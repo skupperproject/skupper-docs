@@ -1,0 +1,21 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: assembled/security.adoc
+// ConversionStatus: raw
+
+[id="skupper-network-isolation"]
+= Built-in network isolation
+
+Skupper provides default, built-in security that scales across clusters and clouds.
+In a Skupper network, the connections between Skupper routers are secured with mutual TLS using a private, dedicated certificate authority (CA).
+Each router is uniquely identified by its own certificate.
+
+image::_images/clusters-tls.svg[]
+
+This means that the Skupper network is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
+
+.Additional information
+
+* link:overview.html[Skupper overview]
+* link:connectivity.html[Skupper connectivity]
+* link:routing.html[Skupper routing]

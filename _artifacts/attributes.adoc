@@ -1,0 +1,26 @@
+// Standard document attributes to be used in the documentation
+//
+// The following are shared by all documents
+
+//:toc:
+//:toclevels: 4
+//:numbered:
+
+// Branding - toggle upstream/downstream content "on/off"
+
+// The following attributes conditionalize content from the Apicurio upstream project:
+// * Upstream-only content conditionalized with ifdef::skupper-io[]...endif::[]
+// * Downstream-only content conditionalized with ifdef::rh-interconnect[]...endif::[]
+
+
+:skupper-io:
+:rh-interconnect!:
+
+// name and version
+:skupper: Skupper
+:skupper-version: 0.3.1
+
+
+// Download URLs
+:linux-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz
+:mac-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-mac-amd64.tgz
