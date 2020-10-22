@@ -1,3 +1,5 @@
+include::_artifacts/attributes.adoc[]
+
 //Category: skupper
 // Type: assembly
 [id="skupper-overview"] 
