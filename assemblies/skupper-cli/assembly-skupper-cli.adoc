@@ -1,0 +1,18 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: chapters/cli/index.adoc
+// ConversionStatus: raw
+
+[id="skupper-cli"]
+= Configuring Skupper sites using the CLI
+
+[role="system:abstract"]
+Using the Skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.
+
+
+
+include::../../modules/skupper-cli/proc-installing-using-cli.adoc[leveloffset=+1]
+
+
+include::../../modules/skupper-cli/proc-creating-using-cli.adoc[leveloffset=+1]
+

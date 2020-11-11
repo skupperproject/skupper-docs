@@ -11,5 +11,8 @@ include::assemblies/skupper-security/assembly-skupper-security.adoc[leveloffset=
 
 include::assemblies/skupper-routing/assembly-skupper-routing.adoc[leveloffset=+1]
 
+include::assemblies/skupper-cli/assembly-skupper-cli.adoc[leveloffset=+1]
+
 include::assemblies/skupper-declarative/assembly-skupper-declarative.adoc[leveloffset=+1]
 
+include::assemblies/skupper-console/assembly-skupper-console.adoc[leveloffset=+1]

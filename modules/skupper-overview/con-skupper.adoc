@@ -22,6 +22,5 @@ When a service is exposed, Skupper creates proxy endpoints to make that service 
 
 .Additional information
 
-* link:security.html[Skupper security]
-* link:connectivity.html[Skupper connectivity]
-* link:routing.html[Skupper routing]
+* {SecurityLink}
+* {RoutingLink}

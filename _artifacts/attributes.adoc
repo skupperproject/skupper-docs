@@ -29,10 +29,10 @@
 
 //assembly links
 
-:OverviewLink: 
-:RoutingLink:
-:SecurityLink:
-:DeclarativeLink:
-:CliLink:
-:GettingStartedLink:
-:ConsoleLink:
+:OverviewLink: xref:skupper-overview[]
+:RoutingLink: xref:skupper-routing[]
+:SecurityLink: xref:skupper-security[]
+:DeclarativeLink: xref:skupper-declarative[]
+:CliLink: xref:skupper-cli[]
+:GettingStartedLink: xref:skupper-getting-started[]
+:ConsoleLink: xref:skupper-console[]
