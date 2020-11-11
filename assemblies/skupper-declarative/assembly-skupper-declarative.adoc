@@ -1,0 +1,7 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: chapters/declarative/index.adoc
+// ConversionStatus: raw
+
+[id="skupper-declarative"]
+= Configuring Skupper sites using YAML

@@ -1,0 +1,6 @@
+include::_artifacts/attributes.adoc[]
+
+//Category: skupper-declarative
+// Type: assembly
+[id="skupper-declarative"] 
+= Configuring Skupper sites using YAML

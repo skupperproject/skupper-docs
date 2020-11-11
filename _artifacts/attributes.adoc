@@ -8,19 +8,31 @@
 
 // Branding - toggle upstream/downstream content "on/off"
 
-// The following attributes conditionalize content from the Apicurio upstream project:
+// The following attributes conditionalize content from the Skupper upstream project:
 // * Upstream-only content conditionalized with ifdef::skupper-io[]...endif::[]
 // * Downstream-only content conditionalized with ifdef::rh-interconnect[]...endif::[]
 
+:imagesdir: _images
 
 :skupper-io:
 :rh-interconnect!:
 
 // name and version
 :skupper: Skupper
-:skupper-version: 0.3.1
+:skupper-version: 0.3.2
 
 
 // Download URLs
 :linux-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz
 :mac-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-mac-amd64.tgz
+
+
+//assembly links
+
+:OverviewLink: 
+:RoutingLink:
+:SecurityLink:
+:DeclarativeLink:
+:CliLink:
+:GettingStartedLink:
+:ConsoleLink:

@@ -1,6 +1,6 @@
 // Metadata created by nebel
 //
-// ConvertedFromFile: assembled/overview.adoc
+// ConvertedFromFile: chapters/overview/index.adoc
 // ConversionStatus: raw
 
 [id="skupper"]
@@ -11,7 +11,7 @@ By using Skupper, you can create a distributed application comprised of microser
 
 This diagram illustrates a Skupper network that connects three services running in three different Kubernetes clusters:
 
-image::_images/overview-clusters.png[]
+image::overview-clusters.png[]
 
 In a Skupper network, each namespace contains a Skupper instance.
 When these Skupper instances connect, they continually share information about the services that each instance exposes.

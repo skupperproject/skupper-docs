@@ -1,6 +1,6 @@
 include::_artifacts/attributes.adoc[]
 
-//Category: skupper
+//Category: skupper-routing
 // Type: assembly
 [id="skupper-routing"] 
 = Skupper routing

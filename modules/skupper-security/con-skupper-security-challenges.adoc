@@ -1,6 +1,6 @@
 // Metadata created by nebel
 //
-// ConvertedFromFile: assembled/security.adoc
+// ConvertedFromFile: chapters/overview/security.adoc
 // ConversionStatus: raw
 
 [id="skupper-security-challenges"]

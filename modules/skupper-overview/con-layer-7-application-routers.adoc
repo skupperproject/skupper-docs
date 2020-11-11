@@ -1,6 +1,6 @@
 // Metadata created by nebel
 //
-// ConvertedFromFile: assembled/overview.adoc
+// ConvertedFromFile: chapters/overview/index.adoc
 // ConversionStatus: raw
 
 [id="layer-7-application-routers"]
