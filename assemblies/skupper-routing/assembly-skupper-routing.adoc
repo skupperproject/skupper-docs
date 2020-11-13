@@ -1,0 +1,20 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: chapters/overview/routing.adoc
+// ConversionStatus: raw
+
+[id="skupper-routing"]
+= Skupper routing
+
+Skupper uses layer 7 addressing and routing to connect services.
+See how the power of application-layer addressing can bring new capabilities to your applications.
+
+
+include::../../modules/skupper-routing/con-multi-cluster-services.adoc[leveloffset=+1]
+
+
+include::../../modules/skupper-routing/con-dynamic-load-balancing.adoc[leveloffset=+1]
+
+
+include::../../modules/skupper-routing/con-reliable-networks.adoc[leveloffset=+1]
+

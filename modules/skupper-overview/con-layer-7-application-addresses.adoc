@@ -1,0 +1,18 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: chapters/overview/index.adoc
+// ConversionStatus: raw
+
+[id="layer-7-application-addresses"]
+= Layer 7 application addresses
+
+A Layer 7 application address represents an endpoint, or destination in the VAN.
+When an application sends a communication to an address, the Layer 7 application routers distribute the communication to any other application in the VAN that has the same address.
+
+For example, in this diagram, *Service B* sends a message with an application address to its local application router.
+*Service A* and *Service C* are subscribed to the same address, so the application router routes copies of the message through the VAN until they arrive at each destination.
+
+image::overview-routers.png[]
+
+VANs provide multiple routing patterns, so communications can be distributed in anycast (balanced or closest) or multicast patterns.
+

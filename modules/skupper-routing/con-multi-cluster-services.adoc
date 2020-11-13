@@ -1,0 +1,13 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: chapters/overview/routing.adoc
+// ConversionStatus: raw
+
+[id="multi-cluster-services"]
+= Multi-cluster services
+
+Deploy a single logical service across multiple clusters.
+
+Skupper can route requests to instances of a single service running on multiple clusters.
+If a provider or data center fails, the service instances running at unaffected sites can scale to meet the need and maintain availability.
+

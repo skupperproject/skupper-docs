@@ -1,0 +1,26 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: chapters/overview/index.adoc
+// ConversionStatus: raw
+
+[id="skupper"]
+= Skupper
+
+Skupper is an open source tool for creating VANs in Kubernetes.
+By using Skupper, you can create a distributed application comprised of microservices running in different Kubernetes clusters.
+
+This diagram illustrates a Skupper network that connects three services running in three different Kubernetes clusters:
+
+image::overview-clusters.png[]
+
+In a Skupper network, each namespace contains a Skupper instance.
+When these Skupper instances connect, they continually share information about the services that each instance exposes.
+This means that each Skupper instance is always aware of every service that has been exposed to the Skupper network, regardless of the namespace in which each service resides.
+
+Once a Skupper network is formed across Kubernetes namespaces, any of the services in those namespaces can be exposed (through annotation) to the Skupper network.
+When a service is exposed, Skupper creates proxy endpoints to make that service available on each namespace in the Skupper network.
+
+.Additional information
+
+* {SecurityLink}
+* {RoutingLink}

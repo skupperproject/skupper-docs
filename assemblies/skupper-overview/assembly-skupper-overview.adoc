@@ -1,0 +1,25 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: chapters/overview/index.adoc
+// ConversionStatus: raw
+
+[id="skupper-overview"]
+= Skupper overview
+
+Hybrid clouds enable organizations to combine on-premise, private cloud, and public cloud resources.
+While such a solution provides many benefits, it also presents a unique challenge: enabling these resources to communicate with each other.
+
+Skupper provides a solution to this challenge with a Virtual Application Network that simply and securely connects applications running in different network locations.
+
+
+include::../../modules/skupper-overview/con-virtual-application-networks.adoc[leveloffset=+1]
+
+
+include::../../modules/skupper-overview/con-layer-7-application-routers.adoc[leveloffset=+1]
+
+
+include::../../modules/skupper-overview/con-layer-7-application-addresses.adoc[leveloffset=+1]
+
+
+include::../../modules/skupper-overview/con-skupper.adoc[leveloffset=+1]
+

@@ -1,0 +1,23 @@
+// Metadata created by nebel
+//
+// ConvertedFromFile: chapters/overview/index.adoc
+// ConversionStatus: raw
+
+[id="virtual-application-networks"]
+= Virtual Application Networks
+
+Skupper solves multi-cluster communication challenges through something called a Virtual Application Network (VAN).
+To understand the value of Skupper, it is helpful to first understand what a VAN is.
+
+A VAN connects the applications and services in your hybrid cloud into a virtual network so that they can communicate with each other as if they were all running in the same site.
+In this diagram, a VAN connects three services, each of which is running in a different cloud:
+
+image::overview-clouds.png[]
+
+In essence, the VAN connects the services in a distributed application with a microservice architecture.
+
+image::overview-application.png[]
+
+VANs are able to provide connectivity across the hybrid cloud because they operate at Layer 7 (the application layer).
+They use *Layer 7 application routers* to route communication between *Layer 7 application addresses*.
+

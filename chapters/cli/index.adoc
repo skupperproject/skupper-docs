@@ -1,0 +1,60 @@
+include::_artifacts/attributes.adoc[]
+
+//Category: skupper-cli
+// Type: assembly
+
+[id="skupper-cli"] 
+= Configuring Skupper sites using the CLI
+
+[role="system:abstract"]
+Using the Skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.
+
+
+// Type: procedure
+[id="installing-using-cli"] 
+== Installing Skupper using the CLI
+
+[role="system:abstract"]
+Installing Skupper using the command-line interface (CLI) provides a simple method to get started with Skupper.
+
+.Prerequisites
+
+* Access to a Kubernetes cluster
+
+. Install the Skupper command-line interface.
++
+--
+For Linux:
+[subs=attributes+]
+----
+$ curl -fL https://github.com/skupperproject/skupper/releases/download//skupper-cli-0.3.2-linux-amd64.tgz | tar -xzf -
+----
+
+For MacOS:
+[subs=attributes+]
+----
+$ curl -fL https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-0.3.2-mac-amd64.tgz | tar -xzf -
+----
+--
+
+. Copy the `skupper` executable to a directory in your $PATH:
++
+----
+$ mkdir -p $HOME/bin
+$ export PATH=$PATH:$HOME/bin
+$ mv skupper $HOME/bin
+----
+
+. Verify the installation.
++
+[subs=attributes+]
+----
+$ skupper --version
+skupper version {skupper-version}
+----
+
+
+// Type: procedure
+[id="creating-using-cli"] 
+== Creating a Skupper site using the CLI
+
