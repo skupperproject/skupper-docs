@@ -1,9 +1,30 @@
 include::{mod-loc}attributes.adoc[]
 = Skupper Documentation
 
+https://skupper.io/start/index.html[Getting Started]
+
+[cols="1,2", options="header"]
+|===
+|Documentation:
+|Blog posts, articles, and videos:
+
+
+a|
+
 * xref:overview/index.adoc[]
 * xref:cli/index.adoc[]
 * xref:overview/security.adoc[]
 * xref:overview/routing.adoc[]
 * xref:declarative/index.adoc[]
 * xref:console/index.adoc[]
+
+a|
+
+* https://developers.redhat.com/blog/2020/01/01/skupper-io-let-your-services-communicate-across-kubernetes-clusters/[Skupper.io: Let your services communicate across Kubernetes clusters]
+* https://netprototalk.com/2019/11/12/virtual-application-networks-for-hybrid-cloud-interconnect/[Virtual Application Networks for Hybrid Cloud Interconnect]
+* https://hackernoon.com/enabling-multi-cloud-kubernetes-communication-with-skupper-glz3u6p[Enabling Multi-Cloud Kubernetes Communication with Skupper]
+* https://youtu.be/2ax0CDyKg4U?t=101[Kubernetes and the hybrid cloud with Skupper - DevNation Tech Talk]
+* https://youtu.be/2ax0CDyKg4U?t=101)https://www.youtube.com/watch?v=np-eBAmB-bs[Cloud-Edge Interconnect: Doing It Right With The Skupper project]
+* https://www.youtube.com/watch?v=FPsUgxmj25s[HTTP load-balancing with Skupper across OpenShift clusters]
+
+|===
