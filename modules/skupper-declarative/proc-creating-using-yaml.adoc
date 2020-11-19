@@ -1,7 +1,0 @@
-// Metadata created by nebel
-//
-// ConvertedFromFile: chapters/declarative/index.adoc
-// ConversionStatus: raw
-
-[id="creating-using-yaml"]
-= Creating a Skupper site using YAML

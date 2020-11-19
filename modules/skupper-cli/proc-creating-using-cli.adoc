@@ -1,8 +1,0 @@
-// Metadata created by nebel
-//
-// ConvertedFromFile: chapters/cli/index.adoc
-// ConversionStatus: raw
-
-[id="creating-using-cli"]
-= Creating a Skupper site using the CLI
-

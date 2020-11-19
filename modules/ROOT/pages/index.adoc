@@ -1,0 +1,9 @@
+include::{mod-loc}attributes.adoc[]
+= Skupper Documentation
+
+* xref:overview/index.adoc[]
+* xref:cli/index.adoc[]
+* xref:overview/security.adoc[]
+* xref:overview/routing.adoc[]
+* xref:declarative/index.adoc[]
+* xref:console/index.adoc[]
