@@ -21,13 +21,6 @@
 
 export PYTHONPATH := python
 
-.PHONY: chunk
-chunk:
-	find ./chapters -name "*.adoc" \
-    -type f \
-    -exec sh -c \
-    'nebel split {}' \;
-
 .PHONY: clean
 clean:
 	find assemblies -type f -delete
