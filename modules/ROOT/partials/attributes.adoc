@@ -15,7 +15,6 @@
 :imagesdir: _images
 
 :skupper-io:
-:rh-interconnect!:
 
 // name and version
 :skupper: Skupper
