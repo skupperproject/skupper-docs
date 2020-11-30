@@ -11,12 +11,12 @@ https://skupper.io/start/index.html[Getting Started]
 
 a|
 
-* xref:overview/index.adoc[]
-* xref:cli/index.adoc[]
-* xref:overview/security.adoc[]
-* xref:overview/routing.adoc[]
-* xref:declarative/index.adoc[]
-* xref:console/index.adoc[]
+* xref:overview:index.adoc[]
+* xref:cli:index.adoc[]
+* xref:overview:security.adoc[]
+* xref:overview:routing.adoc[]
+* xref:declarative:index.adoc[]
+* xref:console:index.adoc[]
 
 a|
 

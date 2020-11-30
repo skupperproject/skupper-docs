@@ -17,4 +17,4 @@ asciidoc:
   attributes:
     plantuml-server-url: 'http://www.plantuml.com/plantuml'
     plantuml-fetch-diagram: true
-    mod-loc: partial$
+    mod-loc: ROOT:partial$
