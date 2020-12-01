@@ -1,0 +1,11 @@
+include::{mod-loc}attributes.adoc[]
+
+//Category: skupper-docker
+// Type: assembly
+
+[id="skupper-docker"] 
+= Using skupper-docker
+
+[role="system:abstract"]
+Using the `skupper-docker` allows you to create and manage Skupper sites outside of the context of a Kubernetes cluster.
+

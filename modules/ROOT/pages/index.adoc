@@ -1,24 +1,64 @@
 include::{mod-loc}attributes.adoc[]
 = Skupper Documentation
 
+
+[cols="1,1,1", options="header"]
+|===
+|Understand the basics
+|The Skupper command
+|YAML configuration
+
+|Learn about the concepts and technology behind virtual application networks.
+|The Skupper command-line tool enables you to initialize, connect, and monitor Skupper sites interactively from your development environment.
+|Learn how you can use YAML to declaratively configure and connect Skupper sites.
+
+a|
+xref:overview:index.adoc[]
+
+xref:overview:security.adoc[]
+
+xref:overview:routing.adoc[]
+
+a|
 https://skupper.io/start/index.html[Getting Started]
 
-[cols="1,2", options="header"]
+xref:cli:index.adoc[]
+
+a|
+xref:declarative:index.adoc[]
+
+a|
+xref:console:index.adoc[]
+
+
 |===
-|Documentation:
-|Blog posts, articles, and videos:
+
+
+[cols="1,1,1", options="header"]
+|===
+
+|Skupper console
+|Skupper docker
+|
+
+|Use the Skupper console to monitor your virtual application network.
+|Use Skupper on your laptop.
+|
+
 
 
 a|
-
-* xref:overview:index.adoc[]
-* xref:cli:index.adoc[]
-* xref:overview:security.adoc[]
-* xref:overview:routing.adoc[]
-* xref:declarative:index.adoc[]
-* xref:console:index.adoc[]
+xref:console:index.adoc[]
 
 a|
+xref:skupper-docker:index.adoc[]
+
+a|
+
+|===
+
+
+*Blog posts, articles, and videos*
 
 * https://developers.redhat.com/blog/2020/01/01/skupper-io-let-your-services-communicate-across-kubernetes-clusters/[Skupper.io: Let your services communicate across Kubernetes clusters]
 * https://netprototalk.com/2019/11/12/virtual-application-networks-for-hybrid-cloud-interconnect/[Virtual Application Networks for Hybrid Cloud Interconnect]
@@ -27,4 +67,3 @@ a|
 * https://youtu.be/2ax0CDyKg4U?t=101)https://www.youtube.com/watch?v=np-eBAmB-bs[Cloud-Edge Interconnect: Doing It Right With The Skupper project]
 * https://www.youtube.com/watch?v=FPsUgxmj25s[HTTP load-balancing with Skupper across OpenShift clusters]
 
-|===
