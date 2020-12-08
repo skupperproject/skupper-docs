@@ -28,10 +28,11 @@
 
 //assembly links
 
-:OverviewLink: xref:skupper-overview[]
-:RoutingLink: xref:skupper-routing[]
-:SecurityLink: xref:skupper-security[]
-:DeclarativeLink: xref:skupper-declarative[]
-:CliLink: xref:skupper-cli[]
-:GettingStartedLink: xref:skupper-getting-started[]
-:ConsoleLink: xref:skupper-console[]
+:OverviewLink: link:/docs/overview/[Overview]
+:RoutingLink: link:/docs/overview/routering.html[Skupper routing]
+:SecurityLink: link:/docs/overview/security.html[Skupper security]
+:ConnectivityLink: link:/docs/overview/connectivity.html[Skupper connectivity]
+:DeclarativeLink: link:/docs/declarative[Configuring Skupper sites using YAML]
+:CliLink: link:/docs/overview[Configuring Skupper sites using the CLI]
+:GettingStartedLink: link:/start/[Getting Started]
+:ConsoleLink: link:/docs/console/[Monitoring Skupper sites using the console]
