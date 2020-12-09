@@ -29,7 +29,7 @@
 //assembly links
 
 :OverviewLink: link:/docs/overview/[Overview]
-:RoutingLink: link:/docs/overview/routering.html[Skupper routing]
+:RoutingLink: link:/docs/overview/routing.html[Skupper routing]
 :SecurityLink: link:/docs/overview/security.html[Skupper security]
 :ConnectivityLink: link:/docs/overview/connectivity.html[Skupper connectivity]
 :DeclarativeLink: link:/docs/declarative[Configuring Skupper sites using YAML]
