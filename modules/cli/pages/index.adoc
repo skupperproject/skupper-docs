@@ -21,6 +21,8 @@ Installing Skupper using the command-line interface (CLI) provides a simple meth
 
 * Access to a Kubernetes cluster
 
+.Procedure
+
 . Install the Skupper command-line interface.
 +
 --

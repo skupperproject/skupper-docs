@@ -22,6 +22,8 @@ You can store your YAML files in source control to track and manage Skupper netw
 
 * Access to a Kubernetes cluster
 
+.Procedure
+
 . Log into your cluster.
 If you are deploying Skupper to be available for all namespaces, make sure you have `cluster-admin` privileges.
 

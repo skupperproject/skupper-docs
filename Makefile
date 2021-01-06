@@ -21,8 +21,6 @@
 
 export PYTHONPATH := python
 
-.PHONY: clean
-clean:
-	find assemblies -type f -delete
-	find modules -type f -delete
-
+.PHONY: generate-preview
+generate-preview:
+	antora preview-playbook.yml

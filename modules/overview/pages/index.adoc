@@ -72,3 +72,4 @@ When a service is exposed, Skupper creates proxy endpoints to make that service 
 
 * {SecurityLink}
 * {RoutingLink}
+* {ConnectivityLink}
