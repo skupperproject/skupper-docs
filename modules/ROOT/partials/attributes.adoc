@@ -10,15 +10,16 @@
 
 // The following attributes conditionalize content from the Skupper upstream project:
 // * Upstream-only content conditionalized with ifdef::skupper-io[]...endif::[]
-// * Downstream-only content conditionalized with ifdef::rh-interconnect[]...endif::[]
+// * Downstream-only content conditionalized with ifdef::product[]...endif::[]
 
 :imagesdir: _images
 
 :skupper-io:
 
-// name and version
-:skupper: Skupper
-:skupper-version: 0.3.2
+// names and version
+:skupper-name: Skupper
+:skupper-network: Service Interconnect
+:skupper-version: 0.4.2
 
 
 // Download URLs
