@@ -24,9 +24,14 @@ Instead, edit the contents of the `{location-chapters}` directory.
 
 This section explains how to edit and create documentation PRs.
 If you only want to make a small update, you might want to just edit the file and make the PR using your standard process.
-If you want to preview changes for more complex contributions, following this procedure.
+If you are familiar with Antora, you can use the `preview-playbook.yml` directly.
+If you want to preview changes for more complex contributions, follow this procedure.
 
-. Install Antora using the https://docs.antora.org/antora/2.3/install-and-run-quickstart/[documentation].
+.Prerequisites
+
+* A Node LTS release (We recommend https://github.com/nvm-sh/nvm for installation)
+
+.Procedure 
 
 . Install the gulp cli:
 +
