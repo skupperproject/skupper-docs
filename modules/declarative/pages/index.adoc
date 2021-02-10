@@ -3,20 +3,20 @@ include::{mod-loc}attributes.adoc[]
 //Category: skupper-declarative
 // Type: assembly
 [id="skupper-declarative"] 
-= Configuring Skupper sites using YAML
+= Configuring {skupper} sites using YAML
 
 
 [role="system:abstract"]
-Using YAML files to configure Skupper allows you to use source control to track and manage Skupper network changes.
+Using YAML files to configure {skupper} allows you to use source control to track and manage {skupper} network changes.
 
 
 // Type: procedure
 [id="installing-using-yaml"] 
-== Installing Skupper using YAML
+== Installing {skupper} using YAML
 
 [role="system:abstract"]
-Installing Skupper using YAML provides a declarative method to install Skupper.
-You can store your YAML files in source control to track and manage Skupper network changes.
+Installing {skupper} using YAML provides a declarative method to install {skupper}.
+You can store your YAML files in source control to track and manage {skupper} network changes.
 
 .Prerequisites
 
@@ -25,18 +25,18 @@ You can store your YAML files in source control to track and manage Skupper netw
 .Procedure
 
 . Log into your cluster.
-If you are deploying Skupper to be available for all namespaces, make sure you have `cluster-admin` privileges.
+If you are deploying {skupper} to be available for all namespaces, make sure you have `cluster-admin` privileges.
 
 . Deploy the site controller:
 
-.. To install Skupper into the current namespace deploy the site controller using the following YAML:
+.. To install {skupper} into the current namespace deploy the site controller using the following YAML:
 +
 [subs=attributes+]
 ----
 kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/{skupper-version}/cmd/site-controller/deploy-watch-current-ns.yaml
 ----
 
-.. To install Skupper for all namespaces, deploy the site controller using the following YAML:
+.. To install {skupper} for all namespaces, deploy the site controller using the following YAML:
 +
 [subs=attributes+]
 ----
@@ -53,4 +53,93 @@ skupper-site-controller-84694bdbb5-n8slb   1/1     Running   0          75s
 
 // Type: procedure
 [id="creating-using-yaml"] 
-== Creating a Skupper site using YAML
+== Creating a {skupper} site using YAML
+
+
+[role="system:abstract"]
+Using YAML files to create {skupper} sites allows you to use source control to track and manage {skupper} network changes.
+
+.Prerequisites
+
+* {skupper} is installed in the cluster or namespace you want to target
+* You are logged into the cluster
+
+.Procedure
+
+. Create a YAML file to define the site, for example, `my-site.yaml`:
++
+----
+apiVersion: v1
+data:
+  cluster-local: "false"
+  console: "true"
+  console-authentication: internal
+  console-password: "rubble"
+  console-user: "barney"
+  edge: "true"
+  name: my-site
+  router-console: "true"
+  service-controller: "true"
+  service-sync: "true"
+kind: ConfigMap
+metadata:
+  name: skupper-site
+----
+
+. Apply the YAML file to your cluster:
++
+----
+kubectl apply -f ~/my-site.yml
+----
+
+.Additional resources
+
+See the xref:yaml-reference[] section for more reference.
+
+
+// Type: reference
+[id="yaml-reference"] 
+== Site ConfigMap YAML reference
+
+[role="system:abstract"]
+Using YAML files to configure {skupper} requires that you understand all the fields so that you provision the site you require.
+
+The following YAML defines a {skupper} site:
+
+----
+apiVersion: v1
+data:
+  cluster-local: "false" //<.>
+  console: "true" //<.>
+  console-authentication: internal //<.>
+  console-user: "username" //<.>
+  console-password: "password" //<.>
+  edge: "false" //<.>
+  name: my-site //<.>
+  router-console: "true" //<.>
+  service-controller: "true" //<.>
+  service-sync: "true" //<.>
+kind: ConfigMap
+metadata:
+  name: skupper-site //<.>
+----
+
+<.> Only accept connections from within the local cluster, defaults to `false`.
+
+<.> Enables the skupper console, defaults to `true`.
+
+<.> Specifies the skupper console authentication method. The options are `openshift`, `internal`, `unsecured`.
+
+<.> Username for the `internal` authentication option.
+
+<.> Password for the `internal` authentication option.
+
+<.> Specifies whether an edge site is created, defaults to `false`.
+
+<.> Specifies the site name.
+
+<.> Enables the router console, defaults to `false`.
+
+<.> Specifies whether the service controller runs, defaults to `true`.
+
+<.> Specifies whether the services are synchronized across the {skupper-network}, defaults to `true`.
