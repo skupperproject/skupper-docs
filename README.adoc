@@ -1,6 +1,6 @@
 = Skupper Documentation
 
-This repo is used to document Skupper using https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc].
+This repo is used to document Skupper using https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc] markup and https://docs.antora.org/[Antora].
 
 Each Skupper function is an Antora module as seen at:
 https://github.com/skupperproject/skupper-docs/tree/master/modules[]
