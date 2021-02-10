@@ -89,7 +89,7 @@ metadata:
 . Apply the YAML file to your cluster:
 +
 ----
-kubectl apply -f ~/east-site.yml
+kubectl apply -f ~/my-site.yml
 ----
 
 .Additional resources
