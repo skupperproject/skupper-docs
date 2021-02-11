@@ -1,5 +1,6 @@
 * xref:index.adoc[]
 * xref:overview:index.adoc[]
+** xref:overview:glossary.adoc[]
 * xref:cli:index.adoc[]
 * xref:declarative:index.adoc[]
 * xref:console:index.adoc[]
