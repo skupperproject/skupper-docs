@@ -1,0 +1,31 @@
+include::{mod-loc}attributes.adoc[]
+
+//Category: openshift-tutorial
+// Type: assembly
+
+[id="openshift-tutorial"] 
+= Sharing services between two OpenShift clusters
+
+[role="system:abstract"]
+This tutorial demonstrates how to connect a frontend service on a OpenShift cluster with a backend service on a OpenShift cluster using the `skupper` command-line interface (CLI).
+
+.Prerequisites
+
+* Access to projects in two OpenShift clusters
+* One of the OpenShift clusters must be addressable from the other cluster
+
+include::{mod-loc}installing-skupper.adoc[]
+
+
+// Type: procedure
+[id="installing-using-cli"] 
+== Installing Skupper using the CLI
+
+[role="system:abstract"]
+Installing Skupper using the command-line interface (CLI) provides a simple method to get started with Skupper.
+
+.Prerequisites
+
+* Access to a Kubernetes cluster
+
+.Procedure
