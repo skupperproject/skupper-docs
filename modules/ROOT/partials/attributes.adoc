@@ -16,7 +16,7 @@
 
 :skupper-io:
 
-// names and version
+// name and version
 :skupper-name: Skupper
 :service-network: service network
 :skupper-version: 0.5.2
