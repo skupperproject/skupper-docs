@@ -27,7 +27,7 @@ include::index.adoc[tags=installing-cli]
 == Configuring terminal sessions
 
 [role="system:abstract"]
-This procedure describes how to configure your terminal sessions to use configurations to avoid problems as you configure {skupper} on different clusters.
+This procedure describes how to configure your terminal sessions to use configurations to avoid problems as you configure {skupper-name} on different clusters.
 
 .Prerequisites
 
