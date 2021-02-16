@@ -4,10 +4,58 @@ include::{mod-loc}attributes.adoc[]
 // Type: assembly
 
 [id="skupper-console"] 
-= Monitoring Skupper sites using the console
+= Monitoring {skupper} sites using the console
 
 [role="system:abstract"]
-The Skupper console provides useful information about the Skupper network, for example, traffic levels between Skupper sites.
-
+The {skupper} console provides useful information about the {service-network}, for example, traffic levels between sites.
 
 image::skupper-console.png[]
+
+
+== Accessing the {skupper} console
+
+By default, the {skupper} console is available whenever you create a {service-network} router and is protected by credentials available in the `skupper-console-users` secret.
+
+
+.Procedure
+
+. Determine the {skupper} console URL using the `skupper` CLI, for example:
++
+----
+$ skupper status
+Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites. It has no exposed services.
+The site console url is:  https://skupper-controller-west.apps-crc.testing
+----
+
+. Browse to the {skupper} console URL. The credential prompt depends on how the site was created:
++
+* using the `--console-auth unsecured` option, you are not prompted for credentials.
+* using the `--console-auth openshift` option, you are prompted to enter OpenShift cluster credentials.
+* using the default or `--console-user <user>  --console-password <password>` options, you are prompted to enter {skupper} credentials.
+
+. If you created the site using default settings, that is `skupper init`, a random password is generated for the `admin` user.
+To retrieve the password:
+
+.. Retrieve the encoded password for the `admin` user:
++
+----
+$ oc get secret skupper-console-users -o yaml| grep admin
+
+admin: Sk5aV3pNSHR5Zw==
+----
+.. Decode the password for the `admin` user:
++
+----
+$ echo -n "Sk5aV3pNSHR5Zw==" | base64 --decode
+
+JNZWzMHtyg
+----
+
+== Exploring the {skupper} console
+
+The {skupper} console provides an overview of the following:
+
+* Services - services that are exposed on the {service-network}, both local and remote.
+* Sites - {skupper} installations on the current {service-network}.
+* Deployments - deployments relating to exposed services.
+
