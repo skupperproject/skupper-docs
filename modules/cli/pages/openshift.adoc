@@ -2,7 +2,7 @@ ifndef::mod-loc[]
 :mod-loc: ./partials/
 :toc:
 endif::mod-loc[]
-
+:prompt: $
 include::{mod-loc}attributes.adoc[]
 :sectnums:
 //Category: openshift-tutorial
@@ -41,15 +41,15 @@ The following table shows how you might set up your terminal sessions.
 |west terminal session  |east terminal session
 
 a|
-[bash,term=west]
+[bash, subs="attributes+"]
 ----
- $ oc project
+{prompt} oc project
  west
 ----
 a|
-[bash,term=west]
+[bash, subs="attributes+"]
 ----
- $ oc project
+{prompt} oc project
  east
 ----
 
@@ -120,7 +120,7 @@ $ skupper init
 --
 [bash,term=west]
 ----
- $ skupper status
+$ skupper status
 ----
 The output should be similar to the following:
 ----
@@ -149,7 +149,7 @@ $ skupper init
 --
 [bash,term=east]
 ----
- $ skupper status
+$ skupper status
 ----
 The output should be similar to the following:
 ----
@@ -186,7 +186,7 @@ $ skupper link create $HOME/secret.yaml
 --
 [bash,term=west]
 ----
- $ skupper status
+$ skupper status
 ----
 The output should be similar to the following:
 ----
@@ -281,7 +281,7 @@ $ skupper expose deployment hello-world-backend --port 8080 --protocol tcp
 --
 [bash,term=west]
 ----
- $ skupper status
+$ skupper status
 ----
 The output should be similar to the following:
 ----
@@ -339,7 +339,7 @@ $  oc delete project west
 +
 [bash,term=east]
 ----
-$  oc project delete east
+$  oc delete project east
 ----
 
 

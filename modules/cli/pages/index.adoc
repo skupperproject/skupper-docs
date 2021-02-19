@@ -13,7 +13,7 @@ A typical workflow is to create a site, link sites together, and expose services
 
 // tag::installing-cli[]
 // Type: procedure
-[id="installing-using-cli"] 
+[id="installing-cli"] 
 == Installing the `skupper` CLI
 
 [role="system:abstract"]
