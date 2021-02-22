@@ -7,8 +7,9 @@ include::{mod-loc}attributes.adoc[]
 = Configuring Skupper sites using the CLI
 
 [role="system:abstract"]
-Using the Skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.
+Using the Skupper command-line interface (CLI) allows you to create and manage {skupper-name} sites from the context of the current namespace.
 
+A typical workflow is to create a site, link sites together, and expose services to the {service-network}.
 
 // Type: procedure
 [id="installing-using-cli"] 
@@ -58,5 +59,30 @@ skupper version {skupper-version}
 
 // Type: procedure
 [id="creating-using-cli"] 
-== Creating a Skupper site using the CLI
+== Creating a site using the CLI
+
+A {service-network} consists of {skupper-name} sites.
+This section describes how to create sites.
+
+In the link:getting
+
+
+// Type: procedure
+[id="linking-sites"] 
+== Linking sites
+
+A {service-network} consists of {skupper-name} sites.
+This section describes how to link sites to form a {service-network}.
+
+
+// Type: procedure
+[id="exposing-services"] 
+== Exposing services on the {service-network}
+
+After creating a {service-network}, services can communicate across that network.
+This section describes how services can be enabled for a {service-network}.
+
+
+
+
 
