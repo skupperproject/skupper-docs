@@ -157,7 +157,7 @@ This section describes how services can be enabled for a {service-network}.
 
 .Procedure
 
-. Define a service in one of your sites, for example to create the backend service for the link:{getting-started-link}[tutorial]:
+. Create a deployment, some pods, or a service in one of your sites, for example to create the backend service for the link:{getting-started-link}[tutorial]:
 +
 ----
 $ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
@@ -165,11 +165,22 @@ $ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-wo
 +
 This step is not {skupper-name}-specific, that is, this process is unchanged from standard processes for your cluster.
 
-. Expose the service on the  {service-network}:
+
+. Expose the service on the  {service-network} using the `expose` option:
 +
+--
 ----
-$ skupper expose 
+$ skupper expose [deployment <name>|pods <selector>|service <name>]
 ----
+
+where `<name>` is the name of your deployment or service and `<selector>` is a pod selector.
+
+Options for this command include:
+
+`--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
+
+`--target-port <port-number>`:: Specify the port number of pods that you want to expose.
+--
 
 
 // Type: reference
