@@ -56,7 +56,7 @@ $ mv skupper $HOME/bin
 $ skupper --version
 skupper version {skupper-version}
 ----
-// tag::installing-cli[]
+// end::installing-cli[]
 
 // Type: procedure
 [id="creating-using-cli"] 
