@@ -4,22 +4,22 @@ include::{mod-loc}attributes.adoc[]
 // Type: assembly
 
 [id="skupper-console"] 
-= Monitoring {skupper} sites using the console
+= Monitoring {skupper-name} sites using the console
 
 [role="system:abstract"]
-The {skupper} console provides useful information about the {service-network}, for example, traffic levels between sites.
+The {skupper-name} console provides useful information about the {service-network}, for example, traffic levels between sites.
 
 image::skupper-console.png[]
 
 
-== Accessing the {skupper} console
+== Accessing the {skupper-name} console
 
-By default, the {skupper} console is available whenever you create a {service-network} router and is protected by credentials available in the `skupper-console-users` secret.
+By default, the {skupper-name} console is available whenever you create a {service-network} router and is protected by credentials available in the `skupper-console-users` secret.
 
 
 .Procedure
 
-. Determine the {skupper} console URL using the `skupper` CLI, for example:
+. Determine the {skupper-name} console URL using the `skupper` CLI, for example:
 +
 ----
 $ skupper status
@@ -27,11 +27,11 @@ Skupper is enabled for namespace "west" in interior mode. It is not connected to
 The site console url is:  https://skupper-controller-west.apps-crc.testing
 ----
 
-. Browse to the {skupper} console URL. The credential prompt depends on how the site was created:
+. Browse to the {skupper-name} console URL. The credential prompt depends on how the site was created:
 +
 * using the `--console-auth unsecured` option, you are not prompted for credentials.
 * using the `--console-auth openshift` option, you are prompted to enter OpenShift cluster credentials.
-* using the default or `--console-user <user>  --console-password <password>` options, you are prompted to enter {skupper} credentials.
+* using the default or `--console-user <user>  --console-password <password>` options, you are prompted to enter {skupper-name} credentials.
 
 . If you created the site using default settings, that is `skupper init`, a random password is generated for the `admin` user.
 To retrieve the password:
@@ -51,17 +51,17 @@ $ echo -n "Sk5aV3pNSHR5Zw==" | base64 --decode
 JNZWzMHtyg
 ----
 
-== Exploring the {skupper} console
+== Exploring the {skupper-name} console
 
-The {skupper} console provides an overview of the following:
+The {skupper-name} console provides an overview of the following:
 
 * Services - services that are exposed on the {service-network}, both local and remote.
-* Sites - {skupper} installations on the current {service-network}.
+* Sites - {skupper-name} installations on the current {service-network}.
 * Deployments - deployments relating to exposed services.
 
 . Perform the link:{openshift-tutorial-link}[OpenShift tutorial].
 
-. Navigate to the {skupper} console.
+. Navigate to the {skupper-name} console.
 
 . Click the *Sites* menu item.
 Both the *east* and *west* sites should be displayed in circles.
