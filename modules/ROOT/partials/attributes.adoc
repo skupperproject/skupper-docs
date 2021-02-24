@@ -18,7 +18,7 @@
 
 // names and version
 :skupper-name: Skupper
-:skupper-network: service network
+:service-network: service network
 :skupper-version: 0.4.2
 
 

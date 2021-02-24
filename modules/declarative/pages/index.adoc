@@ -142,4 +142,4 @@ metadata:
 
 <.> Specifies whether the service controller runs, defaults to `true`.
 
-<.> Specifies whether the services are synchronized across the {skupper-network}, defaults to `true`.
+<.> Specifies whether the services are synchronized across the {service-network}, defaults to `true`.

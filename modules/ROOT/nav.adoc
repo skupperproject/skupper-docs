@@ -1,3 +1,5 @@
+include::partial$attributes.adoc[]
+
 * xref:index.adoc[]
 * xref:overview:index.adoc[]
 ** xref:overview:glossary.adoc[]
