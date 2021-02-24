@@ -11,6 +11,7 @@ Using the Skupper command-line interface (CLI) allows you to create and manage {
 
 A typical workflow is to create a site, link sites together, and expose services to the {service-network}.
 
+// tag::installing-cli[]
 // Type: procedure
 [id="installing-using-cli"] 
 == Installing Skupper using the CLI
@@ -55,7 +56,7 @@ $ mv skupper $HOME/bin
 $ skupper --version
 skupper version {skupper-version}
 ----
-
+// tag::installing-cli[]
 
 // Type: procedure
 [id="creating-using-cli"] 
