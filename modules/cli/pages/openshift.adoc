@@ -41,13 +41,13 @@ The following table shows how you might set up your terminal sessions.
 |west terminal session  |east terminal session
 
 a|
-[bash, subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {prompt} oc project
  west
 ----
 a|
-[bash, subs="attributes+"]
+[source,bash,subs="attributes+"]
 ----
 {prompt} oc project
  east
@@ -67,7 +67,7 @@ NOTE: In OpenShift 4.6 and later, you can use the web terminal to perform the fo
 
 . Start a terminal session to work on the `west` namespace and set the `KUBECONFIG` environment variable:
 +
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ export KUBECONFIG=$HOME/.kube/config-west
 ----
@@ -81,7 +81,7 @@ This session is referred to later as the _west_ terminal session.
 [start=2]
 . Start a terminal session to work on the `east` namespace and set the `KUBECONFIG` environment variable:
 +
-[bash,term=east]
+[source,bash,term=east]
 ----
 $ export KUBECONFIG=$HOME/.kube/config-east
 ----
@@ -103,14 +103,14 @@ This session is referred to later as the _east_ terminal session.
 
 .. Create the `west` project (namespace):
 +
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ oc new-project west 
 ----
 
 .. Create the {service-network} router:
 +
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ skupper init
 ----
@@ -118,7 +118,7 @@ $ skupper init
 .. Check the site status:
 +
 --
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ skupper status
 ----
@@ -132,14 +132,14 @@ Skupper enabled for namespace 'west'. It is not connected to any other sites.
 . In the east terminal session:
 .. Create the `east` project (namespace):
 +
-[bash,term=east]
+[source,bash,term=east]
 ----
 $ oc new-project east 
 ----
 
 .. Create the {service-network} router:
 +
-[bash,term=east]
+[source,bash,term=east]
 ----
 $ skupper init
 ----
@@ -147,7 +147,7 @@ $ skupper init
 .. Check the site status:
 +
 --
-[bash,term=east]
+[source,bash,term=east]
 ----
 $ skupper status
 ----
@@ -167,7 +167,7 @@ With the {service-network} routers installed, you can connect them together secu
 
 . In the west terminal session, create a connection token to allow connection to the west namespace:
 +
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ skupper token create $HOME/secret.yaml
 ----
@@ -176,7 +176,7 @@ This command creates the `secret.yaml` file in your home directory, which you ca
 
 . In the east terminal session, use the token to create a connection to the west namespace:
 +
-[bash,term=east]
+[source,bash,term=east]
 ----
 $ skupper link create $HOME/secret.yaml
 ----
@@ -184,7 +184,7 @@ $ skupper link create $HOME/secret.yaml
 . Check the site status from the west terminal session:
 +
 --
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ skupper status
 ----
@@ -208,21 +208,21 @@ Perform all tasks in the west terminal session:
 
 . Deploy the frontend service:
 +
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ oc create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
 ----
 
 . Expose the frontend deployment as a cluster service:
 +
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ oc expose deployment hello-world-frontend --port 8080 --type LoadBalancer
 ----
 
 . Create a route for the frontend:
 +
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ oc expose svc/hello-world-frontend
 ----
@@ -231,7 +231,7 @@ $ oc expose svc/hello-world-frontend
 .. Get the route details:
 +
 --
-[bash,term=west]
+[source,bash,term=west]
 ----
 $  oc get routes
 ----
@@ -264,14 +264,14 @@ The backend app is a simple Python application that passes a message to the fron
 
 . Deploy the backend service in the east terminal session:
 +
-[bash,term=east]
+[source,bash,term=east]
 ----
 $ oc create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
 ----
 
 . Expose the backend service on the {service-network} from the east terminal session:
 +
-[bash,term=east]
+[source,bash,term=east]
 ----
 $ skupper expose deployment hello-world-backend --port 8080 --protocol tcp
 ----
@@ -279,7 +279,7 @@ $ skupper expose deployment hello-world-backend --port 8080 --protocol tcp
 . Check the site status from the west terminal session:
 +
 --
-[bash,term=west]
+[source,bash,term=west]
 ----
 $ skupper status
 ----
@@ -295,7 +295,7 @@ The service is exposed from the `east` namespace.
 .. Get the route details:
 +
 --
-[bash,term=west]
+[source,bash,term=west]
 ----
 $  oc get routes
 ----
@@ -329,7 +329,7 @@ This procedure describes how to remove the {service-network} you created.
 
 . Delete the `west` namespace from the west terminal session:
 +
-[bash,term=west]
+[source,bash,term=west]
 ----
 $  oc delete project west
 ----
@@ -337,7 +337,7 @@ $  oc delete project west
 
 . Delete the `east` namespace from the east terminal session:
 +
-[bash,term=east]
+[source,bash,term=east]
 ----
 $  oc delete project east
 ----
