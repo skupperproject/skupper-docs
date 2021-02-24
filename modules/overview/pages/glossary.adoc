@@ -3,12 +3,12 @@ include::{mod-loc}attributes.adoc[]
 
 An explanation of common terms used with {skupper-name}.
 
-{skupper-network}:: A network of {skupper-name} sites linked together to share services.
+{service-network}:: A network of {skupper-name} sites linked together to share services.
 
 Service:: In {skupper-name}, the Kubernetes https://kubernetes.io/docs/concepts/services-networking/service/[service]  concept is extended to  allow communication with sites outside the cluster. 
 When you define a service using Skupper, that service appears as a native service in other sites.
 
 Site:: A {skupper-name} site is an {skupper-name} installation.
-You _link_ sites to form a {skupper-network} and share services
+You _link_ sites to form a {service-network} and share services
 
 Link:: A secure connection between sites that enables communication and service sharing between those sites.

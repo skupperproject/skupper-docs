@@ -19,7 +19,7 @@ Increasing the challenge, layer 3 network controls do not extend easily to multi
 These network controls must be duplicated for each cluster.
 
 // Type: concept
-[id="skupper-network-isolation"] 
+[id="service-network-isolation"] 
 == Built-in network isolation
 
 Skupper provides default, built-in security that scales across clusters and clouds.
