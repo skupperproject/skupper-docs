@@ -14,14 +14,14 @@
 
 :imagesdir: _images
 
-:skupper-io:
+
 
 // name and version
 :skupper-name: Skupper
 :service-network: service network
 :skupper-version: 0.5.2
 :skupper-cli-version: {skupper-version}
-
+:cluster-brand: Kubernetes
 
 // Download URLs
 :linux-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz

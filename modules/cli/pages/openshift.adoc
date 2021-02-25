@@ -5,6 +5,7 @@ endif::mod-loc[]
 :prompt: $
 include::{mod-loc}attributes.adoc[]
 :sectnums:
+:cluster-brand: OpenShift
 //Category: openshift-tutorial
 // Type: assembly
 [id="openshift-tutorial"] 
@@ -22,6 +23,7 @@ This tutorial shows how to connect the following namespaces:
 
 * `west` - runs the frontend service and is typically a public cluster.
 * `east` - runs the backend service.
+
 
 include::{mod-loc}introduction-to-skupper.adoc[]
 
