@@ -1,3 +1,2 @@
 include::{mod-loc}attributes.adoc[]
-include::{mod-loc}introduction-to-skupper.adoc[]
 
