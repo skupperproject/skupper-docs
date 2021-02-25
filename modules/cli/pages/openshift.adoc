@@ -1,6 +1,6 @@
 ifndef::mod-loc[]
 :mod-loc: ./partials/
-:toc:
+:downstream:
 endif::mod-loc[]
 :prompt: $
 include::{mod-loc}attributes.adoc[]
@@ -22,6 +22,8 @@ This tutorial shows how to connect the following namespaces:
 
 * `west` - runs the frontend service and is typically a public cluster.
 * `east` - runs the backend service.
+
+include::{mod-loc}introduction-to-skupper.adoc[]
 
 include::index.adoc[tags=installing-cli]
 

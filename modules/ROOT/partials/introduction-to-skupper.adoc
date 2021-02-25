@@ -1,0 +1,24 @@
+// Type: concept
+[id="introduction-to-skupper"] 
+== Introduction to {skupper-name}
+
+ifdef::downstream[Interconnect 2.0 introduces a {service-network}, linking services across the hybrid cloud.]
+
+A {service-network} enables communication between services running in different network locations. 
+It allows geographically distributed services to connect as if they were all running in the same site.
+
+image::ROOT:overview.svg[]
+
+For example, you can deploy your frontend in a public OpenShift cluster and deploy your backend in a private OpenShift cluster, then connect them into a {service-network}.
+
+A {service-network} provides the following features:
+
+* Security by default. All inter-site traffic is protected by mutual TLS using a private, dedicated certificate authority (CA).
+* Easy connections between OpenShift clusters, even private clusters.
+* A {service-network} supports existing TCP-based applications without requiring modification.
+* Monitor your application traffic spread across multiple OpenShift clusters using the {service-network} console.
+
+You deploy and manage a {service-network} using the `skupper` CLI.
+
+
+
