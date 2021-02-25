@@ -59,7 +59,7 @@ The {skupper-name} console provides an overview of the following:
 * Sites - {skupper-name} installations on the current {service-network}.
 * Deployments - deployments relating to exposed services.
 
-. Perform the link:{openshift-tutorial-link}[OpenShift tutorial].
+. Perform the {OpenShiftTutorialLink} tutorial.
 
 . Navigate to the {skupper-name} console.
 
@@ -75,7 +75,13 @@ This view allows you drill down into details relating to the selected site.
 This view shows you any deployments that are exposed as services on the {service-network}.
 In this case, the console displays the *hello-world-backend (east)* deployment.
 
-. Click the *Services* menu item to display details for all services on the {service-network}.
+. Click the *Services* menu item to display details for all services exposed on the {service-network}.
++
+NOTE: Although two services are involved in the tutorial, only one service, `hello-world-backend` is exposed on the {service-network}.
+
+. Click the *Sites* menu again and expand the panel on the right hand side of the console.
+This panel shows the traffic flows from the backend to the frontend.
+
 
 
 
