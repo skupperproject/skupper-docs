@@ -53,7 +53,7 @@ $ mv skupper $HOME/bin
 +
 [subs=attributes+]
 ----
-$ skupper --version
+$ skupper version
 skupper version {skupper-version}
 ----
 // end::installing-cli[]
@@ -133,13 +133,24 @@ NOTE: Access to this file provides access to the {service-network}. Protect it a
 --
 
 . Use a token to join the {service-network}:
+
+.. Create a link:
 +
---
 ----
 $ skupper link create <filename> [-name <link-name>]
 ----
-where where `<filename>` is the name of a YAML file generated from the `skupper token create` command and `<link-name>` is the name of the link.
---
++
+where `<filename>` is the name of a YAML file generated from the `skupper token create` command and `<link-name>` is the name of the link.
+
+.. Check the link:
++
+----
+$ skupper link status
+Connection for conn1 not active
+----
++
+In this example no <link-name> was specified, the name defaulted to `conn1`.
+
 
 . If you want to delete a link:
 +
