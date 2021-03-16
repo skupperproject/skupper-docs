@@ -31,13 +31,13 @@ Installing the `skupper` command-line interface (CLI) provides a simple method t
 For Linux:
 [subs=attributes+]
 ----
-$ curl -fL https://github.com/skupperproject/skupper/releases/download/0.4.2/skupper-cli-0.4.2-linux-amd64.tgz | tar -xzf -
+$ curl -fL https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz | tar -xzf -
 ----
 
 For MacOS:
 [subs=attributes+]
 ----
-$ curl -fL https://github.com/skupperproject/skupper/releases/download/0.4.2/skupper-cli-0.4.2-mac-amd64.tgz | tar -xzf -
+$ curl -fL https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-mac-amd64.tgz | tar -xzf -
 ----
 --
 
