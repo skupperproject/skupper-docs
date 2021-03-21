@@ -30,7 +30,7 @@
 //assembly links
 
 :OpenShiftTutorialLink: link:/docs/cli/openshift.adoc[Creating a service network with OpenShift]
-:OverviewLink: link:/docs/overview/[Overview]
+:OverviewLink: link:/docs/overview/index.html[Overview]
 :RoutingLink: link:/docs/overview/routing.html[Skupper routing]
 :SecurityLink: link:/docs/overview/security.html[Skupper security]
 :ConnectivityLink: link:/docs/overview/connectivity.html[Skupper connectivity]
