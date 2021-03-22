@@ -4,7 +4,7 @@ include::{mod-loc}attributes.adoc[]
 // Type: assembly
 
 [id="skupper-cli"] 
-= Configuring {skupper-name} sites using the CLI
+= Using the {skupper-name} CLI
 
 [role="system:abstract"]
 Using the `skupper` command-line interface (CLI) allows you to create and manage {skupper-name} sites from the context of the current namespace.
@@ -14,14 +14,10 @@ A typical workflow is to create a site, link sites together, and expose services
 // tag::installing-cli[]
 // Type: procedure
 [id="installing-using-cli"] 
-== Installing `skupper` using the CLI
+== Installing the `skupper` CLI
 
 [role="system:abstract"]
 Installing the `skupper` command-line interface (CLI) provides a simple method to get started with {skupper-name}.
-
-.Prerequisites
-
-* Access to a Kubernetes cluster
 
 .Procedure
 
@@ -54,7 +50,7 @@ $ mv skupper $HOME/bin
 [subs=attributes+]
 ----
 $ skupper version
-skupper version {skupper-version}
+client version {skupper-version}
 ----
 // end::installing-cli[]
 
@@ -63,31 +59,58 @@ skupper version {skupper-version}
 == Creating a site using the CLI
 
 A {service-network} consists of {skupper-name} sites.
-This section describes how to create sites.
+This section describes how to create a site using the default settings.
 
-In the link:{getting-started-link}[tutorial], you create a site using the default settings:
+.Prerequisites
+
+* The `skupper` CLI is installed.
+* You are logged into the cluster.
+* The services you want to expose on the {service-network} are in the active namespace.
+
+
+.Procedure
+
+. Create a default site:
++
 ----
 $ skupper init
+----
+
+. Check the site:
++
+----
+$ skupper status
+
+Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites.
 ----
 
 The default settings include:
 
 * console - The {skupper-name} console is provisioned with a single user.
-The password for the `admin` user is stored in the `skupper-console-users` secret.
-* site name - The site name defaults to the namespace name, for example, `west`.
-
-To create a custom site:
-
-. Determine whether to provision the {skupper-name} console.
-To disable the console:
-+
-----
-$ skupper init --enable-console=false
-----
-+
+The password for the `admin` user is stored in the `skupper-console-users` secret. 
 For more information on the console, see link:{using-console-link}[Using the {skupper-name} console].
 
-. Determine how to protect the {skupper-name} console.
+* site name - The site name defaults to the namespace name, for example, `west`.
+
+// Type: procedure
+[id="creating-using-cli"] 
+== Customizing a site using the CLI
+
+If you require a custom configuration, you might need to recreate the site.
+
+.Procedure
+
+
+. Create a site without a console:
++
+----
+$ skupper delete
+$ skupper init --enable-console false
+----
++
+NOTE: If you have linked to sites, you need to recreate those links after reinitializing the site.
+
+. Configure the {skupper-name} console protection.
 There are a number of `skupper` options regarding authentication for the console:
 +
 --
@@ -160,12 +183,63 @@ $ skupper link delete <link-name>
 where `<link-name>` is the name of the link specified during creation.
 
 
-// Type: procedure
+// Type: assembly
 [id="exposing-services"] 
 == Exposing services on the {service-network}
 
-After creating a {service-network}, services can communicate across that network.
-This section describes how services can be enabled for a {service-network}.
+After creating a {service-network}, exposed services can communicate across that network.
+
+The `skupper` CLI has two options for exposing services:
+
+* `expose` supports simple use cases, for example, a deployment with a single service.
+See xref:exposing-simple-services[] for instructions.
+
+* `service create` and `service bind` is a more flexible method of exposing services, for example, if you have multiple services for a deployment.
+See xref:exposing-complex-services[] for instructions.
+
+
+// Type: procedure
+[id="exposing-simple-services"] 
+=== Exposing simple services on the {service-network}
+This section describes how services can be enabled for a {service-network} for simple use cases.
+
+.Procedure
+
+. Create a deployment, some pods, or a service in one of your sites, for example to create the backend service for the link:{getting-started-link}[tutorial]:
++
+----
+$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+----
++
+This step is not {skupper-name}-specific, that is, this process is unchanged from standard processes for your cluster.
+
+. Create a service that can communicate on the {service-network}:
++
+--
+----
+$ skupper expose [deployment <name>|pods <selector>|statefulset <statefulsetname>|service <name>]
+----
+
+where 
+
+* `<name>` is the name of your deployment 
+* `<selector>` is a pod selector
+* `<statefulsetname>` is the name of a statefulset
+
+Options for this command include:
+
+`--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
+
+`--target-port <port-number>`:: Specify the port number of pods that you want to expose.
+--
+
+NOTE: If you do not specify ports, `skupper` uses the `containerPort` value of the deployment.
+
+// Type: procedure
+[id="exposing-complex-services"] 
+=== Exposing complex services on the {service-network}
+
+This section describes how services can be enabled for a {service-network} for more complex use cases.
 
 .Procedure
 
@@ -211,27 +285,6 @@ ifdef::skupper-io[]
 endif::[]
 
 
---
-
-[NOTE]
---
-For simple use cases, for example if you have a one-to-one relationship between service and port, you can combine the two steps above using the `expose` option:
-
-----
-$ skupper expose [deployment <name>|pods <selector>|statefulset <statefulsetname>|service <name>]
-----
-
-where 
-
-* `<name>` is the name of your deployment 
-* `<selector>` is a pod selector
-* `<statefulsetname>` is the name of a statefulset
-
-Options for this command include:
-
-`--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
-
-`--target-port <port-number>`:: Specify the port number of pods that you want to expose.
 --
 
 
