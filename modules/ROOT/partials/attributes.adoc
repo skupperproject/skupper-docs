@@ -19,7 +19,7 @@
 // names and version
 :skupper-name: Skupper
 :service-network: service network
-:skupper-version: 0.5.0
+:skupper-version: 0.5.2
 
 
 // Download URLs
