@@ -122,7 +122,10 @@ There are a number of `skupper` options regarding authentication for the console
 
 
 `--console-user <username>`:: Username for the console user when authentication mode is set to `internal`.
+Defaults to `admin`.
 `--console-password <password>`:: Password for the console user when authentication mode is set to `internal`.
+If not specified, a random passwords is generated.
+
 --
 
 // Type: procedure
@@ -155,9 +158,9 @@ This file contains a key and the location of the site that created it.
 NOTE: Access to this file provides access to the {service-network}. Protect it appropriately.
 --
 
-. Use a token to join the {service-network}:
+. Use a token on the cluster that you want to connect from:
 
-.. Create a link:
+.. Create a link to the {service-network}:
 +
 ----
 $ skupper link create <filename> [-name <link-name>]
@@ -226,11 +229,21 @@ where
 * `<selector>` is a pod selector
 * `<statefulsetname>` is the name of a statefulset
 
+For the example deployment in step 1, you create a service using the following command:
+----
+$ skupper expose deployment/hello-world-backend --port 8080
+----
+
 Options for this command include:
 
 `--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
 
 `--target-port <port-number>`:: Specify the port number of pods that you want to expose.
+
+ifdef::skupper-io[]
+* `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
+endif::[]
+
 --
 
 NOTE: If you do not specify ports, `skupper` uses the `containerPort` value of the deployment.
@@ -263,6 +276,12 @@ where
 * `<name>` is the name of the service you want to create
 * `<port>` is the port the service uses
 
+For the example deployment in step 1, you create a service using the following command:
+----
+$ skupper service create hello-world-backend 8080
+----
+
+
 --
 
 . Bind the service to a cluster service:
@@ -283,6 +302,11 @@ where
 ifdef::skupper-io[]
 * `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
 endif::[]
+
+For the example deployment in step 1, you bind the service using the following command:
+----
+$ skupper service bind hello-world-backend deployment hello-world-backend
+----
 
 
 --
