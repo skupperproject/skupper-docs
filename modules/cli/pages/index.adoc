@@ -104,25 +104,23 @@ For more information on the console, see link:{using-console-link}[Using the {sk
 
 * site name - The site name defaults to the namespace name, for example, `west`.
 
-// Type: procedure
-[id="customizing-using-cli"] 
-== Customizing a site using the CLI
+// Type: reference
+[id="custom-sites"] 
+== Custom sites
 
-If you require a custom configuration, you might need to recreate the site.
+The default `skupper init` creates sites that satisfy typical requirements. 
 
-.Procedure
+If you require a custom configuration, note the following options:
 
 
-. Create a site without a console:
+* Creating a site without a console:
 +
 ----
-$ skupper delete
 $ skupper init --enable-console false
 ----
-+
-NOTE: If you have linked to sites, you need to recreate those links after reinitializing the site.
 
-. Configure the {skupper-name} console protection.
+
+* Configuring console authentication.
 There are a number of `skupper` options regarding authentication for the console:
 +
 --
