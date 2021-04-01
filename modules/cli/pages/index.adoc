@@ -4,38 +4,37 @@ include::{mod-loc}attributes.adoc[]
 // Type: assembly
 
 [id="skupper-cli"] 
-= Configuring Skupper sites using the CLI
+= Using the {skupper-name} CLI
 
 [role="system:abstract"]
-Using the Skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.
+Using the `skupper` command-line interface (CLI) allows you to create and manage {skupper-name} sites from the context of the current namespace.
 
+A typical workflow is to create a site, link sites together, and expose services to the {service-network}.
 
+// tag::installing-cli[]
 // Type: procedure
 [id="installing-using-cli"] 
-== Installing Skupper using the CLI
+== Installing the `skupper` CLI
 
 [role="system:abstract"]
-Installing Skupper using the command-line interface (CLI) provides a simple method to get started with Skupper.
-
-.Prerequisites
-
-* Access to a Kubernetes cluster
+Installing the `skupper` command-line interface (CLI) provides a simple method to get started with {skupper-name}.
 
 .Procedure
 
-. Install the Skupper command-line interface.
+ifdef::skupper-io[]
+. Install the `skupper` command-line interface.
 +
 --
 For Linux:
 [subs=attributes+]
 ----
-$ curl -fL https://github.com/skupperproject/skupper/releases/download//skupper-cli-0.3.2-linux-amd64.tgz | tar -xzf -
+$ curl -fL https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz | tar -xzf -
 ----
 
 For MacOS:
 [subs=attributes+]
 ----
-$ curl -fL https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-0.3.2-mac-amd64.tgz | tar -xzf -
+$ curl -fL https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-mac-amd64.tgz | tar -xzf -
 ----
 --
 
@@ -47,16 +46,290 @@ $ export PATH=$PATH:$HOME/bin
 $ mv skupper $HOME/bin
 ----
 
+endif::[]
+
+ifdef::product[]
+include::common/fragment-skupper-install-steps.adoc[]
+endif::[]
+
+
 . Verify the installation.
 +
 [subs=attributes+]
 ----
-$ skupper --version
-skupper version {skupper-version}
+$ skupper version
+client version {skupper-cli-version}
 ----
-
+// end::installing-cli[]
 
 // Type: procedure
 [id="creating-using-cli"] 
-== Creating a Skupper site using the CLI
+== Creating a site using the CLI
 
+A {service-network} consists of {skupper-name} sites.
+This section describes how to create a site using the default settings.
+
+.Prerequisites
+
+* The `skupper` CLI is installed.
+* You are logged into the cluster.
+* The services you want to expose on the {service-network} are in the active namespace.
+
+
+.Procedure
+
+. Create a default site:
++
+----
+$ skupper init
+----
+
+. Check the site:
++
+----
+$ skupper status
+
+Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites.
+----
+
+The default settings include:
+
+* console - The {skupper-name} console is provisioned with a single user.
+The password for the `admin` user is stored in the `skupper-console-users` secret. 
+For more information on the console, see link:{using-console-link}[Using the {skupper-name} console].
+
+* site name - The site name defaults to the namespace name, for example, `west`.
+
+// Type: reference
+[id="custom-sites"] 
+== Custom sites
+
+The default `skupper init` creates sites that satisfy typical requirements. 
+
+If you require a custom configuration, note the following options:
+
+
+* Creating a site without a console:
++
+----
+$ skupper init --enable-console false
+----
+
+
+* Configuring console authentication.
+There are a number of `skupper` options regarding authentication for the console:
++
+--
+`--console-auth <authentication-mode>`:: Set the authentication mode for the console:
+
+* `openshift` - Use OpenShift authentication, so that users who have permission to log into OpenShift and view the Project (namespace) can view the console.
+* `internal` -  Use {skupper-name} authentication, see the `console-user` and `console-password` options.
+* `unsecured` - No authentication, anyone with the URL can view the console.
+
+
+`--console-user <username>`:: Username for the console user when authentication mode is set to `internal`.
+Defaults to `admin`.
+`--console-password <password>`:: Password for the console user when authentication mode is set to `internal`.
+If not specified, a random passwords is generated.
+
+--
+
+// Type: procedure
+[id="linking-sites"] 
+== Linking sites
+
+A {service-network} consists of {skupper-name} sites.
+This section describes how to link sites to form a {service-network}.
+
+Linking two sites requires a single initial directional connection. However:
+
+* Communication between the two sites is bidirectional, only the initial linking is directional.
+* The choice of direction for linking is typically determined by accessibility. For example, if you are linking an OpenShift Dedicated cluster with a CodeReady Containers cluster, you must link from the CodeReady Containers cluster to the OpenShift Dedicated cluster because that route is accessible. 
+
+.Procedure
+
+. Determine the direction of the link. If both clusters are publicly addressable, then the direction is not significant. If one of the clusters is addressable from the other cluster, perform step 2 below on the addressable cluster.
+
+. Generate a token on the cluster that you want to link to:
++
+--
+----
+$ skupper token create <filename> 
+----
+
+where `<filename>` is the name of a YAML file that is saved on your local filesystem.
+
+This file contains a key and the location of the site that created it.
+
+NOTE: Access to this file provides access to the {service-network}. Protect it appropriately.
+--
+
+. Use a token on the cluster that you want to connect from:
+
+.. Create a link to the {service-network}:
++
+----
+$ skupper link create <filename> [-name <link-name>]
+----
++
+where `<filename>` is the name of a YAML file generated from the `skupper token create` command and `<link-name>` is the name of the link.
+
+.. Check the link:
++
+----
+$ skupper link status
+Connection for conn1 not active
+----
++
+In this example no <link-name> was specified, the name defaulted to `conn1`.
+
+
+. If you want to delete a link:
++
+----
+$ skupper link delete <link-name>
+----
+where `<link-name>` is the name of the link specified during creation.
+
+
+// Type: assembly
+[id="exposing-services"] 
+== Exposing services on the {service-network}
+
+After creating a {service-network}, exposed services can communicate across that network.
+
+The `skupper` CLI has two options for exposing services:
+
+* `expose` supports simple use cases, for example, a deployment with a single service.
+See xref:exposing-simple-services[] for instructions.
+
+* `service create` and `service bind` is a more flexible method of exposing services, for example, if you have multiple services for a deployment.
+See xref:exposing-complex-services[] for instructions.
+
+
+// Type: procedure
+[id="exposing-simple-services"] 
+=== Exposing simple services on the {service-network}
+This section describes how services can be enabled for a {service-network} for simple use cases.
+
+.Procedure
+
+. Create a deployment, some pods, or a service in one of your sites, for example to create the backend service for the link:{getting-started-link}[tutorial]:
++
+----
+$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+----
++
+This step is not {skupper-name}-specific, that is, this process is unchanged from standard processes for your cluster.
+
+. Create a service that can communicate on the {service-network}:
++
+--
+----
+$ skupper expose [deployment <name>|pods <selector>|statefulset <statefulsetname>|service <name>]
+----
+
+where 
+
+* `<name>` is the name of your deployment 
+* `<selector>` is a pod selector
+* `<statefulsetname>` is the name of a statefulset
+
+For the example deployment in step 1, you create a service using the following command:
+----
+$ skupper expose deployment/hello-world-backend --port 8080
+----
+
+Options for this command include:
+
+`--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
+
+`--target-port <port-number>`:: Specify the port number of pods that you want to expose.
+
+ifdef::skupper-io[]
+* `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
+endif::[]
+
+--
+
+NOTE: If you do not specify ports, `skupper` uses the `containerPort` value of the deployment.
+
+// Type: procedure
+[id="exposing-complex-services"] 
+=== Exposing complex services on the {service-network}
+
+This section describes how services can be enabled for a {service-network} for more complex use cases.
+
+.Procedure
+
+. Create a deployment, some pods, or a service in one of your sites, for example to create the backend service for the link:{getting-started-link}[tutorial]:
++
+----
+$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+----
++
+This step is not {skupper-name}-specific, that is, this process is unchanged from standard processes for your cluster.
+
+. Create a service that can communicate on the {service-network}:
++
+--
+----
+$ skupper service create <name> <port>
+----
+
+where 
+
+* `<name>` is the name of the service you want to create
+* `<port>` is the port the service uses
+
+For the example deployment in step 1, you create a service using the following command:
+----
+$ skupper service create hello-world-backend 8080
+----
+
+
+--
+
+. Bind the service to a cluster service:
++
+--
+----
+$ skupper service bind <service-name> <target-type> <target-name>
+----
+
+where
+
+* `<service-name>` is the name of the service on the {service-network}
+
+* `<target-type>` is the object you want to expose, `deployment`, `statefulset`, `pods`, or `service`.
+
+* `<target-name>` is the name of the cluster service
+
+ifdef::skupper-io[]
+* `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
+endif::[]
+
+For the example deployment in step 1, you bind the service using the following command:
+----
+$ skupper service bind hello-world-backend deployment hello-world-backend
+----
+
+
+--
+
+
+// Type: reference
+[id="cli-global-options"] 
+== CLI options for working with different clusters
+
+By default, all `skupper` commands apply to the cluster you are logged into and the current namespace.
+The following `skupper` options allow you to override that behavior and apply to all commands:
+
+`--namespace <namespace-name>`:: Apply command to `<namespace-name>`. For example, if you are currently working on `frontend` namespace and want to initialize a site in the `backend` namespace:
++
+----
+$ skupper init --namespace backend
+----
+`--kubeconfig <kubeconfig-path>`:: Path to the kubeconfig file - This allows you run multiple sessions to a cluster from the same client. An alternative is to set the `KUBECONFIG` environment variable. See the link:{getting-started-link}[tutorial] for an example of using kubeconfig files.
+
+`--context <context-name>`:: The kubeconfig file can contain defined contexts, and this option allows you to use those contexts.
