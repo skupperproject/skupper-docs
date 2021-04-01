@@ -24,10 +24,11 @@ By default, the {skupper-name} console is available whenever you create a {servi
 ----
 $ skupper status
 Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites. It has no exposed services.
-The site console url is:  https://skupper-controller-west.apps-crc.testing
+The site console url is:  https://skupper-west.apps-crc.testing
 ----
 
-. Browse to the {skupper-name} console URL. The credential prompt depends on how the site was created:
+. Browse to the {skupper-name} console URL. 
+The credential prompt depends on how the site was created using `skupper init`:
 +
 * using the `--console-auth unsecured` option, you are not prompted for credentials.
 * using the `--console-auth openshift` option, you are prompted to enter OpenShift cluster credentials.
