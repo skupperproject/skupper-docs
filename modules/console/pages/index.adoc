@@ -12,6 +12,9 @@ The {skupper-name} console provides useful information about the {service-networ
 image::skupper-console.png[]
 
 
+
+// Type: procedure
+[id="accessing-console"] 
 == Accessing the {skupper-name} console
 
 By default, the {skupper-name} console is available whenever you create a {service-network} router and is protected by credentials available in the `skupper-console-users` secret.
@@ -52,6 +55,8 @@ $ echo -n "Sk5aV3pNSHR5Zw==" | base64 --decode
 JNZWzMHtyg
 ----
 
+// Type: procedure
+[id="exploring-console"] 
 == Exploring the {skupper-name} console
 
 The {skupper-name} console provides an overview of the following:

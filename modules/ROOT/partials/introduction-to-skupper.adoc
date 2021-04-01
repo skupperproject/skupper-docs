@@ -1,3 +1,4 @@
+ifdef::skupper-io[:image-prefix: ROOT:]
 // Type: concept
 [id="introduction-to-skupper"] 
 == Introduction to {skupper-name} {skupper-version}
@@ -7,7 +8,7 @@ ifdef::product[Interconnect 2.0 introduces a {service-network}, linking services
 A {service-network} enables communication between services running in different network locations. 
 It allows geographically distributed services to connect as if they were all running in the same site.
 
-image::ROOT:overview.svg[]
+image::{image-prefix}overview.svg[]
 
 For example, you can deploy your frontend in a public {cluster-brand} cluster and deploy your backend in a private {cluster-brand} cluster, then connect them into a {service-network}.
 
