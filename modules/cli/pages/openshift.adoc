@@ -1,8 +1,7 @@
 ifndef::mod-loc[]
 :mod-loc: ./partials/
-:downstream:
 endif::mod-loc[]
-:prompt: $
+
 include::{mod-loc}attributes.adoc[]
 :sectnums:
 :cluster-brand: OpenShift
@@ -47,13 +46,13 @@ The following table shows how you might set up your terminal sessions.
 a|
 [source,bash,subs="attributes+"]
 ----
-{prompt} oc project
+ $ oc project
  west
 ----
 a|
 [source,bash,subs="attributes+"]
 ----
-{prompt} oc project
+ $ oc project
  east
 ----
 

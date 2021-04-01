@@ -22,6 +22,7 @@
 :skupper-version: 0.5.2
 :skupper-cli-version: {skupper-version}
 :cluster-brand: Kubernetes
+:skupper-io:
 
 // Download URLs
 :linux-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz
