@@ -20,6 +20,7 @@
 :skupper-name: Skupper
 :service-network: service network
 :skupper-version: 0.5.2
+:skupper-cli-version: {skupper-version}
 
 
 // Download URLs

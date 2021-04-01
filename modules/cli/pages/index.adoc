@@ -49,27 +49,7 @@ $ mv skupper $HOME/bin
 endif::[]
 
 ifdef::product[]
-. Subscribe to the required repositories:
-+
---
-Red Hat Enterprise Linux 7::
-[options="nowrap"]
-----
-$ sudo subscription-manager repos --enable=amq-interconnect-1-for-rhel-7-server-rpms --enable=amq-clients-2-for-rhel-7-server-rpms
-----
-
-Red Hat Enterprise Linux 8::
-[options="nowrap"]
-----
-$ sudo subscription-manager repos --enable=amq-interconnect-1-for-rhel-8-x86_64-rpms --enable=amq-clients-2-for-rhel-8-x86_64-rpms
-----
---
-
-. Use the `yum` or `dnf` command to install the `qpid-dispatch-router`, `qpid-dispatch-tools`, and `qpid-dispatch-console` packages and their dependencies:
-+
-----
-$ sudo yum install skupper
-----
+include::common/fragment-skupper-install-steps.adoc[]
 endif::[]
 
 
