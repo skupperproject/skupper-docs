@@ -58,7 +58,7 @@ endif::[]
 [subs=attributes+]
 ----
 $ skupper version
-client version {skupper-version}
+client version {skupper-cli-version}
 ----
 // end::installing-cli[]
 
