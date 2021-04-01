@@ -42,3 +42,32 @@ npm install
 ----
 LIVERELOAD=true gulp
 ----
+
+== Creating and running Didact tutorials
+
+https://marketplace.visualstudio.com/items?itemName=redhat.vscode-didact[Didact] is a VS Code extension that allows you perform some procedures as interactive tutorials in VS Code.
+
+To create the tutorials from this documentation:
+
+. Install the https://marketplace.visualstudio.com/items?itemName=redhat.vscode-didact[Didact] extension in VS Code.
+
+. Install the `autodidact` CLI:
++
+----
+$ npm i -g autodidact
+----
+
+. Convert the procedure you want to perform into Didact format:
++
+----
+$ autodidact modules/cli/pages/openshift.adoc
+----
++
+This creates the tutorial file:
++
+----
+modules/cli/pages/openshift.adoc.didact.adoc
+----
+
+. Run the tutorial by right clicking on the file in VS Code and choosing *Didact: Start Didact Tutorial from File*
+

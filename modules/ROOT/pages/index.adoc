@@ -1,3 +1,2 @@
 include::{mod-loc}attributes.adoc[]
-= Skupper Documentation
 
