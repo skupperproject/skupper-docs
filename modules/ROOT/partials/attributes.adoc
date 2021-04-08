@@ -24,6 +24,9 @@
 :cluster-brand: Kubernetes
 :skupper-io:
 
+// resolves to blank for skupper
+:version:
+
 // Download URLs
 :linux-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz
 :mac-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-mac-amd64.tgz

@@ -1,7 +1,7 @@
 ifdef::skupper-io[:image-prefix: ROOT:]
 // Type: concept
 [id="introduction-to-skupper"] 
-== Introduction to {skupper-name} {skupper-version}
+== Introduction to {skupper-name} {version}
 
 ifdef::product[Interconnect 2.0 introduces a {service-network}, linking services across the hybrid cloud.]
 
