@@ -1,7 +1,6 @@
 ifndef::mod-loc[]
 :mod-loc: ./partials/
 endif::mod-loc[]
-
 include::{mod-loc}attributes.adoc[]
 :sectnums:
 :cluster-brand: OpenShift
@@ -321,8 +320,8 @@ This shows how the frontend calls the backend service over the {service-network}
 
 .Additional resources
 
-* link:{using-console-link}[Using the {skupper-name} console]
-* link:{using-console-link}[Using the {skupper-name} CLI]
+* {ConsoleLink}
+* {CliLink}
 
 // Type: procedure
 [id="tearing-down"] 

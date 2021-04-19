@@ -12,9 +12,12 @@ ui:
   bundle:
     url: ./ui-preview-bundle.zip
     snapshot: true
+  supplemental_files: ./supplemental_ui
 
 asciidoc:
   attributes:
     plantuml-server-url: 'http://www.plantuml.com/plantuml'
     plantuml-fetch-diagram: true
     mod-loc: ROOT:partial$
+    skupper-preview: true
+    skupper-io: true

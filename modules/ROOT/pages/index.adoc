@@ -1,2 +1,21 @@
 include::{mod-loc}attributes.adoc[]
 
+= Link check
+
+//external
+* {GettingStartedLink}
+
+
+This page acts as a report for all docs in the skupper-docs repo.
+
+// migrated from markdown
+* {OverviewLink}
+* {RoutingLink}
+* {SecurityLink}
+* {ConnectivityLink}
+
+// can be consumed by nebel
+* {OpenShiftTutorialLink}
+* {DeclarativeLink}
+* {CliLink}
+* {ConsoleLink}
