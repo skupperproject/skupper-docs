@@ -96,7 +96,7 @@ The default settings include:
 
 * console - The {skupper-name} console is provisioned with a single user.
 The password for the `admin` user is stored in the `skupper-console-users` secret. 
-For more information on the console, see link:{using-console-link}[Using the {skupper-name} console].
+For more information on the console, see {ConsoleLink}.
 
 * site name - The site name defaults to the namespace name, for example, `west`.
 
