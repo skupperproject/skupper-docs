@@ -31,15 +31,20 @@
 :linux-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz
 :mac-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-mac-amd64.tgz
 
+// URLs
+:GettingStartedLink: link:https://skupper.io/start/[Getting started]
 
+ifdef::skupper-preview[]
+:linkroot: /skupper/latest/
+endif::[]
 //assembly links
 
-:OpenShiftTutorialLink: link:/docs/cli/openshift.adoc[Creating a service network with OpenShift]
-:OverviewLink: link:/docs/overview/index.html[Overview]
-:RoutingLink: link:/docs/overview/routing.html[Skupper routing]
-:SecurityLink: link:/docs/overview/security.html[Skupper security]
-:ConnectivityLink: link:/docs/overview/connectivity.html[Skupper connectivity]
-:DeclarativeLink: link:/docs/declarative[Configuring Skupper sites using YAML]
-:CliLink: link:/docs/cli/[Configuring Skupper sites using the CLI]
-:GettingStartedLink: link:/start/[Getting started]
-:ConsoleLink: link:/docs/console/[Monitoring Skupper sites using the console]
+
+:OpenShiftTutoriallink: link:{linkroot}cli/openshift.html[Creating a service network with OpenShift]
+:Overviewlink: link:{linkroot}overview/index.html[Overview]
+:Routinglink: link:{linkroot}overview/routing.html[Skupper routing]
+:Securitylink: link:{linkroot}overview/security.html[Skupper security]
+:Connectivitylink: link:{linkroot}overview/connectivity.html[Skupper connectivity]
+:Declarativelink: link:{linkroot}declarative[Configuring Skupper sites using YAML]
+:Clilink: link:{linkroot}cli/[Configuring Skupper sites using the CLI]
+:Consolelink: link:{linkroot}console/[Monitoring Skupper sites using the console]
