@@ -32,7 +32,7 @@
 :mac-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-mac-amd64.tgz
 
 // URLs
-:GettingStartedLink: link:https://skupper.io/start/[Getting started]
+:GettingStartedLink: link:https://skupper.io/start/index.html[Getting started]
 
 ifdef::skupper-preview[]
 :linkroot: /skupper/latest/
@@ -45,6 +45,6 @@ endif::[]
 :Routinglink: link:{linkroot}overview/routing.html[Skupper routing]
 :Securitylink: link:{linkroot}overview/security.html[Skupper security]
 :Connectivitylink: link:{linkroot}overview/connectivity.html[Skupper connectivity]
-:Declarativelink: link:{linkroot}declarative[Configuring Skupper sites using YAML]
-:Clilink: link:{linkroot}cli/[Configuring Skupper sites using the CLI]
-:Consolelink: link:{linkroot}console/[Monitoring Skupper sites using the console]
+:Declarativelink: link:{linkroot}declarative/index.html[Configuring Skupper sites using YAML]
+:Clilink: link:{linkroot}cli/index.html[Configuring Skupper sites using the CLI]
+:Consolelink: link:{linkroot}console/index.html[Monitoring Skupper sites using the console]
