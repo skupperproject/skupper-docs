@@ -12,7 +12,7 @@
 // * Upstream-only content conditionalized with ifdef::skupper-io[]...endif::[]
 // * Downstream-only content conditionalized with ifdef::product[]...endif::[]
 
-:imagesdir: _images
+//:imagesdir: _images
 
 
 
@@ -22,7 +22,7 @@
 :skupper-version: 0.5.2
 :skupper-cli-version: {skupper-version}
 :cluster-brand: Kubernetes
-:skupper-io:
+// :skupper-io:
 
 // resolves to blank for skupper
 :version:
