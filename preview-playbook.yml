@@ -20,4 +20,6 @@ asciidoc:
     plantuml-fetch-diagram: true
     mod-loc: ROOT:partial$
     skupper-preview: true
-    skupper-io: true
+    skupper-io: '@'
+    cluster-brand: Kubernetes@
+    cluster-dir: k8s@
