@@ -8,18 +8,21 @@ include::{mod-loc}attributes.adoc[]
 [role="system:abstract"]
 The {SkupperOperatorName} creates and manages {skupper-name} sites in {cluster-brand}. 
 
-[id='adding-operator-{context}']
-== Adding the Skupper Operator to your cluster
+You can install the Operator as described in xref:installing-operator-using-cli-{context}[].
 
-The options for installing the Operator are:
+ifeval::["{cluster-brand}" == "OpenShift"]
 
-* xref:installing-operator-using-cli-{context}[]
-* xref:installing-operator-using-olm-{context}[]
- 
+On OpenShift, another option is  xref:installing-operator-using-olm-{context}[].
+
+endif::[]
+
 [NOTE]
 ====
 Installing an Operator requires administrator-level privileges for your {cluster-brand} cluster.
 ====
+
+After installing the Operator, you can create a site by deploying a ConfigMap as described in xref:creating-site-using-operator-{context}[]
+
 
 [id='installing-operator-using-cli-{context}']
 == Installing the Operator using the CLI
@@ -149,6 +152,8 @@ If the output does not report the pod is running, use the following command to d
 $ kubectl describe pod -l name=skupper-operator
 ----
 
+ifeval::["{cluster-brand}" == "OpenShift"]
+
 .Additional resources
 * For an alternative method of installing the {skupper-name} Operator that uses the OperatorHub graphical interface, see xref:installing-operator-using-olm-{context}[].
 
@@ -193,6 +198,8 @@ The *Installed Operators* page appears displaying the status of the Operator ins
 
 For more information about installing Operators, see the link:https://docs.openshift.com/container-platform/4.7/operators/user/olm-installing-operators-in-namespace.html[OpenShift Documentation]
 
+endif::[]
+
 [id='creating-site-using-operator-{context}']
 == Creating a site using the Skupper Operator
 
@@ -215,7 +222,6 @@ You can later retrieve the console credentials as described in {ConsoleLink} or 
 [source,yaml,options="nowrap"]
 ----
 data:
-  router-mode: interior
   console-user: "admin"
   console-password: "changeme"
 ----
