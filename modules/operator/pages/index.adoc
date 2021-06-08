@@ -1,6 +1,6 @@
 include::{mod-loc}attributes.adoc[]
 
-= Using the Skupper Operator on {kubernetes-flavor}
+= Using the Skupper Operator on Kubernetes
 
 [role="system:abstract"]
 The {SkupperOperatorName} creates and manages {skupper-name} sites in {kubernetes-flavor}. 
@@ -16,6 +16,6 @@ Installing an Operator requires administrator-level privileges for your {kuberne
 After installing the Operator, you can create a site by deploying a ConfigMap as described in xref:creating-site-using-operator-{context}[]
 
 
-include::{mod-loc}installing-operator-using-cli.adoc[tags=!openshift]
+include::{mod-loc}installing-operator-using-cli.adoc[]
 
 include::{mod-loc}creating-site-using-operator.adoc[]
