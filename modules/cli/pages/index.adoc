@@ -21,36 +21,7 @@ Installing the `skupper` command-line interface (CLI) provides a simple method t
 
 .Procedure
 
-ifdef::skupper-io[]
-. Install the `skupper` command-line interface.
-+
---
-For Linux:
-[subs=attributes+]
-----
-$ curl -fL https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz | tar -xzf -
-----
-
-For MacOS:
-[subs=attributes+]
-----
-$ curl -fL https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-mac-amd64.tgz | tar -xzf -
-----
---
-
-. Copy the `skupper` executable to a directory in your $PATH:
-+
-----
-$ mkdir -p $HOME/bin
-$ export PATH=$PATH:$HOME/bin
-$ mv skupper $HOME/bin
-----
-
-endif::[]
-
-ifdef::product[]
-include::common/fragment-skupper-install-steps.adoc[]
-endif::[]
+include::{common}fragment-skupper-install-steps.adoc[]
 
 
 . Verify the installation.

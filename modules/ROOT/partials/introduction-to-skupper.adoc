@@ -10,14 +10,14 @@ It allows geographically distributed services to connect as if they were all run
 
 image::{image-prefix}overview.svg[Overview of a service network]
 
-For example, you can deploy your frontend in a public {cluster-brand} cluster and deploy your backend in a private {cluster-brand} cluster, then connect them into a {service-network}.
+For example, you can deploy your frontend in a public {kubernetes-flavor} cluster and deploy your backend in a private {kubernetes-flavor} cluster, then connect them into a {service-network}.
 
 A {service-network} provides the following features:
 
 * Security by default. All inter-site traffic is protected by mutual TLS using a private, dedicated certificate authority (CA).
-* Easy connections between {cluster-brand} clusters, even private clusters.
+* Easy connections between {kubernetes-flavor} clusters, even private clusters.
 * A {service-network} supports existing TCP-based applications without requiring modification.
-* Monitor your application traffic spread across multiple {cluster-brand} clusters using the {service-network} console.
+* Monitor your application traffic spread across multiple {kubernetes-flavor} clusters using the {service-network} console.
 
 You deploy and manage a {service-network} using the `skupper` CLI.
 

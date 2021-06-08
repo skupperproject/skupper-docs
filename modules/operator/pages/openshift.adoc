@@ -1,3 +1,6 @@
-:cluster-brand: OpenShift
-:cluster-dir: ocp
-include::index.adoc[]
+:kubernetes-flavor: OpenShift
+:example-directory: ocp
+
+
+
+include::{mod-loc}operator.adoc[tags=!kubernetes]

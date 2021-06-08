@@ -3,7 +3,7 @@ ifndef::mod-loc[]
 endif::mod-loc[]
 include::{mod-loc}attributes.adoc[]
 :sectnums:
-:cluster-brand: OpenShift
+:kubernetes-flavor: OpenShift
 //Category: openshift-tutorial
 // Type: assembly
 [id="openshift-tutorial"] 

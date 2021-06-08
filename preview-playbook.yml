@@ -19,7 +19,8 @@ asciidoc:
     plantuml-server-url: 'http://www.plantuml.com/plantuml'
     plantuml-fetch-diagram: true
     mod-loc: ROOT:partial$
+    common: ROOT:partial$
     skupper-preview: true
     skupper-io: '@'
-    cluster-brand: Kubernetes@
-    cluster-dir: k8s@
+    kubernetes-flavor: Kubernetes@
+    example-directory: k8s@
