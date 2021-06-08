@@ -1,6 +1,31 @@
 :kubernetes-flavor: OpenShift
 :example-directory: ocp
 
+include::{mod-loc}attributes.adoc[]
+
+:context: skupper-operator
+//Category: skupper-operator
+// Type: assembly
+= Using the Skupper Operator on {kubernetes-flavor}
+
+[role="system:abstract"]
+The {SkupperOperatorName} creates and manages {skupper-name} sites in {kubernetes-flavor}. 
+
+You can install the Operator as described in xref:installing-operator-using-cli-{context}[].
 
 
-include::{mod-loc}operator.adoc[tags=!kubernetes]
+[NOTE]
+====
+Installing an Operator requires administrator-level privileges for your {kubernetes-flavor} cluster.
+====
+
+After installing the Operator, you can create a site by deploying a ConfigMap as described in xref:creating-site-using-operator-{context}[]
+
+
+include::{mod-loc}installing-operator-using-cli.adoc[tags=!kubernetes]
+
+
+include::{mod-loc}installing-operator-using-olm.adoc[]
+
+
+include::{mod-loc}creating-site-using-operator.adoc[]
