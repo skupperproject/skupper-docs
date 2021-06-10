@@ -1,3 +1,4 @@
+// Type: procedure
 [id='installing-operator-using-cli-{context}']
 == Installing the Operator using the CLI
 

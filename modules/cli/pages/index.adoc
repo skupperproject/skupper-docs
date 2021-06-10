@@ -163,7 +163,7 @@ $ skupper link delete <link-name>
 where `<link-name>` is the name of the link specified during creation.
 
 
-// Type: assembly
+// Type: concept
 [id="exposing-services"] 
 == Exposing services on the {service-network}
 

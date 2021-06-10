@@ -1,3 +1,4 @@
+// Type: procedure
 [id='installing-operator-using-olm-{context}']
 == Installing the Skupper Operator using the OpenShift console
 

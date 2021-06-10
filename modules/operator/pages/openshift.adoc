@@ -6,6 +6,7 @@ include::{mod-loc}attributes.adoc[]
 :context: skupper-operator-openshift
 //Category: skupper-operator
 // Type: assembly
+[id='using-skupper-operator-{context}']
 = Using the Skupper Operator on OpenShift
 
 [role="system:abstract"]

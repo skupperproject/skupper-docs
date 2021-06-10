@@ -1,10 +1,13 @@
+// Type: procedure
 [id='creating-site-using-operator-{context}']
 == Creating a site using the Skupper Operator
 
 
 . Create a YAML file defining the ConfigMap of the site you want to create.
-For example, create `skupper-site.yaml`:
 +
+--
+For example, create `skupper-site.yaml`:
+
 [source,yaml,options="nowrap"]
 ----
 apiVersion: v1
@@ -12,18 +15,26 @@ kind: ConfigMap
 metadata:
   name: skupper-site
   namespace: my-namespace
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: skupper-operator
+  source: skupper-operator
+  sourceNamespace: openshift-marketplace
+  startingCSV: skupper-operator.v0.6.0
 ----
-+
+
 This is the equivalent to `skupper init`.
 You can later retrieve the console credentials as described in {ConsoleLink} or specify them now by adding the username and optionally the password to `skupper-site.yaml` as follows:
-+
+
 [source,yaml,options="nowrap"]
 ----
 data:
   console-user: "admin"
   console-password: "changeme"
 ----
- 
+--
+
 . Apply the YAML to create a ConfigMap named `skupper-site` in the namespace you want to use:
 +
 [source,bash,options="nowrap"]
