@@ -15,13 +15,6 @@ kind: ConfigMap
 metadata:
   name: skupper-site
   namespace: my-namespace
-spec:
-  channel: alpha
-  installPlanApproval: Automatic
-  name: skupper-operator
-  source: skupper-operator
-  sourceNamespace: openshift-marketplace
-  startingCSV: skupper-operator.v0.6.0
 ----
 
 This is the equivalent to `skupper init`.
