@@ -2,8 +2,6 @@
 [id='installing-operator-using-cli-{context}']
 == Installing the Operator using the CLI
 
-:examples-file: skupper-operator-2.0-ocp-install-examples.zip
-
 The steps in this section show how to use the `kubectl` command-line interface (CLI) to install and deploy the latest version of the {SkupperOperatorName} in a given {kubernetes-flavor} cluster.
 
 .Procedure
@@ -21,6 +19,7 @@ $ kubectl login -u system:admin
 
 .. Create a file named `subscription.yaml` with the following:
 +
+[source,yaml,options="nowrap"]
 ----
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
@@ -43,11 +42,36 @@ spec:
 $ kubectl apply -f subscription.yaml
 ----
 
-. To create a operator subscription for a specific namespace:
+. To create a operator subscription for a specific namespace, you must create an Operator group in that namespace and then create the subscription:
+
+.. Create a file named `operator-group.yaml` with the following:
++
+--
+[source,yaml,options="nowrap"]
+----
+kind: OperatorGroup
+apiVersion: operators.coreos.com/v1
+metadata:
+  name: skupper-operator
+  namespace: my-namespace
+spec:
+  targetNamespaces:
+  - my-namespace
+----
+where `my-namespace` is the name of the namespace you want to create the site.
+--
+
+.. Apply the Operator group YAML:
++
+[source,bash,options="nowrap"]
+----
+$ kubectl apply -f operator-group.yaml
+----
 
 .. Create a file named `subscription.yaml` with the following:
 +
 --
+[source,yaml,options="nowrap"]
 ----
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
@@ -73,4 +97,8 @@ where `my-namespace` is the name of the namespace you want to create the site.
 $ kubectl apply -f subscription.yaml
 ----
 
+
+.Next steps
+
+* xref:creating-site-using-operator-{context}[]
 

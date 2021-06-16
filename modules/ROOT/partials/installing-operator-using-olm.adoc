@@ -35,7 +35,8 @@ The *Installed Operators* page appears displaying the status of the Operator ins
 
 .. Select the *Subscription* tab and view any failures or errors.
 
-.Additional resources
-
 For more information about installing Operators, see the link:https://docs.openshift.com/container-platform/4.7/operators/user/olm-installing-operators-in-namespace.html[OpenShift Documentation]
 
+.Next steps
+
+* xref:creating-site-using-operator-{context}[]
