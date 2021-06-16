@@ -31,7 +31,7 @@ spec:
   channel: alpha
   installPlanApproval: Automatic
   name: skupper-operator
-  source: skupper-operator
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
   startingCSV: skupper-operator.v0.6.0
 ----
@@ -58,7 +58,7 @@ spec:
   channel: alpha
   installPlanApproval: Automatic
   name: skupper-operator
-  source: skupper-operator
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
   startingCSV: skupper-operator.v0.6.0
 
