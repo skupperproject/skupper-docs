@@ -7,7 +7,7 @@ include::{mod-loc}attributes.adoc[]
 = Monitoring {skupper-name} sites using the console
 
 [role="system:abstract"]
-The {skupper-name} console provides useful information about the {service-network}, for example, traffic levels between sites.
+The Skupper console provides useful information about the {service-network}, for example, traffic levels between sites.
 
 image::skupper-console.png[]
 
@@ -15,14 +15,14 @@ image::skupper-console.png[]
 
 // Type: procedure
 [id="accessing-console"] 
-== Accessing the {skupper-name} console
+== Accessing the Skupper console
 
-By default, the {skupper-name} console is available whenever you create a {service-network} router and is protected by credentials available in the `skupper-console-users` secret.
+By default, the Skupper console is available whenever you create a {service-network} router and is protected by credentials available in the `skupper-console-users` secret.
 
 
 .Procedure
 
-. Determine the {skupper-name} console URL using the `skupper` CLI, for example:
+. Determine the Skupper console URL using the `skupper` CLI, for example:
 +
 ----
 $ skupper status
@@ -30,7 +30,7 @@ Skupper is enabled for namespace "west" in interior mode. It is not connected to
 The site console url is:  https://skupper-west.apps-crc.testing
 ----
 
-. Browse to the {skupper-name} console URL. 
+. Browse to the Skupper console URL. 
 The credential prompt depends on how the site was created using `skupper init`:
 +
 * using the `--console-auth unsecured` option, you are not prompted for credentials.
@@ -57,9 +57,9 @@ JNZWzMHtyg
 
 // Type: procedure
 [id="exploring-console"] 
-== Exploring the {skupper-name} console
+== Exploring the Skupper console
 
-The {skupper-name} console provides an overview of the following:
+The Skupper console provides an overview of the following:
 
 * Services - services that are exposed on the {service-network}, both local and remote.
 * Sites - {skupper-name} installations on the current {service-network}.
@@ -67,7 +67,7 @@ The {skupper-name} console provides an overview of the following:
 
 . Perform the {OpenShiftTutorialLink} tutorial.
 
-. Navigate to the {skupper-name} console.
+. Navigate to the Skupper console.
 
 . Click the *Sites* menu item.
 Both the *east* and *west* sites should be displayed in circles.

@@ -65,7 +65,7 @@ Skupper is enabled for namespace "west" in interior mode. It is not connected to
 
 The default settings include:
 
-* console - The {skupper-name} console is provisioned with a single user.
+* console - The Skupper console is provisioned with a single user.
 The password for the `admin` user is stored in the `skupper-console-users` secret. 
 For more information on the console, see {ConsoleLink}.
 
