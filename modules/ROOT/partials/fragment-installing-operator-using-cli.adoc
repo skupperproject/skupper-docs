@@ -1,14 +1,14 @@
 [start={next-step}]
 . Specify the namespace in which you want to install the Operator. You can create a new namespace or switch to an existing one.
 
-.. Create a new namespace:
+.. Create a new namespace if necessary:
 +
 [source,bash,options="nowrap",subs="+quotes"]
 ----
 $ kubectl create namespace  __<namespace-name>__
 ----
 
-.. Or, switch to an existing namespace:
+.. Switch to the namespace in which you want to install the Operator:
 +
 [source,bash,options="nowrap",subs="+quotes"]
 ----
