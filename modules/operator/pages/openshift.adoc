@@ -12,7 +12,15 @@ include::{mod-loc}attributes.adoc[]
 [role="system:abstract"]
 The {SkupperOperatorName} creates and manages {skupper-name} sites in {kubernetes-flavor}. 
 
-You can install the Operator using any of the following methods:
+There are two options when deploying the Skupper Operator:
+
+All namespaces:: 
+All Skupper sites created in the cluster share a common *site controller* pod for co-ordination.
+A specific namespace::
+A site controller pods is created in each namespace that you apply the `site` ConfigMap.
+This is equivalent to the `skupper init` as described in {CliLink}.
+
+You can deploy the Skupper Operator using any of the following methods:
 
 * xref:installing-operator-using-cli-{context}[].
 * xref:installing-operator-using-olm-{context}[].

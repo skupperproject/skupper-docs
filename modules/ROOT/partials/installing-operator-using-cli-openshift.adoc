@@ -8,38 +8,6 @@ The steps in this section show how to use the `kubectl` command-line interface (
 
 .Procedure
 
-. In your web browser, navigate to the *Software Downloads* page for link:https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?downloadType=distributions&product=jboss.amq.interconnect[{skupper-name} releases].
-
-. Ensure that the value of the *Version* drop-down list is set to `{RouterVersion}` and the *Releases* tab is selected.
-
-. Next to *AMQ Interconnect 2.0 Operator Installation and Example Files*, click *Download*.
-+
-Download of the `{examples-file}` compressed archive automatically begins.
-
-. When the download has completed, move the archive to your chosen installation directory. The following example moves the archive to a directory called `~/router/operator`.
-+
-[source,bash,options="nowrap",subs="+attributes"]
-----
-$ mkdir ~/router
-$ mv {examples-file} ~/router
-----
-
-. In your chosen installation directory, extract the contents of the archive. For example:
-+
-[source,bash,options="nowrap", subs="+attributes"]
-----
-$ cd ~/router
-$ unzip {examples-file}
-----
-
-. Switch to the directory that was created when you extracted the archive. For example:
-+
-[source,bash,options="nowrap", subs="+attributes"]
-----
-$ cd operator
-----
-
-
 . Log in to {kubernetes-flavor} as a cluster administrator. For example:
 +
 [source,bash,options="nowrap"]
@@ -47,10 +15,62 @@ $ cd operator
 $ kubectl login -u system:admin
 ----
 
-
 . Complete the steps described in link:https://access.redhat.com/RegistryAuthentication[Red Hat Container Registry Authentication^].
 
+. To create a operator subscription for all namespaces:
 
-:next-step: 9
+.. Create a file named `subscription.yaml` with the following:
++
+----
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: skupper-operator
+  namespace: openshift-operators
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: skupper-operator
+  source: skupper-operator
+  sourceNamespace: openshift-marketplace
+  startingCSV: skupper-operator.v0.6.0
+----
 
-include::fragment-installing-operator-using-cli.adoc[]
+.. Apply the subscription YAML:
++
+[source,bash,options="nowrap"]
+----
+$ kubectl apply -f subscription.yaml
+----
+
+. To create a operator subscription for a specific namespace:
+
+.. Create a file named `subscription.yaml` with the following:
++
+--
+----
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: skupper-operator
+  namespace: my-namespace
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: skupper-operator
+  source: skupper-operator
+  sourceNamespace: openshift-marketplace
+  startingCSV: skupper-operator.v0.6.0
+
+----
+where `my-namespace` is the name of the namespace you want to create the site.
+--
+
+.. Apply the subscription YAML:
++
+[source,bash,options="nowrap"]
+----
+$ kubectl apply -f subscription.yaml
+----
+
+
