@@ -19,10 +19,11 @@
 // name and version
 :skupper-name: Skupper
 :service-network: service network
-:skupper-version: 0.5.2
+:skupper-version: 0.6.0
 :skupper-cli-version: {skupper-version}
-:cluster-brand: Kubernetes
+:SkupperOperatorName: Skupper Operator
 // :skupper-io:
+
 
 // resolves to blank for skupper
 :version:
@@ -41,10 +42,12 @@ endif::[]
 
 
 :OpenShiftTutoriallink: link:{linkroot}cli/openshift.html[Creating a service network with OpenShift]
-:Overviewlink: link:{linkroot}overview/index.html[Overview]
-:Routinglink: link:{linkroot}overview/routing.html[Skupper routing]
-:Securitylink: link:{linkroot}overview/security.html[Skupper security]
-:Connectivitylink: link:{linkroot}overview/connectivity.html[Skupper connectivity]
-:Declarativelink: link:{linkroot}declarative/index.html[Configuring Skupper sites using YAML]
-:Clilink: link:{linkroot}cli/index.html[Configuring Skupper sites using the CLI]
-:Consolelink: link:{linkroot}console/index.html[Monitoring Skupper sites using the console]
+:OverviewLink: link:{linkroot}overview/index.html[Overview]
+:RoutingLink: link:{linkroot}overview/routing.html[Skupper routing]
+:SecurityLink: link:{linkroot}overview/security.html[Skupper security]
+:ConnectivityLink: link:{linkroot}overview/connectivity.html[Skupper connectivity]
+:DeclarativeLink: link:{linkroot}declarative/index.html[Configuring Skupper sites using YAML]
+:CliLink: link:{linkroot}cli/index.html[Configuring Skupper sites using the CLI]
+:ConsoleLink: link:{linkroot}console/index.html[Monitoring Skupper sites using the console]
+:OperatorLink: link:{linkroot}operator/index.html[Configuring Skupper sites using the Operator on Kubernetes]
+:OperatorOCPLink: link:{linkroot}operator/openshift.html[Configuring Skupper sites using the Operator on OpenShift]

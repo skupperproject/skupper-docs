@@ -1,0 +1,60 @@
+[start={next-step}]
+. Specify the namespace in which you want to install the Operator. You can create a new namespace or switch to an existing one.
+
+.. Create a new namespace if necessary:
++
+[source,bash,options="nowrap",subs="+quotes"]
+----
+$ kubectl create namespace  __<namespace-name>__
+----
+
+.. Switch to the namespace in which you want to install the Operator:
++
+[source,bash,options="nowrap",subs="+quotes"]
+----
+$ kubectl config set-context --current --namespace=__<namespace-name>__
+----
+
+. Create a CatalogSource in the `openshift-marketplace` namespace:
++
+[source,bash,options="nowrap",subs=attributes+]
+----
+$ kubectl apply -f examples/{example-directory}/00-cs.yaml
+----
+
+. Make sure the skupper-operator catalog pod is running before continuing:
++
+[source,bash,options="nowrap",subs=attributes+]
+----
+$ kubectl -n openshift-marketplace get pods | grep skupper-operator
+----
+
+. Create an OperatorGroup in the `my-namespace` namespace:
++
+[source,bash,options="nowrap",subs=attributes+]
+----
+$ kubectl apply -f examples/{example-directory}/10-og.yaml
+----
+
+. Create a Subscription  in the `my-namespace` namespace:
++
+[source,bash,options="nowrap",subs=attributes+]
+----
+$ kubectl apply -f examples/{example-directory}/20-sub.yaml
+----
+
+. Verify that the Operator is running:
++
+[source,bash,options="nowrap"]
+----
+$ kubectl get pods -n my-namespace
+
+NAME                                     READY   STATUS    RESTARTS   AGE
+skupper-site-controller-d7b57964-gxms6   1/1     Running   0          1m
+----
++
+If the output does not report the pod is running, use the following command to determine the issue that prevented it from running:
++
+----
+$ kubectl describe pod -l name=skupper-operator
+----

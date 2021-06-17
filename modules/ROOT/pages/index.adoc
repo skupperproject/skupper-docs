@@ -5,6 +5,16 @@ include::{mod-loc}attributes.adoc[]
 //external
 * {GettingStartedLink}
 
+This documentation is built using antora and contains the following antora modules:
+
+* cli 
+* console
+* declarative
+* overview
+* skupper-docker
+* operator
+
+NOTE: This ROOT module is never published but contains partials that are used in various documents.
 
 This page acts as a report for all docs in the skupper-docs repo.
 
@@ -19,3 +29,5 @@ This page acts as a report for all docs in the skupper-docs repo.
 * {DeclarativeLink}
 * {CliLink}
 * {ConsoleLink}
+* {OperatorLink}
+* {OperatorOCPLink}

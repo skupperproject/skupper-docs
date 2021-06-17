@@ -1,0 +1,104 @@
+// Type: procedure
+[id='installing-operator-using-cli-{context}']
+== Installing the Operator using the CLI
+
+The steps in this section show how to use the `kubectl` command-line interface (CLI) to install and deploy the latest version of the {SkupperOperatorName} in a given {kubernetes-flavor} cluster.
+
+.Procedure
+
+. Log in to {kubernetes-flavor} as a cluster administrator. For example:
++
+[source,bash,options="nowrap"]
+----
+$ kubectl login -u system:admin
+----
+
+. Complete the steps described in link:https://access.redhat.com/RegistryAuthentication[Red Hat Container Registry Authentication^].
+
+. To create a operator subscription for all namespaces:
+
+.. Create a file named `subscription.yaml` with the following:
++
+[source,yaml,options="nowrap"]
+----
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: skupper-operator
+  namespace: openshift-operators
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: skupper-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: skupper-operator.v0.6.0
+----
+
+.. Apply the subscription YAML:
++
+[source,bash,options="nowrap"]
+----
+$ kubectl apply -f subscription.yaml
+----
+
+. To create a operator subscription for a specific namespace, you must create an Operator group in that namespace and then create the subscription:
+
+.. Create a file named `operator-group.yaml` with the following:
++
+--
+[source,yaml,options="nowrap"]
+----
+kind: OperatorGroup
+apiVersion: operators.coreos.com/v1
+metadata:
+  name: skupper-operator
+  namespace: my-namespace
+spec:
+  targetNamespaces:
+  - my-namespace
+----
+where `my-namespace` is the name of the namespace you want to create the site.
+--
+
+.. Apply the Operator group YAML:
++
+[source,bash,options="nowrap"]
+----
+$ kubectl apply -f operator-group.yaml
+----
+
+.. Create a file named `subscription.yaml` with the following:
++
+--
+[source,yaml,options="nowrap"]
+----
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: skupper-operator
+  namespace: my-namespace
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: skupper-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: skupper-operator.v0.6.0
+
+----
+where `my-namespace` is the name of the namespace you want to create the site.
+--
+
+.. Apply the subscription YAML:
++
+[source,bash,options="nowrap"]
+----
+$ kubectl apply -f subscription.yaml
+----
+
+
+.Next steps
+
+* xref:creating-site-using-operator-{context}[]
+
