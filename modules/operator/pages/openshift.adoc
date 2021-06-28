@@ -33,6 +33,8 @@ Installing an Operator requires administrator-level privileges for your {kuberne
 
 After installing the Operator, you can create a site by deploying a ConfigMap as described in xref:creating-site-using-operator-{context}[]
 
+include::{mod-loc}fragment-kubectl-note.adoc[]
+
 
 include::{mod-loc}installing-operator-using-cli-openshift.adoc[]
 
