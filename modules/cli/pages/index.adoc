@@ -334,7 +334,9 @@ $ skupper proxy expose <service> localhost <port>
 You can also expose services from other machines on your local network, for example if MySQL is running on a dedicated server (with an IP address of `192.168.1.200`), but you are accessing the cluster from a machine in the same network:
 
 ----
-$ skupper proxy expose mysql localhost 3306
+$ skupper proxy expose mysql 192.168.1.200 3306
+
+Skupper proxy proxy1 created
 ----
 ====
 --
