@@ -1,9 +1,17 @@
+include::{mod-loc}attributes.adoc[]
+
+:context: skupper-tokens
+//Category: skupper-tokens
+// Type: assembly
+[id='using-skupper-tokens-{context}']
+
 = Using Skupper tokens
 
+[role="system:abstract"]
 Skupper tokens allow you create links between sites.
 You create a token on one site and use that token from the other site to create a link between the two sites.
 
-NOTE: Although the linking process is directional, the link allows communication in both directions.
+NOTE: Although the linking process is directional, a Skupper link allows communication in both directions.
 
 If both sites are equally accessible, for example two public clouds, then it not important where the token is created.
 However, when using a token, the site you are linking to must be accessible from the site you are linking from.
@@ -12,6 +20,46 @@ For example, if you are creating a {service-network} using both a public and pri
 There are two types of Skupper token:
 
 Claim token (default):: 
++
 --
-A claim token can be restricted 
+A claim token can be restricted by:
+
+* time - preventing reuse after a specified period.
+* usage - preventing multiple links being created from a single token.
 --
+
+Cert token ::
++
+--
+A cert token can be reused to create many links from many sites.
+--
+
+// Type: procedure
+[id='revoking-access-{context}']
+== Revoking access to a site
+
+[role="system:abstract"]
+To secure access to the {service-network} you can invalidate all the tokens created from a site.
+
+This option removes all links to the site, and requires that you recreate any links to restore the {service-network}.
+
+. Procedure
+
+. Log into the cluster.
+
+. Check the status of the site:
++
+[source,yaml,options="nowrap"]
+----
+$ skupper status
+Skupper is enabled for namespace "pwright-test1" in interior mode. It is linked to 2 other sites.
+----
+
+. Check outgoing links from the site:
++
+[source,yaml,options="nowrap"]
+----
+$ skupper link status
+Link link1 is active
+----
+
