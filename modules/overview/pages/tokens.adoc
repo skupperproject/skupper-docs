@@ -35,6 +35,65 @@ A cert token can be reused to create many links from many sites.
 --
 
 // Type: procedure
+[id='creating-claim-tokens-{context}']
+== Creating claim tokens
+
+[role="system:abstract"]
+Creating claim tokens allows you to restrict access to the {service-network}
+
+.Procedure
+
+. Log into the cluster.
+
+. Change to the namespace associated with the site.
+
+. Create a claim token, for example:
++
+--
+[source,bash,options="nowrap"]
+----
+$ skupper token create $HOME/secret.yaml --expiry 30m0s --uses 2 -t claim
+----
+
+NOTE: Claim tokens are the default, the `-t claim` section of the command is unnecessary.
+
+--expiry:: The amount of time the token is valid in minutes and seconds, default `15m0s`.
+--uses:: The number of times you can use the token to create a  link, default `1`.
+--
+
+.Additional information
+
+* See the {CliLink} for information on using the token to create links.
+
+// Type: procedure
+[id='creating-claim-tokens-{context}']
+== Creating cert tokens
+
+[role="system:abstract"]
+Creating cert tokens allows you create many links to the {service-network} from different sites without restrictions.
+
+.Procedure
+
+. Log into the cluster.
+
+. Change to the namespace associated with the site.
+
+. Create a cert token:
++
+--
+[source,bash,options="nowrap"]
+----
+$ skupper token create $HOME/secret.yaml -t cert
+----
+
+NOTE: Cert tokens are always valid, and can be reused indefinitely.
+--
+
+.Additional information
+
+* See the {CliLink} for information on using the token to create links.
+
+// Type: procedure
 [id='revoking-access-{context}']
 == Revoking access to a site
 
@@ -47,19 +106,49 @@ This option removes all links to the site, and requires that you recreate any li
 
 . Log into the cluster.
 
+. Change to the namespace associated with the site.
+
 . Check the status of the site:
 +
-[source,yaml,options="nowrap"]
+[source,bash,options="nowrap"]
 ----
 $ skupper status
-Skupper is enabled for namespace "pwright-test1" in interior mode. It is linked to 2 other sites.
+Skupper is enabled for namespace "west" in interior mode. It is linked to 2 other sites.
 ----
 
 . Check outgoing links from the site:
 +
-[source,yaml,options="nowrap"]
+[source,bash,options="nowrap"]
 ----
 $ skupper link status
 Link link1 is active
 ----
++
+In this case, there are two links, and one outgoing link, meaning there is one incoming link.
 
+. Revoke access to the site from incoming links:
++
+[source,bash,options="nowrap"]
+----
+$ skupper revoke-access
+----
+
+. Check the status of the site to see the revocation of access:
++
+--
+[source,bash,options="nowrap"]
+----
+$ skupper status
+Skupper is enabled for namespace "west" in interior mode. It is linked to 1 other site.
+$ skupper link status
+Link link1 is active
+----
+
+This shows that incoming links are revoked, but outgoing links are still active.
+
+You can remove that link using the `skupper link delete link1` command, but to revoke access you must follow this procedure while logged into the appropriate cluster.
+--
+
+.Additional information
+
+* See the {CliLink}.
