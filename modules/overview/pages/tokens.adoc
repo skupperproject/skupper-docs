@@ -26,12 +26,20 @@ A claim token can be restricted by:
 
 * time - preventing reuse after a specified period.
 * usage - preventing multiple links being created from a single token.
+
+All inter-site traffic is protected by mutual TLS using a private, dedicated certificate authority (CA).
+A claim token is not a certificate, but is securely exchanged for a certificate during the linking process.
+By implementing appropriate restrictions (for example, creating a single use claim token) you can avoid the accidental exposure of certificates.
 --
 
 Cert token ::
 +
 --
 A cert token can be reused to create many links from many sites.
+
+All inter-site traffic is protected by mutual TLS using a private, dedicated certificate authority (CA).
+A cert token is a certificate issued by the dedicated CA.
+Protect it appropriately.
 --
 
 // Type: procedure
@@ -70,7 +78,7 @@ NOTE: Claim tokens are the default, the `-t claim` section of the command is unn
 == Creating cert tokens
 
 [role="system:abstract"]
-Creating cert tokens allows you create many links to the {service-network} from different sites without restrictions.
+A cert token allows you create many links to the {service-network} from different sites without restrictions.
 
 .Procedure
 
@@ -86,7 +94,7 @@ Creating cert tokens allows you create many links to the {service-network} from 
 $ skupper token create $HOME/secret.yaml -t cert
 ----
 
-NOTE: Cert tokens are always valid, and can be reused indefinitely.
+NOTE: Cert tokens are always valid, and can be reused indefinitely unless revoked as described in xref:revoking-access-{context}[]
 --
 
 .Additional information
