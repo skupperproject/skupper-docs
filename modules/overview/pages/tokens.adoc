@@ -13,7 +13,7 @@ You create a token on one site and use that token from the other site to create 
 
 NOTE: Although the linking process is directional, a Skupper link allows communication in both directions.
 
-If both sites are equally accessible, for example two public clouds, then it not important where the token is created.
+If both sites are equally accessible, for example, two public clouds, then it is not important where you create the token.
 However, when using a token, the site you are linking to must be accessible from the site you are linking from.
 For example, if you are creating a {service-network} using both a public and private cluster, you must create the token on the public cluster and use the token from the private cluster.
 
