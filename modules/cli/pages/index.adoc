@@ -294,15 +294,15 @@ $ skupper service bind hello-world-backend deployment hello-world-backend
 --
 
 // Type: concept
-[id="about-Skupper-proxy"] 
-== About Skupper proxy
+[id="about-Skupper-gateway"] 
+== About Skupper gateway
 
 After creating a {service-network}, you can expose services from a local machine on the {service-network}.
 
 For example, if you run a database on a server in your data center, you can deploy a front end in a cluster that can access the data as if the database was running in the cluster.
 
 // Type: procedure
-[id="exposing-services-proxy"] 
+[id="exposing-services-gateway"] 
 == Exposing a local service to the {service-network}
 
 This section shows how to expose a service running locally on a {service-network}.
@@ -323,7 +323,7 @@ This section shows how to expose a service running locally on a {service-network
 +
 --
 ----
-$ skupper proxy expose <service> localhost <port>
+$ skupper gateway expose <service> localhost <port>
 ----
 
 * <service> - the name of the service on the {service-network}.
@@ -334,9 +334,9 @@ $ skupper proxy expose <service> localhost <port>
 You can also expose services from other machines on your local network, for example if MySQL is running on a dedicated server (with an IP address of `192.168.1.200`), but you are accessing the cluster from a machine in the same network:
 
 ----
-$ skupper proxy expose mysql 192.168.1.200 3306
+$ skupper gateway expose mysql 192.168.1.200 3306
 
-Skupper proxy proxy1 created
+Skupper gateway gateway1 created
 ----
 ====
 --
@@ -345,11 +345,11 @@ Skupper proxy proxy1 created
 +
 --
 ----
-$ ./skupper proxy status
-Proxy Definitions Summary
+$ ./skupper gateway status
+Gateway Definitions Summary
 
 NAME    BINDS  FORWARDS  URL                    
-proxy1  1      0         amqp://127.0.0.1:5672 
+gateway1  1      0         amqp://127.0.0.1:5672 
 ----
 This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
 
