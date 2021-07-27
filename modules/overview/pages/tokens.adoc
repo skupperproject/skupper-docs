@@ -152,7 +152,7 @@ $ skupper link status
 Link link1 is active
 ----
 
-This shows that incoming links are revoked, but outgoing links are still active.
+The output shows that the `skupper revoke-access` command has revoked the incoming links, but outgoing links are still active.
 
 You can remove that link using the `skupper link delete link1` command, but to revoke access you must follow this procedure while logged into the appropriate cluster.
 --
