@@ -8,7 +8,7 @@ include::{mod-loc}attributes.adoc[]
 = Using Skupper tokens
 
 [role="system:abstract"]
-Skupper tokens allow you create links between sites.
+Skupper tokens allow you to create links between sites.
 You create a token on one site and use that token from the other site to create a link between the two sites.
 
 NOTE: Although the linking process is directional, a Skupper link allows communication in both directions.
