@@ -94,7 +94,7 @@ A cert token allows you create many links to the {service-network} from differen
 $ skupper token create $HOME/secret.yaml -t cert
 ----
 
-NOTE: Cert tokens are always valid, and can be reused indefinitely unless revoked as described in xref:revoking-access-{context}[]
+NOTE: Cert tokens are always valid and can be reused indefinitely unless revoked as described in xref:revoking-access-{context}[]
 --
 
 .Additional information
