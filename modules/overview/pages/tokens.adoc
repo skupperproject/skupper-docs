@@ -47,7 +47,7 @@ Protect it appropriately.
 == Creating claim tokens
 
 [role="system:abstract"]
-Creating claim tokens allows you to restrict access to the {service-network}
+You can use claim tokens to restrict access to the {service-network}
 
 .Procedure
 
