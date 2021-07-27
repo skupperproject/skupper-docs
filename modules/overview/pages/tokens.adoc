@@ -108,7 +108,7 @@ NOTE: Cert tokens are always valid, and can be reused indefinitely unless revoke
 [role="system:abstract"]
 To secure access to the {service-network} you can invalidate all the tokens created from a site.
 
-This option removes all links to the site, and requires that you recreate any links to restore the {service-network}.
+This option removes all links to the site and requires that you recreate any links to restore the {service-network}.
 
 . Procedure
 
