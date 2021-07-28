@@ -411,7 +411,7 @@ hello-world-frontend   <frontend-url>
 .. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following:
 +
 ----
-I am the frontend.  The backend says 'Hello from database  (1)'.
+I am the frontend.  The database says '('Hello',)'.
 ----
 
 This shows how the frontend calls the backend service over the {service-network} from a different OpenShift cluster.
