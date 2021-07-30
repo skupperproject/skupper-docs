@@ -21,7 +21,7 @@ The backend service connects to a database running on your local machine.
 
 This tutorial shows how to connect the following:
 
-* `west` - a namespace in an accessible OpenShift cluster running the frontend service.
+* `east` - a namespace in an accessible OpenShift cluster running the frontend service.
 * `mysql` - a database service running on a local machine.
 
 
@@ -56,7 +56,7 @@ CREATE USER skupper@localhost IDENTIFIED BY 'reppuks';
 GRANT SELECT  ON skupper.* TO 'skupper'@'localhost';
 ----
 
-. Test the database by logging in as the `skupper` user and using the following commands:
+. Test the database by logging in as the `skupper` user and using the following SQL commands:
 +
 ----
 use skupper database;
@@ -78,18 +78,14 @@ NOTE: In OpenShift 4.6 and later, you can use the web terminal to perform the fo
 
 .Procedure
 
-. Start a terminal session to work on the `west` namespace and set the `KUBECONFIG` environment variable:
+. Start a terminal session to work on the `east` namespace and set the `KUBECONFIG` environment variable:
 +
-[source,bash,term=west]
+[source,bash,term=east]
 ----
-$ export KUBECONFIG=$HOME/.kube/config-west
+$ export KUBECONFIG=$HOME/.kube/config-east
 ----
 +
-This session is referred to later as the _west_ terminal session.
-
-// icon:cogs[] link:++didact://?commandId=workbench.action.terminal.split++[Split terminal] didactlink
-
-// icon:cogs[] link:didact://?commandId=workbench.action.terminal.renameWithArg&json={&#34;name&#34;:&#34;east&#34;}[Rename terminal] didactlink
+This session is referred to later as the _east_ terminal session.
 
 . Log into the OpenShift cluster, for example:
 +
@@ -99,35 +95,32 @@ This session is referred to later as the _west_ terminal session.
 
 // Type: procedure
 [id="installing-skupper"] 
-== Installing `skupper`
+== Creating a skupper site
 
-
-. In the west terminal session:
-
-.. Create the `west` project (namespace):
+. Create the `east` project (namespace):
 +
-[source,bash,term=west]
+[source,bash,term=east]
 ----
-$ oc new-project west 
+$ oc new-project east 
 ----
 
-.. Create the {service-network} site:
+. Create the {service-network} site:
 +
-[source,bash,term=west]
+[source,bash,term=east]
 ----
 $ skupper init
 ----
 
-.. Check the site status:
+. Check the site status:
 +
 --
-[source,bash,term=west]
+[source,bash,term=east]
 ----
 $ skupper status
 ----
 The output should be similar to the following:
 ----
-Skupper enabled for namespace 'west'. It is not connected to any other sites.
+Skupper enabled for namespace 'east'. It is not connected to any other sites.
 ----
 --
 
@@ -143,21 +136,21 @@ The frontend service is a simple Python application that displays a record from 
 
 . Deploy the frontend service:
 +
-[source,bash,term=west]
+[source,bash,term=east]
 ----
 $ oc create deployment hello-mysql-frontend --image quay.io/pwright/hello-mysql-frontend
 ----
 
 . Expose the frontend deployment as a cluster service:
 +
-[source,bash,term=west]
+[source,bash,term=east]
 ----
 $ oc expose deployment hello-mysql-frontend --port 8080 --type LoadBalancer
 ----
 
 . Create a route for the frontend:
 +
-[source,bash,term=west]
+[source,bash,term=east]
 ----
 $ oc expose svc/hello-mysql-frontend
 ----
@@ -166,7 +159,7 @@ $ oc expose svc/hello-mysql-frontend
 .. Get the route details:
 +
 --
-[source,bash,term=west]
+[source,bash,term=east]
 ----
 $  oc get routes
 ----
@@ -182,88 +175,17 @@ hello-mysql-frontend   <frontend-url>
 .. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following because the frontend cannot communicate with the backend yet:
 +
 ----
-Trouble! HTTPConnectionPool(host='hello-world-backend', port=8080): Max retries exceeded with url: /api/hello (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fbfcdf0d1d0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+I am the frontend.  The database says '(2003, "Can't connect to MySQL server on 'mydb' ([Errno -3] Temporary failure in name resolution)")'.
 ----
 +
-To resolve this situation, you must create the backend service and make it available on the {service-network}.
-
-// Type: procedure
-[id="backend"] 
-== Creating the backend service and making it available on the {service-network}
-
-The backend service runs in the `east` namespace and is not available on the {service-network} by default.
-You use the `skupper` command to expose the service to all namespaces on the {service-network}.
-The backend app is a simple Python application that passes a message to the frontend application.
-
-.Procedure
-
-. Deploy the backend service in the east terminal session:
-+
-[source,bash,term=east]
-----
-$ oc create deployment hello-world-backend --image quay.io/pwright/hello-world-backend
-----
-
-. Expose the backend service on the {service-network} from the east terminal session:
-+
-[source,bash,term=east]
-----
-$ skupper expose deployment hello-world-backend --port 8080 --protocol tcp
-----
-
-. Check the site status from the west terminal session:
-+
---
-[source,bash,term=west]
-----
-$ skupper status
-----
-The output should be similar to the following:
-----
-Skupper is enabled for namespace "west" in interior mode. It is connected to 1 other site. It has 1 exposed service.
-----
-The service is exposed from the `east` namespace.
---
-
-
-. Create a route for the backend:
-+
-[source,bash,term=west]
-----
-$ oc expose svc/hello-world-backend
-----
-
-
-. Check the backend route in the east terminal session:
-
-.. Get the route details:
-+
---
-[source,bash,term=east]
-----
-$  oc get routes
-----
-
-The output should be similar to the following:
-
-----
-NAME                   HOST/PORT                                   
-hello-world-backend   <frontend-url>       
-----
---
-
-.. Navigate to the `<backend-url>` value in your browser, you see a message similar to the following:
-+
-----
-Trouble! (2003, "Can't connect to MySQL server on 'localhost' ([Errno 111] Connection refused)")
-----
-+
-To resolve this situation, you must create a Skupper gateway to make the database available on the {service-network}.
+To resolve this situation, you must create the skupper gateway and make the database available on the {service-network}.
 
 
 // Type: procedure
 [id="gateway"] 
-== Creating a Skupper gateway and making a database available on the {service-network}
+== Creating and using a Skupper gateway
+
+This procedure describes how to create a gateway and  make a database available on the {service-network}.
 
 .Procedure
 
@@ -274,19 +196,35 @@ To resolve this situation, you must create a Skupper gateway to make the databas
 $ skupper gateway expose mydb localhost 3306
 ----
 
+. Check the gateway status:
++
+--
+[source,bash,term=east]
+----
+$ skupper gateway status
+----
+
+The output should be similar to following:
+
+[source,bash,term=east]
+----
+Gateway Definitions Summary
+
+NAME                 BINDS  FORWARDS  URL                     
+<machine-name>  1      0         amqp://127.0.0.1:39783
+----
+--
+
 // Type: procedure
 [id="check"] 
 == Checking database access from the frontend
 
 .Procedure
 
-
-. Check the frontend route in the west terminal session:
-
-.. Get the route details:
+. Get the route details:
 +
 --
-[source,bash,term=west]
+[source,bash,term=east]
 ----
 $  oc get routes
 ----
@@ -299,13 +237,14 @@ hello-mysql-frontend   <frontend-url>
 ----
 --
 
-.. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following:
+. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following:
 +
 ----
 I am the frontend.  The database says '('Hello',)'.
 ----
 
-This shows how the frontend calls the backend service over the {service-network} from a different OpenShift cluster.
+
+This shows how the frontend calls the database over the {service-network} from an OpenShift cluster.
 
 .Additional resources
 
@@ -318,11 +257,11 @@ This shows how the frontend calls the backend service over the {service-network}
 
 This procedure describes how to remove the {service-network} you created.
 
-. Delete the `west` namespace from the west terminal session:
+. Delete the gateway:
 +
-[source,bash,term=west]
+[source,bash,term=east]
 ----
-$  oc delete project west
+$  skupper gateway delete <machine-name>
 ----
 
 
@@ -332,6 +271,4 @@ $  oc delete project west
 ----
 $  oc delete project east
 ----
-
-
 

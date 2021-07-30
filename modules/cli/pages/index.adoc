@@ -335,21 +335,19 @@ You can also expose services from other machines on your local network, for exam
 
 ----
 $ skupper gateway expose mysql 192.168.1.200 3306
-
-Skupper gateway gateway1 created
 ----
 ====
 --
 
-. Check the status of Skupper proxies:
+. Check the status of Skupper gateways:
 +
 --
 ----
-$ ./skupper gateway status
+$ skupper gateway status
 Gateway Definitions Summary
 
 NAME    BINDS  FORWARDS  URL                    
-gateway1  1      0         amqp://127.0.0.1:5672 
+<machine-name>  1      0         amqp://127.0.0.1:5672 
 ----
 This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
 
