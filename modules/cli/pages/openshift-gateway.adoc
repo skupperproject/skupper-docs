@@ -19,12 +19,10 @@ The backend service connects to a database running on your local machine.
 * One of the OpenShift clusters must be addressable from the other cluster.
 * A MySQL database running on your local machine.
 
-This tutorial shows how to connect the following namespaces:
+This tutorial shows how to connect the following:
 
-* `west` - runs the frontend service and is typically a public cluster.
-* `east` - runs the backend service.
-
-NOTE: The backend service retrieves data from a database using a Skupper gateway.
+* `west` - a namespace in an accessible OpenShift cluster running the frontend service.
+* `mysql` - a database service running on a local machine.
 
 
 include::{mod-loc}introduction-to-skupper.adoc[]
@@ -70,35 +68,6 @@ select * from greetings;
 +------+-------+
 ----
 
-// Type: procedure
-[id="configuring-consoles"] 
-== Configuring terminal sessions
-
-[role="system:abstract"]
-This procedure describes how to configure your terminal sessions to use configurations to avoid problems as you configure {skupper-name} on different clusters.
-
-The following table shows how you might set up your terminal sessions.
-
-.Terminal sessions
-[cols="1,1"]
-|===
-|west terminal session  |east terminal session
-
-a|
-[source,bash,subs="attributes+"]
-----
- $ oc project
- west
-----
-a|
-[source,bash,subs="attributes+"]
-----
- $ oc project
- east
-----
-
-
-|===
 
 .Prerequisites
 
@@ -122,17 +91,7 @@ This session is referred to later as the _west_ terminal session.
 
 // icon:cogs[] link:didact://?commandId=workbench.action.terminal.renameWithArg&json={&#34;name&#34;:&#34;east&#34;}[Rename terminal] didactlink
 
-[start=2]
-. Start a terminal session to work on the `east` namespace and set the `KUBECONFIG` environment variable:
-+
-[source,bash,term=east]
-----
-$ export KUBECONFIG=$HOME/.kube/config-east
-----
-+
-This session is referred to later as the _east_ terminal session.
-
-. In each terminal session, log into the OpenShift cluster, for example:
+. Log into the OpenShift cluster, for example:
 +
 ----
  $ oc login
@@ -140,7 +99,7 @@ This session is referred to later as the _east_ terminal session.
 
 // Type: procedure
 [id="installing-skupper"] 
-== Installing the {service-network} router in both clusters
+== Installing `skupper`
 
 
 . In the west terminal session:
@@ -152,7 +111,7 @@ This session is referred to later as the _east_ terminal session.
 $ oc new-project west 
 ----
 
-.. Create the {service-network} router:
+.. Create the {service-network} site:
 +
 [source,bash,term=west]
 ----
@@ -173,102 +132,34 @@ Skupper enabled for namespace 'west'. It is not connected to any other sites.
 --
 
 
-. In the east terminal session:
-.. Create the `east` project (namespace):
-+
-[source,bash,term=east]
-----
-$ oc new-project east 
-----
-
-.. Create the {service-network} router:
-+
-[source,bash,term=east]
-----
-$ skupper init
-----
-
-.. Check the site status:
-+
---
-[source,bash,term=east]
-----
-$ skupper status
-----
-The output should be similar to the following:
-----
-Skupper enabled for namespace 'east'. It is not connected to any other sites.
-----
---
-
-// Type: procedure
-[id="connecting-namespaces"] 
-== Connecting namespaces to create a {service-network}
-
-With the {service-network} routers installed, you can connect them together securely and allow service sharing across the {service-network}.
-
-.Procedure
-
-. In the west terminal session, create a connection token to allow connection to the west namespace:
-+
-[source,bash,term=west]
-----
-$ skupper token create $HOME/secret.yaml
-----
-+
-This command creates the `secret.yaml` file in your home directory, which you can use to create the secure connection.
-
-. In the east terminal session, use the token to create a connection to the west namespace:
-+
-[source,bash,term=east]
-----
-$ skupper link create $HOME/secret.yaml
-----
-
-. Check the site status from the west terminal session:
-+
---
-[source,bash,term=west]
-----
-$ skupper status
-----
-The output should be similar to the following:
-----
-Skupper is enabled for namespace "west" in interior mode. It is connected to 1 other site. It has no exposed services.
-The site console url is:  https://<skupper-url>
-The credentials for internal console-auth mode are held in secret: 'skupper-console-users'
-----
---
 
 // Type: procedure
 [id="frontend"] 
 == Creating the frontend service
 
-The frontend service is a simple Python application that displays a message from the backend application.
+The frontend service is a simple Python application that displays a record from the database.
 
 .Procedure
-
-Perform all tasks in the west terminal session:
 
 . Deploy the frontend service:
 +
 [source,bash,term=west]
 ----
-$ oc create deployment hello-world-frontend --image quay.io/pwright/hello-world-frontend
+$ oc create deployment hello-mysql-frontend --image quay.io/pwright/hello-mysql-frontend
 ----
 
 . Expose the frontend deployment as a cluster service:
 +
 [source,bash,term=west]
 ----
-$ oc expose deployment hello-world-frontend --port 8080 --type LoadBalancer
+$ oc expose deployment hello-mysql-frontend --port 8080 --type LoadBalancer
 ----
 
 . Create a route for the frontend:
 +
 [source,bash,term=west]
 ----
-$ oc expose svc/hello-world-frontend
+$ oc expose svc/hello-mysql-frontend
 ----
 
 . Check the frontend route:
@@ -284,7 +175,7 @@ The output should be similar to the following:
 
 ----
 NAME                   HOST/PORT                                   
-hello-world-frontend   <frontend-url>       
+hello-mysql-frontend   <frontend-url>       
 ----
 --
 
@@ -404,7 +295,7 @@ The output should be similar to the following:
 
 ----
 NAME                   HOST/PORT                                   
-hello-world-frontend   <frontend-url>       
+hello-mysql-frontend   <frontend-url>       
 ----
 --
 
