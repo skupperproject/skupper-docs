@@ -430,6 +430,94 @@ where
 
 --
 
+
+// Type: procedure
+[id="exposing-services-gateway"] 
+=== Creating a gateway and applying it on a different machine
+
+If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition on the first machine and later apply that definition from a second machine as described in this procedure.
+
+.Procedure
+
+. Log into your cluster from the first machine and change to the namespace for your site.
+
+. Create a Skupper gateway without associating it with the current machine by specifying the `downloadonly` option:
++
+[source,bash]
+----
+$ skupper gateway init --downloadonly
+----
+
+. Create a service that can communicate on the {service-network}:
++
+--
+----
+$ skupper service create <name> <port>
+----
+
+where 
+
+* `<name>` is the name of the service you want to create
+* `<port>` is the port the service uses
+
+For example:
+
+----
+$ skupper service create mydb 3306
+----
+--
+
+. Bind the service on the {service-network}:
++
+--
+----
+$ skupper gateway bind <service> <host> <port>
+----
+
+* <service> - the name of the service on the {service-network}, `mydb` in the example above.
+* <host> - the host that runs the service.
+* <port> - the port the service is running on, `3306` from the example above.
+
+NOTE: No communication is possible at this point, the gateway definition needs to be applied from the actual host before the service is available on the {service-network}.
+--
+
+. Download the gateway definition:
++
+--
+----
+$ skupper gateway download <destination-directory>
+----
+
+where:
+
+* <destination-directory> - the location where you want to save the resulting gateway definition, for example `~/gateways`.
+
+--
+
+. Copy the gateway defintion file, for example, `mylaptop-jdoe.tar.gz` to the machine that hosts the service you want to expose on the {service-network}.
+
+. From the machine that hosts the service you want to expose:
++
+----
+$ mkdir gateway
+$ tar -xvf <gateway-defintion-file>
+$ cd gateway
+$ sh ./launch.py
+----
+
+. From the machine with cluster access, check the status of Skupper gateways:
++
+--
+----
+$ skupper gateway status
+Gateway Definitions Summary
+
+NAME    BINDS  FORWARDS  URL                    
+<machine-name>  1      0         amqp://127.0.0.1:5672 
+----
+This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
+--
+
 // Type: reference
 [id="cli-global-options"] 
 == CLI options for working with different clusters
