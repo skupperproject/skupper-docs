@@ -503,6 +503,7 @@ $ mkdir gateway
 $ tar -xvf <gateway-defintion-file>
 $ cd gateway
 $ sh ./launch.py
+$ systemctl --user start <gateway-definition-name>
 ----
 
 . From the machine with cluster access, check the status of Skupper gateways:
