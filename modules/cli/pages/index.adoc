@@ -132,7 +132,13 @@ where `<filename>` is the name of a YAML file that is saved on your local filesy
 
 This file contains a key and the location of the site that created it.
 
-NOTE: Access to this file provides access to the {service-network}. Protect it appropriately.
+[NOTE]
+====
+Access to this file provides access to the {service-network}. 
+Protect it appropriately.
+
+For more information about protecting access to the {service-network}, see {TokensLink}.
+====
 --
 
 . Use a token on the cluster that you want to connect from:
@@ -149,10 +155,10 @@ where `<filename>` is the name of a YAML file generated from the `skupper token 
 +
 ----
 $ skupper link status
-Connection for conn1 not active
+Connection for link1 not active
 ----
 +
-In this example no <link-name> was specified, the name defaulted to `conn1`.
+In this example no <link-name> was specified, the name defaulted to `link1`.
 
 
 . If you want to delete a link:
