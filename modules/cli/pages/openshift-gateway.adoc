@@ -1,3 +1,4 @@
+ifdef::skupper-io[:image-prefix: ROOT:]
 ifndef::mod-loc[]
 :mod-loc: ./partials/
 endif::mod-loc[]
@@ -25,7 +26,25 @@ This tutorial shows how to connect the following:
 * `mysql` - a database service running on a local machine.
 
 
-include::{mod-loc}introduction-to-skupper.adoc[]
+// Type: concept
+[id="introduction-to-skupper"] 
+== Introduction to {skupper-name} {version}
+
+ifdef::product[Interconnect 2.0 introduces a {service-network}, linking services across the hybrid cloud.]
+
+A {service-network} enables communication between services running in different network locations. 
+It allows geographically distributed services to connect as if they were all running in the same site.
+
+image::{image-prefix}overview-gateway.svg[Overview of a service network]
+
+For example, you can deploy your frontend in a public {kubernetes-flavor} cluster and deploy your backend on a local network, then connect them into a {service-network}.
+
+You deploy and manage a {service-network}, including a gateway, using the `skupper` CLI.
+
+.Additional resources
+
+* {OverviewLink}
+
 
 include::index.adoc[tags=installing-cli]
 
