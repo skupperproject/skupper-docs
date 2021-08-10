@@ -503,8 +503,10 @@ $ mkdir gateway
 $ tar -xvf <gateway-defintion-file>
 $ cd gateway
 $ sh ./launch.py
-$ systemctl --user start <gateway-definition-name>
+$ systemctl --user status <gateway-definition-name>
 ----
++
+NOTE: You can later remove the gateway using `./remove.py`.
 
 . From the machine with cluster access, check the status of Skupper gateways:
 +
@@ -518,6 +520,9 @@ NAME    BINDS  FORWARDS  URL
 ----
 This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
 --
+
+NOTE: If you need to change the gateway definition, for example to change port, you need to remove the existing gateway and repeat this procedure from the start to redefine the gateway.
+
 
 // Type: reference
 [id="cli-global-options"] 
