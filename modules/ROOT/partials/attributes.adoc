@@ -42,6 +42,7 @@ endif::[]
 
 
 :OpenShiftTutoriallink: link:{linkroot}cli/openshift.html[Creating a service network with OpenShift]
+:GatewayTutoriallink: link:{linkroot}cli/openshift-gateway.html[Creating a service network with OpenShift and accessing a database using a Skupper gateway]
 :OverviewLink: link:{linkroot}overview/index.html[Overview]
 :RoutingLink: link:{linkroot}overview/routing.html[Skupper routing]
 :SecurityLink: link:{linkroot}overview/security.html[Skupper security]

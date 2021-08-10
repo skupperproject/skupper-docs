@@ -1,0 +1,293 @@
+ifdef::skupper-io[:image-prefix: ROOT:]
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
+include::{mod-loc}attributes.adoc[]
+:sectnums:
+:kubernetes-flavor: OpenShift
+//Category: openshift-tutorial
+// Type: assembly
+[id="openshift-tutorial"] 
+= Creating a {service-network} with OpenShift and accessing a database using a Skupper gateway
+
+[role="system:abstract"]
+This tutorial demonstrates how to connect a frontend service on a OpenShift cluster with a backend service on a OpenShift cluster using the `skupper` command-line interface (CLI).
+The backend service connects to a database running on your local machine.
+
+.Prerequisites
+
+* Access to projects in two OpenShift clusters, `cluster-admin` access is not required.
+* One of the OpenShift clusters must be addressable from the other cluster.
+* A MySQL database running on your local machine.
+
+This tutorial shows how to connect the following:
+
+* `west` - a namespace in an accessible OpenShift cluster running the frontend service.
+* `mysql` - a database service running on a local machine.
+
+
+// Type: concept
+[id="introduction-to-skupper"] 
+== Introduction to {skupper-name} {version}
+
+ifdef::product[Interconnect 2.0 introduces a {service-network}, linking services across the hybrid cloud.]
+
+A {service-network} enables communication between services running in different network locations. 
+It allows geographically distributed services to connect as if they were all running in the same site.
+
+image::{image-prefix}overview-gateway.svg[Overview of a service network]
+
+For example, you can deploy your frontend in a public {kubernetes-flavor} cluster and deploy your backend on a local network, then connect them into a {service-network}.
+
+You deploy and manage a {service-network}, including a gateway, using the `skupper` CLI.
+
+.Additional resources
+
+* {OverviewLink}
+
+
+include::index.adoc[tags=installing-cli]
+
+
+// Type: procedure
+[id="creating-database"] 
+== Creating a database
+
+[role="system:abstract"]
+This procedure describes how to create a database on your local machine that is accessed from the {service-network}.
+
+.Prerequisites
+
+* A demo MySQL database running on RHEL
+
+.Procedure
+
+NOTE: This procedure creates a user with a published password. Do not perform this procedure on a database with sensitive data.
+
+. Log into MySQL and create the database using the following commands:
++
+----
+create database skupper;
+use skupper database;
+CREATE TABLE greetings (ID int, text varchar(255) );
+INSERT INTO greetings VALUES (1,'Hello');
+CREATE USER skupper@localhost IDENTIFIED BY 'reppuks';
+GRANT SELECT  ON skupper.* TO 'skupper'@'localhost';
+----
+
+. Test the database by logging in as the `skupper` user and using the following SQL commands:
++
+----
+use skupper database;
+select * from greetings;
++------+-------+
+| ID   | text  |
++------+-------+
+|    1 | Hello |
++------+-------+
+----
+
+
+.Prerequisites
+
+* The OpenShift CLI is installed.
+See the https://access.redhat.com/documentation/en-us/openshift_container_platform/4.6/html-single/cli_tools/index#installing-openshift-cli[OpenShift CLI] documentation for more instructions on how to install `oc`.
+
+NOTE: In OpenShift 4.6 and later, you can use the web terminal to perform the following procedure, as described in the https://docs.openshift.com/container-platform/4.5/web_console/odc-about-web-terminal.html[web terminal] documentation.
+
+.Procedure
+
+. Start a terminal session to work on the `west` namespace and set the `KUBECONFIG` environment variable:
++
+[source,bash,term=west]
+----
+$ export KUBECONFIG=$HOME/.kube/config-west
+----
++
+This session is referred to later as the _west_ terminal session.
+
+. Log into the OpenShift cluster, for example:
++
+----
+ $ oc login
+----
+
+// Type: procedure
+[id="installing-skupper"] 
+== Creating a skupper site
+
+. Create the `west` project (namespace):
++
+[source,bash,term=west]
+----
+$ oc new-project west 
+----
+
+. Create the {service-network} site:
++
+[source,bash,term=west]
+----
+$ skupper init
+----
+
+. Check the site status:
++
+--
+[source,bash,term=west]
+----
+$ skupper status
+----
+The output should be similar to the following:
+----
+Skupper enabled for namespace 'west'. It is not connected to any other sites.
+----
+--
+
+
+
+// Type: procedure
+[id="frontend"] 
+== Creating the frontend service
+
+The frontend service is a simple Python application that displays a record from the database.
+
+.Procedure
+
+. Deploy the frontend service:
++
+[source,bash,term=west]
+----
+$ oc create deployment hello-mysql-frontend --image quay.io/pwright/hello-mysql-frontend
+----
+
+. Expose the frontend deployment as a cluster service:
++
+[source,bash,term=west]
+----
+$ oc expose deployment hello-mysql-frontend --port 8080 --type LoadBalancer
+----
+
+. Create a route for the frontend:
++
+[source,bash,term=west]
+----
+$ oc expose svc/hello-mysql-frontend
+----
+
+. Check the frontend route:
+.. Get the route details:
++
+--
+[source,bash,term=west]
+----
+$  oc get routes
+----
+
+The output should be similar to the following:
+
+----
+NAME                   HOST/PORT                                   
+hello-mysql-frontend   <frontend-url>       
+----
+--
+
+.. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following because the frontend cannot communicate with the backend yet:
++
+----
+I am the frontend.  The database says '(2003, "Can't connect to MySQL server on 'mydb' ([Errno -3] Temporary failure in name resolution)")'.
+----
++
+To resolve this situation, you must create the skupper gateway and make the database available on the {service-network}.
+
+
+// Type: procedure
+[id="gateway"] 
+== Creating and using a Skupper gateway
+
+This procedure describes how to create a gateway and  make a database available on the {service-network}.
+
+.Procedure
+
+. Create a gateway and make the database available on the {service-network}:
++
+[source,bash,term=west]
+----
+$ skupper gateway expose mydb localhost 3306
+----
+
+. Check the gateway status:
++
+--
+[source,bash,term=west]
+----
+$ skupper gateway status
+----
+
+The output should be similar to following:
+
+[source,bash,term=west]
+----
+Gateway Definitions Summary
+
+NAME                 BINDS  FORWARDS  URL                     
+<machine-name>  1      0         amqp://127.0.0.1:39783
+----
+--
+
+// Type: procedure
+[id="check"] 
+== Checking database access from the frontend
+
+.Procedure
+
+. Get the route details:
++
+--
+[source,bash,term=west]
+----
+$  oc get routes
+----
+
+The output should be similar to the following:
+
+----
+NAME                   HOST/PORT                                   
+hello-mysql-frontend   <frontend-url>       
+----
+--
+
+. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following:
++
+----
+I am the frontend.  The database says '('Hello',)'.
+----
+
+
+This shows how the frontend calls the database over the {service-network} from an OpenShift cluster.
+
+.Additional resources
+
+* {ConsoleLink}
+* {CliLink}
+
+// Type: procedure
+[id="tearing-down"] 
+== Tearing down the {service-network}
+
+This procedure describes how to remove the {service-network} you created.
+
+. Delete the gateway:
++
+[source,bash,term=west]
+----
+$  skupper gateway delete <machine-name>
+----
+
+
+. Delete the `west` namespace from the west terminal session:
++
+[source,bash,term=west]
+----
+$  oc delete project west
+----
+
