@@ -5,7 +5,7 @@ endif::mod-loc[]
 include::{mod-loc}attributes.adoc[]
 :sectnums:
 :kubernetes-flavor: OpenShift
-//Category: openshift-tutorial
+//Category: gateway-tutorial
 // Type: assembly
 [id="openshift-tutorial"] 
 = Creating a {service-network} with OpenShift and accessing a database using a Skupper gateway
