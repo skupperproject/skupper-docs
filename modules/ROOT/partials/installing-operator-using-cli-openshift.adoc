@@ -19,7 +19,7 @@ $ kubectl login -u system:admin
 
 .. Create a file named `subscription.yaml` with the following:
 +
-[source,yaml,options="nowrap"]
+[source,yaml,subs=attributes+,options="nowrap"]
 ----
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
@@ -32,7 +32,7 @@ spec:
   name: skupper-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: skupper-operator.v0.6.0
+  startingCSV: skupper-operator.v{skupper-version}
 ----
 
 .. Apply the subscription YAML:
@@ -71,7 +71,7 @@ $ kubectl apply -f operator-group.yaml
 .. Create a file named `subscription.yaml` with the following:
 +
 --
-[source,yaml,options="nowrap"]
+[source,yaml,subs=attributes+,options="nowrap"]
 ----
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
@@ -84,7 +84,7 @@ spec:
   name: skupper-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: skupper-operator.v0.6.0
+  startingCSV: skupper-operator.v{skupper-version}
 
 ----
 where `my-namespace` is the name of the namespace you want to create the site.
