@@ -29,14 +29,18 @@ If you are deploying {skupper-name} to be available for all namespaces, make sur
 
 . Deploy the site controller:
 
-.. To install {skupper-name} into the current namespace deploy the site controller using the following YAML:
+* To install {skupper-name} into the current namespace deploy the site controller using the following YAML:
 +
 [subs=attributes+]
 ----
 kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/{skupper-version}/cmd/site-controller/deploy-watch-current-ns.yaml
 ----
 
-.. To install {skupper-name} for all namespaces, deploy the site controller using the following YAML:
+* To install {skupper-name} for all namespaces:
++
+.. Create a namespace named `skupper-site-controller`.
+
+.. Deploy the site controller using the following YAML:
 +
 [subs=attributes+]
 ----
