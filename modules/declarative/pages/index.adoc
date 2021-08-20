@@ -78,9 +78,8 @@ data:
   cluster-local: "false"
   console: "true"
   console-authentication: internal
-  console-password: "rubble"
-  console-user: "barney"
-  edge: "true"
+  console-user: "skupper"
+  console-password: "reppuks"
   name: my-site
   router-console: "true"
   service-controller: "true"
@@ -118,7 +117,6 @@ data:
   console-authentication: internal //<.>
   console-user: "username" //<.>
   console-password: "password" //<.>
-  edge: "false" //<.>
   name: my-site //<.>
   router-console: "true" //<.>
   service-controller: "true" //<.>
@@ -137,8 +135,6 @@ metadata:
 <.> Username for the `internal` authentication option.
 
 <.> Password for the `internal` authentication option.
-
-<.> Specifies whether an edge site is created, defaults to `false`.
 
 <.> Specifies the site name.
 
