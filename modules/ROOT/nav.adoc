@@ -1,14 +1,14 @@
 include::partial$attributes.adoc[]
 
 * xref:index.adoc[]
-* xref:overview:index.adoc[]
+* xref:overview:index.adoc[Overview]
 ** xref:overview:glossary.adoc[]
 // can be consumed by nebel
-* {CliLink}
-* {OpenShiftTutorialLink}
-* {GatewayTutoriallink}
-* {DeclarativeLink}
-* {ConsoleLink}
-* {OperatorLink}
-* {OperatorOCPLink}
-* {TokensLink}
+* xref:cli:index.adoc[CLI]
+* xref:cli:openshift.adoc[OpenShift tutorial]
+* xref:cli:openshift-gateway.adoc[Gateway tutorial]
+* xref:declarative:index.adoc[Declarative]
+* xref:console:index.adoc[Console]
+* xref:operator:index.adoc[k8s operator]
+* xref:operator:openshift.adoc[OpenShift operator]
+* xref:overview:tokens.adoc[Tokens]
