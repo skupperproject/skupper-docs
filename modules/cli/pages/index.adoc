@@ -142,8 +142,11 @@ If not specified, a random passwords is generated.
 $ skupper init --create-network-policy
 ----
 
-By default, services exposed on a site in a cluster may become accessible on all namespaces on a remote cluster which has a site initialized. 
-This setting restricts service access to the namespace in which the site was created.
+NOTE: All sites are associated with a namespace, called the _active namespace_ in this procedure.
+
+Services in the active namespace may be accessible to pods in other namespaces on that cluster by default, depending on your cluster network policies.
+As a result, you can expose services to pods in namespaces not directly connected to the {service-network}. 
+This setting applies a network policy to restrict access to services to those pods in the active namespace.
 
 For example, if you create a site in the namespace `projectA` of `clusterA` and link that site to a {service-network} where the `database` service is exposed, the `database` service is available to pods in `projectB` of `clusterA`. 
 
