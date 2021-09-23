@@ -102,6 +102,26 @@ There are a number of `skupper` options regarding authentication for the console
 Defaults to `admin`.
 `--console-password <password>`:: Password for the console user when authentication mode is set to `internal`.
 If not specified, a random passwords is generated.
+--
+
+
+
+* Configuring service access
++
+--
+----
+$ skupper init --create-network-policy
+----
+
+NOTE: All sites are associated with a namespace, called the _active namespace_ in this procedure.
+
+Services in the active namespace may be accessible to pods in other namespaces on that cluster by default, depending on your cluster network policies.
+As a result, you can expose services to pods in namespaces not directly connected to the {service-network}. 
+This setting applies a network policy to restrict access to services to those pods in the active namespace.
+
+For example, if you create a site in the namespace `projectA` of `clusterA` and link that site to a {service-network} where the `database` service is exposed, the `database` service is available to pods in `projectB` of `clusterA`. 
+
+You can use the `--create-network-policy` option to restrict the `database` service access to `projectA` of `clusterA`.
 
 --
 
