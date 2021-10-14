@@ -1,6 +1,6 @@
 
 // Type: procedure
-[id="exposing-services-gateway"] 
+[id="exporting-gateway"] 
 === Creating a gateway and applying it on a different machine
 
 If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition on the first machine and later apply that definition from a second machine as described in this procedure.
