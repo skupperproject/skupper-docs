@@ -76,7 +76,7 @@ NOTE: Claim tokens are the default, the `-t claim` section of the command is unn
 * See the {CliLink} for information on using the token to create links.
 
 // Type: procedure
-[id='creating-claim-tokens-{context}']
+[id='creating-cert-tokens-{context}']
 == Creating cert tokens
 
 [role="system:abstract"]

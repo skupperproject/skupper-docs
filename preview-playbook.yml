@@ -16,6 +16,7 @@ ui:
 
 asciidoc:
   attributes:
+    attribute-missing: drop
     plantuml-server-url: 'http://www.plantuml.com/plantuml'
     plantuml-fetch-diagram: true
     mod-loc: ROOT:partial$
