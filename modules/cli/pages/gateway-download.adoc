@@ -1,6 +1,6 @@
 
 // Type: procedure
-[id="exposing-services-gateway"] 
+[id="exporting-gateway"] 
 === Creating a gateway and applying it on a different machine
 
 If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition on the first machine and later apply that definition from a second machine as described in this procedure.
@@ -13,7 +13,7 @@ If you have access to a cluster from one machine but want to create a gateway to
 +
 [source,bash]
 ----
-$ skupper gateway init --downloadonly
+$ skupper gateway init --exportonly
 ----
 
 . Create a service that can communicate on the {service-network}:
@@ -49,26 +49,43 @@ $ skupper gateway bind <service> <host> <port>
 NOTE: No communication is possible at this point, the gateway definition needs to be applied from the actual host before the service is available on the {service-network}.
 --
 
-. Download the gateway definition:
+. Export the gateway definition configuration:
 +
 --
 ----
-$ skupper gateway download <destination-directory>
+$ skupper gateway export-config <config-name> <destination-directory>
 ----
 
 where:
 
+* <config-name> - the name of the resulting YAML file without a suffix.
 * <destination-directory> - the location where you want to save the resulting gateway definition, for example `~/gateways`.
 
 --
 
-. Copy the gateway defintion file, for example, `mylaptop-jdoe.tar.gz` to the machine that hosts the service you want to expose on the {service-network}.
+. Generate a bundle that can be applied to the machine that hosts the service you want to expose on the {service-network}:
++
+--
+----
+$ skupper gateway generate-bundle <config-filename> <destination-directory>
+----
+
+where:
+
+* <config-filename> - the name of the YAML file, include suffix, that you generated in the previous step.
+* <destination-directory> - the location where you want to save the resulting gateway bundle, for example `~/gateways`.
+
+--
+
+
+
+. Copy the gateway definition file, for example, `mylaptop-jdoe.tar.gz` to the machine that hosts the service you want to expose on the {service-network}.
 
 . From the machine that hosts the service you want to expose:
 +
 ----
 $ mkdir gateway
-$ tar -xvf <gateway-defintion-file>
+$ tar -xvf <gateway-definition-file>
 $ cd gateway
 $ sh ./launch.py
 $ systemctl --user status <gateway-definition-name>

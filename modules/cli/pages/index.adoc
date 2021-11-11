@@ -450,6 +450,7 @@ where
 
 --
 
+include::gateway-download.adoc[]
 
 // Type: reference
 [id="cli-global-options"] 
