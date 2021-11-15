@@ -26,4 +26,4 @@ When choosing which protocol to specify, note the following:
 
 * HTTP1 and HTTP2 work when you specify `tcp`. Just because a service is a web service does not mean you must specify a HTTP variant. 
 * If you specify `http` or `http2`, the IP address reported by a client may not be accessible.
-* If you expose a gateway service using a particular protocol, you must specify the same protocol later when exposing the service on the service network.
+* All {service-network} traffic is converted to AMQP messages in order to traverse the {service-network}, however when you specify `tcp`, the AMQP messaging conversion overhead is minimized.
