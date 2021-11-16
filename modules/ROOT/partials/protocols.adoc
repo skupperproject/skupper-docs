@@ -24,6 +24,8 @@ where `<protocol>` can be:
 
 When choosing which protocol to specify, note the following:
 
-* HTTP1 and HTTP2 work when you specify `tcp`. Just because a service is a web service does not mean you must specify a HTTP variant. 
+* `tcp` supports any protocol overlayed on TCP, for example, HTTP1 and HTTP2 work when you specify `tcp`.
 * If you specify `http` or `http2`, the IP address reported by a client may not be accessible.
-* All {service-network} traffic is converted to AMQP messages in order to traverse the {service-network}, however when you specify `tcp`, the AMQP messaging conversion overhead is minimized.
+* All {service-network} traffic is converted to AMQP messages in order to traverse the {service-network}.
++
+TCP is implemented as a single streamed message, whereas HTTP1 and HTTP2 are implemented as request/response message routing.
