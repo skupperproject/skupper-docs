@@ -95,7 +95,7 @@ The Skupper console provides an overview of the following:
 * Sites - {skupper-name} installations on the current {service-network}.
 * Deployments - deployments relating to exposed services.
 
-The Skupper console also provides useful flow information about the {service-network}, for example, traffic levels between sites.
+The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels between sites.
 
 image::skupper-console.png[]
 
