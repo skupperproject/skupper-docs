@@ -4,13 +4,10 @@ include::{mod-loc}attributes.adoc[]
 // Type: assembly
 
 [id="skupper-console"] 
-= Monitoring {skupper-name} sites using the console
+= Using the {skupper-name} console
 
-[role="system:abstract"]
-The Skupper console provides useful information about the {service-network}, for example, traffic levels between sites.
-
-image::skupper-console.png[]
-
+By default, when you create a {skupper-name} site, you also enable the {skupper-name} console.
+The {skupper-name} console URL is displayed whenever you check site status using `skupper status`.
 
 
 // Type: procedure
@@ -55,6 +52,39 @@ $ echo -n "Sk5aV3pNSHR5Zw==" | base64 --decode
 JNZWzMHtyg
 ----
 
+
+// Type: procedure
+[id="linking-sites-using-skupper-console"] 
+== Linking sites using the {skupper-name} console
+
+The {skupper-name} console allows you create and use claim type tokens as described in {CliLink}.
+
+.Prerequisites
+
+* Two sites, each with {skupper-name} console enabled
+
+.Procedure
+
+NOTE: Your browser may prompt you to allow using the clipboard. You must accept that prompt for this procedure.
+
+. Log into the console for the first site.
+
+. Navigate to *Site* in left hand menu.
+
+. Click *Link a remote site* to display the steps for linking.
+
+. Click *Copy a token to the clipboard*.
+
+. Log into the console for the second site.
+
+. Navigate to *Site* in left hand menu.
+
+. Click *Use a token* to accept the token from the first site.
+
+. Verify that the sites are linked by clicking *Deployments* and checking that both sites are listed.
+
+
+
 // Type: procedure
 [id="exploring-console"] 
 == Exploring the Skupper console
@@ -64,6 +94,11 @@ The Skupper console provides an overview of the following:
 * Services - services that are exposed on the {service-network}, both local and remote.
 * Sites - {skupper-name} installations on the current {service-network}.
 * Deployments - deployments relating to exposed services.
+
+The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels between sites.
+
+image::skupper-console.png[]
+
 
 . Perform the {OpenShiftTutorialLink} tutorial.
 
