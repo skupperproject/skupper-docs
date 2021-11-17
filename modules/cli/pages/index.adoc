@@ -239,13 +239,12 @@ $ skupper expose deployment/hello-world-backend --port 8080
 
 Options for this command include:
 
-`--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
+* `--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
+NOTE: You can specify more than one port by repeatinging this option.
 
-`--target-port <port-number>`:: Specify the port number of pods that you want to expose.
+* `--target-port <port-number>`:: Specify the port number of pods that you want to expose.
 
-ifdef::skupper-io[]
 * `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
-endif::[]
 
 --
 
@@ -302,9 +301,7 @@ where
 
 * `<target-name>` is the name of the cluster service
 
-ifdef::skupper-io[]
 * `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
-endif::[]
 
 For the example deployment in step 1, you bind the service using the following command:
 ----
@@ -451,6 +448,9 @@ where
 --
 
 include::gateway-download.adoc[]
+
+
+include::{common}protocols.adoc[leveloffset=+1]
 
 // Type: reference
 [id="cli-global-options"] 
