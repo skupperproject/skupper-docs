@@ -361,10 +361,12 @@ $ skupper gateway expose mysql 192.168.1.200 3306
 --
 ----
 $ skupper gateway status
-Gateway Definitions Summary
 
-NAME    BINDS  FORWARDS  URL                    
-<machine-name>  1      0         amqp://127.0.0.1:5672 
+Gateway Definition:
+╰─ machine-user type:service version:1.18.0
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 127.0.0.1 3306
+
 ----
 This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
 
@@ -423,8 +425,11 @@ $ skupper gateway bind <service> <host> <port>
 $ skupper gateway status
 Gateway Definitions Summary
 
-NAME    BINDS  FORWARDS  URL                    
-<machine-name>  1      0         amqp://127.0.0.1:5672 
+Gateway Definition:
+╰─ machine-user type:service version:1.18.0
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 127.0.0.1 3306
+
 ----
 This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
 

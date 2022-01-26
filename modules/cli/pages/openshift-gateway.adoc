@@ -204,7 +204,11 @@ To resolve this situation, you must create the skupper gateway and make the data
 [id="gateway"] 
 == Creating and using a Skupper gateway
 
-This procedure describes how to create a gateway and  make a database available on the {service-network}.
+This procedure describes how to create a gateway and make a database available on the {service-network}.
+
+.Prerequisites
+
+* Skupper router is installed on local machine
 
 .Procedure
 
@@ -227,10 +231,10 @@ The output should be similar to following:
 
 [source,bash,term=west]
 ----
-Gateway Definitions Summary
-
-NAME                 BINDS  FORWARDS  URL                     
-<machine-name>  1      0         amqp://127.0.0.1:39783
+Gateway Definition:
+╰─ machine-user type:service version:1.18.0
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 127.0.0.1 3306
 ----
 --
 
