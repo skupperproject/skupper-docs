@@ -1,3 +1,4 @@
+:toc:
 = Skupper resources on Kubernetes
 
 The following sections describe the various Skupper resources on Kubernetes, for example, service accounts
@@ -61,6 +62,8 @@ Each Skupper site on Kubernetes consists of two deployments:
 skupper-router:: provides the data plane for the {service-network}.
 
 skupper-service-controller:: provides 
+
+
 == ConfigMaps
 
 Do not edit these ConfigMap values directly, use the `skupper` CLI to create or change configuration.
@@ -79,23 +82,29 @@ skupper-services:: internal representation of the services available on the {ser
 skupper-internal:: internal router configuration.
 The service controller determines the values in this ConfigMap based on the services available on the {service-network}.
 
-== Secrets and Certificate Authorities
+== Secrets and Certificate Authorities 
 
 
-Each site has two CAs, one that issues the certs for local access called skupper-local-ca, one for certs for remote access called skupper-site-ca. The local certs are held in skupper-local-client and skupper-local-server. The server cert is used by the router, the client by the service controller. The site ca issued certs are skupper-site-server which holds the certs that identify the router to other routers that link to this site, skupper-claims-server which identifies the claims service, which is part of the service controller
-and is used when another site first established a link to ecxhange a restricted use token for a tls certificate and skupper-console-certs (post 0.7.0 only) which holds certs for the console.
+Each site has two CAs:
 
+skupper-local-ca:: issues certs for local access. 
+The local certs are held in skupper-local-client and skupper-local-server. The server cert is used by the router, the client by the service controller. 
+
+
+skupper-site-ca:: issues certs for remote access. 
+The site ca issued certs are skupper-site-server which holds the certs that identify the router to other routers that link to this site, skupper-claims-server which identifies the claims service, which is part of the service controller and is used when another site first established a link to ecxhange a restricted use token for a tls certificate and skupper-console-certs which holds certs for the console.
+
+// what's this about?
 The first set of secrets are those holding TLS credentials. 
 
-If using username based console authentication, there is also a
-skupper-console-users secret that contains the username(s) and
-password(s) that can be used to access the console. A username and password can be specified on skupper init. If not then an 'admin' user is generated with a generated password.
+If using username based console authentication, there is also a skupper-console-users secret that contains the username(s) and password(s) that can be used to access the console. A username and password can be specified on skupper init. If not then an 'admin' user is generated with a generated password.
 
-The tokens used to establish a link will also result in secrets. 
 
-The site that issues a token (of type claim) will have a secret with a uuid as name that contains details of any usage restrictions (how many times it can still be used and when it expires). 
+The tokens used to establish a link will also result in secrets:
 
-The site establishing the link will have a token generally called link1, link2 etc that contains the token claim or certificate.
+* The site that issues a token (of type claim) will have a secret with a uuid as name that contains details of any usage restrictions (how many times it can still be used and when it expires). 
+
+* The site establishing the link will have a token generally called link1, link2 etc that contains the token claim or certificate.
 
 
 == Services
