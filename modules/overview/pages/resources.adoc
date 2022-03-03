@@ -6,7 +6,7 @@ The following sections describe the various Skupper resources on Kubernetes, for
 
 == Service accounts, roles and role bindings
 
-When you use the `skupper` CLI to create a {skupper-name} site, the following resources are created
+When you create a {skupper-name} site, the following resources are created
 
 
 skupper-service-controller:: A service account, role and role binding with this name are created to manage the {skupper-name} service controller.
@@ -61,7 +61,7 @@ Each Skupper site on Kubernetes consists of two deployments:
 
 skupper-router:: provides the data plane for the {service-network}.
 
-skupper-service-controller:: provides 
+skupper-service-controller:: provides the control plane for the {service-network}.
 
 
 == ConfigMaps
@@ -88,14 +88,14 @@ The service controller determines the values in this ConfigMap based on the serv
 Each site has two CAs:
 
 skupper-local-ca:: issues certs for local access. 
-The local certs are held in skupper-local-client and skupper-local-server. The server cert is used by the router, the client by the service controller. 
+The local certs are held in *skupper-local-client* and *skupper-local-server*. The server cert is used by the router, the client by the service controller. 
 
 
 skupper-site-ca:: issues certs for remote access. 
-The site ca issued certs are skupper-site-server which holds the certs that identify the router to other routers that link to this site, skupper-claims-server which identifies the claims service, which is part of the service controller and is used when another site first established a link to ecxhange a restricted use token for a tls certificate and skupper-console-certs which holds certs for the console.
+The site ca issued certs are *skupper-site-server* which holds the certs that identify the router to other routers that link to this site, *skupper-claims-server* which identifies the claims service, which is part of the service controller and is used when another site first established a link to exchange a restricted use token for a TLS certificate and *skupper-console-certs* which holds certs for the console.
 
-// what's this about?
-The first set of secrets are those holding TLS credentials. 
+These CAs create secrets of the same names, containing the 
+
 
 If using username based console authentication, there is also a skupper-console-users secret that contains the username(s) and password(s) that can be used to access the console. A username and password can be specified on skupper init. If not then an 'admin' user is generated with a generated password.
 
