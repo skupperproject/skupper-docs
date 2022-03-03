@@ -94,8 +94,6 @@ The local certs are held in *skupper-local-client* and *skupper-local-server*. T
 skupper-site-ca:: issues certs for remote access. 
 The site ca issued certs are *skupper-site-server* which holds the certs that identify the router to other routers that link to this site, *skupper-claims-server* which identifies the claims service, which is part of the service controller and is used when another site first established a link to exchange a restricted use token for a TLS certificate and *skupper-console-certs* which holds certs for the console.
 
-These CAs create secrets of the same names, containing the 
-
 
 If using username based console authentication, there is also a skupper-console-users secret that contains the username(s) and password(s) that can be used to access the console. A username and password can be specified on skupper init. If not then an 'admin' user is generated with a generated password.
 
