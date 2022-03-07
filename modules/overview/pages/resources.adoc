@@ -84,5 +84,5 @@ skupper-router-local:: The service controller uses this service to connect to th
 
 skupper-router:: Other sites use this service to access the router over the inter-router or edge ports, although there may be other resources involved, for example, an ingress. 
 
-skupper:: The console and claims-server use this service to access the service-controller,
+skupper:: The console and claims-server are accessed through this service.
 
