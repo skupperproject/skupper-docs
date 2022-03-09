@@ -168,7 +168,6 @@ NOTE: Typically, you create a policy CR that combines many elements from the ste
 . xref:allowedServices[]
 . xref:allowedExposedResources[]
 
-
 // Type: procedure
 [id="AllowIncomingLinks"] 
 === Design a policy to allow incoming links
