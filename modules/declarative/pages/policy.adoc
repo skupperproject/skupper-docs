@@ -181,13 +181,11 @@ Use `AllowIncomingLinks` to enable users create tokens and configure incoming li
 
 Use `allowedOutgoingLinksHostnames` to specify hosts that users can create links to.
 
-
 // Type: procedure
 [id="allowedServices"] 
 === Design a policy to allow specific services
 
 Allow services:: Use `allowedServices` to specify which services can be created or used on the {service-network}.
-
 
 // Type: procedure
 [id="allowedExposedResources"] 
