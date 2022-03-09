@@ -22,6 +22,8 @@
 :skupper-version: 0.8.6
 :skupper-cli-version: {skupper-version}
 :SkupperOperatorName: Skupper Operator
+:skupper-router: Skupper router
+:policy-system: policy system
 // :skupper-io:
 
 
