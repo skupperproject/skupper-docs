@@ -64,7 +64,9 @@ spec:
 ====
 The following patterns are valid:
 
-`*`:: Applies to all.
+<string>:: Applies only to the referenced string.
+
+*:: Applies to all.
 
 Regular expressions:: Any valid regular expression, for example `.*/.com` will match any string ending in `.com`.
 
@@ -73,9 +75,13 @@ Regular expressions:: Any valid regular expression, for example `.*/.com` will m
 If you create another CR that allows outgoing links for a specific namespace, a user can create a link from that namespace to join a {service-network}, that is, the logic for multiple policy CRs is `OR`.
 {skupper-name} allows operations if one or more of the policy CRs permits the operation.
 
+// Type: procedure
+[id="installing-crd"] 
 == Installing the {policy-system} CRD
 
 Install the {policy-system} CRD enables a cluster administrator enforce policies for {service-network}s.
+
+NOTE: If there are existing sites on the cluster, see xref:installing-crd-existing-sites[]
 
 .Prerequisites
 
@@ -102,7 +108,89 @@ clusterrole.rbac.authorization.k8s.io/skupper-service-controller created
 
 . To verify that the {policy-system} is active, use the `skupper status` command and check that the output includes the following line:
 +
+[source,bash]
 ----
 Skupper policy is enabled
 ----
 
+// Type: procedure
+[id="installing-crd-existing-sites"] 
+== Installing the {policy-system} CRD on a cluster with existing sites
+
+If the cluster already hosts {skupper-name} sites, not the following before installing the CRD:
+
+* All existing connections are closed. 
+You must apply a policy CR to reopen connections
+* All existing {service-network} services and service bindings are removed. 
+You must create those resources again.
+
+.Procedure
+
+To avoid disruption:
+
+. Plan the CRD deployment for an appropriate time.
+
+. Search your cluster for sites:
++
+[source,bash]
+----
+$ kubectl get pods --all-namespaces --selector=app=skupper
+----
+
+. Document each service and service binding.
+
+. Install the CRD as described in xref:installing-crd[].
+This step closes connections and removes all {service-network} services and service bindings.
+
+. Create policy CRs as described in xref:
+
+. Recreate any services and service bindings as required.
+
+
+// Type: procedure
+[id="creating-policies"] 
+== Creating policies for the {policy-system}
+
+Policies allow you control communication across the {service-network} from a cluster.
+
+
+.Prerequisites
+
+* Access to a cluster using a `cluster-admin` account
+* The {policy-system} CRD is installed on the cluster
+
+.Procedure
+
+NOTE: Typically, you create a policy CR that combines many elements from the steps below, for example, see xref:about-skupper-policies[]
+
+. xref:AllowIncomingLinks[]
+. xref:allowedOutgoingLinksHostnames[]
+. xref:allowedServices[]
+. xref:allowedExposedResources[]
+
+
+// Type: procedure
+[id="AllowIncomingLinks"] 
+=== Design a policy to allow incoming links
+
+Use `AllowIncomingLinks` to enable users create tokens and configure incoming links.
+
+// Type: procedure
+[id="allowedOutgoingLinksHostnames"] 
+=== Design a policy to allow outgoing links to specific hosts
+
+Use `allowedOutgoingLinksHostnames` to specify hosts that users can create links to.
+
+
+// Type: procedure
+[id="allowedServices"] 
+=== Design a policy to allow specific services
+
+Allow services:: Use `allowedServices` to specify which services can be created or used on the {service-network}.
+
+
+// Type: procedure
+[id="allowedExposedResources"] 
+=== Design a policy to allow specific resources
+
+Allow resources to be exposed:: Use `allowedExposedResources` to specify which service bindings can be created or used on the {service-network}.
