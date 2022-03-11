@@ -170,24 +170,114 @@ NOTE: Typically, you create a policy CR that combines many elements from the ste
 
 // Type: procedure
 [id="AllowIncomingLinks"] 
-=== Design a policy to allow incoming links
+=== Implement a policy to allow incoming links
 
 Use `AllowIncomingLinks` to enable users create tokens and configure incoming links.
 
+.Procedure
+
+. Determine which namespaces you want to apply this policy to.
+. Create a CR with `AllowIncomingLinks` set to `true` or `false`.
+. Create and apply the CR.
+
+For example, the following CR disallows incoming links for all namespaces: 
+[source,yaml]
+----
+apiVersion: skupper.io/v1alpha1
+kind: SkupperClusterPolicy
+metadata:
+  name: AllowIncomingLinks
+spec:
+  namespaces:
+    - "*"
+  allowIncomingLinks: true
+----
+
+
+
+
 // Type: procedure
 [id="allowedOutgoingLinksHostnames"] 
-=== Design a policy to allow outgoing links to specific hosts
+=== Implement a policy to allow outgoing links to specific hosts
 
 Use `allowedOutgoingLinksHostnames` to specify hosts that users can create links to.
 
+. Determine which namespaces you want to apply this policy to.
+. Create a CR with `allowedOutgoingLinksHostnames` set to a pattern of allowed hosts.
+. Create and apply the CR.
+
+For example, the following CR allows links to all subdomains of `example.com` for all namespaces: 
+[source,yaml]
+----
+apiVersion: skupper.io/v1alpha1
+kind: SkupperClusterPolicy
+metadata:
+  name: allowedOutgoingLinksHostnames
+spec:
+  namespaces:
+    - "*"
+  allowedOutgoingLinksHostnames: ['*.example.com']
+----
+
+
 // Type: procedure
 [id="allowedServices"] 
-=== Design a policy to allow specific services
+=== Implement a policy to allow specific services
 
-Allow services:: Use `allowedServices` to specify which services can be created or used on the {service-network}.
+Use `allowedServices` to specify which services can be created or used on the {service-network}.
+
+.Procedure
+
+. Determine which namespaces you want to apply this policy to.
+. Create a CR with `allowedServices` set to specify the services allowed on the {service-network}.
+. Create and apply the CR.
+
+For example, the following CR allows users expose services with the prefix `backend-` for all namespaces: 
+[source,yaml]
+----
+apiVersion: skupper.io/v1alpha1
+kind: SkupperClusterPolicy
+metadata:
+  name: allowedServices
+spec:
+  namespaces:
+    - "*"
+  allowedServices: ['backend-*']
+----
+
+NOTE: When exposing services, use the `--address <name>` parameter of the `skupper` CLI to name services appropriately.
+
 
 // Type: procedure
 [id="allowedExposedResources"] 
-=== Design a policy to allow specific resources
+=== Implement a policy to allow specific resources
 
-Allow resources to be exposed:: Use `allowedExposedResources` to specify which service bindings can be created or used on the {service-network}.
+Use `allowedExposedResources` to specify which service bindings can be created or used on the {service-network}.
+
+.Procedure
+
+. Determine which namespaces you want to apply this policy to.
+. Create a CR with `allowedExposedResources` set to specify the service bindings allowed on the {service-network}.
+. Create and apply the CR.
+
+For example, the following CR allows users expose services with the prefix `backend-` for all namespaces: 
+[source,yaml]
+----
+apiVersion: skupper.io/v1alpha1
+kind: SkupperClusterPolicy
+metadata:
+  name: allowedExposedResources
+spec:
+  namespaces:
+    - "*"
+  allowedExposedResources: ['backend-*']
+----
+
+[NOTE] 
+====
+When binding services, specify an appropriate name when using the `skupper` CLI, for example:
+[source,bash]
+----
+$ skupper service bind backend-db <target-type> <target-name>
+----
+====
