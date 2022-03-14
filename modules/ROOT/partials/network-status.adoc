@@ -1,0 +1,78 @@
+// Type: procedure
+[id='network-service-{context}']
+= Exploring a {service-network}
+
+{skupper-name} includes a command to allow you report all the sites and the services available on a {service-network}.
+
+.Prerequisites
+
+* A {service-network} with more than one site
+
+.Procedure
+
+. Set your Kubernetes context to a namespace on the {service-network}.
+
+. Use the following command to report the status of the {service-network}:
++
+--
+
+[source,bash]
+----
+$ skupper network status
+----
+
+For example, the following shows the output for the {service-network} created from the {OpenShiftTutoriallink} tutorial from the `west` namespace:
+
+[source]
+----
+Sites:
+├─ [local] 4dba248 - west  <1>
+│  URL: 10.96.146.236 <2>
+│  name: west <3>
+│  namespace: west
+│  version: 0.8.6 <4>
+│  ╰─ Services:
+│     ╰─ name: hello-world-backend <5>
+│        address: hello-world-backend: 8080 <6>
+│        protocol: tcp <7>
+╰─ [remote] bca99d1 - east <8> 
+   URL: 
+   name: east
+   namespace: east
+   sites linked to: 4dba248-west <9>
+   version: 0.8.6
+   ╰─ Services:
+      ╰─ name: hello-world-backend
+         address: hello-world-backend: 8080
+         protocol: tcp
+         ╰─ Targets:
+            ╰─ name: hello-world-backend-7dfb45b98d-mhskw <10>
+----
+
+<1> The unique identifier of the site associated with the current context, that is, the `west` namespace
+
+<2> The URL of the Skupper router. 
+If you require the URL of the console, use the `skupper status` command to display that URL.
+
+<3> The site name.
+By default, skupper uses the name of the current namespace.
+If you want to specify a site name, use `skupper init  --site-name <site-name>`.
+
+<4> The version of {skupper-name} running the site.
+The site version can be different from the current `skupper` CLI version.
+To update a site to the version of the CLI, use `skupper update`.
+
+<5> The name of a service exposed on the {service-network}.
+
+<6> The address of a service exposed on the {service-network}.
+
+<7> The protocol of a service exposed on the {service-network}.
+
+<8> The unique identifier of a remote site on the {service-network}.
+
+<9> The sites that the remote site is linked to.
+
+<10> The name of the local Kubernetes service that is exposed on the {service-network}.
+
+
+--

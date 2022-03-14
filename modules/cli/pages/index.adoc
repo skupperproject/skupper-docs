@@ -449,6 +449,7 @@ where
 
 include::gateway-download.adoc[]
 
+include::{common}network-status.adoc[leveloffset=+1]
 
 include::{common}protocols.adoc[leveloffset=+1]
 
