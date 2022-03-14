@@ -72,7 +72,7 @@ To update a site to the version of the CLI, use `skupper update`.
 
 <9> The sites that the remote site is linked to.
 
-<10> The name of the local Kubernetes service that is exposed on the {service-network}.
-
+<10> The name of the local Kubernetes object that is exposed on the {service-network}.
+In this example, this is the `hello-world-backend` pod.
 
 --
