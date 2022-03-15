@@ -51,7 +51,8 @@ Sites:
 
 <1> The unique identifier of the site associated with the current context, that is, the `west` namespace
 
-<2> The URL of the Skupper router. 
+<2> The URL of the {service-network} router.
+This is required for other sites to connect to this site and is different from the console URL. 
 If you require the URL of the console, use the `skupper status` command to display that URL.
 
 <3> The site name.
@@ -75,4 +76,11 @@ To update a site to the version of the CLI, use `skupper update`.
 <10> The name of the local Kubernetes object that is exposed on the {service-network}.
 In this example, this is the `hello-world-backend` pod.
 
+[NOTE]
+====
+The URL for the east site has no value because that site was initialized without ingress using the following command:
+----
+$ skupper init --ingress none
+----
+====
 --
