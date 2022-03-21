@@ -4,26 +4,28 @@ ifndef::mod-loc[]
 endif::mod-loc[]
 include::{mod-loc}attributes.adoc[]
 :sectnums:
-:kubernetes-flavor: OpenShift
+
 //Category: gateway-tutorial
 // Type: assembly
 [id="openshift-tutorial"] 
-= Creating a {service-network} with OpenShift and accessing a database using a Skupper gateway
+= Creating a {service-network} with {kubernetes-flavor} and accessing a backend service using a Skupper gateway
 
 [role="system:abstract"]
-This tutorial demonstrates how to connect a frontend service on a OpenShift cluster with a backend service on a OpenShift cluster using the `skupper` command-line interface (CLI).
-The backend service connects to a database running on your local machine.
+This tutorial describes how to connect a local backend service on a local machine with a frontend service running on a {kubernetes-flavor} cluster. 
+
+In this tutorial, the services are the same as used in {OpenShiftTutoriallink}, however you run the backend service locally and expose the service on the service network using the `skupper` command-line interface (CLI).
 
 .Prerequisites
 
-* Access to projects in two OpenShift clusters, `cluster-admin` access is not required.
-* One of the OpenShift clusters must be addressable from the other cluster.
-* A MySQL database running on your local machine.
+* Access to a projects in a {kubernetes-flavor} cluster, `cluster-admin` access is not required.
+* Python on your local machine.
 
 This tutorial shows how to connect the following:
 
 * `west` - a namespace in an accessible OpenShift cluster running the frontend service.
-* `mysql` - a database service running on a local machine.
+* `hello-world-backend` - a Python service running on a local machine.
+
+NOTE: Although this tutorial demonstrates exposing a Python service on the {service-network}, a more typical use case would involve a database service, for example, MySQL.
 
 
 // Type: concept
@@ -50,50 +52,89 @@ include::index.adoc[tags=installing-cli]
 
 
 // Type: procedure
-[id="creating-database"] 
-== Creating a database
+[id="creating-backend"] 
+== Creating a backend service
 
 [role="system:abstract"]
-This procedure describes how to create a database on your local machine that is accessed from the {service-network}.
+This procedure describes how to create a backend service on your local machine that is accessed from the {service-network}.
 
 .Prerequisites
 
-* A demo MySQL database running on RHEL
+* Python
 
 .Procedure
 
-NOTE: This procedure creates a user with a published password. Do not perform this procedure on a database with sensitive data.
+. Clone the link:https://github.com/skupperproject/skupper-example-hello-world[skupper-example-hello-world] repo.
 
-. Log into MySQL and create the database using the following commands:
+
+. Change to the service directory.
 +
+[source,bash,term=local]
 ----
-create database skupper;
-use skupper database;
-CREATE TABLE greetings (ID int, text varchar(255) );
-INSERT INTO greetings VALUES (1,'Hello');
-CREATE USER skupper@localhost IDENTIFIED BY 'reppuks';
-GRANT SELECT  ON skupper.* TO 'skupper'@'localhost';
+$ cd skupper-example-hello-world/backend/
 ----
 
-. Test the database by logging in as the `skupper` user and using the following SQL commands:
+. Install the `flask` library.
 +
+[source,bash,term=local]
 ----
-use skupper database;
-select * from greetings;
-+------+-------+
-| ID   | text  |
-+------+-------+
-|    1 | Hello |
-+------+-------+
+$ pip install --user flask
 ----
+
+. Run the backend service
++
+--
+[source,bash,term=local]
+----
+$ python ./main.py
+----
+The output is similar to the following:
+
+[source,bash,term=local]
+----
+* Serving Flask app 'main' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://10.33.241.56:8080/ (Press CTRL+C to quit)
+----
+
+Note the IP address as <backend-ip-address>
+--
+
+. Test the service by navigating to the following URL.
++
+--
+[source,bash,term=local]
+----
+http://<backend-ip-address>:8080/api/hello
+----
+
+The output is similar to the following:
+
+[source,bash,term=local]
+----
+Hello from workstation (1)
+----
+This indicates that the backend service is running and available.
+--
+
+// Type: procedure
+[id="configuring-consoles"] 
+== Logging into cluster
 
 
 .Prerequisites
 
-* The OpenShift CLI is installed.
-See the https://access.redhat.com/documentation/en-us/openshift_container_platform/4.6/html-single/cli_tools/index#installing-openshift-cli[OpenShift CLI] documentation for more instructions on how to install `oc`.
+* The kubectl CLI is installed.
++
+ifdef::product[]
+The `kubectl` CLI is automatically installed when you install `oc` as described in the link:https://access.redhat.com/documentation/en-us/openshift_container_platform/4.9/html-single/cli_tools/index#installing-openshift-cli[OpenShift CLI] documentation.
+endif::[]
 
-NOTE: In OpenShift 4.6 and later, you can use the web terminal to perform the following procedure, as described in the https://docs.openshift.com/container-platform/4.5/web_console/odc-about-web-terminal.html[web terminal] documentation.
 
 .Procedure
 
@@ -106,23 +147,40 @@ $ export KUBECONFIG=$HOME/.kube/config-west
 +
 This session is referred to later as the _west_ terminal session.
 
-. Log into the OpenShift cluster, for example:
+. Log into the {kubernetes-flavor} cluster.
 +
+--
+ifdef::product[]
+
+For example:
 ----
  $ oc login
 ----
+endif::[]
+--
 
 // Type: procedure
 [id="installing-skupper"] 
 == Creating a skupper site
 
-. Create the `west` project (namespace):
+. Create the `west` namespace:
 +
+--
+ifdef::skupper-io[]
+[source,bash,term=west]
+----
+$ kubectl create namespace west
+$ kubectl config set-context --current --namespace west
+----
+endif::[]
+
+ifdef::product[]
 [source,bash,term=west]
 ----
 $ oc new-project west 
 ----
-
+endif::[]
+--
 . Create the {service-network} site:
 +
 [source,bash,term=west]
@@ -149,29 +207,31 @@ Skupper enabled for namespace 'west'. It is not connected to any other sites.
 [id="frontend"] 
 == Creating the frontend service
 
-The frontend service is a simple Python application that displays a record from the database.
+The frontend service is a simple Python application that displays a message from the backend application.
 
 .Procedure
+
+Perform all tasks in the west terminal session:
 
 . Deploy the frontend service:
 +
 [source,bash,term=west]
 ----
-$ oc create deployment hello-mysql-frontend --image quay.io/pwright/hello-mysql-frontend
+$ oc create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
 ----
 
 . Expose the frontend deployment as a cluster service:
 +
 [source,bash,term=west]
 ----
-$ oc expose deployment hello-mysql-frontend --port 8080 --type LoadBalancer
+$ oc expose deployment hello-world-frontend --port 8080 --type LoadBalancer
 ----
 
 . Create a route for the frontend:
 +
 [source,bash,term=west]
 ----
-$ oc expose svc/hello-mysql-frontend
+$ oc expose svc/hello-world-frontend
 ----
 
 . Check the frontend route:
@@ -187,24 +247,23 @@ The output should be similar to the following:
 
 ----
 NAME                   HOST/PORT                                   
-hello-mysql-frontend   <frontend-url>       
+hello-world-frontend   <frontend-url>       
 ----
 --
 
 .. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following because the frontend cannot communicate with the backend yet:
 +
 ----
-I am the frontend.  The database says '(2003, "Can't connect to MySQL server on 'mydb' ([Errno -3] Temporary failure in name resolution)")'.
+Trouble! HTTPConnectionPool(host='hello-world-backend', port=8080): Max retries exceeded with url: /api/hello (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fbfcdf0d1d0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
 ----
 +
-To resolve this situation, you must create the skupper gateway and make the database available on the {service-network}.
-
+To resolve this situation, you must make the backend service available on the {service-network} using a gateway.
 
 // Type: procedure
 [id="gateway"] 
 == Creating and using a Skupper gateway
 
-This procedure describes how to create a gateway and make a database available on the {service-network}.
+This procedure describes how to create a gateway and make a backend service available on the {service-network}.
 
 .Prerequisites
 
@@ -212,12 +271,30 @@ This procedure describes how to create a gateway and make a database available o
 
 .Procedure
 
-. Create a gateway and make the database available on the {service-network}:
+. Create a gateway:
 +
 [source,bash,term=west]
 ----
-$ skupper gateway expose mydb localhost 3306
+$ skupper gateway init --type podman
 ----
+
+. Create a {skupper-name} service:
++
+[source,bash,term=west]
+----
+$ skupper service create hello-world-backend 8080
+----
+
+. Bind the local backend service to the {skupper-name} service:
++
+--
+[source,bash,term=west]
+----
+$ skupper gateway bind hello-world-backend <backend-ip-address> 8080
+----
+where the <backend-ip-address is the address you noted in xref:creating-backend[]
+
+--
 
 . Check the gateway status:
 +
@@ -231,43 +308,42 @@ The output should be similar to following:
 
 [source,bash,term=west]
 ----
-Gateway Definition:
-╰─ machine-user type:service version:1.18.0
-   ╰─ Bindings:
-      ╰─ mydb:3306 tcp mydb:3306 127.0.0.1 3306
+Gateway Definitions:
+╰─ <machine>-<user> type: podman version: 1.17.1 url: amqp://127.0.0.1:5672
+ ╰─ Bindings:
+    ╰─ hello-world-backend:8080 tcp hello-world-backend:8080 <backend-ip-address> 8080
+
 ----
 --
 
 // Type: procedure
 [id="check"] 
-== Checking database access from the frontend
+== Checking service access from the frontend
 
 .Procedure
 
-. Get the route details:
+. Get the URL details:
 +
 --
 [source,bash,term=west]
 ----
-$  oc get routes
+$ kubectl get service hello-world-frontend -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ----
 
-The output should be similar to the following:
-
+Use the output IP address to construct the <frontend-url>:
 ----
-NAME                   HOST/PORT                                   
-hello-mysql-frontend   <frontend-url>       
+<cluster-ip-address>:8080/
 ----
 --
 
 . Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following:
 +
 ----
-I am the frontend.  The database says '('Hello',)'.
+I am the frontend.  The backend says 'Hello from <machine> 1)'.
 ----
 
 
-This shows how the frontend calls the database over the {service-network} from an OpenShift cluster.
+This shows how the frontend calls the backend over the {service-network} from an {kubernetes-flavor} cluster.
 
 .Additional resources
 
@@ -284,7 +360,7 @@ This procedure describes how to remove the {service-network} you created.
 +
 [source,bash,term=west]
 ----
-$  skupper gateway delete <machine-name>
+$  skupper gateway delete 
 ----
 
 
@@ -292,6 +368,6 @@ $  skupper gateway delete <machine-name>
 +
 [source,bash,term=west]
 ----
-$  oc delete project west
+$  kubectl namespace delete west
 ----
 
