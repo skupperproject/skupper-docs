@@ -309,7 +309,7 @@ The output should be similar to following:
 [source,bash,term=west]
 ----
 Gateway Definitions:
-╰─ <machine>-<user> type: podman version: 1.17.1 url: amqp://127.0.0.1:5672
+╰─ <machine>-<user> type: podman version: 1.17.1
  ╰─ Bindings:
     ╰─ hello-world-backend:8080 tcp hello-world-backend:8080 <backend-ip-address> 8080
 
