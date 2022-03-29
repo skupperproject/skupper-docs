@@ -62,13 +62,10 @@ spec:
 
 [TIP]
 ====
-The following patterns are valid:
+Use regular expressions to create matches, for example:
 
-<string>:: Applies only to the referenced string.
-
-*:: Applies to all.
-
-Regular expressions:: Any valid regular expression, for example `.*/.com` will match any string ending in `.com`.
+* `.*/.com` matches any string ending in `.com`.
+* `^abc$` matches the string `abc`.
 
 ====
 
@@ -86,7 +83,7 @@ NOTE: If there are existing sites on the cluster, see xref:installing-crd-existi
 .Prerequisites
 
 * Access to a cluster using a `cluster-admin` account
-
+* The operator is installed in {OperatorLink}
 .Procedure
 
 . Log into the cluster using a `cluster-admin` account.
@@ -117,7 +114,7 @@ Skupper policy is enabled
 [id="installing-crd-existing-sites"] 
 == Installing the {policy-system} CRD on a cluster with existing sites
 
-If the cluster already hosts {skupper-name} sites, not the following before installing the CRD:
+If the cluster already hosts {skupper-name} sites, note the following before installing the CRD:
 
 * All existing connections are closed. 
 You must apply a policy CR to reopen connections
