@@ -100,8 +100,6 @@ customresourcedefinition.apiextensions.k8s.io/skupperclusterpolicies.skupper.io 
 clusterrole.rbac.authorization.k8s.io/skupper-service-controller created
 ----
 
-// to be modified soon
-. Create a rolebinding in all namespaces.
 
 . To verify that the {policy-system} is active, use the `skupper status` command and check that the output includes the following line:
 +
@@ -109,6 +107,7 @@ clusterrole.rbac.authorization.k8s.io/skupper-service-controller created
 ----
 Skupper policy is enabled
 ----
+
 
 // Type: procedure
 [id="installing-crd-existing-sites"] 
@@ -138,6 +137,20 @@ $ kubectl get pods --all-namespaces --selector=app=skupper
 
 . Install the CRD as described in xref:installing-crd[].
 This step closes connections and removes all {service-network} services and service bindings.
+
+. If {skupper-name} sites exist in the cluster not created by `cluster-admin`, you must grant permissions to read policies to developers.
++
+--
+For each site namespace:
+
+[source,bash]
+----
+kubectl create clusterrolebinding skupper-service-controller-<namespace> --clusterrole=skupper-service-controller --serviceaccount=<namespace>:skupper-service-controller
+----
+
+where `<namespace>` is the site namespace.
+--
+
 
 . Create policy CRs as described in xref:
 
