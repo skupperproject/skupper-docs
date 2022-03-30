@@ -20,7 +20,7 @@ This means that the {service-network} is isolated from external access, preventi
 
 After installing the {policy-system} Custom Resource Definition (CRD), you need to configure one or more of the following items using custom resources (CRs) to enable communication:
 
-Allow incoming links:: Use `AllowIncomingLinks` to enable users create tokens and configure incoming links.
+Allow incoming links:: Use `allowIncomingLinks` to enable users create tokens and configure incoming links.
 
 Allow outgoing links to specific hosts:: Use `allowedOutgoingLinksHostnames` to specify hosts that users can create links to.
 
@@ -30,7 +30,7 @@ Allow resources to be exposed:: Use `allowedExposedResources` to specify which s
 
 NOTE: Each setting for the {policy-system} can be applied to one or more namespaces.
 
-For example, the following policy CR disallows outgoing links for all namespaces, but all other {skupper-name} capabilities are allowed:
+For example, the following policy CR disallows outgoing links for all namespaces and only permits service bindings named `deployment/nginx`, but all other {skupper-name} capabilities are allowed:
 
 [source,yaml]
 ----
@@ -44,13 +44,14 @@ spec:
   allowIncomingLinks: true
   allowGateway: true
   allowedExposedResources:
-    - "*"
+    - "deployment/nginx"
   allowedOutgoingLinksHostnames: []
   allowedServices:
     - "*"
 ----
 
 `namespaces`:: One or more patterns to specify the namespaces that this policy applies to.
+Note that you can use link:https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[Label selectors] to match the namespaces.
 
 `allowIncomingLinks`:: Specify `true` or `false` to determine whether other sites can create links to the namespaces specified.
 
@@ -58,13 +59,14 @@ spec:
 
 `allowedServices`:: Specify one or more patterns to determine the permitted names of services allowed on the {service-network} from the namespaces specified.
 
-`allowedExposedResources`:: Specify one or more patterns to determine the permitted names of service bindings allowed on the {service-network} from the namespaces specified.
+`allowedExposedResources`:: Specify one or more permitted names of service bindings allowed on the {service-network} from the namespaces specified. 
+Note that patterns are not supported. 
 
 [TIP]
 ====
-Use regular expressions to create matches, for example:
+Use regular expressions to create pattern matches, for example:
 
-* `.*/.com` matches any string ending in `.com`.
+* `.*\\.com` matches any string ending in `.com`.
 * `^abc$` matches the string `abc`.
 
 ====
@@ -105,8 +107,36 @@ clusterrole.rbac.authorization.k8s.io/skupper-service-controller created
 +
 [source,bash]
 ----
-Skupper policy is enabled
+Skupper is enabled for namespace "<namespace>" in interior mode (with policies).
 ----
+
+
+// Type: procedure
+[id="upgrading-existing-sites"] 
+== Upgrading on a cluster with existing sites
+
+If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of {policy-system} in that version and avoid {service-network} disruption.
+
+.Procedure
+
+. Document each service and service binding.
+
+. Create policy CRs as described in xref:creating-policies[]
+
+. Install the CRD as described in xref:installing-crd[].
+
+. Grant permissions to read policies to developers to avoid that site being blocked from the {service-network}.
++
+--
+For each site namespace:
+
+[source,bash]
+----
+$ kubectl create clusterrolebinding skupper-service-controller-<namespace> --clusterrole=skupper-service-controller --serviceaccount=<namespace>:skupper-service-controller
+----
+
+where `<namespace>` is the site namespace.
+--
 
 
 // Type: procedure
@@ -119,6 +149,8 @@ If the cluster already hosts {skupper-name} sites, note the following before ins
 You must apply a policy CR to reopen connections
 * All existing {service-network} services and service bindings are removed. 
 You must create those resources again.
+
+NOTE: If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of {policy-system} in that version and avoid {service-network} disruption by following the procedure described in xref:upgrading-existing-sites[].
 
 .Procedure
 
@@ -138,21 +170,21 @@ $ kubectl get pods --all-namespaces --selector=app=skupper
 . Install the CRD as described in xref:installing-crd[].
 This step closes connections and removes all {service-network} services and service bindings.
 
-. If {skupper-name} sites exist in the cluster not created by `cluster-admin`, you must grant permissions to read policies to developers.
+. If {skupper-name} sites exist in the cluster not created by `cluster-admin`, you must grant permissions to read policies to developers to avoid that site being blocked from the {service-network}.
 +
 --
 For each site namespace:
 
 [source,bash]
 ----
-kubectl create clusterrolebinding skupper-service-controller-<namespace> --clusterrole=skupper-service-controller --serviceaccount=<namespace>:skupper-service-controller
+$ kubectl create clusterrolebinding skupper-service-controller-<namespace> --clusterrole=skupper-service-controller --serviceaccount=<namespace>:skupper-service-controller
 ----
 
 where `<namespace>` is the site namespace.
 --
 
 
-. Create policy CRs as described in xref:
+. Create policy CRs as described in xref:creating-policies[]
 
 . Recreate any services and service bindings as required.
 
@@ -173,21 +205,21 @@ Policies allow you control communication across the {service-network} from a clu
 
 NOTE: Typically, you create a policy CR that combines many elements from the steps below, for example, see xref:about-skupper-policies[]
 
-. xref:AllowIncomingLinks[]
+. xref:allowIncomingLinks[]
 . xref:allowedOutgoingLinksHostnames[]
 . xref:allowedServices[]
 . xref:allowedExposedResources[]
 
 // Type: procedure
-[id="AllowIncomingLinks"] 
+[id="allowIncomingLinks"] 
 === Implement a policy to allow incoming links
 
-Use `AllowIncomingLinks` to enable users create tokens and configure incoming links.
+Use `allowIncomingLinks` to enable users create tokens and configure incoming links.
 
 .Procedure
 
 . Determine which namespaces you want to apply this policy to.
-. Create a CR with `AllowIncomingLinks` set to `true` or `false`.
+. Create a CR with `allowIncomingLinks` set to `true` or `false`.
 . Create and apply the CR.
 
 For example, the following CR disallows incoming links for all namespaces: 
@@ -196,7 +228,7 @@ For example, the following CR disallows incoming links for all namespaces:
 apiVersion: skupper.io/v1alpha1
 kind: SkupperClusterPolicy
 metadata:
-  name: AllowIncomingLinks
+  name: allowIncomingLinks
 spec:
   namespaces:
     - "*"
@@ -226,7 +258,7 @@ metadata:
 spec:
   namespaces:
     - "*"
-  allowedOutgoingLinksHostnames: ['*.example.com']
+  allowedOutgoingLinksHostnames: ['.*\\.example\\.com']
 ----
 
 
@@ -252,7 +284,7 @@ metadata:
 spec:
   namespaces:
     - "*"
-  allowedServices: ['backend-*']
+  allowedServices: ['backend-.*']
 ----
 
 NOTE: When exposing services, use the `--address <name>` parameter of the `skupper` CLI to name services appropriately.
@@ -280,14 +312,6 @@ metadata:
 spec:
   namespaces:
     - "*"
-  allowedExposedResources: ['backend-*']
+  allowedExposedResources: ['deployment/nginx']
 ----
 
-[NOTE] 
-====
-When binding services, specify an appropriate name when using the `skupper` CLI, for example:
-[source,bash]
-----
-$ skupper service bind backend-db <target-type> <target-name>
-----
-====
