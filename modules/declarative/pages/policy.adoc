@@ -30,7 +30,8 @@ Allow resources to be exposed:: Use `allowedExposedResources` to specify which s
 
 NOTE: Each setting for the {policy-system} can be applied to one or more namespaces.
 
-For example, the following policy CR disallows outgoing links for all namespaces and only permits service bindings named `deployment/nginx`, but all other {skupper-name} capabilities are allowed:
+For example, the following policy CR fully allows all {skupper-name} capabilities on all namespaces, except for exposed resources.
+The policy allows incoming links from any domain ending in `example.com` and adds 'deployment/nginx' to the list of allowed resources on all namespaces.
 
 [source,yaml]
 ----
@@ -45,10 +46,16 @@ spec:
   allowGateway: true
   allowedExposedResources:
     - "deployment/nginx"
-  allowedOutgoingLinksHostnames: []
+  allowedOutgoingLinksHostnames: [".*\\.example.com$"]
   allowedServices:
     - "*"
 ----
+
+[NOTE]
+====
+You can apply many policy CRs and the most permissive policies are enforced.
+For example, if you apply a separate policy CR with the line `allowedOutgoingLinksHostnames: []`, outgoing links to `example.com` are still permitted.
+====
 
 `namespaces`:: One or more patterns to specify the namespaces that this policy applies to.
 Note that you can use link:https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[Label selectors] to match the namespaces.
@@ -222,7 +229,7 @@ Use `allowIncomingLinks` to enable users create tokens and configure incoming li
 . Create a CR with `allowIncomingLinks` set to `true` or `false`.
 . Create and apply the CR.
 
-For example, the following CR disallows incoming links for all namespaces: 
+For example, the following CR allows incoming links for all namespaces: 
 [source,yaml]
 ----
 apiVersion: skupper.io/v1alpha1
