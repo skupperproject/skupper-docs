@@ -31,7 +31,7 @@ Allow resources to be exposed:: Use `allowedExposedResources` to specify which s
 NOTE: Each setting for the {policy-system} can be applied to one or more namespaces.
 
 For example, the following policy CR fully allows all {skupper-name} capabilities on all namespaces, except for exposed resources.
-The policy allows incoming links from any domain ending in `.example.com` and adds 'deployment/nginx' to the list of allowed resources on all namespaces.
+The policy allows outgoing links to any domain ending in `.example.com` and adds 'deployment/nginx' to the list of allowed resources on all namespaces.
 
 [source,yaml]
 ----
@@ -310,7 +310,7 @@ Use `allowedExposedResources` to specify which service bindings can be created o
 . Create a CR with `allowedExposedResources` set to specify the service bindings allowed on the {service-network}.
 . Create and apply the CR.
 
-For example, the following CR allows users expose services with the prefix `backend-` for all namespaces: 
+For example, the following CR allows service bindings to an `nginx` deployment for all namespaces: 
 [source,yaml]
 ----
 apiVersion: skupper.io/v1alpha1
@@ -323,3 +323,4 @@ spec:
   allowedExposedResources: ['deployment/nginx']
 ----
 
+NOTE: For `allowedExposedResources`, each entry must conform to the `type/name` syntax.
