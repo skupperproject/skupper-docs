@@ -26,7 +26,7 @@ Allow outgoing links to specific hosts:: Use `allowedOutgoingLinksHostnames` to 
 
 Allow services:: Use `allowedServices` to specify which services can be created or used on the {service-network}.
 
-Allow resources to be exposed:: Use `allowedExposedResources` to specify which service bindings can be created or used on the {service-network}.
+Allow resources to be exposed:: Use `allowedExposedResources` to specify which resources can be exposed on the {service-network}.
 
 NOTE: Each setting for the {policy-system} can be applied to one or more namespaces.
 
@@ -66,7 +66,7 @@ If set to `false` you cannot create tokens or use the gateway features from this
 
 `allowedServices`:: Specify one or more patterns to determine the permitted names of services allowed on the {service-network} from the namespaces specified.
 
-`allowedExposedResources`:: Specify one or more permitted names of service bindings allowed on the {service-network} from the namespaces specified. 
+`allowedExposedResources`:: Specify one or more permitted names of resources allowed on the {service-network} from the namespaces specified. 
 Note that patterns are not supported. 
 
 [TIP]
@@ -127,7 +127,7 @@ If you are upgrading sites from {skupper-name} version 0.8, you can take advanta
 
 .Procedure
 
-. Document each service and service binding.
+. Document each service and exposed resources.
 
 . Create policy CRs as described in xref:creating-policies[]
 
@@ -155,7 +155,7 @@ If the cluster already hosts {skupper-name} sites, note the following before ins
 
 * All existing connections are closed. 
 You must apply a policy CR to reopen connections
-* All existing {service-network} services and service bindings are removed. 
+* All existing {service-network} services and exposed resources are removed. 
 You must create those resources again.
 
 NOTE: If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of {policy-system} in that version and avoid {service-network} disruption by following the procedure described in xref:upgrading-existing-sites[].
@@ -173,10 +173,10 @@ To avoid disruption:
 $ kubectl get pods --all-namespaces --selector=app=skupper
 ----
 
-. Document each service and service binding.
+. Document each service and resources exposed on the {service-network}.
 
 . Install the CRD as described in xref:installing-crd[].
-This step closes connections and removes all {service-network} services and service bindings.
+This step closes connections and removes all {service-network} services and exposed resources.
 
 . If {skupper-name} sites exist in the cluster not created by `cluster-admin`, you must grant permissions to read policies to developers to avoid that site being blocked from the {service-network}.
 +
@@ -194,7 +194,7 @@ where `<namespace>` is the site namespace.
 
 . Create policy CRs as described in xref:creating-policies[]
 
-. Recreate any services and service bindings as required.
+. Recreate any services and exposed resources as required.
 
 
 // Type: procedure
@@ -302,15 +302,15 @@ NOTE: When exposing services, use the `--address <name>` parameter of the `skupp
 [id="allowedExposedResources"] 
 === Implement a policy to allow specific resources
 
-Use `allowedExposedResources` to specify which service bindings can be created or used on the {service-network}.
+Use `allowedExposedResources` to specify which resources can be exposed on the {service-network}.
 
 .Procedure
 
 . Determine which namespaces you want to apply this policy to.
-. Create a CR with `allowedExposedResources` set to specify the service bindings allowed on the {service-network}.
+. Create a CR with `allowedExposedResources` set to specify resources that can be exposed on the {service-network}.
 . Create and apply the CR.
 
-For example, the following CR allows service bindings to an `nginx` deployment for all namespaces: 
+For example, the following CR allows you expose an `nginx` deployment for all namespaces: 
 [source,yaml]
 ----
 apiVersion: skupper.io/v1alpha1
