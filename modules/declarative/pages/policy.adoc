@@ -43,7 +43,6 @@ spec:
   namespaces:
     - "*"
   allowIncomingLinks: true
-  allowGateway: true
   allowedExposedResources:
     - "deployment/nginx"
   allowedOutgoingLinksHostnames: [".*\\.example.com$"]
@@ -61,6 +60,7 @@ For example, if you apply a separate policy CR with the line `allowedOutgoingLin
 Note that you can use link:https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[Label selectors] to match the namespaces.
 
 `allowIncomingLinks`:: Specify `true` or `false` to determine whether other sites can create links to the namespaces specified.
+If set to `false` you cannot create tokens or use the gateway features from this site.
 
 `allowedOutgoingLinksHostnames`:: Specify one or more patterns to determine which hosts you can create links to from the namespaces specified.
 
@@ -73,7 +73,8 @@ Note that patterns are not supported.
 ====
 Use regular expressions to create pattern matches, for example:
 
-* `.*\\.com` matches any string ending in `.com`.
+* `.*\\.com$` matches any string ending in `.com`.
+A double back slash is required to avoid issues in YAML.
 * `^abc$` matches the string `abc`.
 
 ====
@@ -281,7 +282,7 @@ Use `allowedServices` to specify which services can be created or used on the {s
 . Create a CR with `allowedServices` set to specify the services allowed on the {service-network}.
 . Create and apply the CR.
 
-For example, the following CR allows users expose services with the prefix `backend-` for all namespaces: 
+For example, the following CR allows users to expose and consume services with the prefix `backend-` for all namespaces: 
 [source,yaml]
 ----
 apiVersion: skupper.io/v1alpha1
@@ -291,7 +292,7 @@ metadata:
 spec:
   namespaces:
     - "*"
-  allowedServices: ['backend-.*']
+  allowedServices: ['^backend-.*']
 ----
 
 NOTE: When exposing services, use the `--address <name>` parameter of the `skupper` CLI to name services appropriately.
