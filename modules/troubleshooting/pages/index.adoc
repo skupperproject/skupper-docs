@@ -1,0 +1,36 @@
+include::{mod-loc}attributes.adoc[]
+
+//Category: skupper-troubleshooting
+// Type: assembly
+
+[id="troubleshooting"] 
+= Troubleshooting a {service-network}
+
+[role="system:abstract"]
+Typically, you can create a {service-network} without referencing this troubleshooting guide.
+However, this guide provides some tips for situations when the {service-network} does not perform as expected.
+
+A typical troubleshooting workflow is to check all the sites, protocols and create logging tarballs.
+
+// Type: procedure
+[id="installing-cli"] 
+== Checking sites
+
+[role="system:abstract"]
+Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting {skupper-name}.
+
+.Procedure
+
+. Check the site status:
++
+--
+----
+$ skupper status
+
+Skupper is enabled for namespace "west" in interior mode. It is connected to 2 other sites. It has 1 exposed services.
+----
+
+
+--
+
+. Check the link status
