@@ -1,4 +1,13 @@
+ifdef::env-github[]
+:service-network: service network
+:skupper-name: Skupper
+:policy-system: Skupper policy system
+:skupper-router: Skupper router
+endif::[]
+
+ifndef::env-github[]
 include::{mod-loc}attributes.adoc[]
+endif::[]
 
 //Category: skupper-policy
 // Type: assembly
@@ -93,7 +102,8 @@ NOTE: If there are existing sites on the cluster, see xref:installing-crd-existi
 .Prerequisites
 
 * Access to a cluster using a `cluster-admin` account
-* The operator is installed in {OperatorLink}
+* The Skupper operator is installed
+
 .Procedure
 
 . Log into the cluster using a `cluster-admin` account.
