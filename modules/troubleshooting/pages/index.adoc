@@ -10,6 +10,8 @@ include::{mod-loc}attributes.adoc[]
 Typically, you can create a {service-network} without referencing this troubleshooting guide.
 However, this guide provides some tips for situations when the {service-network} does not perform as expected.
 
+See xref:common-problems-and-solutions[] if you have encountered a specific issue using the `skupper` CLI.
+
 A typical troubleshooting workflow is to check all the sites, protocols and create logging tarballs.
 
 // Type: procedure
@@ -77,3 +79,44 @@ Skupper dump details written to compressed archive:  my-site.tar.gz
 --
 
 
+[id="common-problems-and-solutions"] 
+== Common problems and solutions
+
+The following issues and workarounds might help you debug simple scenarios when evaluating {skupper-name}.
+
+.Cannot initialize skupper
+
+If the `skupper init` command fails, consider the following options:
+
+* Check the load balancer.
++
+--
+If you are evaluating {skupper-name} on minikube, a load balancer is not automatically created.
+To create a load 
+
+--
+
+* Initialize without ingress.
++
+--
+This option will prevent other sites from linking to this site, but linking outwards is supported.
+Once a link is established, traffic can flow in either direction.
+Enter the following command:
+
+[bash]
+----
+$ skupper init --ingress none
+----
+
+[NOTE]
+====
+You might also consider other ingress options:
+
+* route
+* loadbalancer (default)
+* nodeport
+* nginx-ingress-v1
+* contour-http-proxy
+====
+
+--
