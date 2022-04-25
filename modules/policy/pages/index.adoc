@@ -39,7 +39,7 @@ Allow resources to be exposed:: Use `allowedExposedResources` to specify which r
 
 NOTE: Each setting for the {policy-system} can be applied to one or more namespaces.
 
-For example, the following policy CR fully allows all {skupper-name} capabilities on all namespaces, except for exposed resources.
+For example, the following policy CR fully allows all {skupper-name} capabilities on all namespaces, except for exposed resources and a restriction on hostnames for outgoing links.
 The policy allows outgoing links to any domain ending in `.example.com` and adds 'deployment/nginx' to the list of allowed resources on all namespaces.
 
 [source,yaml]
