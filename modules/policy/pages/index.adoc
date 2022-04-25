@@ -15,12 +15,13 @@ endif::[]
 = Securing a {service-network}
 
 By default, {skupper-name} includes many security features.
-If you apply the {policy-system}, all communication is denied, and you can specify granular policies to allow your {service-network} operate.
+If you apply the {policy-system} to a cluster, all {service-network} communication to and from that cluster is denied, and you can specify granular policies to allow your {service-network} operate.
 
 {skupper-name} provides default, built-in security that scales across clusters and clouds. 
 In a {service-network}, the communication between sites is performed by {skupper-router}s and is secured with mutual TLS using a private, dedicated certificate authority (CA). 
 Each {skupper-router} is uniquely identified by its own certificate.
 This means that the {service-network} is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
+The {policy-system} adds another layer at a cluster level to help a cluster administrator control access to a {service-network}.
 
 
 // Type: concept
