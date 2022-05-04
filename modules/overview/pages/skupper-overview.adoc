@@ -1,9 +1,8 @@
 ifdef::skupper-io[:image-prefix: ROOT:]
 // Type: concept
 [id="skupper-overview"] 
-== Skupper overview
+== {skupper-name} overview
 
-{product} is based on link:https://skupper.io[Skupper] and allows you create a {service-network} across Kubernetes clusters and individual hosts. For example:
 
 * Create a service in one cluster and consume it on a different cluster.
 * Create a database service on a host and query it from multiple clusters without opening a port
@@ -13,13 +12,14 @@ To connect sites into a {service-network} you use either the Skupper CLI or cons
 
 To extend the {service-network} beyond Kubernetes, the Skupper CLI allows you create a _gateway_. For example, you can run a database on Linux host and query it from a front end service running on a cluster.
 
-Skupper has been tested on:
+{skupper-name} has been tested on:
 
 * RHEL 8 for Skupper gateways
-* OpenShift Container Platform 4.7,4.8 and 4.9 for Skupper sites
+* OpenShift Container Platform 4.7,4.8 and 4.9 for {skupper-name} sites
 
 .Additional information
 
 * {CliLink}
 * {ConsoleLink}
 * {OperatorLink}
+

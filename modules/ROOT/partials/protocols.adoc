@@ -2,6 +2,19 @@
 [id='protocols-{context}']
 = Supported standards and protocols
 
+Understanding {skupper-name} protocols can help you avoid issues when your service network becomes more complex, but is not necessary to use Skupper in simple topologies, for example, if you expose a database running on Linux to services running on a cluster.
+Understanding how {skupper-name} works might also help you decide which protocol to use when exposing services on the {service-network}.
+ 
+Typically in most networks, if a serviceA calls serviceB and requests the IP address of serviceB, that IP address is accessible from the serviceA host.
+However, with {skupper-name}, when serviceA calls serviceB, there is no dependency on the underlying IP address and the IP address that serviceB reports is typically not accessible from serviceA.
+The services can be referred to as layer 7 application addresses even though you expose either TCP or HTTP resources.
+ 
+When a service is exposed, Skupper creates proxy endpoints to make that service available on each namespace in the Skupper service network.
+Each protocol is mapped to an AMQP connection, providing the transport for data between the endpoints:
+* TCP maps to continuous incoming and outgoing connections that can be balanced per service connection.
+* HTTP 1/2 maps to a request/response pattern that can be balanced per service request.
+
+
 {skupper-name} supports the following protocols for your {service-network}:
 
 * TCP - default
@@ -27,5 +40,10 @@ When choosing which protocol to specify, note the following:
 * `tcp` supports any protocol overlayed on TCP, for example, HTTP1 and HTTP2 work when you specify `tcp`.
 * If you specify `http` or `http2`, the IP address reported by a client may not be accessible.
 * All {service-network} traffic is converted to AMQP messages in order to traverse the {service-network}.
-+
-TCP is implemented as a single streamed message, whereas HTTP1 and HTTP2 are implemented as request/response message routing.
+
+[NOTE]
+====
+These protocols are only available after you link sites. 
+To link sites, one of the clusters must be accessible from the other cluster to exchange tokens.
+After the link is established, traffic can flow in either direction and access services across the service network.
+====
