@@ -2,9 +2,8 @@
 [id='installing-operator-using-olm-{context}']
 == Installing the Skupper Operator using the OpenShift console
 
-The procedures in this section show how to use the OperatorHub to install and deploy the latest version of the {SkupperOperatorName} in a given OpenShift namespace. 
+The procedures in this section show how to use the OperatorHub from the OpenShift console to install and deploy the latest version of the {SkupperOperatorName} in a given OpenShift namespace. 
 
-In {kubernetes-flavor} 4.1 and later, the __Operator Lifecycle Manager__ (OLM) helps users install, update, and generally manage the lifecycle of all Operators and their associated services running across their clusters. It is part of the Operator Framework, an open source toolkit designed to manage Kubernetes native applications (Operators) in an effective, automated, and scalable way.
 
 .Prerequisites
 

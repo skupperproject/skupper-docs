@@ -11,27 +11,7 @@ Using the `skupper` command-line interface (CLI) allows you to create and manage
 
 A typical workflow is to create a site, link sites together, and expose services to the {service-network}.
 
-// tag::installing-cli[]
-// Type: procedure
-[id="installing-cli"] 
-== Installing the `skupper` CLI
-
-[role="system:abstract"]
-Installing the `skupper` command-line interface (CLI) provides a simple method to get started with {skupper-name}.
-
-.Procedure
-
-include::{mod-loc}fragment-skupper-install-steps.adoc[]
-
-
-. Verify the installation.
-+
-[subs=attributes+]
-----
-$ skupper version
-client version {skupper-cli-version}
-----
-// end::installing-cli[]
+include::installing.adoc[leveloffset=+1]
 
 // Type: procedure
 [id="creating-using-cli"] 
@@ -563,9 +543,9 @@ This shows that there is only one exposed service and that service is only expos
 NOTE: If you need to change the gateway definition, for example to change port, you need to remove the existing gateway and repeat this procedure from the start to redefine the gateway.
 
 
-include::{mod-loc}network-status.adoc[leveloffset=+1]
+include::./network-status.adoc[leveloffset=+1]
 
-include::{mod-loc}protocols.adoc[leveloffset=+1]
+include::./protocols.adoc[leveloffset=+1]
 
 // Type: reference
 [id="cli-global-options"] 

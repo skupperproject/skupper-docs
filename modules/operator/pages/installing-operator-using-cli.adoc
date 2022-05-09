@@ -2,7 +2,6 @@
 [id='installing-operator-using-cli-{context}']
 == Installing the Operator using the CLI
 
-:examples-file: skupper-operator-2.0-ocp-install-examples.zip
 
 The steps in this section show how to use the `kubectl` command-line interface (CLI) to install and deploy the latest version of the {SkupperOperatorName} in a given {kubernetes-flavor} cluster.
 

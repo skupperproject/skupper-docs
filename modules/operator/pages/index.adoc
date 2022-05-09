@@ -16,6 +16,6 @@ Installing an Operator requires administrator-level privileges for your {kuberne
 After installing the Operator, you can create a site by deploying a ConfigMap as described in xref:creating-site-using-operator-{context}[]
 
 
-include::{mod-loc}installing-operator-using-cli.adoc[]
+include::./installing-operator-using-cli.adoc[]
 
-include::{mod-loc}creating-site-using-operator.adoc[]
+include::./creating-site-using-operator.adoc[]

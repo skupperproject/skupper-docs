@@ -48,7 +48,7 @@ You deploy and manage a {service-network}, including a gateway, using the `skupp
 * {OverviewLink}
 
 
-include::index.adoc[tags=installing-cli]
+include::installing.adoc[leveloffset=+1]
 
 
 // Type: procedure

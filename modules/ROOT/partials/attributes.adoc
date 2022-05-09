@@ -17,7 +17,6 @@
 
 
 // name and version
-:skupper-name: Skupper
 :service-network: service network
 :skupper-version: 0.8.6
 :skupper-cli-version: {skupper-version}
