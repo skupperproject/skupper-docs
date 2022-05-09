@@ -13,6 +13,8 @@ include::{mod-loc}attributes.adoc[]
 [id="skupper-policy"] 
 = Securing a {service-network}
 
+include::{mod-loc}preface.adoc[]
+
 By default, {skupper-name} includes many security features.
 If you apply the {policy-system} to a cluster, all {service-network} communication to and from that cluster is denied, and you can specify granular policies to allow your {service-network} operate.
 

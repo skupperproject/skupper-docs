@@ -2,11 +2,11 @@ include::{mod-loc}attributes.adoc[]
 
 //Category: skupper-cli
 // Type: assembly
-
 [id="skupper-cli"] 
 = Using the {skupper-name} CLI
 
-[role="system:abstract"]
+include::{mod-loc}preface.adoc[]
+
 Using the `skupper` command-line interface (CLI) allows you to create and manage {skupper-name} sites from the context of the current namespace.
 
 A typical workflow is to create a site, link sites together, and expose services to the {service-network}.

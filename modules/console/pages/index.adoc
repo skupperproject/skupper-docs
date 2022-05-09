@@ -1,10 +1,13 @@
 include::{mod-loc}attributes.adoc[]
-
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
 //Category: skupper-console
 // Type: assembly
-
 [id="skupper-console"] 
 = Using the {skupper-name} console
+
+include::{mod-loc}preface.adoc[]
 
 By default, when you create a {skupper-name} site, you also enable the {skupper-name} console.
 The {skupper-name} console URL is displayed whenever you check site status using `skupper status`.
