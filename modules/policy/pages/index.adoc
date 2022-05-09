@@ -4,15 +4,16 @@ ifdef::env-github[]
 :policy-system: Skupper policy system
 :skupper-router: Skupper router
 endif::[]
-
-ifndef::env-github[]
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
 include::{mod-loc}attributes.adoc[]
-endif::[]
-
 //Category: skupper-policy
 // Type: assembly
 [id="skupper-policy"] 
 = Securing a {service-network}
+
+include::{mod-loc}preface.adoc[]
 
 By default, {skupper-name} includes many security features.
 If you apply the {policy-system} to a cluster, all {service-network} communication to and from that cluster is denied, and you can specify granular policies to allow your {service-network} operate.

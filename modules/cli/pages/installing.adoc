@@ -1,0 +1,19 @@
+// Type: procedure
+[id="installing-cli"] 
+= Installing the `skupper` CLI
+
+[role="system:abstract"]
+Installing the `skupper` command-line interface (CLI) provides a simple method to get started with {skupper-name}.
+
+.Procedure
+
+include::{mod-loc}fragment-skupper-install-steps.adoc[]
+
+
+. Verify the installation.
++
+[subs=attributes+]
+----
+$ skupper version
+client version {skupper-cli-version}
+----

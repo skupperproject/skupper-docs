@@ -1,3 +1,21 @@
+// Type: procedure
+[id='installing-operator-using-cli-{context}']
+== Installing the Operator using the CLI
+
+
+The steps in this section show how to use the `kubectl` command-line interface (CLI) to install and deploy the latest version of the {SkupperOperatorName} in a given {kubernetes-flavor} cluster.
+
+.Procedure
+
+
+. Download the Skupper Operator example files, for example:
++
+----
+$ curl -fL https://github.com/skupperproject/skupper-operator/archive/refs/heads/main.zip
+----
+
+:next-step: 2
+
 [start={next-step}]
 . Specify the namespace in which you want to install the Operator. You can create a new namespace or switch to an existing one.
 

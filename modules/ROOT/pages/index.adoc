@@ -2,8 +2,10 @@ include::{mod-loc}attributes.adoc[]
 
 = Preview homepage
 
+This is a preview of link:https://github.com/skupperproject/skupper-docs[skupperproject/skupper-docs: Documentation for the Skupper project] 
 //external
-* You might be looking for the {GettingStartedLink}
+
+NOTE: You might be looking for the {GettingStartedLink}
 
 This documentation is built using antora and contains the following antora modules:
 
@@ -13,6 +15,7 @@ This documentation is built using antora and contains the following antora modul
 * overview
 * skupper-docker
 * operator
+* policy
 
 NOTE: This ROOT module is never published but contains partials that are used in various documents.
 
@@ -33,3 +36,4 @@ This page acts as a report for all docs in the skupper-docs repo.
 * {OperatorLink}
 * {OperatorOCPLink}
 * {TokensLink}
+* {PolicyLink}

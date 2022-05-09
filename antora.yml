@@ -4,3 +4,10 @@ version: 'latest'
 start_ROOT: ROOT:index.adoc
 nav:
 - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    skupper-name: Skupper
+    attribute-missing: drop
+    mod-loc: ROOT:partial$
+    kubernetes-flavor: Kubernetes@
+    example-directory: k8s@

@@ -36,10 +36,10 @@ After installing the Operator, you can create a site by deploying a ConfigMap as
 include::{mod-loc}fragment-kubectl-note.adoc[]
 
 
-include::{mod-loc}installing-operator-using-cli-openshift.adoc[]
+include::./installing-operator-using-cli-openshift.adoc[]
 
 
-include::{mod-loc}installing-operator-using-olm.adoc[]
+include::./installing-operator-using-olm.adoc[]
 
 
-include::{mod-loc}creating-site-using-operator.adoc[]
+include::./creating-site-using-operator.adoc[]
