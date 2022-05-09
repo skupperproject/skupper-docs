@@ -76,11 +76,6 @@ $ export KUBECONFIG=$HOME/.kube/config-west
 +
 This session is referred to later as the _west_ terminal session.
 
-// icon:cogs[] link:++didact://?commandId=workbench.action.terminal.split++[Split terminal] didactlink
-
-// icon:cogs[] link:didact://?commandId=workbench.action.terminal.renameWithArg&json={&#34;name&#34;:&#34;east&#34;}[Rename terminal] didactlink
-
-[start=2]
 . Start a terminal session to work on the `east` namespace and set the `KUBECONFIG` environment variable:
 +
 [source,bash,term=east]
