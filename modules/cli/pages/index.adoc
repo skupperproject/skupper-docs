@@ -220,7 +220,7 @@ $ skupper expose deployment/hello-world-backend --port 8080
 Options for this command include:
 
 * `--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
-NOTE: You can specify more than one port by repeatinging this option.
+NOTE: You can specify more than one port by repeating this option.
 
 * `--target-port <port-number>`:: Specify the port number of pods that you want to expose.
 
