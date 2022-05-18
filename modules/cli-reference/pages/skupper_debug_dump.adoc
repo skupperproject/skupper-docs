@@ -1,0 +1,12 @@
+= Skupper debug dump
+
+Collect and store skupper logs, config, etc.
+to compressed archive file
+
+`skupper debug dump <filename>.tar.gz [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper_debug.adoc[skupper debug]	 - Debug skupper installation

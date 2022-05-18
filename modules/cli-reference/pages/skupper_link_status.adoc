@@ -1,0 +1,13 @@
+= Skupper link status
+
+Check whether a link to another Skupper site is active
+
+`skupper link status [<link-name>] [flags]`
+
+.Options
+
+* `wait int`  The number of seconds to wait for links to become active
+
+.SEE ALSO
+
+* xref:skupper_link.adoc[skupper link]	 - Manage skupper links definitions

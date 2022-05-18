@@ -1,0 +1,17 @@
+= Skupper update
+
+Update skupper installation version
+
+.Synopsis
+
+Update the skupper site to 1.0.0-2-gec65044
+
+`skupper update [flags]`
+
+.Options
+
+* `force-restart`  Restart skupper daemons even if image tag is not updated
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -

@@ -1,0 +1,13 @@
+= Skupper network status
+
+Shows information about the current site, and connected sites.
+
+`skupper network status [flags]`
+
+.Options
+
+* `site - string`  Site identifier (default "all")
+
+.SEE ALSO
+
+* xref:skupper_network.adoc[skupper network]	 - Show information about the sites and services included in the network.

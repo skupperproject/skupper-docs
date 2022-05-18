@@ -1,0 +1,13 @@
+= Skupper unexpose
+
+Unexpose a set of pods previously exposed through a Skupper address
+
+`skupper unexpose [deployment <name>|pods <selector>|statefulset <statefulsetname>|service <name>] [flags]`
+
+.Options
+
+* `address - string`  Skupper address the target was exposed as
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -

@@ -1,0 +1,11 @@
+= Skupper service unbind
+
+Unbind a target from a service
+
+`skupper service unbind <service-name> <target-type> <target-name> [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper_service.adoc[skupper service]	 - Manage skupper service definitions

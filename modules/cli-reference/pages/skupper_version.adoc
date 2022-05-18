@@ -1,0 +1,11 @@
+= Skupper version
+
+Report the version of the Skupper CLI and services
+
+`skupper version [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -

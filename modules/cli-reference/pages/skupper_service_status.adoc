@@ -1,0 +1,13 @@
+= Skupper service status
+
+List services exposed over the service network
+
+`skupper service status [flags]`
+
+.Options
+
+* `show-labels`  show service labels
+
+.SEE ALSO
+
+* xref:skupper_service.adoc[skupper service]	 - Manage skupper service definitions

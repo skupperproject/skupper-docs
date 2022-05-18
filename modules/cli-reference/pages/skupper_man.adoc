@@ -1,0 +1,11 @@
+= Skupper man
+
+generate man pages
+
+`skupper man [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -

@@ -1,0 +1,18 @@
+= Skupper service create
+
+Create a skupper service
+
+`+skupper service create <name> <port...> [flags]+`
+
+.Options
+
+* `aggregate - string`  The aggregation strategy to use.
+One of 'json' or 'multipart'.
+If specified requests to this service will be sent to all registered implementations and the responses aggregated.
+* `enable-tls`        If specified, the service communication will be encrypted using TLS
+* `event-channel`     If specified, this service will be a channel for multicast events.
+* `mapping - string`    The mapping in use for this service address (currently one of tcp or http) (default "tcp")
+
+.SEE ALSO
+
+* xref:skupper_service.adoc[skupper service]	 - Manage skupper service definitions

@@ -1,0 +1,25 @@
+= Skupper expose
+
+Expose a set of pods through a Skupper address
+
+`skupper expose [deployment <name>|pods <selector>|statefulset <statefulsetname>|service <name>] [flags]`
+
+.Options
+
+* `address - string`                 The Skupper address to expose
+* `enable-tls`                     If specified, the service will be exposed over TLS
+* `headless`                       Expose through a headless service (valid only for a statefulset target)
+* `port ints`                      The ports to expose on
+* `protocol - string`                The protocol to proxy (tcp, http, or http2) (default "tcp")
+* `proxy-cpu - string`               CPU request for router pods
+* `proxy-cpu-limit - string`         CPU limit for router pods
+* `proxy-memory - string`            Memory request for router pods
+* `proxy-memory-limit - string`      Memory limit for router pods
+* `proxy-node-selector - string`     Node selector to control placement of router pods
+* `proxy-pod-affinity - string`      Pod affinity label matches to control placement of router pods
+* `proxy-pod-antiaffinity - string`  Pod antiaffinity label matches to control placement of router pods
+* `target-port - strings`            The ports to target on pods
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -

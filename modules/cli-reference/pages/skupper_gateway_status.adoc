@@ -1,0 +1,11 @@
+= Skupper gateway status
+
+Report the status of the gateway(s) for the current skupper site
+
+`skupper gateway status <gateway-name> [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper_gateway.adoc[skupper gateway]	 - Manage skupper gateway definitions

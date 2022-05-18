@@ -1,0 +1,11 @@
+= Skupper status
+
+Report the status of the current Skupper site
+
+`skupper status [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -
