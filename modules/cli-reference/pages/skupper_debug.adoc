@@ -1,0 +1,13 @@
+= Skupper debug
+
+Debug skupper installation
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -
+* xref:skupper_debug_dump.adoc[skupper debug dump]	 - Collect and store skupper logs, config, etc.
+to compressed archive file
+* xref:skupper_debug_events.adoc[skupper debug events]	 - Show events
+* xref:skupper_debug_service.adoc[skupper debug service]	 - Check the internal state of a skupper exposed service

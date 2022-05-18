@@ -1,0 +1,11 @@
+= Skupper gateway export-config
+
+Export the configuration for a gateway definition
+
+`skupper gateway export-config <export-gateway-name> <output-path> [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper_gateway.adoc[skupper gateway]	 - Manage skupper gateway definitions

@@ -1,0 +1,19 @@
+= Skupper gateway expose
+
+Expose a process to the service network (ensure gateway and cluster service)
+
+`+skupper gateway expose <address> <host> <port...> [flags]+`
+
+.Options
+
+* `aggregate - string`  The aggregation strategy to use.
+One of 'json' or 'multipart'.
+If specified requests to this service will be sent to all registered implementations and the responses aggregated.
+* `event-channel`     If specified, this service will be a channel for multicast events.
+* `protocol - string`   The protocol to gateway (tcp, http or http2).
+(default "tcp")
+* `type - string`       The gateway type one of: 'service', 'docker', 'podman' (default "service")
+
+.SEE ALSO
+
+* xref:skupper_gateway.adoc[skupper gateway]	 - Manage skupper gateway definitions

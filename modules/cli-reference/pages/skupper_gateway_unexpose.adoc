@@ -1,0 +1,13 @@
+= Skupper gateway unexpose
+
+Unexpose a process previously exposed to the service network
+
+`skupper gateway unexpose <address> [flags]`
+
+.Options
+
+* `delete-last`  Delete the gateway if no services remain (default true)
+
+.SEE ALSO
+
+* xref:skupper_gateway.adoc[skupper gateway]	 - Manage skupper gateway definitions

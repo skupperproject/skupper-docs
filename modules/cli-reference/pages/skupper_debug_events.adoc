@@ -1,0 +1,13 @@
+= Skupper debug events
+
+Show events
+
+`skupper debug events [flags]`
+
+.Options
+
+* `verbose`  More detailed output (in json)
+
+.SEE ALSO
+
+* xref:skupper_debug.adoc[skupper debug]	 - Debug skupper installation

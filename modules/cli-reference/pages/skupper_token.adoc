@@ -1,0 +1,11 @@
+= Skupper token
+
+Manage skupper tokens
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -
+* xref:skupper_token_create.adoc[skupper token create]	 - Create a token.
+The 'link create' command uses the token to establish a link from a remote Skupper site.

@@ -1,0 +1,14 @@
+= Skupper service bind
+
+Bind a target to a service
+
+`skupper service bind <service-name> <target-type> <target-name> [flags]`
+
+.Options
+
+* `protocol - string`      The protocol to proxy (tcp, http or http2).
+* `target-port - strings`  The port the target is listening on (you can also use colon to map source-port to a target-port).
+
+.SEE ALSO
+
+* xref:skupper_service.adoc[skupper service]	 - Manage skupper service definitions

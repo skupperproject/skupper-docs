@@ -1,0 +1,13 @@
+= Skupper debug service
+
+Check the internal state of a skupper exposed service
+
+`skupper debug service <service-name> [flags]`
+
+.Options
+
+* `verbose`  More detailed output (in json)
+
+.SEE ALSO
+
+* xref:skupper_debug.adoc[skupper debug]	 - Debug skupper installation

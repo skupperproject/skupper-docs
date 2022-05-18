@@ -1,0 +1,15 @@
+= Skupper link create
+
+Links this skupper installation to that which issued the specified token
+
+`skupper link create <input-token-file> [flags]`
+
+.Options
+
+* `cost int32`   Specify a cost for this link.
+(default 1)
+* `name - string`  Provide a specific name for the link (used when deleting it)
+
+.SEE ALSO
+
+* xref:skupper_link.adoc[skupper link]	 - Manage skupper links definitions

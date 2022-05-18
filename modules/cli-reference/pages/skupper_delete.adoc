@@ -1,0 +1,15 @@
+= Skupper delete
+
+Delete skupper installation
+
+.Synopsis
+
+delete will delete any skupper related objects from the namespace
+
+`skupper delete [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper.adoc[skupper]	 -

@@ -1,0 +1,11 @@
+= Skupper service delete
+
+Delete a skupper service
+
+`skupper service delete <name> [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper_service.adoc[skupper service]	 - Manage skupper service definitions

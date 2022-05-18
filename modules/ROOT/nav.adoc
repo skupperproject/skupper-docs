@@ -5,6 +5,7 @@ include::partial$attributes.adoc[]
 ** xref:overview:glossary.adoc[]
 // can be consumed by nebel
 * xref:cli:index.adoc[CLI]
+** xref:cli-reference:skupper.adoc[Reference]
 * xref:cli:openshift.adoc[OpenShift tutorial]
 * xref:cli:openshift-gateway.adoc[Gateway tutorial]
 * xref:declarative:index.adoc[Declarative]

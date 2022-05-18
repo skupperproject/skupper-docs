@@ -1,0 +1,11 @@
+= Skupper link delete
+
+Remove specified link
+
+`skupper link delete <name> [flags]`
+
+.Options
+
+.SEE ALSO
+
+* xref:skupper_link.adoc[skupper link]	 - Manage skupper links definitions
