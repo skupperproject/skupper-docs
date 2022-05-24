@@ -1,0 +1,103 @@
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
+include::{mod-loc}attributes.adoc[]
+// Type: assembly
+[id="built-in-security-options"] 
+= Built-in security options for {skupper-name}
+
+{skupper-name} provides default, built-in security that scales across clusters and clouds.
+
+// Type: procedure
+[id="network-policy"] 
+= Restricting access to services using network-policy
+
+By default, if you expose a service on the {service-network}, that service is also accessible from other namespaces in the cluster.
+You can avoid this situation when creating a site using the `--create-network-policy` option.
+
+.Procedure
+
+. Create the {service-network} router with a network policy:
++
+[source,bash]
+----
+$ skupper init --create-network-policy
+----
+
+. Check the site status:
++
+--
+[source,bash]
+----
+$ skupper status
+----
+The output should be similar to the following:
+----
+Skupper enabled for namespace 'west'. It is not connected to any other sites.
+----
+--
+
+You can now expose services on the {service-network} and those services are not accessible from other namespaces in the cluster.
+
+
+// Type: procedure
+[id="tls"] 
+= Applying TLS to HTTP2 traffic on the {service-network}
+
+By default, the traffic between sites is encrypted, however the traffic between the service pod and the router pod is not encrypted.
+For services exposed as HTTP2, the traffic between the pod and the router pod can be encrypted using TLS.
+
+.Prerequisites
+
+* Two or more linked sites
+* A HTTP2 frontend and backend service
+
+.Procedure
+
+. Deploy your backend service.
+
+. Expose your backend deployment on the {service-network}, enabling TLS, for example:
++
+--
+[source,bash]
+----
+$ skupper expose deployment <deployment-name> --port 443 --protocol http2 --enable-tls
+----
+
+Enabling TLS creates the necessary certificates required for TLS and stores them in a secret named `skupper-tls-<deployment-name>`.
+--
+
+. Modify the backend deployment to include the generated certificates, for example:
++
+--
+[source,yaml]
+----
+...
+    spec:
+      containers:
+      ...
+        command:
+        ...
+        - "/certs/tls.key"
+        - "/certs/tls.crt"
+        ...
+        volumeMounts:
+        ...
+        - mountPath: /certs
+          name: certs
+          readOnly: true
+      volumes:
+      - name: index-html
+        configMap:
+          name: index-html
+      - name: certs
+        secret:
+          secretName: skupper-tls-<deployment-name>
+----
+--
+
+. Test calling the service from a TLS enabled frontend.
+
+
+
+
