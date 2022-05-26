@@ -64,7 +64,7 @@ For services exposed as HTTP2, the traffic between the pod and the router pod ca
 $ skupper expose deployment <deployment-name> --port 443 --protocol http2 --enable-tls
 ----
 
-Enabling TLS creates the necessary certificates required for TLS and stores them in a secret named `skupper-tls-<deployment-name>`.
+Enabling TLS creates the necessary certificates required for TLS backends and stores them in a secret named `skupper-tls-<deployment-name>`.
 --
 
 . Modify the backend deployment to include the generated certificates, for example:
@@ -94,7 +94,30 @@ Enabling TLS creates the necessary certificates required for TLS and stores them
         secret:
           secretName: skupper-tls-<deployment-name>
 ----
+
+Each site creates the necessary certificates required for TLS clients and stores them in a secret named `skupper-service-client`.
 --
+
+. Modify the frontend deployment to include the generated certificates, for example:
++
+--
+[source,yaml]
+----
+spec:
+  template:
+    spec:
+      containers:
+      ...
+        volumeMounts:
+        - name: certs
+          mountPath: /tmp/certs/skupper-service-client
+      ...
+      volumes:
+      - name: certs
+        secret:
+          secretName: skupper-service-client
+
+----
 
 . Test calling the service from a TLS enabled frontend.
 
