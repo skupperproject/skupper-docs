@@ -43,7 +43,7 @@ To retrieve the password:
 .. Retrieve the encoded password for the `admin` user:
 +
 ----
-$ oc get secret skupper-console-users -o yaml| grep admin
+$ kubectl get secret skupper-console-users -o yaml| grep admin
 
 admin: Sk5aV3pNSHR5Zw==
 ----
@@ -84,7 +84,7 @@ NOTE: Your browser may prompt you to allow using the clipboard. You must accept 
 
 . Click *Use a token* to accept the token from the first site.
 
-. Verify that the sites are linked by clicking *Deployments* and checking that both sites are listed.
+. Verify that the sites are linked by Checking that both sites are listed in the *Network details* section of the *Site* page.
 
 
 
@@ -107,7 +107,7 @@ image::skupper-console.png[]
 
 . Navigate to the Skupper console.
 
-. Click the *Sites* menu item.
+. Click the *Network* menu item.
 Both the *east* and *west* sites should be displayed in circles.
 
 . Drag and drop the *west* circle to be on the left of the *east* circle.
@@ -123,8 +123,12 @@ In this case, the console displays the *hello-world-backend (east)* deployment.
 +
 NOTE: Although two services are involved in the tutorial, only one service, `hello-world-backend` is exposed on the {service-network}.
 
-. Click the *Sites* menu again and expand the panel on the right hand side of the console.
-This panel shows the traffic flows from the backend to the frontend.
+. Click the *Site* menu.
+This page shows:
+* The number of sites in the {service-network}.
+* The services that are exposed on the {service-network}.
+* The gateways that are defined in the {service-network}.
+* The traffic for the current site.
 
 
 
