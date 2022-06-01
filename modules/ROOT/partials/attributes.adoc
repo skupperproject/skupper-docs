@@ -17,6 +17,7 @@
 
 
 // name and version
+:skupper-name: Skupper
 :service-network: service network
 :skupper-version: 0.8.6
 :skupper-cli-version: {skupper-version}
@@ -54,3 +55,4 @@ endif::[]
 :OperatorLink: link:{linkroot}operator/index.html[Configuring Skupper sites using the Operator on Kubernetes]
 :OperatorOCPLink: link:{linkroot}operator/openshift.html[Configuring Skupper sites using the Operator on OpenShift]
 :TokensLink: link:{linkroot}overview/tokens.html[Using Skupper tokens]
+:Policylink: link:{linkroot}policy/index.html[Securing a service network using policies]

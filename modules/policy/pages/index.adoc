@@ -11,14 +11,14 @@ include::{mod-loc}attributes.adoc[]
 //Category: skupper-policy
 // Type: assembly
 [id="skupper-policy"] 
-= Securing a {service-network}
+= Securing a {service-network} using policies
 
 include::{mod-loc}preface.adoc[]
 
 By default, {skupper-name} includes many security features.
-If you apply the {policy-system} to a cluster, all {service-network} communication to and from that cluster is denied, and you can specify granular policies to allow your {service-network} operate.
+You can also apply the {policy-system} to a cluster, all {service-network} communication to and from that cluster is denied, and you can specify granular policies to allow your {service-network} operate.
 
-{skupper-name} provides default, built-in security that scales across clusters and clouds. 
+{skupper-name} provides default, built-in security that scales across clusters and clouds.
 In a {service-network}, the communication between sites is performed by {skupper-router}s and is secured with mutual TLS using a private, dedicated certificate authority (CA). 
 Each {skupper-router} is uniquely identified by its own certificate.
 This means that the {service-network} is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
@@ -336,3 +336,5 @@ spec:
 ----
 
 NOTE: For `allowedExposedResources`, each entry must conform to the `type/name` syntax.
+
+include::native-security-options.adoc[leveloffset=+1]

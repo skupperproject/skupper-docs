@@ -1,3 +1,6 @@
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
 include::{mod-loc}attributes.adoc[]
 
 //Category: skupper-cli
@@ -544,6 +547,8 @@ NOTE: If you need to change the gateway definition, for example to change port, 
 
 
 include::./network-status.adoc[leveloffset=+1]
+
+include::./native-security-options.adoc[leveloffset=+1]
 
 include::./protocols.adoc[leveloffset=+1]
 
