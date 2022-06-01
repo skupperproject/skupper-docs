@@ -437,18 +437,13 @@ where
 [id="exporting-gateway"] 
 === Creating a gateway and applying it on a different machine
 
-If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition on the first machine and later apply that definition from a second machine as described in this procedure.
+If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition bundle on the first machine and later apply that definition bundle on a second machine as described in this procedure.
+For example, if you want to expose a local database service to the {service-network}, but you never want to access the cluster from the database server, you can use this procedure to create the definition bundle and apply it on the database server.
 
 .Procedure
 
 . Log into your cluster from the first machine and change to the namespace for your site.
 
-. Create a Skupper gateway without associating it with the current machine by specifying the `downloadonly` option:
-+
-[source,bash]
-----
-$ skupper gateway init --exportonly
-----
 
 . Create a service that can communicate on the {service-network}:
 +
@@ -465,37 +460,44 @@ where
 For example:
 
 ----
-$ skupper service create mydb 3306
+$ skupper service create database 5432
 ----
 --
 
-. Bind the service on the {service-network}:
+. Create a YAML file to represent the service you want to expose, for example:
 +
 --
+[source,yaml]
 ----
-$ skupper gateway bind <service> <host> <port>
+name: database <1>
+bindings:
+    - name: database <2>
+      host: localhost <3>
+      service:
+        address: database:5432 <4>
+        protocol: tcp <5>
+        ports:
+            - 5432 <6>
+        enabletls: false
+        tlscredentials: ""
+      target_ports:
+        - 5432 <7>
+qdr-listeners:
+    - name: amqp
+      host: localhost
+      port: 5672
 ----
+<1> Gateway name, useful for reference only.
+<2> Binding name, useful to track multiple bindings.
+<3> Name of host providing the service you want to expose.
+<4> Service name and port on {service-network}. You created the service in a previous step. 
+<5> The protocol you want to use to expose the service, `tcp`, `http` or `http2`.
+<6> The port on the {service-network} that you want this service to be available on.
+<7> The port of the service.
 
-* <service> - the name of the service on the {service-network}, `mydb` in the example above.
-* <host> - the host that runs the service.
-* <port> - the port the service is running on, `3306` from the example above.
-
-NOTE: No communication is possible at this point, the gateway definition needs to be applied from the actual host before the service is available on the {service-network}.
 --
 
-. Export the gateway definition configuration:
-+
---
-----
-$ skupper gateway export-config <config-name> <destination-directory>
-----
-
-where:
-
-* <config-name> - the name of the resulting YAML file without a suffix.
-* <destination-directory> - the location where you want to save the resulting gateway definition, for example `~/gateways`.
-
---
+. Save the YAML file using the name of the gateway, for example, `gateway.yaml`.
 
 . Generate a bundle that can be applied to the machine that hosts the service you want to expose on the {service-network}:
 +
@@ -506,26 +508,44 @@ $ skupper gateway generate-bundle <config-filename> <destination-directory>
 
 where:
 
-* <config-filename> - the name of the YAML file, include suffix, that you generated in the previous step.
+* <config-filename> - the name of the YAML file, including suffix, that you generated in the previous step.
 * <destination-directory> - the location where you want to save the resulting gateway bundle, for example `~/gateways`.
 
+For example:
+----
+$ skupper gateway generate-bundle database.yaml ./
+----
+
+This bundle contains the gateway definition YAML and a  certificate that allow access to the {service-network}.
+
 --
-
-
 
 . Copy the gateway definition file, for example, `mylaptop-jdoe.tar.gz` to the machine that hosts the service you want to expose on the {service-network}.
 
 . From the machine that hosts the service you want to expose:
 +
+--
 ----
 $ mkdir gateway
-$ tar -xvf <gateway-definition-file>
+
+$ tar -xvf <gateway-definition-file> --directory gateway
 $ cd gateway
 $ sh ./launch.py
+----
+
+Running the gateway bundle uses the gateway definition YAML and a certificate to access and expose the service on the {service-network}.
+--
+
+. Check the status of the gateway service:
++
+--
+----
 $ systemctl --user status <gateway-definition-name>
 ----
-+
+
 NOTE: You can later remove the gateway using `./remove.py`.
+
+--
 
 . From the machine with cluster access, check the status of Skupper gateways:
 +
