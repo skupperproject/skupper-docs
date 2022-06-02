@@ -15,29 +15,37 @@ include::{mod-loc}attributes.adoc[]
 
 include::{mod-loc}preface.adoc[]
 
-By default, {skupper-name} includes many security features, including using mutual TLS for all {service-network} communication.
-If you apply the {policy-system} to a cluster, all {service-network} communication to and from that cluster is denied, and you can specify granular policies to allow {service-network} communication.
+By default, {skupper-name} includes many security features, including using mutual TLS for all {service-network} communication between sites.
+By default, applying the {policy-system} to a cluster prevents all {service-network} communication to and from that cluster.
+You specify granular policies to allow only the {service-network} communication you require.
 
-{skupper-name} provides default, built-in security that scales across clusters and clouds.
-In a {service-network}, the communication between sites is performed by {skupper-router}s and is secured with mutual TLS using a private, dedicated certificate authority (CA). 
-Each {skupper-router} is uniquely identified by its own certificate.
-This means that the {service-network} is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
-The {policy-system} adds another layer at a cluster level to help a cluster administrator control access to a {service-network}.                                                                                                  
+Each site in a {service-network} runs a {skupper-router} and has a private, dedicated certificate authority (CA).
+Communication between sites is secured with mutual TLS, so the {service-network} is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
+The {policy-system} adds another layer at a cluster level to help a cluster administrator control access to a {service-network}.
 
+This guide assumes that you understand the following {skupper-name} concepts:
+
+site:: A namespace in which {skupper-name} is installed.
+token:: A token is required to establish a link between two sites. 
+{service-network}:: After exposing services using {skupper-name}, you have created a {service-network}.
 
 // Type: concept
 [id="about-skupper-policies"] 
 == About the {policy-system}
 
-After installing the {policy-system} Custom Resource Definition (CRD), you need to configure one or more of the following items using custom resources (CRs) to enable communication:
+After a cluster administrator installs the {policy-system} using a Custom Resource Definition (CRD), the cluster administrator needs to configure one or more policies to allow _developers_ create and use services on the {service-network}.
 
-Allow incoming links:: Use `allowIncomingLinks` to enable users create tokens and configure incoming links.
+NOTE: In this guide, _developers_ refers to users of a cluster who have access to a namespace, but do not have administrator privileges.
 
-Allow outgoing links to specific hosts:: Use `allowedOutgoingLinksHostnames` to specify hosts that users can create links to.
+of the following items using custom resources (CRs) to enable communication:
 
-Allow services:: Use `allowedServices` to specify which services can be created or used on the {service-network}.
+Allow incoming links:: Use `allowIncomingLinks` to enable developers create tokens and configure incoming links.
 
-Allow resources to be exposed:: Use `allowedExposedResources` to specify which resources can be exposed on the {service-network}.
+Allow outgoing links to specific hosts:: Use `allowedOutgoingLinksHostnames` to specify hosts that developers can create links to.
+
+Allow services:: Use `allowedServices` to specify which services developers can create or use on the {service-network}.
+
+Allow resources to be exposed:: Use `allowedExposedResources` to specify which resources a developer can expose on the {service-network}.
 
 NOTE: Each setting for the {policy-system} can be applied to one or more namespaces.
 
