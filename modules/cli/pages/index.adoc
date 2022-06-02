@@ -478,8 +478,6 @@ bindings:
         protocol: tcp <5>
         ports:
             - 5432 <6>
-        enabletls: false
-        tlscredentials: ""
       target_ports:
         - 5432 <7>
 qdr-listeners:
@@ -493,7 +491,7 @@ qdr-listeners:
 <4> Service name and port on {service-network}. You created the service in a previous step. 
 <5> The protocol you want to use to expose the service, `tcp`, `http` or `http2`.
 <6> The port on the {service-network} that you want this service to be available on.
-<7> The port of the service.
+<7> The port of the service running on the host specified in point 3.
 
 --
 
@@ -533,7 +531,10 @@ $ cd gateway
 $ sh ./launch.py
 ----
 
+NOTE: Use `./launch.py -t podman` or `./launch.py -t docker` to run the {skupper-router} in a container.
+
 Running the gateway bundle uses the gateway definition YAML and a certificate to access and expose the service on the {service-network}.
+
 --
 
 . Check the status of the gateway service:
@@ -561,6 +562,41 @@ This shows that there is only one exposed service and that service is only expos
 --
 
 NOTE: If you need to change the gateway definition, for example to change port, you need to remove the existing gateway and repeat this procedure from the start to redefine the gateway.
+
+// Type: procedure
+[id="gateway-reference"] 
+=== Gateway YAML reference
+
+The xref:exporting-gateway[] describes how to create a gateway to apply on a separate machine using a gateway definition YAML file.
+
+The following are valid entries in a gateway definition YAML file.
+
+name:: Name of gateway
+bindings.name:: Name of binding for a single host.
+bindings.host:: Hostname of local service.
+bindings.service:: Definition of service you want to be available on service network.
+bindings.service.address:: Address on the service network, name and port.
+bindings.service.protocol:: Skupper protocol, `tcp`, `http` or `http2`.
+bindings.service.ports:: A single port that becomes available on the service network. 
+bindings.service.target_ports:: A single port that you want to expose on the service network.
+
+NOTE: If the local service requires more than one port, create separate bindings for each port.
+
+forwards.name:: Name of forward for a single host.
+forwards.host:: Hostname of local service.
+forwards.service:: Definition of service you want to be available locally.
+forwards.service.address:: Address on the service network that you want to use locally, name and port.
+forwards.service.protocol:: Skupper protocol, `tcp`, `http` or `http2`.
+forwards.service.ports:: A single port that is available on the service network. 
+forwards.service.target_ports:: A single port that you want to use locally.
+
+NOTE: If the network service requires more than one port, create separate forwards for each port.
+
+qdr-listeners:: Definition of skupper router listeners
+qdr-listeners.name:: Name of skupper router, typically `amqp`.
+qdr-listeners.host:: Hostname for skupper router, typically `localhost`.
+qdr-listeners.port:: Port for skupper router, typically `5672`.
+
 
 
 include::./network-status.adoc[leveloffset=+1]
