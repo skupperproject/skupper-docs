@@ -15,8 +15,8 @@ include::{mod-loc}attributes.adoc[]
 
 include::{mod-loc}preface.adoc[]
 
-By default, {skupper-name} includes many security features.
-You can also apply the {policy-system} to a cluster, all {service-network} communication to and from that cluster is denied, and you can specify granular policies to allow your {service-network} operate.
+By default, {skupper-name} includes many security features, including using mutual TLS for all {service-network} communication.
+If you apply the {policy-system} to a cluster, all {service-network} communication to and from that cluster is denied, and you can specify granular policies to allow {service-network} communication.
 
 {skupper-name} provides default, built-in security that scales across clusters and clouds.
 In a {service-network}, the communication between sites is performed by {skupper-router}s and is secured with mutual TLS using a private, dedicated certificate authority (CA). 
