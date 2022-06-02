@@ -37,7 +37,7 @@ After a cluster administrator installs the {policy-system} using a Custom Resour
 
 NOTE: In this guide, _developers_ refers to users of a cluster who have access to a namespace, but do not have administrator privileges.
 
-of the following items using custom resources (CRs) to enable communication:
+A cluster administrator configures one or more of following items using custom resources (CRs) to enable communication:
 
 Allow incoming links:: Use `allowIncomingLinks` to enable developers create tokens and configure incoming links.
 
@@ -47,10 +47,12 @@ Allow services:: Use `allowedServices` to specify which services developers can 
 
 Allow resources to be exposed:: Use `allowedExposedResources` to specify which resources a developer can expose on the {service-network}.
 
-NOTE: Each setting for the {policy-system} can be applied to one or more namespaces.
+NOTE: A cluster administrator can apply each {policy-system} setting to one or more namespaces.
 
-For example, the following policy CR fully allows all {skupper-name} capabilities on all namespaces, except for exposed resources and a restriction on hostnames for outgoing links.
-The policy allows outgoing links to any domain ending in `.example.com` and adds 'deployment/nginx' to the list of allowed resources on all namespaces.
+For example, the following policy CR fully allows all {skupper-name} capabilities on all namespaces, except for:
+
+* only allows outgoing links to any domain ending in `.example.com`.
+* only allows 'deployment/nginx' resources to be exposed on the {service-network}.
 
 [source,yaml]
 ----
@@ -71,21 +73,21 @@ spec:
 
 [NOTE]
 ====
-You can apply many policy CRs and the most permissive policies are enforced.
-For example, if you apply a separate policy CR with the line `allowedOutgoingLinksHostnames: []`, outgoing links to `*.example.com` are still permitted.
+You can apply many policy CRs, and if there are conflicts in the items allowed, the most permissive policy is applied.
+For example, if you apply an additional policy CR with the line `allowedOutgoingLinksHostnames: []`, which does not list any hostnames, outgoing links to `*.example.com` are still permitted because that is permitted in the original CR.
 ====
 
 `namespaces`:: One or more patterns to specify the namespaces that this policy applies to.
 Note that you can use link:https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[Label selectors] to match the namespaces.
 
-`allowIncomingLinks`:: Specify `true` or `false` to determine whether other sites can create links to the namespaces specified.
-If set to `false` you cannot create tokens or use the gateway features from this site.
+`allowIncomingLinks`:: Specify `true` or `false` to determine whether other sites can create links to the specified namespaces.
+If set to `false`, you cannot create tokens or use the gateway features from this site.
 
-`allowedOutgoingLinksHostnames`:: Specify one or more patterns to determine which hosts you can create links to from the namespaces specified.
+`allowedOutgoingLinksHostnames`:: Specify one or more patterns to determine which hosts you can create links to from the specified namespaces.
 
-`allowedServices`:: Specify one or more patterns to determine the permitted names of services allowed on the {service-network} from the namespaces specified.
+`allowedServices`:: Specify one or more patterns to determine the permitted names of services allowed on the {service-network} from the specified namespaces.
 
-`allowedExposedResources`:: Specify one or more permitted names of resources allowed on the {service-network} from the namespaces specified. 
+`allowedExposedResources`:: Specify one or more permitted names of resources allowed on the {service-network} from the specified namespaces. 
 Note that patterns are not supported. 
 
 [TIP]
@@ -93,21 +95,21 @@ Note that patterns are not supported.
 Use regular expressions to create pattern matches, for example:
 
 * `.*\\.com$` matches any string ending in `.com`.
-A double back slash is required to avoid issues in YAML.
+A double backslash is required to avoid issues in YAML.
 * `^abc$` matches the string `abc`.
 
 ====
 
-If you create another CR that allows outgoing links for a specific namespace, a user can create a link from that namespace to join a {service-network}, that is, the logic for multiple policy CRs is `OR`.
-{skupper-name} allows operations if one or more of the policy CRs permits the operation.
+If you create another CR that allows outgoing links for a specific namespace, a user can create a link from that namespace to join a {service-network}. That is, the logic for multiple policy CRs is `OR`.
+An operation is permitted if any single policy CR permits the operation.
 
 // Type: procedure
 [id="installing-crd"] 
 == Installing the {policy-system} CRD
 
-Install the {policy-system} CRD enables a cluster administrator enforce policies for {service-network}s.
+Install the {policy-system} CRD enables a cluster administrator to enforce policies for {service-network}s.
 
-NOTE: If there are existing sites on the cluster, see xref:installing-crd-existing-sites[]
+NOTE: If there are existing sites on the cluster, see xref:installing-crd-existing-sites[].
 
 .Prerequisites
 
@@ -116,7 +118,7 @@ NOTE: If there are existing sites on the cluster, see xref:installing-crd-existi
 
 .Procedure
 
-. Log into the cluster using a `cluster-admin` account.
+. Log in to the cluster using a `cluster-admin` account.
 
 . Download the CRD.
 
@@ -143,7 +145,7 @@ Skupper is enabled for namespace "<namespace>" in interior mode (with policies).
 [id="upgrading-existing-sites"] 
 == Upgrading on a cluster with existing sites
 
-If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of {policy-system} in that version and avoid {service-network} disruption.
+If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of a {policy-system} in that version and avoid {service-network} disruption.
 
 .Procedure
 
@@ -174,11 +176,11 @@ where `<namespace>` is the site namespace.
 If the cluster already hosts {skupper-name} sites, note the following before installing the CRD:
 
 * All existing connections are closed. 
-You must apply a policy CR to reopen connections
+You must apply a policy CR to reopen connections.
 * All existing {service-network} services and exposed resources are removed. 
 You must create those resources again.
 
-NOTE: If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of {policy-system} in that version and avoid {service-network} disruption by following the procedure described in xref:upgrading-existing-sites[].
+NOTE: If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of a {policy-system} in that version and avoid {service-network} disruption by following the procedure described in xref:upgrading-existing-sites[].
 
 .Procedure
 
@@ -193,7 +195,7 @@ To avoid disruption:
 $ kubectl get pods --all-namespaces --selector=app=skupper
 ----
 
-. Document each service and resources exposed on the {service-network}.
+. Document each service and resource exposed on the {service-network}.
 
 . Install the CRD as described in xref:installing-crd[].
 This step closes connections and removes all {service-network} services and exposed resources.
@@ -221,17 +223,17 @@ where `<namespace>` is the site namespace.
 [id="creating-policies"] 
 == Creating policies for the {policy-system}
 
-Policies allow you control communication across the {service-network} from a cluster.
+Policies allow a cluster administrator to control communication across the {service-network} from a cluster.
 
 
 .Prerequisites
 
-* Access to a cluster using a `cluster-admin` account
-* The {policy-system} CRD is installed on the cluster
+* Access to a cluster using a `cluster-admin` account.
+* The {policy-system} CRD is installed on the cluster.
 
 .Procedure
 
-NOTE: Typically, you create a policy CR that combines many elements from the steps below, for example, see xref:about-skupper-policies[]
+NOTE: Typically, you create a policy CR that combines many elements from the steps below. See xref:about-skupper-policies[] for an example CR.
 
 . xref:allowIncomingLinks[]
 . xref:allowedOutgoingLinksHostnames[]
@@ -242,7 +244,7 @@ NOTE: Typically, you create a policy CR that combines many elements from the ste
 [id="allowIncomingLinks"] 
 === Implement a policy to allow incoming links
 
-Use `allowIncomingLinks` to enable users create tokens and configure incoming links.
+Use `allowIncomingLinks` to enable developers create tokens and configure incoming links.
 
 .Procedure
 
@@ -270,7 +272,7 @@ spec:
 [id="allowedOutgoingLinksHostnames"] 
 === Implement a policy to allow outgoing links to specific hosts
 
-Use `allowedOutgoingLinksHostnames` to specify hosts that users can create links to.
+Use `allowedOutgoingLinksHostnames` to specify hosts that developers can create links to.
 
 . Determine which namespaces you want to apply this policy to.
 . Create a CR with `allowedOutgoingLinksHostnames` set to a pattern of allowed hosts.
@@ -294,7 +296,7 @@ spec:
 [id="allowedServices"] 
 === Implement a policy to allow specific services
 
-Use `allowedServices` to specify which services can be created or used on the {service-network}.
+Use `allowedServices` to specify which services a developer can create or use on the {service-network}.
 
 .Procedure
 
@@ -322,15 +324,15 @@ NOTE: When exposing services, use the `--address <name>` parameter of the `skupp
 [id="allowedExposedResources"] 
 === Implement a policy to allow specific resources
 
-Use `allowedExposedResources` to specify which resources can be exposed on the {service-network}.
+Use `allowedExposedResources` to specify which resources a developer can expose on the {service-network}.
 
 .Procedure
 
 . Determine which namespaces you want to apply this policy to.
-. Create a CR with `allowedExposedResources` set to specify resources that can be exposed on the {service-network}.
+. Create a CR with `allowedExposedResources` set to specify resources that a developer can expose on the {service-network}.
 . Create and apply the CR.
 
-For example, the following CR allows you expose an `nginx` deployment for all namespaces: 
+For example, the following CR allows you to expose an `nginx` deployment for all namespaces: 
 [source,yaml]
 ----
 apiVersion: skupper.io/v1alpha1
@@ -344,5 +346,3 @@ spec:
 ----
 
 NOTE: For `allowedExposedResources`, each entry must conform to the `type/name` syntax.
-
-include::native-security-options.adoc[leveloffset=+1]
