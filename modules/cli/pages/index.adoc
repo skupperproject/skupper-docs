@@ -540,9 +540,22 @@ Running the gateway bundle uses the gateway definition YAML and a certificate to
 . Check the status of the gateway service:
 +
 --
+
+To check a _service_ type gateway:
 ----
 $ systemctl --user status <gateway-definition-name>
 ----
+
+To check a _podman_ type gateway:
+----
+$ podman inspect
+----
+
+To check a _docker_ type gateway:
+----
+$ docker inspect
+----
+
 
 NOTE: You can later remove the gateway using `./remove.py`.
 
