@@ -326,7 +326,7 @@ This procedure describes how to remove the {service-network} you created.
 +
 [source,bash]
 ----
-$ kubectl namespace delete west
+$ kubectl delete namespace west
 ----
 
 
@@ -334,7 +334,7 @@ $ kubectl namespace delete west
 +
 [source,bash]
 ----
-$ kubectl namespace delete east
+$ kubectl delete namespace east
 ----
 
 

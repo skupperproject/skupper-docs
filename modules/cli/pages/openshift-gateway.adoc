@@ -30,7 +30,7 @@ NOTE: Although this tutorial demonstrates exposing a Python service on the {serv
 
 // Type: concept
 [id="introduction-to-skupper"] 
-== Introduction to {skupper-name} {version}
+== Introduction to {skupper-name} {product-version}
 
 ifdef::product[Interconnect 2.0 introduces a {service-network}, linking services across the hybrid cloud.]
 
@@ -345,6 +345,6 @@ $  skupper gateway delete
 +
 [source,bash,term=west]
 ----
-$  kubectl namespace delete west
+$  kubectl delete namespace west
 ----
 

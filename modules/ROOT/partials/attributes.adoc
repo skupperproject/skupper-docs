@@ -19,7 +19,7 @@
 // name and version
 :skupper-name: Skupper
 :service-network: service network
-:skupper-version: 0.8.6
+:skupper-version: 1.0
 :skupper-cli-version: {skupper-version}
 :SkupperOperatorName: Skupper Operator
 :skupper-router: Skupper router
@@ -28,7 +28,7 @@
 
 
 // resolves to blank for skupper
-:version:
+:product-version:
 
 // Download URLs
 :linux-download-url-skupper-cli: https://github.com/skupperproject/skupper/releases/download/{skupper-version}/skupper-cli-{skupper-version}-linux-amd64.tgz
