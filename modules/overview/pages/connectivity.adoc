@@ -45,7 +45,7 @@ image::many-clusters.svg[]
 
 .Additional information
 
-* {OverviewLink}
+* {SkupperOverviewBookLink}
 * {SecurityLink}
 * {RoutingLink}
 

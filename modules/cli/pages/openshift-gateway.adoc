@@ -45,7 +45,7 @@ You deploy and manage a {service-network}, including a gateway, using the `skupp
 
 .Additional resources
 
-* {OverviewLink}
+* {SkupperOverviewBookLink}
 
 
 include::./installing.adoc[leveloffset=+1]
@@ -57,6 +57,8 @@ include::./installing.adoc[leveloffset=+1]
 
 [role="system:abstract"]
 This procedure describes how to create a backend service on your local machine that is accessed from the {service-network}.
+
+The example backend takes a name as input and returns a greeting.
 
 .Prerequisites
 
@@ -100,19 +102,19 @@ INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 ----
 --
 
-. Test the service by navigating to the following URL.
+. Test the service using the following command:
 +
 --
 [source,bash,term=local]
 ----
-http://localhost:8080/api/hello
+ curl --verbose -H "Content-type: application/json" -d '{"name": "Hubert"}' localhost:8080/api/hello
 ----
 
-The output is similar to the following:
+The output should include the following:
 
 [source,bash,term=local]
 ----
-Hello from workstation (1)
+{"text":"Hi, Hubert.  I am Heroic Hardware (<machine name>).","name":"Heroic Hardware"}
 ----
 This indicates that the backend service is running and available.
 --

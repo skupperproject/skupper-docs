@@ -22,7 +22,7 @@ NOTE: This ROOT module is never published but contains partials that are used in
 This page acts as a report for all docs in the skupper-docs repo.
 
 // migrated from markdown
-* {OverviewLink}
+* {SkupperOverviewBookLink}
 * {RoutingLink}
 * {SecurityLink}
 * {ConnectivityLink}
@@ -36,4 +36,4 @@ This page acts as a report for all docs in the skupper-docs repo.
 * {OperatorLink}
 * {OperatorOCPLink}
 * {TokensLink}
-* {PolicyLink}
+* {SkupperPolicyBookLink}

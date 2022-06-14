@@ -12,6 +12,8 @@ include::{mod-loc}attributes.adoc[]
 [role="system:abstract"]
 This tutorial demonstrates how to connect a frontend service on a OpenShift cluster with a backend service on a OpenShift cluster using the `skupper` command-line interface (CLI).
 
+See {SkupperOverviewBookLink} for an introduction to {skupper-name}.
+
 .Prerequisites
 
 * Access to projects in two OpenShift clusters, `cluster-admin` access is not required.
@@ -22,9 +24,6 @@ This tutorial shows how to connect the following namespaces:
 
 * `west` - runs the frontend service and is typically a public cluster.
 * `east` - runs the backend service.
-
-
-include::{mod-loc}introduction-to-skupper.adoc[]
 
 include::./installing.adoc[leveloffset=+1]
 
