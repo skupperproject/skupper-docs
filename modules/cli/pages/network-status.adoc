@@ -21,7 +21,7 @@
 $ skupper network status
 ----
 
-For example, the following shows the output for the {service-network} created from the {OpenShiftTutoriallink} tutorial from the `west` namespace:
+For example, the following shows the output for the {service-network} created from the {SkupperOpenShiftBookLink} tutorial from the `west` namespace:
 
 [source]
 ----

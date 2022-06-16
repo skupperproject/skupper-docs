@@ -312,8 +312,8 @@ This shows how the frontend calls the backend service over the {service-network}
 
 .Additional resources
 
-* {ConsoleLink}
-* {CliLink}
+* {SkupperConsoleBookLink}
+* {SkupperCliBookLink}
 
 // Type: procedure
 [id="tearing-down"] 

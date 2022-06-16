@@ -17,7 +17,7 @@ metadata:
   namespace: my-namespace
 ----
 
-You can later retrieve the console credentials as described in {ConsoleLink} or specify them now by adding the username and optionally the password to `skupper-site.yaml` as follows:
+You can later retrieve the console credentials as described in {SkupperConsoleBookLink} or specify them now by adding the username and optionally the password to `skupper-site.yaml` as follows:
 
 [source,yaml,options="nowrap"]
 ----
