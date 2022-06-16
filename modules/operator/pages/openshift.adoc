@@ -18,7 +18,7 @@ All namespaces::
 All Skupper sites created in the cluster share a common *site controller* pod for co-ordination.
 A specific namespace::
 A site controller pod is created in each namespace that you apply the `site` ConfigMap.
-This is equivalent to the `skupper init` as described in {CliLink}.
+This is equivalent to the `skupper init` as described in {SkupperCliBookLink}.
 
 You can deploy the Skupper Operator using any of the following methods:
 

@@ -8,12 +8,12 @@ include::{mod-loc}attributes.adoc[]
 //Category: gateway-tutorial
 // Type: assembly
 [id="openshift-tutorial"] 
-= Creating a {service-network} with {kubernetes-flavor} and accessing a backend service using a Skupper gateway
+= Creating a {service-network} with {kubernetes-flavor} and accessing a backend service using a gateway
 
 [role="system:abstract"]
 This tutorial describes how to connect a local backend service on a local machine with a frontend service running on a {kubernetes-flavor} cluster. 
 
-In this tutorial, the services are the same as used in {OpenShiftTutoriallink}, however you run the backend service locally and expose the service on the service network using the `skupper` command-line interface (CLI).
+In this tutorial, the services are the same as used in {SkupperOpenShiftBookLink}, however you run the backend service locally and expose the service on the service network using the `skupper` command-line interface (CLI).
 
 .Prerequisites
 
@@ -30,7 +30,7 @@ NOTE: Although this tutorial demonstrates exposing a Python service on the {serv
 
 // Type: concept
 [id="introduction-to-skupper"] 
-== Introduction to {skupper-name} {version}
+== Introduction to {skupper-name} {product-version}
 
 ifdef::product[Interconnect 2.0 introduces a {service-network}, linking services across the hybrid cloud.]
 
@@ -45,10 +45,10 @@ You deploy and manage a {service-network}, including a gateway, using the `skupp
 
 .Additional resources
 
-* {OverviewLink}
+* {SkupperOverviewBookLink}
 
 
-include::installing.adoc[leveloffset=+1]
+include::./installing.adoc[leveloffset=+1]
 
 
 // Type: procedure
@@ -74,11 +74,12 @@ This procedure describes how to create a backend service on your local machine t
 $ cd skupper-example-hello-world/backend/
 ----
 
-. Install the `flask` library.
+. Install the required libraries.
 +
 [source,bash,term=local]
 ----
-$ pip install --user flask
+$ pip install --user flask starlette uvicorn
+
 ----
 
 . Run the backend service
@@ -92,17 +93,11 @@ The output is similar to the following:
 
 [source,bash,term=local]
 ----
-* Serving Flask app 'main' (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: off
- * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
- * Running on http://10.33.241.56:8080/ (Press CTRL+C to quit)
+INFO:     Started server process [107836]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 ----
-
-Note the IP address as <backend-ip-address>
 --
 
 . Test the service by navigating to the following URL.
@@ -110,7 +105,7 @@ Note the IP address as <backend-ip-address>
 --
 [source,bash,term=local]
 ----
-http://<backend-ip-address>:8080/api/hello
+http://localhost:8080/api/hello
 ----
 
 The output is similar to the following:
@@ -148,16 +143,7 @@ $ export KUBECONFIG=$HOME/.kube/config-west
 This session is referred to later as the _west_ terminal session.
 
 . Log into the {kubernetes-flavor} cluster.
-+
---
-ifdef::product[]
 
-For example:
-----
- $ oc login
-----
-endif::[]
---
 
 // Type: procedure
 [id="installing-skupper"] 
@@ -166,20 +152,11 @@ endif::[]
 . Create the `west` namespace:
 +
 --
-ifdef::skupper-io[]
 [source,bash,term=west]
 ----
 $ kubectl create namespace west
 $ kubectl config set-context --current --namespace west
 ----
-endif::[]
-
-ifdef::product[]
-[source,bash,term=west]
-----
-$ oc new-project west 
-----
-endif::[]
 --
 . Create the {service-network} site:
 +
@@ -217,14 +194,14 @@ Perform all tasks in the west terminal session:
 +
 [source,bash,term=west]
 ----
-$ oc create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
+$ kubectl create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
 ----
 
 . Expose the frontend deployment as a cluster service:
 +
 [source,bash,term=west]
 ----
-$ oc expose deployment hello-world-frontend --port 8080 --type LoadBalancer
+$ kubectl expose deployment hello-world-frontend --port 8080 --type LoadBalancer
 ----
 
 . Create a route for the frontend:
@@ -347,8 +324,8 @@ This shows how the frontend calls the backend over the {service-network} from an
 
 .Additional resources
 
-* {ConsoleLink}
-* {CliLink}
+* {SkupperConsoleBookLink}
+* {SkupperCliBookLink}
 
 // Type: procedure
 [id="tearing-down"] 
@@ -368,6 +345,6 @@ $  skupper gateway delete
 +
 [source,bash,term=west]
 ----
-$  kubectl namespace delete west
+$  kubectl delete namespace west
 ----
 

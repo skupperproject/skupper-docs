@@ -34,6 +34,6 @@ This means that the Skupper network is isolated from external access, preventing
 
 .Additional information
 
-* {OverviewLink}
+* {SkupperOverviewBookLink}
 * {ConnectivityLink}
 * {RoutingLink}

@@ -12,18 +12,18 @@ include::{mod-loc}attributes.adoc[]
 [role="system:abstract"]
 This tutorial demonstrates how to connect a frontend service on a OpenShift cluster with a backend service on a OpenShift cluster using the `skupper` command-line interface (CLI).
 
+See {SkupperOverviewBookLink} for an introduction to {skupper-name}.
+
 .Prerequisites
 
 * Access to projects in two OpenShift clusters, `cluster-admin` access is not required.
 * One of the OpenShift clusters must be addressable from the other cluster.
+* `kubectl` and `oc` CLI. Many commands can be performed using `oc`, however this tutorial shows the `kubectl` options.
 
 This tutorial shows how to connect the following namespaces:
 
 * `west` - runs the frontend service and is typically a public cluster.
 * `east` - runs the backend service.
-
-
-include::{mod-loc}introduction-to-skupper.adoc[]
 
 include::./installing.adoc[leveloffset=+1]
 
@@ -45,14 +45,13 @@ The following table shows how you might set up your terminal sessions.
 a|
 [source,bash,subs="attributes+"]
 ----
- $ oc project
- west
+ $ kubectl get pods
 ----
 a|
 [source,bash,subs="attributes+"]
 ----
- $ oc project
- east
+ $ kubectl get pods
+
 ----
 
 
@@ -69,7 +68,7 @@ NOTE: In OpenShift 4.6 and later, you can use the web terminal to perform the fo
 
 . Start a terminal session to work on the `west` namespace and set the `KUBECONFIG` environment variable:
 +
-[source,bash,term=west]
+[source,bash]
 ----
 $ export KUBECONFIG=$HOME/.kube/config-west
 ----
@@ -78,18 +77,14 @@ This session is referred to later as the _west_ terminal session.
 
 . Start a terminal session to work on the `east` namespace and set the `KUBECONFIG` environment variable:
 +
-[source,bash,term=east]
+[source,bash]
 ----
 $ export KUBECONFIG=$HOME/.kube/config-east
 ----
 +
 This session is referred to later as the _east_ terminal session.
 
-. In each terminal session, log into the OpenShift cluster, for example:
-+
-----
- $ oc login
-----
+. In each terminal session, log into the OpenShift cluster.
 
 // Type: procedure
 [id="installing-skupper"] 
@@ -100,14 +95,15 @@ This session is referred to later as the _east_ terminal session.
 
 .. Create the `west` project (namespace):
 +
-[source,bash,term=west]
+[source,bash]
 ----
-$ oc new-project west 
+$ kubectl create namespace west
+$ kubectl config set-context --current --namespace west
 ----
 
 .. Create the {service-network} router:
 +
-[source,bash,term=west]
+[source,bash]
 ----
 $ skupper init
 ----
@@ -115,7 +111,7 @@ $ skupper init
 .. Check the site status:
 +
 --
-[source,bash,term=west]
+[source,bash]
 ----
 $ skupper status
 ----
@@ -129,14 +125,15 @@ Skupper enabled for namespace 'west'. It is not connected to any other sites.
 . In the east terminal session:
 .. Create the `east` project (namespace):
 +
-[source,bash,term=east]
+[source,bash]
 ----
-$ oc new-project east 
+$ kubectl create namespace east
+$ kubectl config set-context --current --namespace east
 ----
 
 .. Create the {service-network} router:
 +
-[source,bash,term=east]
+[source,bash]
 ----
 $ skupper init
 ----
@@ -144,7 +141,7 @@ $ skupper init
 .. Check the site status:
 +
 --
-[source,bash,term=east]
+[source,bash]
 ----
 $ skupper status
 ----
@@ -164,7 +161,7 @@ With the {service-network} routers installed, you can connect them together secu
 
 . In the west terminal session, create a connection token to allow connection to the west namespace:
 +
-[source,bash,term=west]
+[source,bash]
 ----
 $ skupper token create $HOME/secret.yaml
 ----
@@ -173,7 +170,7 @@ This command creates the `secret.yaml` file in your home directory, which you ca
 
 . In the east terminal session, use the token to create a connection to the west namespace:
 +
-[source,bash,term=east]
+[source,bash]
 ----
 $ skupper link create $HOME/secret.yaml
 ----
@@ -181,7 +178,7 @@ $ skupper link create $HOME/secret.yaml
 . Check the site status from the west terminal session:
 +
 --
-[source,bash,term=west]
+[source,bash]
 ----
 $ skupper status
 ----
@@ -205,30 +202,30 @@ Perform all tasks in the west terminal session:
 
 . Deploy the frontend service:
 +
-[source,bash,term=west]
+[source,bash]
 ----
-$ oc create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
+$ kubectl create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
 ----
 
 . Expose the frontend deployment as a cluster service:
 +
-[source,bash,term=west]
+[source,bash]
 ----
-$ oc expose deployment hello-world-frontend --port 8080 --type LoadBalancer
+$ kubectl expose deployment hello-world-frontend --port 8080 --type LoadBalancer
 ----
 
 . Create a route for the frontend:
 +
-[source,bash,term=west]
+[source,bash]
 ----
-$ oc expose svc/hello-world-frontend
+$ kubectl expose svc/hello-world-frontend
 ----
 
 . Check the frontend route:
 .. Get the route details:
 +
 --
-[source,bash,term=west]
+[source,bash]
 ----
 $  oc get routes
 ----
@@ -261,14 +258,14 @@ The backend app is a simple Python application that passes a message to the fron
 
 . Deploy the backend service in the east terminal session:
 +
-[source,bash,term=east]
+[source,bash]
 ----
-$ oc create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
 ----
 
 . Expose the backend service on the {service-network} from the east terminal session:
 +
-[source,bash,term=east]
+[source,bash]
 ----
 $ skupper expose deployment hello-world-backend --port 8080 --protocol tcp
 ----
@@ -276,7 +273,7 @@ $ skupper expose deployment hello-world-backend --port 8080 --protocol tcp
 . Check the site status from the west terminal session:
 +
 --
-[source,bash,term=west]
+[source,bash]
 ----
 $ skupper status
 ----
@@ -292,7 +289,7 @@ The service is exposed from the `east` namespace.
 .. Get the route details:
 +
 --
-[source,bash,term=west]
+[source,bash]
 ----
 $  oc get routes
 ----
@@ -315,8 +312,8 @@ This shows how the frontend calls the backend service over the {service-network}
 
 .Additional resources
 
-* {ConsoleLink}
-* {CliLink}
+* {SkupperConsoleBookLink}
+* {SkupperCliBookLink}
 
 // Type: procedure
 [id="tearing-down"] 
@@ -326,17 +323,17 @@ This procedure describes how to remove the {service-network} you created.
 
 . Delete the `west` namespace from the west terminal session:
 +
-[source,bash,term=west]
+[source,bash]
 ----
-$  oc delete project west
+$ kubectl delete namespace west
 ----
 
 
 . Delete the `east` namespace from the east terminal session:
 +
-[source,bash,term=east]
+[source,bash]
 ----
-$  oc delete project east
+$ kubectl delete namespace east
 ----
 
 

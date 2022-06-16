@@ -1,9 +1,6 @@
 ifdef::skupper-io[:image-prefix: ROOT:]
-// Type: concept
-[id="introduction-to-skupper"] 
-== Introduction to {skupper-name} {version}
 
-ifdef::product[Interconnect 2.0 introduces a {service-network}, linking services across the hybrid cloud.]
+{skupper-name} introduces a {service-network}, linking services across the hybrid cloud.
 
 A {service-network} enables communication between services running in different network locations. 
 It allows geographically distributed services to connect as if they were all running in the same site.

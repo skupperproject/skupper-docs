@@ -73,7 +73,7 @@ NOTE: Claim tokens are the default, the `-t claim` section of the command is unn
 
 .Additional information
 
-* See the {CliLink} for information on using the token to create links.
+* See the {SkupperCliBookLink} for information on using the token to create links.
 
 // Type: procedure
 [id='creating-cert-tokens-{context}']
@@ -101,7 +101,7 @@ NOTE: Cert tokens are always valid and can be reused indefinitely unless revoked
 
 .Additional information
 
-* See the {CliLink} for information on using the token to create links.
+* See the {SkupperCliBookLink} for information on using the token to create links.
 
 // Type: procedure
 [id='revoking-access-{context}']
@@ -161,4 +161,4 @@ You can remove that link using the `skupper link delete link1` command, but to r
 
 .Additional information
 
-* See the {CliLink}.
+* See the {SkupperCliBookLink}.

@@ -60,7 +60,7 @@ JNZWzMHtyg
 [id="linking-sites-using-skupper-console"] 
 == Linking sites using the {skupper-name} console
 
-The {skupper-name} console allows you create and use claim type tokens as described in {CliLink}.
+The {skupper-name} console allows you create and use claim type tokens as described in {SkupperCliBookLink}.
 
 .Prerequisites
 
@@ -103,7 +103,7 @@ The Skupper console also provides useful networking information about the {servi
 image::skupper-console.png[]
 
 
-. Perform the {OpenShiftTutorialLink} tutorial.
+. Perform the {SkupperOpenShiftBookLink} tutorial.
 
 . Navigate to the Skupper console.
 

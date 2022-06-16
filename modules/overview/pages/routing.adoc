@@ -41,6 +41,6 @@ Skupper uses redundant network paths and smart routing to provide highly availab
 
 .Additional information
 
-* {OverviewLink}
+* {SkupperOverviewBookLink}
 * {SecurityLink}
 * {ConnectivityLink}

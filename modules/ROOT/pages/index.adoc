@@ -22,18 +22,18 @@ NOTE: This ROOT module is never published but contains partials that are used in
 This page acts as a report for all docs in the skupper-docs repo.
 
 // migrated from markdown
-* {OverviewLink}
+* {SkupperOverviewBookLink}
 * {RoutingLink}
 * {SecurityLink}
 * {ConnectivityLink}
 
 // can be consumed by nebel
-* {CliLink}
-* {OpenShiftTutorialLink}
+* {SkupperCliBookLink}
+* {SkupperOpenShiftBookLink}
 * {GatewayTutoriallink}
 * {DeclarativeLink}
-* {ConsoleLink}
-* {OperatorLink}
-* {OperatorOCPLink}
+* {SkupperConsoleBookLink}
+* {SkupperOperatorBookLink}
+* {SkupperOperatorBookLink}
 * {TokensLink}
-* {PolicyLink}
+* {SkupperPolicyBookLink}
