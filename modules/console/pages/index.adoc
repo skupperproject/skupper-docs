@@ -35,23 +35,13 @@ The credential prompt depends on how the site was created using `skupper init`:
 +
 * using the `--console-auth unsecured` option, you are not prompted for credentials.
 * using the `--console-auth openshift` option, you are prompted to enter OpenShift cluster credentials.
-* using the default or `--console-user <user>  --console-password <password>` options, you are prompted to enter {skupper-name} credentials.
+* using the default or `--console-user <user>  --console-password <password>` options, you are prompted to enter those credentials.
 
 . If you created the site using default settings, that is `skupper init`, a random password is generated for the `admin` user.
-To retrieve the password:
-
-.. Retrieve the encoded password for the `admin` user:
+To retrieve the password the `admin` user:
 +
 ----
-$ kubectl get secret skupper-console-users -o yaml| grep admin
-
-admin: Sk5aV3pNSHR5Zw==
-----
-.. Decode the password for the `admin` user:
-+
-----
-$ echo -n "Sk5aV3pNSHR5Zw==" | base64 --decode
-
+$ kubectl get secret skupper-console-users -o jsonpath={.data.admin} | base64 -d
 JNZWzMHtyg
 ----
 
@@ -100,7 +90,7 @@ The Skupper console provides an overview of the following:
 
 The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels between sites.
 
-image::skupper-console.png[]
+image::{img-loc}skupper-console.png[]
 
 
 . Perform the {SkupperOpenShiftBookLink} tutorial.

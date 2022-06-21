@@ -1,6 +1,6 @@
 include::{mod-loc}attributes.adoc[]
 
-= Using the Skupper Operator on Kubernetes
+= Using the Skupper Operator on {kubernetes-flavor}
 
 include::{mod-loc}preface.adoc[]
 
