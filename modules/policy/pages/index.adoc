@@ -148,6 +148,7 @@ Skupper is enabled for namespace "<namespace>" in interior mode (with policies).
 ----
 
 
+ifdef::skupper-io[]
 // Type: procedure
 [id="upgrading-existing-sites"] 
 == Upgrading on a cluster with existing sites
@@ -175,6 +176,7 @@ $ kubectl create clusterrolebinding skupper-service-controller-<namespace> --clu
 where `<namespace>` is the site namespace.
 --
 
+endif::skupper-io[]
 
 // Type: procedure
 [id="installing-crd-existing-sites"] 
