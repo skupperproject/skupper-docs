@@ -305,8 +305,11 @@ hello-world-frontend   <frontend-url>
 .. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following:
 +
 ----
-I am the frontend.  The backend says 'Hello from hello-world-backend-78cd4d7d8c-plrr9 (1)'.
+Hi, <name>. I am Mathematical Machine (backend-77f8f45fc8-mnrdp).
 ----
++
+If you click *Say hello* again, a different backend process responds showing how {skupper-name} balances the requests.
+
 
 This shows how the frontend calls the backend service over the {service-network} from a different OpenShift cluster.
 
