@@ -49,7 +49,7 @@ Allow services:: Use `allowedServices` to specify which services developers can 
 
 Allow resources to be exposed:: Use `allowedExposedResources` to specify which resources a developer can expose on the {service-network}.
 
-NOTE: A cluster administrator can apply each {policy-system} setting to one or more namespaces.
+NOTE: A cluster administrator can apply each policy CR setting to one or more namespaces.
 
 For example, the following policy CR fully allows all {skupper-name} capabilities on all namespaces, except for:
 
@@ -122,11 +122,16 @@ NOTE: If there are existing sites on the cluster, see xref:installing-crd-existi
 
 . Log in to the cluster using a `cluster-admin` account.
 
-. Download the CRD.
+. Download the CRD:
++
+[source,bash]
+----
+$ wget https://raw.githubusercontent.com/skupperproject/skupper/1.0/api/types/crds/skupper_cluster_policy_crd.yaml
+----
 
 . Apply the CRD:
 +
-[source,yaml]
+[source,bash]
 ----
 $ kubectl apply -f skupper_cluster_policy_crd.yaml
 
@@ -275,6 +280,7 @@ spec:
 === Implement a policy to allow outgoing links to specific hosts
 
 Use `allowedOutgoingLinksHostnames` to specify hosts that developers can create links to.
+You cannot create a `allowedOutgoingLinksHostnames` policy to disallow a specific host that was previously allowed.
 
 . Determine which namespaces you want to apply this policy to.
 . Create a CR with `allowedOutgoingLinksHostnames` set to a pattern of allowed hosts.
@@ -299,6 +305,7 @@ spec:
 === Implement a policy to allow specific services
 
 Use `allowedServices` to specify which services a developer can create or use on the {service-network}.
+You cannot create a `allowedServices` policy to disallow a specific service that was previously allowed.
 
 .Procedure
 
@@ -327,6 +334,7 @@ NOTE: When exposing services, use the `--address <name>` parameter of the `skupp
 === Implement a policy to allow specific resources
 
 Use `allowedExposedResources` to specify which resources a developer can expose on the {service-network}.
+You cannot create a `allowedExposedResources` policy to disallow a specific resource that was previously allowed.
 
 .Procedure
 
@@ -348,3 +356,53 @@ spec:
 ----
 
 NOTE: For `allowedExposedResources`, each entry must conform to the `type/name` syntax.
+
+// Type: procedure
+[id="exploring-policies"] 
+== Exploring the current policies for a cluster
+
+As a developer you might want to check which policies are enforced for a particular site.
+
+.Procedure
+
+. Log into a namespace where a {skupper-name} site has been initialized.
+
+. Check whether incoming links are permitted:
++
+[source,bash]
+----
+$ kubectl exec deploy/skupper-service-controller -- get policies incominglink
+
+ALLOWED POLICY ENABLED ERROR                                                   ALLOWED BY 
+false   true           Policy validation error: incoming links are not allowed 
+----
++
+In this example incoming links are not allowed by policy.
+
+. Explore other policies:
++
+--
+[source,bash]
+----
+$ kubectl exec deploy/skupper-service-controller -- get policies 
+Validates existing policies
+
+Usage:
+  get policies [command]
+
+Available Commands:
+  expose       Validates if the given resource can be exposed
+  incominglink Validates if incoming links can be created
+  outgoinglink Validates if an outgoing link to the given hostname is allowed
+  service      Validates if service can be created or imported
+----
+
+As shown, there are commands to check each policy type by specifying what you want to do, for example, to check if you can expose an nginx deployment:
+
+[source,bash]
+----
+$ kubectl  exec deploy/skupper-service-controller -- get policies expose deployment nginx
+ALLOWED POLICY ENABLED ERROR                                                       ALLOWED BY 
+false   true           Policy validation error: deployment/nginx cannot be exposed            
+----
+--
