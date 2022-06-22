@@ -54,6 +54,10 @@ For more information on the console, see {SkupperConsoleBookLink}.
 
 * site name - The site name defaults to the namespace name, for example, `west`.
 
+ifdef::product[]
+include::{mod-loc}fragment-ingress.adoc[]
+endif::[]
+
 // Type: reference
 [id="custom-sites"] 
 == Custom sites
@@ -311,7 +315,8 @@ This section shows how to expose a single service running locally on a {service-
 
 * A {service-network}. Only one site is required.
 * Access to the {service-network}.
-* `qdrouterd` 
+
+ifdef::product[* `skrouterd` for the default `service` type gateways]
 
 .Procedure
 
@@ -365,10 +370,22 @@ This section shows more advanced usage of skupper gateway.
 
 . Create a Skupper gateway:
 +
+--
 [source,bash]
 ----
-$ skupper gateway init
+$ skupper gateway init --type <gateway-type>
 ----
+
+
+ifdef::product[]
+NOTE: The default service type gateway requires that `skrouterd` is running.
+endif::[]
+
+By default a _service_ type gateway is created, however you can also specify:
+
+* `podman`
+* `docker`
+--
 
 . Create a service that can communicate on the {service-network}:
 +

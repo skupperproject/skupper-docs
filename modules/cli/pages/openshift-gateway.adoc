@@ -20,6 +20,7 @@ In this tutorial, the services are the same as used in {SkupperOpenShiftBookLink
 * Access to a projects in a {kubernetes-flavor} cluster, `cluster-admin` access is not required.
 * Python on your local machine.
 
+
 This tutorial shows how to connect the following:
 
 * `west` - a namespace in an accessible OpenShift cluster running the frontend service.
@@ -32,12 +33,12 @@ NOTE: Although this tutorial demonstrates exposing a Python service on the {serv
 [id="introduction-to-skupper"] 
 == Introduction to {skupper-name} {product-version}
 
-ifdef::product[Interconnect 2.0 introduces a {service-network}, linking services across the hybrid cloud.]
+ifdef::product[{skupper-name} introduces a {service-network}, linking services across the hybrid cloud.]
 
 A {service-network} enables communication between services running in different network locations. 
 It allows geographically distributed services to connect as if they were all running in the same site.
 
-image::{image-prefix}overview-gateway.svg[Overview of a service network]
+image::{image-prefix}overview-gateway.png[Overview of a service network]
 
 For example, you can deploy your frontend in a public {kubernetes-flavor} cluster and deploy your backend on a local network, then connect them into a {service-network}.
 
@@ -313,11 +314,14 @@ Use the output IP address to construct the <frontend-url>:
 ----
 --
 
-. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following:
+. Navigate to the `<frontend-url>` value in your browser and click *Say hello*. 
+You see a message similar to the following:
 +
 ----
-I am the frontend.  The backend says 'Hello from <machine> 1)'.
+Hi, <name>. I am Mathematical Machine (backend-77f8f45fc8-mnrdp).
 ----
++
+If you click *Say hello* again, a different backend process responds showing how {skupper-name} balances the requests.
 
 
 This shows how the frontend calls the backend over the {service-network} from an {kubernetes-flavor} cluster.
