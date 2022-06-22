@@ -260,7 +260,7 @@ For example, the following CR allows incoming links for all namespaces:
 apiVersion: skupper.io/v1alpha1
 kind: SkupperClusterPolicy
 metadata:
-  name: allowIncomingLinks
+  name: allowincominglinks
 spec:
   namespaces:
     - "*"
@@ -286,7 +286,7 @@ For example, the following CR allows links to all subdomains of `example.com` fo
 apiVersion: skupper.io/v1alpha1
 kind: SkupperClusterPolicy
 metadata:
-  name: allowedOutgoingLinksHostnames
+  name: allowedoutgoinglinkshostnames
 spec:
   namespaces:
     - "*"
@@ -312,7 +312,7 @@ For example, the following CR allows users to expose and consume services with t
 apiVersion: skupper.io/v1alpha1
 kind: SkupperClusterPolicy
 metadata:
-  name: allowedServices
+  name: allowedservices
 spec:
   namespaces:
     - "*"
@@ -340,7 +340,7 @@ For example, the following CR allows you to expose an `nginx` deployment for all
 apiVersion: skupper.io/v1alpha1
 kind: SkupperClusterPolicy
 metadata:
-  name: allowedExposedResources
+  name: allowedexposedresources
 spec:
   namespaces:
     - "*"
