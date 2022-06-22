@@ -189,7 +189,9 @@ You must apply a policy CR to reopen connections.
 * All existing {service-network} services and exposed resources are removed. 
 You must create those resources again.
 
+ifdef::skupper-io[]
 NOTE: If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of a {policy-system} in that version and avoid {service-network} disruption by following the procedure described in xref:upgrading-existing-sites[].
+endif::skupper-io[]
 
 .Procedure
 
