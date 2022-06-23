@@ -45,8 +45,11 @@ $ skupper status
 
 Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites.
 ----
++
+NOTE: The default message above is displayed when you initialize a site on a cluster that does not have the {policy-system} installed.
+If you install the {policy-system} as described in {skupperpolicybooklink}, the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
 
-The default settings include:
+The default site settings include:
 
 * console - The Skupper console is provisioned with a single user.
 The password for the `admin` user is stored in the `skupper-console-users` secret. 
