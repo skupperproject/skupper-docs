@@ -109,9 +109,9 @@ An operation is permitted if any single policy CR permits the operation.
 [id="installing-crd"] 
 == Installing the {policy-system} CRD
 
-Install the {policy-system} CRD enables a cluster administrator to enforce policies for {service-network}s.
+Installing the {policy-system} CRD enables a cluster administrator to enforce policies for {service-network}s.
 
-NOTE: If there are existing sites on the cluster, see xref:installing-crd-existing-sites[].
+NOTE: If there are existing sites on the cluster, see xref:installing-crd-existing-sites[] to avoid {service-network} disruption.
 
 .Prerequisites
 
