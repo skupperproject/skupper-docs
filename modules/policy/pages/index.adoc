@@ -409,4 +409,15 @@ $ kubectl  exec deploy/skupper-service-controller -- get policies expose deploym
 ALLOWED POLICY ENABLED ERROR                                                       ALLOWED BY 
 false   true           Policy validation error: deployment/nginx cannot be exposed            
 ----
+
+If you allowed an nginx deployment as described in xref:allowedExposedResources[], the same command shows that the resource is allowed and displays the name of the policy CR that enabled it:
+
+[source,bash]
+----
+$ kubectl  exec deploy/skupper-service-controller -- get policies expose deployment nginx
+ALLOWED POLICY ENABLED ERROR                                                       ALLOWED BY 
+true    true                                                                       allowedexposedresources        
+----
+
+
 --
