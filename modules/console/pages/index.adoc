@@ -5,12 +5,12 @@ endif::mod-loc[]
 //Category: skupper-console
 // Type: assembly
 [id="skupper-console"] 
-= Using the {skupper-name} console
+= Using the Skupper console
 
 include::{mod-loc}preface.adoc[]
 
-By default, when you create a {skupper-name} site, you also enable the {skupper-name} console.
-The {skupper-name} console URL is displayed whenever you check site status using `skupper status`.
+By default, when you create a {skupper-name} site, you also enable the Skupper console.
+The Skupper console URL is displayed whenever you check site status using `skupper status`.
 
 
 // Type: procedure
@@ -48,13 +48,13 @@ JNZWzMHtyg
 
 // Type: procedure
 [id="linking-sites-using-skupper-console"] 
-== Linking sites using the {skupper-name} console
+== Linking sites using the Skupper console
 
-The {skupper-name} console allows you create and use claim type tokens as described in {SkupperCliBookLink}.
+The Skupper console allows you create and use claim type tokens as described in {SkupperCliBookLink}.
 
 .Prerequisites
 
-* Two sites, each with {skupper-name} console enabled
+* Two sites, each with Skupper console enabled
 
 .Procedure
 

@@ -82,8 +82,7 @@ For example, if you apply an additional policy CR with the line `allowedOutgoing
 `namespaces`:: One or more patterns to specify the namespaces that this policy applies to.
 Note that you can use link:https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[Label selectors] to match the namespaces.
 
-`allowIncomingLinks`:: Specify `true` or `false` to determine whether other sites can create links to the specified namespaces.
-If set to `false`, you cannot create tokens or use the gateway features from this site.
+`allowIncomingLinks`:: Specify `true` to allow other sites create links to the specified namespaces.
 
 `allowedOutgoingLinksHostnames`:: Specify one or more patterns to determine which hosts you can create links to from the specified namespaces.
 
@@ -109,9 +108,9 @@ An operation is permitted if any single policy CR permits the operation.
 [id="installing-crd"] 
 == Installing the {policy-system} CRD
 
-Install the {policy-system} CRD enables a cluster administrator to enforce policies for {service-network}s.
+Installing the {policy-system} CRD enables a cluster administrator to enforce policies for {service-network}s.
 
-NOTE: If there are existing sites on the cluster, see xref:installing-crd-existing-sites[].
+NOTE: If there are existing sites on the cluster, see xref:installing-crd-existing-sites[] to avoid {service-network} disruption.
 
 .Prerequisites
 
@@ -330,7 +329,7 @@ spec:
   allowedServices: ['^backend-']
 ----
 
-NOTE: When exposing services, use the `--address <name>` parameter of the `skupper` CLI to name services appropriately.
+NOTE: When exposing services, you can use the `--address <name>` parameter of the `skupper` CLI to name services to match your policy.
 
 
 // Type: procedure
