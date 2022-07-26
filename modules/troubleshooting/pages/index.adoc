@@ -32,10 +32,16 @@ $ skupper status
 Skupper is enabled for namespace "west" in interior mode. It is connected to 2 other sites. It has 1 exposed services.
 ----
 
+The output shows:
+
+* A site exists in the specified namespace.
+
 
 --
 
 . Check the link status
+
+
 
 
 . Check the network
