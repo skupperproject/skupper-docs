@@ -1,0 +1,175 @@
+include::{mod-loc}attributes.adoc[]
+
+//Category: skupper-troubleshooting
+// Type: assembly
+
+[id="troubleshooting"] 
+= Troubleshooting a {service-network}
+
+[role="system:abstract"]
+Typically, you can create a {service-network} without referencing this troubleshooting guide.
+However, this guide provides some tips for situations when the {service-network} does not perform as expected.
+
+See xref:common-problems[] if you have encountered a specific issue using the `skupper` CLI.
+
+A typical troubleshooting workflow is to check all the sites and create debug tarballs.
+
+// Type: procedure
+[id="checking-sites"] 
+== Checking sites
+
+[role="system:abstract"]
+Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting {skupper-name}.
+
+.Procedure
+
+. Check the site status:
++
+--
+----
+$ skupper status --namespace west
+
+Skupper is enabled for namespace "west" in interior mode. It is connected to 2 other sites. It has 1 exposed services.
+----
+
+The output shows:
+
+* A site exists in the specified namespace.
+* A link exists to two other sites.
+* A service is exposed on the {service-network} and is accessible from this namespace.
+
+--
+
+. Check the link status:
++
+--
+----
+$ skupper link status --namespace east
+
+Link link1 is active
+----
+
+A link exists from the specified site to another site, meaning a token from another site was applied to the specified site.
+
+NOTE: Running `skupper link status` on a connected site produces output only if a token was used to create a link.   
+--
+
+. Check the {service-network}:
++
+--
+----
+$ skupper network status --namespace west
+
+Sites:
+├─ [local] 05f8c38 - west 
+│  URL: 10.110.15.54
+│  mode: interior
+│  name: west
+│  namespace: west
+│  version: 1.0.2
+│  ╰─ Services:
+│     ╰─ name: backend
+│        address: backend: 8080
+│        protocol: tcp
+╰─ [remote] 1537b82 - east 
+   URL: 10.97.26.100
+   name: east
+   namespace: east
+   sites linked to: 05f8c38-west
+   version: 1.0.2
+   ╰─ Services:
+      ╰─ name: backend
+         address: backend: 8080
+         protocol: tcp
+         ╰─ Targets:
+            ├─ name: backend-77f8f45fc8-smckp
+            ├─ name: backend-77f8f45fc8-gh6tp
+            ╰─ name: backend-77f8f45fc8-m58tg
+----
+
+The output shows:
+
+* There are 2 sites on the {service-network}, `east` and `west`.
+* Details for each site, for example the namespace names.
+* The original services that are exposed (Targets), in this case the three backend services exposed using the `tcp` protocol.
+* The services available on the {service-network}, including the port number. For example, `backend:8080`. 
+--
+
+
+// Type: procedure
+[id='creating-debug']
+== Creating a skupper debug tarball
+
+The debug tarball contains all the logs from the {skupper-name} components and provides detailed information to help debug issues.
+
+
+
+. Create the debug tarball:
++
+--
+----
+$  skupper debug dump my-site
+
+Skupper dump details written to compressed archive:  my-site.tar.gz
+
+----
+
+--
+
+// Type:procedure
+[id='common-problems']
+== Resolving common problems
+
+The following issues and workarounds might help you debug simple scenarios when evaluating {skupper-name}.
+
+*Cannot initialize skupper*
+
+If the `skupper init` command fails, consider the following options:
+
+* Check the load balancer.
++
+--
+If you are evaluating {skupper-name} on minikube, use the following command to create a load balancer:
+
+----
+$ minikube tunnel
+----
+
+For other Kubernetes flavors, see the documentation from your provider.
+
+--
+
+* Initialize without ingress.
++
+--
+This option prevents other sites from linking to this site, but linking outwards is supported.
+Once a link is established, traffic can flow in either direction.
+Enter the following command:
+
+[bash]
+----
+$ skupper init --ingress none
+----
+
+[NOTE]
+====
+See xref:cli-reference:skupper_init.adoc[] for more options.
+====
+
+--
+
+*Cannot link sites*
+
+To link two sites, one site must be accessible from the other site.
+For example, if one site is behind a firewall and the other site is on an AWS cluster, you must:
+
+. Create a token on the AWS cluster site.
+
+. Create the link on the site inside the firewall.
+
+
+*Cannot access Skupper console*
+
+Use `skupper status` to find the console URL.
+
+See xref:console:index.adoc[] for more information on *Accessing the console*, including how to retrieve the username and password.
