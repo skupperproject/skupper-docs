@@ -12,7 +12,7 @@ However, this guide provides some tips for situations when the {service-network}
 
 See xref:common-problems[] if you have encountered a specific issue using the `skupper` CLI.
 
-A typical troubleshooting workflow is to check all the sites, and create debug tarballs.
+A typical troubleshooting workflow is to check all the sites and create debug tarballs.
 
 // Type: procedure
 [id="checking-sites"] 
@@ -36,7 +36,7 @@ The output shows:
 
 * A site exists in the specified namespace.
 * A link exists to two other sites.
-* A service is exposed on the {service-network}, and is accessible from this namespace.
+* A service is exposed on the {service-network} and is accessible from this namespace.
 
 --
 
@@ -51,7 +51,7 @@ Link link1 is active
 
 A link exists from the specified site to another site, meaning a token from another site was applied to the specified site.
 
-NOTE: Running `skupper link status` on a connected site only produces output if a token was used to create a link.   
+NOTE: Running `skupper link status` on a connected site produces output only if a token was used to create a link.   
 --
 
 . Check the {service-network}:
@@ -89,10 +89,10 @@ Sites:
 
 The output shows:
 
-* There are two sites on the {service-network}, `east` and `west`.
+* There are 2 sites on the {service-network}, `east` and `west`.
 * Details for each site, for example the namespace names.
 * The original services that are exposed (Targets), in this case the three backend services exposed using the `tcp` protocol.
-* The services available on the {service-network}, including port, for example, `backend:8080`. 
+* The services available on the {service-network}, including the port number. For example, `backend:8080`. 
 --
 
 
@@ -100,7 +100,7 @@ The output shows:
 [id='creating-debug']
 == Creating a skupper debug tarball
 
-The debug tarball contains all the logs from the {skupper-name} components, and provides detailed information to help debug issues.
+The debug tarball contains all the logs from the {skupper-name} components and provides detailed information to help debug issues.
 
 
 
@@ -129,8 +129,7 @@ If the `skupper init` command fails, consider the following options:
 * Check the load balancer.
 +
 --
-If you are evaluating {skupper-name} on minikube, a load balancer is not automatically created.
-Use the following command to create a loadbalancer:
+If you are evaluating {skupper-name} on minikube, use the following command to create a load balancer:
 
 ----
 $ minikube tunnel
@@ -143,7 +142,7 @@ For other Kubernetes flavors, see the documentation from your provider.
 * Initialize without ingress.
 +
 --
-This option will prevent other sites from linking to this site, but linking outwards is supported.
+This option prevents other sites from linking to this site, but linking outwards is supported.
 Once a link is established, traffic can flow in either direction.
 Enter the following command:
 
@@ -167,4 +166,10 @@ For example, if one site is behind a firewall and the other site is on an AWS cl
 . Create a token on the AWS cluster site.
 
 . Create the link on the site inside the firewall.
- 
+
+
+*Cannot access Skupper console*
+
+Use `skupper status` to find the console URL.
+
+See xref:console:index.adoc[] for more information on *Accessing the console*, including how to retrieve the username and password.
