@@ -15,7 +15,7 @@ To extend the {service-network} beyond Kubernetes, the Skupper CLI allows you cr
 {skupper-name} has been tested on:
 
 * RHEL 8 for Skupper gateways
-* OpenShift Container Platform 4.7,4.8 and 4.9 for {skupper-name} sites
+* OpenShift Container Platform 4.7 to 4.10 for {skupper-name} sites
 
 .Additional information
 
