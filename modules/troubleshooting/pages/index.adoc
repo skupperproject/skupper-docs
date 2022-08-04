@@ -183,6 +183,6 @@ Token written to <path> (Note: token will only be valid for local cluster)
 ----
 
 This output indicates that the site was deployed without an ingress option. For example `skupper init --ingress none`.
-You must specify an ingress to allow other sites link to your site.
+You must specify an ingress to allow sites on other clusters to link to your site.
 
-You can also use the `skupper token create` command to check if an ingress was specified.
+You can also use the `skupper token create` command to check if an ingress was specified when the site was created.
