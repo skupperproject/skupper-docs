@@ -173,3 +173,16 @@ For example, if one site is behind a firewall and the other site is on an AWS cl
 Use `skupper status` to find the console URL.
 
 See xref:console:index.adoc[] for more information on *Accessing the console*, including how to retrieve the username and password.
+
+*Cannot create a token for linking clusters*
+
+You might see the following note after using the `skupper token create` command:
+
+----
+Token written to <path> (Note: token will only be valid for local cluster)
+----
+
+This output indicates that the site was deployed without an ingress option. For example `skupper init --ingress none`.
+You must specify an ingress to allow sites on other clusters to link to your site.
+
+You can also use the `skupper token create` command to check if an ingress was specified when the site was created.
