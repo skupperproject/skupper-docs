@@ -10,7 +10,9 @@ include::{mod-loc}attributes.adoc[]
 Typically, you can create a {service-network} without referencing this troubleshooting guide.
 However, this guide provides some tips for situations when the {service-network} does not perform as expected.
 
+// tag::skupper-io[]
 See xref:common-problems[] if you have encountered a specific issue using the `skupper` CLI.
+// end::skupper-io[]
 
 A typical troubleshooting workflow is to check all the sites and create debug tarballs.
 
@@ -100,19 +102,53 @@ The output shows:
 [id='creating-debug']
 == Creating a skupper debug tarball
 
-The debug tarball contains all the logs from the {skupper-name} components and provides detailed information to help debug issues.
+The debug tarball contains all the logs from the {skupper-name} components for a site and provides detailed information to help debug issues.
 
 
 
 . Create the debug tarball:
 +
---
 ----
 $  skupper debug dump my-site
 
-Skupper dump details written to compressed archive:  my-site.tar.gz
-
+Skupper dump details written to compressed archive:  `my-site.tar.gz`
 ----
+
+. You can expand the file using the following command:
++
+--
+----
+$ tar -xvf kind-site.tar.gz 
+
+k8s-versions.txt
+skupper-versions.txt
+skupper-router-deployment.yaml
+skupper-router-867f5ddcd8-plrcg-skstat-g.txt
+skupper-router-867f5ddcd8-plrcg-skstat-c.txt
+skupper-router-867f5ddcd8-plrcg-skstat-l.txt
+skupper-router-867f5ddcd8-plrcg-skstat-n.txt
+skupper-router-867f5ddcd8-plrcg-skstat-e.txt
+skupper-router-867f5ddcd8-plrcg-skstat-a.txt
+skupper-router-867f5ddcd8-plrcg-skstat-m.txt
+skupper-router-867f5ddcd8-plrcg-skstat-p.txt
+skupper-router-867f5ddcd8-plrcg-router-logs.txt
+skupper-router-867f5ddcd8-plrcg-config-sync-logs.txt
+skupper-service-controller-deployment.yaml
+skupper-service-controller-7485756984-gvrf6-events.txt
+skupper-service-controller-7485756984-gvrf6-service-controller-logs.txt
+skupper-site-configmap.yaml
+skupper-services-configmap.yaml
+skupper-internal-configmap.yaml
+skupper-sasl-config-configmap.yaml
+----
+
+These files can be used to provide support for {skupper-name}, however some items you can check:
+
+versions:: See `*versions.txt` for the versions of various components.
+
+ingress:: See `skupper-site-configmap.yaml` to determine the `ingress` type for the site.
+
+linking and services:: See the `skupper-service-controller-*-events.txt` file to view details of token usage and service exposure.
 
 --
 
