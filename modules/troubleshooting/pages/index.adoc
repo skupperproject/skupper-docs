@@ -116,6 +116,8 @@ Skupper dump details written to compressed archive:  my-site.tar.gz
 
 --
 
+// tag::skupper-io[]
+
 // Type:procedure
 [id='common-problems']
 == Resolving common problems
@@ -186,3 +188,4 @@ This output indicates that the site was deployed without an ingress option. For 
 You must specify an ingress to allow sites on other clusters to link to your site.
 
 You can also use the `skupper token create` command to check if an ingress was specified when the site was created.
+// end::skupper-io[]
