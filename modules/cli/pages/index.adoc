@@ -201,7 +201,7 @@ This section describes how services can be enabled for a {service-network} for s
 
 .Procedure
 
-. Create a deployment, some pods, or a service in one of your sites, for example to create the backend service for the link:{SkupperOpenShiftBookUrl}[tutorial]:
+. Create a deployment, some pods, or a service in one of your sites, for example:
 +
 ----
 $ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
@@ -248,7 +248,7 @@ This section describes how services can be enabled for a {service-network} for m
 
 .Procedure
 
-. Create a deployment, some pods, or a service in one of your sites, for example to create the backend service for the link:{SkupperOpenShiftBookUrl}[tutorial]:
+. Create a deployment, some pods, or a service in one of your sites, for example:
 +
 ----
 $ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
@@ -653,6 +653,6 @@ The following `skupper` options allow you to override that behavior and apply to
 ----
 $ skupper init --namespace backend
 ----
-`--kubeconfig <kubeconfig-path>`:: Path to the kubeconfig file - This allows you run multiple sessions to a cluster from the same client. An alternative is to set the `KUBECONFIG` environment variable. See the link:{SkupperOpenShiftBookUrl}[tutorial] for an example of using kubeconfig files.
+`--kubeconfig <kubeconfig-path>`:: Path to the kubeconfig file - This allows you run multiple sessions to a cluster from the same client. An alternative is to set the `KUBECONFIG` environment variable.
 
 `--context <context-name>`:: The kubeconfig file can contain defined contexts, and this option allows you to use those contexts.
