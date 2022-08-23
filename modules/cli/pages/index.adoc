@@ -310,6 +310,7 @@ This section shows how to expose a service from a namespace where {skupper-name}
 
 * A namespace where {skupper-name} is deployed.
 * A service running in a different namespace.
+* A network policy that allows communication between the namespaces
 
 . Log into your cluster and change to the namespace for your site.
 
