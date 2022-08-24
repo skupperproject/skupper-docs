@@ -324,6 +324,12 @@ $ skupper gateway expose service <service>.<namespace> --address <service>
 * <service> - the name of the service on the {service-network}.
 * <namespace> - the name of the namespace where the service you want to expose runs.
 
+For example, if you deployed {skupper-name} in the `east` namespace and you created a `backend` service in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+
+----
+$ skupper expose service backend.east-backend --port 8080 --address backend
+----
+
 [NOTE]
 ====
 You can only expose services from other namespaces.
