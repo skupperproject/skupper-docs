@@ -318,7 +318,7 @@ This section shows how to expose a service from a namespace where {skupper-name}
 +
 --
 ----
-$ skupper gateway expose service <service>.<namespace> --address <service>
+$ skupper expose service <service>.<namespace> --address <service>
 ----
 
 * <service> - the name of the service on the {service-network}.
