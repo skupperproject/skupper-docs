@@ -300,6 +300,44 @@ $ skupper service bind hello-world-backend deployment hello-world-backend
 
 --
 
+// Type: procedure
+[id="exposing-services-from-different-ns"] 
+=== Exposing services from a different namespace to the {service-network}
+
+This section shows how to expose a service from a namespace where {skupper-name} is not deployed.
+
+.Prerequisites
+
+* A namespace where {skupper-name} is deployed.
+* A service running in a different namespace.
+* A network policy that allows communication between the namespaces
+
+. Log into your cluster and change to the namespace for your site.
+
+. Expose the service on the {service-network}:
++
+--
+----
+$ skupper expose service <service>.<namespace> --address <service>
+----
+
+* <service> - the name of the service on the {service-network}.
+* <namespace> - the name of the namespace where the service you want to expose runs.
+
+For example, if you deployed {skupper-name} in the `east` namespace and you created a `backend` service in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+
+----
+$ skupper expose service backend.east-backend --port 8080 --address backend
+----
+
+[NOTE]
+====
+You can only expose services from other namespaces.
+If you want to expose a deployment from another namespace, create a service from the deployment before you try to expose it.
+====
+--
+
+
 // Type: concept
 [id="exposing-services-local"] 
 == Exposing services on the {service-network} from a local machine
