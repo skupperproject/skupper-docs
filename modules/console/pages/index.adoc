@@ -100,7 +100,7 @@ image::{img-loc}skupper-console.png[]
 . Click the *Network* menu item.
 Both the *east* and *west* sites should be displayed in circles.
 
-. Drag and drop the *west* circle to be on the left of the *east* circle.
+. Drag the *west* circle to be on the left of the *east* circle.
 
 . Click the *Table* tab to display the sites as text items.
 This view allows you drill down into details relating to the selected site.
