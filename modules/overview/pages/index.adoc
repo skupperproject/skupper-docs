@@ -5,7 +5,7 @@ include::{mod-loc}attributes.adoc[]
 [id="skupper-overview"] 
 = Skupper overview
 
-Hybrid clouds enable organizations to combine on-premise, private cloud, and public cloud resources.
+Hybrid clouds enable organizations to combine on-premises, private cloud, and public cloud resources.
 While such a solution provides many benefits, it also presents a unique challenge: enabling these resources to communicate with each other.
 
 Skupper provides a solution to this challenge with a Virtual Application Network that simply and securely connects applications running in different network locations.
@@ -55,7 +55,7 @@ VANs provide multiple routing patterns, so communications can be distributed in 
 == Skupper
 
 Skupper is an open source tool for creating VANs in Kubernetes.
-By using Skupper, you can create a distributed application comprised of microservices running in different Kubernetes clusters.
+By using Skupper, you can create a distributed application consisting of microservices running in different Kubernetes clusters.
 
 This diagram illustrates a Skupper network that connects three services running in three different Kubernetes clusters:
 

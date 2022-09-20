@@ -68,7 +68,7 @@ The tokens used to establish links creates the following secrets with variable n
 * The site that issues a claim token generates a secret with a UUID name that contains details of any usage restrictions, for example, the number of times you can use the token to create a link and the amount of time the token is valid for.
 
 * The site establishing the link will have a secret that contains the token claim or certificate. 
-These secrets are typically called `link1`, `link2`, etc. 
+These secrets are typically called `link1`, `link2`, and so on. 
 --
 
 skupper-console-users::
@@ -80,7 +80,7 @@ If a username and password are not specified, an `admin` user is created with a 
 
 In addition to the services that are exposed on the {service-network}, the following services are created:
 
-skupper-router-local:: The service controller uses this service to connect to the router in order to configure it and get statistics. 
+skupper-router-local:: The service controller uses this service to connect to and configure the router. 
 
 skupper-router:: Other sites use this service to access the router over the inter-router or edge ports, although there may be other resources involved, for example, an ingress. 
 

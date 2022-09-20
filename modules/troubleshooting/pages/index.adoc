@@ -14,7 +14,7 @@ However, this guide provides some tips for situations when the {service-network}
 See xref:common-problems[] if you have encountered a specific issue using the `skupper` CLI.
 // end::skupper-io[]
 
-A typical troubleshooting workflow is to check all the sites and create debug tarballs.
+A typical troubleshooting workflow is to check all the sites and create debug tar files.
 
 // Type: procedure
 [id="checking-sites"] 
@@ -100,13 +100,13 @@ The output shows:
 
 // Type: procedure
 [id='creating-debug']
-== Creating a skupper debug tarball
+== Creating a skupper debug tar file
 
-The debug tarball contains all the logs from the {skupper-name} components for a site and provides detailed information to help debug issues.
+The debug tar file contains all the logs from the {skupper-name} components for a site and provides detailed information to help debug issues.
 
 
 
-. Create the debug tarball:
+. Create the debug tar file:
 +
 ----
 $  skupper debug dump my-site
@@ -210,7 +210,7 @@ For example, if one site is behind a firewall and the other site is on an AWS cl
 
 Use `skupper status` to find the console URL.
 
-See xref:console:index.adoc[] for more information on *Accessing the console*, including how to retrieve the username and password.
+See xref:console:index.adoc[] for more information about *Accessing the console*, including how to retrieve the username and password.
 
 *Cannot create a token for linking clusters*
 

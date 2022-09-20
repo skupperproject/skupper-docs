@@ -53,7 +53,7 @@ The default site settings include:
 
 * console - The Skupper console is provisioned with a single user.
 The password for the `admin` user is stored in the `skupper-console-users` secret. 
-For more information on the console, see {SkupperConsoleBookLink}.
+For more information about the console, see {SkupperConsoleBookLink}.
 
 * site name - The site name defaults to the namespace name, for example, `west`.
 
@@ -78,7 +78,7 @@ $ skupper init --enable-console false
 
 
 * Configuring console authentication.
-There are a number of `skupper` options regarding authentication for the console:
+There are several `skupper` options regarding authentication for the console:
 +
 --
 `--console-auth <authentication-mode>`:: Set the authentication mode for the console:

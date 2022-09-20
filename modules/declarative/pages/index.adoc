@@ -25,7 +25,7 @@ You can store your YAML files in source control to track and manage {skupper-nam
 .Procedure
 
 . Log into your cluster.
-If you are deploying {skupper-name} to be available for all namespaces, make sure you have `cluster-admin` privileges.
+If you are deploying {skupper-name} to be available for all namespaces, verify you have `cluster-admin` privileges.
 
 . Deploy the site controller:
 

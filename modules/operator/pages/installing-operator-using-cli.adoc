@@ -40,7 +40,7 @@ $ kubectl config set-context --current --namespace=__<namespace-name>__
 $ kubectl apply -f examples/{example-directory}/00-cs.yaml
 ----
 
-. Make sure the skupper-operator catalog pod is running before continuing:
+. Verify the skupper-operator catalog pod is running before continuing:
 +
 [source,bash,options="nowrap",subs=attributes+]
 ----
