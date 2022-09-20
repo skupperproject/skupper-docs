@@ -156,7 +156,14 @@ Link link1 is active
 
 The output shows that the `skupper revoke-access` command has revoked the incoming links, but outgoing links are still active.
 
-You can remove that link using the `skupper link delete link1` command, but to revoke access, you must follow this procedure while logged into the appropriate cluster.
+You can remove that link using the `skupper link delete link1` command.
+To revoke access, you must follow this procedure while logged into the appropriate cluster.
+
+[NOTE]
+====
+After performing the `skupper revoke-access` command, the remote site still retains the link information and returns a `Already connected to <site>` message if you try to recreate the link.
+To recreate the link, you must first delete the link manually from the remote site context.
+====
 --
 
 .Additional information
