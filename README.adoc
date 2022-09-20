@@ -42,3 +42,14 @@ npm install
 ----
 LIVERELOAD=true gulp
 ----
+
+== Testing documentation
+
+Vale is a command-line tool that allows you to check your writing for grammar and spelling errors against a set of style rules. 
+See link:https://vale.sh/docs/vale-cli/installation/[Installation - Vale.sh] for more information about vale.
+
+To test documentation:
+
+----
+vale modules/
+----
