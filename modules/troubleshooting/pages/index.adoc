@@ -97,6 +97,23 @@ The output shows:
 * The services available on the {service-network}, including the port number. For example, `backend:8080`. 
 --
 
+. Check the status of services exposed on the {service-network}:
++
+--
+----
+$ skupper service status
+Services exposed through Skupper:
+╰─ backend (tcp port 8080)
+   ╰─ Targets:
+      ╰─ app=backend name=backend
+----
+
+The output shows the `backend` service and the related target of that service.
+
+NOTE: The related targets for services are only displayed when the target is available on the current cluster.
+--
+
+
 
 // Type: procedure
 [id='creating-debug']
