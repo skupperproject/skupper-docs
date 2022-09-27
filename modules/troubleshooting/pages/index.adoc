@@ -113,15 +113,57 @@ The output shows the `backend` service and the related target of that service.
 NOTE: The related targets for services are only displayed when the target is available on the current cluster.
 --
 
+. List the events for a site:
++
+--
+----
+$ skupper debug events
+NAME                         COUNT                                                          AGE
+GatewayQueryRequest          3                                                              9m12s
+                             3     gateway request                                          9m12s
+SiteQueryRequest             3                                                              9m12s
+                             3     site data request                                        9m12s
+ServiceControllerEvent       9                                                              10m24s
+                             2     service event for west/frontend                          10m24s
+                             1     service event for west/backend                           10m26s
+                             1     Checking service for: backend                            10m26s
+                             2     Service definitions have changed                         10m26s
+                             1     service event for west/skupper-router                    11m4s
+DefinitionMonitorEvent       15                                                             10m24s
+                             2     service event for west/frontend                          10m24s
+                             1     service event for west/backend                           10m26s
+                             1     Service definitions have changed                         10m26s
+                             5     deployment event for west/frontend                       10m34s
+                             1     deployment event for west/skupper-service-controller     11m4s
+ServiceControllerUpdateEvent 1                                                              10m26s
+                             1     Updating skupper-internal                                10m26s
+ServiceSyncEvent             3                                                              10m26s
+                             1     Service interface(s) added backend                       10m26s
+                             1     Service sync sender connection to                        11m4s
+                                   amqps://skupper-router-local.west.svc.cluster.local:5671 
+                                   established                                              
+                             1     Service sync receiver connection to                      11m4s
+                                   amqps://skupper-router-local.west.svc.cluster.local:5671 
+                                   established                                              
+IpMappingEvent               5                                                              10m34s
+                             1     172.17.0.7 mapped to frontend-6b4688bf56-rp9hc           10m34s
+                             2      mapped to frontend-6b4688bf56-rp9hc                     10m54s
+                             1     172.17.0.4 mapped to                                     11m4s
+                                   skupper-service-controller-6c97c5cf5d-6nzph              
+                             1     172.17.0.3 mapped to skupper-router-547dffdcbf-l8pdc     11m4s
+TokenClaimVerification       1                                                              10m59s
+                             1     Claim for efe3a241-3e4f-11ed-95d0-482ae336eb38 succeeded 10m59s
 
+----
+The output shows the linking of sites and exposing a service on a {service-network}.
+However, this output is most useful when reporting an issue and is included in the {skupper-name} debug tar file.
+--
 
 // Type: procedure
 [id='creating-debug']
-== Creating a skupper debug tar file
+== Creating a {skupper-name} debug tar file
 
 The debug tar file contains all the logs from the {skupper-name} components for a site and provides detailed information to help debug issues.
-
-
 
 . Create the debug tar file:
 +
