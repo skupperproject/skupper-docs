@@ -155,7 +155,7 @@ TokenClaimVerification       1                                                  
                              1     Claim for efe3a241-3e4f-11ed-95d0-482ae336eb38 succeeded 10m59s
 
 ----
-The output shows the linking of sites and exposing a service on a {service-network}.
+The output shows sites being linked and a service being exposed on a {service-network}.
 However, this output is most useful when reporting an issue and is included in the {skupper-name} debug tar file.
 --
 
@@ -264,6 +264,11 @@ For example, if one site is behind a firewall and the other site is on an AWS cl
 
 . Create the link on the site inside the firewall.
 
+[NOTE]
+====
+By default, a token is only valid for a single link.
+If you need to link many sites, create separate tokens for each link.
+====
 
 *Cannot access Skupper console*
 
