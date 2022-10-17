@@ -1,0 +1,61 @@
+// Type: procedure
+[id="installing-cli"] 
+= Creating sites using a custom certificate authority on OpenShift
+
+By default, {skupper-name} creates certificates to establish links between sites using mTLS.
+These certificates are stored as secrets in the namespace when you create a site using `skupper init`.
+If you want to use your own certificates, you can populate the a set secrets with the appropriate certificates before creating the site as described in this section.
+
+.Prerequisites
+
+* Access to an OpenShift cluster with sufficient permission to run `skupper init`.
+* Access to create certificates using your certificate authority.
+
+
+. Create one or more certificates for a site.
++
+--
+There several alternative approaches to this step:
+
+* Reissue an existing certificate with a set of Subject Alternative Names (SAN) for the site.
+* Create a new certificate with a set of SANs for the site.
+* Create a new certificate for each item relating to the site.
+
+You require a certificate for each of the following:
+
+* skupper.<namespace>
+* skupper-router.<namespace>
+* skupper-router-local 
+* skupper-router-local.<namespace>.svc.cluster.local
+* claims-<namespace>.<clustername>.<domain>     
+* skupper-<namespace>.<clustername>.<domain>
+* skupper-edge-<namespace>.<clustername>.<domain>
+* skupper-inter-router-<namespace>.<clustername>.<domain>
+
+where:
+
+* <namespace> is the name of the namespace where you want to create a site.
+* <clustername> is the name of the cluster.
+* domain is the domain name for the cluster.
+
+Using a specific certificate authority technology is beyond the scope of this guide, but the following command creates a certificate authority on Linux:
+
+----
+$ ssh-keygen -t rsa -m PEM -f tls.key -q -N ""
+openssl req -x509 -nodes -days 365 -key tls.key -out tls.crt 
+----
+
+Given the certificate authority created `tls.crt` and `tls.key` files, you can create a certificate for the site as follows:
+
+----
+$ mkdir certificate
+
+$ cd certificate
+
+$ openssl req -nodes -newkey rsa:4096 -x509 -CA ../tls.crt -CAkey ../tls.key  -out tls.crt -keyout tls.key -addext "subjectAltName = DNS:skupper.<namespace>, DNS:skupper-router.<namespace>, DNS:skupper-router-local, DNS:skupper-router-local.<namespace>.svc.cluster.local,DNS:claims-<namespace>.<clustername>.<domain>, DNS:skupper-<namespace>.<clustername>.<domain>, DNS:skupper-edge-<namespace>.<clustername>.<domain>, DNS:skupper-inter-router-<namespace>.<clustername>.<domain>" -batch
+----
+
+You should now have `tls.crt` and `tls.key` files in the `certificate` directory that you can use with a site.
+--
+
+
