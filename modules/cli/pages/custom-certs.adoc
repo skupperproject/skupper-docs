@@ -2,7 +2,7 @@
 [id="installing-cli"] 
 = Creating sites using a custom certificate authority on OpenShift
 
-By default, {skupper-name} creates certificates to establish links between sites using mTLS.
+By default, {skupper-name} creates certificates to establish links between sites using mutual TLS.
 These certificates are stored as secrets in the namespace when you create a site using `skupper init`.
 If you want to use your own certificates, you can populate the a set secrets with the appropriate certificates before creating the site as described in this section.
 
@@ -57,13 +57,7 @@ $ cd ..
 $ mkdir certificate
 $ cd certificate
 
-$ openssl req -nodes -newkey rsa:4096 -x509 -CA ../tls.crt -CAkey ../tls.key  -out tls.crt -keyout tls.key -addext "subjectAltName = DNS:skupper.<namespace>, DNS:skupper-router.<namespace>, DNS:skupper-router-local, DNS:skupper-router-local.<namespace>.svc.cluster.local,DNS:claims-<namespace>.<clustername>.<domain>, DNS:skupper-<namespace>.<clustername>.<domain>, DNS:skupper-edge-<namespace>.<clustername>.<domain>, DNS:skupper-inter-router-<namespace>.<clustername>.<domain>" -batch
-----
-
-.. Copy the generated `tls.crt` from the `ca` directory to the `certificate` directory`:
-+
-----
-$ cp ../ca/tls.crt ./ca.crt
+$ openssl req -nodes -newkey rsa:4096 -x509 -CA ../ca/tls.crt -CAkey ../ca/tls.key -out tls.crt -keyout tls.key -addext "subjectAltName = DNS:skupper.<namespace>, DNS:skupper-router.<namespace>, DNS:skupper-router-local, DNS:skupper-router-local.<namespace>.svc.cluster.local,DNS:claims-<namespace>.<clustername>.<domain>, DNS:skupper-<namespace>.<clustername>.<domain>, DNS:skupper-edge-<namespace>.<clustername>.<domain>, DNS:skupper-inter-router-<namespace>.<clustername>.<domain>"
 ----
 
 
