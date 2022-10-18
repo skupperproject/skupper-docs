@@ -134,4 +134,16 @@ To verify your site, check the status:
 $ skupper status
 ----
 
+You can also verify the OpenShift routes are created using:
+
+----
+$ oc get routes
+----
+
+Finally, use the following command to check for errors relating to incorrect certificates:
+
+----
+$ skupper debug events
+----
+
 --
