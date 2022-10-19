@@ -1,5 +1,5 @@
 // Type: procedure
-[id="installing-cli"] 
+[id="custom-certs"] 
 = Creating sites using a custom certificate authority on OpenShift
 
 By default, {skupper-name} creates certificates to establish links between sites using mutual TLS.
