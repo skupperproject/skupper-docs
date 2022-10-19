@@ -7,6 +7,15 @@ These certificates are stored as secrets in the namespace when you create a site
 If you want to use your own certificates, you can populate the a set of secrets with the appropriate certificates before creating the site as described in this section.
 This set of secrets provides {skupper-name} with the configuration required to create a site.
 
+The following certificates are required:
+
+skupper-claims-server:: Used for linking sites with claim type tokens.
+skupper-console-certs:: Used by the Skupper console.
+skupper-local-client and skupper-local-server:: Used by the Skupper router. 
+skupper-site-server:: Used for all inter-router connections, and for headless services.
+skupper-service-client:: Used for services exposed over TLS.
+
+
 .Prerequisites
 * Access to an OpenShift cluster with sufficient permission to run `skupper init`.
 * Access to create certificates using your certificate authority.
@@ -25,7 +34,7 @@ You require a certificate for each of the following secrets:
 
 * `skupper.<namespace>`
 * `skupper-router.<namespace>`
-* `skupper-router-local `
+* `skupper-router-local`
 * `skupper-router-local.<namespace>.svc.cluster.local`
 * `claims-<namespace>.<clustername>.<domain>`     
 * `skupper-<namespace>.<clustername>.<domain>`
