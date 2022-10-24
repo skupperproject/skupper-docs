@@ -42,20 +42,6 @@ The output shows:
 
 --
 
-. Check the link status:
-+
---
-----
-$ skupper link status --namespace east
-
-Link link1 is active
-----
-
-A link exists from the specified site to another site, meaning a token from another site was applied to the specified site.
-
-NOTE: Running `skupper link status` on a connected site produces output only if a token was used to create a link.   
---
-
 . Check the {service-network}:
 +
 --
@@ -88,6 +74,8 @@ Sites:
             ├─ name: backend-77f8f45fc8-gh6tp
             ╰─ name: backend-77f8f45fc8-m58tg
 ----
+
+NOTE: If the output is not what you expected, you might want to xref:checking-links[check links] before proceeding.
 
 The output shows:
 
@@ -158,6 +146,71 @@ TokenClaimVerification       1                                                  
 The output shows sites being linked and a service being exposed on a {service-network}.
 However, this output is most useful when reporting an issue and is included in the {skupper-name} debug tar file.
 --
+
+.Additional information
+
+* xref:checking-links[]
+
+// Type: procedure
+[id='checking-links']
+== Checking links
+
+You must link sites before you can expose services on the {service-network}.
+This section outlines some advanced options for checking links.
+
+
+. Check the link status:
++
+--
+----
+$ skupper link status --namespace east
+
+Links created from this site:
+-------------------------------
+Link link1 is active
+----
+
+A link exists from the specified site to another site, meaning a token from another site was applied to the specified site.
+
+NOTE: Running `skupper link status` on a connected site produces output only if a token was used to create a link.   
+
+If you use this command on a site where you did not create the link, but there is an incoming link to the site:
+----
+$ skupper link status --namespace west
+
+Links created from this site:
+-------------------------------
+There are no links configured or active
+
+Currently active links from other sites:
+----------------------------------------
+A link from the namespace east on site east(536695a9-26dc-4448-b207-519f56e99b71) is active 
+----
+--
+
+. Check the verbose link status:
++
+--
+----
+$ skupper link status link1 --verbose --namespace east
+
+ Cost:          1
+ Created:       2022-10-24 12:50:33 +0100 IST
+ Name:          link1
+ Namespace:     east
+ Site:          east-536695a9-26dc-4448-b207-519f56e99b71
+ Status:        Active
+----
+
+The output shows detail about the link, including a timestamp of when the link was created and the associated relative cost of using the link.
+
+The status of the link must be `Active` to allow service traffic.
+--
+
+.Additional information
+
+* xref:checking-sites[]
+
 
 // Type: procedure
 [id='creating-debug']
