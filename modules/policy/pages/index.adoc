@@ -382,7 +382,17 @@ false   true           Policy validation error: incoming links are not allowed
 +
 In this example incoming links are not allowed by policy.
 
-. Explore other policies:
+. List all policies:
++
+--
+[source,bash]
+----
+$ kubectl exec deploy/skupper-service-controller -- get policies list
+----
+The output shows all the policies applied to this site.
+--
+
+. Explore policies:
 +
 --
 [source,bash]
@@ -396,6 +406,7 @@ Usage:
 Available Commands:
   expose       Validates if the given resource can be exposed
   incominglink Validates if incoming links can be created
+  list         List policy state for current site
   outgoinglink Validates if an outgoing link to the given hostname is allowed
   service      Validates if service can be created or imported
 ----
