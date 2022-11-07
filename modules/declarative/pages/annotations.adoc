@@ -1,0 +1,29 @@
+include::{mod-loc}attributes.adoc[]
+
+//Category: skupper-annotations
+// Type: assembly
+[id="skupper-annotations"] 
+= Configuring services using annotations
+
+
+[role="system:abstract"]
+Using Kubernetes annotations allows you to control which services are available on the {service-network}.
+
+
+// Type: procedure
+[id="installing-using-yaml"] 
+== Exposing simple services on the {service-network} using annotations
+
+[role="system:abstract"]
+This section provides an alternative to the `skupper expose` command, allowing you to annotate existing resources to expose simple services on the {service-network}.
+
+.Prerequisites
+
+* Access to a Kubernetes cluster
+* A site
+
+.Procedure
+
+. Log into the namespace in your cluster that is configured as a site.
+
+
