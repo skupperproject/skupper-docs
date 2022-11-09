@@ -5,13 +5,11 @@ include::{mod-loc}attributes.adoc[]
 [id="skupper-annotations"] 
 = Configuring services using annotations
 
-
-[role="system:abstract"]
 Using Kubernetes annotations allows you to control which services are available on the {service-network}.
 
 
 // Type: procedure
-[id="installing-using-yaml"] 
+[id="exposing-services-annotations"] 
 == Exposing simple services on the {service-network} using annotations
 
 [role="system:abstract"]
@@ -25,5 +23,46 @@ This section provides an alternative to the `skupper expose` command, allowing y
 .Procedure
 
 . Log into the namespace in your cluster that is configured as a site.
+
+. Create a deployment, some pods, or a service in one of your sites, for example:
++
+----
+$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+----
++
+This step is not {skupper-name}-specific, that is, this process is unchanged from standard processes for your cluster.
+
+. Annotate the kubernetes resource to create a service that can communicate on the {service-network}, for example:
++
+--
+----
+$ kubectl annotate deployment backend "skupper.io/address=backend" "skupper.io/port=8080" "skupper.io/proxy=tcp" "skupper.io/target=backend"
+----
+
+The required annotations are:
+
+* `skupper.io/address` - the name of the service on the {service-network}. 
+* `skupper.io/port` - the port for the service on the {service-network}. 
+* `skupper.io/proxy` - the protocol you want to use, `tcp`, `http` or `http2`.
+* `skupper.io/target` is the kubernetes resource that want to expose.
+
+Typically, the `target` is the same as the resource you are annotating.
+
+NOTE: If you do not specify `skupper.io/port`, the `containerPort` value of the deployment is used.
+--
+
+. Check that you have exposed the service:
++
+--
+----
+$ skupper service status
+Services exposed through Skupper:
+╰─ backend (tcp port 8080)
+   ╰─ Targets:
+      ╰─ app=backend name=backend
+----
+
+NOTE: The related targets for services are only displayed when the target is available on the current cluster.
+--
 
 
