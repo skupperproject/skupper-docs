@@ -49,8 +49,6 @@ You deploy and manage a {service-network}, including a gateway, using the `skupp
 * {SkupperOverviewBookLink}
 
 
-include::./installing.adoc[leveloffset=+1]
-
 
 // Type: procedure
 [id="creating-backend"] 
