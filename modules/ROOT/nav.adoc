@@ -16,5 +16,5 @@ include::partial$attributes.adoc[]
 * OpenShift
 ** xref:openshift:index.adoc[Certs]
 ** xref:openshift:openshift.adoc[OpenShift tutorial]
-** xref:cli:openshift-gateway.adoc[Gateway tutorial]
+** xref:openshift:openshift-gateway.adoc[Gateway tutorial]
 
