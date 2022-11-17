@@ -178,6 +178,56 @@ $ skupper link delete <link-name>
 ----
 where `<link-name>` is the name of the link specified during creation.
 
+// Type: procedure
+[id="link-cost"] 
+== Specifying link cost
+
+When linking sites, you can assign a cost to each link to influence the traffic flow. By default, link cost is set to `1` for a new link.
+
+If you have more than two sites and services distributed across different clusters, you might want a calling service to favor a particular target or link.
+In this case, you can specify a cost of greater than `1` for links that should be avoided.
+
+.Prerequisite
+
+* You have set your Kubernetes context to a site that you want to link _from_.
+* A token for the site that you want to link _to_.
+
+.Procedure
+
+. Create a link to the {service-network}:
++
+--
+----
+$ skupper link create <filename> --cost <integer-cost>
+----
+
+where `<integer-cost>` is an integer greater than 1 and traffic favors lower cost links.
+
+For example, create a link with cost set to `2` using a token file named `token.yaml`:
+
+----
+$ skupper link create token.yaml --cost 2
+----
+--
+
+. Check the link cost:
++
+----
+$ skupper link status link1 --verbose
+
+ Cost:          2
+ Created:       2022-11-17 15:02:01 +0000 GMT
+ Name:          link1
+ Namespace:     default
+ Site:          default-0d99d031-cee2-4cc6-a761-697fe0f76275
+ Status:        Active
+----
+
+
+
+
+
+
 
 // Type: concept
 [id="exposing-services-ns"] 
