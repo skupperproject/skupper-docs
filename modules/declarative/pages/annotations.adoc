@@ -60,7 +60,7 @@ $ skupper service status
 Services exposed through Skupper:
 ╰─ backend (tcp port 8080)
    ╰─ Targets:
-      ╰─ app=backend name=backend
+      ╰─ app=hello-world-backend name=hello-world-backend
 ----
 
 NOTE: The related targets for services are only displayed when the target is available on the current cluster.
