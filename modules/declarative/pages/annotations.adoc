@@ -10,15 +10,13 @@ Using Kubernetes annotations allows you to control which services are available 
 
 // Type: procedure
 [id="exposing-services-annotations"] 
-== Exposing simple services on the {service-network} using annotations
+== Exposing simple services on a {service-network} using annotations
 
-[role="system:abstract"]
 This section provides an alternative to the `skupper expose` command, allowing you to annotate existing resources to expose simple services on the {service-network}.
 
 .Prerequisites
 
-* Access to a Kubernetes cluster
-* A site
+* A site with a service you want to expose
 
 .Procedure
 
@@ -36,7 +34,7 @@ This step is not {skupper-name}-specific, that is, this process is unchanged fro
 +
 --
 ----
-$ kubectl annotate deployment backend "skupper.io/address=backend" "skupper.io/port=8080" "skupper.io/proxy=tcp" "skupper.io/target=backend"
+$ kubectl annotate deployment backend "skupper.io/address=backend" "skupper.io/port=8080" "skupper.io/proxy=tcp"
 ----
 
 The required annotations are:
@@ -44,11 +42,14 @@ The required annotations are:
 * `skupper.io/address` - the name of the service on the {service-network}. 
 * `skupper.io/port` - the port for the service on the {service-network}. 
 * `skupper.io/proxy` - the protocol you want to use, `tcp`, `http` or `http2`.
-* `skupper.io/target` is the kubernetes resource that want to expose.
 
-Typically, the `target` is the same as the resource you are annotating.
 
-NOTE: If you do not specify `skupper.io/port`, the `containerPort` value of the deployment is used.
+[NOTE]
+====
+* `skupper.io/target` is an additional annotation that you use when exposing services.
+* If you do not specify `skupper.io/port`, the `containerPort` value of the deployment is used.
+====
+
 --
 
 . Check that you have exposed the service:
@@ -65,4 +66,54 @@ Services exposed through Skupper:
 NOTE: The related targets for services are only displayed when the target is available on the current cluster.
 --
 
+// Type: reference
+[id="understanding-annotations"] 
+== Understanding Skupper annotations
+
+Annotations allow you to expose services on the {service-network}.
+This section provides details on the scope of those annotations
+
+
+skupper.io/address::
+The name of the service on the {service-network}.
+Applies to:
+* Deployments
+* StatefulSets
+* DaemonSets
+* Services
+
+skupper.io/port::
+The port for the service on the {service-network}.
+Applies to:
+* Deployments
+* StatefulSets
+* DaemonSets
+
+skupper.io/proxy::
+The protocol you want to use, `tcp`, `http` or `http2`.
+Applies to:
+* Deployments
+* StatefulSets
+* DaemonSets
+* Services
+
+skupper.io/target::
+The name of the target service you want to expose.
+Applies to:
+* Services
+
+skupper.io/service-labels::
+A comma separated list of label keys and values for the exposed service.
+You can use this annotation to set up labels for monitoring exposed services.
+Applies to:
+* Deployments
+* DaemonSets
+* Services
+
+// Uncomment when we have docs for headless
+
+// skupper.io/headless::
+// Flag that indicates Skupper to generate a headless service
+// Applies to:
+// * StatefulSets
 
