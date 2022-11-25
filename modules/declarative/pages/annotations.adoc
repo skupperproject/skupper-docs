@@ -39,16 +39,22 @@ $ kubectl annotate deployment backend "skupper.io/address=backend" "skupper.io/p
 
 The annotations include:
 
+* `skupper.io/proxy` - the protocol you want to use, `tcp`, `http` or `http2`.
+This is the only annotation that is required.
+For example, if you annotate a simple deployment named `backend` with `skupper.io/proxy=tcp`, the service is exposed as `backend` and the `containerPort` value of the deployment is used as the port number.
+
 * `skupper.io/address` - the name of the service on the {service-network}. 
-This is the only annotation that is required and is equivalent to the `skupper expose` command.
-* `skupper.io/port` - the ports for the service on the {service-network}. 
-* `skupper.io/proxy` - the protocol you want to use, `tcp`, `http` or `http2`, defaults to `tcp`.
+
+* `skupper.io/port` - one or more ports for the service on the {service-network}. 
 
 
 [NOTE]
 ====
-* `skupper.io/target` is an additional annotation that you use when exposing services.
-* If you do not specify `skupper.io/port`, the `containerPort` value of the deployment is used.
+When exposing services, rather than other resources like deployments, you must use the `skupper.io/target` annotation.
+For example, if you want to expose the `backend` service:
+----
+$ kubectl annotate service backend "skupper.io/address=van-backend" "skupper.io/port=8080" "skupper.io/proxy=tcp"
+----
 ====
 
 --
