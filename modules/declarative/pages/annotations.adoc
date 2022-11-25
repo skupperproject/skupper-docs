@@ -50,11 +50,12 @@ For example, if you annotate a simple deployment named `backend` with `skupper.i
 
 [NOTE]
 ====
-When exposing services, rather than other resources like deployments, you must use the `skupper.io/target` annotation.
+When exposing services, rather than other resources like deployments, you can use the `skupper.io/target` annotation to avoid modifying the original service.
 For example, if you want to expose the `backend` service:
 ----
-$ kubectl annotate service backend "skupper.io/address=van-backend" "skupper.io/port=8080" "skupper.io/proxy=tcp"
+$ kubectl annotate service backend "skupper.io/address=van-backend" "skupper.io/port=8080" "skupper.io/proxy=tcp" "skupper.io/target=backend"
 ----
+This allows you to delete and recreate the `backend` service without having to apply the annotation again.
 ====
 
 --
