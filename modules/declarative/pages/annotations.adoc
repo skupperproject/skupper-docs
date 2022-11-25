@@ -37,11 +37,12 @@ This step is not {skupper-name}-specific, that is, this process is unchanged fro
 $ kubectl annotate deployment backend "skupper.io/address=backend" "skupper.io/port=8080" "skupper.io/proxy=tcp"
 ----
 
-The required annotations are:
+The annotations include:
 
 * `skupper.io/address` - the name of the service on the {service-network}. 
-* `skupper.io/port` - the port for the service on the {service-network}. 
-* `skupper.io/proxy` - the protocol you want to use, `tcp`, `http` or `http2`.
+This is the only annotation that is required and is equivalent to the `skupper expose` command.
+* `skupper.io/port` - the ports for the service on the {service-network}. 
+* `skupper.io/proxy` - the protocol you want to use, `tcp`, `http` or `http2`, defaults to `tcp`.
 
 
 [NOTE]
