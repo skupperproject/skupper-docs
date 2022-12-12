@@ -388,11 +388,12 @@ $ skupper gateway expose mysql 192.168.1.200 3306
 . Check the status of Skupper gateways:
 +
 --
+[subs=attributes+]
 ----
 $ skupper gateway status
 
 Gateway Definition:
-╰─ machine-user type:service version:2.2.0
+╰─ machine-user type:service version:{service-version}
    ╰─ Bindings:
       ╰─ mydb:3306 tcp mydb:3306 localhost 3306
 
@@ -462,12 +463,13 @@ $ skupper gateway bind <service> <host> <port>
 . Check the status of Skupper gateways:
 +
 --
+[subs=attributes+]
 ----
 $ skupper gateway status
 Gateway Definitions Summary
 
 Gateway Definition:
-╰─ machine-user type:service version:2.2.0
+╰─ machine-user type:service version:{service-version}
    ╰─ Bindings:
       ╰─ mydb:3306 tcp mydb:3306 localhost 3306
 
@@ -625,10 +627,11 @@ NOTE: You can later remove the gateway using `./remove.py`.
 . From the machine with cluster access, check the status of Skupper gateways:
 +
 --
+[subs=attributes+]
 ----
 $ skupper gateway status
 Gateway Definition:
-╰─ machine-user type:service version:2.2.0
+╰─ machine-user type:service version:{service-version}
    ╰─ Bindings:
       ╰─ mydb:3306 tcp mydb:3306 localhost 3306
 ----

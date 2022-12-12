@@ -19,8 +19,9 @@
 // name and version
 :skupper-name: Skupper
 :service-network: service network
-:skupper-version: 1.0
-:skupper-cli-version: {skupper-version}
+:skupper-version: 1.2
+:service-version: 2.2.0
+:skupper-cli-version: {skupper-version}.0
 :SkupperOperatorName: Skupper Operator
 :skupper-router: Skupper router
 :policy-system: policy system
