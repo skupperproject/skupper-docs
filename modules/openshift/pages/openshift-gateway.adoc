@@ -7,8 +7,8 @@ include::{mod-loc}attributes.adoc[]
 
 //Category: gateway-tutorial
 // Type: assembly
-[id="openshift-tutorial"] 
-= Creating a {service-network} with {kubernetes-flavor} and accessing a backend service using a gateway
+[id="gateway-tutorial"] 
+= Creating a {service-network} with g and accessing a backend service using a gateway
 
 [role="system:abstract"]
 This tutorial describes how to connect a local backend service on a local machine with a frontend service running on a {kubernetes-flavor} cluster. 
@@ -23,7 +23,7 @@ In this tutorial, the services are the same as used in {SkupperOpenShiftBookLink
 
 This tutorial shows how to connect the following:
 
-* `west` - a namespace in an accessible OpenShift cluster running the frontend service.
+* `west` - a namespace in an accessible cluster running the frontend service.
 * `hello-world-backend` - a Python service running on a local machine.
 
 NOTE: Although this tutorial demonstrates exposing a Python service on the {service-network}, a more typical use case would involve a database service, for example, MySQL.
@@ -126,7 +126,7 @@ This indicates that the backend service is running and available.
 * The kubectl CLI is installed.
 +
 ifdef::product[]
-The `kubectl` CLI is automatically installed when you install `oc` as described in the link:https://access.redhat.com/documentation/en-us/openshift_container_platform/4.9/html-single/cli_tools/index#installing-openshift-cli[OpenShift CLI] documentation.
+The `kubectl` CLI is automatically installed when you install `oc` as described in the link:https://access.redhat.com/documentation/en-us/openshift_container_platform/4.11/html-single/cli_tools/index#installing-openshift-cli[OpenShift CLI] documentation.
 endif::[]
 
 

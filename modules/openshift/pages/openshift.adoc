@@ -3,22 +3,21 @@ ifndef::mod-loc[]
 endif::mod-loc[]
 include::{mod-loc}attributes.adoc[]
 :sectnums:
-:kubernetes-flavor: OpenShift
-//Category: openshift-tutorial
+//Category: k8s-tutorial
 // Type: assembly
-[id="openshift-tutorial"] 
-= Creating a {service-network} with OpenShift
+[id="k8s-tutorial"] 
+= Creating a {service-network} with {kubernetes-flavor}
 
 [role="system:abstract"]
-This tutorial demonstrates how to connect a frontend service on a OpenShift cluster with a backend service on a OpenShift cluster using the `skupper` command-line interface (CLI).
+This tutorial demonstrates how to connect a frontend service on a {kubernetes-flavor} cluster with a backend service on a {kubernetes-flavor} cluster using the `skupper` command-line interface (CLI).
 
 See {SkupperOverviewBookLink} for an introduction to {skupper-name}.
 
 .Prerequisites
 
-* Access to projects in two OpenShift clusters, `cluster-admin` access is not required.
-* One of the OpenShift clusters must be addressable from the other cluster.
-* `kubectl` and `oc` CLI. Many commands can be performed using `oc`, however this tutorial shows the `kubectl` options.
+* Access to namespaces in two {kubernetes-flavor} clusters, `cluster-admin` access is not required.
+* One of the {kubernetes-flavor} clusters must be addressable from the other cluster.
+* `kubectl` CLI. Many commands can be performed on OpenShift using `oc`, however this tutorial shows the `kubectl` options.
 
 This tutorial shows how to connect the following namespaces:
 
@@ -57,13 +56,6 @@ a|
 
 |===
 
-.Prerequisites
-
-* The OpenShift CLI is installed.
-See the https://access.redhat.com/documentation/en-us/openshift_container_platform/4.6/html-single/cli_tools/index#installing-openshift-cli[OpenShift CLI] documentation for more instructions on how to install `oc`.
-
-NOTE: In OpenShift 4.6 and later, you can use the web terminal to perform the following procedure, as described in the https://docs.openshift.com/container-platform/4.5/web_console/odc-about-web-terminal.html[web terminal] documentation.
-
 .Procedure
 
 . Start a terminal session to work on the `west` namespace and set the `KUBECONFIG` environment variable:
@@ -84,7 +76,7 @@ $ export KUBECONFIG=$HOME/.kube/config-east
 +
 This session is referred to later as the _east_ terminal session.
 
-. In each terminal session, log into the OpenShift cluster.
+. In each terminal session, log into the {kubernetes-flavor} cluster.
 
 // Type: procedure
 [id="installing-skupper"] 
@@ -93,7 +85,7 @@ This session is referred to later as the _east_ terminal session.
 
 . In the west terminal session:
 
-.. Create the `west` project (namespace):
+.. Create the `west` namespace:
 +
 [source,bash]
 ----
@@ -123,7 +115,7 @@ Skupper enabled for namespace 'west'. It is not connected to any other sites.
 
 
 . In the east terminal session:
-.. Create the `east` project (namespace):
+.. Create the `east` namespace:
 +
 [source,bash]
 ----
@@ -214,31 +206,25 @@ $ kubectl create deployment hello-world-frontend --image quay.io/skupper/hello-w
 $ kubectl expose deployment hello-world-frontend --port 8080 --type LoadBalancer
 ----
 
-. Create a route for the frontend:
-+
-[source,bash]
-----
-$ kubectl expose svc/hello-world-frontend
-----
-
 . Check the frontend route:
 .. Get the route details:
 +
 --
 [source,bash]
 ----
-$  oc get routes
+$  kubectl get service/frontend
 ----
 
 The output should be similar to the following:
 
 ----
 NAME                   HOST/PORT                                   
-hello-world-frontend   <frontend-url>       
+NAME       TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE
+frontend   LoadBalancer   10.103.232.28   <external-ip>   8080:30407/TCP   15s
 ----
 --
 
-.. Navigate to the `<frontend-url>` value in your browser, you see a message similar to the following because the frontend cannot communicate with the backend yet:
+.. Navigate to the `<frontend-ip>:8080` URL in your browser, you see a message similar to the following because the frontend cannot communicate with the backend yet:
 +
 ----
 Trouble! HTTPConnectionPool(host='hello-world-backend', port=8080): Max retries exceeded with url: /api/hello (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fbfcdf0d1d0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
@@ -311,7 +297,7 @@ Hi, <name>. I am Mathematical Machine (backend-77f8f45fc8-mnrdp).
 If you click *Say hello* again, a different backend process responds showing how {skupper-name} balances the requests.
 
 
-This shows how the frontend calls the backend service over the {service-network} from a different OpenShift cluster.
+This shows how the frontend calls the backend service over the {service-network} from a different {kubernetes-flavor} cluster.
 
 .Additional resources
 
