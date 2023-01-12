@@ -48,8 +48,6 @@ You deploy and manage a {service-network}, including a gateway, using the `skupp
 
 * {SkupperOverviewBookLink}
 
-
-
 // Type: procedure
 [id="creating-backend"] 
 == Creating a backend service

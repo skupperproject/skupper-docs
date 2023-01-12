@@ -296,7 +296,7 @@ This option prevents other sites from linking to this site, but linking outwards
 Once a link is established, traffic can flow in either direction.
 Enter the following command:
 
-[bash]
+[source,bash]
 ----
 $ skupper init --ingress none
 ----

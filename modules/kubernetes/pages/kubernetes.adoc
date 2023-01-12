@@ -24,7 +24,7 @@ This tutorial shows how to connect the following namespaces:
 * `west` - runs the frontend service and is typically a public cluster.
 * `east` - runs the backend service.
 
-include::cli/pages/installing.adoc[leveloffset=+1]
+//include::cli/pages/installing.adoc[leveloffset=+1]
 
 
 // Type: procedure
