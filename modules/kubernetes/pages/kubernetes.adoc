@@ -6,7 +6,7 @@ include::{mod-loc}attributes.adoc[]
 //Category: k8s-tutorial
 // Type: assembly
 [id="k8s-tutorial"] 
-= Creating a {service-network} with {kubernetes-flavor}
+= Creating a {service-network} with Kubernetes
 
 [role="system:abstract"]
 This tutorial demonstrates how to connect a frontend service on a {kubernetes-flavor} cluster with a backend service on a {kubernetes-flavor} cluster using the `skupper` command-line interface (CLI).
@@ -24,7 +24,7 @@ This tutorial shows how to connect the following namespaces:
 * `west` - runs the frontend service and is typically a public cluster.
 * `east` - runs the backend service.
 
-include::cli/installing.adoc[leveloffset=+1]
+//include::cli/pages/installing.adoc[leveloffset=+1]
 
 
 // Type: procedure
