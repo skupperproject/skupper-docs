@@ -15,7 +15,7 @@ include::partial$attributes.adoc[]
 * xref:overview:tokens.adoc[Tokens]
 * xref:troubleshooting:index.adoc[Troubleshooting]
 * Kubernetes/OpenShift
-** xref:openshift:index.adoc[Certs]
-** xref:openshift:openshift.adoc[Kubernetes tutorial]
-** xref:openshift:openshift-gateway.adoc[Gateway tutorial]
+** xref:kubernetes:index.adoc[Certs]
+** xref:kubernetes:kubernetes.adoc[Kubernetes tutorial]
+** xref:kubernetes:gateway.adoc[Gateway tutorial]
 

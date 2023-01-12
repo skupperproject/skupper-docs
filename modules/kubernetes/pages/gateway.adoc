@@ -196,18 +196,18 @@ Perform all tasks in the west terminal session:
 $ kubectl create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
 ----
 
-. Expose the frontend deployment as a cluster service:
+. Expose the frontend deployment:
 +
 [source,bash,term=west]
 ----
 $ kubectl expose deployment hello-world-frontend --port 8080 --type LoadBalancer
 ----
 
-. Create a route for the frontend:
+. Find the external IP address for the frontend:
 +
 [source,bash,term=west]
 ----
-$ oc expose svc/hello-world-frontend
+$ kubectl get service/frontend
 ----
 
 . Check the frontend route:
