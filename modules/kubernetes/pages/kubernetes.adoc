@@ -8,6 +8,8 @@ include::{mod-loc}attributes.adoc[]
 [id="k8s-tutorial"] 
 = Creating a {service-network} with Kubernetes
 
+include::{mod-loc}preface.adoc[]
+
 [role="system:abstract"]
 This tutorial demonstrates how to connect a frontend service on a {kubernetes-flavor} cluster with a backend service on a {kubernetes-flavor} cluster using the `skupper` command-line interface (CLI).
 
