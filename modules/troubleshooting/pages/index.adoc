@@ -211,6 +211,60 @@ The status of the link must be `Active` to allow service traffic.
 
 * xref:checking-sites[]
 
+// Type: procedure
+[id='debug-gateways']
+== Checking gateways
+
+By default, `skupper gateway` creates a service type gateway and these gateways run properly after a machine restart.
+
+However, if you create a docker or podman type gateway, check that the container is running after a machine restart.
+For example:
+
+. Check the status of Skupper gateways:
++
+--
+[subs=attributes+]
+----
+$ skupper gateway status
+
+Gateway Definition:
+╰─ machine-user type:podman version:{service-version}
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306
+
+----
+This shows a podman type gateway.
+--
+
+. Check that the container is running:
++
+--
+[subs=attributes+]
+----
+$ podman ps
+CONTAINER ID  IMAGE                                           COMMAND               CREATED         STATUS             PORTS                   NAMES
+4e308ef8ee58  quay.io/skupper/skupper-router:{service-version}             /home/skrouterd/b...  26 seconds ago  Up 27 seconds ago                          machine-user
+
+----
+This shows the container running.
+
+NOTE: To view stopped containers, use `podman ps -a` or `docker ps -a`.
+--
+
+
+. Start the container if necessary:
++
+--
+[subs=attributes+]
+----
+
+$ podman start machine-user
+
+----
+--
+
+
+
 
 // Type: procedure
 [id='creating-debug']

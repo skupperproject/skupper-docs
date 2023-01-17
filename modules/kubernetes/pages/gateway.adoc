@@ -8,7 +8,9 @@ include::{mod-loc}attributes.adoc[]
 //Category: gateway-tutorial
 // Type: assembly
 [id="gateway-tutorial"] 
-= Creating a {service-network} with g and accessing a backend service using a gateway
+= Creating a {service-network} with Kubernetes and accessing a backend service using a gateway
+
+include::{mod-loc}preface.adoc[]
 
 [role="system:abstract"]
 This tutorial describes how to connect a local backend service on a local machine with a frontend service running on a {kubernetes-flavor} cluster. 
