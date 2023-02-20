@@ -37,3 +37,4 @@ This page acts as a report for all docs in the skupper-docs repo.
 * {SkupperOperatorBookLink}
 * {TokensLink}
 * {SkupperPolicyBookLink}
+* xref:cli:podman.adoc[]
