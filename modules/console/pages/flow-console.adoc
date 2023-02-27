@@ -97,14 +97,29 @@ The Skupper console provides an overview of the following:
 
 The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels between sites.
 
-image::{img-loc}skupper-console.png[]
+image::{img-loc}skupper-adservice.png[]
 
 
 . Deploy the https://github.com/skupperproject/skupper-example-grpc[microservices example], using the associated README.
 
-. Navigate to the Skupper console.
+. Navigate to the Skupper console using the instructions in xref:accessing-console[]
 
 . Click the *Network* menu item.
++
+--
+The *Sites* tab shows how the sites in the {service-network} are linked.
+For example, you can see that no token was created on the *private1* site but it is linked to *public1* and *public2*.
+Clicking on a site displays the detail from the *Sites* tab.
 
-NOTE: Not only are services exposed on the {service-network} displayed, but the services that call the exposed services are also represented.
+The *Components* tab shows the services you exposed and the components that call those services.
+For example, the *frontend* component is not an exposed service, but a process that calls the exposed services.
 
+NOTE: Not only are services exposed on the {service-network} displayed, but the components that call the exposed services are also represented.
+
+Clicking on a component displays the detail from the *Components* tab.
+
+The *Processes* tab shows detail about the services you exposed, which is useful when services are scaled.
+For example, if a service has three replicas, you can monitor each replica.
+Clicking on a process displays the detail from the *Processes* tab.
+
+--
