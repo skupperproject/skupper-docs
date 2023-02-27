@@ -1,0 +1,110 @@
+include::{mod-loc}attributes.adoc[]
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
+//Category: flow-console
+// Type: assembly
+[id="skupper-console"] 
+= Using the Skupper console
+
+include::{mod-loc}preface.adoc[]
+
+The Skupper console provides data and visualizations of the traffic flow between Skupper sites.
+
+// Type: procedure
+[id="enabling-console"] 
+== Enabling the Skupper console
+
+By default, when you create a {skupper-name} site, you do not the Skupper console.
+
+When enabled, the Skupper console URL is displayed whenever you check site status using `skupper status`.
+
+.Prerequisites
+
+* A Kubernetes namespace where you plan to create a site
+
+.Procedure
+
+. Determine which site in your {service-network} is best to enable the console.
++
+--
+Enabling the console also requires that you enable the flow-collector component, which requires resources to process traffic data from all sites.
+You might locate the console using the following criteria:
+
+* Does the {service-network} cross a firewall?
+For example, if you want the console to be available only inside the firewall, you need to locate the flow-collector and console on a site inside the firewall.
+
+* Is there a site that processes more traffic than other sites?
+For example, if you have a _frontend_ component that calls a set of services from other sites, it might make sense to locate the flow collector and console on that site to minimize data traffic.
+
+* Is there a site with more or cheaper resources that you want to use?
+For example, if you have two sites, A and B, and resources are more expensive on site A, you might want to locate the flow collector and console on site B.
+--
+
+. Create a site with the flow collector and console enabled:
++
+----
+$ skupper init --enable-console --enable-flow-collector
+----
++
+NOTE: You must enable the console on the same site as you enable the flow collector.
+
+
+// Type: procedure
+[id="accessing-console"] 
+== Accessing the Skupper console
+
+By default, the Skupper console is protected by credentials available in the `skupper-console-users` secret.
+
+
+.Procedure
+
+. Determine the Skupper console URL using the `skupper` CLI, for example:
++
+----
+$ skupper status
+Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites. It has no exposed services.
+The site console url is:  https://skupper-west.apps-crc.testing
+----
+
+. Browse to the Skupper console URL. 
+The credential prompt depends on how the site was created using `skupper init`:
++
+* using the `--console-auth unsecured` option, you are not prompted for credentials.
+* using the `--console-auth openshift` option, you are prompted to enter OpenShift cluster credentials.
+* using the default or `--console-user <user>  --console-password <password>` options, you are prompted to enter those credentials.
+
+. If you created the site using default settings, that is `skupper init`, a random password is generated for the `admin` user.
+To retrieve the password the `admin` user:
++
+----
+$ kubectl get secret skupper-console-users -o jsonpath={.data.admin} | base64 -d
+JNZWzMHtyg
+----
+
+
+// Type: procedure
+[id="exploring-console"] 
+== Exploring the Skupper console
+
+The Skupper console provides an overview of the following:
+
+* Sites - {skupper-name} installations on the current {service-network}.
+* Components - services that are exposed on the {service-network}
+* Processes - running processes relating to exposed services.
+* Addresses - services and port numbers relating to exposed services
+* Network - visualizations of sites, components and processes
+
+The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels between sites.
+
+image::{img-loc}skupper-console.png[]
+
+
+. Deploy the https://github.com/skupperproject/skupper-example-grpc[microservices example], using the associated README.
+
+. Navigate to the Skupper console.
+
+. Click the *Network* menu item.
+
+NOTE: Not only are services exposed on the {service-network} displayed, but the services that call the exposed services are also represented.
+
