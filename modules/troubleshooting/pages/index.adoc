@@ -319,21 +319,27 @@ linking and services:: See the `skupper-service-controller-*-events.txt` file to
 --
 
 // Type:procedure
-[id='network-performance']
-== Improving network performance
+[id='router-performance']
+== Improving Skupper router performance
 
-If you encounter network performance issues, you can scale Skupper to address those concerns.
-For example, use this procedure to increase network throughput, and if you have many clients, network latency.
+If you encounter Skupper router performance issues, you can scale the Skupper router to address those concerns.
 
-. Note all configuration and delete your existing site:
+NOTE: Currently, you must delete and recreate a site to reconfigure the Skupper router.
+
+For example, use this procedure to increase throughput, and if you have many clients, latency.
+
+. Delete your site or create a new site in a different namespace.
++
+Note all configuration and delete your existing site:
 +
 ----
 $ skupper delete
 ----
 +
-As an alternative, you can create a new namespace and configure that for network performance testing before deleting your original site.
+As an alternative, you can create a new namespace and configure a new site with optimized Skupper router performance. 
+After validating the performance improvement, you can delete and recreate your original site.
 
-. Recreate the site with optimal performance CPU settings:
+. Create a site with optimal performance CPU settings:
 +
 ----
 $ skupper init --router-cpu 5
