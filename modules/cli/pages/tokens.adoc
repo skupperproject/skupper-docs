@@ -131,7 +131,7 @@ Skupper is enabled for namespace "west" in interior mode. It is linked to 2 othe
 [source,bash,options="nowrap"]
 ----
 $ skupper link status
-Link link1 is active
+Link link1 is connected
 ----
 +
 In this case, there are two links, and one outgoing link, meaning there is one incoming link.
@@ -151,10 +151,10 @@ $ skupper revoke-access
 $ skupper status
 Skupper is enabled for namespace "west" in interior mode. It is linked to 1 other site.
 $ skupper link status
-Link link1 is active
+Link link1 is connected
 ----
 
-The output shows that the `skupper revoke-access` command has revoked the incoming links, but outgoing links are still active.
+The output shows that the `skupper revoke-access` command has revoked the incoming links, but outgoing links are still connected.
 
 You can remove that link using the `skupper link delete link1` command.
 To revoke access, you must follow this procedure while logged into the appropriate cluster.
