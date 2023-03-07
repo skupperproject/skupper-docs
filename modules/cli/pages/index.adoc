@@ -163,7 +163,7 @@ where `<filename>` is the name of a YAML file generated from the `skupper token 
 +
 ----
 $ skupper link status
-Connection for link1 not active
+Link link1 not connected
 ----
 +
 In this example no <link-name> was specified, the name defaulted to `link1`.
@@ -221,7 +221,7 @@ $ skupper link status link1 --verbose
  Name:          link1
  Namespace:     default
  Site:          default-0d99d031-cee2-4cc6-a761-697fe0f76275
- Status:        Active
+ Status:        Connected
 ----
 
 

@@ -167,7 +167,7 @@ $ skupper link status --namespace east
 
 Links created from this site:
 -------------------------------
-Link link1 is active
+Link link1 is connected
 ----
 
 A link exists from the specified site to another site, meaning a token from another site was applied to the specified site.
@@ -180,11 +180,11 @@ $ skupper link status --namespace west
 
 Links created from this site:
 -------------------------------
-There are no links configured or active
+There are no links configured or connected
 
-Currently active links from other sites:
+Currently connected links from other sites:
 ----------------------------------------
-A link from the namespace east on site east(536695a9-26dc-4448-b207-519f56e99b71) is active 
+A link from the namespace east on site east(536695a9-26dc-4448-b207-519f56e99b71) is connected 
 ----
 --
 
@@ -199,12 +199,12 @@ $ skupper link status link1 --verbose --namespace east
  Name:          link1
  Namespace:     east
  Site:          east-536695a9-26dc-4448-b207-519f56e99b71
- Status:        Active
+ Status:        Connected
 ----
 
 The output shows detail about the link, including a timestamp of when the link was created and the associated relative cost of using the link.
 
-The status of the link must be `Active` to allow service traffic.
+The status of the link must be `Connected` to allow service traffic.
 --
 
 .Additional information
