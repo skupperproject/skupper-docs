@@ -91,7 +91,7 @@ After exposing a service on the {service-network}, you create an _address_, that
 There might be many replicas associated with an address, these are shown in the Skupper console as _processes_. 
 Not all participants on a {service-network} are services.
 For example, a _frontend_ deployment might call an exposed service named _backend_, but that frontend is not part of the {service-network}.
-In the console, both are shown so that you can view the traffic and called _components_.
+In the console, both are shown so that you can view the traffic and these are called _components_.
 
 The Skupper console provides an overview of the following:
 
