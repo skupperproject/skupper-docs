@@ -47,7 +47,7 @@ For example, if you have two sites, A and B, and resources are more expensive on
 $ skupper init --enable-console --enable-flow-collector
 ----
 +
-NOTE: You must enable the console on the same site as you enable the flow collector.
+IMPORTANT: You must enable the console on the same site as you enable the flow collector.
 
 
 // Type: procedure
