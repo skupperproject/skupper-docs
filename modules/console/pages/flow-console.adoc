@@ -87,13 +87,20 @@ JNZWzMHtyg
 [id="exploring-console"] 
 == Exploring the Skupper console
 
+After exposing a service on the {service-network}, you create an _address_, that is, a service name and port number associated with a site. 
+There might be many replicas associated with an address, these are shown in the Skupper console as _processes_. 
+Not all participants on a {service-network} are services.
+For example, a _frontend_ deployment might call an exposed service named _backend_, but that frontend is not part of the {service-network}.
+In the console, both are shown so that you can view the traffic and called _components_.
+
 The Skupper console provides an overview of the following:
 
-* Sites - {skupper-name} installations on the current {service-network}.
-* Components - services that are exposed on the {service-network}
-* Processes - running processes relating to exposed services.
-* Addresses - services and port numbers relating to exposed services
-* Network - visualizations of sites, components and processes
+* Sites 
+* Network 
+* Addresses
+* Components
+* Processes
+
 
 The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels between sites.
 
