@@ -111,4 +111,4 @@ NOTE: The process detail displays the associated image, host and addresses.
 
 . Click an address to show the details for that address.
 
-To view a static representation of all the console features, see the https://skupper-console-vry5.vercel.app/[Example Console].
+// To view a static representation of all the console features, see the https://skupper-console-vry5.vercel.app/[Example Console].
