@@ -16,11 +16,19 @@ NOTE: This is a preview feature and may change before becoming fully supported b
 [id='about-{context}']
 == About Skupper podman
 
-Skupper podman is available from the CLI using:
+Skupper podman is available with the following precedence:
 
-`skupper switch podman`:: If you enter this command, all subsequent command target podman rather than Kubernetes.
+`skupper --platform podman <command>`:: Use this option to avoid changing mode, for example, if you are working on Kubernetes and podman simultaneously.
+
+`export SKUPPER_PLATFORM=podman`:: Use this command to use Skupper podman for the current session, for example, if you have two terminals set to different contexts. To set the environment to target Kubernetes sites:
 +
---
+----
+$ export SKUPPER_PLATFORM=kubernetes
+----
+
+`skupper switch podman`:: If you enter this command, all subsequent command target podman rather than Kubernetes for all terminal sessions.
+
+
 To determine which mode is currently active:
 
 ----
@@ -30,23 +38,13 @@ podman
 ----
 
 To switch back to target Kubernetes sites: `skupper switch kubernetes`
---
-
-`skupper --platform podman`:: Use this option to avoid changing mode, for example, if you are working on Kubernetes and podman simultaneously.
-
-`export SKUPPER_PLATFORM=podman`:: Use this command to use Skupper podman for the current session, for example, if you have two terminals set to different contexts. To set the environment to target Kubernetes sites:
-
-----
-$ export SKUPPER_PLATFORM=kubernetes
-----
-
 
 [id='creating-a-site-{context}']
 == Creating a site using Skupper podman
 
 .Prerequisites
 
-* The `skupper` CLI is installed.
+* The latest `skupper` CLI is installed.
 * Podman is installed, see https://podman.io/
 
 
@@ -121,19 +119,124 @@ $ skupper token create <filename>
 $ skupper link create <filename>
 ----
 
-After you have linked to a network, you can view the exposed services:
+After you have linked to a network, you can check the link status:
+
+----
+$ skupper link status
+----
+
+
+== Working with services using Skupper podman
+
+The general flow for working with services is the same for Kubernetes and Podman sites.
+However, consider the following:
+
+* Services exposed on Kubernetes are not automatically available to Podman sites.
+This is the equivalent to Kubernetes sites created using `skupper init --enable-service-sync false`.
+* On Kubernetes sites, `skupper service status` shows details about original service location.
+This information might not be available from Podman sites.
+
+.Example 01: Consuming a service from a Podman site
+
+In this variation of the link:https://github.com/skupperproject/skupper-example-hello-world[hello world] example, the `backend` service is exposed on Kubernetes site and a Podman site is linked.
+You deploy the `frontend` as a container and that container can access the `backend` service.
+
+. Create a Podman site and link it to a Kubernetes site.
+
+. Check the service from the Podman site:
++
+----
+$ skupper service status
+
+No services defined
+----
++
+This result is expected because services exposed on Kubernetes are not automatically available to Podman sites.
+
+. Create a service on the Podman site matching the service exposed on the Kubernetes site:
++
+----
+$ skupper service create backend 8080
+----
+
+. Validate the service from the Podman site by checking the backend API health URL:
++
+--
+----
+$ podman run -it --network=skupper --name=myubi ubi8/ubi curl backend:8080/api/health
+
+OK
+----
+
+This command runs a container using the `skupper` network and returns the results from `http://backend:8080/api/health`
+--
+
+. Run the frontend as a container:
++
+----
+$ podman run -dp 8080:8080 --name hello-world-frontend --network skupper quay.io/skupper/hello-world-frontend
+----
+
+. Check your {service-network} is working as expected by navigating to http://localhost:8080 and click *Say hello*.
++
+--
+Each of the backend replicas respond, for example `Hi, Perfect Parrot. I am Kind Hearted Component (backend-7c84887f9f-wxhxp).`
+
+[NOTE]
+====
+In this scenario, running the `skupper service status` command on the Podman site does not provide much detail about the service:
 
 ----
 $ skupper service status
+Services exposed through Skupper:
+╰─ backend (tcp port 8080)
+----
+
+====
+--
+
+.Example 02: Exposing a service from a Podman site
+
+In this variation of the link:https://github.com/skupperproject/skupper-example-hello-world[hello world] example, the `backend` service is exposed on Podman site and consumed from a `frontend` on a Kubernetes site.
+
+
+
+. Create a Podman site and link it to a Kubernetes site.
+
+. Create and expose a frontend deployment on the Kubernetes site:
++
+----
+$ kubectl create deployment frontend --image quay.io/skupper/hello-world-frontend
+$ kubectl expose deployment/frontend --port 8080 --type LoadBalancer
+----
+
+. Run the backend as a container:
++
+----
+$ podman run -d --name hello-world-backend --network skupper quay.io/skupper/hello-world-backend
+----
+
+. Determine the IP address of the `hello-world-backend` container:
++
+----
+$ podman inspect --format='{{.NetworkSettings.Networks.skupper.IPAddress}}' hello-world-backend
+
+10.89.0.10
+----
+
+. Expose the `backend` from the Podman site.
++
+----
+$ skupper expose host 10.89.0.10 --address backend --port 8080 
+----
+
+. From the Kubernetes site, create the `backend` service:
++
+----
+$ skupper expose host 10.89.0.10 --address backend --port 8080 
 ----
 
 
-== Exposing services using Skupper podman
-
-The general flow for exposing services is the same as Kubernetes for podman sites, for example:
-
-----
-$ skupper expose  <service> <port>
-----
+. Check your {service-network} is working as expected by navigating to your cluster URL, port 8080, and clicking *Say hello*.
 
 For more information, see xref:cli-podman:skupper_expose.adoc[podman skupper expose].
