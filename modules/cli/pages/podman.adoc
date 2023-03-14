@@ -98,7 +98,7 @@ $ skupper status
 Skupper is enabled for "<username>" with site name "<machine-name>-<username>" in interior mode. It is not connected to any other sites. It has no exposed services.
 ----
 
-NOTE: You can only create one site per user. If your require a host to support many sites, create a user for each site.
+NOTE: You can only create one site per user. If you require a host to support many sites, create a user for each site.
 
 --
 
@@ -163,7 +163,7 @@ $ skupper service create backend 8080
 +
 --
 ----
-$ podman run -it --network=skupper --name=myubi ubi8/ubi curl backend:8080/api/health
+$ podman run -it --rm --network=skupper --name=myubi ubi8/ubi curl backend:8080/api/health
 
 OK
 ----
