@@ -129,12 +129,10 @@ $ skupper link status
 == Working with services using Skupper podman
 
 The general flow for working with services is the same for Kubernetes and Podman sites.
-However, consider the following:
 
-* Services exposed on Kubernetes are not automatically available to Podman sites.
+
+NOTE: Services exposed on Kubernetes are not automatically available to Podman sites.
 This is the equivalent to Kubernetes sites created using `skupper init --enable-service-sync false`.
-* On Kubernetes sites, `skupper service status` shows details about original service location.
-This information might not be available from Podman sites.
 
 .Example 01: Consuming a service from a Podman site
 
@@ -233,7 +231,7 @@ $ skupper expose host 10.89.0.10 --address backend --port 8080
 . From the Kubernetes site, create the `backend` service:
 +
 ----
-$ skupper expose host 10.89.0.10 --address backend --port 8080 
+$ skupper service create backend 8080
 ----
 
 
