@@ -214,18 +214,10 @@ $ kubectl expose deployment/frontend --port 8080 --type LoadBalancer
 $ podman run -d --name hello-world-backend --network skupper quay.io/skupper/hello-world-backend
 ----
 
-. Determine the IP address of the `hello-world-backend` container:
-+
-----
-$ podman inspect --format='{{.NetworkSettings.Networks.skupper.IPAddress}}' hello-world-backend
-
-10.89.0.10
-----
-
 . Expose the `backend` from the Podman site.
 +
 ----
-$ skupper expose host 10.89.0.10 --address backend --port 8080 
+$ skupper expose host hello-world-backend --address backend --port 8080 
 ----
 
 . From the Kubernetes site, create the `backend` service:
