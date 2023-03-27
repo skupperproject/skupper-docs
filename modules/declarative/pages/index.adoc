@@ -103,6 +103,8 @@ kubectl apply -f ~/my-site.yml
 See the xref:site-config-reference[] section for more reference.
 
 
+include::annotations.adoc[leveloffset=+1]
+
 // Type: reference
 [id="site-config-reference"] 
 [appendix]
