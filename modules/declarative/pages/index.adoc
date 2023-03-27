@@ -33,8 +33,9 @@ If you are deploying {skupper-name} to be available for all namespaces, verify y
 +
 [subs=attributes+]
 ----
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/{skupper-version}/cmd/site-controller/deploy-watch-current-ns.yaml
+kubectl apply -f deploy-watch-current-ns.yaml
 ----
+where the contents of `deploy-watch-current-ns.yaml` is specified in the xref:watch-current-reference[] appendix.
 
 * To install {skupper-name} for all namespaces:
 +
@@ -44,8 +45,9 @@ kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/{skupp
 +
 [subs=attributes+]
 ----
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/{skupper-version}/cmd/site-controller/deploy-watch-all-ns.yaml
+kubectl apply -f deploy-watch-all-ns.yaml
 ----
+where the contents of `deploy-watch-all-ns.yaml` is specified in the xref:watch-all-reference[] appendix.
 
 . Verify the installation.
 +
@@ -98,11 +100,12 @@ kubectl apply -f ~/my-site.yml
 
 .Additional resources
 
-See the xref:yaml-reference[] section for more reference.
+See the xref:site-config-reference[] section for more reference.
 
 
 // Type: reference
-[id="yaml-reference"] 
+[id="site-config-reference"] 
+[appendix]
 == Site ConfigMap YAML reference
 
 [role="system:abstract"]
@@ -147,3 +150,24 @@ metadata:
 <.> Specifies whether the service controller runs, defaults to `true`.
 
 <.> Specifies whether the services are synchronized across the {service-network}, defaults to `true`.
+
+[id="watch-current-reference"] 
+[appendix]
+== YAML for watching current namespace
+
+The following example deploys {skupper-name} to watch the current namespace.
+
+----
+include::example$deploy-watch-current-ns.yaml[]
+----
+
+[id="watch-all-reference"] 
+[appendix]
+== YAML for watching all namespaces
+
+The following example deploys {skupper-name} to watch all namespaces.
+
+----
+include::example$deploy-watch-all-ns.yaml[]
+----
+
