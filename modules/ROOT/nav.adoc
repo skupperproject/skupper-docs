@@ -9,13 +9,16 @@ include::partial$attributes.adoc[]
 ** xref:cli-podman:skupper.adoc[Podman Reference]
 * xref:declarative:index.adoc[Declarative]
 * xref:policy:index.adoc[Policies]
-* xref:console:index.adoc[Gilligan Console]
+* xref:console:index.adoc[Deprecated Console]
 * xref:console:flow-console.adoc[Console 1.3 and later]
-* xref:operator:index.adoc[Kubernetes operator]
 * xref:cli:tokens.adoc[Tokens]
+
+
+
 * xref:troubleshooting:index.adoc[Troubleshooting]
 * Kubernetes/OpenShift
 ** xref:kubernetes:index.adoc[Certs]
 ** xref:kubernetes:kubernetes.adoc[Kubernetes tutorial]
 ** xref:kubernetes:gateway.adoc[Gateway tutorial]
+** xref:operator:index.adoc[Kubernetes Operator]
 
