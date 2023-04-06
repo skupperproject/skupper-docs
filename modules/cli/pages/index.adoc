@@ -67,18 +67,12 @@ The default `skupper init` creates sites that satisfy typical requirements.
 
 If you require a custom configuration, note the following options:
 
-
-* Creating a site without a console:
-+
-----
-$ skupper init --enable-console false
-----
-
-
 * Configuring console authentication.
 There are several `skupper` options regarding authentication for the console:
 +
 --
+include::ROOT
+
 `--console-auth <authentication-mode>`:: Set the authentication mode for the console:
 
 * `openshift` - Use OpenShift authentication, so that users who have permission to log into OpenShift and view the Project (namespace) can view the console.
