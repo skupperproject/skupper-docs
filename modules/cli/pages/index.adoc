@@ -35,6 +35,8 @@ This section describes how to create a site using the default settings.
 ----
 $ skupper init
 ----
++
+include::ROOT:partial$console.adoc[]
 
 . Check the site:
 +
@@ -47,13 +49,7 @@ Skupper is enabled for namespace "west" in interior mode. It is not connected to
 NOTE: The default message above is displayed when you initialize a site on a cluster that does not have the {policy-system} installed.
 If you install the {policy-system} as described in {skupperpolicybooklink}, the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
 
-The default site settings include:
-
-* console - The Skupper console is provisioned with a single user.
-The password for the `admin` user is stored in the `skupper-console-users` secret. 
-For more information about the console, see {SkupperConsoleBookLink}.
-
-* site name - The site name defaults to the namespace name, for example, `west`.
+By default, the site name defaults to the namespace name, for example, `west`.
 
 ifdef::product[]
 include::{mod-loc}fragment-ingress.adoc[]
@@ -65,20 +61,15 @@ endif::[]
 
 The default `skupper init` creates sites that satisfy typical requirements. 
 
+include::ROOT:partial$console.adoc[]
+
 If you require a custom configuration, note the following options:
-
-
-* Creating a site without a console:
-+
-----
-$ skupper init --enable-console false
-----
-
 
 * Configuring console authentication.
 There are several `skupper` options regarding authentication for the console:
 +
 --
+
 `--console-auth <authentication-mode>`:: Set the authentication mode for the console:
 
 * `openshift` - Use OpenShift authentication, so that users who have permission to log into OpenShift and view the Project (namespace) can view the console.

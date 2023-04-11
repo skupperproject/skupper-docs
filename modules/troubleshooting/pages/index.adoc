@@ -413,6 +413,8 @@ If you need to link many sites, create separate tokens for each link.
 
 *Cannot access Skupper console*
 
+include::ROOT:partial$console.adoc[]
+
 Use `skupper status` to find the console URL.
 
 Use the following command to display the password for the `admin` user:doctype: article
