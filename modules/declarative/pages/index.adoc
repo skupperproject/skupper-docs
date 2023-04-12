@@ -103,7 +103,7 @@ kubectl apply -f ~/my-site.yml
 See the xref:site-config-reference[] section for more reference.
 
 // Type: procedure
-[id="site-config-reference"] 
+[id="linking-sites-using-yaml"] 
 == Linking sites using YAML
 
 While it is not possible to declaratively link sites, you can create a token using YAML.
