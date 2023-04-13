@@ -5,32 +5,34 @@
 
 The steps in this section show how to use the `kubectl` command-line interface (CLI) to install and deploy the latest version of the {SkupperOperatorName} in a given {kubernetes-flavor} cluster.
 
-.Procedure
+.Prerequisites
 
+* The Operator Lifecycle Manager is installed in the cluster.
+For more information, see the link:https://olm.operatorframework.io/docs/getting-started/[QuickStart].
+
+.Procedure
 
 . Download the Skupper Operator example files, for example:
 +
 ----
-$ curl -fL https://github.com/skupperproject/skupper-operator/archive/refs/heads/main.zip
+$ wget https://github.com/skupperproject/skupper-operator/archive/refs/heads/main.zip
 ----
 
-:next-step: 2
+. Create a `my-namespace` namespace.
+NOTE: If you want to use a different namespace, you need to edit the referenced YAML files.
 
-[start={next-step}]
-. Specify the namespace in which you want to install the Operator. You can create a new namespace or switch to an existing one.
-
-.. Create a new namespace if necessary:
+.. Create a new namespace:
 +
 [source,bash,options="nowrap",subs="+quotes"]
 ----
-$ kubectl create namespace  __<namespace-name>__
+$ kubectl create namespace my-namespace
 ----
 
-.. Switch to the namespace in which you want to install the Operator:
+.. Switch context to the namespace:
 +
 [source,bash,options="nowrap",subs="+quotes"]
 ----
-$ kubectl config set-context --current --namespace=__<namespace-name>__
+$ kubectl config set-context --current --namespace=my-namespace
 ----
 
 . Create a CatalogSource in the `openshift-marketplace` namespace:
@@ -44,7 +46,7 @@ $ kubectl apply -f examples/{example-directory}/00-cs.yaml
 +
 [source,bash,options="nowrap",subs=attributes+]
 ----
-$ kubectl -n openshift-marketplace get pods | grep skupper-operator
+$ kubectl -n olm get pods | grep skupper-operator
 ----
 
 . Create an OperatorGroup in the `my-namespace` namespace:
