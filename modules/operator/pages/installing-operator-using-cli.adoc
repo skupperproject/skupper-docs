@@ -39,7 +39,7 @@ $ kubectl config set-context --current --namespace=my-namespace
 +
 [source,bash,options="nowrap",subs=attributes+]
 ----
-$ kubectl apply -f examples/{example-directory}/00-cs.yaml
+$ kubectl apply -f examples/k8s/00-cs.yaml
 ----
 
 . Verify the skupper-operator catalog pod is running before continuing:
@@ -53,14 +53,14 @@ $ kubectl -n olm get pods | grep skupper-operator
 +
 [source,bash,options="nowrap",subs=attributes+]
 ----
-$ kubectl apply -f examples/{example-directory}/10-og.yaml
+$ kubectl apply -f examples/k8s/10-og.yaml
 ----
 
 . Create a Subscription  in the `my-namespace` namespace:
 +
 [source,bash,options="nowrap",subs=attributes+]
 ----
-$ kubectl apply -f examples/{example-directory}/20-sub.yaml
+$ kubectl apply -f examples/k8s/20-sub.yaml
 ----
 
 . Verify that the Operator is running:
