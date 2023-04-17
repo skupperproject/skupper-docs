@@ -33,8 +33,9 @@ If you are deploying {skupper-name} to be available for all namespaces, verify y
 +
 [subs=attributes+]
 ----
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/{skupper-version}/cmd/site-controller/deploy-watch-current-ns.yaml
+kubectl apply -f deploy-watch-current-ns.yaml
 ----
+where the contents of `deploy-watch-current-ns.yaml` is specified in the xref:watch-current-reference[] appendix.
 
 * To install {skupper-name} for all namespaces:
 +
@@ -44,8 +45,9 @@ kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/{skupp
 +
 [subs=attributes+]
 ----
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/{skupper-version}/cmd/site-controller/deploy-watch-all-ns.yaml
+kubectl apply -f deploy-watch-all-ns.yaml
 ----
+where the contents of `deploy-watch-all-ns.yaml` is specified in the xref:watch-all-reference[] appendix.
 
 . Verify the installation.
 +
@@ -65,8 +67,8 @@ Using YAML files to create {skupper-name} sites allows you to use source control
 
 .Prerequisites
 
-* {skupper-name} is installed in the cluster or namespace you want to target
-* You are logged into the cluster
+* {skupper-name} is installed in the cluster or namespace you want to target.
+* You are logged into the cluster.
 
 .Procedure
 
@@ -77,10 +79,10 @@ apiVersion: v1
 data:
   cluster-local: "false"
   console: "true"
+  flow-collector: "true"
   console-authentication: internal
   console-password: "rubble"
   console-user: "barney"
-  edge: "true"
   name: my-site
   router-console: "true"
   service-controller: "true"
@@ -98,11 +100,68 @@ kubectl apply -f ~/my-site.yml
 
 .Additional resources
 
-See the xref:yaml-reference[] section for more reference.
+See the xref:site-config-reference[] section for more reference.
 
+// Type: procedure
+[id="linking-sites-using-yaml"] 
+== Linking sites using YAML
+
+While it is not possible to declaratively link sites, you can create a token using YAML.
+
+.Prerequisites
+
+* {skupper-name} is installed on the clusters you want to link.
+* You are logged into the cluster.
+
+
+.Procedure
+
+. Log into the cluster you want to link to and change context to the namespace where {skupper-name} is installed.
+This site must have `ingress` enabled.
+
+. Create a YAML file named `token-request.yml` to request a token:
++
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    skupper.io/type: connection-token-request
+  name: secret-name
+----
+
+. Apply the YAML to the namespace to create a secret.
++
+----
+$ kubectl apply -f token-request.yml
+----
+
+. Create the token YAML from the secret.
++
+----
+$ kubectl get secret -o yaml secret-name | yq 'del(.metadata.namespace)' > ~/token.yaml
+----
+
+
+. Log into the cluster you want to link from and change context to the namespace where {skupper-name} is installed.
+
+. Apply the token YAML.
++
+----
+$ kubectl apply -f token.yml
+----
+
+. Verify the link, allowing some time for the process to complete.
++
+----
+$ skupper link status --wait 60
+----
+
+include::annotations.adoc[leveloffset=+1]
 
 // Type: reference
-[id="yaml-reference"] 
+[id="site-config-reference"] 
+[appendix]
 == Site ConfigMap YAML reference
 
 [role="system:abstract"]
@@ -115,6 +174,7 @@ apiVersion: v1
 data:
   cluster-local: "false" //<.>
   console: "true" //<.>
+  flow-collector: "true" //<.>
   console-authentication: internal //<.>
   console-user: "username" //<.>
   console-password: "password" //<.>
@@ -130,7 +190,10 @@ metadata:
 
 <.> Only accept connections from within the local cluster, defaults to `false`.
 
-<.> Enables the skupper console, defaults to `true`.
+<.> Enables the skupper console, defaults to `false`.
+NOTE: You must enable `console` and `flow-collector` for the console to function.
+
+<.> Enables the flow collector, defaults to `false`.
 
 <.> Specifies the skupper console authentication method. The options are `openshift`, `internal`, `unsecured`.
 
@@ -147,3 +210,24 @@ metadata:
 <.> Specifies whether the service controller runs, defaults to `true`.
 
 <.> Specifies whether the services are synchronized across the {service-network}, defaults to `true`.
+
+[id="watch-current-reference"] 
+[appendix]
+== YAML for watching current namespace
+
+The following example deploys {skupper-name} to watch the current namespace.
+
+----
+include::example$deploy-watch-current-ns.yaml[]
+----
+
+[id="watch-all-reference"] 
+[appendix]
+== YAML for watching all namespaces
+
+The following example deploys {skupper-name} to watch all namespaces.
+
+----
+include::example$deploy-watch-all-ns.yaml[]
+----
+

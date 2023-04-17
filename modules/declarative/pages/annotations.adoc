@@ -5,7 +5,7 @@ include::{mod-loc}attributes.adoc[]
 [id="skupper-annotations"] 
 = Configuring services using annotations
 
-Using Kubernetes annotations allows you to control which services are available on the {service-network}.
+After creating and linking sites, you can use Kubernetes annotations to control which services are available on the {service-network}.
 
 
 // Type: procedure
