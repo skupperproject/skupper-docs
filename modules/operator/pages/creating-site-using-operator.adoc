@@ -6,24 +6,22 @@
 . Create a YAML file defining the ConfigMap of the site you want to create.
 +
 --
-For example, create `skupper-site.yaml`:
+For example, create `skupper-site.yaml` that provisions a site with a console:
 
 [source,yaml,options="nowrap"]
 ----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: skupper-site
-  namespace: my-namespace
+include::example$site-cm.yaml[]
+
 ----
 
-You can later retrieve the console credentials as described in {SkupperConsoleBookLink} or specify them now by adding the username and optionally the password to `skupper-site.yaml` as follows:
+NOTE: The console is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
+Currently, you must enable the console on the same site as you enable the flow collector. This requirement may change before the console is fully supported by https://skupper.io[skupper.io].
+
+You can also create a site without a console:
 
 [source,yaml,options="nowrap"]
 ----
-data:
-  console-user: "admin"
-  console-password: "changeme"
+include::example$no-console.yaml[]
 ----
 --
 

@@ -11,4 +11,3 @@ asciidoc:
     mod-loc: ROOT:partial$
     img-loc: 'ROOT:'
     kubernetes-flavor: Kubernetes@
-    example-directory: k8s@
