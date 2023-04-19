@@ -32,6 +32,10 @@ When enabled, the Skupper console URL is displayed whenever you check site statu
 +
 --
 Enabling the console also requires that you enable the flow-collector component, which requires resources to process traffic data from all sites.
+
+NOTE: To display components that require services rather than provide services, the flow-collector makes all services that are available in the namespace visible in the console.
+For example, if you deploy a `frontend` component in the namespace where the flow-collector exists, the `frontend` is visible in the console even though that is not a component exposed on the {service-network}.
+
 You might locate the console using the following criteria:
 
 * Does the {service-network} cross a firewall?
