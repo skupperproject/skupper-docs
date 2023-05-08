@@ -8,7 +8,7 @@ If you want to use custom certificates to protect the communication from compone
 * xref:skupper-generated-certs[]
 * xref:provided-certs[]
 
-// Type: assembly
+// Type: procedure
 [id="skupper-generated-certs"] 
 = Exposing services on the {service-network} using generated certificates
 
@@ -76,16 +76,45 @@ For example, modify a deployment to mount the secret in a container.
 --
 
 
+// Type: procedure
+[id="provided-certs"] 
+= Exposing services on the {service-network} using provided certificates
+
+You can protect component to component communication on the {service-network} using certificates provided by a certificate authority.
+
+.Prerequisites
+
+* Access to Kubernetes site where the service is exposed
+* Access to Kubernetes site where the service is called from
+* Certificate and private key files. Assuming `tls.crt` and `tls.key` filenames.
+
 
 .Procedure
 
-. Create secrets from the certificates:
+. Create secrets from the certificate and private key files:
 +
+--
+----
+$ kubectl create secret tls skupper-tls-<service-name>\
+--key <key-pat> \
+--cert <cert-path>
 ----
 
+For example
+
+----
+kubectl create secret tls skupper-tls-nghttp2tls --key ./tls.key --cert ./tls.crt
+----
+--
+
+. Create a secret from the certificate authority public key:
++
+--
+----
+$ kubectl create secret tls public-ca --key ./ca.key.pub --cert ./ca.crt
 ----
 
-
+--
 
 . Expose the service on the {service-network}:
 
@@ -94,3 +123,15 @@ For example, modify a deployment to mount the secret in a container.
 ----
 $ skupper expose deployment backend --port 5432 --protocol http2 --tls-cert backend-secret --tls-trust public-ca-secret
 ----
+
+.. If you use the `create` and `bind` options:
++
+--
+
+----
+$ skupper service create backend 5432 --tls-cert backend-secret
+$ skupper bind deployment backend  --port 5001  --protocol http2 --tls-trust public-ca-secret
+----
+
+
+--
