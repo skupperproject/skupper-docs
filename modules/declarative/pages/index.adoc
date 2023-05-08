@@ -85,7 +85,6 @@ data:
   console-user: "barney"
   name: my-site
   router-console: "true"
-  service-controller: "true"
   service-sync: "true"
 kind: ConfigMap
 metadata:
@@ -181,7 +180,6 @@ data:
   edge: "false" //<.>
   name: my-site //<.>
   router-console: "true" //<.>
-  service-controller: "true" //<.>
   service-sync: "true" //<.>
 kind: ConfigMap
 metadata:
@@ -206,8 +204,6 @@ NOTE: You must enable `console` and `flow-collector` for the console to function
 <.> Specifies the site name.
 
 <.> Enables the router console, defaults to `false`.
-
-<.> Specifies whether the service controller runs, defaults to `true`.
 
 <.> Specifies whether the services are synchronized across the {service-network}, defaults to `true`.
 
