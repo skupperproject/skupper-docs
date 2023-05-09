@@ -76,19 +76,15 @@ Using YAML files to create {skupper-name} sites allows you to use source control
 +
 ----
 apiVersion: v1
-data:
-  cluster-local: "false"
-  console: "true"
-  flow-collector: "true"
-  console-authentication: internal
-  console-password: "rubble"
-  console-user: "barney"
-  name: my-site
-  router-console: "true"
-  service-sync: "true"
 kind: ConfigMap
 metadata:
   name: skupper-site
+data:
+  name: my-site
+  console: "true"
+  console-user: "barney"
+  console-password: "rubble"
+  flow-collector: "true"
 ----
 
 . Apply the YAML file to your cluster:
@@ -179,7 +175,6 @@ data:
   console-password: "password" //<.>
   edge: "false" //<.>
   name: my-site //<.>
-  router-console: "true" //<.>
   service-sync: "true" //<.>
 kind: ConfigMap
 metadata:
@@ -202,8 +197,6 @@ NOTE: You must enable `console` and `flow-collector` for the console to function
 <.> Specifies whether an edge site is created, defaults to `false`.
 
 <.> Specifies the site name.
-
-<.> Enables the router console, defaults to `false`.
 
 <.> Specifies whether the services are synchronized across the {service-network}, defaults to `true`.
 
