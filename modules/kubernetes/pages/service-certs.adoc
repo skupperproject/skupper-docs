@@ -5,8 +5,8 @@
 By default, {skupper-name} creates certificates to establish links between sites using mutual TLS.
 If you want to use custom certificates to protect the communication from component to component, you can use certificates as follows:
 
-* xref:skupper-generated-certs[]
-* xref:provided-certs[]
+* xref:skupper-generated-certs[] - suitable for traffic that is confined to the {service-network}.
+* xref:provided-certs[] - requires that the certificate authority is distributed across all sites.
 
 // Type: procedure
 [id="skupper-generated-certs"] 
@@ -86,7 +86,7 @@ You can protect component to component communication on the {service-network} us
 
 * Access to Kubernetes site where the service is exposed
 * Access to Kubernetes site where the service is called from
-* Certificate and private key files. Assuming `tls.crt` and `tls.key` filenames.
+* Certificate authority access (intermediate certificate is sufficient)
 
 
 .Procedure
