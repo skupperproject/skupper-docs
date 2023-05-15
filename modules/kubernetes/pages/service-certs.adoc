@@ -14,12 +14,13 @@ This ensures that traffic between sites is encrypted. To use custom certificates
 You can use certificates to encrypt traffic between pods and the Skupper router as follows:
 
 * xref:skupper-generated-certs[] - does not require user to provide certificates.
-* xref:user-provided-certs[] - requires that the certificate authority is distributed across all sites.
+* xref:user-provided-certs[] - requires that the certificate authority, and the signed certificates, are distributed across all sites.
 
-NOTE: With both procedures, the certificates are provided when you expose the service on the {service-network}.
+NOTE: With both procedures, you reference the certificates when you expose the service on the {service-network}.
+If you do not reference certificates, the traffic between pods and the Skupper router is unencrypted.
 
 // Type: procedure
-[id="skupper-generated-certs"] 
+[id="skupper-generated-certs"]
 = Exposing services on the {service-network} with Skupper-generated certificates
 
 A {skupper-name} installation includes a certificate authority which can generate certificates that can be used to encrypt traffic from the pod to the Skupper router.
@@ -69,7 +70,7 @@ On this site, a secret is created named `skupper-tls-<service-name>`.
 The secret contains the generated certificates under `data/ca.crt`, `data/tls.crt` and `data/tls.key`.
 --
 
-. Configure components that call the exposed service to use the certificates. 
+. Configure components that call the exposed service to use the certificates stored in `skupper-tls-<service-name>`.
 +
 --
 For example, modify a deployment to mount the secret in a container.
@@ -80,7 +81,19 @@ For example, modify a deployment to mount the secret in a container.
         secret:
           secretName: skupper-tls-nghttp2tls
 ----
+--
 
+. Configure the exposed service, that is the component that responds to the request, to use the certificates stored in `skupper-service-client`.
++
+--
+For example, modify a deployment to mount the secret in a container.
+
+----
+      volumes:
+      - name: certs
+        secret:
+          secretName: skupper-service-client
+----
 --
 
 
