@@ -21,7 +21,7 @@ If you do not reference certificates, the traffic between pods and the Skupper r
 
 // Type: procedure
 [id="skupper-generated-certs"]
-= Exposing services on the {service-network} with Skupper-generated certificates
+== Exposing services on the {service-network} with Skupper-generated certificates
 
 A {skupper-name} installation includes a certificate authority which can generate certificates that can be used to encrypt traffic from the pod to the Skupper router.
 This procedure describes how to use those certificates in your {service-network}.
@@ -99,7 +99,7 @@ For example, modify a deployment to mount the secret in a container.
 
 // Type: procedure
 [id="user-provided-certs"] 
-= Exposing services on the {service-network} with user-provided certificates
+== Exposing services on the {service-network} with user-provided certificates
 
 You can encrypt traffic from the pod to the Skupper router using certificates provided by a certificate authority.
 
@@ -112,26 +112,36 @@ You can encrypt traffic from the pod to the Skupper router using certificates pr
 
 .Procedure
 
-. Create a secret from the certificate authority, for example:
+. Create a TLS secret from the certificate authority to store the private key and certificate.
 +
 --
+The required format of the secret is:
+
+`data/ca.crt`:: CA TLS certificate
+`data/tls.crt`:: CA TLS certificate (same certificate as above)
+`data/tls.key`:: CA Private key
+
+For example, you might name the secret `ca-tls-secret`:
+
 ----
 $ kubectl create secret tls ca-tls-secret --key=rootCA.key.pem --cert=rootCA.crt.pem
+$ kubectl patch secret ca-tls-secret -p="{\"data\":{\"ca.crt\": \"$(kubectl get secret ca-tls-secret -o json -o=jsonpath="{.data.tls\.crt}")\"}}"
 ----
 --
 
-
-. Create secrets from the certificate and private key files:
+. Create a secret from the signed certificate and private key files:
 +
 --
-----
-$ kubectl create secret tls user-tls-<service-name> --key <key-path> --cert <cert-path>
-----
+The required format of the secret is:
 
-For example
+`data/ca.crt`:: CA TLS certificate from step 1
+`data/tls.crt`:: Signed TLS certificate 
+`data/tls.key`:: Signed Private key
 
+For example, to encrypt a service named `backend`, you might name the secret `user-tls-backend`:
 ----
-kubectl create secret tls user-tls-nghttp2tls --key ./tls.key --cert ./tls.crt
+$ kubectl create secret tls user-tls-backend --key <key-path> --cert <cert-path>
+$ kubectl patch secret user-tls-backend  -p="{\"data\":{\"ca.crt\": \"$(kubectl get secret ca-tls-secret -o json -o=jsonpath="{.data.tls\.crt}")\"}}"
 ----
 --
 
@@ -140,14 +150,14 @@ kubectl create secret tls user-tls-nghttp2tls --key ./tls.key --cert ./tls.crt
 .. If you use the `expose` option, you specify both certificate secret and the public CA secret, for example:
 +
 ----
-$ skupper expose deployment backend --port 5432 --protocol http2 --tls-cert user-tls-nghttp2tls --tls-trust ca-tls-secret
+$ skupper expose deployment backend --port 5432 --protocol http2 --tls-cert user-tls-backend --tls-trust ca-tls-secret
 ----
 
 .. If you use the `create` and `bind` options:
 +
 --
 ----
-$ skupper service create backend 5432 --tls-cert user-tls-nghttp2tls
+$ skupper service create backend 5432 --tls-cert user-tls-backend
 $ skupper bind deployment backend  --port 5001  --protocol http2 --tls-trust ca-tls-secret
 ----
 --
