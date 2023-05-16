@@ -86,6 +86,7 @@ For example, modify a deployment to mount the secret in a container.
 . Configure the exposed service, that is the component that responds to the request, to use the certificates stored in `skupper-service-client`.
 +
 --
+The `skupper-service-client` secret contains the certificate and private key of the Skupper certificate authority.
 For example, modify a deployment to mount the secret in a container.
 
 ----
