@@ -6,17 +6,17 @@ This section describes how to apply certificates to encrypt the traffic within a
 
 By default:
 
-* {Skupper-name} creates certificates to establish links between sites using mutual TLS.
-This ensures that traffic between sites is encrypted. To use custom certificates for traffic between sites, see xref:index.adoc[].
+* {Skupper-name} creates certificates to establish links between sites using mutual TLS so that traffic between sites is encrypted. 
+To use custom certificates for traffic between sites, see xref:index.adoc[].
 
 * Network traffic between pods and the Skupper router is not encrypted. 
 
 You can use certificates to encrypt traffic between pods and the Skupper router as follows:
 
-* xref:skupper-generated-certs[] - does not require user to provide certificates.
+* xref:skupper-generated-certs[] - does not require that you provide certificates.
 * xref:user-provided-certs[] - requires that the certificate authority, and the signed certificates, are distributed across all sites.
 
-NOTE: With both procedures, you reference the certificates when you expose the service on the {service-network}.
+NOTE: With both procedures, you reference the certificates when exposing the service on the {service-network}.
 If you do not reference certificates, the traffic between pods and the Skupper router is unencrypted.
 
 // Type: procedure
@@ -28,8 +28,8 @@ This procedure describes how to use those certificates in your {service-network}
 
 .Prerequisites
 
-* Access to Kubernetes site where the service is exposed
-* Access to Kubernetes site where the service is called from
+* Access to the Kubernetes site where the service is exposed
+* Access to the Kubernetes site where the service is called from
 * service sync is enabled on both sites
 
 .Procedure
@@ -67,7 +67,7 @@ Services exposed through Skupper:
 ----
 
 On this site, a secret is created named `skupper-tls-<service-name>`. 
-The secret contains the generated certificates under `data/ca.crt`, `data/tls.crt` and `data/tls.key`.
+The secret contains the generated certificates under `data/ca.crt`, `data/tls.crt`, and `data/tls.key`.
 --
 
 . Configure components that call the exposed service to use the certificates stored in `skupper-tls-<service-name>`.
@@ -83,7 +83,7 @@ For example, modify a deployment to mount the secret in a container.
 ----
 --
 
-. Configure the exposed service, that is the component that responds to the request, to use the certificates stored in `skupper-service-client`.
+. Configure the exposed service, which is the component that responds to the request, to use the certificates stored in `skupper-service-client`.
 +
 --
 The `skupper-service-client` secret contains the certificate and private key of the Skupper certificate authority.
@@ -106,8 +106,8 @@ You can encrypt traffic from the pod to the Skupper router using certificates pr
 
 .Prerequisites
 
-* Access to Kubernetes site where the service is exposed
-* Access to Kubernetes site where the service is called from
+* Access to the Kubernetes site where the service is exposed
+* Access to the Kubernetes site where the service is called from
 * Certificate authority access (intermediate certificate is sufficient)
 
 
@@ -148,7 +148,7 @@ $ kubectl patch secret user-tls-backend  -p="{\"data\":{\"ca.crt\": \"$(kubectl 
 
 . Expose the service on the {service-network}:
 
-.. If you use the `expose` option, you specify both certificate secret and the public CA secret, for example:
+.. If you use the `expose` option, you specify the certificate secret and the CA secret, for example:
 +
 ----
 $ skupper expose deployment backend --port 5432 --protocol http2 --tls-cert user-tls-backend --tls-trust ca-tls-secret
