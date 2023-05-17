@@ -2,7 +2,13 @@
 [id="custom-certs"] 
 = Creating sites using a custom certificate authority on OpenShift
 
-By default, {skupper-name} creates certificates to establish links between sites using mutual TLS.
+By default:
+
+* Network traffic between pods and the Skupper router is not encrypted. To encrypt traffic between pods and the Skupper router see xref:service-certs.adoc[].
+
+* {Skupper-name} creates certificates to establish links between sites using mutual TLS.
+This ensures that traffic between sites is encrypted. 
+
 These certificates are stored as secrets in the namespace when you create a site using `skupper init`.
 If you want to use your own certificates, you can populate the a set of secrets with the appropriate certificates before creating the site as described in this section.
 This set of secrets provides {skupper-name} with the configuration required to create a site.
