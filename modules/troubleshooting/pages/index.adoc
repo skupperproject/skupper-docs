@@ -157,7 +157,7 @@ However, this output is most useful when reporting an issue and is included in t
 
 You must link sites before you can expose services on the {service-network}.
 
-NOTE: By default, tokens expire after 5 minutes and can only be used once.
+NOTE: By default, tokens expire after 5 minutes and you can only use a token once.
 Generate a new token if the link is not connected.
 You can also generate tokens using the `-token-type cert` option for permanent reusable tokens.
 
