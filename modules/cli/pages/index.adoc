@@ -175,7 +175,7 @@ When linking sites, you can assign a cost to each link to influence the traffic 
 In a {service-network}, the routing algorithm attempts to use the path with the lowest total cost from caller to target service.
 
 If you have more than two sites and services distributed across different clusters, you might want a calling service to favor a particular target or link.
-In this case, you can specify a cost of greater than `1`.
+In this case, you can specify a cost of greater than `1` to reduce the usage of the link.
 
 .Prerequisite
 
@@ -192,8 +192,6 @@ $ skupper link create <filename> --cost <integer-cost>
 ----
 
 where `<integer-cost>` is an integer greater than 1 and traffic favors lower cost links.
-
-NOTE: If a service can be called without traversing a link, that service is considered local, with an implicit cost of `0`.
 
 For example, create a link with cost set to `2` using a token file named `token.yaml`:
 
@@ -215,11 +213,11 @@ $ skupper link status link1 --verbose
  Status:        Connected
 ----
 
+.Additional resources
 
-
-
-
-
+Since release 2.2.1, a local service can be balanced with a remote service.
+For example, if you deploy a web server  in site A and B, and bind both to a service `http-server`, client requests from site A will be balanced equally with responses from site A and B when the service is under load.
+If only a few requests are sent, the responses come from site A.
 
 // Type: concept
 [id="exposing-services-ns"] 
