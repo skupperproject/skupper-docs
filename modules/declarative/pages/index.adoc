@@ -74,19 +74,19 @@ Using YAML files to create {skupper-name} sites allows you to use source control
 
 . Create a YAML file to define the site, for example, `my-site.yaml`:
 +
+--
 ----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: skupper-site
-data:
-  name: my-site
-  console: "true"
-  console-user: "barney"
-  console-password: "rubble"
-  flow-collector: "true"
+include::example$my-site.yaml[]
+----
+The YAML creates a site with a console and you can create tokens from this site.
+
+To create a site that has no ingress:
+
+----
+include::example$no-ingress.yaml[]
 ----
 
+--
 . Apply the YAML file to your cluster:
 +
 ----
@@ -176,9 +176,10 @@ data:
   cluster-local: "false" //<.>
   edge: "false" //<.>
   service-sync: "true" //<.>
+  ingress: "true" //<.>
 kind: ConfigMap
 metadata:
-  name: skupper-site //<.>
+  name: skupper-site
 ----
 
 <.> Specifies the site name.
@@ -199,6 +200,10 @@ NOTE: You must enable `console` and `flow-collector` for the console to function
 <.> Specifies whether an edge site is created, defaults to `false`.
 
 <.> Specifies whether the services are synchronized across the {service-network}, defaults to `true`.
+
+<.> Specifies whether the site supports ingress, for example, to create tokens usable from remote sites.
+
+NOTE: All ingress types are supported using the same parameters as the `skupper` CLI.
 
 [id="watch-current-reference"] 
 [appendix]
