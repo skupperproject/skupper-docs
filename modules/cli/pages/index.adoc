@@ -348,15 +348,29 @@ $ skupper service bind hello-world-backend deployment hello-world-backend
 
 This section shows how to expose a service from a namespace where {skupper-name} is not deployed.
 
+{skupper-name} allows you expose services from other namespaces by default. 
+You can expose other resources, for example deployments if you create a site as described in this section. 
+
 .Prerequisites
 
 * A namespace where {skupper-name} is deployed.
-* A service running in a different namespace.
 * A network policy that allows communication between the namespaces
+* cluster-admin permissions if you want to expose resources other than services
 
-. Log into your cluster and change to the namespace for your site.
+
+. Create a site with cluster permissions if you want to expose a Kubernetes resource other than a service:
++
+--
+----
+$ skupper init --enable-cluster-permissions
+----
+--
+
 
 . Expose the service on the {service-network}:
+
+
+.. If you want to expose a service, for example, if you did not create a site with `--enable-cluster-permissions`:
 +
 --
 ----
@@ -371,12 +385,23 @@ For example, if you deployed {skupper-name} in the `east` namespace and you crea
 ----
 $ skupper expose service backend.east-backend --port 8080 --address backend
 ----
+--
 
-[NOTE]
-====
-You can only expose services from other namespaces.
-If you want to expose a deployment from another namespace, create a service from the deployment before you try to expose it.
-====
+.. If you want to expose a Kubernetes resource, that is, you created a site with `--enable-cluster-permissions`:
++
+--
+----
+$ skupper expose <resource> --port <port-number> --target-namespace <namespace>
+----
+
+* <resource> - the name of the resource.
+* <namespace> - the name of the namespace where the resource you want to expose runs.
+
+For example, if you deployed {skupper-name} in the `east` namespace and you created a `backend` deployment in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+
+----
+$ skupper expose deployment/backend --port 8080 --target-namespace east-backend
+----
 --
 
 
