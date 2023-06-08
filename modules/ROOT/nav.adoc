@@ -21,4 +21,5 @@ include::partial$attributes.adoc[]
 ** xref:kubernetes:kubernetes.adoc[Kubernetes tutorial]
 ** xref:kubernetes:gateway.adoc[Gateway tutorial]
 ** xref:operator:index.adoc[Kubernetes Operator]
+** xref:kubernetes:service-certs.adoc[]
 
