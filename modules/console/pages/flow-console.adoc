@@ -87,7 +87,6 @@ $ kubectl get secret skupper-console-users -o jsonpath={.data.admin} | base64 -d
 JNZWzMHtyg
 ----
 
-
 // Type: procedure
 [id="exploring-console"] 
 == Exploring the Skupper console
@@ -101,20 +100,21 @@ In the console, both are shown so that you can view the traffic and these are ca
 
 The Skupper console provides an overview of the following:
 
-* Sites 
-* Network 
+* Topology 
 * Addresses
+* Sites
 * Components
 * Processes
 
 
-The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels between sites.
+The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels.
 
 image::{img-loc}skupper-adservice.png[]
 
 
 . Check the *Sites* tab.
 All your sites should be listed.
+See the *Topology* tab to view how the sites are linked.
 
 . Check that all the services you exposed are visible in the *Components* tab.
 
@@ -123,7 +123,11 @@ All your sites should be listed.
 . Click on a process to display the process traffic.
 +
 NOTE: The process detail displays the associated image, host, and addresses.
+You can also view the clients that are calling the process.
 
-. Click an address to show the details for that address.
+. Click *Addresses* and choose an address to show the details for that address. This shows the set of processes that are exposed across the {service-network}.
+
+TIP: To view information about each window, click the *?* icon.
+
 
 // To view a static representation of all the console features, see the https://skupper-console-vry5.vercel.app/[Example Console].
