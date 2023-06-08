@@ -412,8 +412,8 @@ For example, if one site is behind a firewall and the other site is on an AWS cl
 
 [NOTE]
 ====
-By default, a token is only valid for a single link.
-If you need to link many sites, create separate tokens for each link.
+By default, a token is valid for only 15 minutes and can only be used once.
+See xref:cli:tokens.adoc[] for more information on creating different types of tokens.
 ====
 
 *Cannot access Skupper console*
