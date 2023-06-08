@@ -333,8 +333,6 @@ where
 
 * `<target-name>` is the name of the cluster service
 
-* `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
-
 For the example deployment in step 1, you bind the service using the following command:
 ----
 $ skupper service bind hello-world-backend deployment hello-world-backend
