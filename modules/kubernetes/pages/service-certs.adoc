@@ -162,3 +162,5 @@ $ skupper service create backend 5432 --tls-cert user-tls-backend
 $ skupper bind deployment backend  --port 5001  --protocol http2 --tls-trust ca-tls-secret
 ----
 --
+
+NOTE: When certificates expire, you need to perform this procedure again with the new certificates.
