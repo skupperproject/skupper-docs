@@ -94,7 +94,7 @@ The Skupper console also provides useful networking information about the {servi
 image::{img-loc}skupper-console.png[]
 
 
-. Perform the {SkupperOpenShiftBookLink} tutorial.
+. Perform the *Getting Started* tutorial.
 
 . Navigate to the Skupper console.
 
