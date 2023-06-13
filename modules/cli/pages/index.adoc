@@ -346,15 +346,30 @@ $ skupper service bind hello-world-backend deployment hello-world-backend
 
 This section shows how to expose a service from a namespace where {skupper-name} is not deployed.
 
+{skupper-name} allows you expose Kubernetes services from other namespaces for any site. 
+However, if you want to expose workloads, for example deployments, you must create a site as described in this section. 
+
 .Prerequisites
 
 * A namespace where {skupper-name} is deployed.
-* A service running in a different namespace.
 * A network policy that allows communication between the namespaces
+* cluster-admin permissions if you want to expose resources other than services
 
-. Log into your cluster and change to the namespace for your site.
+
+. Create a site with cluster permissions if you want to expose a workload from a namespace other than the site namespace:
++
+--
+----
+$ skupper init --enable-cluster-permissions
+----
+--
+
 
 . Expose the service on the {service-network}:
++
+NOTE: The site does not require the extra permissions granted with the `--enable-cluster-permissions` to expose a Kubernetes service.
+
+.. If you want to expose a Kubernetes service from a namespace other than the site namespace:
 +
 --
 ----
@@ -364,17 +379,28 @@ $ skupper expose service <service>.<namespace> --address <service>
 * <service> - the name of the service on the {service-network}.
 * <namespace> - the name of the namespace where the service you want to expose runs.
 
-For example, if you deployed {skupper-name} in the `east` namespace and you created a `backend` service in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+For example, if you deployed {skupper-name} in the `east` namespace and you created a `backend` Kubernetes service in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
 
 ----
 $ skupper expose service backend.east-backend --port 8080 --address backend
 ----
+--
 
-[NOTE]
-====
-You can only expose services from other namespaces.
-If you want to expose a deployment from another namespace, create a service from the deployment before you try to expose it.
-====
+.. If you want to expose a workload and you created a site with `--enable-cluster-permissions`:
++
+--
+----
+$ skupper expose <resource> --port <port-number> --target-namespace <namespace>
+----
+
+* <resource> - the name of the resource.
+* <namespace> - the name of the namespace where the resource you want to expose runs.
+
+For example, if you deployed {skupper-name} in the `east` namespace and you created a `backend` deployment in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+
+----
+$ skupper expose deployment/backend --port 8080 --target-namespace east-backend
+----
 --
 
 
