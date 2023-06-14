@@ -171,15 +171,26 @@ where `<link-name>` is the name of the link specified during creation.
 [id="link-cost"] 
 == Specifying link cost
 
-When linking sites, you can assign a cost to each link to influence the traffic flow. By default, link cost is set to `1` for a new link.
+When linking sites, you can assign a cost to each link to influence the traffic flow. 
+By default, link cost is set to `1` for a new link.
 In a {service-network}, the routing algorithm attempts to use the path with the lowest total cost from caller to target service.
 
-If you have services distributed across different sites, you might want a calling service to favor a particular target or link.
+* If you have services distributed across different sites, you might want a calling service to favor a particular target or link.
 In this case, you can specify a cost of greater than `1` on the alternative links to reduce the usage of those links.
-For TCP, the exact usage level of a link is determined by the number of open connections.
-When the number of open connections exceeds the cost, the next request is likely to open a connection to a different target.
-
++
 NOTE: The distribution of open connections is statistical, that is, not a round robin system.
+
+* If a connection only traverses one link, then the path cost is equal to the link cost.  
+If the connection traverses more than one link, the path cost is the sum of all the links involved in the path.  
+
+* Cost acts as a threshold for using a path in the network.
+When there is only one path, traffic flows on that path regardless of cost.  
++
+NOTE: If you start with two targets for a service, and one of the targets is no longer available, traffic flows on the remaining path regardless of cost.
+
+* When there are a number of paths, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
+After this threshold of open connections is reached, new connections use the alternative path
+
 
 .Prerequisite
 
