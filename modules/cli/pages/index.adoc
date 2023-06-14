@@ -173,9 +173,9 @@ where `<link-name>` is the name of the link specified during creation.
 
 When linking sites, you can assign a cost to each link to influence the traffic flow. 
 By default, link cost is set to `1` for a new link.
-In a {service-network}, the routing algorithm attempts to use the path with the lowest total cost from caller to target service.
+In a {service-network}, the routing algorithm attempts to use the path with the lowest total cost from client to target server.
 
-* If you have services distributed across different sites, you might want a calling service to favor a particular target or link.
+* If you have services distributed across different sites, you might want a client to favor a particular target or link.
 In this case, you can specify a cost of greater than `1` on the alternative links to reduce the usage of those links.
 +
 NOTE: The distribution of open connections is statistical, that is, not a round robin system.
@@ -183,13 +183,13 @@ NOTE: The distribution of open connections is statistical, that is, not a round 
 * If a connection only traverses one link, then the path cost is equal to the link cost.  
 If the connection traverses more than one link, the path cost is the sum of all the links involved in the path.  
 
-* Cost acts as a threshold for using a path in the network.
+* Cost acts as a threshold for using a path from client to server in the network.
 When there is only one path, traffic flows on that path regardless of cost.  
 +
 NOTE: If you start with two targets for a service, and one of the targets is no longer available, traffic flows on the remaining path regardless of cost.
 
-* When there are a number of paths, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
-After this threshold of open connections is reached, new connections use the alternative path
+* When there are a number of paths from a client to a server, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
+After this threshold of open connections is reached, new connections use the alternative path.
 
 
 .Prerequisite
@@ -229,6 +229,16 @@ $ skupper link status link1 --verbose
  Site:          default-0d99d031-cee2-4cc6-a761-697fe0f76275
  Status:        Connected
 ----
+
+. Observe traffic using the console.
++
+--
+If you have a console on a site, log in and navigate to the processes for each server. 
+You can view the traffic levels corresponding to each client.
+
+NOTE: If there are multiple clients on different sites, filter the view to each client to determine the effect of cost on traffic.
+For example, in a two site network linked with a high cost with servers and clients on both sites, you can see that a client is served by the local servers while a local server is available.
+--
 
 // Type: concept
 [id="exposing-services-ns"] 
