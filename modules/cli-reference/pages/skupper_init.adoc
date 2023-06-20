@@ -6,154 +6,91 @@ Initialise skupper installation
 
 Setup a router and other supporting objects to provide a functional skupper installation that can then be connected to other skupper installations
 
-
+```
  skupper init  --[option]
 
 
+```
 
 .Options
 
-
-site-name:: 
-Provide a specific name for this skupper installation
- (string)
-ingress:: 
-Setup Skupper ingress to one of: [route|loadbalancer|nodeport|nginx-ingress-v1|contour-http-proxy|ingress|none]. If not specified route is used when available, otherwise loadbalancer is used.
- (string)
-ingress-host:: 
-Hostname or alias by which the ingress route or proxy can be reached
- (string)
-router-mode:: 
-Skupper router-mode (default "interior")
- (string)
-labels:: 
-Labels to add to skupper pods
- (strings)
-router-logging:: 
-Logging settings for router. 'trace', 'debug', 'info' (default), 'notice', 'warning', and 'error' are valid values.
- (string)
-router-debug-mode:: 
-Enable debug mode for router ('asan' or 'gdb' are valid values)
- (string)
-routers:: 
-Number of router replicas to start
- (int)
-enable-console:: 
-Enable skupper console (default true)
- (bool)
-create-network-policy:: 
-Create network policy to restrict access to skupper services exposed through this site to current pods in namespace
- (bool)
-console-auth:: 
-Authentication mode for console(s). One of: 'openshift', 'internal', 'unsecured'
- (string)
-console-user:: 
-Skupper console user. Valid only when --console-auth=internal
- (string)
-console-password:: 
-Skupper console user. Valid only when --console-auth=internal
- (string)
-console-ingress:: 
-Determines if/how console is exposed outside cluster. If not specified uses value of --ingress. One of: [route|loadbalancer|nodeport|nginx-ingress-v1|contour-http-proxy|ingress|none].
- (string)
-ingress-annotations:: 
-Annotations to add to skupper ingress
- (strings)
-annotations:: 
-Annotations to add to skupper pods
- (strings)
-router-service-annotations:: 
-Annotations to add to skupper router service
- (strings)
-controller-service-annotation:: 
-Annotations to add to skupper controller service
- (strings)
-enable-service-sync:: 
-Participate in cross-site service synchronization (default true)
- (bool)
-router-cpu:: 
-CPU request for router pods
- (string)
-router-memory:: 
-Memory request for router pods
- (string)
-router-cpu-limit:: 
-CPU limit for router pods
- (string)
-router-memory-limit:: 
-Memory limit for router pods
- (string)
-router-node-selector:: 
-Node selector to control placement of router pods
- (string)
-router-pod-affinity:: 
-Pod affinity label matches to control placement of router pods
- (string)
-router-pod-antiaffinity:: 
-Pod antiaffinity label matches to control placement of router pods
- (string)
-router-ingress-host:: 
-Host through which node is accessible when using nodeport as ingress.
- (string)
-router-load-balancer-ip:: 
-Load balancer ip that will be used for router service, if supported by cloud provider
- (string)
-controller-cpu:: 
-CPU request for controller pods
- (string)
-controller-memory:: 
-Memory request for controller pods
- (string)
-controller-cpu-limit:: 
-CPU limit for controller pods
- (string)
-controller-memory-limit:: 
-Memory limit for controller pods
- (string)
-controller-node-selector:: 
-Node selector to control placement of controller pods
- (string)
-controller-pod-affinity:: 
-Pod affinity label matches to control placement of controller pods
- (string)
-controller-pod-antiaffinity:: 
-Pod antiaffinity label matches to control placement of controller pods
- (string)
-controller-ingress-host:: 
-Host through which node is accessible when using nodeport as ingress.
- (string)
-controller-load-balancer-ip:: 
-Load balancer ip that will be used for controller service, if supported by cloud provider
- (string)
-config-sync-cpu:: 
-CPU request for config-sync pods
- (string)
-config-sync-memory:: 
-Memory request for config-sync pods
- (string)
-config-sync-cpu-limit:: 
-CPU limit for config-sync pods
- (string)
-config-sync-memory-limit:: 
-Memory limit for config-sync pods
- (string)
-timeout:: 
-Configurable timeout for the ingress loadbalancer option. (default 2m0s)
- (duration)
-// 
-
+```
+--site-name string                        Provide a specific name for this skupper installation
+--ingress string                          Setup Skupper ingress to one of: [route|loadbalancer|nodeport|nginx-ingress-v1|contour-http-proxy|ingress|none]. If not specified route is used when available, otherwise loadbalancer is used.
+--router-mode string                      Skupper router-mode (default "interior")
+--labels strings                          Labels to add to skupper pods
+--router-logging string                   Logging settings for router. 'trace', 'debug', 'info' (default), 'notice', 'warning', and 'error' are valid values.
+--router-debug-mode string                Enable debug mode for router ('asan' or 'gdb' are valid values)
+--enable-console                          Enable skupper console must be used in conjunction with '--enable-flow-collector' flag
+--ingress-host string                     Hostname or alias by which the ingress route or proxy can be reached
+--create-network-policy                   Create network policy to restrict access to skupper services exposed through this site to current pods in namespace
+--console-auth string                     Authentication mode for console(s). One of: 'openshift', 'internal', 'unsecured'
+--console-user string                     Skupper console user. Valid only when --console-auth=internal
+--console-password string                 Skupper console user. Valid only when --console-auth=internal
+--console-ingress string                  Determines if/how console is exposed outside cluster. If not specified uses value of --ingress. One of: [route|loadbalancer|nodeport|nginx-ingress-v1|contour-http-proxy|ingress|none].
+--enable-rest-api                         Enable REST API
+--ingress-annotations strings             Annotations to add to skupper ingress
+--annotations strings                     Annotations to add to skupper pods
+--router-service-annotations strings      Annotations to add to skupper router service
+--controller-service-annotation strings   Annotations to add to skupper controller service
+--enable-service-sync                     Participate in cross-site service synchronization (default true)
+--service-sync-site-ttl duration          Time after which stale services, i.e. those whose site has not been heard from, created through service-sync are removed.
+--enable-flow-collector                   Enable cross-site flow collection for the application network
+--routers int                             Number of router replicas to start
+--router-cpu string                       CPU request for router pods
+--router-memory string                    Memory request for router pods
+--router-cpu-limit string                 CPU limit for router pods
+--router-memory-limit string              Memory limit for router pods
+--router-node-selector string             Node selector to control placement of router pods
+--router-pod-affinity string              Pod affinity label matches to control placement of router pods
+--router-pod-antiaffinity string          Pod antiaffinity label matches to control placement of router pods
+--router-ingress-host string              Host through which node is accessible when using nodeport as ingress.
+--router-load-balancer-ip string          Load balancer ip that will be used for router service, if supported by cloud provider
+--router-data-connection-count string     Configures the number of data connections the router will use when linking to other routers
+--controller-cpu string                   CPU request for controller pods
+--controller-memory string                Memory request for controller pods
+--controller-cpu-limit string             CPU limit for controller pods
+--controller-memory-limit string          Memory limit for controller pods
+--controller-node-selector string         Node selector to control placement of controller pods
+--controller-pod-affinity string          Pod affinity label matches to control placement of controller pods
+--controller-pod-antiaffinity string      Pod antiaffinity label matches to control placement of controller pods
+--controller-ingress-host string          Host through which node is accessible when using nodeport as ingress.
+--controller-load-balancer-ip string      Load balancer ip that will be used for controller service, if supported by cloud provider
+--config-sync-cpu string                  CPU request for config-sync pods
+--config-sync-memory string               Memory request for config-sync pods
+--config-sync-cpu-limit string            CPU limit for config-sync pods
+--config-sync-memory-limit string         Memory limit for config-sync pods
+--enable-cluster-permissions              Enable cluster wide permissions in order to expose deployments/statefulsets in other namespaces
+--flow-collector-record-ttl duration      Time after which terminated flow records are deleted, i.e. those flow records that have an end time set. Default is 15 minutes.
+--flow-collector-cpu string               CPU request for flow collector pods
+--flow-collector-memory string            Memory request for flow collector pods
+--flow-collector-cpu-limit string         CPU limit for flow collector pods
+--flow-collector-memory-limit string      Memory limit for flow collector pods
+--external-prometheus-server string       External prometheus server for metric aggregation. Valid only when --enable-flow-collector
+--prometheus-auth string                  Authentication mode for skupper prometheus server. One of: 'tls', 'basic', 'unsecured'
+--prometheus-user string                  Skupper prometheus user. Valid only when --prometheus-auth=basic
+--prometheus-password string              Skupper prometheus user. Valid only when --prometheus-auth=basic
+--prometheus-cpu string                   CPU request for prometheus pods
+--prometheus-memory string                Memory request for prometheus pods
+--prometheus-cpu-limit string             CPU limit for prometheus pods
+--prometheus-memory-limit string          Memory limit for prometheus pods
+--timeout duration                        Configurable timeout for the ingress loadbalancer option. (default 2m0s)
+--enable-skupper-events                   Enable sending Skupper events to Kubernetes (default true)
+-h, --help                                    help for init
+```
 
 .Options inherited from parent commands
 
-
-// 
-// 
-// 
-
+```
+-c, --context string      The kubeconfig context to use
+--kubeconfig string   Path to the kubeconfig file to use
+-n, --namespace string    The Kubernetes namespace to use
+--platform string     The platform type to use [kubernetes, podman]
+```
 
 .See also
 
 * xref:skupper.adoc[skupper]	 -
 
-
-// = Auto generated by spf13/cobra on 6-Oct-2022
+[discrete]
+// Auto generated by spf13/cobra on 12-Jun-2023
