@@ -188,8 +188,8 @@ When there is only one path, traffic flows on that path regardless of cost.
 +
 NOTE: If you start with two targets for a service, and one of the targets is no longer available, traffic flows on the remaining path regardless of cost.
 
-* When there are a number of paths from a client to a server, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
-After this threshold of open connections is reached, new connections use the alternative path.
+* When there are a number of paths from a client to server instances or a service, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
+After this threshold of open connections is reached, new connections are spread across the alternative path and the lowest cost path.
 
 
 .Prerequisite
