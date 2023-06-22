@@ -2,22 +2,62 @@ include::{mod-loc}attributes.adoc[]
 ifndef::mod-loc[]
 :mod-loc: ./partials/
 endif::mod-loc[]
-//Category: skupper-console
+//Category: flow-console
 // Type: assembly
 [id="skupper-console"] 
 = Using the Skupper console
 
 include::{mod-loc}preface.adoc[]
 
-By default, when you create a {skupper-name} site, you also enable the Skupper console.
-The Skupper console URL is displayed whenever you check site status using `skupper status`.
+The Skupper console provides data and visualizations of the traffic flow between Skupper sites.
+
+NOTE: This is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
+
+
+// Type: procedure
+[id="enabling-console"] 
+== Enabling the Skupper console
+
+By default, when you create a {skupper-name} site, a Skupper console is not available.
+
+When enabled, the Skupper console URL is displayed whenever you check site status using `skupper status`.
+
+.Prerequisites
+
+* A Kubernetes namespace where you plan to create a site
+
+.Procedure
+
+. Determine which site in your {service-network} is best to enable the console.
++
+--
+Enabling the console also requires that you enable the flow-collector component, which requires resources to process traffic data from all sites.
+You might locate the console using the following criteria:
+
+* Does the {service-network} cross a firewall?
+For example, if you want the console to be available only inside the firewall, you need to locate the flow-collector and console on a site inside the firewall.
+
+* Is there a site that processes more traffic than other sites?
+For example, if you have a _frontend_ component that calls a set of services from other sites, it might make sense to locate the flow collector and console on that site to minimize data traffic.
+
+* Is there a site with more or cheaper resources that you want to use?
+For example, if you have two sites, A and B, and resources are more expensive on site A, you might want to locate the flow collector and console on site B.
+--
+
+. Create a site with the flow collector and console enabled:
++
+----
+$ skupper init --enable-console --enable-flow-collector
+----
++
+IMPORTANT: Currently, you must enable the console on the same site as you enable the flow collector. This requirement may change before the console is fully supported by https://skupper.io[skupper.io].
 
 
 // Type: procedure
 [id="accessing-console"] 
 == Accessing the Skupper console
 
-By default, the Skupper console is available whenever you create a {service-network} router and is protected by credentials available in the `skupper-console-users` secret.
+By default, the Skupper console is protected by credentials available in the `skupper-console-users` secret.
 
 
 .Procedure
@@ -26,6 +66,7 @@ By default, the Skupper console is available whenever you create a {service-netw
 +
 ----
 $ skupper status
+
 Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites. It has no exposed services.
 The site console url is:  https://skupper-west.apps-crc.testing
 ----
@@ -33,94 +74,61 @@ The site console url is:  https://skupper-west.apps-crc.testing
 . Browse to the Skupper console URL. 
 The credential prompt depends on how the site was created using `skupper init`:
 +
-* using the `--console-auth unsecured` option, you are not prompted for credentials.
-* using the `--console-auth openshift` option, you are prompted to enter OpenShift cluster credentials.
-* using the default or `--console-user <user>  --console-password <password>` options, you are prompted to enter those credentials.
+* Using the `--console-auth unsecured` option, you are not prompted for credentials.
+* Using the `--console-auth openshift` option, you are prompted to enter OpenShift cluster credentials.
+* Using the default or `--console-user <user>  --console-password <password>` options, you are prompted to enter those credentials.
 
 . If you created the site using default settings, that is `skupper init`, a random password is generated for the `admin` user.
 To retrieve the password the `admin` user:
 +
 ----
 $ kubectl get secret skupper-console-users -o jsonpath={.data.admin} | base64 -d
+
 JNZWzMHtyg
 ----
-
-
-// Type: procedure
-[id="linking-sites-using-skupper-console"] 
-== Linking sites using the Skupper console
-
-The Skupper console allows you create and use claim type tokens as described in {SkupperCliBookLink}.
-
-.Prerequisites
-
-* Two sites, each with Skupper console enabled
-* Google Chrome browser
-
-.Procedure
-
-NOTE: Your browser may prompt you to allow using the clipboard. You must accept that prompt for this procedure.
-
-. Log into the console for the first site.
-
-. Navigate to *Site* in left hand menu.
-
-. Click *Link a remote site* to display the steps for linking.
-
-. Click *Copy a token to the clipboard*.
-
-. Log into the console for the second site.
-
-. Navigate to *Site* in left hand menu.
-
-. Click *Use a token* to accept the token from the first site.
-
-. Verify that the sites are linked by Checking that both sites are listed in the *Network details* section of the *Site* page.
-
-
 
 // Type: procedure
 [id="exploring-console"] 
 == Exploring the Skupper console
 
+After exposing a service on the {service-network}, you create an _address_, that is, a service name and port number associated with a site. 
+There might be many replicas associated with an address.
+These replicas are shown in the Skupper console as _processes_. 
+Not all participants on a {service-network} are services.
+For example, a _frontend_ deployment might call an exposed service named _backend_, but that frontend is not part of the {service-network}.
+In the console, both are shown so that you can view the traffic and these are called _components_.
+
 The Skupper console provides an overview of the following:
 
-* Services - services that are exposed on the {service-network}, both local and remote.
-* Sites - {skupper-name} installations on the current {service-network}.
-* Deployments - deployments relating to exposed services.
-
-The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels between sites.
-
-image::{img-loc}skupper-console.png[]
+* Topology 
+* Addresses
+* Sites
+* Components
+* Processes
 
 
-. Perform the *Getting Started* tutorial.
+The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels.
 
-. Navigate to the Skupper console.
+image::{img-loc}skupper-adservice.png[]
 
-. Click the *Network* menu item.
-Both the *east* and *west* sites should be displayed in circles.
 
-. Drag the *west* circle to be on the left of the *east* circle.
+. Check the *Sites* tab.
+All your sites should be listed.
+See the *Topology* tab to view how the sites are linked.
 
-. Click the *Table* tab to display the sites as text items.
-This view allows you drill down into details relating to the selected site.
+. Check that all the services you exposed are visible in the *Components* tab.
 
-. Click the *Deployments* menu item.
-This view shows you any deployments that are exposed as services on the {service-network}.
-In this case, the console displays the *hello-world-backend (east)* deployment.
+. Click a component to show the component details and associated processes.
 
-. Click the *Services* menu item to display details for all services exposed on the {service-network}.
+. Click on a process to display the process traffic.
 +
-NOTE: Although two services are involved in the tutorial, only one service, `hello-world-backend` is exposed on the {service-network}.
+NOTE: The process detail displays the associated image, host, and addresses.
+You can also view the clients that are calling the process.
 
-. Click the *Site* menu.
-This page shows:
-* The number of sites in the {service-network}.
-* The services that are exposed on the {service-network}.
-* The gateways that are defined in the {service-network}.
-* The traffic for the current site.
+. Click *Addresses* and choose an address to show the details for that address. This shows the set of servers that are exposed across the {service-network}.
 
 
+TIP: To view information about each window, click the *?* icon.
 
 
+// To view a static representation of all the console features, see the https://skupper-console-vry5.vercel.app/[Example Console].
