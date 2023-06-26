@@ -119,14 +119,11 @@ You can encrypt traffic from the pod to the Skupper router using certificates pr
 The required format of the secret is:
 
 `data/ca.crt`:: CA TLS certificate
-`data/tls.crt`:: CA TLS certificate (same certificate as above)
-`data/tls.key`:: CA Private key
 
 For example, you might name the secret `ca-tls-secret`:
 
 ----
-$ kubectl create secret tls ca-tls-secret --key=rootCA.key.pem --cert=rootCA.crt.pem
-$ kubectl patch secret ca-tls-secret -p="{\"data\":{\"ca.crt\": \"$(kubectl get secret ca-tls-secret -o json -o=jsonpath="{.data.tls\.crt}")\"}}"
+$ kubectl create secret generic ca-tls-secret --from-file=ca.crt=rootCA.crt
 ----
 --
 
