@@ -9,8 +9,7 @@ include::partial$attributes.adoc[]
 ** xref:cli-podman:skupper.adoc[Podman Reference]
 * xref:declarative:index.adoc[Declarative]
 * xref:policy:index.adoc[Policies]
-* xref:console:index.adoc[Deprecated Console]
-* xref:console:flow-console.adoc[Console 1.3 and later]
+* xref:console:index.adoc[Console 1.3 and later]
 * xref:cli:tokens.adoc[Tokens]
 
 

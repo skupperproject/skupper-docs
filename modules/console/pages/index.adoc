@@ -2,7 +2,7 @@ include::{mod-loc}attributes.adoc[]
 ifndef::mod-loc[]
 :mod-loc: ./partials/
 endif::mod-loc[]
-//Category: flow-console
+//Category: console
 // Type: assembly
 [id="skupper-console"] 
 = Using the Skupper console
