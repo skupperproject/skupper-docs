@@ -1,4 +1,3 @@
-include::partial$attributes.adoc[]
 
 * xref:index.adoc[]
 * xref:overview:index.adoc[Overview]

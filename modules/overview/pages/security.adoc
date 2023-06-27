@@ -1,4 +1,3 @@
-include::{mod-loc}attributes.adoc[]
 
 //Category: skupper-security
 // Type: assembly

@@ -1,5 +1,3 @@
-include::{mod-loc}attributes.adoc[]
-
 //Category: skupper-declarative
 // Type: assembly
 [id="skupper-declarative"] 

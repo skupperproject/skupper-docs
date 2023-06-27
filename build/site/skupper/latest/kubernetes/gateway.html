@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Creating a service network with Kubernetes and accessing a backend service using a gateway :: Skupper PREVIEW</title>
+    <title>Untitled :: Skupper PREVIEW</title>
     <link rel="canonical" href="https://skupper.io/docs/skupper/latest/kubernetes/gateway.html">
     <meta name="generator" content="Antora 3.1.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
@@ -53,7 +53,7 @@
     <a class="nav-link" href="../overview/index.html">Overview</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../overview/glossary.html">Glossary</a>
+    <a class="nav-link" href="../overview/glossary.html">overview:glossary.adoc</a>
   </li>
 </ul>
   </li>
@@ -147,14 +147,16 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Creating a service network with Kubernetes and accessing a backend service using a gateway</h1>
-<div id="preamble">
-<div class="sectionbody">
+<div class="paragraph">
+<p>Unresolved include directive in modules/kubernetes/pages/gateway.adoc - include::ROOT:partial$attributes.adoc[]
+:sectnums:</p>
+</div>
+<h1 id="gateway-tutorial" class="sect0"><a class="anchor" href="#gateway-tutorial"></a>Creating a service network with Kubernetes and accessing a backend service using a gateway</h1>
 <div class="paragraph system:abstract">
 <p>This tutorial describes how to connect a local backend service on a local machine with a frontend service running on a Kubernetes cluster.</p>
 </div>
 <div class="paragraph">
-<p>In this tutorial, the services are the same as used in <a href="/skupper/latest/cli/openshift.html">Creating a service network with OpenShift</a>, however you run the backend service locally and expose the service on the service network using the <code>skupper</code> command-line interface (CLI).</p>
+<p>In this tutorial, the services are the same as used in {SkupperOpenShiftBookLink}, however you run the backend service locally and expose the service on the service network using the <code>skupper</code> command-line interface (CLI).</p>
 </div>
 <div class="ulist">
 <div class="title">Prerequisites</div>
@@ -192,10 +194,8 @@ Although this tutorial demonstrates exposing a Python service on the service net
 </tr>
 </table>
 </div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="introduction-to-skupper"><a class="anchor" href="#introduction-to-skupper"></a>1. Introduction to Skupper </h2>
+<h2 id="introduction-to-skupper"><a class="anchor" href="#introduction-to-skupper"></a>Introduction to Skupper {product-version}</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A service network enables communication between services running in different network locations.
@@ -216,14 +216,14 @@ It allows geographically distributed services to connect as if they were all run
 <div class="title">Additional resources</div>
 <ul>
 <li>
-<p><a href="/skupper/latest/overview/index.html">Overview</a></p>
+<p>{SkupperOverviewBookLink}</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating-backend"><a class="anchor" href="#creating-backend"></a>2. Creating a backend service</h2>
+<h2 id="creating-backend"><a class="anchor" href="#creating-backend"></a>Creating a backend service</h2>
 <div class="sectionbody">
 <div class="paragraph system:abstract">
 <p>This procedure describes how to create a backend service on your local machine that is accessed from the service network.</p>
@@ -309,7 +309,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)</code></
 </div>
 </div>
 <div class="sect1">
-<h2 id="configuring-consoles"><a class="anchor" href="#configuring-consoles"></a>3. Logging into cluster</h2>
+<h2 id="configuring-consoles"><a class="anchor" href="#configuring-consoles"></a>Logging into cluster</h2>
 <div class="sectionbody">
 <div class="ulist">
 <div class="title">Prerequisites</div>
@@ -341,7 +341,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)</code></
 </div>
 </div>
 <div class="sect1">
-<h2 id="installing-skupper"><a class="anchor" href="#installing-skupper"></a>4. Creating a skupper site</h2>
+<h2 id="installing-skupper"><a class="anchor" href="#installing-skupper"></a>Creating a skupper site</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -391,7 +391,7 @@ $ kubectl config set-context --current --namespace west</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="frontend"><a class="anchor" href="#frontend"></a>5. Creating the frontend service</h2>
+<h2 id="frontend"><a class="anchor" href="#frontend"></a>Creating the frontend service</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The frontend service is a simple Python application that displays a message from the backend application.</p>
@@ -470,7 +470,7 @@ hello-world-frontend   &lt;frontend-url&gt;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="gateway"><a class="anchor" href="#gateway"></a>6. Creating and using a Skupper gateway</h2>
+<h2 id="gateway"><a class="anchor" href="#gateway"></a>Creating and using a Skupper gateway</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This procedure describes how to create a gateway and make a backend service available on the service network.</p>
@@ -545,7 +545,7 @@ hello-world-frontend   &lt;frontend-url&gt;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="check"><a class="anchor" href="#check"></a>7. Checking service access from the frontend</h2>
+<h2 id="check"><a class="anchor" href="#check"></a>Checking service access from the frontend</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <div class="title">Procedure</div>
@@ -591,17 +591,17 @@ You see a message similar to the following:</p>
 <div class="title">Additional resources</div>
 <ul>
 <li>
-<p><a href="/skupper/latest/console/index.html">Skupper console</a></p>
+<p>link</p>
 </li>
 <li>
-<p><a href="/skupper/latest/cli/index.html">Configuring Skupper sites using the CLI</a></p>
+<p>{SkupperCliBookLink}</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="tearing-down"><a class="anchor" href="#tearing-down"></a>8. Tearing down the service network</h2>
+<h2 id="tearing-down"><a class="anchor" href="#tearing-down"></a>Tearing down the service network</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This procedure describes how to remove the service network you created.</p>

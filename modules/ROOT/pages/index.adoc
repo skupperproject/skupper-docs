@@ -1,5 +1,3 @@
-include::{mod-loc}attributes.adoc[]
-
 = Preview homepage
 
 This is a preview of link:https://github.com/skupperproject/skupper-docs[skupperproject/skupper-docs: Documentation for the Skupper project] 

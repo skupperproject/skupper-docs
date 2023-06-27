@@ -1,4 +1,3 @@
-include::{mod-loc}attributes.adoc[]
 = Skupper connectivity
 
 Skupper represents a new approach to connecting services across multiple Kubernetes clusters.

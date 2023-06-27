@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Securing a service network using policies :: Skupper PREVIEW</title>
+    <title>Untitled :: Skupper PREVIEW</title>
     <link rel="canonical" href="https://skupper.io/docs/skupper/latest/policy/index.html">
     <meta name="generator" content="Antora 3.1.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
@@ -53,7 +53,7 @@
     <a class="nav-link" href="../overview/index.html">Overview</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../overview/glossary.html">Glossary</a>
+    <a class="nav-link" href="../overview/glossary.html">overview:glossary.adoc</a>
   </li>
 </ul>
   </li>
@@ -146,12 +146,13 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Securing a service network using policies</h1>
-<div id="preamble">
-<div class="sectionbody">
+<div class="paragraph">
+<p>Unresolved include directive in modules/policy/pages/index.adoc - include::ROOT:partial$attributes.adoc[]</p>
+</div>
+<h1 id="skupper-policy" class="sect0"><a class="anchor" href="#skupper-policy"></a>Securing a service network using policies</h1>
 <div class="paragraph">
 <p>By default, Skupper includes many security features, including using mutual TLS for all service network communication between sites.
-By default, applying the policy system to a cluster prevents all service network communication to and from that cluster.
+By default, applying the {policy-system} to a cluster prevents all service network communication to and from that cluster.
 You specify granular policies to allow only the service network communication you require.</p>
 </div>
 <div class="admonitionblock note">
@@ -161,15 +162,15 @@ You specify granular policies to allow only the service network communication yo
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The policy system is distinct from the <code>network-policy</code> option which restricts access to Skupper services to the current namespace as described in <a href="/skupper/latest/cli/index.html">Configuring Skupper sites using the CLI</a>.
+The {policy-system} is distinct from the <code>network-policy</code> option which restricts access to Skupper services to the current namespace as described in {skupperclibooklink}.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Each site in a service network runs a Skupper router and has a private, dedicated certificate authority (CA).
+<p>Each site in a service network runs a {skupper-router} and has a private, dedicated certificate authority (CA).
 Communication between sites is secured with mutual TLS, so the service network is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
-The policy system adds another layer at a cluster level to help a cluster administrator control access to a service network.</p>
+The {policy-system} adds another layer at a cluster level to help a cluster administrator control access to a service network.</p>
 </div>
 <div class="paragraph">
 <p>This guide assumes that you understand the following Skupper concepts:</p>
@@ -190,13 +191,11 @@ The policy system adds another layer at a cluster level to help a cluster admini
 </dd>
 </dl>
 </div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="about-skupper-policies"><a class="anchor" href="#about-skupper-policies"></a>About the policy system</h2>
+<h2 id="about-skupper-policies"><a class="anchor" href="#about-skupper-policies"></a>About the {policy-system}</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After a cluster administrator installs the policy system using a Custom Resource Definition (CRD), the cluster administrator needs to configure one or more policies to allow <em>developers</em> create and use services on the service network.</p>
+<p>After a cluster administrator installs the {policy-system} using a Custom Resource Definition (CRD), the cluster administrator needs to configure one or more policies to allow <em>developers</em> create and use services on the service network.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -348,10 +347,10 @@ An operation is permitted if any single policy CR permits the operation.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="installing-crd"><a class="anchor" href="#installing-crd"></a>Installing the policy system CRD</h2>
+<h2 id="installing-crd"><a class="anchor" href="#installing-crd"></a>Installing the {policy-system} CRD</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Installing the policy system CRD enables a cluster administrator to enforce policies for service networks.</p>
+<p>Installing the {policy-system} CRD enables a cluster administrator to enforce policies for service networks.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -360,7 +359,7 @@ An operation is permitted if any single policy CR permits the operation.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If there are existing sites on the cluster, see <a href="#installing-crd-existing-sites">Installing the policy system CRD on a cluster with existing sites</a> to avoid service network disruption.
+If there are existing sites on the cluster, see <a href="#installing-crd-existing-sites">Installing the {policy-system} CRD on a cluster with existing sites</a> to avoid service network disruption.
 </td>
 </tr>
 </table>
@@ -402,7 +401,7 @@ clusterrole.rbac.authorization.k8s.io/skupper-service-controller created</code><
 </div>
 </li>
 <li>
-<p>To verify that the policy system is active, use the <code>skupper status</code> command and check that the output includes the following line:</p>
+<p>To verify that the {policy-system} is active, use the <code>skupper status</code> command and check that the output includes the following line:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Skupper is enabled for namespace "&lt;namespace&gt;" in interior mode (with policies).</code></pre>
@@ -417,7 +416,7 @@ clusterrole.rbac.authorization.k8s.io/skupper-service-controller created</code><
 <h2 id="upgrading-existing-sites"><a class="anchor" href="#upgrading-existing-sites"></a>Upgrading on a cluster with existing sites</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you are upgrading sites from Skupper version 0.8, you can take advantage of the lack of a policy system in that version and avoid service network disruption.</p>
+<p>If you are upgrading sites from Skupper version 0.8, you can take advantage of the lack of a {policy-system} in that version and avoid service network disruption.</p>
 </div>
 <div class="olist arabic">
 <div class="title">Procedure</div>
@@ -426,10 +425,10 @@ clusterrole.rbac.authorization.k8s.io/skupper-service-controller created</code><
 <p>Document each service and exposed resources.</p>
 </li>
 <li>
-<p>Create policy CRs as described in <a href="#creating-policies">Creating policies for the policy system</a></p>
+<p>Create policy CRs as described in <a href="#creating-policies">Creating policies for the {policy-system}</a></p>
 </li>
 <li>
-<p>Install the CRD as described in <a href="#installing-crd">Installing the policy system CRD</a>.</p>
+<p>Install the CRD as described in <a href="#installing-crd">Installing the {policy-system} CRD</a>.</p>
 </li>
 <li>
 <p>Grant permissions to read policies to developers to avoid that site being blocked from the service network.</p>
@@ -454,7 +453,7 @@ clusterrole.rbac.authorization.k8s.io/skupper-service-controller created</code><
 </div>
 </div>
 <div class="sect1">
-<h2 id="installing-crd-existing-sites"><a class="anchor" href="#installing-crd-existing-sites"></a>Installing the policy system CRD on a cluster with existing sites</h2>
+<h2 id="installing-crd-existing-sites"><a class="anchor" href="#installing-crd-existing-sites"></a>Installing the {policy-system} CRD on a cluster with existing sites</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If the cluster already hosts Skupper sites, note the following before installing the CRD:</p>
@@ -478,7 +477,7 @@ You must create those resources again.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you are upgrading sites from Skupper version 0.8, you can take advantage of the lack of a policy system in that version and avoid service network disruption by following the procedure described in <a href="#upgrading-existing-sites">Upgrading on a cluster with existing sites</a>.
+If you are upgrading sites from Skupper version 0.8, you can take advantage of the lack of a {policy-system} in that version and avoid service network disruption by following the procedure described in <a href="#upgrading-existing-sites">Upgrading on a cluster with existing sites</a>.
 </td>
 </tr>
 </table>
@@ -504,7 +503,7 @@ If you are upgrading sites from Skupper version 0.8, you can take advantage of t
 <p>Document each service and resource exposed on the service network.</p>
 </li>
 <li>
-<p>Install the CRD as described in <a href="#installing-crd">Installing the policy system CRD</a>.
+<p>Install the CRD as described in <a href="#installing-crd">Installing the {policy-system} CRD</a>.
 This step closes connections and removes all service network services and exposed resources.</p>
 </li>
 <li>
@@ -526,7 +525,7 @@ This step closes connections and removes all service network services and expose
 </div>
 </li>
 <li>
-<p>Create policy CRs as described in <a href="#creating-policies">Creating policies for the policy system</a></p>
+<p>Create policy CRs as described in <a href="#creating-policies">Creating policies for the {policy-system}</a></p>
 </li>
 <li>
 <p>Recreate any services and exposed resources as required.</p>
@@ -536,7 +535,7 @@ This step closes connections and removes all service network services and expose
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating-policies"><a class="anchor" href="#creating-policies"></a>Creating policies for the policy system</h2>
+<h2 id="creating-policies"><a class="anchor" href="#creating-policies"></a>Creating policies for the {policy-system}</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Policies allow a cluster administrator to control communication across the service network from a cluster.</p>
@@ -548,7 +547,7 @@ This step closes connections and removes all service network services and expose
 <p>Access to a cluster using a <code>cluster-admin</code> account.</p>
 </li>
 <li>
-<p>The policy system CRD is installed on the cluster.</p>
+<p>The {policy-system} CRD is installed on the cluster.</p>
 </li>
 </ul>
 </div>
@@ -560,7 +559,7 @@ This step closes connections and removes all service network services and expose
 </td>
 <td class="content">
 <div class="title">Procedure</div>
-Typically, you create a policy CR that combines many elements from the steps below. See <a href="#about-skupper-policies">About the policy system</a> for an example CR.
+Typically, you create a policy CR that combines many elements from the steps below. See <a href="#about-skupper-policies">About the {policy-system}</a> for an example CR.
 </td>
 </tr>
 </table>

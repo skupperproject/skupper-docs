@@ -7,7 +7,6 @@ endif::[]
 ifndef::mod-loc[]
 :mod-loc: ./partials/
 endif::mod-loc[]
-include::{mod-loc}attributes.adoc[]
 //Category: skupper-policy
 // Type: assembly
 [id="skupper-policy"] 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Using Skupper tokens :: Skupper PREVIEW</title>
+    <title>Untitled :: Skupper PREVIEW</title>
     <link rel="canonical" href="https://skupper.io/docs/skupper/latest/cli/tokens.html">
     <meta name="generator" content="Antora 3.1.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
@@ -53,7 +53,7 @@
     <a class="nav-link" href="../overview/index.html">Overview</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../overview/glossary.html">Glossary</a>
+    <a class="nav-link" href="../overview/glossary.html">overview:glossary.adoc</a>
   </li>
 </ul>
   </li>
@@ -146,9 +146,11 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Using Skupper tokens</h1>
-<div id="preamble">
-<div class="sectionbody">
+<div class="paragraph">
+<p>Unresolved include directive in modules/cli/pages/tokens.adoc - include::ROOT:partial$attributes.adoc[]
+:context: skupper-tokens</p>
+</div>
+<h1 id="using-skupper-tokens-skupper" class="sect0"><a class="anchor" href="#using-skupper-tokens-skupper"></a>Using Skupper tokens</h1>
 <div class="paragraph system:abstract">
 <p>Skupper tokens allow you to create links between sites.
 You create a token on one site and use that token from the other site to create a link between the two sites.</p>
@@ -217,10 +219,8 @@ Protect it appropriately.</p>
 </dd>
 </dl>
 </div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="creating-claim-tokens-skupper-tokens"><a class="anchor" href="#creating-claim-tokens-skupper-tokens"></a>Creating claim tokens</h2>
+<h2 id="creating-claim-tokens-skupper"><a class="anchor" href="#creating-claim-tokens-skupper"></a>Creating claim tokens</h2>
 <div class="sectionbody">
 <div class="paragraph system:abstract">
 <p>You can use a claim token to create a link to the site which issued that token.
@@ -278,14 +278,14 @@ Claim tokens are the default, the <code>-t claim</code> section of the command i
 <div class="title">Additional information</div>
 <ul>
 <li>
-<p>See the <a href="/skupper/latest/cli/index.html">Configuring Skupper sites using the CLI</a> for information about using the token to create links.</p>
+<p>See the {SkupperCliBookLink} for information about using the token to create links.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating-cert-tokens-skupper-tokens"><a class="anchor" href="#creating-cert-tokens-skupper-tokens"></a>Creating cert tokens</h2>
+<h2 id="creating-cert-tokens-skupper"><a class="anchor" href="#creating-cert-tokens-skupper"></a>Creating cert tokens</h2>
 <div class="sectionbody">
 <div class="paragraph system:abstract">
 <p>A cert token allows you create many links to the service network from different sites without restrictions.</p>
@@ -315,7 +315,7 @@ Claim tokens are the default, the <code>-t claim</code> section of the command i
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Cert tokens are always valid and can be reused indefinitely unless revoked as described in <a href="#revoking-access-skupper-tokens">Revoking access to a site</a>
+Cert tokens are always valid and can be reused indefinitely unless revoked as described in <a href="#revoking-access-skupper">Revoking access to a site</a>
 </td>
 </tr>
 </table>
@@ -329,14 +329,14 @@ Cert tokens are always valid and can be reused indefinitely unless revoked as de
 <div class="title">Additional information</div>
 <ul>
 <li>
-<p>See the <a href="/skupper/latest/cli/index.html">Configuring Skupper sites using the CLI</a> for information about using the token to create links.</p>
+<p>See the {SkupperCliBookLink} for information about using the token to create links.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="revoking-access-skupper-tokens"><a class="anchor" href="#revoking-access-skupper-tokens"></a>Revoking access to a site</h2>
+<h2 id="revoking-access-skupper"><a class="anchor" href="#revoking-access-skupper"></a>Revoking access to a site</h2>
 <div class="sectionbody">
 <div class="paragraph system:abstract">
 <p>If a token is compromised, you can prevent unauthorized use of that token by invalidating  all the tokens created from a site.</p>
@@ -427,7 +427,7 @@ To recreate the link, you must first delete the link manually from the remote si
 <div class="title">Additional information</div>
 <ul>
 <li>
-<p>See the <a href="/skupper/latest/cli/index.html">Configuring Skupper sites using the CLI</a>.</p>
+<p>See the {SkupperCliBookLink}.</p>
 </li>
 </ul>
 </div>

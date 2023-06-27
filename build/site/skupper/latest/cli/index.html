@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Using the Skupper CLI :: Skupper PREVIEW</title>
+    <title>Untitled :: Skupper PREVIEW</title>
     <link rel="canonical" href="https://skupper.io/docs/skupper/latest/cli/index.html">
     <meta name="generator" content="Antora 3.1.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
@@ -53,7 +53,7 @@
     <a class="nav-link" href="../overview/index.html">Overview</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../overview/glossary.html">Glossary</a>
+    <a class="nav-link" href="../overview/glossary.html">overview:glossary.adoc</a>
   </li>
 </ul>
   </li>
@@ -146,16 +146,18 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Using the Skupper CLI</h1>
-<div id="preamble">
-<div class="sectionbody">
+<div class="paragraph">
+<p>Unresolved include directive in modules/cli/pages/index.adoc - include::ROOT:partial$attributes.adoc[]</p>
+</div>
+<h1 id="skupper-cli" class="sect0"><a class="anchor" href="#skupper-cli"></a>Using the Skupper CLI</h1>
 <div class="paragraph">
 <p>Using the <code>skupper</code> command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.</p>
 </div>
 <div class="paragraph">
 <p>A typical workflow is to create a site, link sites together, and expose services to the service network.</p>
 </div>
-</div>
+<div class="paragraph">
+<p>Unresolved include directive in modules/cli/pages/installing.adoc - include::ROOT:partial$attributes.adoc[]</p>
 </div>
 <div class="sect1">
 <h2 id="installing-cli"><a class="anchor" href="#installing-cli"></a>Installing the Skupper CLI</h2>
@@ -175,7 +177,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ curl -fL https://github.com/skupperproject/skupper/releases/download/1.4/skupper-cli-1.4-linux-amd64.tgz | tar -xzf -</pre>
+<pre>$ curl -fL https://github.com/skupperproject/skupper/releases/download/1/skupper-cli-1-linux-amd64.tgz | tar -xzf -</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -183,7 +185,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ curl -fL https://github.com/skupperproject/skupper/releases/download/1.4/skupper-cli-1.4-mac-amd64.tgz | tar -xzf -</pre>
+<pre>$ curl -fL https://github.com/skupperproject/skupper/releases/download/1/skupper-cli-1-mac-amd64.tgz | tar -xzf -</pre>
 </div>
 </div>
 </div>
@@ -204,7 +206,7 @@ $ mv skupper $HOME/bin</pre>
 <div class="listingblock">
 <div class="content">
 <pre>$ skupper version
-client version 1.4.1</pre>
+client version 1</pre>
 </div>
 </div>
 </li>
@@ -245,7 +247,7 @@ This section describes how to create a site using the default settings.</p>
 </div>
 <div class="paragraph">
 <p>Starting with Skupper release 1.3, the console is not enabled by default.
-To use the new console, which is a preview feature and may change, see <a href="../console/index.html" class="xref page">Using the Skupper console</a>.</p>
+To use the new console, which is a preview feature and may change, see <a href="../console/index.html" class="xref page">console:index.adoc</a>.</p>
 </div>
 </li>
 <li>
@@ -264,8 +266,8 @@ Skupper is enabled for namespace "west" in interior mode. It is not connected to
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The default message above is displayed when you initialize a site on a cluster that does not have the policy system installed.
-If you install the policy system as described in <a href="/skupper/latest/policy/index.html">Securing a service network using policies</a>, the message becomes <code>Skupper is enabled for namespace "west" in interior mode (with policies)</code>.
+The default message above is displayed when you initialize a site on a cluster that does not have the {policy-system} installed.
+If you install the {policy-system} as described in {skupperpolicybooklink}, the message becomes <code>Skupper is enabled for namespace "west" in interior mode (with policies)</code>.
 </td>
 </tr>
 </table>
@@ -286,7 +288,7 @@ If you install the policy system as described in <a href="/skupper/latest/policy
 </div>
 <div class="paragraph">
 <p>Starting with Skupper release 1.3, the console is not enabled by default.
-To use the new console, which is a preview feature and may change, see <a href="../console/index.html" class="xref page">Using the Skupper console</a>.</p>
+To use the new console, which is a preview feature and may change, see <a href="../console/index.html" class="xref page">console:index.adoc</a>.</p>
 </div>
 <div class="paragraph">
 <p>If you require a custom configuration, note the following options:</p>
@@ -424,7 +426,7 @@ This section describes how to link sites to form a service network.</p>
 Protect it appropriately.</p>
 </div>
 <div class="paragraph">
-<p>For more information about protecting access to the service network, see <a href="/skupper/latest/cli/tokens.html">Using Skupper tokens</a>.</p>
+<p>For more information about protecting access to the service network, see {TokensLink}.</p>
 </div>
 </td>
 </tr>
@@ -1026,7 +1028,7 @@ The site does not require the extra permissions granted with the <code>--enable-
 <pre>$ skupper gateway status
 
 Gateway Definition:
-╰─ machine-user type:service version:2.4.0
+╰─ machine-user type:service version:{service-version}
    ╰─ Bindings:
       ╰─ mydb:3306 tcp mydb:3306 localhost 3306</pre>
 </div>
@@ -1143,7 +1145,7 @@ Gateway Definition:
 Gateway Definitions Summary
 
 Gateway Definition:
-╰─ machine-user type:service version:2.4.0
+╰─ machine-user type:service version:{service-version}
    ╰─ Bindings:
       ╰─ mydb:3306 tcp mydb:3306 localhost 3306</pre>
 </div>
@@ -1353,7 +1355,7 @@ $ sh ./launch.py</pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Use <code>./launch.py -t podman</code> or <code>./launch.py -t docker</code> to run the Skupper router in a container.
+Use <code>./launch.py -t podman</code> or <code>./launch.py -t docker</code> to run the {skupper-router} in a container.
 </td>
 </tr>
 </table>
@@ -1415,7 +1417,7 @@ You can later remove the gateway using <code>./remove.py</code>.
 <div class="content">
 <pre>$ skupper gateway status
 Gateway Definition:
-╰─ machine-user type:service version:2.4.0
+╰─ machine-user type:service version:{service-version}
    ╰─ Bindings:
       ╰─ mydb:3306 tcp mydb:3306 localhost 3306</pre>
 </div>
@@ -1561,6 +1563,9 @@ If the network service requires more than one port, create separate forwards for
 </dd>
 </dl>
 </div>
+<div class="paragraph">
+<p>Unresolved include directive in modules/cli/pages/network-status.adoc - include::ROOT:partial$attributes.adoc[]</p>
+</div>
 </div>
 </div>
 </div>
@@ -1697,6 +1702,9 @@ In this example, this is the <code>hello-world-backend</code> pod.</td>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>Unresolved include directive in modules/cli/pages/native-security-options.adoc - include::ROOT:partial$attributes.adoc[]</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1707,7 +1715,7 @@ In this example, this is the <code>hello-world-backend</code> pod.</td>
 This section describes additional security you can configure.</p>
 </div>
 <div class="paragraph">
-<p>See <a href="/skupper/latest/policy/index.html">Securing a service network using policies</a> for information about creating granular policies for each cluster.</p>
+<p>See {SkupperPolicyBookLink} for information about creating granular policies for each cluster.</p>
 </div>
 <div class="sect2">
 <h3 id="network-policy"><a class="anchor" href="#network-policy"></a>Restricting access to services using network-policy</h3>
@@ -1856,6 +1864,9 @@ For services exposed as TCP or HTTP2, the traffic between the pod and the router
 <p>Test calling the service from a TLS enabled frontend.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>Unresolved include directive in modules/cli/pages/protocols.adoc - include::ROOT:partial$attributes.adoc[]</p>
 </div>
 </div>
 </div>
