@@ -1,6 +1,11 @@
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
+include::{mod-loc}attributes.adoc[]
+
 // Type: procedure
 [id="installing-cli"] 
-= Installing the `skupper` CLI
+= Installing the Skupper CLI
 
 [role="system:abstract"]
 Installing the `skupper` command-line interface (CLI) provides a simple method to get started with {skupper-name}.

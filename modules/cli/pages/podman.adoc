@@ -1,3 +1,6 @@
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
 include::{mod-loc}attributes.adoc[]
 
 :context: skupper-podman
