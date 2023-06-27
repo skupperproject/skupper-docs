@@ -14,7 +14,6 @@
 
 //:imagesdir: _images
 
-:icons: font
 
 
 // name and version
@@ -22,7 +21,7 @@
 :service-network: service network
 :skupper-version: 1.4
 :service-version: 2.4.0
-:skupper-cli-version: {skupper-version}.0
+:skupper-cli-version: {skupper-version}.1
 :SkupperOperatorName: Skupper Operator
 :skupper-router: Skupper router
 :policy-system: policy system
@@ -53,7 +52,7 @@ endif::[]
 :ConnectivityLink: link:{linkroot}overview/connectivity.html[Skupper connectivity]
 :DeclarativeLink: link:{linkroot}declarative/index.html[Configuring Skupper sites using YAML]
 :SkupperCliBookLink: link:{linkroot}cli/index.html[Configuring Skupper sites using the CLI]
-:SkupperConsoleBookLink: link:https://github.com/skupperproject/skupper-console[Skupper console]
+:SkupperConsoleBookLink: link:{linkroot}console/index.html[Skupper console]
 :SkupperOperatorBookLink: link:{linkroot}operator/index.html[Configuring Skupper sites using the Operator on Kubernetes]
 :OperatorOCPLink: link:{linkroot}operator/openshift.html[Configuring Skupper sites using the Operator on OpenShift]
 :TokensLink: link:{linkroot}overview/tokens.html[Using Skupper tokens]

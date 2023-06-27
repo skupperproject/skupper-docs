@@ -7,7 +7,7 @@ This is a preview of link:https://github.com/skupperproject/skupper-docs[skupper
 
 NOTE: You might be looking for the {GettingStartedLink}
 
-This documentation is built using antora and contains the following antora modules:
+This documentation is built using Antora and contains the following Antora modules:
 
 * cli 
 * console
@@ -33,8 +33,6 @@ This page acts as a report for all docs in the skupper-docs repo.
 * {GatewayTutoriallink}
 * {DeclarativeLink}
 * {SkupperConsoleBookLink}
-* xref:console:index.adoc[Old console]
-* {SkupperOperatorBookLink}
 * {SkupperOperatorBookLink}
 * {TokensLink}
 * {SkupperPolicyBookLink}
