@@ -24,6 +24,7 @@ This section provides an alternative to the `skupper expose` command, allowing y
 
 . Create a deployment, some pods, or a service in one of your sites, for example:
 +
+[source, bash]
 ----
 $ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
 ----
@@ -33,6 +34,7 @@ This step is not {skupper-name}-specific, that is, this process is unchanged fro
 . Annotate the kubernetes resource to create a service that can communicate on the {service-network}, for example:
 +
 --
+[source, bash]
 ----
 $ kubectl annotate deployment backend "skupper.io/address=backend" "skupper.io/port=8080" "skupper.io/proxy=tcp"
 ----
@@ -52,10 +54,13 @@ For example, if you annotate a simple deployment named `backend` with `skupper.i
 ====
 When exposing services, rather than other resources like deployments, you can use the `skupper.io/target` annotation to avoid modifying the original service.
 For example, if you want to expose the `backend` service:
+
+[source, bash]
 ----
 $ kubectl annotate service backend "skupper.io/address=van-backend" "skupper.io/port=8080" \
 "skupper.io/proxy=tcp" "skupper.io/target=backend"
 ----
+
 This allows you to delete and recreate the `backend` service without having to apply the annotation again.
 ====
 
@@ -64,6 +69,8 @@ This allows you to delete and recreate the `backend` service without having to a
 . Check that you have exposed the service:
 +
 --
+
+[source, bash]
 ----
 $ skupper service status
 Services exposed through Skupper:
