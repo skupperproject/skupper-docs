@@ -14,6 +14,7 @@
 
 //:imagesdir: _images
 
+:icons: font
 
 
 // name and version
