@@ -1,3 +1,7 @@
+ifndef::mod-loc[]
+:mod-loc: ./partials/
+endif::mod-loc[]
+include::{mod-loc}attributes.adoc[]
 // Type: procedure
 [id='network-service-{context}']
 = Exploring a {service-network}
