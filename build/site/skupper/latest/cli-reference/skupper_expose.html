@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>skupper expose :: Skupper PREVIEW</title>
+    <link rel="canonical" href="https://skupper.io/docs/skupper/latest/cli-reference/skupper_expose.html">
+    <meta name="generator" content="Antora 3.1.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/search.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://skupper.io/docs">Skupper PREVIEW</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="#">Home</a>
+
+
+
+                <div class="navbar-item">
+                    <span class="control">
+                        <a class="button is-primary" href="#">Download</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header><div class="body">
+<div class="nav-container" data-component="skupper" data-version="latest">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Skupper</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Preview homepage</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../overview/index.html">Overview</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../overview/glossary.html">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../cli/index.html">CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="skupper.html">Kubernetes Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-podman/skupper.html">Podman Reference</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../declarative/index.html">Declarative</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../policy/index.html">Policies</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../console/index.html">Console 1.3 and later</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../cli/tokens.html">Tokens</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Kubernetes/OpenShift</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/index.html">Certs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/kubernetes.html">Kubernetes tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/gateway.html">Gateway tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operator/index.html">Kubernetes Operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/service-certs.html">Encrypting traffic from a pod to the Skupper router</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Skupper</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Skupper</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Skupper</a></li>
+    <li><a href="skupper_expose.html">skupper expose</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/paulwright/repos/skupper-docs/modules/cli-reference/pages/skupper_expose.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">skupper expose</h1>
+<div class="paragraph">
+<p>Expose a set of pods through a Skupper address</p>
+</div>
+<div class="paragraph">
+<div class="title">Synopsis</div>
+<p>Expose a set of pods through a Skupper address</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"> skupper expose [deployment &lt;name&gt;|pods &lt;selector&gt;|statefulset &lt;statefulsetname&gt;|service &lt;name&gt;|deploymentconfig &lt;name&gt;]  --[option]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Options</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">--address string                           The Skupper address to expose
+--aggregate string                         The aggregation strategy to use. One of 'json' or 'multipart'. If specified requests to this service will be sent to all registered implementations and the responses aggregated.
+--bridge-image string                      The image to use for a bridge running external to the skupper router
+--enable-ingress-from-target-site string   Determines whether access to the Skupper service is enabled in the site the target was exposed through. Always (default) or Never are valid values.
+--event-channel                            If specified, this service will be a channel for multicast events.
+--generate-tls-secrets                     If specified, the service will be exposed over TLS
+--headless                                 Expose through a headless service (valid only for a statefulset target)
+-h, --help                                     help for expose
+--port ints                                The ports to expose on
+--protocol string                          The protocol to proxy (tcp, http, or http2) (default "tcp")
+--proxy-cpu string                         CPU request for router pods
+--proxy-cpu-limit string                   CPU limit for router pods
+--proxy-memory string                      Memory request for router pods
+--proxy-memory-limit string                Memory limit for router pods
+--proxy-node-selector string               Node selector to control placement of router pods
+--proxy-pod-affinity string                Pod affinity label matches to control placement of router pods
+--proxy-pod-antiaffinity string            Pod antiaffinity label matches to control placement of router pods
+--publish-not-ready-addresses              If specified, skupper will not wait for pods to be ready
+--target-namespace string                  Expose resources from a specific namespace
+--target-port strings                      The ports to target on pods
+--tls-cert string                          K8s secret name with custom certificates to expose the service over TLS
+--tls-trust string                         K8s secret name with the CA to expose the service over TLS</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Options inherited from parent commands</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-c, --context string      The kubeconfig context to use
+--kubeconfig string   Path to the kubeconfig file to use
+-n, --namespace string    The Kubernetes namespace to use
+--platform string     The platform type to use [kubernetes, podman]</code></pre>
+</div>
+</div>
+<div class="ulist">
+<div class="title">See also</div>
+<ul>
+<li>
+<p><a href="skupper.html" class="xref page">skupper</a>	 -</p>
+</li>
+</ul>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

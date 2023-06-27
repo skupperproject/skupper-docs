@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Skupper overview :: Skupper PREVIEW</title>
+    <link rel="canonical" href="https://skupper.io/docs/skupper/latest/overview/index.html">
+    <meta name="generator" content="Antora 3.1.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/search.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://skupper.io/docs">Skupper PREVIEW</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="#">Home</a>
+
+
+
+                <div class="navbar-item">
+                    <span class="control">
+                        <a class="button is-primary" href="#">Download</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header><div class="body">
+<div class="nav-container" data-component="skupper" data-version="latest">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Skupper</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Preview homepage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Overview</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="glossary.html">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../cli/index.html">CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-reference/skupper.html">Kubernetes Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-podman/skupper.html">Podman Reference</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../declarative/index.html">Declarative</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../policy/index.html">Policies</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../console/index.html">Console 1.3 and later</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../cli/tokens.html">Tokens</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Kubernetes/OpenShift</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/index.html">Certs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/kubernetes.html">Kubernetes tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/gateway.html">Gateway tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operator/index.html">Kubernetes Operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/service-certs.html">Encrypting traffic from a pod to the Skupper router</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Skupper</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Skupper</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Skupper</a></li>
+    <li><a href="index.html">Overview</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/paulwright/repos/skupper-docs/modules/overview/pages/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Skupper overview</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hybrid clouds enable organizations to combine on-premises, private cloud, and public cloud resources.
+While such a solution provides many benefits, it also presents a unique challenge: enabling these resources to communicate with each other.</p>
+</div>
+<div class="paragraph">
+<p>Skupper provides a solution to this challenge with a Virtual Application Network that simply and securely connects applications running in different network locations.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="virtual-application-networks"><a class="anchor" href="#virtual-application-networks"></a>Virtual Application Networks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper solves multi-cluster communication challenges through something called a Virtual Application Network (VAN).
+To understand the value of Skupper, it is helpful to first understand what a VAN is.</p>
+</div>
+<div class="paragraph">
+<p>A VAN connects the applications and services in your hybrid cloud into a virtual network so that they can communicate with each other as if they were all running in the same site.
+In this diagram, a VAN connects three services, each of which is running in a different cloud:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/overview-clouds.png" alt="overview clouds">
+</div>
+</div>
+<div class="paragraph">
+<p>In essence, the VAN connects the services in a distributed application with a microservice architecture.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/overview-application.png" alt="overview application">
+</div>
+</div>
+<div class="paragraph">
+<p>VANs are able to provide connectivity across the hybrid cloud because they operate at Layer 7 (the application layer).
+They use <strong>Layer 7 application routers</strong> to route communication between <strong>Layer 7 application addresses</strong>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="layer-7-application-routers"><a class="anchor" href="#layer-7-application-routers"></a>Layer 7 application routers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Layer 7 application routers form the backbone of a VAN in the same way that conventional network routers form the backbone of a VPN.
+However, instead of routing IP packets between network endpoints, Layer 7 application routers route messages between application endpoints (called Layer 7 application addresses).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="layer-7-application-addresses"><a class="anchor" href="#layer-7-application-addresses"></a>Layer 7 application addresses</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Layer 7 application address represents an endpoint, or destination in the VAN.
+When an application sends a communication to an address, the Layer 7 application routers distribute the communication to any other application in the VAN that has the same address.</p>
+</div>
+<div class="paragraph">
+<p>For example, in this diagram, <strong>Service B</strong> sends a message with an application address to its local application router.
+<strong>Service A</strong> and <strong>Service C</strong> are subscribed to the same address, so the application router routes copies of the message through the VAN until they arrive at each destination.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/overview-routers.png" alt="overview routers">
+</div>
+</div>
+<div class="paragraph">
+<p>VANs provide multiple routing patterns, so communications can be distributed in anycast (balanced or closest) or multicast patterns.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="skupper"><a class="anchor" href="#skupper"></a>Skupper</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper is an open source tool for creating VANs in Kubernetes.
+By using Skupper, you can create a distributed application consisting of microservices running in different Kubernetes clusters.</p>
+</div>
+<div class="paragraph">
+<p>This diagram illustrates a Skupper network that connects three services running in three different Kubernetes clusters:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/overview-clusters.png" alt="overview clusters">
+</div>
+</div>
+<div class="paragraph">
+<p>In a Skupper network, each namespace contains a Skupper instance.
+When these Skupper instances connect, they continually share information about the services that each instance exposes.
+This means that each Skupper instance is always aware of every service that has been exposed to the Skupper network, regardless of the namespace in which each service resides.</p>
+</div>
+<div class="paragraph">
+<p>Once a Skupper network is formed across Kubernetes namespaces, any of the services in those namespaces can be exposed (through annotation) to the Skupper network.
+When a service is exposed, Skupper creates proxy endpoints to make that service available on each namespace in the Skupper network.</p>
+</div>
+<div class="ulist">
+<div class="title">Additional information</div>
+<ul>
+<li>
+<p><a href="/skupper/latest/overview/security.html">Skupper security</a></p>
+</li>
+<li>
+<p><a href="/skupper/latest/overview/routing.html">Skupper routing</a></p>
+</li>
+<li>
+<p><a href="/skupper/latest/overview/connectivity.html">Skupper connectivity</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

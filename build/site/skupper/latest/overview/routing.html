@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Skupper routing :: Skupper PREVIEW</title>
+    <link rel="canonical" href="https://skupper.io/docs/skupper/latest/overview/routing.html">
+    <meta name="generator" content="Antora 3.1.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/search.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://skupper.io/docs">Skupper PREVIEW</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="#">Home</a>
+
+
+
+                <div class="navbar-item">
+                    <span class="control">
+                        <a class="button is-primary" href="#">Download</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header><div class="body">
+<div class="nav-container" data-component="skupper" data-version="latest">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Skupper</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Preview homepage</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Overview</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="glossary.html">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../cli/index.html">CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-reference/skupper.html">Kubernetes Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-podman/skupper.html">Podman Reference</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../declarative/index.html">Declarative</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../policy/index.html">Policies</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../console/index.html">Console 1.3 and later</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../cli/tokens.html">Tokens</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Kubernetes/OpenShift</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/index.html">Certs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/kubernetes.html">Kubernetes tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/gateway.html">Gateway tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operator/index.html">Kubernetes Operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/service-certs.html">Encrypting traffic from a pod to the Skupper router</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Skupper</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Skupper</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Skupper</a></li>
+    <li><a href="routing.html">Skupper routing</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/paulwright/repos/skupper-docs/modules/overview/pages/routing.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Skupper routing</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper uses layer 7 addressing and routing to connect services.
+See how the power of application-layer addressing can bring new capabilities to your applications.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="multi-cluster-services"><a class="anchor" href="#multi-cluster-services"></a>Multi-cluster services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Deploy a single logical service across multiple clusters.</p>
+</div>
+<div class="paragraph">
+<p>Skupper can route requests to instances of a single service running on multiple clusters.
+If a provider or data center fails, the service instances running at unaffected sites can scale to meet the need and maintain availability.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dynamic-load-balancing"><a class="anchor" href="#dynamic-load-balancing"></a>Dynamic load balancing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Balance requests across clusters according to service capacity.</p>
+</div>
+<div class="paragraph">
+<p>The Skupper network has cross-cluster visibility.
+It can see which services are already loaded and which have spare capacity, and it directs requests accordingly.</p>
+</div>
+<div class="paragraph">
+<p>You can assign a cost to each inter-cluster connection.
+This enables you to configure a preference for one resource over another.
+If demand is normal, you can keep all traffic on your private cloud.
+If demand peaks, you can dynamically spill over to public cloud resources.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="reliable-networks"><a class="anchor" href="#reliable-networks"></a>Reliable networks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper uses redundant network paths and smart routing to provide highly available connectivity at scale.</p>
+</div>
+<div class="ulist">
+<div class="title">Additional information</div>
+<ul>
+<li>
+<p><a href="/skupper/latest/overview/index.html">Overview</a></p>
+</li>
+<li>
+<p><a href="/skupper/latest/overview/security.html">Skupper security</a></p>
+</li>
+<li>
+<p><a href="/skupper/latest/overview/connectivity.html">Skupper connectivity</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

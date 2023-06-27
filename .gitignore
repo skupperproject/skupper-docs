@@ -1,4 +1,4 @@
-build/
+#build/
 !antora-ui/build
 node_modules/
 *.didact.adoc

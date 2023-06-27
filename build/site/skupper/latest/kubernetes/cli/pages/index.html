@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Using the Skupper CLI :: Skupper PREVIEW</title>
+    <link rel="canonical" href="https://skupper.io/docs/skupper/latest/kubernetes/cli/pages/index.html">
+    <meta name="generator" content="Antora 3.1.4">
+    <link rel="stylesheet" href="../../../../../_/css/site.css">
+<link rel="stylesheet" href="../../../../../_/css/search.css">
+    <script>var uiRootPath = '../../../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://skupper.io/docs">Skupper PREVIEW</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="#">Home</a>
+
+
+
+                <div class="navbar-item">
+                    <span class="control">
+                        <a class="button is-primary" href="#">Download</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header><div class="body">
+<div class="nav-container" data-component="skupper" data-version="latest">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../../index.html">Skupper</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../index.html">Preview homepage</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../overview/index.html">Overview</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../overview/glossary.html">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../cli/index.html">CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../cli-reference/skupper.html">Kubernetes Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../cli-podman/skupper.html">Podman Reference</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../declarative/index.html">Declarative</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../policy/index.html">Policies</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../console/index.html">Console 1.3 and later</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../cli/tokens.html">Tokens</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Kubernetes/OpenShift</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../index.html">Certs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../kubernetes.html">Kubernetes tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../gateway.html">Gateway tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../operator/index.html">Kubernetes Operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../service-certs.html">Encrypting traffic from a pod to the Skupper router</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Skupper</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../../index.html">Skupper</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../../index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../../index.html">Skupper</a></li>
+    <li><a href="index.html">Using the Skupper CLI</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/paulwright/repos/skupper-docs/modules/kubernetes/pages/cli/pages/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Using the Skupper CLI</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Using the <code>skupper</code> command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.</p>
+</div>
+<div class="paragraph">
+<p>A typical workflow is to create a site, link sites together, and expose services to the service network.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="installing-cli"><a class="anchor" href="#installing-cli"></a>Installing the Skupper CLI</h2>
+<div class="sectionbody">
+<div class="paragraph system:abstract">
+<p>Installing the <code>skupper</code> command-line interface (CLI) provides a simple method to get started with Skupper.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Install the <code>skupper</code> command-line interface.</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>For Linux:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -fL https://github.com/skupperproject/skupper/releases/download/1.4/skupper-cli-1.4-linux-amd64.tgz | tar -xzf -</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For MacOS:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ curl -fL https://github.com/skupperproject/skupper/releases/download/1.4/skupper-cli-1.4-mac-amd64.tgz | tar -xzf -</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Copy the <code>skupper</code> executable to a directory in your $PATH:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ mkdir -p $HOME/bin
+$ export PATH=$PATH:$HOME/bin
+$ mv skupper $HOME/bin</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify the installation.</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper version
+client version 1.4.1</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-using-cli"><a class="anchor" href="#creating-using-cli"></a>Creating a site using the CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A service network consists of Skupper sites.
+This section describes how to create a site using the default settings.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>The <code>skupper</code> CLI is installed.</p>
+</li>
+<li>
+<p>You are logged into the cluster.</p>
+</li>
+<li>
+<p>The services you want to expose on the service network are in the active namespace.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a default site:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting with Skupper release 1.3, the console is not enabled by default.
+To use the new console, which is a preview feature and may change, see <a href="../../../console/index.html" class="xref page">Using the Skupper console</a>.</p>
+</div>
+</li>
+<li>
+<p>Check the site:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper status
+
+Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The default message above is displayed when you initialize a site on a cluster that does not have the policy system installed.
+If you install the policy system as described in <a href="/skupper/latest/policy/index.html">Securing a service network using policies</a>, the message becomes <code>Skupper is enabled for namespace "west" in interior mode (with policies)</code>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>By default, the site name defaults to the namespace name, for example, <code>west</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="custom-sites"><a class="anchor" href="#custom-sites"></a>Custom sites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The default <code>skupper init</code> creates sites that satisfy typical requirements.</p>
+</div>
+<div class="paragraph">
+<p>Starting with Skupper release 1.3, the console is not enabled by default.
+To use the new console, which is a preview feature and may change, see <a href="../../../console/index.html" class="xref page">Using the Skupper console</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you require a custom configuration, note the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Configuring console authentication.
+There are several <code>skupper</code> options regarding authentication for the console:</p>
+<div class="openblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>--console-auth &lt;authentication-mode&gt;</code></dt>
+<dd>
+<p>Set the authentication mode for the console:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>openshift</code> - Use OpenShift authentication, so that users who have permission to log into OpenShift and view the Project (namespace) can view the console.</p>
+</li>
+<li>
+<p><code>internal</code> -  Use Skupper authentication, see the <code>console-user</code> and <code>console-password</code> options.</p>
+</li>
+<li>
+<p><code>unsecured</code> - No authentication, anyone with the URL can view the console.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><code>--console-user &lt;username&gt;</code></dt>
+<dd>
+<p>Username for the console user when authentication mode is set to <code>internal</code>.
+Defaults to <code>admin</code>.</p>
+</dd>
+<dt class="hdlist1"><code>--console-password &lt;password&gt;</code></dt>
+<dd>
+<p>Password for the console user when authentication mode is set to <code>internal</code>.
+If not specified, a random passwords is generated.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Configuring service access</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init --create-network-policy</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+All sites are associated with a namespace, called the <em>active namespace</em> in this procedure.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Services in the active namespace may be accessible to pods in other namespaces on that cluster by default, depending on your cluster network policies.
+As a result, you can expose services to pods in namespaces not directly connected to the service network.
+This setting applies a network policy to restrict access to services to those pods in the active namespace.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you create a site in the namespace <code>projectA</code> of <code>clusterA</code> and link that site to a service network where the <code>database</code> service is exposed, the <code>database</code> service is available to pods in <code>projectB</code> of <code>clusterA</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can use the <code>--create-network-policy</code> option to restrict the <code>database</code> service access to <code>projectA</code> of <code>clusterA</code>.</p>
+</div>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="linking-sites"><a class="anchor" href="#linking-sites"></a>Linking sites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A service network consists of Skupper sites.
+This section describes how to link sites to form a service network.</p>
+</div>
+<div class="paragraph">
+<p>Linking two sites requires a single initial directional connection. However:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Communication between the two sites is bidirectional, only the initial linking is directional.</p>
+</li>
+<li>
+<p>The choice of direction for linking is typically determined by accessibility. For example, if you are linking an OpenShift Dedicated cluster with a CodeReady Containers cluster, you must link from the CodeReady Containers cluster to the OpenShift Dedicated cluster because that route is accessible.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Determine the direction of the link. If both clusters are publicly addressable, then the direction is not significant. If one of the clusters is addressable from the other cluster, perform step 2 below on the addressable cluster.</p>
+</li>
+<li>
+<p>Generate a token on the cluster that you want to link to:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper token create &lt;filename&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;filename&gt;</code> is the name of a YAML file that is saved on your local filesystem.</p>
+</div>
+<div class="paragraph">
+<p>This file contains a key and the location of the site that created it.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Access to this file provides access to the service network.
+Protect it appropriately.</p>
+</div>
+<div class="paragraph">
+<p>For more information about protecting access to the service network, see <a href="/skupper/latest/cli/tokens.html">Using Skupper tokens</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Use a token on the cluster that you want to connect from:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Create a link to the service network:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link create &lt;filename&gt; [-name &lt;link-name&gt;]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;filename&gt;</code> is the name of a YAML file generated from the <code>skupper token create</code> command and <code>&lt;link-name&gt;</code> is the name of the link.</p>
+</div>
+</li>
+<li>
+<p>Check the link:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link status
+Link link1 not connected</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example no &lt;link-name&gt; was specified, the name defaulted to <code>link1</code>.</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>If you want to delete a link:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link delete &lt;link-name&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;link-name&gt;</code> is the name of the link specified during creation.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="link-cost"><a class="anchor" href="#link-cost"></a>Specifying link cost</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When linking sites, you can assign a cost to each link to influence the traffic flow.
+By default, link cost is set to <code>1</code> for a new link.
+In a service network, the routing algorithm attempts to use the path with the lowest total cost from client to target server.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you have services distributed across different sites, you might want a client to favor a particular target or link.
+In this case, you can specify a cost of greater than <code>1</code> on the alternative links to reduce the usage of those links.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The distribution of open connections is statistical, that is, not a round robin system.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>If a connection only traverses one link, then the path cost is equal to the link cost.
+If the connection traverses more than one link, the path cost is the sum of all the links involved in the path.</p>
+</li>
+<li>
+<p>Cost acts as a threshold for using a path from client to server in the network.
+When there is only one path, traffic flows on that path regardless of cost.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you start with two targets for a service, and one of the targets is no longer available, traffic flows on the remaining path regardless of cost.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>When there are a number of paths from a client to server instances or a service, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
+After this threshold of open connections is reached, new connections are spread across the alternative path and the lowest cost path.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Prerequisite</div>
+<ul>
+<li>
+<p>You have set your Kubernetes context to a site that you want to link <em>from</em>.</p>
+</li>
+<li>
+<p>A token for the site that you want to link <em>to</em>.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a link to the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link create &lt;filename&gt; --cost &lt;integer-cost&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;integer-cost&gt;</code> is an integer greater than 1 and traffic favors lower cost links.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a service can be called without traversing a link, that service is considered local, with an implicit cost of <code>0</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For example, create a link with cost set to <code>2</code> using a token file named <code>token.yaml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link create token.yaml --cost 2</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Check the link cost:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link status link1 --verbose
+
+ Cost:          2
+ Created:       2022-11-17 15:02:01 +0000 GMT
+ Name:          link1
+ Namespace:     default
+ Site:          default-0d99d031-cee2-4cc6-a761-697fe0f76275
+ Status:        Connected</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Observe traffic using the console.</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>If you have a console on a site, log in and navigate to the processes for each server.
+You can view the traffic levels corresponding to each client.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If there are multiple clients on different sites, filter the view to each client to determine the effect of cost on traffic.
+For example, in a two site network linked with a high cost with servers and clients on both sites, you can see that a client is served by the local servers while a local server is available.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="exposing-services-ns"><a class="anchor" href="#exposing-services-ns"></a>Exposing services on the service network from a namespace</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After creating a service network, exposed services can communicate across that network.</p>
+</div>
+<div class="paragraph">
+<p>The <code>skupper</code> CLI has two options for exposing services that already exist in a namespace:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>expose</code> supports simple use cases, for example, a deployment with a single service.
+See <a href="#exposing-simple-services">Exposing simple services on the service network</a> for instructions.</p>
+</li>
+<li>
+<p><code>service create</code> and <code>service bind</code> is a more flexible method of exposing services, for example, if you have multiple services for a deployment.
+See <a href="#exposing-complex-services">Exposing complex services on the service network</a> for instructions.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="exposing-simple-services"><a class="anchor" href="#exposing-simple-services"></a>Exposing simple services on the service network</h3>
+<div class="paragraph">
+<p>This section describes how services can be enabled for a service network for simple use cases.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a deployment, some pods, or a service in one of your sites, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.</p>
+</div>
+</li>
+<li>
+<p>Create a service that can communicate on the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose [deployment &lt;name&gt;|pods &lt;selector&gt;|statefulset &lt;statefulsetname&gt;|service &lt;name&gt;]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;name&gt;</code> is the name of your deployment</p>
+</li>
+<li>
+<p><code>&lt;selector&gt;</code> is a pod selector</p>
+</li>
+<li>
+<p><code>&lt;statefulsetname&gt;</code> is the name of a statefulset</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the example deployment in step 1, you create a service using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose deployment/hello-world-backend --port 8080</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Options for this command include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--port &lt;port-number&gt;</code>:: Specify the port number that this service is available on the service network.
+NOTE: You can specify more than one port by repeating this option.</p>
+</li>
+<li>
+<p><code>--target-port &lt;port-number&gt;</code>:: Specify the port number of pods that you want to expose.</p>
+</li>
+<li>
+<p><code>--protocol &lt;protocol&gt;</code> allows you specify the protocol you want to use, <code>tcp</code>, <code>http</code> or <code>http2</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you do not specify ports, <code>skupper</code> uses the <code>containerPort</code> value of the deployment.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exposing-complex-services"><a class="anchor" href="#exposing-complex-services"></a>Exposing complex services on the service network</h3>
+<div class="paragraph">
+<p>This section describes how services can be enabled for a service network for more complex use cases.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a deployment, some pods, or a service in one of your sites, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.</p>
+</div>
+</li>
+<li>
+<p>Create a service that can communicate on the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create &lt;name&gt; &lt;port&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;name&gt;</code> is the name of the service you want to create</p>
+</li>
+<li>
+<p><code>&lt;port&gt;</code> is the port the service uses</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the example deployment in step 1, you create a service using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create hello-world-backend 8080</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Bind the service to a cluster service:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service bind &lt;service-name&gt; &lt;target-type&gt; &lt;target-name&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;service-name&gt;</code> is the name of the service on the service network</p>
+</li>
+<li>
+<p><code>&lt;target-type&gt;</code> is the object you want to expose, <code>deployment</code>, <code>statefulset</code>, <code>pods</code>, or <code>service</code>.</p>
+</li>
+<li>
+<p><code>&lt;target-name&gt;</code> is the name of the cluster service</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the example deployment in step 1, you bind the service using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service bind hello-world-backend deployment hello-world-backend</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exposing-services-from-different-ns"><a class="anchor" href="#exposing-services-from-different-ns"></a>Exposing services from a different namespace to the service network</h3>
+<div class="paragraph">
+<p>This section shows how to expose a service from a namespace where Skupper is not deployed.</p>
+</div>
+<div class="paragraph">
+<p>Skupper allows you expose Kubernetes services from other namespaces for any site.
+However, if you want to expose workloads, for example deployments, you must create a site as described in this section.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>A namespace where Skupper is deployed.</p>
+</li>
+<li>
+<p>A network policy that allows communication between the namespaces</p>
+</li>
+<li>
+<p>cluster-admin permissions if you want to expose resources other than services</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a site with cluster permissions if you want to expose a workload from a namespace other than the site namespace:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init --enable-cluster-permissions</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Expose the service on the service network:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The site does not require the extra permissions granted with the <code>--enable-cluster-permissions</code> to expose a Kubernetes service.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If you want to expose a Kubernetes service from a namespace other than the site namespace:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose service &lt;service&gt;.&lt;namespace&gt; --address &lt;service&gt;</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;service&gt; - the name of the service on the service network.</p>
+</li>
+<li>
+<p>&lt;namespace&gt; - the name of the namespace where the service you want to expose runs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, if you deployed Skupper in the <code>east</code> namespace and you created a <code>backend</code> Kubernetes service in the <code>east-backend</code> namespace, you set the context to the <code>east</code> namespace and expose the service as <code>backend</code> on the service network using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose service backend.east-backend --port 8080 --address backend</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>If you want to expose a workload and you created a site with <code>--enable-cluster-permissions</code>:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose &lt;resource&gt; --port &lt;port-number&gt; --target-namespace &lt;namespace&gt;</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;resource&gt; - the name of the resource.</p>
+</li>
+<li>
+<p>&lt;namespace&gt; - the name of the namespace where the resource you want to expose runs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, if you deployed Skupper in the <code>east</code> namespace and you created a <code>backend</code> deployment in the <code>east-backend</code> namespace, you set the context to the <code>east</code> namespace and expose the service as <code>backend</code> on the service network using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose deployment/backend --port 8080 --target-namespace east-backend</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="exposing-services-local"><a class="anchor" href="#exposing-services-local"></a>Exposing services on the service network from a local machine</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After creating a service network, you can expose services from a local machine on the service network.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you run a database on a server in your data center, you can deploy a front end in a cluster that can access the data as if the database was running in the cluster.</p>
+</div>
+<div class="sect2">
+<h3 id="exposing-service-gateway"><a class="anchor" href="#exposing-service-gateway"></a>Exposing simple local services to the service network</h3>
+<div class="paragraph">
+<p>This section shows how to expose a single service running locally on a service network.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>A service network. Only one site is required.</p>
+</li>
+<li>
+<p>Access to the service network.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Run your service locally.</p>
+</li>
+<li>
+<p>Log into your cluster and change to the namespace for your site.</p>
+</li>
+<li>
+<p>Expose the service on the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway expose &lt;service&gt; localhost &lt;port&gt;</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;service&gt; - the name of the service on the service network.</p>
+</li>
+<li>
+<p>&lt;port&gt; - the port that runs the service locally.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can also expose services from other machines on your local network, for example if MySQL is running on a dedicated server (with an IP address of <code>192.168.1.200</code>), but you are accessing the cluster from a machine in the same network:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway expose mysql 192.168.1.200 3306</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Check the status of Skupper gateways:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway status
+
+Gateway Definition:
+╰─ machine-user type:service version:2.4.0
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.</p>
+</div>
+<div class="paragraph">
+<p>The URL field shows the underlying communication and can be ignored.</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exposing-services-gateway"><a class="anchor" href="#exposing-services-gateway"></a>Working with complex local services on the service network</h3>
+<div class="paragraph">
+<p>This section shows more advanced usage of skupper gateway.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a Skupper gateway:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ skupper gateway init --type &lt;gateway-type&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default a <em>service</em> type gateway is created, however you can also specify:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>podman</code></p>
+</li>
+<li>
+<p><code>docker</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Create a service that can communicate on the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create &lt;name&gt; &lt;port&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;name&gt;</code> is the name of the service you want to create</p>
+</li>
+<li>
+<p><code>&lt;port&gt;</code> is the port the service uses</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create mydb 3306</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Bind the service on the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway bind &lt;service&gt; &lt;host&gt; &lt;port&gt;</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;service&gt; - the name of the service on the service network, <code>mydb</code> in the example above.</p>
+</li>
+<li>
+<p>&lt;host&gt; - the host that runs the service.</p>
+</li>
+<li>
+<p>&lt;port&gt; - the port the service is running on, <code>3306</code> from the example above.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Check the status of Skupper gateways:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway status
+Gateway Definitions Summary
+
+Gateway Definition:
+╰─ machine-user type:service version:2.4.0
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.</p>
+</div>
+<div class="paragraph">
+<p>The URL field shows the underlying communication and can be ignored.</p>
+</div>
+<div class="paragraph">
+<p>You can create more services in the service network and bind more local services to expose those services on the service network.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Forward a service from the service network to the local machine.</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway forward &lt;service&gt; &lt;port&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;service&gt;</code> is the name of an existing service on the service network.</p>
+</li>
+<li>
+<p><code>&lt;port&gt;</code> is the port on the local machine that you want to use.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exporting-gateway"><a class="anchor" href="#exporting-gateway"></a>Creating a gateway and applying it on a different machine</h3>
+<div class="paragraph">
+<p>If you have access to a cluster from one machine but want to create a gateway to the service network from a different machine, you can create the gateway definition bundle on the first machine and later apply that definition bundle on a second machine as described in this procedure.
+For example, if you want to expose a local database service to the service network, but you never want to access the cluster from the database server, you can use this procedure to create the definition bundle and apply it on the database server.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Log into your cluster from the first machine and change to the namespace for your site.</p>
+</li>
+<li>
+<p>Create a service that can communicate on the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create &lt;name&gt; &lt;port&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;name&gt;</code> is the name of the service you want to create</p>
+</li>
+<li>
+<p><code>&lt;port&gt;</code> is the port the service uses</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create database 5432</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Create a YAML file to represent the service you want to expose, for example:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">name: database <i class="conum" data-value="1"></i><b>(1)</b>
+bindings:
+    - name: database <i class="conum" data-value="2"></i><b>(2)</b>
+      host: localhost <i class="conum" data-value="3"></i><b>(3)</b>
+      service:
+        address: database:5432 <i class="conum" data-value="4"></i><b>(4)</b>
+        protocol: tcp <i class="conum" data-value="5"></i><b>(5)</b>
+        ports:
+            - 5432 <i class="conum" data-value="6"></i><b>(6)</b>
+      target_ports:
+        - 5432 <i class="conum" data-value="7"></i><b>(7)</b>
+qdr-listeners:
+    - name: amqp
+      host: localhost
+      port: 5672</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Gateway name, useful for reference only.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Binding name, useful to track multiple bindings.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Name of host providing the service you want to expose.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Service name and port on service network. You created the service in a previous step.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The protocol you want to use to expose the service, <code>tcp</code>, <code>http</code> or <code>http2</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The port on the service network that you want this service to be available on.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The port of the service running on the host specified in point 3.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Save the YAML file using the name of the gateway, for example, <code>gateway.yaml</code>.</p>
+</li>
+<li>
+<p>Generate a bundle that can be applied to the machine that hosts the service you want to expose on the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway generate-bundle &lt;config-filename&gt; &lt;destination-directory&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;config-filename&gt; - the name of the YAML file, including suffix, that you generated in the previous step.</p>
+</li>
+<li>
+<p>&lt;destination-directory&gt; - the location where you want to save the resulting gateway bundle, for example <code>~/gateways</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway generate-bundle database.yaml ./</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This bundle contains the gateway definition YAML and a  certificate that allow access to the service network.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Copy the gateway definition file, for example, <code>mylaptop-jdoe.tar.gz</code> to the machine that hosts the service you want to expose on the service network.</p>
+</li>
+<li>
+<p>From the machine that hosts the service you want to expose:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ mkdir gateway
+
+$ tar -xvf &lt;gateway-definition-file&gt; --directory gateway
+$ cd gateway
+$ sh ./launch.py</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use <code>./launch.py -t podman</code> or <code>./launch.py -t docker</code> to run the Skupper router in a container.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Running the gateway bundle uses the gateway definition YAML and a certificate to access and expose the service on the service network.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Check the status of the gateway service:</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>To check a <em>service</em> type gateway:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ systemctl --user status &lt;gateway-definition-name&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To check a <em>podman</em> type gateway:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ podman inspect</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To check a <em>docker</em> type gateway:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ docker inspect</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can later remove the gateway using <code>./remove.py</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>From the machine with cluster access, check the status of Skupper gateways:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway status
+Gateway Definition:
+╰─ machine-user type:service version:2.4.0
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you need to change the gateway definition, for example to change port, you need to remove the existing gateway and repeat this procedure from the start to redefine the gateway.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gateway-reference"><a class="anchor" href="#gateway-reference"></a>Gateway YAML reference</h3>
+<div class="paragraph">
+<p>The <a href="#exporting-gateway">Creating a gateway and applying it on a different machine</a> describes how to create a gateway to apply on a separate machine using a gateway definition YAML file.</p>
+</div>
+<div class="paragraph">
+<p>The following are valid entries in a gateway definition YAML file.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">name</dt>
+<dd>
+<p>Name of gateway</p>
+</dd>
+<dt class="hdlist1">bindings.name</dt>
+<dd>
+<p>Name of binding for a single host.</p>
+</dd>
+<dt class="hdlist1">bindings.host</dt>
+<dd>
+<p>Hostname of local service.</p>
+</dd>
+<dt class="hdlist1">bindings.service</dt>
+<dd>
+<p>Definition of service you want to be available on service network.</p>
+</dd>
+<dt class="hdlist1">bindings.service.address</dt>
+<dd>
+<p>Address on the service network, name and port.</p>
+</dd>
+<dt class="hdlist1">bindings.service.protocol</dt>
+<dd>
+<p>Skupper protocol, <code>tcp</code>, <code>http</code> or <code>http2</code>.</p>
+</dd>
+<dt class="hdlist1">bindings.service.ports</dt>
+<dd>
+<p>A single port that becomes available on the service network.</p>
+</dd>
+<dt class="hdlist1">bindings.service.target_ports</dt>
+<dd>
+<p>A single port that you want to expose on the service network.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the local service requires more than one port, create separate bindings for each port.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">forwards.name</dt>
+<dd>
+<p>Name of forward for a single host.</p>
+</dd>
+<dt class="hdlist1">forwards.host</dt>
+<dd>
+<p>Hostname of local service.</p>
+</dd>
+<dt class="hdlist1">forwards.service</dt>
+<dd>
+<p>Definition of service you want to be available locally.</p>
+</dd>
+<dt class="hdlist1">forwards.service.address</dt>
+<dd>
+<p>Address on the service network that you want to use locally, name and port.</p>
+</dd>
+<dt class="hdlist1">forwards.service.protocol</dt>
+<dd>
+<p>Skupper protocol, <code>tcp</code>, <code>http</code> or <code>http2</code>.</p>
+</dd>
+<dt class="hdlist1">forwards.service.ports</dt>
+<dd>
+<p>A single port that is available on the service network.</p>
+</dd>
+<dt class="hdlist1">forwards.service.target_ports</dt>
+<dd>
+<p>A single port that you want to use locally.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the network service requires more than one port, create separate forwards for each port.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">qdr-listeners</dt>
+<dd>
+<p>Definition of skupper router listeners</p>
+</dd>
+<dt class="hdlist1">qdr-listeners.name</dt>
+<dd>
+<p>Name of skupper router, typically <code>amqp</code>.</p>
+</dd>
+<dt class="hdlist1">qdr-listeners.host</dt>
+<dd>
+<p>Hostname for skupper router, typically <code>localhost</code>.</p>
+</dd>
+<dt class="hdlist1">qdr-listeners.port</dt>
+<dd>
+<p>Port for skupper router, typically <code>5672</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="network-service-skupper"><a class="anchor" href="#network-service-skupper"></a>Exploring a service network</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper includes a command to allow you report all the sites and the services available on a service network.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>A service network with more than one site</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Set your Kubernetes context to a namespace on the service network.</p>
+</li>
+<li>
+<p>Use the following command to report the status of the service network:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ skupper network status</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Sites:
+├─ [local] 4dba248 - west  <i class="conum" data-value="1"></i><b>(1)</b>
+│  URL: 10.96.146.236 <i class="conum" data-value="2"></i><b>(2)</b>
+│  name: west <i class="conum" data-value="3"></i><b>(3)</b>
+│  namespace: west
+│  version: 0.8.6 <i class="conum" data-value="4"></i><b>(4)</b>
+│  ╰─ Services:
+│     ╰─ name: hello-world-backend <i class="conum" data-value="5"></i><b>(5)</b>
+│        address: hello-world-backend: 8080 <i class="conum" data-value="6"></i><b>(6)</b>
+│        protocol: tcp <i class="conum" data-value="7"></i><b>(7)</b>
+╰─ [remote] bca99d1 - east <i class="conum" data-value="8"></i><b>(8)</b>
+   URL:
+   name: east
+   namespace: east
+   sites linked to: 4dba248-west <i class="conum" data-value="9"></i><b>(9)</b>
+   version: 0.8.6
+   ╰─ Services:
+      ╰─ name: hello-world-backend
+         address: hello-world-backend: 8080
+         protocol: tcp
+         ╰─ Targets:
+            ╰─ name: hello-world-backend-7dfb45b98d-mhskw <i class="conum" data-value="10"></i><b>(10)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The unique identifier of the site associated with the current context, that is, the <code>west</code> namespace</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The URL of the service network router.
+This is required for other sites to connect to this site and is different from the console URL.
+If you require the URL of the console, use the <code>skupper status</code> command to display that URL.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The site name.
+By default, skupper uses the name of the current namespace.
+If you want to specify a site name, use <code>skupper init  --site-name &lt;site-name&gt;</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The version of Skupper running the site.
+The site version can be different from the current <code>skupper</code> CLI version.
+To update a site to the version of the CLI, use <code>skupper update</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The name of a service exposed on the service network.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The address of a service exposed on the service network.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The protocol of a service exposed on the service network.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>The unique identifier of a remote site on the service network.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>The sites that the remote site is linked to.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>The name of the local Kubernetes object that is exposed on the service network.
+In this example, this is the <code>hello-world-backend</code> pod.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The URL for the east site has no value because that site was initialized without ingress using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init --ingress none</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="built-in-security-options"><a class="anchor" href="#built-in-security-options"></a>Securing a service network</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper provides default, built-in security that scales across clusters and clouds.
+This section describes additional security you can configure.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="/skupper/latest/policy/index.html">Securing a service network using policies</a> for information about creating granular policies for each cluster.</p>
+</div>
+<div class="sect2">
+<h3 id="network-policy"><a class="anchor" href="#network-policy"></a>Restricting access to services using network-policy</h3>
+<div class="paragraph">
+<p>By default, if you expose a service on the service network, that service is also accessible from other namespaces in the cluster.
+You can avoid this situation when creating a site using the <code>--create-network-policy</code> option.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create the service network router with a network policy:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ skupper init --create-network-policy</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check the site status:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ skupper status</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should be similar to the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Skupper enabled for namespace 'west'. It is not connected to any other sites.</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You can now expose services on the service network and those services are not accessible from other namespaces in the cluster.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tls"><a class="anchor" href="#tls"></a>Applying TLS to TCP or HTTP2 traffic on the service network</h3>
+<div class="paragraph">
+<p>By default, the traffic between sites is encrypted, however the traffic between the service pod and the router pod is not encrypted.
+For services exposed as TCP or HTTP2, the traffic between the pod and the router pod can be encrypted using TLS.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>Two or more linked sites</p>
+</li>
+<li>
+<p>A TCP or HTTP2 frontend and backend service</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Deploy your backend service.</p>
+</li>
+<li>
+<p>Expose your backend deployment on the service network, enabling TLS.</p>
+<div class="paragraph">
+<p>For example, if you want to expose a TCP service:</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ skupper expose deployment &lt;deployment-name&gt; --port 443 --enable-tls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enabling TLS creates the necessary certificates required for TLS backends and stores them in a secret named <code>skupper-tls-&lt;deployment-name&gt;</code>.</p>
+</div>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Modify the backend deployment to include the generated certificates, for example:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">...
+    spec:
+      containers:
+      ...
+        command:
+        ...
+        - "/certs/tls.key"
+        - "/certs/tls.crt"
+        ...
+        volumeMounts:
+        ...
+        - mountPath: /certs
+          name: certs
+          readOnly: true
+      volumes:
+      - name: index-html
+        configMap:
+          name: index-html
+      - name: certs
+        secret:
+          secretName: skupper-tls-&lt;deployment-name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each site creates the necessary certificates required for TLS clients and stores them in a secret named <code>skupper-service-client</code>.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Modify the frontend deployment to include the generated certificates, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  template:
+    spec:
+      containers:
+      ...
+        volumeMounts:
+        - name: certs
+          mountPath: /tmp/certs/skupper-service-client
+      ...
+      volumes:
+      - name: certs
+        secret:
+          secretName: skupper-service-client</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Test calling the service from a TLS enabled frontend.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="protocols-skupper"><a class="anchor" href="#protocols-skupper"></a>Supported standards and protocols</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper supports the following protocols for your service network:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>TCP - default</p>
+</li>
+<li>
+<p>HTTP1</p>
+</li>
+<li>
+<p>HTTP2</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When exposing or creating a service, you can specify the protocol, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-bash hljs" data-lang="bash">$ skupper expose deployment hello-world-backend --port 8080 --protocol &lt;protocol&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;protocol&gt;</code> can be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>tcp</p>
+</li>
+<li>
+<p>http</p>
+</li>
+<li>
+<p>http2</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When choosing which protocol to specify, note the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tcp</code> supports any protocol overlayed on TCP, for example, HTTP1 and HTTP2 work when you specify <code>tcp</code>.</p>
+</li>
+<li>
+<p>If you specify <code>http</code> or <code>http2</code>, the IP address reported by a client may not be accessible.</p>
+</li>
+<li>
+<p>All service network traffic is converted to AMQP messages in order to traverse the service network.</p>
+<div class="paragraph">
+<p>TCP is implemented as a single streamed message, whereas HTTP1 and HTTP2 are implemented as request/response message routing.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cli-global-options"><a class="anchor" href="#cli-global-options"></a>CLI options for working with different clusters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, all <code>skupper</code> commands apply to the cluster you are logged into and the current namespace.
+The following <code>skupper</code> options allow you to override that behavior and apply to all commands:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>--namespace &lt;namespace-name&gt;</code></dt>
+<dd>
+<p>Apply command to <code>&lt;namespace-name&gt;</code>. For example, if you are currently working on <code>frontend</code> namespace and want to initialize a site in the <code>backend</code> namespace:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init --namespace backend</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><code>--kubeconfig &lt;kubeconfig-path&gt;</code></dt>
+<dd>
+<p>Path to the kubeconfig file - This allows you run multiple sessions to a cluster from the same client. An alternative is to set the <code>KUBECONFIG</code> environment variable.</p>
+</dd>
+<dt class="hdlist1"><code>--context &lt;context-name&gt;</code></dt>
+<dd>
+<p>The kubeconfig file can contain defined contexts, and this option allows you to use those contexts.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../../../_/js/site.js"></script>
+<script async src="../../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

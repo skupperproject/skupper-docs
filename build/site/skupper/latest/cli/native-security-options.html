@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Securing a service network :: Skupper PREVIEW</title>
+    <link rel="canonical" href="https://skupper.io/docs/skupper/latest/cli/native-security-options.html">
+    <meta name="generator" content="Antora 3.1.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/search.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://skupper.io/docs">Skupper PREVIEW</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="#">Home</a>
+
+
+
+                <div class="navbar-item">
+                    <span class="control">
+                        <a class="button is-primary" href="#">Download</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header><div class="body">
+<div class="nav-container" data-component="skupper" data-version="latest">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Skupper</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Preview homepage</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../overview/index.html">Overview</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../overview/glossary.html">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-reference/skupper.html">Kubernetes Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-podman/skupper.html">Podman Reference</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../declarative/index.html">Declarative</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../policy/index.html">Policies</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../console/index.html">Console 1.3 and later</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tokens.html">Tokens</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Kubernetes/OpenShift</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/index.html">Certs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/kubernetes.html">Kubernetes tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/gateway.html">Gateway tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operator/index.html">Kubernetes Operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../kubernetes/service-certs.html">Encrypting traffic from a pod to the Skupper router</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Skupper</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Skupper</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Skupper</a></li>
+    <li><a href="native-security-options.html">Securing a service network</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/paulwright/repos/skupper-docs/modules/cli/pages/native-security-options.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Securing a service network</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper provides default, built-in security that scales across clusters and clouds.
+This section describes additional security you can configure.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="/skupper/latest/policy/index.html">Securing a service network using policies</a> for information about creating granular policies for each cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="network-policy"><a class="anchor" href="#network-policy"></a>Restricting access to services using network-policy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, if you expose a service on the service network, that service is also accessible from other namespaces in the cluster.
+You can avoid this situation when creating a site using the <code>--create-network-policy</code> option.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create the service network router with a network policy:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ skupper init --create-network-policy</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check the site status:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ skupper status</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should be similar to the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Skupper enabled for namespace 'west'. It is not connected to any other sites.</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You can now expose services on the service network and those services are not accessible from other namespaces in the cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tls"><a class="anchor" href="#tls"></a>Applying TLS to TCP or HTTP2 traffic on the service network</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the traffic between sites is encrypted, however the traffic between the service pod and the router pod is not encrypted.
+For services exposed as TCP or HTTP2, the traffic between the pod and the router pod can be encrypted using TLS.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>Two or more linked sites</p>
+</li>
+<li>
+<p>A TCP or HTTP2 frontend and backend service</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Deploy your backend service.</p>
+</li>
+<li>
+<p>Expose your backend deployment on the service network, enabling TLS.</p>
+<div class="paragraph">
+<p>For example, if you want to expose a TCP service:</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ skupper expose deployment &lt;deployment-name&gt; --port 443 --enable-tls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enabling TLS creates the necessary certificates required for TLS backends and stores them in a secret named <code>skupper-tls-&lt;deployment-name&gt;</code>.</p>
+</div>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Modify the backend deployment to include the generated certificates, for example:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">...
+    spec:
+      containers:
+      ...
+        command:
+        ...
+        - "/certs/tls.key"
+        - "/certs/tls.crt"
+        ...
+        volumeMounts:
+        ...
+        - mountPath: /certs
+          name: certs
+          readOnly: true
+      volumes:
+      - name: index-html
+        configMap:
+          name: index-html
+      - name: certs
+        secret:
+          secretName: skupper-tls-&lt;deployment-name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each site creates the necessary certificates required for TLS clients and stores them in a secret named <code>skupper-service-client</code>.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Modify the frontend deployment to include the generated certificates, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  template:
+    spec:
+      containers:
+      ...
+        volumeMounts:
+        - name: certs
+          mountPath: /tmp/certs/skupper-service-client
+      ...
+      volumes:
+      - name: certs
+        secret:
+          secretName: skupper-service-client</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Test calling the service from a TLS enabled frontend.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Encrypting traffic from a pod to the Skupper router :: Skupper PREVIEW</title>
+    <link rel="canonical" href="https://skupper.io/docs/skupper/latest/kubernetes/service-certs.html">
+    <meta name="generator" content="Antora 3.1.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/search.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://skupper.io/docs">Skupper PREVIEW</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="#">Home</a>
+
+
+
+                <div class="navbar-item">
+                    <span class="control">
+                        <a class="button is-primary" href="#">Download</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header><div class="body">
+<div class="nav-container" data-component="skupper" data-version="latest">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Skupper</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Preview homepage</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../overview/index.html">Overview</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../overview/glossary.html">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../cli/index.html">CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-reference/skupper.html">Kubernetes Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../cli-podman/skupper.html">Podman Reference</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../declarative/index.html">Declarative</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../policy/index.html">Policies</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../console/index.html">Console 1.3 and later</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../cli/tokens.html">Tokens</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../troubleshooting/index.html">Troubleshooting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Kubernetes/OpenShift</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html">Certs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="kubernetes.html">Kubernetes tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway.html">Gateway tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operator/index.html">Kubernetes Operator</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="service-certs.html">Encrypting traffic from a pod to the Skupper router</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Skupper</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Skupper</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Skupper</a></li>
+    <li>Kubernetes/OpenShift</li>
+    <li><a href="service-certs.html">Encrypting traffic from a pod to the Skupper router</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/paulwright/repos/skupper-docs/modules/kubernetes/pages/service-certs.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Encrypting traffic from a pod to the Skupper router</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes how to apply certificates to encrypt the traffic within a cluster.</p>
+</div>
+<div class="paragraph">
+<p>By default:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Skupper creates certificates to establish links between sites using mutual TLS so that traffic between sites is encrypted.
+To use custom certificates for traffic between sites, see <a href="index.html" class="xref page">Creating sites using a custom certificate authority on OpenShift</a>.</p>
+</li>
+<li>
+<p>Network traffic between pods and the Skupper router is not encrypted.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can use certificates to encrypt traffic between pods and the Skupper router as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#skupper-generated-certs">Exposing services on the service network with Skupper-generated certificates</a> - does not require that you provide certificates.</p>
+</li>
+<li>
+<p><a href="#user-provided-certs">Exposing services on the service network with user-provided certificates</a> - requires that the certificate authority, and the signed certificates, are distributed across all sites.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With both procedures, you reference the certificates when exposing the service on the service network.
+If you do not reference certificates, the traffic between pods and the Skupper router is unencrypted.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="skupper-generated-certs"><a class="anchor" href="#skupper-generated-certs"></a>Exposing services on the service network with Skupper-generated certificates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Skupper installation includes a certificate authority which can generate certificates that can be used to encrypt traffic from the pod to the Skupper router.
+This procedure describes how to use those certificates in your service network.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>Access to the Kubernetes site where the service is exposed</p>
+</li>
+<li>
+<p>Access to the Kubernetes site where the service is called from</p>
+</li>
+<li>
+<p>service sync is enabled on both sites</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Expose the service on the service network:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If you use the <code>expose</code> option:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose  &lt;target-type&gt; &lt;target-name&gt; --generate-tls-secrets</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, to expose a <code>backend</code> deployment using <code>http2</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose deployment backend --port 8080 --protocol http2 --generate-tls-secrets</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>If you use <code>create</code> and <code>bind</code> options:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create &lt;service-name&gt; --generate-tls-secrets
+$ skupper service bind &lt;service-name&gt;  &lt;target-type&gt; &lt;target-name&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Check that the service is available on another site:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service status
+Services exposed through Skupper:
+╰─ nghttp2tls (http2 port 443)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On this site, a secret is created named <code>skupper-tls-&lt;service-name&gt;</code>.
+The secret contains the generated certificates under <code>data/ca.crt</code>, <code>data/tls.crt</code>, and <code>data/tls.key</code>.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Configure components that call the exposed service to use the certificates stored in <code>skupper-tls-&lt;service-name&gt;</code>.</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>For example, modify a deployment to mount the secret in a container.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>      volumes:
+      - name: certs
+        secret:
+          secretName: skupper-tls-nghttp2tls</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Configure the exposed service, which is the component that responds to the request, to use the certificates stored in <code>skupper-service-client</code>.</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>The <code>skupper-service-client</code> secret contains the certificate and private key of the Skupper certificate authority.
+For example, modify a deployment to mount the secret in a container.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>      volumes:
+      - name: certs
+        secret:
+          secretName: skupper-service-client</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="user-provided-certs"><a class="anchor" href="#user-provided-certs"></a>Exposing services on the service network with user-provided certificates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can encrypt traffic from the pod to the Skupper router using certificates provided by a certificate authority.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>Access to the Kubernetes site where the service is exposed</p>
+</li>
+<li>
+<p>Access to the Kubernetes site where the service is called from</p>
+</li>
+<li>
+<p>Certificate authority access (intermediate certificate is sufficient)</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a TLS secret from the certificate authority to store the private key and certificate.</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>The required format of the secret is:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>data/ca.crt</code></dt>
+<dd>
+<p>CA TLS certificate</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>For example, you might name the secret <code>ca-tls-secret</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ kubectl create secret generic ca-tls-secret --from-file=ca.crt=rootCA.crt</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Create a secret from the signed certificate and private key files:</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>The required format of the secret is:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>data/ca.crt</code></dt>
+<dd>
+<p>CA TLS certificate from step 1</p>
+</dd>
+<dt class="hdlist1"><code>data/tls.crt</code></dt>
+<dd>
+<p>Signed TLS certificate</p>
+</dd>
+<dt class="hdlist1"><code>data/tls.key</code></dt>
+<dd>
+<p>Signed Private key</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>For example, to encrypt a service named <code>backend</code>, you might name the secret <code>user-tls-backend</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ kubectl create secret tls user-tls-backend --key &lt;key-path&gt; --cert &lt;cert-path&gt;
+$ kubectl patch secret user-tls-backend  -p="{\"data\":{\"ca.crt\": \"$(kubectl get secret ca-tls-secret -o json -o=jsonpath="{.data.tls\.crt}")\"}}"</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Expose the service on the service network:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If you use the <code>expose</code> option, you specify the certificate secret and the CA secret, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose deployment backend --port 5432 --protocol http2 --tls-cert user-tls-backend --tls-trust ca-tls-secret</pre>
+</div>
+</div>
+</li>
+<li>
+<p>If you use the <code>create</code> and <code>bind</code> options:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create backend 5432 --tls-cert user-tls-backend
+$ skupper bind deployment backend  --port 5001  --protocol http2 --tls-trust ca-tls-secret</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When certificates expire, you need to perform this procedure again with the new certificates.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
