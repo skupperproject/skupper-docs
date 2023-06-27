@@ -7,7 +7,6 @@
 //:numbered:
 
 // Branding - toggle upstream/downstream content "on/off"
-
 // The following attributes conditionalize content from the Skupper upstream project:
 // * Upstream-only content conditionalized with ifdef::skupper-io[]...endif::[]
 // * Downstream-only content conditionalized with ifdef::product[]...endif::[]
@@ -55,5 +54,5 @@ endif::[]
 :SkupperConsoleBookLink: link:{linkroot}console/index.html[Skupper console]
 :SkupperOperatorBookLink: link:{linkroot}operator/index.html[Configuring Skupper sites using the Operator on Kubernetes]
 :OperatorOCPLink: link:{linkroot}operator/openshift.html[Configuring Skupper sites using the Operator on OpenShift]
-:TokensLink: link:{linkroot}overview/tokens.html[Using Skupper tokens]
+:TokensLink: link:{linkroot}cli/tokens.html[Using Skupper tokens]
 :SkupperPolicyBookLink: link:{linkroot}policy/index.html[Securing a service network using policies]
