@@ -769,7 +769,20 @@ include::./protocols.adoc[leveloffset=+1]
 
 // Type: reference
 [id="cli-global-options"] 
-== CLI options for working with different clusters
+== CLI options
+
+For a full list of options, see the xref:cli-reference:skupper.adoc[Kubernetes] and xref:cli-podman:skupper.adoc[Podman] reference documentation.
+
+[WARNING]
+====
+When you create a site and set logging level to `trace`, you can inadvertently log sensitive information from HTTP headers.
+
+----
+$ skupper init --router-logging trace
+----
+
+
+====
 
 By default, all `skupper` commands apply to the cluster you are logged into and the current namespace.
 The following `skupper` options allow you to override that behavior and apply to all commands:
