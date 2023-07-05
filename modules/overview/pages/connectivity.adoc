@@ -44,7 +44,7 @@ image::many-clusters.svg[]
 
 .Additional information
 
-* {SkupperOverviewBookLink}
-* {SecurityLink}
-* {RoutingLink}
+* xref:index.adoc[]
+* xref:routing.adoc[]
+* xref:connectivity.adoc[]
 

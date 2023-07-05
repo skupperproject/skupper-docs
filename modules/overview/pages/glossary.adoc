@@ -8,7 +8,7 @@ service:: In {skupper-name}, the Kubernetes https://kubernetes.io/docs/concepts/
 When you define a service using Skupper, that service appears as a native service in other sites.
 
 site:: A {skupper-name} site is an {skupper-name} installation.
-You _link_ sites to form a {service-network} and share services
+You _link_ sites to form a {service-network} and share services. You can create sites in a Kubernetes namespace or for a Linux user.
 
 link:: A secure connection between sites that enables communication and service sharing between those sites.
 

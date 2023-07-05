@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Skupper PREVIEW</title>
+    <title>Creating a service network with Kubernetes and accessing a backend service using a gateway :: Skupper PREVIEW</title>
     <link rel="canonical" href="https://skupper.io/docs/skupper/latest/kubernetes/gateway.html">
-    <meta name="generator" content="Antora 3.1.4">
+    <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/search.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -53,7 +53,7 @@
     <a class="nav-link" href="../overview/index.html">Overview</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../overview/glossary.html">overview:glossary.adoc</a>
+    <a class="nav-link" href="../overview/glossary.html">Glossary</a>
   </li>
 </ul>
   </li>
@@ -147,11 +147,9 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="paragraph">
-<p>Unresolved include directive in modules/kubernetes/pages/gateway.adoc - include::ROOT:partial$attributes.adoc[]
-:sectnums:</p>
-</div>
-<h1 id="gateway-tutorial" class="sect0"><a class="anchor" href="#gateway-tutorial"></a>Creating a service network with Kubernetes and accessing a backend service using a gateway</h1>
+<h1 class="page">Creating a service network with Kubernetes and accessing a backend service using a gateway</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph system:abstract">
 <p>This tutorial describes how to connect a local backend service on a local machine with a frontend service running on a Kubernetes cluster.</p>
 </div>
@@ -194,6 +192,8 @@ Although this tutorial demonstrates exposing a Python service on the service net
 </tr>
 </table>
 </div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="introduction-to-skupper"><a class="anchor" href="#introduction-to-skupper"></a>Introduction to Skupper {product-version}</h2>
 <div class="sectionbody">
@@ -201,9 +201,9 @@ Although this tutorial demonstrates exposing a Python service on the service net
 <p>A service network enables communication between services running in different network locations.
 It allows geographically distributed services to connect as if they were all running in the same site.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock unresolved">
 <div class="content">
-<img src="../_images/overview-gateway.png" alt="Overview of a service network">
+<img src="{image-prefix}overview-gateway.png" alt="Overview of a service network">
 </div>
 </div>
 <div class="paragraph">
