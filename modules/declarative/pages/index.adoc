@@ -3,16 +3,13 @@
 [id="skupper-declarative"] 
 = Configuring {skupper-name} sites using YAML
 
-
-[role="system:abstract"]
 Using YAML files to configure {skupper-name} allows you to use source control to track and manage {skupper-name} network changes.
-
 
 // Type: procedure
 [id="installing-using-yaml"] 
 == Installing {skupper-name} using YAML
 
-[role="system:abstract"]
+
 Installing {skupper-name} using YAML provides a declarative method to install {skupper-name}.
 You can store your YAML files in source control to track and manage {skupper-name} network changes.
 
@@ -60,7 +57,7 @@ skupper-site-controller-84694bdbb5-n8slb   1/1     Running   0          75s
 == Creating a {skupper-name} site using YAML
 
 
-[role="system:abstract"]
+
 Using YAML files to create {skupper-name} sites allows you to use source control to track and manage {skupper-name} network changes.
 
 .Prerequisites
@@ -157,7 +154,7 @@ include::annotations.adoc[leveloffset=+1]
 [appendix]
 == Site ConfigMap YAML reference
 
-[role="system:abstract"]
+
 Using YAML files to configure {skupper-name} requires that you understand all the fields so that you provision the site you require.
 
 The following YAML defines a {skupper-name} site:

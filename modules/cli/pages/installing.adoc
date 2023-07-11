@@ -2,12 +2,12 @@
 [id="installing-cli"] 
 = Installing the Skupper CLI
 
-[role="system:abstract"]
+
 Installing the `skupper` command-line interface (CLI) provides a simple method to get started with {skupper-name}.
 
 .Procedure
 
-include::{mod-loc}fragment-skupper-install-steps.adoc[]
+include::ROOT:partial$fragment-skupper-install-steps.adoc[]
 
 
 . Verify the installation.

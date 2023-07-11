@@ -1,5 +1,5 @@
 // Type: procedure
-[id='creating-site-using-operator-{context}']
+[id='creating-site-using-operator']
 == Creating a site using the Skupper Operator
 
 

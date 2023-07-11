@@ -5,13 +5,11 @@
 [id="troubleshooting"] 
 = Troubleshooting a {service-network}
 
-[role="system:abstract"]
+
 Typically, you can create a {service-network} without referencing this troubleshooting guide.
 However, this guide provides some tips for situations when the {service-network} does not perform as expected.
 
-// tag::skupper-io[]
 See xref:common-problems[] if you have encountered a specific issue using the `skupper` CLI.
-// end::skupper-io[]
 
 A typical troubleshooting workflow is to check all the sites and create debug tar files.
 
@@ -19,7 +17,7 @@ A typical troubleshooting workflow is to check all the sites and create debug ta
 [id="checking-sites"] 
 == Checking sites
 
-[role="system:abstract"]
+
 Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting {skupper-name}.
 
 .Procedure
@@ -356,7 +354,6 @@ NOTE: While you can address availability concerns by scaling the number of route
 
 
 
-// tag::skupper-io[]
 
 // Type:procedure
 [id='common-problems']
@@ -455,4 +452,4 @@ You must specify an ingress to allow sites on other clusters to link to your sit
 
 You can also use the `skupper token create` command to check if an ingress was specified when the site was created.
 --
-// end::skupper-io[]
+

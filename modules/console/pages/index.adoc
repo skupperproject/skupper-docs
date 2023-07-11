@@ -1,7 +1,7 @@
 [id="skupper-console"] 
 = Using the Skupper console
 
-include::{mod-loc}preface.adoc[]
+
 
 The Skupper console provides data and visualizations of the traffic flow between Skupper sites.
 
@@ -103,7 +103,7 @@ The Skupper console provides an overview of the following:
 
 The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels.
 
-image::{img-loc}skupper-adservice.png[]
+image::ROOT:skupper-adservice.png[]
 
 
 . Check the *Sites* tab.

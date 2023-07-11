@@ -1,17 +1,17 @@
 :context: skupper-podman
 //Category: skupper-cli
 // Type: assembly
-[id='using-skupper-podman-{context}']
+[id='using-skupper-podman']
 = Using Skupper podman
 
-[role="system:abstract"]
+
 Skupper podman allow you to create a site using containers, without requiring Kubernetes.
 Typically, you create a site on a Linux host, allowing you to link to and from other sites, regardless of whether those sites are running in podman or Kubernetes.
 
 NOTE: This is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
 
 
-[id='about-{context}']
+[id='about']
 == About Skupper podman
 
 Skupper podman is available with the following precedence:
@@ -37,7 +37,7 @@ podman
 
 To switch back to target Kubernetes sites: `skupper switch kubernetes`
 
-[id='creating-a-site-{context}']
+[id='creating-a-site']
 == Creating a site using Skupper podman
 
 .Prerequisites

@@ -17,10 +17,4 @@ ui:
 asciidoc:
   attributes:
     skupper-preview: true
-    skupper-io: '@'
-    service-network: service network@
-    skupper-version: 1@
-    context: skupper@
-    skupper-cli-version: 1@
-    skupperoperatorname: Skupper Operator@
-    skupperconsolebooklink: link@
+

@@ -1,5 +1,5 @@
 // Type: reference
-[id='protocols-{context}']
+[id='protocols']
 = Supported standards and protocols
 
 {skupper-name} supports the following protocols for your {service-network}:

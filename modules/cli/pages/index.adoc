@@ -41,14 +41,11 @@ $ skupper status
 Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites.
 ----
 +
-NOTE: The default message above is displayed when you initialize a site on a cluster that does not have the {policy-system} installed.
-If you install the {policy-system} as described in {skupperpolicybooklink}, the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
+NOTE: The default message above is displayed when you initialize a site on a cluster that does not have the policy system installed.
+If you install the policy system as described in xref:policy:index.adoc[], the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
 
 By default, the site name defaults to the namespace name, for example, `west`.
 
-ifdef::product[]
-include::{mod-loc}fragment-ingress.adoc[]
-endif::[]
 
 // Type: reference
 [id="custom-sites"] 
@@ -131,7 +128,7 @@ This file contains a key and the location of the site that created it.
 Access to this file provides access to the {service-network}. 
 Protect it appropriately.
 
-For more information about protecting access to the {service-network}, see {TokensLink}.
+For more information about protecting access to the {service-network}, see xref:cli:tokens.adoc[].
 ====
 --
 
@@ -468,6 +465,7 @@ $ skupper gateway expose mysql 192.168.1.200 3306
 . Check the status of Skupper gateways:
 +
 --
+
 [subs=attributes+]
 ----
 $ skupper gateway status
@@ -674,7 +672,7 @@ $ cd gateway
 $ sh ./launch.py
 ----
 
-NOTE: Use `./launch.py -t podman` or `./launch.py -t docker` to run the {skupper-router} in a container.
+NOTE: Use `./launch.py -t podman` or `./launch.py -t docker` to run the Skupper router in a container.
 
 Running the gateway bundle uses the gateway definition YAML and a certificate to access and expose the service on the {service-network}.
 

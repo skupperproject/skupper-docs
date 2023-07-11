@@ -1,5 +1,5 @@
 // Type: procedure
-[id='network-service-{context}']
+[id='network-service']
 = Exploring a {service-network}
 
 {skupper-name} includes a command to allow you report all the sites and the services available on a {service-network}.

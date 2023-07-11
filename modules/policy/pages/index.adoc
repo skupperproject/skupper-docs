@@ -3,17 +3,16 @@
 [id="skupper-policy"] 
 = Securing a {service-network} using policies
 
-include::{mod-loc}preface.adoc[]
 
 By default, {skupper-name} includes many security features, including using mutual TLS for all {service-network} communication between sites.
-By default, applying the {policy-system} to a cluster prevents all {service-network} communication to and from that cluster.
+By default, applying the policy system to a cluster prevents all {service-network} communication to and from that cluster.
 You specify granular policies to allow only the {service-network} communication you require.
 
-NOTE: The {policy-system} is distinct from the `network-policy` option which restricts access to {skupper-name} services to the current namespace as described in {skupperclibooklink}.
+NOTE: The policy system is distinct from the `network-policy` option which restricts access to {skupper-name} services to the current namespace as described in xref:cli:index.adoc[].
 
-Each site in a {service-network} runs a {skupper-router} and has a private, dedicated certificate authority (CA).
+Each site in a {service-network} runs a Skupper router and has a private, dedicated certificate authority (CA).
 Communication between sites is secured with mutual TLS, so the {service-network} is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
-The {policy-system} adds another layer at a cluster level to help a cluster administrator control access to a {service-network}.
+The policy system adds another layer at a cluster level to help a cluster administrator control access to a {service-network}.
 
 This guide assumes that you understand the following {skupper-name} concepts:
 
@@ -23,9 +22,9 @@ token:: A token is required to establish a link between two sites.
 
 // Type: concept
 [id="about-skupper-policies"] 
-== About the {policy-system}
+== About the policy system
 
-After a cluster administrator installs the {policy-system} using a Custom Resource Definition (CRD), the cluster administrator needs to configure one or more policies to allow _developers_ create and use services on the {service-network}.
+After a cluster administrator installs the policy system using a Custom Resource Definition (CRD), the cluster administrator needs to configure one or more policies to allow _developers_ create and use services on the {service-network}.
 
 NOTE: In this guide, _developers_ refers to users of a cluster who have access to a namespace, but do not have administrator privileges.
 
@@ -96,9 +95,9 @@ An operation is permitted if any single policy CR permits the operation.
 
 // Type: procedure
 [id="installing-crd"] 
-== Installing the {policy-system} CRD
+== Installing the policy system CRD
 
-Installing the {policy-system} CRD enables a cluster administrator to enforce policies for {service-network}s.
+Installing the policy system CRD enables a cluster administrator to enforce policies for {service-network}s.
 
 NOTE: If there are existing sites on the cluster, see xref:installing-crd-existing-sites[] to avoid {service-network} disruption.
 
@@ -129,7 +128,7 @@ clusterrole.rbac.authorization.k8s.io/skupper-service-controller created
 ----
 
 
-. To verify that the {policy-system} is active, use the `skupper status` command and check that the output includes the following line:
+. To verify that the policy system is active, use the `skupper status` command and check that the output includes the following line:
 +
 [source,bash]
 ----
@@ -142,7 +141,7 @@ ifdef::skupper-io[]
 [id="upgrading-existing-sites"] 
 == Upgrading on a cluster with existing sites
 
-If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of a {policy-system} in that version and avoid {service-network} disruption.
+If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of a policy system in that version and avoid {service-network} disruption.
 
 .Procedure
 
@@ -169,7 +168,7 @@ endif::skupper-io[]
 
 // Type: procedure
 [id="installing-crd-existing-sites"] 
-== Installing the {policy-system} CRD on a cluster with existing sites
+== Installing the policy system CRD on a cluster with existing sites
 
 If the cluster already hosts {skupper-name} sites, note the following before installing the CRD:
 
@@ -179,7 +178,7 @@ You must apply a policy CR to reopen connections.
 You must create those resources again.
 
 ifdef::skupper-io[]
-NOTE: If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of a {policy-system} in that version and avoid {service-network} disruption by following the procedure described in xref:upgrading-existing-sites[].
+NOTE: If you are upgrading sites from {skupper-name} version 0.8, you can take advantage of the lack of a policy system in that version and avoid {service-network} disruption by following the procedure described in xref:upgrading-existing-sites[].
 endif::skupper-io[]
 
 .Procedure
@@ -221,7 +220,7 @@ where `<namespace>` is the site namespace.
 
 // Type: procedure
 [id="creating-policies"] 
-== Creating policies for the {policy-system}
+== Creating policies for the policy system
 
 Policies allow a cluster administrator to control communication across the {service-network} from a cluster.
 
@@ -229,7 +228,7 @@ Policies allow a cluster administrator to control communication across the {serv
 .Prerequisites
 
 * Access to a cluster using a `cluster-admin` account.
-* The {policy-system} CRD is installed on the cluster.
+* The policy system CRD is installed on the cluster.
 
 .Procedure
 

@@ -5,7 +5,7 @@
 {skupper-name} provides default, built-in security that scales across clusters and clouds.
 This section describes additional security you can configure.
 
-See {SkupperPolicyBookLink} for information about creating granular policies for each cluster.
+See xref:policy:index.adoc[] for information about creating granular policies for each cluster.
 
 // Type: procedure
 [id="network-policy"] 

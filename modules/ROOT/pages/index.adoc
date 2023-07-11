@@ -3,35 +3,19 @@
 This is a preview of link:https://github.com/skupperproject/skupper-docs[skupperproject/skupper-docs: Documentation for the Skupper project] 
 //external
 
-NOTE: You might be looking for the {GettingStartedLink}
 
 This documentation is built using Antora and contains the following Antora modules:
 
 * cli 
+* cli-reference 
 * console
 * declarative
 * overview
 * skupper-docker
 * operator
 * policy
+* podman-reference
+* troubleshooting
 
 NOTE: This ROOT module is never published but contains partials that are used in various documents.
 
-This page acts as a report for all docs in the skupper-docs repo.
-
-// migrated from markdown
-* {SkupperOverviewBookLink}
-* {RoutingLink}
-* {SecurityLink}
-* {ConnectivityLink}
-
-// can be consumed by nebel
-* {SkupperCliBookLink}
-* {SkupperOpenShiftBookLink}
-* {GatewayTutoriallink}
-* {DeclarativeLink}
-* {SkupperConsoleBookLink}
-* {SkupperOperatorBookLink}
-* {TokensLink}
-* {SkupperPolicyBookLink}
-* xref:cli:podman.adoc[]
