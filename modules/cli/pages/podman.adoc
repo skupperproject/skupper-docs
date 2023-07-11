@@ -49,6 +49,7 @@ To switch back to target Kubernetes sites: `skupper switch kubernetes`
 . Set your session to use Skupper podman:
 +
 --
+[source, bash]
 ----
 $ export SKUPPER_PLATFORM=podman
 ----
@@ -91,6 +92,7 @@ For more information, see xref:cli-podman:skupper_init.adoc[podman skupper init]
 . Check the status of your site:
 +
 --
+[source, bash]
 ----
 $ skupper status
 Skupper is enabled for "<username>" with site name "<machine-name>-<username>" in interior mode. It is not connected to any other sites. It has no exposed services.
@@ -158,6 +160,7 @@ $ skupper service create backend 8080
 . Validate the service from the Podman site by checking the backend API health URL:
 +
 --
+[source, bash]
 ----
 $ podman run -it --rm --network=skupper --name=myubi ubi8/ubi curl backend:8080/api/health
 

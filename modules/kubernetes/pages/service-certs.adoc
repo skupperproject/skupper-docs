@@ -39,6 +39,7 @@ This procedure describes how to use those certificates in your {service-network}
 .. If you use the `expose` option:
 +
 --
+[source, bash]
 ----
 $ skupper expose  <target-type> <target-name> --generate-tls-secrets
 ----
@@ -51,6 +52,7 @@ $ skupper expose deployment backend --port 8080 --protocol http2 --generate-tls-
 .. If you use `create` and `bind` options:
 +
 --
+[source, bash]
 ----
 $ skupper service create <service-name> --generate-tls-secrets
 $ skupper service bind <service-name>  <target-type> <target-name>
@@ -60,6 +62,7 @@ $ skupper service bind <service-name>  <target-type> <target-name>
 . Check that the service is available on another site:
 +
 --
+[source, bash]
 ----
 $ skupper service status
 Services exposed through Skupper:
@@ -154,6 +157,7 @@ $ skupper expose deployment backend --port 5432 --protocol http2 --tls-cert user
 .. If you use the `create` and `bind` options:
 +
 --
+[source, bash]
 ----
 $ skupper service create backend 5432 --tls-cert user-tls-backend
 $ skupper bind deployment backend  --port 5001  --protocol http2 --tls-trust ca-tls-secret

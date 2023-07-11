@@ -80,6 +80,7 @@ If not specified, a random passwords is generated.
 * Configuring service access
 +
 --
+
 ----
 $ skupper init --create-network-policy
 ----
@@ -115,6 +116,7 @@ Linking two sites requires a single initial directional connection. However:
 . Generate a token on the cluster that you want to link to:
 +
 --
+[source, bash]
 ----
 $ skupper token create <filename> 
 ----
@@ -194,6 +196,7 @@ After this threshold of open connections is reached, new connections are spread 
 . Create a link to the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper link create <filename> --cost <integer-cost>
 ----
@@ -265,6 +268,7 @@ This step is not {skupper-name}-specific, that is, this process is unchanged fro
 . Create a service that can communicate on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper expose [deployment <name>|pods <selector>|statefulset <statefulsetname>|service <name>]
 ----
@@ -312,6 +316,7 @@ This step is not {skupper-name}-specific, that is, this process is unchanged fro
 . Create a service that can communicate on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper service create <name> <port>
 ----
@@ -332,6 +337,7 @@ $ skupper service create hello-world-backend 8080
 . Bind the service to a cluster service:
 +
 --
+[source, bash]
 ----
 $ skupper service bind <service-name> <target-type> <target-name>
 ----
@@ -370,6 +376,7 @@ However, if you want to expose workloads, for example deployments, you must crea
 . Create a site with cluster permissions if you want to expose a workload from a namespace other than the site namespace:
 +
 --
+[source, bash]
 ----
 $ skupper init --enable-cluster-permissions
 ----
@@ -383,6 +390,7 @@ NOTE: The site does not require the extra permissions granted with the `--enable
 .. If you want to expose a Kubernetes service from a namespace other than the site namespace:
 +
 --
+[source, bash]
 ----
 $ skupper expose service <service>.<namespace> --address <service>
 ----
@@ -400,6 +408,7 @@ $ skupper expose service backend.east-backend --port 8080 --address backend
 .. If you want to expose a workload and you created a site with `--enable-cluster-permissions`:
 +
 --
+[source, bash]
 ----
 $ skupper expose <resource> --port <port-number> --target-namespace <namespace>
 ----
@@ -445,6 +454,7 @@ ifdef::product[* `skrouterd` for the default `service` type gateways]
 . Expose the service on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper gateway expose <service> localhost <port>
 ----
@@ -510,6 +520,7 @@ By default a _service_ type gateway is created, however you can also specify:
 . Create a service that can communicate on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper service create <name> <port>
 ----
@@ -521,6 +532,7 @@ where
 
 For example:
 
+[source, bash]
 ----
 $ skupper service create mydb 3306
 ----
@@ -529,6 +541,7 @@ $ skupper service create mydb 3306
 . Bind the service on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper gateway bind <service> <host> <port>
 ----
@@ -541,7 +554,7 @@ $ skupper gateway bind <service> <host> <port>
 . Check the status of Skupper gateways:
 +
 --
-[subs=attributes+]
+[source, bash, subs=attributes+]
 ----
 $ skupper gateway status
 Gateway Definitions Summary
@@ -562,6 +575,7 @@ You can create more services in the {service-network} and bind more local servic
 . Forward a service from the {service-network} to the local machine.
 +
 --
+[source, bash]
 ----
 $ skupper gateway forward <service> <port>
 ----
@@ -589,6 +603,7 @@ For example, if you want to expose a local database service to the {service-netw
 . Create a service that can communicate on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper service create <name> <port>
 ----
@@ -600,6 +615,7 @@ where
 
 For example:
 
+[source, bash]
 ----
 $ skupper service create database 5432
 ----
@@ -641,6 +657,7 @@ qdr-listeners:
 . Generate a bundle that can be applied to the machine that hosts the service you want to expose on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper gateway generate-bundle <config-filename> <destination-directory>
 ----
@@ -651,6 +668,7 @@ where:
 * <destination-directory> - the location where you want to save the resulting gateway bundle, for example `~/gateways`.
 
 For example:
+[source, bash]
 ----
 $ skupper gateway generate-bundle database.yaml ./
 ----
@@ -664,6 +682,7 @@ This bundle contains the gateway definition YAML and a  certificate that allow a
 . From the machine that hosts the service you want to expose:
 +
 --
+[source, bash]
 ----
 $ mkdir gateway
 
@@ -683,16 +702,19 @@ Running the gateway bundle uses the gateway definition YAML and a certificate to
 --
 
 To check a _service_ type gateway:
+[source, bash]
 ----
 $ systemctl --user status <gateway-definition-name>
 ----
 
 To check a _podman_ type gateway:
+[source, bash]
 ----
 $ podman inspect
 ----
 
 To check a _docker_ type gateway:
+[source, bash]
 ----
 $ docker inspect
 ----

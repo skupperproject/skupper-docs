@@ -70,6 +70,7 @@ Using YAML files to create {skupper-name} sites allows you to use source control
 . Create a YAML file to define the site, for example, `my-site.yaml`:
 +
 --
+[source, bash]
 ----
 include::example$my-site.yaml[]
 ----

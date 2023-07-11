@@ -25,6 +25,7 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 . Check the site status:
 +
 --
+[source, bash]
 ----
 $ skupper status --namespace west
 
@@ -42,6 +43,7 @@ The output shows:
 . Check the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper network status --namespace west
 
@@ -85,6 +87,7 @@ The output shows:
 . Check the status of services exposed on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper service status
 Services exposed through Skupper:
@@ -101,6 +104,7 @@ NOTE: The related targets for services are only displayed when the target is ava
 . List the events for a site:
 +
 --
+[source, bash]
 ----
 $ skupper debug events
 NAME                         COUNT                                                          AGE
@@ -164,6 +168,7 @@ This section outlines some advanced options for checking links.
 . Check the link status:
 +
 --
+[source, bash]
 ----
 $ skupper link status --namespace east
 
@@ -193,6 +198,7 @@ A link from the namespace east on site east(536695a9-26dc-4448-b207-519f56e99b71
 . Check the verbose link status:
 +
 --
+[source, bash]
 ----
 $ skupper link status link1 --verbose --namespace east
 
@@ -285,6 +291,7 @@ Skupper dump details written to compressed archive:  `my-site.tar.gz`
 . You can expand the file using the following command:
 +
 --
+[source, bash]
 ----
 $ tar -xvf kind-site.tar.gz 
 
