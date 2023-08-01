@@ -1,4 +1,0 @@
-{
-    "asciidoc.antora.enableAntoraSupport": true,
-    "ansible.python.interpreterPath": "/bin/python"
-}
