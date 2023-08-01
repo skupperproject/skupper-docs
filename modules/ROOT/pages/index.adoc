@@ -1,39 +1,21 @@
-include::{mod-loc}attributes.adoc[]
-
 = Preview homepage
 
 This is a preview of link:https://github.com/skupperproject/skupper-docs[skupperproject/skupper-docs: Documentation for the Skupper project] 
 //external
 
-NOTE: You might be looking for the {GettingStartedLink}
 
 This documentation is built using Antora and contains the following Antora modules:
 
-* cli 
-* console
-* declarative
-* overview
-* skupper-docker
-* operator
-* policy
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/ROOT[ROOT] - Metadata like this page and images
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/cli[cli] - Kubernetes and Podman CLI procedures
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/cli-reference[cli-reference] - Kubernetes CLI reference (generated)
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/console[console] - Console docs
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/declarative[declarative] - Using Skupper with YAML
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/overview[overview] - Skupper concepts 
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/operator[operator] - Using Skupper with a Kubernetes operator
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/policy[policy] - Control Skupper usage in a cluster using the policy CRD
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/podman-reference[podman-reference] - Podman CLI reference (generated)
+* https://github.com/skupperproject/skupper-docs/tree/main/modules/troubleshooting[troubleshooting] - Resolving problems in your service network
 
 NOTE: This ROOT module is never published but contains partials that are used in various documents.
 
-This page acts as a report for all docs in the skupper-docs repo.
-
-// migrated from markdown
-* {SkupperOverviewBookLink}
-* {RoutingLink}
-* {SecurityLink}
-* {ConnectivityLink}
-
-// can be consumed by nebel
-* {SkupperCliBookLink}
-* {SkupperOpenShiftBookLink}
-* {GatewayTutoriallink}
-* {DeclarativeLink}
-* {SkupperConsoleBookLink}
-* {SkupperOperatorBookLink}
-* {TokensLink}
-* {SkupperPolicyBookLink}
-* xref:cli:podman.adoc[]

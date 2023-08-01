@@ -1,4 +1,3 @@
-include::{mod-loc}attributes.adoc[]
 
 //Category: skupper-routing
 // Type: assembly
@@ -39,8 +38,6 @@ Skupper uses redundant network paths and smart routing to provide highly availab
 
 .Additional information
 
-.Additional information
-
-* {SkupperOverviewBookLink}
-* {SecurityLink}
-* {ConnectivityLink}
+* xref:index.adoc[]
+* xref:security.adoc[]
+* xref:connectivity.adoc[]

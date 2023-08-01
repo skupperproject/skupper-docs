@@ -1,15 +1,10 @@
-ifndef::mod-loc[]
-:mod-loc: ./partials/
-endif::mod-loc[]
-include::{mod-loc}attributes.adoc[]
-:context: skupper-tokens
 //Category: skupper-tokens
 // Type: assembly
-[id='using-skupper-tokens-{context}']
+[id='using-skupper-tokens']
 
 = Using Skupper tokens
 
-[role="system:abstract"]
+
 Skupper tokens allow you to create links between sites.
 You create a token on one site and use that token from the other site to create a link between the two sites.
 
@@ -45,10 +40,10 @@ Protect it appropriately.
 --
 
 // Type: procedure
-[id='creating-claim-tokens-{context}']
+[id='creating-claim-tokens']
 == Creating claim tokens
 
-[role="system:abstract"]
+
 You can use a claim token to create a link to the site which issued that token.
 It does not includes a certificate from that site, but a certificate is passed from the site when the claim token is used.
 A claim token can be restricted by time or usage.
@@ -75,13 +70,13 @@ NOTE: Claim tokens are the default, the `-t claim` section of the command is unn
 
 .Additional information
 
-* See the {SkupperCliBookLink} for information about using the token to create links.
+* See the xref:cli:index.adoc[] for information about using the token to create links.
 
 // Type: procedure
-[id='creating-cert-tokens-{context}']
+[id='creating-cert-tokens']
 == Creating cert tokens
 
-[role="system:abstract"]
+
 A cert token allows you create many links to the {service-network} from different sites without restrictions.
 
 .Procedure
@@ -98,18 +93,18 @@ A cert token allows you create many links to the {service-network} from differen
 $ skupper token create $HOME/secret.yaml -t cert
 ----
 
-NOTE: Cert tokens are always valid and can be reused indefinitely unless revoked as described in xref:revoking-access-{context}[]
+NOTE: Cert tokens are always valid and can be reused indefinitely unless revoked as described in xref:revoking-access[]
 --
 
 .Additional information
 
-* See the {SkupperCliBookLink} for information about using the token to create links.
+* See the xref:cli:index.adoc[] for information about using the token to create links.
 
 // Type: procedure
-[id='revoking-access-{context}']
+[id='revoking-access']
 == Revoking access to a site
 
-[role="system:abstract"]
+
 If a token is compromised, you can prevent unauthorized use of that token by invalidating  all the tokens created from a site.
 
 This option removes all links to the site and requires that you recreate any links to restore the {service-network}.
@@ -168,6 +163,4 @@ To recreate the link, you must first delete the link manually from the remote si
 ====
 --
 
-.Additional information
 
-* See the {SkupperCliBookLink}.

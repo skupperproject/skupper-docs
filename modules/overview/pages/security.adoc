@@ -1,4 +1,3 @@
-include::{mod-loc}attributes.adoc[]
 
 //Category: skupper-security
 // Type: assembly
@@ -34,6 +33,6 @@ This means that the Skupper network is isolated from external access, preventing
 
 .Additional information
 
-* {SkupperOverviewBookLink}
-* {ConnectivityLink}
-* {RoutingLink}
+* xref:index.adoc[]
+* xref:connectivity.adoc[]
+* xref:routing.adoc[]

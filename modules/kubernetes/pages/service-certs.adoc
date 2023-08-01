@@ -6,7 +6,7 @@ This section describes how to apply certificates to encrypt the traffic within a
 
 By default:
 
-* {Skupper-name} creates certificates to establish links between sites using mutual TLS so that traffic between sites is encrypted. 
+* Skupper creates certificates to establish links between sites using mutual TLS so that traffic between sites is encrypted. 
 To use custom certificates for traffic between sites, see xref:index.adoc[].
 
 * Network traffic between pods and the Skupper router is not encrypted. 
@@ -23,7 +23,7 @@ If you do not reference certificates, the traffic between pods and the Skupper r
 [id="skupper-generated-certs"]
 == Exposing services on the {service-network} with Skupper-generated certificates
 
-A {skupper-name} installation includes a certificate authority which can generate certificates that can be used to encrypt traffic from the pod to the Skupper router.
+A Skupper installation includes a certificate authority which can generate certificates that can be used to encrypt traffic from the pod to the Skupper router.
 This procedure describes how to use those certificates in your {service-network}.
 
 .Prerequisites
@@ -39,6 +39,7 @@ This procedure describes how to use those certificates in your {service-network}
 .. If you use the `expose` option:
 +
 --
+[source, bash]
 ----
 $ skupper expose  <target-type> <target-name> --generate-tls-secrets
 ----
@@ -51,6 +52,7 @@ $ skupper expose deployment backend --port 8080 --protocol http2 --generate-tls-
 .. If you use `create` and `bind` options:
 +
 --
+[source, bash]
 ----
 $ skupper service create <service-name> --generate-tls-secrets
 $ skupper service bind <service-name>  <target-type> <target-name>
@@ -60,6 +62,7 @@ $ skupper service bind <service-name>  <target-type> <target-name>
 . Check that the service is available on another site:
 +
 --
+[source, bash]
 ----
 $ skupper service status
 Services exposed through Skupper:
@@ -154,6 +157,7 @@ $ skupper expose deployment backend --port 5432 --protocol http2 --tls-cert user
 .. If you use the `create` and `bind` options:
 +
 --
+[source, bash]
 ----
 $ skupper service create backend 5432 --tls-cert user-tls-backend
 $ skupper bind deployment backend  --port 5001  --protocol http2 --tls-trust ca-tls-secret

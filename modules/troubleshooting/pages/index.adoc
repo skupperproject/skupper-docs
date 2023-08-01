@@ -1,4 +1,3 @@
-include::{mod-loc}attributes.adoc[]
 
 //Category: skupper-troubleshooting
 // Type: assembly
@@ -6,13 +5,11 @@ include::{mod-loc}attributes.adoc[]
 [id="troubleshooting"] 
 = Troubleshooting a {service-network}
 
-[role="system:abstract"]
+
 Typically, you can create a {service-network} without referencing this troubleshooting guide.
 However, this guide provides some tips for situations when the {service-network} does not perform as expected.
 
-// tag::skupper-io[]
 See xref:common-problems[] if you have encountered a specific issue using the `skupper` CLI.
-// end::skupper-io[]
 
 A typical troubleshooting workflow is to check all the sites and create debug tar files.
 
@@ -20,14 +17,15 @@ A typical troubleshooting workflow is to check all the sites and create debug ta
 [id="checking-sites"] 
 == Checking sites
 
-[role="system:abstract"]
-Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting {skupper-name}.
+
+Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting Skupper.
 
 .Procedure
 
 . Check the site status:
 +
 --
+[source, bash]
 ----
 $ skupper status --namespace west
 
@@ -45,6 +43,7 @@ The output shows:
 . Check the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper network status --namespace west
 
@@ -88,6 +87,7 @@ The output shows:
 . Check the status of services exposed on the {service-network}:
 +
 --
+[source, bash]
 ----
 $ skupper service status
 Services exposed through Skupper:
@@ -104,6 +104,7 @@ NOTE: The related targets for services are only displayed when the target is ava
 . List the events for a site:
 +
 --
+[source, bash]
 ----
 $ skupper debug events
 NAME                         COUNT                                                          AGE
@@ -144,7 +145,7 @@ TokenClaimVerification       1                                                  
 
 ----
 The output shows sites being linked and a service being exposed on a {service-network}.
-However, this output is most useful when reporting an issue and is included in the {skupper-name} debug tar file.
+However, this output is most useful when reporting an issue and is included in the Skupper debug tar file.
 --
 
 .Additional information
@@ -167,6 +168,7 @@ This section outlines some advanced options for checking links.
 . Check the link status:
 +
 --
+[source, bash]
 ----
 $ skupper link status --namespace east
 
@@ -196,6 +198,7 @@ A link from the namespace east on site east(536695a9-26dc-4448-b207-519f56e99b71
 . Check the verbose link status:
 +
 --
+[source, bash]
 ----
 $ skupper link status link1 --verbose --namespace east
 
@@ -273,9 +276,9 @@ $ podman start machine-user
 
 // Type: procedure
 [id='creating-debug']
-== Creating a {skupper-name} debug tar file
+== Creating a Skupper debug tar file
 
-The debug tar file contains all the logs from the {skupper-name} components for a site and provides detailed information to help debug issues.
+The debug tar file contains all the logs from the Skupper components for a site and provides detailed information to help debug issues.
 
 . Create the debug tar file:
 +
@@ -288,6 +291,7 @@ Skupper dump details written to compressed archive:  `my-site.tar.gz`
 . You can expand the file using the following command:
 +
 --
+[source, bash]
 ----
 $ tar -xvf kind-site.tar.gz 
 
@@ -313,7 +317,7 @@ skupper-internal-configmap.yaml
 skupper-sasl-config-configmap.yaml
 ----
 
-These files can be used to provide support for {skupper-name}, however some items you can check:
+These files can be used to provide support for Skupper, however some items you can check:
 
 versions:: See `*versions.txt` for the versions of various components.
 
@@ -357,13 +361,12 @@ NOTE: While you can address availability concerns by scaling the number of route
 
 
 
-// tag::skupper-io[]
 
 // Type:procedure
 [id='common-problems']
 == Resolving common problems
 
-The following issues and workarounds might help you debug simple scenarios when evaluating {skupper-name}.
+The following issues and workarounds might help you debug simple scenarios when evaluating Skupper.
 
 *Cannot initialize skupper*
 
@@ -372,7 +375,7 @@ If the `skupper init` command fails, consider the following options:
 * Check the load balancer.
 +
 --
-If you are evaluating {skupper-name} on minikube, use the following command to create a load balancer:
+If you are evaluating Skupper on minikube, use the following command to create a load balancer:
 
 ----
 $ minikube tunnel
@@ -456,4 +459,4 @@ You must specify an ingress to allow sites on other clusters to link to your sit
 
 You can also use the `skupper token create` command to check if an ingress was specified when the site was created.
 --
-// end::skupper-io[]
+

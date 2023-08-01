@@ -1,12 +1,8 @@
-ifndef::mod-loc[]
-:mod-loc: ./partials/
-endif::mod-loc[]
-include::{mod-loc}attributes.adoc[]
 // Type: procedure
-[id='network-service-{context}']
+[id='network-service']
 = Exploring a {service-network}
 
-{skupper-name} includes a command to allow you report all the sites and the services available on a {service-network}.
+Skupper includes a command to allow you report all the sites and the services available on a {service-network}.
 
 .Prerequisites
 
@@ -63,7 +59,7 @@ If you require the URL of the console, use the `skupper status` command to displ
 By default, skupper uses the name of the current namespace.
 If you want to specify a site name, use `skupper init  --site-name <site-name>`.
 
-<4> The version of {skupper-name} running the site.
+<4> The version of Skupper running the site.
 The site version can be different from the current `skupper` CLI version.
 To update a site to the version of the CLI, use `skupper update`.
 

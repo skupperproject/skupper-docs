@@ -1,22 +1,17 @@
-ifndef::mod-loc[]
-:mod-loc: ./partials/
-endif::mod-loc[]
-include::{mod-loc}attributes.adoc[]
-
 :context: skupper-podman
 //Category: skupper-cli
 // Type: assembly
-[id='using-skupper-podman-{context}']
+[id='using-skupper-podman']
 = Using Skupper podman
 
-[role="system:abstract"]
+
 Skupper podman allow you to create a site using containers, without requiring Kubernetes.
 Typically, you create a site on a Linux host, allowing you to link to and from other sites, regardless of whether those sites are running in podman or Kubernetes.
 
 NOTE: This is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
 
 
-[id='about-{context}']
+[id='about']
 == About Skupper podman
 
 Skupper podman is available with the following precedence:
@@ -42,7 +37,7 @@ podman
 
 To switch back to target Kubernetes sites: `skupper switch kubernetes`
 
-[id='creating-a-site-{context}']
+[id='creating-a-site']
 == Creating a site using Skupper podman
 
 .Prerequisites
@@ -54,6 +49,7 @@ To switch back to target Kubernetes sites: `skupper switch kubernetes`
 . Set your session to use Skupper podman:
 +
 --
+[source, bash]
 ----
 $ export SKUPPER_PLATFORM=podman
 ----
@@ -96,6 +92,7 @@ For more information, see xref:cli-podman:skupper_init.adoc[podman skupper init]
 . Check the status of your site:
 +
 --
+[source, bash]
 ----
 $ skupper status
 Skupper is enabled for "<username>" with site name "<machine-name>-<username>" in interior mode. It is not connected to any other sites. It has no exposed services.
@@ -163,6 +160,7 @@ $ skupper service create backend 8080
 . Validate the service from the Podman site by checking the backend API health URL:
 +
 --
+[source, bash]
 ----
 $ podman run -it --rm --network=skupper --name=myubi ubi8/ubi curl backend:8080/api/health
 

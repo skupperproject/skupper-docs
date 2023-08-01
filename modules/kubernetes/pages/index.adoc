@@ -1,17 +1,17 @@
 // Type: procedure
 [id="custom-certs"] 
-= Creating sites using a custom certificate authority on OpenShift
+= Creating sites using a custom certificate authority
 
 By default:
 
 * Network traffic between pods and the Skupper router is not encrypted. To encrypt traffic between pods and the Skupper router see xref:service-certs.adoc[].
 
-* {Skupper-name} creates certificates to establish links between sites using mutual TLS.
+* Skupper creates certificates to establish links between sites using mutual TLS.
 This ensures that traffic between sites is encrypted. 
 
 These certificates are stored as secrets in the namespace when you create a site using `skupper init`.
 If you want to use your own certificates, you can populate the a set of secrets with the appropriate certificates before creating the site as described in this section.
-This set of secrets provides {skupper-name} with the configuration required to create a site.
+This set of secrets provides Skupper with the configuration required to create a site.
 
 The following certificates are required:
 
@@ -23,7 +23,7 @@ skupper-service-client:: Used for services exposed over TLS.
 
 
 .Prerequisites
-* Access to an OpenShift cluster with sufficient permission to run `skupper init`.
+* Access to a Kubernetes cluster with sufficient permission to run `skupper init`.
 * Access to create certificates using your certificate authority.
 
 .Procedure
@@ -57,6 +57,7 @@ Using a specific certificate authority technology is beyond the scope of this gu
 
 .. Create a `ca` directory and create a certificate authority certificate:
 +
+[source, bash]
 ----
 $ mkdir ca
 
@@ -68,6 +69,7 @@ $ openssl req -x509 -nodes -days 365 -key tls.key -out tls.crt
 
 .. Given the certificate authority created `tls.crt` and `tls.key` files, you can create a certificate for the site as follows:
 +
+[source, bash]
 ----
 $ cd ..
 $ mkdir certificate
@@ -87,12 +89,14 @@ You should now have a root certificate in the `ca` directory and another certifi
 --
 .. Change to the parent directory of the `certificate` directory:
 +
+[source, bash]
 ----
 $ cd ..
 ----
 
 .. Populate the `ca` related secrets using the certificate from the `ca` directory:
 +
+[source, bash]
 ----
 $ kubectl create secret tls skupper-site-ca --cert=ca/tls.crt --key=ca/tls.key
 
@@ -104,6 +108,7 @@ $ kubectl create secret tls skupper-local-ca --cert=ca/tls.crt --key=ca/tls.key
 
 .. Populate the other secrets and modify them into the format required by `skupper`:
 +
+[source, bash]
 ----
 $ kubectl create secret tls skupper-claims-server --cert=certificate/tls.crt --key=certificate/tls.key 
 
@@ -140,26 +145,33 @@ $ kubectl patch secret skupper-service-client  -p="{\"data\":{\"ca.crt\": \"$($ 
 . Create the site using the following command:
 +
 --
+[source, bash]
 ----
 $ skupper init
 ----
+
 On OpenShift, `skupper` defaults to use the `route` ingress, which is the equivalent of `skupper init --ingress route`.
 
 To verify your site, check the status:
+
+[source, bash]
 ----
 $ skupper status
 ----
 
-You can also verify the OpenShift routes are created using:
-
+[NOTE]
+====
+On OpenShift, you can also verify routes are created using:
+[source, bash]
 ----
 $ oc get routes
 ----
+====
+--
 
-Finally, use the following command to check for errors relating to incorrect certificates:
-
+. Use the following command to check for errors relating to incorrect certificates:
++
+[source, bash]
 ----
 $ skupper debug events
 ----
-
---

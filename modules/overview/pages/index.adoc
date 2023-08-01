@@ -1,4 +1,3 @@
-include::{mod-loc}attributes.adoc[]
 
 //Category: skupper-overview
 // Type: assembly
@@ -70,6 +69,6 @@ When a service is exposed, Skupper creates proxy endpoints to make that service 
 
 .Additional information
 
-* {SecurityLink}
-* {RoutingLink}
-* {ConnectivityLink}
+* xref:security.adoc[]
+* xref:routing.adoc[]
+* xref:connectivity.adoc[]
