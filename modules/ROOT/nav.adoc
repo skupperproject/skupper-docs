@@ -1,14 +1,14 @@
 
 * xref:index.adoc[]
 
-* --- *Basics*
+* *Basics*
 
 * xref:overview:index.adoc[Overview]
 * xref:overview:security.adoc[Security]
 * xref:overview:connectivity.adoc[Connectivity]
 * xref:overview:routing.adoc[Routing]
 
-* --- *Kubernetes*
+* *Kubernetes*
 
 * link:https://skupper.io/start/index.html[Getting started] (md)
 * xref:cli:index.adoc[CLI guide]
@@ -23,22 +23,22 @@
 
 
 
-* --- *Podman*
+* *Podman*
 
 * xref:cli:podman.adoc[CLI guide]
 * xref:cli-podman:skupper.adoc[Podman Reference]
 
-* --- *Observability*
+* *Observability*
 
 * xref:console:index.adoc[Console]
 
-* --- *Security*
+* *Security*
 
 * xref:cli:tokens.adoc[]
 * xref:cli:native-security-options.adoc[]
 * xref:policy:index.adoc[]
 
-* --- *Troubleshooting*
+* *Troubleshooting*
 
 * xref:troubleshooting:index.adoc[]
 
