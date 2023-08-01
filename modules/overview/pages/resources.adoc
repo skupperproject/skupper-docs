@@ -5,12 +5,12 @@ The following sections describe the various Skupper resources on Kubernetes, for
 
 == Service accounts, roles and role bindings
 
-When you create a {skupper-name} site, the following resources are created.
+When you create a Skupper site, the following resources are created.
 
 
-skupper-service-controller:: A service account, role and role binding with this name are created to manage the {skupper-name} service controller.
+skupper-service-controller:: A service account, role and role binding with this name are created to manage the Skupper service controller.
 
-skupper-router:: A service account, role and role binding with this name are created to manage the {skupper-name} router.
+skupper-router:: A service account, role and role binding with this name are created to manage the Skupper router.
 
 
 

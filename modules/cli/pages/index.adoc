@@ -3,7 +3,7 @@
 [id="skupper-cli"] 
 = Using the Skupper CLI
 
-Using the `skupper` command-line interface (CLI) allows you to create and manage {skupper-name} sites from the context of the current namespace.
+Using the `skupper` command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.
 
 A typical workflow is to create a site, link sites together, and expose services to the {service-network}.
 
@@ -13,7 +13,7 @@ include::installing.adoc[leveloffset=+1]
 [id="creating-using-cli"] 
 == Creating a site using the CLI
 
-A {service-network} consists of {skupper-name} sites.
+A {service-network} consists of Skupper sites.
 This section describes how to create a site using the default settings.
 
 .Prerequisites
@@ -65,7 +65,7 @@ There are several `skupper` options regarding authentication for the console:
 `--console-auth <authentication-mode>`:: Set the authentication mode for the console:
 
 * `openshift` - Use OpenShift authentication, so that users who have permission to log into OpenShift and view the Project (namespace) can view the console.
-* `internal` -  Use {skupper-name} authentication, see the `console-user` and `console-password` options.
+* `internal` -  Use Skupper authentication, see the `console-user` and `console-password` options.
 * `unsecured` - No authentication, anyone with the URL can view the console.
 
 
@@ -101,7 +101,7 @@ You can use the `--create-network-policy` option to restrict the `database` serv
 [id="linking-sites"] 
 == Linking sites
 
-A {service-network} consists of {skupper-name} sites.
+A {service-network} consists of Skupper sites.
 This section describes how to link sites to form a {service-network}.
 
 Linking two sites requires a single initial directional connection. However:
@@ -263,7 +263,7 @@ This section describes how services can be enabled for a {service-network} for s
 $ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
 ----
 +
-This step is not {skupper-name}-specific, that is, this process is unchanged from standard processes for your cluster.
+This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.
 
 . Create a service that can communicate on the {service-network}:
 +
@@ -311,7 +311,7 @@ This section describes how services can be enabled for a {service-network} for m
 $ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
 ----
 +
-This step is not {skupper-name}-specific, that is, this process is unchanged from standard processes for your cluster.
+This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.
 
 . Create a service that can communicate on the {service-network}:
 +
@@ -361,14 +361,14 @@ $ skupper service bind hello-world-backend deployment hello-world-backend
 [id="exposing-services-from-different-ns"] 
 === Exposing services from a different namespace to the {service-network}
 
-This section shows how to expose a service from a namespace where {skupper-name} is not deployed.
+This section shows how to expose a service from a namespace where Skupper is not deployed.
 
-{skupper-name} allows you expose Kubernetes services from other namespaces for any site. 
+Skupper allows you expose Kubernetes services from other namespaces for any site. 
 However, if you want to expose workloads, for example deployments, you must create a site as described in this section. 
 
 .Prerequisites
 
-* A namespace where {skupper-name} is deployed.
+* A namespace where Skupper is deployed.
 * A network policy that allows communication between the namespaces
 * cluster-admin permissions if you want to expose resources other than services
 
@@ -398,7 +398,7 @@ $ skupper expose service <service>.<namespace> --address <service>
 * <service> - the name of the service on the {service-network}.
 * <namespace> - the name of the namespace where the service you want to expose runs.
 
-For example, if you deployed {skupper-name} in the `east` namespace and you created a `backend` Kubernetes service in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+For example, if you deployed Skupper in the `east` namespace and you created a `backend` Kubernetes service in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
 
 ----
 $ skupper expose service backend.east-backend --port 8080 --address backend
@@ -416,7 +416,7 @@ $ skupper expose <resource> --port <port-number> --target-namespace <namespace>
 * <resource> - the name of the resource.
 * <namespace> - the name of the namespace where the resource you want to expose runs.
 
-For example, if you deployed {skupper-name} in the `east` namespace and you created a `backend` deployment in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+For example, if you deployed Skupper in the `east` namespace and you created a `backend` deployment in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
 
 ----
 $ skupper expose deployment/backend --port 8080 --target-namespace east-backend

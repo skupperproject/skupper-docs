@@ -3,7 +3,7 @@
 = Installing the Skupper CLI
 
 
-Installing the `skupper` command-line interface (CLI) provides a simple method to get started with {skupper-name}.
+Installing the `skupper` command-line interface (CLI) provides a simple method to get started with Skupper.
 
 .Procedure
 

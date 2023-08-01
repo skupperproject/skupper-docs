@@ -2,7 +2,7 @@
 [id='protocols']
 = Supported standards and protocols
 
-{skupper-name} supports the following protocols for your {service-network}:
+Skupper supports the following protocols for your {service-network}:
 
 * TCP - default
 * HTTP1

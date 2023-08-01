@@ -12,7 +12,7 @@ NOTE: This is a preview feature and may change before becoming fully supported b
 [id="enabling-console"] 
 == Enabling the Skupper console
 
-By default, when you create a {skupper-name} site, a Skupper console is not available.
+By default, when you create a Skupper site, a Skupper console is not available.
 
 When enabled, the Skupper console URL is displayed whenever you check site status using `skupper status`.
 

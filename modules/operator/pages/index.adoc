@@ -1,6 +1,6 @@
 = Using the Skupper Operator on Kubernetes
 
-The {SkupperOperatorName} creates and manages {skupper-name} sites in Kubernetes. 
+The {SkupperOperatorName} creates and manages Skupper sites in Kubernetes. 
 
 You can install the Operator as described in xref:installing-operator-using-cli[].
 

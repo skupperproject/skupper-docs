@@ -18,7 +18,7 @@ A typical troubleshooting workflow is to check all the sites and create debug ta
 == Checking sites
 
 
-Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting {skupper-name}.
+Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting Skupper.
 
 .Procedure
 
@@ -145,7 +145,7 @@ TokenClaimVerification       1                                                  
 
 ----
 The output shows sites being linked and a service being exposed on a {service-network}.
-However, this output is most useful when reporting an issue and is included in the {skupper-name} debug tar file.
+However, this output is most useful when reporting an issue and is included in the Skupper debug tar file.
 --
 
 .Additional information
@@ -276,9 +276,9 @@ $ podman start machine-user
 
 // Type: procedure
 [id='creating-debug']
-== Creating a {skupper-name} debug tar file
+== Creating a Skupper debug tar file
 
-The debug tar file contains all the logs from the {skupper-name} components for a site and provides detailed information to help debug issues.
+The debug tar file contains all the logs from the Skupper components for a site and provides detailed information to help debug issues.
 
 . Create the debug tar file:
 +
@@ -317,7 +317,7 @@ skupper-internal-configmap.yaml
 skupper-sasl-config-configmap.yaml
 ----
 
-These files can be used to provide support for {skupper-name}, however some items you can check:
+These files can be used to provide support for Skupper, however some items you can check:
 
 versions:: See `*versions.txt` for the versions of various components.
 
@@ -366,7 +366,7 @@ NOTE: While you can address availability concerns by scaling the number of route
 [id='common-problems']
 == Resolving common problems
 
-The following issues and workarounds might help you debug simple scenarios when evaluating {skupper-name}.
+The following issues and workarounds might help you debug simple scenarios when evaluating Skupper.
 
 *Cannot initialize skupper*
 
@@ -375,7 +375,7 @@ If the `skupper init` command fails, consider the following options:
 * Check the load balancer.
 +
 --
-If you are evaluating {skupper-name} on minikube, use the following command to create a load balancer:
+If you are evaluating Skupper on minikube, use the following command to create a load balancer:
 
 ----
 $ minikube tunnel

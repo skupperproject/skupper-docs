@@ -27,7 +27,7 @@ This section provides an alternative to the `skupper expose` command, allowing y
 $ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
 ----
 +
-This step is not {skupper-name}-specific, that is, this process is unchanged from standard processes for your cluster.
+This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.
 
 . Annotate the kubernetes resource to create a service that can communicate on the {service-network}, for example:
 +
