@@ -44,6 +44,12 @@ To switch back to target Kubernetes sites: `skupper switch kubernetes`
 
 * The latest `skupper` CLI is installed.
 * Podman is installed, see https://podman.io/
++
+--
+By default, Podman v4 uses Netavark which works with Skupper.
+If you are using CNI, for example, if you upgrade from Podman v3, you must also install https://www.cni.dev/plugins/current/[containernetworking-plugins].
+For example, `dnf install containernetworking-plugins` or `apt-get install containernetworking-plugins`.
+--
 
 
 . Set your session to use Skupper podman:
