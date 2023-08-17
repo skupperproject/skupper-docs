@@ -57,7 +57,7 @@ spec:
   allowIncomingLinks: true
   allowedExposedResources:
     - "deployment/nginx"
-  allowedOutgoingLinksHostnames: [".*\\.example.com$"]
+  allowedOutgoingLinksHostnames: [".*\.example.com$"]
   allowedServices:
     - "*"
 ----
@@ -84,7 +84,7 @@ Note that patterns are not supported.
 ====
 Use regular expressions to create pattern matches, for example:
 
-* `.*\\.com$` matches any string ending in `.com`.
+* `.*\.com$` matches any string ending in `.com`.
 A double backslash is required to avoid issues in YAML.
 * `^abc$` matches the string `abc`.
 
@@ -288,7 +288,7 @@ metadata:
 spec:
   namespaces:
     - "*"
-  allowedOutgoingLinksHostnames: ['.*\\.example\\.com']
+  allowedOutgoingLinksHostnames: ['.*\.example\.com']
 ----
 
 
