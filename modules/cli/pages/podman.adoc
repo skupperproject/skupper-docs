@@ -52,7 +52,9 @@ For example, `dnf install podman-plugins` for RPM based distributions.
 
 NOTE: CNI will be deprecated in the future in preference of Netavark.
 --
-
+* Podman service endpoint
++
+See link:https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md[Podman socket activation] for information about enabling this endpoint.
 
 . Set your session to use Skupper podman:
 +
