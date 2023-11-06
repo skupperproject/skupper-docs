@@ -327,10 +327,9 @@ bindings.service:: Definition of service you want to be available on service net
 bindings.service.address:: Address on the service network, name and port.
 bindings.service.protocol:: Skupper protocol, `tcp`, `http` or `http2`.
 bindings.service.ports:: A single port that becomes available on the service network. 
-bindings.service.exposeIngress:: (optional) The ingress mode for the service.
+bindings.service.exposeIngress:: (optional) The traffic direction, `ingress` or `egress`.
 bindings.service.tlscredentials:: (optional) The TLS certificate and key for the service.
 bindings.service.tlscertauthority:: (optional) The TLS public certificate.
-bindings.service.publishnotreadyaddresses:: Specify whether to sync services relating to Kubernetes objects scheduled but not yet available.
 bindings.target_ports:: A single port that you want to expose on the service network.
 
 NOTE: If the local service requires more than one port, create separate bindings for each port.
