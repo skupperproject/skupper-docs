@@ -48,10 +48,10 @@ $ skupper init --enable-console --enable-flow-collector
 ====
 With this release:
 
-* You must enable the console on the same site as you enable the flow collector. 
+// * You must enable the console on the same site as you enable the flow collector. 
 * A link:https://prometheus.io/[Prometheus] instance is created and used by the flow collector.
 
-These requirements may change before the console is fully supported by https://skupper.io[skupper.io].
+Requirements may change before the console is fully supported by https://skupper.io[skupper.io].
 
 ====
 
