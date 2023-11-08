@@ -52,9 +52,16 @@ For example, `dnf install podman-plugins` for RPM based distributions.
 
 NOTE: CNI will be deprecated in the future in preference of Netavark.
 --
-* Podman service endpoint
+* Podman service endpoint.
 +
+--
+Use `systemctl status podman.socket` to make sure the Podman API Socket is running.
+
+Use `systemctl --user enable --now podman.socket` to start the  Podman API Socket.
+
 See link:https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md[Podman socket activation] for information about enabling this endpoint.
+--
+
 
 . Set your session to use Skupper podman:
 +
