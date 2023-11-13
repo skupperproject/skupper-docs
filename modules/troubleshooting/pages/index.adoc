@@ -295,6 +295,69 @@ $ podman start machine-user
 
 
 // Type: procedure
+[id="checking-policies"] 
+== Checking policies
+
+As a developer you might not be aware of the Skupper policy applied to your site.
+Follow this procedure to explore the policies applied to the site.
+
+.Procedure
+
+. Log into a namespace where a Skupper site has been initialized.
+
+. Check whether incoming links are permitted:
++
+[source,bash]
+----
+$ kubectl exec deploy/skupper-service-controller -- get policies incominglink
+
+ALLOWED POLICY ENABLED ERROR                                                   ALLOWED BY 
+false   true           Policy validation error: incoming links are not allowed 
+----
++
+In this example incoming links are not allowed by policy.
+
+. Explore other policies:
++
+--
+[source,bash]
+----
+$ kubectl exec deploy/skupper-service-controller -- get policies 
+Validates existing policies
+
+Usage:
+  get policies [command]
+
+Available Commands:
+  expose       Validates if the given resource can be exposed
+  incominglink Validates if incoming links can be created
+  outgoinglink Validates if an outgoing link to the given hostname is allowed
+  service      Validates if service can be created or imported
+----
+
+As shown, there are commands to check each policy type by specifying what you want to do, for example, to check if you can expose an nginx deployment:
+
+[source,bash]
+----
+$ kubectl  exec deploy/skupper-service-controller -- get policies expose deployment nginx
+ALLOWED POLICY ENABLED ERROR                                                       ALLOWED BY 
+false   true           Policy validation error: deployment/nginx cannot be exposed            
+----
+
+If you allowed an nginx deployment as described in xref:allowedExposedResources[], the same command shows that the resource is allowed and displays the name of the policy CR that enabled it:
+
+[source,bash]
+----
+$ kubectl  exec deploy/skupper-service-controller -- get policies expose deployment nginx
+ALLOWED POLICY ENABLED ERROR                                                       ALLOWED BY 
+true    true                                                                       allowedexposedresources        
+----
+
+
+--
+
+
+// Type: procedure
 [id='creating-debug']
 == Creating a Skupper debug tar file
 

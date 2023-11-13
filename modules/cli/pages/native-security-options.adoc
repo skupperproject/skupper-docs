@@ -9,14 +9,14 @@ See xref:policy:index.adoc[] for information about creating granular policies fo
 
 // Type: procedure
 [id="network-policy"] 
-== Restricting access to services using network-policy
+== Restricting access to services using a Kubernetes network policy
 
 By default, if you expose a service on the {service-network}, that service is also accessible from other namespaces in the cluster.
 You can avoid this situation when creating a site using the `--create-network-policy` option.
 
 .Procedure
 
-. Create the {service-network} router with a network policy:
+. Create the {service-network} router with a Kubernetes network policy:
 +
 [source,bash]
 ----
