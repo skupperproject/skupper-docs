@@ -101,7 +101,7 @@ The output shows the `backend` service and the related target of that service.
 NOTE: The related targets for services are only displayed when the target is available on the current cluster.
 --
 
-. List the events for a site:
+. List the Skupper events for a site:
 +
 --
 [source, bash]
@@ -147,6 +147,26 @@ TokenClaimVerification       1                                                  
 The output shows sites being linked and a service being exposed on a {service-network}.
 However, this output is most useful when reporting an issue and is included in the Skupper debug tar file.
 --
+
+. List the Kubernetes events for a site:
++
+--
+[source, bash]
+----
+kubectl get events | grep "service/skupper"                                                                                                                                                               
+10m         Normal    ServiceSyncEvent               service/skupper                                   Service sync receiver connection to amqps://skupper-router-local.private1.svc.cluster.local:5671 established
+10m         Normal    ServiceSyncEvent               service/skupper                                   Service sync sender connection to amqps://skupper-router-local.private1.svc.cluster.local:5671 established
+10m         Normal    ServiceControllerCreateEvent   service/skupper                                   Creating service productcatalogservice
+7m59s       Normal    TokenHandler                   service/skupper                                   Connecting using token link1
+7m54s       Normal    TokenHandler                   service/skupper                                   Connecting using token link2
+----
+
+The output shows events relating to Kubernetes resources.  
+
+--
+
+
+
 
 .Additional information
 
