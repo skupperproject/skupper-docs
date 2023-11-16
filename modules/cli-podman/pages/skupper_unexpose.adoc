@@ -1,4 +1,4 @@
-== skupper unexpose
+== skupper unexpose (podman)
 
 Unexpose a set of pods previously exposed through a Skupper address
 

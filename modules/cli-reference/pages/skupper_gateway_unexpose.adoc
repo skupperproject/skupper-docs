@@ -1,4 +1,4 @@
-== skupper gateway unexpose
+== skupper gateway unexpose (kubernetes)
 
 Unexpose a process previously exposed to the service network
 

@@ -1,4 +1,4 @@
-== skupper gateway delete
+== skupper gateway delete (kubernetes)
 
 Stop the gateway instance and remove the definition
 

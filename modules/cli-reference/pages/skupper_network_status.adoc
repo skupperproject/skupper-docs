@@ -1,4 +1,4 @@
-== skupper network status
+== skupper network status (kubernetes)
 
 Shows information about the current site, and connected sites.
 

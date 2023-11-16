@@ -1,4 +1,4 @@
-== skupper revoke-access
+== skupper revoke-access (kubernetes)
 
 Revoke all previously granted access to the site.
 

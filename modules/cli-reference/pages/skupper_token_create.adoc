@@ -1,4 +1,4 @@
-== skupper token create
+== skupper token create (kubernetes)
 
 Create a token.
 The 'link create' command uses the token to establish a link from a remote Skupper site.

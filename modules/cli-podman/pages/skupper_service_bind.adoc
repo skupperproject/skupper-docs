@@ -1,4 +1,4 @@
-== skupper service bind
+== skupper service bind (podman)
 
 Bind a target to a service
 

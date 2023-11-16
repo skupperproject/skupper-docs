@@ -1,4 +1,4 @@
-== skupper update
+== skupper update (podman)
 
 Update skupper installation version
 

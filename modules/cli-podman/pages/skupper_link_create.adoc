@@ -1,4 +1,4 @@
-== skupper link create
+== skupper link create (podman)
 
 Links this skupper site to the site that issued the token
 

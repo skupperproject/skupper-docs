@@ -1,4 +1,4 @@
-== skupper expose
+== skupper expose (podman)
 
 Expose a set of pods through a Skupper address
 

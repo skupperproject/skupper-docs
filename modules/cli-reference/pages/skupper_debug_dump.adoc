@@ -1,4 +1,4 @@
-== skupper debug dump
+== skupper debug dump (kubernetes)
 
 Collect and store skupper logs, config, etc.
 to compressed archive file

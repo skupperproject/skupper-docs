@@ -1,4 +1,4 @@
-== skupper network
+== skupper network (kubernetes)
 
 Show information about the sites and services included in the network.
 

@@ -1,4 +1,4 @@
-== skupper debug service
+== skupper debug service (kubernetes)
 
 Check the internal state of a skupper exposed service
 

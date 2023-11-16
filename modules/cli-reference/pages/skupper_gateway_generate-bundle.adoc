@@ -1,4 +1,4 @@
-== skupper gateway generate-bundle
+== skupper gateway generate-bundle (kubernetes)
 
 Generate an installation bundle using a gateway config file
 

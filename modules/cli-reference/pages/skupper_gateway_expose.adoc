@@ -1,4 +1,4 @@
-== skupper gateway expose
+== skupper gateway expose (kubernetes)
 
 Expose a process to the service network (ensure gateway and cluster service)
 
