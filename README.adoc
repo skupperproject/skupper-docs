@@ -15,8 +15,16 @@ The layout of files in each Antora module is:
 == Contributing to the documentation
 
 This section explains how to edit and create documentation PRs.
+
 If you only want to make a small update, you might want to just edit the file and make the PR using your standard process.
+
+If you want to build the docs using link:https://podman.io/[Podman]:
+```
+$ podman run -v $PWD:/antora:Z --rm -t antora/antora preview-playbook.yml
+```
+
 If you are familiar with Antora, you can use the `preview-playbook.yml` directly.
+
 If you want to preview changes for more complex contributions, follow this procedure.
 
 .Prerequisites
@@ -42,6 +50,8 @@ npm install
 ----
 LIVERELOAD=true gulp
 ----
+
+See the preview homepage for more information about the file layout.
 
 == Testing documentation
 
