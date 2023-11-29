@@ -377,7 +377,7 @@ $ skupper init --router-cpu 5
 . Recreate your configuration from step 1, recreating links and services.
 
 
-NOTE: While you can address availability concerns by scaling the number of routers and somewhat improve performance, for example `skupper init --routers 3`, typically this is not necessary.
+NOTE: While you can address availability concerns by scaling the number of routers, typically this is not necessary.
 
 
 
