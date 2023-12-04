@@ -26,7 +26,7 @@ If you are deploying Skupper to be available for all namespaces, verify you have
 
 * To install Skupper into the current namespace deploy the site controller using the following YAML:
 +
-[subs=attributes+]
+[source, bash]
 ----
 kubectl apply -f deploy-watch-current-ns.yaml
 ----
@@ -38,7 +38,7 @@ where the contents of `deploy-watch-current-ns.yaml` is specified in the xref:wa
 
 .. Deploy the site controller using the following YAML:
 +
-[subs=attributes+]
+[source, bash]
 ----
 kubectl apply -f deploy-watch-all-ns.yaml
 ----
@@ -46,8 +46,9 @@ where the contents of `deploy-watch-all-ns.yaml` is specified in the xref:watch-
 
 . Verify the installation.
 +
+[source, bash]
 ----
-$ oc get pods
+$ kubectl get pods
 NAME                                       READY   STATUS    RESTARTS   AGE
 skupper-site-controller-84694bdbb5-n8slb   1/1     Running   0          75s
 ----
@@ -85,6 +86,7 @@ include::example$no-ingress.yaml[]
 --
 . Apply the YAML file to your cluster:
 +
+[source, bash]
 ----
 kubectl apply -f ~/my-site.yml
 ----
@@ -123,12 +125,14 @@ metadata:
 
 . Apply the YAML to the namespace to create a secret.
 +
+[source, bash]
 ----
 $ kubectl apply -f token-request.yml
 ----
 
 . Create the token YAML from the secret.
 +
+[source, bash]
 ----
 $ kubectl get secret -o yaml secret-name | yq 'del(.metadata.namespace)' > ~/token.yaml
 ----
@@ -138,12 +142,14 @@ $ kubectl get secret -o yaml secret-name | yq 'del(.metadata.namespace)' > ~/tok
 
 . Apply the token YAML.
 +
+[source, bash]
 ----
 $ kubectl apply -f token.yml
 ----
 
 . Verify the link, allowing some time for the process to complete.
 +
+[source, bash]
 ----
 $ skupper link status --wait 60
 ----
@@ -159,7 +165,7 @@ include::annotations.adoc[leveloffset=+1]
 Using YAML files to configure Skupper requires that you understand all the fields so that you provision the site you require.
 
 The following YAML defines a Skupper site:
-
+[source, yaml]
 ----
 apiVersion: v1
 data:
