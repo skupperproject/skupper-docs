@@ -79,6 +79,7 @@ In this example, this is the `hello-world-backend` pod.
 [NOTE]
 ====
 The URL for the east site has no value because that site was initialized without ingress using the following command:
+[source, bash]
 ----
 $ skupper init --ingress none
 ----

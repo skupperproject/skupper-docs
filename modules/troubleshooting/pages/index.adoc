@@ -361,6 +361,7 @@ For example, use this procedure to increase throughput, and if you have many cli
 +
 Note all configuration and delete your existing site:
 +
+[source, bash]
 ----
 $ skupper delete
 ----
@@ -370,6 +371,7 @@ After validating the performance improvement, you can delete and recreate your o
 
 . Create a site with optimal performance CPU settings:
 +
+[source, bash]
 ----
 $ skupper init --router-cpu 5
 ----
@@ -394,6 +396,7 @@ If the `skupper init` command fails, consider the following options:
 
 * Check the load balancer.
 +
+[source, bash]
 --
 If you are evaluating Skupper on minikube, use the following command to create a load balancer:
 
@@ -459,6 +462,7 @@ Site not ready::
 +
 --
 After creating a site, you might see the following message when creating a token:
+[source, bash]
 ----
 Error: Failed to create token: Policy validation error: Skupper is not enabled in namespace
 ----
@@ -470,6 +474,7 @@ No ingress::
 +
 --
 You might see the following note after using the `skupper token create` command:
+[source, bash]
 ----
 Token written to <path> (Note: token will only be valid for local cluster)
 ----
