@@ -73,14 +73,14 @@ Using YAML files to create Skupper sites allows you to use source control to tra
 --
 [source, bash]
 ----
-include::example$my-site.yaml[]
+include::my-site.yaml[]
 ----
 The YAML creates a site with a console and you can create tokens from this site.
 
 To create a site that has no ingress:
 
 ----
-include::example$no-ingress.yaml[]
+include::no-ingress.yaml[]
 ----
 
 --
@@ -214,7 +214,7 @@ NOTE: All ingress types are supported using the same parameters as the `skupper`
 The following example deploys Skupper to watch the current namespace.
 
 ----
-include::example$deploy-watch-current-ns.yaml[]
+include::deploy-watch-current-ns.yaml[]
 ----
 
 [id="watch-all-reference"] 
@@ -224,6 +224,6 @@ include::example$deploy-watch-current-ns.yaml[]
 The following example deploys Skupper to watch all namespaces.
 
 ----
-include::example$deploy-watch-all-ns.yaml[]
+include::deploy-watch-all-ns.yaml[]
 ----
 
