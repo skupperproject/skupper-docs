@@ -3,7 +3,7 @@ BUILD_DIR := build
 CCUTIL_ENABLED := \
 	$(shell which ccutil 1> /dev/null 2>&1 && echo yes || echo no)
 
-BOOK_SOURCES := $(shell find . -maxdepth 2 -type f -name index.adoc)
+BOOK_SOURCES := $(shell find . -maxdepth 2 -type f -name *.adoc)
 # BOOK_SOURCES := $(filter-out ./docs/other/index.adoc,${BOOK_SOURCES})
 BOOK_TARGETS := \
 	${BOOK_SOURCES:%/index.adoc=${BUILD_DIR}/%/index.html} \
@@ -12,13 +12,6 @@ BOOK_TARGETS := \
 IMAGE_SOURCES := $(shell find images -type f)
 IMAGE_TARGETS := \
 	${IMAGE_SOURCES:images/%=${BUILD_DIR}/images/%}
-
-ifeq (${CCUTIL_ENABLED},yes)
-CCUTIL_TARGETS := \
-	${BOOK_SOURCES:%/index.adoc=${BUILD_DIR}/ccutil/%/index.html}
-else
-CCUTIL_TARGETS :=
-endif
 
 
 BUILD_ATTRIBUTES := $(shell sed 's/^/-a /' .build-attributes)
@@ -34,7 +27,7 @@ help:
 .PHONY: build
 build: ${BOOK_TARGETS} ${IMAGE_TARGETS} ${EXTRA_TARGETS}
 	@echo "See the output in your browser at:"
-	@echo "file:${PWD}/${BUILD_DIR}/welcome/index.html"
+	@echo "file:${PWD}/${BUILD_DIR}/index.html"
 
 
 .PHONY: clean
@@ -82,16 +75,3 @@ ${BUILD_DIR}/docs:
 .PHONY: ${BUILD_DIR}/index.html
 ${BUILD_DIR}/index.html: scripts/redirect-to-welcome.html
 	cp $< $@
-
-.PHONY: refresh-upstream-%
-refresh-upstream-%: BRANCH := main
-refresh-upstream-%:
-	rm -rf upstreams/$* upstreams/$*.revision
-	scripts/git-export "https://gitbox.apache.org/repos/asf/$*.git" ${BRANCH} upstreams/$*
-
-
-.PHONY: refresh-github-upstream-%
-refresh-github-upstream-%: BRANCH := main
-refresh-github-upstream-%:
-	rm -rf upstreams/$* upstreams/$*.revision
-	scripts/git-export "git@github.com:skupperproject/$*.git" ${BRANCH} upstreams/$*

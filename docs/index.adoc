@@ -1,0 +1,41 @@
+= Skupper documentation
+
+== Understanding the basics
+
+Learn about the concepts and technology behind virtual application networks.
+
+link:./overview/index.html[Overview] link:./overview/security.html[Security] link:./overview/connectivity.html[Connectivity] link:./overview/routing.html[Routing]
+
+== Using Skupper with Kubernetes
+
+The Skupper command-line tool enables you to initialize, link, and monitor Skupper sites interactively from your development environment.
+
+You can also use YAML to declaratively configure Skupper sites on Kubernetes.
+
+https://skupper.io/start/index.html[Getting started] link:./cli/index.html[CLI guide] link:./cli/index.html#exposing-services-local[Using local services (gateway)] link:./cli-reference/skupper.html[CLI reference] link:./declarative/index.html[YAML configuration reference] link:./cli/index.html#gateway-reference[Gateway YAML reference] link:./operator/index.html[Using the Skupper operator]
+
+== Using Skupper with Podman
+
+The Skupper command-line tool also works on Podman
+
+You can also use YAML to declaratively configure Skupper sites on Podman.
+
+link:./cli/podman.html[CLI guide] link:./cli-podman/skupper.html[CLI reference]
+
+== Observability
+
+Learn how to monitor traffic using the Skupper console.
+
+link:./console/index.html[Using the Skupper console]
+
+== Security
+
+Skupper provides default, built-in security that scales across clusters and clouds. Learn how to enhance the security of your service network.
+
+link:./cli/tokens.html[Working with tokens] link:./cli/native-security-options.html[Network policy and TLS] link:./policy/index.html[Applying granular policies to your cluster]
+
+== Troubleshooting
+
+Resolve common problems, inspect sites, and create debug tarballs
+
+link:./console/index.html[Monitoring traffic with the Skupper console] link:./troubleshooting/index.html[Troubleshooting sites and networks]
