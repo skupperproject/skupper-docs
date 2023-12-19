@@ -1,4 +1,4 @@
-= Addressing deployment challenges on Kubernetes
+= Deployment options on Kubernetes
 
 When you create a site on Kubernetes, there are many options you can use, for example, the number of pods for each component and the resource allocations for the associated pods.
 This guide focusses on the following goals:
@@ -10,7 +10,7 @@ This guide focusses on the following goals:
 [id="increased-traffic"]
 == Scaling for increased traffic
 
-For optimal network latency and throughput, you can adjust the CPU allocation for the router.
+For optimal network latency and throughput, you can adjust the CPU allocation for the router using the `router-cpu` option.
 Adjusting other allocations does not affect network performance.
 
 NOTE: Increasing the number of routers does not improve network performance.
@@ -20,13 +20,23 @@ NOTE: Increasing the number of routers does not improve network performance.
 --
 By default, the router CPU allocation is `BestEffort` as described in link:https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#besteffort[Pod Quality of Service Classes].
 
-You can set onsider the following CPU allocation options:
+Consider the following CPU allocation options:
 
-* `1` - avoid issues with `BestEffort` on low resource clusters.
+[cols="1,5"]
+|===
 
-* `2` - suitable for production environments.
+|Router CPU | Description
 
-* `5` - maximum performance.
+|1 
+|Helps avoid issues with `BestEffort` on low resource clusters.
+
+|2
+|Suitable for production environments. 
+
+|5
+|Maximum performance. 
+|=== 
+
 
 --
 
