@@ -42,4 +42,5 @@
 
 * xref:troubleshooting:index.adoc[]
 
+* xref:kubernetes:deployment-concerns.adoc[]
 
