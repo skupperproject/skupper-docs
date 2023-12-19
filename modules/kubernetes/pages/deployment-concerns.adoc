@@ -18,13 +18,15 @@ NOTE: Increasing the number of routers does not improve network performance.
 . Determine the router CPU allocation you require.
 +
 --
-By default the router CPU allocation is `BestEffort`. 
+By default, the router CPU allocation is `BestEffort` as described in link:https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#besteffort[Pod Quality of Service Classes].
 
-At a minimum, set the allocation to `1` to avoid issues with performance.
+You can set onsider the following CPU allocation options:
 
-For production environments, set the allocation to `2`.
+* `1` - avoid issues with `BestEffort` on low resource clusters.
 
-For maximum performance, set the allocation to `5`.
+* `2` - suitable for production environments.
+
+* `5` - maximum performance.
 
 --
 
@@ -39,6 +41,7 @@ $ skupper init --router-cpu 2
 
 . If you are using YAML, set the CPU allocation for the router by setting a value for `router-cpu`, for example:
 +
+--
 [source, YAML]
 ----
 apiVersion: v1
@@ -57,7 +60,7 @@ data:
 == Creating a high availability site
 
 By default, Kubernetes restarts any router that become unresponsive.
-If you encounter router pod issues consider xref:increased-traffic[] before increasing the number of routers.
+If you encounter router pod issues, consider xref:increased-traffic[] before increasing the number of routers.
 
 To address high availability concerns, increase the number of routers to 2 as follows:
 
@@ -70,7 +73,7 @@ $ skupper init --routers 2
 ----
 --
 
-. If you are using YAML,set the number of routers to `2` by setting the `routers` value:
+. If you are using YAML, set the number of routers to `2` by setting the `routers` value:
 +
 [source, YAML]
 ----
