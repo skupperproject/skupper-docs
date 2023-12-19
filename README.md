@@ -2,8 +2,6 @@
 
 This repo contains the user documentation for https://skupper.io.
 
-```
-
 
 ```bash
 /cli # Skupper CLI usage
