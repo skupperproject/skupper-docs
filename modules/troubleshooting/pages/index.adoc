@@ -317,7 +317,7 @@ false   true           Policy validation error: incoming links are not allowed
 +
 In this example incoming links are not allowed by policy.
 
-. Explore other policies:
+. Check other policies:
 +
 --
 [source,bash]
