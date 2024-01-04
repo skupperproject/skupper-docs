@@ -38,6 +38,7 @@ $ skupper gateway expose <service> localhost <port>
 ====
 You can also expose services from other machines on your local network, for example if MySQL is running on a dedicated server (with an IP address of `192.168.1.200`), but you are accessing the cluster from a machine in the same network:
 
+[source, bash]
 ----
 $ skupper gateway expose mysql 192.168.1.200 3306
 ----
@@ -48,7 +49,7 @@ $ skupper gateway expose mysql 192.168.1.200 3306
 +
 --
 
-[subs=attributes+]
+[source, bash, subs=attributes+]
 ----
 $ skupper gateway status
 
@@ -78,10 +79,7 @@ This section shows more advanced usage of skupper gateway.
 $ skupper gateway init --type <gateway-type>
 ----
 
-
-ifdef::product[]
-NOTE: The default service type gateway requires that `skrouterd` is running.
-endif::[]
+// NOTE: The default service type gateway requires that `skrouterd` is running.
 
 By default a _service_ type gateway is created, however you can also specify:
 
@@ -129,6 +127,12 @@ $ skupper gateway bind <service> <host> <port>
 [source, bash, subs=attributes+]
 ----
 $ skupper gateway status
+----
+
+The output looks similar to the following:
+
+[source, bash]
+----
 Gateway Definitions Summary
 
 Gateway Definition:
@@ -299,7 +303,7 @@ NOTE: You can later remove the gateway using `./remove.py`.
 . From the machine with cluster access, check the status of Skupper gateways:
 +
 --
-[subs=attributes+]
+[source, bash, subs=attributes+]
 ----
 $ skupper gateway status
 Gateway Definition:

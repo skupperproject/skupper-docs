@@ -6,14 +6,14 @@ By default, `skupper init` creates a site that synchronizes all services from ot
 
 To disable service synchronization:
 
-[subs=attributes+]
+[source, bash, subs=attributes+]
 ----
 $ skupper init --service-sync false
 ----
 
 To check whether synchronization is enabled, check the value for `service-sync` in the output from the following command:
 
-[subs=attributes+]
+[source, bash, subs=attributes+]
 ----
 $ kubectl get cm skupper-site -o json 
 ----

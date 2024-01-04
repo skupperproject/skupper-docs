@@ -5,7 +5,7 @@
 = Using Skupper podman
 
 
-Skupper podman allow you to create a site using containers, without requiring Kubernetes.
+Skupper podman allows you to create a site using containers, without requiring Kubernetes.
 Typically, you create a site on a Linux host, allowing you to link to and from other sites, regardless of whether those sites are running in podman or Kubernetes.
 
 NOTE: This is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
@@ -20,6 +20,7 @@ Skupper podman is available with the following precedence:
 
 `export SKUPPER_PLATFORM=podman`:: Use this command to use Skupper podman for the current session, for example, if you have two terminals set to different contexts. To set the environment to target Kubernetes sites:
 +
+[source, bash]
 ----
 $ export SKUPPER_PLATFORM=kubernetes
 ----
@@ -28,7 +29,7 @@ $ export SKUPPER_PLATFORM=kubernetes
 
 
 To determine which mode is currently active:
-
+[source, bash]
 ----
 $ skupper switch
 
@@ -73,6 +74,7 @@ $ export SKUPPER_PLATFORM=podman
 
 To verify the `skupper` mode:
 
+[source, bash]
 ----
 $ skupper switch
 
@@ -86,6 +88,7 @@ podman
 --
 The simplest Skupper site allows you to link to other sites, but does not support linking _to_ the current site.
 
+[source, bash]
 ----
 $ skupper init --ingress none
 
@@ -95,6 +98,7 @@ Skupper is now installed for user '<username>'.  Use 'skupper status' to get mor
 
 If you require that other sites can link to the site you are creating:
 
+[source, bash]
 ----
 $ skupper init --ingress-host <machine-address>
 
@@ -126,18 +130,20 @@ The general flow for linking podman sites is the same as for Kubernetes sites:
 
 . Generate a token on one site:
 +
+[source, bash]
 ----
 $ skupper token create <filename>
 ----
 
 . Create a link from the other site:
 +
+[source, bash]
 ----
 $ skupper link create <filename>
 ----
 
 After you have linked to a network, you can check the link status:
-
+[source, bash]
 ----
 $ skupper link status
 ----
@@ -160,6 +166,7 @@ You deploy the `frontend` as a container and that container can access the `back
 
 . Check the service from the Podman site:
 +
+[source, bash]
 ----
 $ skupper service status
 
@@ -170,6 +177,7 @@ This result is expected because services exposed on Kubernetes are not automatic
 
 . Create a service on the Podman site matching the service exposed on the Kubernetes site:
 +
+[source, bash]
 ----
 $ skupper service create backend 8080
 ----
@@ -189,6 +197,7 @@ This command runs a container using the `skupper` network and returns the result
 
 . Run the frontend as a container:
 +
+[source, bash]
 ----
 $ podman run -dp 8080:8080 --name hello-world-frontend --network skupper quay.io/skupper/hello-world-frontend
 ----
@@ -202,6 +211,7 @@ Each of the backend replicas respond, for example `Hi, Perfect Parrot. I am Kind
 ====
 In this scenario, running the `skupper service status` command on the Podman site does not provide much detail about the service:
 
+[source, bash]
 ----
 $ skupper service status
 Services exposed through Skupper:
@@ -221,6 +231,7 @@ In this variation of the link:https://github.com/skupperproject/skupper-example-
 
 . Create and expose a frontend deployment on the Kubernetes site:
 +
+[source, bash]
 ----
 $ kubectl create deployment frontend --image quay.io/skupper/hello-world-frontend
 $ kubectl expose deployment/frontend --port 8080 --type LoadBalancer
@@ -228,18 +239,21 @@ $ kubectl expose deployment/frontend --port 8080 --type LoadBalancer
 
 . Run the backend as a container:
 +
+[source, bash]
 ----
 $ podman run -d --name hello-world-backend --network skupper quay.io/skupper/hello-world-backend
 ----
 
 . Expose the `backend` from the Podman site.
 +
+[source, bash]
 ----
 $ skupper expose host hello-world-backend --address backend --port 8080 
 ----
 
 . From the Kubernetes site, create the `backend` service:
 +
+[source, bash]
 ----
 $ skupper service create backend 8080
 ----

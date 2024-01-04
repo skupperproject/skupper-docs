@@ -45,43 +45,38 @@ The output shows:
 --
 [source, bash]
 ----
-$ skupper network status --namespace west
-
+$ skupper network status
 Sites:
-├─ [local] 05f8c38 - west 
-│  URL: 10.110.15.54
-│  mode: interior
-│  name: west
-│  namespace: west
-│  version: 1.0.2
-│  ╰─ Services:
-│     ╰─ name: backend
-│        address: backend: 8080
-│        protocol: tcp
-╰─ [remote] 1537b82 - east 
-   URL: 10.97.26.100
-   name: east
-   namespace: east
-   sites linked to: 05f8c38-west
-   version: 1.0.2
-   ╰─ Services:
-      ╰─ name: backend
-         address: backend: 8080
-         protocol: tcp
-         ╰─ Targets:
-            ├─ name: backend-77f8f45fc8-smckp
-            ├─ name: backend-77f8f45fc8-gh6tp
-            ╰─ name: backend-77f8f45fc8-m58tg
+├─ [local] a960b766-20bd-42c8-886d-741f3a9f6aa2(west) 
+│  │ namespace: west
+│  │ site name: west
+│  │ version: 1.5.1
+│  ╰─ Linked sites:
+│     ├─ 496ca1de-0c80-4e70-bbb4-d0d6ec2a09c0(east)
+│     │  direction: outgoing
+│     ╰─ 484cccc3-401c-4c30-a6ed-73382701b18a()
+│        direction: incoming
+├─ [remote] 496ca1de-0c80-4e70-bbb4-d0d6ec2a09c0(east) 
+│  │ namespace: east
+│  │ site name: east
+│  │ version: 1.5.1
+│  ╰─ Linked sites:
+│     ╰─ a960b766-20bd-42c8-886d-741f3a9f6aa2(west)
+│        direction: incoming
+╰─ [remote] 484cccc3-401c-4c30-a6ed-73382701b18a() 
+   │ site name: vm-user-c3d98
+   │ version: 1.5.1
+   ╰─ Linked sites:
+      ╰─ a960b766-20bd-42c8-886d-741f3a9f6aa2(west)
+         direction: outgoing
 ----
 
 NOTE: If the output is not what you expected, you might want to xref:checking-links[check links] before proceeding.
 
 The output shows:
 
-* There are 2 sites on the {service-network}, `east` and `west`.
+* There are 3 sites on the {service-network}, `vm-user-c3d98`, `east` and `west`.
 * Details for each site, for example the namespace names.
-* The original services that are exposed (Targets), in this case the three backend services exposed using the `tcp` protocol.
-* The services available on the {service-network}, including the port number. For example, `backend:8080`. 
 --
 
 . Check the status of services exposed on the {service-network}:
@@ -424,6 +419,7 @@ For example, use this procedure to increase throughput, and if you have many cli
 +
 Note all configuration and delete your existing site:
 +
+[source, bash]
 ----
 $ skupper delete
 ----
@@ -433,6 +429,7 @@ After validating the performance improvement, you can delete and recreate your o
 
 . Create a site with optimal performance CPU settings:
 +
+[source, bash]
 ----
 $ skupper init --router-cpu 5
 ----
@@ -440,7 +437,7 @@ $ skupper init --router-cpu 5
 . Recreate your configuration from step 1, recreating links and services.
 
 
-NOTE: While you can address availability concerns by scaling the number of routers and somewhat improve performance, for example `skupper init --routers 3`, typically this is not necessary.
+NOTE: While you can address availability concerns by scaling the number of routers, typically this is not necessary.
 
 
 
@@ -457,6 +454,7 @@ If the `skupper init` command fails, consider the following options:
 
 * Check the load balancer.
 +
+[source, bash]
 --
 If you are evaluating Skupper on minikube, use the following command to create a load balancer:
 
@@ -522,6 +520,7 @@ Site not ready::
 +
 --
 After creating a site, you might see the following message when creating a token:
+[source, bash]
 ----
 Error: Failed to create token: Policy validation error: Skupper is not enabled in namespace
 ----
@@ -533,6 +532,7 @@ No ingress::
 +
 --
 You might see the following note after using the `skupper token create` command:
+[source, bash]
 ----
 Token written to <path> (Note: token will only be valid for local cluster)
 ----

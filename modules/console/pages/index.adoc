@@ -40,12 +40,10 @@ For example, if you have two sites, A and B, and resources are more expensive on
 
 . Create a site with the flow collector and console enabled:
 +
+[source, bash]
 ----
 $ skupper init --enable-console --enable-flow-collector
 ----
-+
-IMPORTANT: Currently, you must enable the console on the same site as you enable the flow collector. This requirement may change before the console is fully supported by https://skupper.io[skupper.io].
-
 
 // Type: procedure
 [id="accessing-console"] 
@@ -58,6 +56,7 @@ By default, the Skupper console is protected by credentials available in the `sk
 
 . Determine the Skupper console URL using the `skupper` CLI, for example:
 +
+[source, bash]
 ----
 $ skupper status
 
