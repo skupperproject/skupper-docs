@@ -195,7 +195,7 @@ $ kubectl get pods --all-namespaces --selector=app=skupper
 . Install the CRD as described in xref:installing-crd[].
 This step closes connections and removes all {service-network} services and exposed resources.
 
-. If Skupper sites that were not created by `cluster-admin` exist in the cluster, you must grant permissions to read Skupper policies to developers to avoid that site being blocked from the {service-network}.
+. If Skupper sites that were not created by `cluster-admin` exist in the cluster, you must grant permissions to read Skupper policies to avoid that site being blocked from the {service-network}.
 +
 --
 For each site namespace:
