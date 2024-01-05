@@ -69,9 +69,9 @@ The output should look similar to the following:
 Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites.
 ----
 
-NOTE: The default message above is displayed when you initialize a site on a cluster that does not have the policy system installed.
-If you install the policy system as described in xref:policy:index.adoc[], the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
---
+NOTE: The default message above is displayed when you initialize a site on a cluster that does not have a Skupper policy installed.
+If you install a Skupper policy as described in xref:policy:index.adoc[], the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
+
 By default, the site name defaults to the namespace name, for example, `west`.
 
 
@@ -117,7 +117,7 @@ NOTE: All sites are associated with a namespace, called the _active namespace_ i
 
 Services in the active namespace may be accessible to pods in other namespaces on that cluster by default, depending on your cluster network policies.
 As a result, you can expose services to pods in namespaces not directly connected to the {service-network}. 
-This setting applies a network policy to restrict access to services to those pods in the active namespace.
+This setting applies a Kubernetes network policy to restrict access to services to those pods in the active namespace.
 
 For example, if you create a site in the namespace `projectA` of `clusterA` and link that site to a {service-network} where the `database` service is exposed, the `database` service is available to pods in `projectB` of `clusterA`. 
 
