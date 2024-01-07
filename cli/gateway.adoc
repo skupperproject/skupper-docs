@@ -131,7 +131,7 @@ $ skupper gateway status
 
 The output looks similar to the following:
 
-[source, bash]
+[source, bash, subs=attributes+]
 ----
 Gateway Definitions Summary
 

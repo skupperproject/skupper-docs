@@ -1,0 +1,3 @@
+:service-network: service network
+:skupper-cli-version: <skupper-cli-version>
+:service-version: <service-version>

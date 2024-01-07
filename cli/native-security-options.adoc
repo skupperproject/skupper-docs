@@ -96,6 +96,7 @@ Enabling TLS creates the necessary certificates required for TLS backends and st
 ----
 
 Each site creates the necessary certificates required for TLS clients and stores them in a secret named `skupper-service-client`.
+
 --
 
 . Modify the frontend deployment to include the generated certificates, for example:
