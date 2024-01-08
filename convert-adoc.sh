@@ -6,7 +6,7 @@ process_file() {
     local output_file="build/${dir_name}/${base_name}.html"
 
     # Run asciidoctor to convert the input file to HTML
-    asciidoctor -a stylesheet=null.css "$input_file" -o "$output_file"
+    asciidoctor -a stylesheet=null.css  -a data-uri -a allow-uri-read "$input_file" -o "$output_file"
 }
 
 # Check if at least one input file is provided

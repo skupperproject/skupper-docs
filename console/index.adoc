@@ -104,7 +104,7 @@ The Skupper console provides an overview of the following:
 
 The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels.
 
-image::ROOT:skupper-adservice.png[]
+image::../images/skupper-adservice.png[]
 
 
 . Check the *Sites* tab.

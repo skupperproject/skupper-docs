@@ -8,7 +8,7 @@ See how Skupper can give you the flexibility to deploy your services where you n
 Kubernetes *services* provide a virtual network address for each element of your distributed application.
 Service "A" can contact service "B", "B" can contact "C", and so on.
 
-image::one-cluster.svg[]
+image::../images/one-cluster.svg[]
 
 But if you want to deploy your application across multiple clusters, your options are limited.
 You have to either expose your services to the public internet or set up a VPN.
@@ -21,7 +21,7 @@ It uses that network to forward local service traffic to remote clusters.
 
 Deploy your application across public and private clusters.
 
-image::two-clusters.svg[]
+image::../images/two-clusters.svg[]
 
 You can host your database on a private cluster and retain full connectivity with services running on the public cloud.
 All communication is secured by mutual TLS authentication and encryption.
@@ -30,7 +30,7 @@ All communication is secured by mutual TLS authentication and encryption.
 
 Distribute application services across geographic regions.
 
-image::five-clusters.svg[]
+image::../images/five-clusters.svg[]
 
 You can connect multiple retail sites to a central office.
 Once connected, each edge location can contact any other edge.
@@ -40,7 +40,7 @@ You can add and remove sites on demand.
 
 Build large, robust networks of connected clusters.
 
-image::many-clusters.svg[]
+image::../images/many-clusters.svg[]
 
 .Additional information
 

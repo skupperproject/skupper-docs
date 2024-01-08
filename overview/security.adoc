@@ -25,7 +25,7 @@ Skupper provides default, built-in security that scales across clusters and clou
 In a Skupper network, the connections between Skupper routers are secured with mutual TLS using a private, dedicated certificate authority (CA).
 Each router is uniquely identified by its own certificate.
 
-image::clusters-tls.svg[]
+image::../images/clusters-tls.svg[]
 
 This means that the Skupper network is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
 
