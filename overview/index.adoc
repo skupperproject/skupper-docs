@@ -69,6 +69,6 @@ When a service is exposed, Skupper creates proxy endpoints to make that service 
 
 .Additional information
 
-* xref:security.adoc[]
-* xref:routing.adoc[]
-* xref:connectivity.adoc[]
+* xref:security.adoc[Security]
+* xref:routing.adoc[Routing]
+* xref:connectivity.adoc[Connectivity]

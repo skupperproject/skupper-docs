@@ -33,6 +33,6 @@ This means that the Skupper network is isolated from external access, preventing
 
 .Additional information
 
-* xref:index.adoc[]
-* xref:connectivity.adoc[]
-* xref:routing.adoc[]
+* xref:index.adoc[Overview]
+* xref:connectivity.adoc[Connectivity]
+* xref:routing.adoc[Routing]
