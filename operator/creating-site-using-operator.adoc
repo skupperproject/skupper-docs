@@ -10,7 +10,7 @@ For example, create `skupper-site.yaml` that provisions a site with a console:
 
 [source,yaml,options="nowrap"]
 ----
-include::example$site-cm.yaml[]
+include::../examples/site-cm.yaml[]
 
 ----
 
@@ -21,7 +21,7 @@ You can also create a site without a console:
 
 [source,yaml,options="nowrap"]
 ----
-include::example$no-console.yaml[]
+include::../examples/no-console.yaml[]
 ----
 --
 
