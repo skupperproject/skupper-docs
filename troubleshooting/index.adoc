@@ -1,4 +1,4 @@
-
+include::../partials/attributes.adoc[]
 //Category: skupper-troubleshooting
 // Type: assembly
 
@@ -502,7 +502,7 @@ See xref:cli:tokens.adoc[] for more information on creating different types of t
 
 *Cannot access Skupper console*
 
-include::ROOT:partial$console.adoc[]
+include::../partials/console.adoc[]
 
 Use `skupper status` to find the console URL.
 

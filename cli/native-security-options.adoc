@@ -1,3 +1,4 @@
+include::../partials/attributes.adoc[]
 // Type: assembly
 [id="built-in-security-options"] 
 = Securing a {service-network}
@@ -5,7 +6,7 @@
 Skupper provides default, built-in security that scales across clusters and clouds.
 This section describes additional security you can configure.
 
-See xref:policy:index.adoc[] for information about creating granular policies for each cluster.
+See link:{policy-link} for information about creating granular policies for each cluster.
 
 // Type: procedure
 [id="network-policy"] 

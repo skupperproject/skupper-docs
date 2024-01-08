@@ -1,3 +1,4 @@
+include::../partials/attributes.adoc[]
 //Category: skupper-tokens
 // Type: assembly
 [id='using-skupper-tokens']
@@ -70,7 +71,7 @@ NOTE: Claim tokens are the default, the `-t claim` section of the command is unn
 
 .Additional information
 
-* See the xref:cli:index.adoc[] for information about using the token to create links.
+* See the link:{cli-link} for information about using the token to create links.
 
 // Type: procedure
 [id='creating-cert-tokens']
@@ -98,7 +99,7 @@ NOTE: Cert tokens are always valid and can be reused indefinitely unless revoked
 
 .Additional information
 
-* See the xref:cli:index.adoc[] for information about using the token to create links.
+* See the link:{cli-link} for information about using the token to create links.
 
 // Type: procedure
 [id='revoking-access']

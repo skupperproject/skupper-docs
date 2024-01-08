@@ -1,3 +1,5 @@
+include::../partials/attributes.adoc[]
+
 :context: skupper-podman
 //Category: skupper-cli
 // Type: assembly

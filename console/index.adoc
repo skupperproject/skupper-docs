@@ -1,3 +1,5 @@
+include::../partials/attributes.adoc[]
+
 [id="skupper-console"] 
 = Using the Skupper console
 

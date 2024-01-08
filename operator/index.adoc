@@ -1,3 +1,5 @@
+include::../partials/attributes.adoc[]
+
 = Using the Skupper Operator on Kubernetes
 
 The {SkupperOperatorName} creates and manages Skupper sites in Kubernetes. 

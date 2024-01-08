@@ -54,7 +54,7 @@ This section describes how to create a site using the default settings.
 $ skupper init
 ----
 +
-include::ROOT:partial$console.adoc[]
+include::../partials/console.adoc[]
 
 . Check the site:
 +
@@ -72,7 +72,7 @@ Skupper is enabled for namespace "west" in interior mode. It is not connected to
 ----
 
 NOTE: The default message above is displayed when you initialize a site on a cluster that does not have a Skupper policy installed.
-If you install a Skupper policy as described in xref:policy:index.adoc[], the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
+If you install a Skupper policy as described in link:{policy-link}, the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
 
 By default, the site name defaults to the namespace name, for example, `west`.
 --
@@ -83,7 +83,7 @@ By default, the site name defaults to the namespace name, for example, `west`.
 
 The default `skupper init` creates sites that satisfy typical requirements. 
 
-include::ROOT:partial$console.adoc[]
+include::../partials/console.adoc[]
 
 If you require a custom configuration, note the following options:
 

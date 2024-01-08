@@ -1,3 +1,4 @@
+include::../partials/attributes.adoc[]
 //Category: skupper-declarative
 // Type: assembly
 [id="skupper-declarative"] 
