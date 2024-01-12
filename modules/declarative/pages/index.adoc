@@ -178,7 +178,7 @@ data:
   cluster-local: "false" //<.>
   edge: "false" //<.>
   service-sync: "true" //<.>
-  ingress: "true" //<.>
+  ingress: "none" //<.>
 kind: ConfigMap
 metadata:
   name: skupper-site
@@ -203,7 +203,9 @@ NOTE: You must enable `console` and `flow-collector` for the console to function
 
 <.> Specifies whether the services are synchronized across the {service-network}, defaults to `true`.
 
-<.> Specifies whether the site supports ingress, for example, to create tokens usable from remote sites.
+<.> Specifies whether the site supports ingress.
+If you do not specify a value, the default ingress ('loadbalancer' on Kubernetes, 'route' on OpenShift) is enabled. 
+This allows you to create tokens usable from remote sites.
 
 NOTE: All ingress types are supported using the same parameters as the `skupper` CLI.
 
