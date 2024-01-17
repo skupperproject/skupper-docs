@@ -1,0 +1,20 @@
+include::../partials/attributes.adoc[]
+
+= Using the Skupper Operator on Kubernetes
+
+The {SkupperOperatorName} creates and manages Skupper sites in Kubernetes. 
+
+You can install the Operator as described in xref:installing-operator-using-cli[].
+
+
+[NOTE]
+====
+Installing an Operator requires administrator-level privileges for your Kubernetes cluster.
+====
+
+After installing the Operator, you can create a site by deploying a ConfigMap as described in xref:creating-site-using-operator[]
+
+
+include::./installing-operator-using-cli.adoc[]
+
+include::./creating-site-using-operator.adoc[]

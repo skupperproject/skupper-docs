@@ -1,0 +1,232 @@
+include::../partials/attributes.adoc[]
+//Category: skupper-declarative
+// Type: assembly
+[id="skupper-declarative"] 
+= Configuring Skupper sites using YAML
+
+Using YAML files to configure Skupper allows you to use source control to track and manage Skupper network changes.
+
+// Type: procedure
+[id="installing-using-yaml"] 
+== Installing Skupper using YAML
+
+
+Installing Skupper using YAML provides a declarative method to install Skupper.
+You can store your YAML files in source control to track and manage Skupper network changes.
+
+.Prerequisites
+
+* Access to a Kubernetes cluster
+
+.Procedure
+
+. Log into your cluster.
+If you are deploying Skupper to be available for all namespaces, verify you have `cluster-admin` privileges.
+
+. Deploy the site controller:
+
+* To install Skupper into the current namespace deploy the site controller using the following YAML:
++
+[source, bash]
+----
+kubectl apply -f deploy-watch-current-ns.yaml
+----
+where the contents of `deploy-watch-current-ns.yaml` is specified in the xref:watch-current-reference[] appendix.
+
+* To install Skupper for all namespaces:
++
+.. Create a namespace named `skupper-site-controller`.
+
+.. Deploy the site controller using the following YAML:
++
+[source, bash]
+----
+kubectl apply -f deploy-watch-all-ns.yaml
+----
+where the contents of `deploy-watch-all-ns.yaml` is specified in the xref:watch-all-reference[] appendix.
+
+. Verify the installation.
++
+[source, bash]
+----
+$ kubectl get pods
+NAME                                       READY   STATUS    RESTARTS   AGE
+skupper-site-controller-84694bdbb5-n8slb   1/1     Running   0          75s
+----
+
+// Type: procedure
+[id="creating-using-yaml"] 
+== Creating a Skupper site using YAML
+
+
+
+Using YAML files to create Skupper sites allows you to use source control to track and manage Skupper network changes.
+
+.Prerequisites
+
+* Skupper is installed in the cluster or namespace you want to target.
+* You are logged into the cluster.
+
+.Procedure
+
+. Create a YAML file to define the site, for example, `my-site.yaml`:
++
+--
+[source, bash]
+----
+include::../examples/my-site.yaml[]
+----
+The YAML creates a site with a console and you can create tokens from this site.
+
+To create a site that has no ingress:
+
+----
+include::../examples/no-ingress.yaml[]
+----
+
+--
+. Apply the YAML file to your cluster:
++
+[source, bash]
+----
+kubectl apply -f ~/my-site.yml
+----
+
+.Additional resources
+
+See the xref:site-config-reference[] section for more reference.
+
+// Type: procedure
+[id="linking-sites-using-yaml"] 
+== Linking sites using YAML
+
+While it is not possible to declaratively link sites, you can create a token using YAML.
+
+.Prerequisites
+
+* Skupper is installed on the clusters you want to link.
+* You are logged into the cluster.
+
+
+.Procedure
+
+. Log into the cluster you want to link to and change context to the namespace where Skupper is installed.
+This site must have `ingress` enabled.
+
+. Create a YAML file named `token-request.yml` to request a token:
++
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    skupper.io/type: connection-token-request
+  name: secret-name
+----
+
+. Apply the YAML to the namespace to create a secret.
++
+[source, bash]
+----
+$ kubectl apply -f token-request.yml
+----
+
+. Create the token YAML from the secret.
++
+[source, bash]
+----
+$ kubectl get secret -o yaml secret-name | yq 'del(.metadata.namespace)' > ~/token.yaml
+----
+
+
+. Log into the cluster you want to link from and change context to the namespace where Skupper is installed.
+
+. Apply the token YAML.
++
+[source, bash]
+----
+$ kubectl apply -f token.yml
+----
+
+. Verify the link, allowing some time for the process to complete.
++
+[source, bash]
+----
+$ skupper link status --wait 60
+----
+
+include::annotations.adoc[leveloffset=+1]
+
+// Type: reference
+[id="site-config-reference"] 
+[appendix]
+== Site ConfigMap YAML reference
+
+
+Using YAML files to configure Skupper requires that you understand all the fields so that you provision the site you require.
+
+The following YAML defines a Skupper site:
+[source, yaml]
+----
+apiVersion: v1
+data:
+  name: my-site //<.>
+  console: "true" //<.>
+  flow-collector: "true" //<.>
+  console-authentication: internal //<.>
+  console-user: "username" //<.>
+  console-password: "password" //<.>
+  cluster-local: "false" //<.>
+  edge: "false" //<.>
+  service-sync: "true" //<.>
+  ingress: "none" //<.>
+kind: ConfigMap
+metadata:
+  name: skupper-site
+----
+
+<.> Specifies the site name.
+
+<.> Enables the skupper console, defaults to `false`.
+NOTE: You must enable `console` and `flow-collector` for the console to function.
+
+<.> Enables the flow collector, defaults to `false`.
+
+<.> Specifies the skupper console authentication method. The options are `openshift`, `internal`, `unsecured`.
+
+<.> Username for the `internal` authentication option.
+
+<.> Password for the `internal` authentication option.
+
+<.> Only accept connections from within the local cluster, defaults to `false`.
+
+<.> Specifies whether an edge site is created, defaults to `false`.
+
+<.> Specifies whether the services are synchronized across the {service-network}, defaults to `true`.
+
+<.> Specifies whether the site supports ingress.
+If you do not specify a value, the default ingress ('loadbalancer' on Kubernetes, 'route' on OpenShift) is enabled. 
+This allows you to create tokens usable from remote sites.
+
+NOTE: All ingress types are supported using the same parameters as the `skupper` CLI.
+
+[id="watch-current-reference"] 
+[appendix]
+== YAML for watching current namespace
+
+The following example deploys Skupper to watch the current namespace.
+
+----
+include::../examples/deploy-watch-current-ns.yaml[]
+----
+
+[id="watch-all-reference"] 
+[appendix]
+== YAML for watching all namespaces
+
+The following example deploys Skupper to watch all namespaces.
+
+----
+include::../examples/deploy-watch-all-ns.yaml[]
+----
+

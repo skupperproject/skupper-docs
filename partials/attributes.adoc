@@ -1,0 +1,7 @@
+:service-network: service network
+:skupper-cli-version: 1.5
+:service-version: 1.5
+:policy-link: ../policy/[Securing a service network using policies]
+:console-link: ../console/[Using the Skupper console]
+:cli-link: ../cli/[Using the Skupper CLI]
+:SkupperOperatorName: Skupper operator

@@ -1,0 +1,355 @@
+// Type: concept
+[id="exposing-services-local"] 
+= Exposing services on the {service-network} from a local machine
+
+After creating a {service-network}, you can expose services from a local machine on the {service-network}.
+
+For example, if you run a database on a server in your data center, you can deploy a front end in a cluster that can access the data as if the database was running in the cluster.
+
+// Type: procedure
+[id="exposing-service-gateway"] 
+== Exposing simple local services to the {service-network}
+
+This section shows how to expose a single service running locally on a {service-network}.
+
+.Prerequisites
+
+* A {service-network}. Only one site is required.
+* Access to the {service-network}.
+
+.Procedure
+
+. Run your service locally. 
+
+. Log into your cluster and change to the namespace for your site.
+
+. Expose the service on the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper gateway expose <service> localhost <port>
+----
+
+* <service> - the name of the service on the {service-network}.
+* <port> - the port that runs the service locally.
+
+[NOTE]
+====
+You can also expose services from other machines on your local network, for example if MySQL is running on a dedicated server (with an IP address of `192.168.1.200`), but you are accessing the cluster from a machine in the same network:
+
+[source, bash]
+----
+$ skupper gateway expose mysql 192.168.1.200 3306
+----
+====
+--
+
+. Check the status of Skupper gateways:
++
+--
+
+[source, bash, subs=attributes+]
+----
+$ skupper gateway status
+
+Gateway Definition:
+╰─ machine-user type:service version:{service-version}
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306
+
+----
+This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
+
+The URL field shows the underlying communication and can be ignored.
+--
+
+// Type: procedure
+[id="exposing-services-gateway"] 
+== Working with complex local services on the {service-network}
+
+
+This section shows more advanced usage of skupper gateway.
+
+. Create a Skupper gateway:
++
+--
+[source,bash]
+----
+$ skupper gateway init --type <gateway-type>
+----
+
+// NOTE: The default service type gateway requires that `skrouterd` is running.
+
+By default a _service_ type gateway is created, however you can also specify:
+
+* `podman`
+* `docker`
+--
+
+. Create a service that can communicate on the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper service create <name> <port>
+----
+
+where 
+
+* `<name>` is the name of the service you want to create
+* `<port>` is the port the service uses
+
+For example:
+
+[source, bash]
+----
+$ skupper service create mydb 3306
+----
+--
+
+. Bind the service on the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper gateway bind <service> <host> <port>
+----
+
+* <service> - the name of the service on the {service-network}, `mydb` in the example above.
+* <host> - the host that runs the service.
+* <port> - the port the service is running on, `3306` from the example above.
+--
+
+. Check the status of Skupper gateways:
++
+--
+[source, bash, subs=attributes+]
+----
+$ skupper gateway status
+----
+
+The output looks similar to the following:
+
+[source, bash, subs=attributes+]
+----
+Gateway Definitions Summary
+
+Gateway Definition:
+╰─ machine-user type:service version:{service-version}
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306
+
+----
+This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
+
+The URL field shows the underlying communication and can be ignored.
+
+You can create more services in the {service-network} and bind more local services to expose those services on the {service-network}.  
+--
+
+. Forward a service from the {service-network} to the local machine.
++
+--
+[source, bash]
+----
+$ skupper gateway forward <service> <port>
+----
+
+where 
+
+* `<service>` is the name of an existing service on the {service-network}. 
+* `<port>` is the port on the local machine that you want to use.
+
+--
+
+
+// Type: procedure
+[id="exporting-gateway"] 
+== Creating a gateway and applying it on a different machine
+
+If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition bundle on the first machine and later apply that definition bundle on a second machine as described in this procedure.
+For example, if you want to expose a local database service to the {service-network}, but you never want to access the cluster from the database server, you can use this procedure to create the definition bundle and apply it on the database server.
+
+.Procedure
+
+. Log into your cluster from the first machine and change to the namespace for your site.
+
+
+. Create a service that can communicate on the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper service create <name> <port>
+----
+
+where 
+
+* `<name>` is the name of the service you want to create
+* `<port>` is the port the service uses
+
+For example:
+
+[source, bash]
+----
+$ skupper service create database 5432
+----
+--
+
+. Create a YAML file to represent the service you want to expose, for example:
++
+--
+[source,yaml]
+----
+name: database <1>
+bindings:
+    - name: database <2>
+      host: localhost <3>
+      service:
+        address: database:5432 <4>
+        protocol: tcp <5>
+        ports:
+            - 5432 <6>
+      target_ports:
+        - 5432 <7>
+qdr-listeners:
+    - name: amqp
+      host: localhost
+      port: 5672
+----
+<1> Gateway name, useful for reference only.
+<2> Binding name, useful to track multiple bindings.
+<3> Name of host providing the service you want to expose.
+<4> Service name and port on {service-network}. You created the service in a previous step. 
+<5> The protocol you want to use to expose the service, `tcp`, `http` or `http2`.
+<6> The port on the {service-network} that you want this service to be available on.
+<7> The port of the service running on the host specified in point 3.
+
+--
+
+. Save the YAML file using the name of the gateway, for example, `gateway.yaml`.
+
+. Generate a bundle that can be applied to the machine that hosts the service you want to expose on the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper gateway generate-bundle <config-filename> <destination-directory>
+----
+
+where:
+
+* <config-filename> - the name of the YAML file, including suffix, that you generated in the previous step.
+* <destination-directory> - the location where you want to save the resulting gateway bundle, for example `~/gateways`.
+
+For example:
+[source, bash]
+----
+$ skupper gateway generate-bundle database.yaml ./
+----
+
+This bundle contains the gateway definition YAML and a  certificate that allow access to the {service-network}.
+
+--
+
+. Copy the gateway definition file, for example, `mylaptop-jdoe.tar.gz` to the machine that hosts the service you want to expose on the {service-network}.
+
+. From the machine that hosts the service you want to expose:
++
+--
+[source, bash]
+----
+$ mkdir gateway
+
+$ tar -xvf <gateway-definition-file> --directory gateway
+$ cd gateway
+$ sh ./launch.py
+----
+
+NOTE: Use `./launch.py -t podman` or `./launch.py -t docker` to run the Skupper router in a container.
+
+Running the gateway bundle uses the gateway definition YAML and a certificate to access and expose the service on the {service-network}.
+
+--
+
+. Check the status of the gateway service:
++
+--
+
+To check a _service_ type gateway:
+[source, bash]
+----
+$ systemctl --user status <gateway-definition-name>
+----
+
+To check a _podman_ type gateway:
+[source, bash]
+----
+$ podman inspect
+----
+
+To check a _docker_ type gateway:
+[source, bash]
+----
+$ docker inspect
+----
+
+
+NOTE: You can later remove the gateway using `./remove.py`.
+
+--
+
+. From the machine with cluster access, check the status of Skupper gateways:
++
+--
+[source, bash, subs=attributes+]
+----
+$ skupper gateway status
+Gateway Definition:
+╰─ machine-user type:service version:{service-version}
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306
+----
+This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.
+--
+
+NOTE: If you need to change the gateway definition, for example to change port, you need to remove the existing gateway and repeat this procedure from the start to redefine the gateway.
+
+// Type: procedure
+[id="gateway-reference"] 
+== Gateway YAML reference
+
+The xref:exporting-gateway[] describes how to create a gateway to apply on a separate machine using a gateway definition YAML file.
+
+The following are valid entries in a gateway definition YAML file.
+
+name:: Name of gateway
+bindings.name:: Name of binding for a single host.
+bindings.host:: Hostname of local service.
+bindings.service:: Definition of service you want to be available on service network.
+bindings.service.address:: Address on the service network, name and port.
+bindings.service.protocol:: Skupper protocol, `tcp`, `http` or `http2`.
+bindings.service.ports:: A single port that becomes available on the service network. 
+bindings.service.exposeIngress:: (optional) The traffic direction, `ingress` or `egress`.
+bindings.service.tlscredentials:: (optional) The TLS certificate and key for the service.
+bindings.service.tlscertauthority:: (optional) The TLS public certificate.
+bindings.target_ports:: A single port that you want to expose on the service network.
+
+NOTE: If the local service requires more than one port, create separate bindings for each port.
+
+forwards.name:: Name of forward for a single host.
+forwards.host:: Hostname of local service.
+forwards.service:: Definition of service you want to be available locally.
+forwards.service.address:: Address on the service network that you want to use locally, name and port.
+forwards.service.protocol:: Skupper protocol, `tcp`, `http` or `http2`.
+forwards.service.ports:: A single port that is available on the service network. 
+forwards.target_ports:: A single port that you want to use locally.
+
+NOTE: If the network service requires more than one port, create separate forwards for each port.
+
+qdr-listeners:: Definition of skupper router listeners
+qdr-listeners.name:: Name of skupper router, typically `amqp`.
+qdr-listeners.host:: Hostname for skupper router, typically `localhost`.
+qdr-listeners.port:: Port for skupper router, typically `5672`.
+

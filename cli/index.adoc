@@ -1,0 +1,510 @@
+include::../partials/attributes.adoc[]
+//Category: skupper-cli
+// Type: assembly
+[id="skupper-cli"] 
+= Using the Skupper CLI
+
+Using the `skupper` command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.
+
+A typical workflow is to create a site, link sites together, and expose services to the {service-network}.
+
+// Type: procedure
+[id="checking-cli"] 
+== Checking the Skupper CLI
+
+
+Installing the `skupper` command-line interface (CLI) provides a simple method to get started with Skupper.
+
+.Procedure
+
+// tag::skupper-io[]
+. Follow the instructions for link:/install/index.html[Installing Skupper].
+// end::skupper-io[]
+
+. Verify the installation.
++
+[source, bash, subs=attributes+]
+----
+$ skupper version
+client version {skupper-cli-version}
+----
+
+
+// Type: procedure
+[id="creating-using-cli"] 
+== Creating a site using the CLI
+
+A {service-network} consists of Skupper sites.
+This section describes how to create a site using the default settings.
+
+.Prerequisites
+
+* The `skupper` CLI is installed.
+* You are logged into the cluster.
+* The services you want to expose on the {service-network} are in the active namespace.
+
+
+.Procedure
+
+. Create a default site:
++
+[source, bash]
+----
+$ skupper init
+----
++
+include::../partials/console.adoc[]
+
+. Check the site:
++
+--
+[source, bash]
+----
+$ skupper status
+----
+
+The output should look similar to the following:
+
+[source, bash]
+----
+Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites.
+----
+
+NOTE: The default message above is displayed when you initialize a site on a cluster that does not have a Skupper policy installed.
+If you install a Skupper policy as described in link:{policy-link}, the message becomes `Skupper is enabled for namespace "west" in interior mode (with policies)`.
+
+By default, the site name defaults to the namespace name, for example, `west`.
+--
+
+// Type: reference
+[id="custom-sites"] 
+== Custom sites
+
+The default `skupper init` creates sites that satisfy typical requirements. 
+
+include::../partials/console.adoc[]
+
+If you require a custom configuration, note the following options:
+
+* Configuring console authentication.
+There are several `skupper` options regarding authentication for the console:
++
+--
+
+`--console-auth <authentication-mode>`:: Set the authentication mode for the console:
+
+* `openshift` - Use OpenShift authentication, so that users who have permission to log into OpenShift and view the Project (namespace) can view the console.
+* `internal` -  Use Skupper authentication, see the `console-user` and `console-password` options.
+* `unsecured` - No authentication, anyone with the URL can view the console.
+
+
+`--console-user <username>`:: Username for the console user when authentication mode is set to `internal`.
+Defaults to `admin`.
+`--console-password <password>`:: Password for the console user when authentication mode is set to `internal`.
+If not specified, a random passwords is generated.
+--
+
+
+
+* Configuring service access
++
+--
+[source, bash]
+----
+$ skupper init --create-network-policy
+----
+
+NOTE: All sites are associated with a namespace, called the _active namespace_ in this procedure.
+
+Services in the active namespace may be accessible to pods in other namespaces on that cluster by default, depending on your cluster network policies.
+As a result, you can expose services to pods in namespaces not directly connected to the {service-network}. 
+This setting applies a Kubernetes network policy to restrict access to services to those pods in the active namespace.
+
+For example, if you create a site in the namespace `projectA` of `clusterA` and link that site to a {service-network} where the `database` service is exposed, the `database` service is available to pods in `projectB` of `clusterA`. 
+
+You can use the `--create-network-policy` option to restrict the `database` service access to `projectA` of `clusterA`.
+
+--
+
+// Type: procedure
+[id="linking-sites"] 
+== Linking sites
+
+A {service-network} consists of Skupper sites.
+This section describes how to link sites to form a {service-network}.
+
+Linking two sites requires a single initial directional connection. However:
+
+* Communication between the two sites is bidirectional, only the initial linking is directional.
+* The choice of direction for linking is typically determined by accessibility. For example, if you are linking an OpenShift Dedicated cluster with a CodeReady Containers cluster, you must link from the CodeReady Containers cluster to the OpenShift Dedicated cluster because that route is accessible. 
+
+.Procedure
+
+. Determine the direction of the link. If both clusters are publicly addressable, then the direction is not significant. If one of the clusters is addressable from the other cluster, perform step 2 below on the addressable cluster.
+
+. Generate a token on the cluster that you want to link to:
++
+--
+[source, bash]
+----
+$ skupper token create <filename> 
+----
+
+where `<filename>` is the name of a YAML file that is saved on your local filesystem.
+
+This file contains a key and the location of the site that created it.
+
+[NOTE]
+====
+Access to this file provides access to the {service-network}. 
+Protect it appropriately.
+
+For more information about protecting access to the {service-network}, see xref:cli:tokens.adoc[].
+====
+--
+
+. Use a token on the cluster that you want to connect from:
+
+.. Create a link to the {service-network}:
++
+[source, bash]
+----
+$ skupper link create <filename> [-name <link-name>]
+----
++
+where `<filename>` is the name of a YAML file generated from the `skupper token create` command and `<link-name>` is the name of the link.
+
+.. Check the link:
++
+[source, bash]
+----
+$ skupper link status
+Link link1 not connected
+----
++
+In this example no <link-name> was specified, the name defaulted to `link1`.
+
+
+. If you want to delete a link:
++
+[source, bash]
+----
+$ skupper link delete <link-name>
+----
+where `<link-name>` is the name of the link specified during creation.
+
+// Type: procedure
+[id="link-cost"] 
+== Specifying link cost
+
+When linking sites, you can assign a cost to each link to influence the traffic flow. 
+By default, link cost is set to `1` for a new link.
+In a {service-network}, the routing algorithm attempts to use the path with the lowest total cost from client to target server.
+
+* If you have services distributed across different sites, you might want a client to favor a particular target or link.
+In this case, you can specify a cost of greater than `1` on the alternative links to reduce the usage of those links.
++
+NOTE: The distribution of open connections is statistical, that is, not a round robin system.
+
+* If a connection only traverses one link, then the path cost is equal to the link cost.  
+If the connection traverses more than one link, the path cost is the sum of all the links involved in the path.  
+
+* Cost acts as a threshold for using a path from client to server in the network.
+When there is only one path, traffic flows on that path regardless of cost.  
++
+NOTE: If you start with two targets for a service, and one of the targets is no longer available, traffic flows on the remaining path regardless of cost.
+
+* When there are a number of paths from a client to server instances or a service, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
+After this threshold of open connections is reached, new connections are spread across the alternative path and the lowest cost path.
+
+
+.Prerequisite
+
+* You have set your Kubernetes context to a site that you want to link _from_.
+* A token for the site that you want to link _to_.
+
+.Procedure
+
+. Create a link to the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper link create <filename> --cost <integer-cost>
+----
+
+where `<integer-cost>` is an integer greater than 1 and traffic favors lower cost links.
+
+NOTE: If a service can be called without traversing a link, that service is considered local, with an implicit cost of `0`.
+
+For example, create a link with cost set to `2` using a token file named `token.yaml`:
+
+[source, bash]
+----
+$ skupper link create token.yaml --cost 2
+----
+--
+
+. Check the link cost:
++
+--
+[source, bash]
+----
+$ skupper link status link1 --verbose
+----
+
+The output is similar to the following:
+
+[source, bash]
+----
+ Cost:          2
+ Created:       2022-11-17 15:02:01 +0000 GMT
+ Name:          link1
+ Namespace:     default
+ Site:          default-0d99d031-cee2-4cc6-a761-697fe0f76275
+ Status:        Connected
+----
+--
+
+. Observe traffic using the console.
++
+--
+If you have a console on a site, log in and navigate to the processes for each server. 
+You can view the traffic levels corresponding to each client.
+
+NOTE: If there are multiple clients on different sites, filter the view to each client to determine the effect of cost on traffic.
+For example, in a two site network linked with a high cost with servers and clients on both sites, you can see that a client is served by the local servers while a local server is available.
+--
+
+// Type: concept
+[id="exposing-services-ns"] 
+== Exposing services on the {service-network} from a namespace
+
+After creating a {service-network}, exposed services can communicate across that network.
+
+The `skupper` CLI has two options for exposing services that already exist in a namespace:
+
+* `expose` supports simple use cases, for example, a deployment with a single service.
+See xref:exposing-simple-services[] for instructions.
+
+* `service create` and `service bind` is a more flexible method of exposing services, for example, if you have multiple services for a deployment.
+See xref:exposing-complex-services[] for instructions.
+
+
+// Type: procedure
+[id="exposing-simple-services"] 
+=== Exposing simple services on the {service-network}
+This section describes how services can be enabled for a {service-network} for simple use cases.
+
+.Procedure
+
+. Create a deployment, some pods, or a service in one of your sites, for example:
++
+[source, bash]
+----
+$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+----
++
+This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.
+
+. Create a service that can communicate on the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper expose [deployment <name>|pods <selector>|statefulset <statefulsetname>|service <name>]
+----
+
+where 
+
+* `<name>` is the name of your deployment 
+* `<selector>` is a pod selector
+* `<statefulsetname>` is the name of a statefulset
+
+For the example deployment in step 1, you create a service using the following command:
+----
+$ skupper expose deployment/hello-world-backend --port 8080
+----
+
+Options for this command include:
+
+* `--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
+NOTE: You can specify more than one port by repeating this option.
+
+* `--target-port <port-number>`:: Specify the port number of pods that you want to expose.
+
+* `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
+
+--
+
+NOTE: If you do not specify ports, `skupper` uses the `containerPort` value of the deployment.
+
+// Type: procedure
+[id="exposing-complex-services"] 
+=== Exposing complex services on the {service-network}
+
+This section describes how services can be enabled for a {service-network} for more complex use cases.
+
+.Procedure
+
+. Create a deployment, some pods, or a service in one of your sites, for example:
++
+[source, bash]
+----
+$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+----
++
+This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.
+
+. Create a service that can communicate on the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper service create <name> <port>
+----
+
+where 
+
+* `<name>` is the name of the service you want to create
+* `<port>` is the port the service uses
+
+For the example deployment in step 1, you create a service using the following command:
+[source, bash]
+----
+$ skupper service create hello-world-backend 8080
+----
+
+
+--
+
+. Bind the service to a cluster service:
++
+--
+[source, bash]
+----
+$ skupper service bind <service-name> <target-type> <target-name>
+----
+
+where
+
+* `<service-name>` is the name of the service on the {service-network}
+
+* `<target-type>` is the object you want to expose, `deployment`, `statefulset`, `pods`, or `service`.
+
+* `<target-name>` is the name of the cluster service
+
+For the example deployment in step 1, you bind the service using the following command:
+[source, bash]
+----
+$ skupper service bind hello-world-backend deployment hello-world-backend
+----
+
+--
+
+// Type: procedure
+[id="exposing-services-from-different-ns"] 
+=== Exposing services from a different namespace to the {service-network}
+
+This section shows how to expose a service from a namespace where Skupper is not deployed.
+
+Skupper allows you expose Kubernetes services from other namespaces for any site. 
+However, if you want to expose workloads, for example deployments, you must create a site as described in this section. 
+
+.Prerequisites
+
+* A namespace where Skupper is deployed.
+* A network policy that allows communication between the namespaces
+* cluster-admin permissions if you want to expose resources other than services
+
+
+. Create a site with cluster permissions if you want to expose a workload from a namespace other than the site namespace:
++
+--
+[source, bash]
+----
+$ skupper init --enable-cluster-permissions
+----
+--
+
+
+. Expose the service on the {service-network}:
++
+NOTE: The site does not require the extra permissions granted with the `--enable-cluster-permissions` to expose a Kubernetes service.
+
+.. If you want to expose a Kubernetes service from a namespace other than the site namespace:
++
+--
+[source, bash]
+----
+$ skupper expose service <service>.<namespace> --address <service>
+----
+
+* <service> - the name of the service on the {service-network}.
+* <namespace> - the name of the namespace where the service you want to expose runs.
+
+For example, if you deployed Skupper in the `east` namespace and you created a `backend` Kubernetes service in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+
+[source, bash]
+----
+$ skupper expose service backend.east-backend --port 8080 --address backend
+----
+--
+
+.. If you want to expose a workload and you created a site with `--enable-cluster-permissions`:
++
+--
+[source, bash]
+----
+$ skupper expose <resource> --port <port-number> --target-namespace <namespace>
+----
+
+* <resource> - the name of the resource.
+* <namespace> - the name of the namespace where the resource you want to expose runs.
+
+For example, if you deployed Skupper in the `east` namespace and you created a `backend` deployment in the `east-backend` namespace, you set the context to the `east` namespace and expose the service as `backend` on the {service-network} using:
+
+[source, bash]
+----
+$ skupper expose deployment/backend --port 8080 --target-namespace east-backend
+----
+--
+
+include::./gateway.adoc[leveloffset=+1]
+
+include::./network-status.adoc[leveloffset=+1]
+
+include::./native-security-options.adoc[leveloffset=+1]
+
+include::./protocols.adoc[leveloffset=+1]
+
+// Type: reference
+[id="cli-global-options"] 
+== CLI options
+
+For a full list of options, see the xref:cli-reference:skupper.adoc[Kubernetes] and xref:cli-podman:skupper.adoc[Podman] reference documentation.
+
+[WARNING]
+====
+When you create a site and set logging level to `trace`, you can inadvertently log sensitive information from HTTP headers.
+
+[source, bash]
+----
+$ skupper init --router-logging trace
+----
+
+
+====
+
+By default, all `skupper` commands apply to the cluster you are logged into and the current namespace.
+The following `skupper` options allow you to override that behavior and apply to all commands:
+
+`--namespace <namespace-name>`:: Apply command to `<namespace-name>`. For example, if you are currently working on `frontend` namespace and want to initialize a site in the `backend` namespace:
++
+[source, bash]
+----
+$ skupper init --namespace backend
+----
+`--kubeconfig <kubeconfig-path>`:: Path to the kubeconfig file - This allows you run multiple sessions to a cluster from the same client. An alternative is to set the `KUBECONFIG` environment variable.
+
+`--context <context-name>`:: The kubeconfig file can contain defined contexts, and this option allows you to use those contexts.
