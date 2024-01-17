@@ -22,7 +22,7 @@ If you want to preview changes for more complex contributions, follow this proce
 . Start the build:
 +
 ----
-$ bash convert-all.sh
+$ bash scripts/convert-all.sh
 ----
 
 . See the `build` directory for the HTML output.
