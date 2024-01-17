@@ -1,3 +1,6 @@
+include::../partials/attributes.adoc[]
+//Category: skupper-overview
+// Type: assembly
 = Skupper connectivity
 
 Skupper represents a new approach to connecting services across multiple Kubernetes clusters.

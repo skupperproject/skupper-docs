@@ -1,3 +1,6 @@
+include::../partials/attributes.adoc[]
+//Category: skupper-overview
+// Type: assembly
 = Glossary
 
 An explanation of common terms used with Skupper.

@@ -23,4 +23,4 @@ export PYTHONPATH := python
 
 .PHONY: generate-preview
 generate-preview:
-	antora preview-playbook.yml
+	bash ./scripts/convert-all.sh

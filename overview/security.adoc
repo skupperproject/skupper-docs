@@ -1,5 +1,6 @@
 
-//Category: skupper-security
+include::../partials/attributes.adoc[]
+//Category: skupper-overview
 // Type: assembly
 [id="skupper-security"] 
 = Skupper security

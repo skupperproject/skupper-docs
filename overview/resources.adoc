@@ -1,3 +1,6 @@
+include::../partials/attributes.adoc[]
+//Category: skupper-overview
+// Type: assembly
 = Skupper resources on Kubernetes
 
 The following sections describe the various Skupper resources on Kubernetes, for example, service accounts

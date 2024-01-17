@@ -1,5 +1,4 @@
 include::../partials/attributes.adoc[]
-
 //Category: skupper-cli
 // Type: assembly
 [id="skupper-cli"] 
