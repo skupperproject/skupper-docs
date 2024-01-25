@@ -3,7 +3,7 @@
 == Installing the Operator using the CLI
 
 
-The steps in this section show how to use the `kubectl` command-line interface (CLI) to install and deploy the latest version of the {SkupperOperatorName} in a given Kubernetes cluster.
+The steps in this section show how to use the `kubectl` command-line interface (CLI) to install and deploy the latest version of the {skupper-operator-name} in a given Kubernetes cluster.
 
 .Prerequisites
 

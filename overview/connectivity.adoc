@@ -47,7 +47,7 @@ image::../images/many-clusters.svg[]
 
 .Additional information
 
-* xref:index.adoc[Overview]
-* xref:routing.adoc[Routing]
-* xref:connectivity.adoc[Connectivity]
+* link:{overview-link}
+* link:{routing-link}
+* link:{connectivity-link}
 

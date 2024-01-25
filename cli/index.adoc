@@ -159,39 +159,42 @@ This file contains a key and the location of the site that created it.
 Access to this file provides access to the {service-network}. 
 Protect it appropriately.
 
-For more information about protecting access to the {service-network}, see xref:cli:tokens.adoc[].
+For more information about protecting access to the {service-network}, see link:{tokens-link}.
 ====
 --
 
 . Use a token on the cluster that you want to connect from:
-
-.. Create a link to the {service-network}:
 +
+--
+
+To create a link to the {service-network}:
+
 [source, bash]
 ----
 $ skupper link create <filename> [-name <link-name>]
 ----
-+
+
 where `<filename>` is the name of a YAML file generated from the `skupper token create` command and `<link-name>` is the name of the link.
 
-.. Check the link:
-+
+To check the link:
+
 [source, bash]
 ----
 $ skupper link status
 Link link1 not connected
 ----
-+
+
 In this example no <link-name> was specified, the name defaulted to `link1`.
 
 
-. If you want to delete a link:
-+
+To delete a link:
+
 [source, bash]
 ----
 $ skupper link delete <link-name>
 ----
 where `<link-name>` is the name of the link specified during creation.
+-- 
 
 // Type: procedure
 [id="link-cost"] 
@@ -417,22 +420,20 @@ However, if you want to expose workloads, for example deployments, you must crea
 * A network policy that allows communication between the namespaces
 * cluster-admin permissions if you want to expose resources other than services
 
+.Procedure
 
 . Create a site with cluster permissions if you want to expose a workload from a namespace other than the site namespace:
 +
 --
+NOTE: The site does not require the extra permissions granted with the `--enable-cluster-permissions` to expose a Kubernetes service resource.
+
 [source, bash]
 ----
 $ skupper init --enable-cluster-permissions
 ----
 --
 
-
-. Expose the service on the {service-network}:
-+
-NOTE: The site does not require the extra permissions granted with the `--enable-cluster-permissions` to expose a Kubernetes service.
-
-.. If you want to expose a Kubernetes service from a namespace other than the site namespace:
+. To expose a Kubernetes service from a namespace other than the site namespace:
 +
 --
 [source, bash]
@@ -451,7 +452,7 @@ $ skupper expose service backend.east-backend --port 8080 --address backend
 ----
 --
 
-.. If you want to expose a workload and you created a site with `--enable-cluster-permissions`:
+. To expose a workload from a site created with `--enable-cluster-permissions`:
 +
 --
 [source, bash]
@@ -482,7 +483,7 @@ include::./protocols.adoc[leveloffset=+1]
 [id="cli-global-options"] 
 == CLI options
 
-For a full list of options, see the xref:cli-reference:skupper.adoc[Kubernetes] and xref:cli-podman:skupper.adoc[Podman] reference documentation.
+For a full list of options, see the link:{kube-ref-link} and link:{pod-ref-link} documentation.
 
 [WARNING]
 ====

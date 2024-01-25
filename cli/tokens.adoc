@@ -30,7 +30,7 @@ A claim token is not a certificate, but is securely exchanged for a certificate 
 By implementing appropriate restrictions (for example, creating a single-use claim token), you can avoid the accidental exposure of certificates.
 --
 
-Cert token ::
+Cert token::
 +
 --
 You can use a cert token to create a link to the site which issued that token, it includes a valid certificate from that site.
