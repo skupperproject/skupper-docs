@@ -2,7 +2,7 @@ include::../partials/attributes.adoc[]
 //Category: skupper-policy
 // Type: assembly
 [id="skupper-policy"] 
-= Securing a {service-network} using Skupper policies
+= Securing a service network using Skupper policies
 
 By default, Skupper includes many security features, including using mutual TLS for all {service-network} communication between sites.
 You can add extra security features by installing the Skupper policy CRD.

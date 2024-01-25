@@ -1,7 +1,18 @@
 :service-network: service network
 :skupper-cli-version: 1.5
 :service-version: 1.5
-:policy-link: ../policy/[Securing a service network using policies]
-:console-link: ../console/[Using the Skupper console]
-:cli-link: ../cli/[Using the Skupper CLI]
-:SkupperOperatorName: Skupper operator
+
+:policy-link: ../policy/index.html[Securing a service network using policies]
+:console-link: ../console/index.html[Using the Skupper console]
+:cli-link: ../cli/index.html[Using the Skupper CLI]
+:tokens-link: ../cli/tokens.html[Using Skupper tokens]
+:overview-link: ../overview/index.html[Overview]
+:security-link: ../overview/security.html[Security]
+:routing-link: ../overview/routing.html[Routing]
+:connectivity-link: ../overview/connectivity.html[Connectivity]
+:glossary-link: ../overview/glossary.html[Glossary]
+:kube-ref-link: ../kubernetes-reference/skupper.html[Skupper Kubernetes CLI reference]
+:pod-ref-link: ../podman-reference/skupper.html[Skupper Podman CLI reference]
+
+
+:skupper-operator-name: Skupper operator

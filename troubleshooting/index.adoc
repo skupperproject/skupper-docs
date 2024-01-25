@@ -339,7 +339,7 @@ ALLOWED POLICY ENABLED ERROR                                                    
 false   true           Policy validation error: deployment/nginx cannot be exposed            
 ----
 
-If you allowed an nginx deployment as described in xref:allowedExposedResources[], the same command shows that the resource is allowed and displays the name of the policy CR that enabled it:
+If you allowed an nginx deployment, the same command shows that the resource is allowed and displays the name of the policy CR that enabled it:
 
 [source,bash]
 ----
@@ -480,7 +480,7 @@ $ skupper init --ingress none
 
 [NOTE]
 ====
-See xref:cli-reference:skupper_init.adoc[] for more options.
+See the link:{pod-ref-link} documentation for `skupper init`.
 ====
 
 --
@@ -497,7 +497,7 @@ For example, if one site is behind a firewall and the other site is on an AWS cl
 [NOTE]
 ====
 By default, a token is valid for only 15 minutes and can only be used once.
-See xref:cli:tokens.adoc[] for more information on creating different types of tokens.
+See link:{tokens-link} for more information on creating different types of tokens.
 ====
 
 *Cannot access Skupper console*

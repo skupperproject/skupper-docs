@@ -1,7 +1,7 @@
 include::../partials/attributes.adoc[]
 // Type: assembly
 [id="built-in-security-options"] 
-= Securing a {service-network}
+= Securing a service network
 
 Skupper provides default, built-in security that scales across clusters and clouds.
 This section describes additional security you can configure.
@@ -58,8 +58,9 @@ For services exposed as TCP or HTTP2, the traffic between the pod and the router
 
 . Expose your backend deployment on the {service-network}, enabling TLS.
 +
-For example, if you want to expose a TCP service:
 --
+For example, if you want to expose a TCP service:
+
 [source,bash]
 ----
 $ skupper expose deployment <deployment-name> --port 443 --enable-tls

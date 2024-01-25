@@ -108,7 +108,8 @@ It is recommended to enable lingering for <username>, otherwise Skupper may not 
 Skupper is now installed for user '<username>'.  Use 'skupper status' to get more information.
 ----
 
-For more information, see xref:cli-podman:skupper_init.adoc[podman skupper init].
+For more information, see the link:{pod-ref-link} documentation.
+
 
 --
 
@@ -263,4 +264,4 @@ $ skupper service create backend 8080
 
 . Check your {service-network} is working as expected by navigating to your cluster URL, port 8080, and clicking *Say hello*.
 
-For more information, see xref:cli-podman:skupper_expose.adoc[podman skupper expose].
+For more information, see the link:{pod-ref-link} documentation.
