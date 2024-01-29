@@ -6,6 +6,7 @@ include::../partials/attributes.adoc[]
 
 Using YAML files to configure Skupper allows you to use source control to track and manage Skupper network changes.
 
+// tag::skupper-io[]
 // Type: procedure
 [id="installing-using-yaml"] 
 == Installing Skupper using YAML
@@ -54,6 +55,9 @@ NAME                                       READY   STATUS    RESTARTS   AGE
 skupper-site-controller-84694bdbb5-n8slb   1/1     Running   0          75s
 ----
 
+// end::skupper-io[]
+
+
 // Type: procedure
 [id="creating-using-yaml"] 
 == Creating a Skupper site using YAML
@@ -96,6 +100,7 @@ kubectl apply -f ~/my-site.yml
 
 See the xref:site-config-reference[] section for more reference.
 
+// tag::skupper-io[]
 // Type: procedure
 [id="linking-sites-using-yaml"] 
 == Linking sites using YAML
@@ -157,6 +162,9 @@ $ skupper link status --wait 60
 
 include::annotations.adoc[leveloffset=+1]
 
+// end::skupper-io[]
+
+
 // Type: reference
 [id="site-config-reference"] 
 [appendix]
@@ -210,6 +218,7 @@ This allows you to create tokens usable from remote sites.
 
 NOTE: All ingress types are supported using the same parameters as the `skupper` CLI.
 
+// tag::skupper-io[]
 [id="watch-current-reference"] 
 [appendix]
 == YAML for watching current namespace
@@ -230,3 +239,4 @@ The following example deploys Skupper to watch all namespaces.
 include::../examples/deploy-watch-all-ns.yaml[]
 ----
 
+// end::skupper-io[]

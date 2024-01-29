@@ -7,8 +7,6 @@ include::../partials/attributes.adoc[]
 
 The Skupper console provides data and visualizations of the traffic flow between Skupper sites.
 
-NOTE: This is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
-
 
 // Type: procedure
 [id="enabling-console"] 

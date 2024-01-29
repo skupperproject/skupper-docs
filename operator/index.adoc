@@ -3,6 +3,7 @@ include::../partials/attributes.adoc[]
 
 The {skupper-operator-name} creates and manages Skupper sites in Kubernetes. 
 
+// tag::skupper-io[]
 You can install the Operator as described in xref:installing-operator-using-cli[].
 
 [NOTE]
@@ -14,5 +15,6 @@ After installing the Operator, you can create a site by deploying a ConfigMap as
 
 
 include::./installing-operator-using-cli.adoc[]
+// end::skupper-io[]
 
 include::./creating-site-using-operator.adoc[]
