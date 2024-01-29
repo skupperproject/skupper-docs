@@ -10,9 +10,6 @@ include::../partials/attributes.adoc[]
 Skupper podman allows you to create a site using containers, without requiring Kubernetes.
 Typically, you create a site on a Linux host, allowing you to link to and from other sites, regardless of whether those sites are running in podman or Kubernetes.
 
-NOTE: This is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
-
-
 [id='about']
 == About Skupper podman
 

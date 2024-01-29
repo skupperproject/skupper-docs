@@ -113,9 +113,9 @@ NOTE: If there are existing sites on the cluster, see xref:installing-crd-existi
 
 . Download the CRD:
 +
-[source,bash]
+[source,bash, subs=attributes+]
 ----
-$ wget https://raw.githubusercontent.com/skupperproject/skupper/1.4/api/types/crds/skupper_cluster_policy_crd.yaml
+$ wget https://raw.githubusercontent.com/skupperproject/skupper/{skupper-version}/api/types/crds/skupper_cluster_policy_crd.yaml
 ----
 
 . Apply the CRD:
