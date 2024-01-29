@@ -454,10 +454,10 @@ If the `skupper init` command fails, consider the following options:
 
 * Check the load balancer.
 +
-[source, bash]
 --
 If you are evaluating Skupper on minikube, use the following command to create a load balancer:
 
+[source, bash]
 ----
 $ minikube tunnel
 ----
