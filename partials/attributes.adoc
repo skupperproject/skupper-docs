@@ -11,8 +11,8 @@
 :routing-link: ../overview/routing.html[Routing]
 :connectivity-link: ../overview/connectivity.html[Connectivity]
 :glossary-link: ../overview/glossary.html[Glossary]
-:kube-ref-link: ../kubernetes-reference/[Skupper Kubernetes CLI reference]
-:pod-ref-link: ../podman-reference/[Skupper Podman CLI reference]
+:kube-ref-link: ../kubernetes-reference/index.html[Skupper Kubernetes CLI reference]
+:pod-ref-link: ../podman-reference/index.html[Skupper Podman CLI reference]
 
 
 :skupper-operator-name: Skupper operator
