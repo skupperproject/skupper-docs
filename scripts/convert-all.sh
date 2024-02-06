@@ -13,4 +13,5 @@ overview/glossary.adoc \
 overview/index.adoc \
 overview/resources.adoc \
 overview/routing.adoc \
-overview/security.adoc
+overview/security.adoc \
+kubernetes/deployment-concerns.adoc
