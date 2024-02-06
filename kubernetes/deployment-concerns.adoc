@@ -49,7 +49,7 @@ $ skupper init --router-cpu 2
 ----
 --
 
-. If you are using YAML, set the CPU allocation for the router by setting a value for `router-cpu`.  For example:
+. If you are using YAML, set the CPU allocation for the router by setting a value for the `router-cpu` attribute.  For example:
 +
 --
 [source, YAML]
@@ -72,7 +72,7 @@ data:
 By default, Kubernetes restarts any router that becomes unresponsive.
 (If you encounter router restarts, consider xref:increased-traffic[] in order to improve responsiveness.)
 
-If the cluster where you are running Skupper is particularly busy, it may take time for Kubernetes to schedule a new router pod.  You can "pre schedule" a backup router by deploying two routers in a site.
+If the cluster where you are running Skupper is very busy, it may take time for Kubernetes to schedule a new router pod.  You can "preschedule" a backup router by deploying two routers in a site.
 
 . If you are using the Skupper CLI, set the number of routers to `2` using the `--routers` option:
 +
@@ -99,3 +99,6 @@ data:
 --
 
 Setting the number of routers to more than two does not provide increased availability and can adversely affect performance.
+
+Note that clients must reconnect when a router restarts or traffic is
+redirected to a backup router.
