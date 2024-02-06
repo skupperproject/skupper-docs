@@ -13,7 +13,7 @@ This guide focusses on the following goals:
 For optimal network latency and throughput, you can adjust the CPU allocation for the router using the `router-cpu` option.
 Router CPU is the primary factor governing Skupper network performance.
 
-NOTE: Increasing the number of routers does not improve network performance.  An incoming router-to-router link is associated with just one active router in a replica set.  Additional routers do not receive traffic.
+NOTE: Increasing the number of routers does not improve network performance.  An incoming router-to-router link is associated with just one active router.  Additional routers do not receive traffic while that router is responding
 
 . Determine the router CPU allocation you require.
 +
