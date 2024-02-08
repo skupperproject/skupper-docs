@@ -22,7 +22,7 @@ By default, the router CPU allocation is `BestEffort` as described in link:https
 
 Consider the following CPU allocation options:
 
-[cols="1,5"]
+[%header,cols="1,5"]
 |===
 
 |Router CPU | Description
