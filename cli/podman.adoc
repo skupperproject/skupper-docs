@@ -116,7 +116,7 @@ For more information, see the link:{pod-ref-link} documentation.
 [source, bash]
 ----
 $ skupper status
-Skupper is enabled for "<username>" with site name "<machine-name>-<username>" in interior mode. It is not connected to any other sites. It has no exposed services.
+Skupper is enabled for "<username>" with site name "<machine-name>-<username>". It is not connected to any other sites. It has no exposed services.
 ----
 
 NOTE: You can only create one site per user. If you require a host to support many sites, create a user for each site.
@@ -262,3 +262,51 @@ $ skupper service create backend 8080
 . Check your {service-network} is working as expected by navigating to your cluster URL, port 8080, and clicking *Say hello*.
 
 For more information, see the link:{pod-ref-link} documentation.
+
+
+== Deleting a Skupper podman site
+
+If you are no longer using a podman site, you can delete that site and recover resources.
+
+.Prerequisites
+
+* A running Skupper podman site
+
+.Procedure
+
+. Make sure you are logged in as the user that created the site:
++
+--
+[source, bash]
+----
+$ skupper status
+Skupper is enabled for "<username>" with site name "<machine-name>-<username>".
+----
+
+--
+
+. Make sure you are only removing resources you no longer require.
++
+--
+When you expose a container from a podman site, Skupper adds a `application=skupper` label to the container. 
+When you delete a podman site, all podman resources labeled with `application=skupper` are removed. 
+
+To check the labels associated with running containers:
+
+[source, bash]
+----
+$ podman ps -a --format "{{.ID}}  {{.Image}}  {{.Labels}} 
+----
+--
+
+. Delete the site and all podman resources (containers, volumes and networks) labeled with "application=skupper":
++
+--
+[source, bash]
+----
+$ skupper delete
+Skupper is now removed for user "<username>".
+----
+
+
+--
