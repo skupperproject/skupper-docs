@@ -246,10 +246,28 @@ $ podman run -d --name hello-world-backend --network skupper quay.io/skupper/hel
 
 . Expose the `backend` from the Podman site.
 +
+--
 [source, bash]
 ----
 $ skupper expose host hello-world-backend --address backend --port 8080 
 ----
+
+If you are exposing a service that is running on the same host as your site that is not a podman container, you need to specify an external IP address, not `localhost`. 
+
+For example, you can find the currently used IP address with the following command:
+[source, bash]
+----
+$ ip route get 8.8.8.8 | head -1 | awk ' {print $(NF-2) }'
+10.32.241.97
+----
+
+Use that IP address when exposing the service:
+
+[source, bash]
+----
+skupper expose host 10.32.241.97 --address backend --port 8080
+----
+--
 
 . From the Kubernetes site, create the `backend` service:
 +
