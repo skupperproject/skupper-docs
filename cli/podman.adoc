@@ -130,10 +130,25 @@ The general flow for linking podman sites is the same as for Kubernetes sites:
 
 . Generate a token on one site:
 +
+--
 [source, bash]
 ----
 $ skupper token create <filename>
 ----
+
+You can also specify the ingress hostname using the `--ingress-host` option.
+
+[NOTE]
+====
+When creating tokens you can specify a name, which you can later use to identify a particular token.
+For example:
+
+[source, bash]
+----
+$ skupper create --name my-token
+----
+====
+--
 
 . Create a link from the other site:
 +

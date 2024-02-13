@@ -40,6 +40,18 @@ A cert token is a certificate issued by the dedicated CA.
 Protect it appropriately.
 --
 
+[NOTE]
+====
+When creating tokens you can specify a name, which you can later use to identify a particular token.
+For example:
+
+[source, bash]
+----
+$ skupper create --name my-token
+----
+
+====
+
 // Type: procedure
 [id='creating-claim-tokens']
 == Creating claim tokens
