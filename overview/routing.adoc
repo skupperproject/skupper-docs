@@ -31,6 +31,7 @@ This enables you to configure a preference for one resource over another.
 If demand is normal, you can keep all traffic on your private cloud.
 If demand peaks, you can dynamically spill over to public cloud resources.
 
+See link:{cost-link} for more information.
 // Type: concept
 [id="reliable-networks"] 
 == Reliable networks
