@@ -1,0 +1,82 @@
+// Type: procedure
+[id="link-cost"] 
+= Specifying link cost
+
+When linking sites, you can assign a cost to each link to influence the traffic flow. 
+By default, link cost is set to `1` for a new link.
+In a {service-network}, the routing algorithm attempts to use the path with the lowest total cost from client to target server.
+
+* If you have services distributed across different sites, you might want a client to favor a particular target or link.
+In this case, you can specify a cost of greater than `1` on the alternative links to reduce the usage of those links.
++
+NOTE: The distribution of open connections is statistical, that is, not a round robin system.
+
+* If a connection only traverses one link, then the path cost is equal to the link cost.  
+If the connection traverses more than one link, the path cost is the sum of all the links involved in the path.  
+
+* Cost acts as a threshold for using a path from client to server in the network.
+When there is only one path, traffic flows on that path regardless of cost.  
++
+NOTE: If you start with two targets for a service, and one of the targets is no longer available, traffic flows on the remaining path regardless of cost.
+
+* When there are a number of paths from a client to server instances or a service, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
+After this threshold of open connections is reached, new connections are spread across the alternative path and the lowest cost path.
+
+
+.Prerequisite
+
+* You have set your Kubernetes context to a site that you want to link _from_.
+* A token for the site that you want to link _to_.
+
+.Procedure
+
+. Create a link to the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper link create <filename> --cost <integer-cost>
+----
+
+where `<integer-cost>` is an integer greater than 1 and traffic favors lower cost links.
+
+NOTE: If a service can be called without traversing a link, that service is considered local, with an implicit cost of `0`.
+
+For example, create a link with cost set to `2` using a token file named `token.yaml`:
+
+[source, bash]
+----
+$ skupper link create token.yaml --cost 2
+----
+--
+
+. Check the link cost:
++
+--
+[source, bash]
+----
+$ skupper link status link1 --verbose
+----
+
+The output is similar to the following:
+
+[source, bash]
+----
+ Cost:          2
+ Created:       2022-11-17 15:02:01 +0000 GMT
+ Name:          link1
+ Namespace:     default
+ Site:          default-0d99d031-cee2-4cc6-a761-697fe0f76275
+ Status:        Connected
+----
+--
+
+. Observe traffic using the console.
++
+--
+If you have a console on a site, log in and navigate to the processes for each server. 
+You can view the traffic levels corresponding to each client.
+
+NOTE: If there are multiple clients on different sites, filter the view to each client to determine the effect of cost on traffic.
+For example, in a two site network linked with a high cost with servers and clients on both sites, you can see that a client is served by the local servers while a local server is available.
+--
