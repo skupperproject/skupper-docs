@@ -290,6 +290,48 @@ This is the equivalent to Kubernetes sites created using `skupper init --enable-
 ----
 $ skupper service create <service-name> <port number>
 ----
+--
 
+== Deleting a Podman site
+
+When you no longer want the Linux host to be part of the {service-network}, you can delete the site.
+
+NOTE: This procedure removes all containers labelled `application=skupper`.
+
+.Procedure
+
+. Make sure you are logged in as the user that created the site:
++
+--
+[source, bash]
+----
+$ skupper status
+Skupper is enabled for "<username>" with site name "<machine-name>-<username>".
+----
+
+--
+
+. Make sure you are only removing resources you no longer require.
++
+--
+When you expose a container from a podman site, Skupper adds a `application=skupper` label to the container. 
+When you delete a podman site, all podman resources labeled with `application=skupper` are removed. 
+
+To check the labels associated with running containers:
+
+[source, bash]
+----
+$ podman ps -a --format "{{.ID}}  {{.Image}}  {{.Labels}} 
+----
+--
+
+. Delete the site and all podman resources (containers, volumes and networks) labeled with "application=skupper":
++
+--
+[source, bash]
+----
+$ skupper delete
+Skupper is now removed for user "<username>".
+----
 
 --
