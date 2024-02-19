@@ -110,25 +110,25 @@ The simplest Skupper site allows you to link to other sites, but does not suppor
 
 [source, bash]
 ----
-$ skupper init --ingress none
+$ skupper init
 
 It is recommended to enable lingering for <username>, otherwise Skupper may not start on boot.
 Skupper is now installed for user '<username>'.  Use 'skupper status' to get more information.
 ----
 
-If you require that other sites can link to the site you are creating:
+If you do not require that other sites can link to the site you are creating:
 
 [source, bash]
 ----
-$ skupper init --ingress-host <machine-address>
-
-It is recommended to enable lingering for <username>, otherwise Skupper may not start on boot.
-Skupper is now installed for user '<username>'.  Use 'skupper status' to get more information.
+$ skupper init --ingress none
 ----
 
-For more information, see the link:{pod-ref-link} documentation.
+In this guide we assume you have enabled ingress using the first command.
+This allows you create tokens that allow links from every network interface on the host.
 
+NOTE: When creating a token you can specify the ingress interface.
 
+You can also restrict ingress to an IP address or hostname when initializing as described in the link:{pod-ref-link} documentation.
 --
 
 . Check the status of your site:
@@ -154,16 +154,29 @@ This section describes how to link sites to form a {service-network}.
 Linking two sites requires a single initial directional connection. However:
 
 * Communication between the two sites is bidirectional, only the initial linking is directional.
-* The choice of direction for linking is typically determined by accessibility. For example, if you are linking an OpenShift Dedicated cluster with a Linux host running behind a firewall, you must link from the Linux host to the OpenShift Dedicated cluster because that route is accessible. 
+* The choice of direction for linking is typically determined by accessibility. For example, if you are linking a virtual machine running in the cloud with a Linux host running behind a firewall, you must link from the Linux host to the cloud virtual machine because that route is accessible. 
 
 .Procedure
 
 . Generate a token on one site:
 +
+--
 [source, bash]
 ----
 $ skupper token create <filename>
 ----
+
+The `metadata` section of the resulting YAML file shows which interface is available for linking.
+
+To specify the interface, use `ifconfig` to determine the IP address of the interface you want to use.
+You can then specify that IP address when creating the token:
+
+[source, bash]
+----
+$ skupper token create <filename> --ingress-host <IP Address>
+----
+
+--
 
 . Create a link from the other site:
 +
@@ -227,7 +240,8 @@ $ skupper expose [host <hostname|ip>]
 
 where 
 
-* `<host>` is the name of the host where the server is running
+* `<host>` is the name of the host where the server is running. 
+For example, the name of the container if you run the server as a container.
 * `<ip>` is the IP address where the server is running
 
 For the example deployment in step 1, you create a service using the following command:
@@ -253,7 +267,29 @@ NOTE: You can specify more than one port by repeating this option.
 $ skupper service create backend 8080
 ----
 
+// Type: procedure
+[id="exposing-simple-services"] 
+=== Consuming simple services from the {service-network}
 
-NOTE: Services exposed on Podman sites are not automatically available to other sites.
+Services exposed on Podman sites are not automatically available to other sites.
 This is the equivalent to Kubernetes sites created using `skupper init --enable-service-sync false`.
 
+.Prerequisites
+
+* A remote site where a service is exposed on the {service-network}
+* A Podman site
+
+.Procedure
+
+. Log into the host as the user associated with the Skupper site.
+
+. Create the local service:
++
+--
+[source, bash]
+----
+$ skupper service create <service-name> <port number>
+----
+
+
+--
