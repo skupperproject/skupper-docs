@@ -5,6 +5,7 @@
 :policy-link: ../policy/index.html[Securing a service network using policies]
 :console-link: ../console/index.html[Using the Skupper console]
 :cli-link: ../cli/index.html[Using the Skupper CLI]
+:podman-link: ../cli/podman.html[Using Skupper Podman]
 :tokens-link: ../cli/tokens.html[Using Skupper tokens]
 :overview-link: ../overview/index.html[Overview]
 :security-link: ../overview/security.html[Security]

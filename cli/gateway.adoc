@@ -6,6 +6,13 @@ After creating a {service-network}, you can expose services from a local machine
 
 For example, if you run a database on a server in your data center, you can deploy a front end in a cluster that can access the data as if the database was running in the cluster.
 
+[NOTE]
+====
+This documentation describes creating a gateway from a local host to a cluster site.
+An alternative approach is to create a site on the local host and link to the cluster site.
+See link:{podman-link} for information about using the Skupper CLI to create Podman sites.
+====
+
 // Type: procedure
 [id="exposing-service-gateway"] 
 == Exposing simple local services to the {service-network}
