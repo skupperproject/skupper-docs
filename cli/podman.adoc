@@ -126,7 +126,7 @@ $ skupper init --ingress none
 In this guide we assume you have enabled ingress using the first command.
 This allows you create tokens that allow links from every network interface on the host.
 
-NOTE: When creating a token you can specify the ingress interface.
+NOTE: When creating a token you can specify the ingress host.
 
 You can also restrict ingress to an IP address or hostname when initializing as described in the link:{pod-ref-link} documentation.
 --
@@ -203,10 +203,10 @@ The general flow for working with services is the same for Kubernetes and Podman
 
 The `skupper` CLI has two options for exposing services that already exist on a host:
 
-* `expose` supports simple use cases, for example, a deployment with a single service.
+* `expose` supports simple use cases, for example, a host with a single service.
 See xref:exposing-simple-services[] for instructions.
 
-* `service create` and `service bind` is a more flexible method of exposing services, for example, if you have multiple services for a deployment.
+* `service create` and `service bind` is a more flexible method of exposing services, for example, if you have multiple services for a host.
 See xref:exposing-complex-services[] for instructions.
 
 // Type: procedure
@@ -246,7 +246,7 @@ For example, the name of the container if you run the server as a container.
 
 For the example deployment in step 1, you create a service using the following command:
 ----
-$ skupper expose host hello-world-backend --address backend --port 8080
+$ skupper expose host backend-target --address backend --port 8080
 ----
 
 Options for this command include:
@@ -296,7 +296,7 @@ $ skupper service create <service-name> <port number>
 
 When you no longer want the Linux host to be part of the {service-network}, you can delete the site.
 
-NOTE: This procedure removes all containers labelled `application=skupper`.
+NOTE: This procedure removes all containers, volumes and networks labeled `application=skupper`.
 
 .Procedure
 
