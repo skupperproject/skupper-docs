@@ -1,3 +1,4 @@
+include::../partials/attributes.adoc[]
 = Deployment options on Kubernetes
 
 When you create a site on Kubernetes, there are many options you can use.  For example, you can set the number of pods and the resources allocated to each pod.

@@ -1,3 +1,4 @@
+include::../partials/attributes.adoc[]
 // Type: procedure
 [id="custom-certs"] 
 = Creating sites using a custom certificate authority

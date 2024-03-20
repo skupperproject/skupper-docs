@@ -17,3 +17,4 @@
 
 
 :skupper-operator-name: Skupper operator
+:skupper-console-name: Skupper console

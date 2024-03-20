@@ -1,20 +1,16 @@
 include::../partials/attributes.adoc[]
-
 [id="skupper-console"] 
-= Using the Skupper console
+= Using the {skupper-console-name}
 
-
-
-The Skupper console provides data and visualizations of the traffic flow between Skupper sites.
-
+The {skupper-console-name} provides data and visualizations of the traffic flow between Skupper sites.
 
 // Type: procedure
 [id="enabling-console"] 
-== Enabling the Skupper console
+== Enabling the {skupper-console-name}
 
-By default, when you create a Skupper site, a Skupper console is not available.
+By default, when you create a Skupper site, a {skupper-console-name} is not available.
 
-When enabled, the Skupper console URL is displayed whenever you check site status using `skupper status`.
+When enabled, the {skupper-console-name} URL is displayed whenever you check site status using `skupper status`.
 
 .Prerequisites
 
@@ -47,14 +43,14 @@ $ skupper init --enable-console --enable-flow-collector
 
 // Type: procedure
 [id="accessing-console"] 
-== Accessing the Skupper console
+== Accessing the {skupper-console-name}
 
-By default, the Skupper console is protected by credentials available in the `skupper-console-users` secret.
+By default, the {skupper-console-name} is protected by credentials available in the `skupper-console-users` secret.
 
 
 .Procedure
 
-. Determine the Skupper console URL using the `skupper` CLI, for example:
+. Determine the {skupper-console-name} URL using the `skupper` CLI, for example:
 +
 [source, bash]
 ----
@@ -64,7 +60,7 @@ Skupper is enabled for namespace "west" in interior mode. It is not connected to
 The site console url is:  https://skupper-west.apps-crc.testing
 ----
 
-. Browse to the Skupper console URL. 
+. Browse to the {skupper-console-name} URL. 
 The credential prompt depends on how the site was created using `skupper init`:
 +
 * Using the `--console-auth unsecured` option, you are not prompted for credentials.
@@ -82,16 +78,16 @@ JNZWzMHtyg
 
 // Type: procedure
 [id="exploring-console"] 
-== Exploring the Skupper console
+== Exploring the {skupper-console-name}
 
 After exposing a service on the {service-network}, you create an _address_, that is, a service name and port number associated with a site. 
 There might be many replicas associated with an address.
-These replicas are shown in the Skupper console as _processes_. 
+These replicas are shown in the {skupper-console-name} as _processes_. 
 Not all participants on a {service-network} are services.
 For example, a _frontend_ deployment might call an exposed service named _backend_, but that frontend is not part of the {service-network}.
 In the console, both are shown so that you can view the traffic and these are called _components_.
 
-The Skupper console provides an overview of the following:
+The {skupper-console-name} provides an overview of the following:
 
 * Topology 
 * Addresses
@@ -100,7 +96,7 @@ The Skupper console provides an overview of the following:
 * Processes
 
 
-The Skupper console also provides useful networking information about the {service-network}, for example, traffic levels.
+The {skupper-console-name} also provides useful networking information about the {service-network}, for example, traffic levels.
 
 image::../images/skupper-adservice.png[]
 
