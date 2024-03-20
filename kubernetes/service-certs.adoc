@@ -1,3 +1,4 @@
+include::../partials/attributes.adoc[]
 // Type: assembly
 [id="encrypting-traffic-pod-router"] 
 = Encrypting traffic from a pod to the Skupper router

@@ -1,7 +1,6 @@
-
+include::../partials/attributes.adoc[]
 //Category: skupper-overview
 // Type: assembly
-
 [id="skupper-overview"] 
 = Skupper overview
 
