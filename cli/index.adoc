@@ -1,4 +1,5 @@
 include::../partials/attributes.adoc[]
+:context: skupper-kubernetes
 //Category: skupper-cli
 // Type: assembly
 [id="skupper-cli"] 
@@ -200,7 +201,7 @@ where `<link-name>` is the name of the link specified during creation.
 include::link-cost.adoc[leveloffset=+1]
 
 // Type: concept
-[id="exposing-services-ns"] 
+[id="{context}_exposing-services-ns"] 
 == Exposing services on the {service-network} from a namespace
 
 After creating a {service-network}, exposed services can communicate across that network.
@@ -208,14 +209,14 @@ After creating a {service-network}, exposed services can communicate across that
 The `skupper` CLI has two options for exposing services that already exist in a namespace:
 
 * `expose` supports simple use cases, for example, a deployment with a single service.
-See xref:exposing-simple-services[] for instructions.
+See xref:{context}_exposing-simple-services[] for instructions.
 
 * `service create` and `service bind` is a more flexible method of exposing services, for example, if you have multiple services for a deployment.
 See xref:exposing-complex-services[] for instructions.
 
 
 // Type: procedure
-[id="exposing-simple-services"] 
+[id="{context}_exposing-simple-services"] 
 === Exposing simple services on the {service-network}
 This section describes how services can be enabled for a {service-network} for simple use cases.
 

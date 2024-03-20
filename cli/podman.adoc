@@ -1,5 +1,4 @@
 include::../partials/attributes.adoc[]
-
 :context: skupper-podman
 //Category: skupper-cli
 // Type: assembly
@@ -194,7 +193,7 @@ $ skupper link status
 include::link-cost.adoc[leveloffset=+1]
 
 // Type: concept
-[id="exposing-services-ns"] 
+[id="{context}_exposing-services-ns"] 
 == Exposing services on the {service-network} from a Linux host
 
 After creating a {service-network}, exposed services can communicate across that network.
@@ -204,13 +203,13 @@ The general flow for working with services is the same for Kubernetes and Podman
 The `skupper` CLI has two options for exposing services that already exist on a host:
 
 * `expose` supports simple use cases, for example, a host with a single service.
-See xref:exposing-simple-services[] for instructions.
+See xref:{context}_exposing-simple-services[] for instructions.
 
 * `service create` and `service bind` is a more flexible method of exposing services, for example, if you have multiple services for a host.
 See xref:exposing-complex-services[] for instructions.
 
 // Type: procedure
-[id="exposing-simple-services"] 
+[id="{context}_exposing-simple-services"] 
 === Exposing simple services on the {service-network}
 This section describes how services can be enabled for a {service-network} for simple use cases.
 
@@ -268,7 +267,7 @@ $ skupper service create backend 8080
 ----
 
 // Type: procedure
-[id="exposing-simple-services"] 
+[id="consuming-simple-services"] 
 === Consuming simple services from the {service-network}
 
 Services exposed on Podman sites are not automatically available to other sites.
