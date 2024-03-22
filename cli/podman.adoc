@@ -303,7 +303,7 @@ To check the labels associated with running containers:
 
 [source, bash]
 ----
-$ podman ps -a --format "{{.ID}}  {{.Image}}  {{.Labels}} 
+$ podman ps -a --format "{{.ID}}  {{.Image}}  {{.Labels}}" 
 ----
 ====
 
