@@ -1,6 +1,6 @@
 // Type: concept
 [id="exposing-services-local"] 
-= Exposing services on the {service-network} from a local machine
+== Exposing services on the {service-network} from a local machine
 
 After creating a {service-network}, you can expose services from a local machine on the {service-network}.
 
@@ -15,7 +15,7 @@ See link:{podman-link} for information about using the Skupper CLI to create Pod
 
 // Type: procedure
 [id="exposing-service-gateway"] 
-== Exposing simple local services to the {service-network}
+=== Exposing simple local services to the {service-network}
 
 This section shows how to expose a single service running locally on a {service-network}.
 
@@ -73,7 +73,7 @@ The URL field shows the underlying communication and can be ignored.
 
 // Type: procedure
 [id="exposing-services-gateway"] 
-== Working with complex local services on the {service-network}
+=== Working with complex local services on the {service-network}
 
 
 This section shows more advanced usage of skupper gateway.
@@ -173,7 +173,7 @@ where
 
 // Type: procedure
 [id="exporting-gateway"] 
-== Creating a gateway and applying it on a different machine
+=== Creating a gateway and applying it on a different machine
 
 If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition bundle on the first machine and later apply that definition bundle on a second machine as described in this procedure.
 For example, if you want to expose a local database service to the {service-network}, but you never want to access the cluster from the database server, you can use this procedure to create the definition bundle and apply it on the database server.
@@ -325,7 +325,7 @@ NOTE: If you need to change the gateway definition, for example to change port, 
 
 // Type: procedure
 [id="gateway-reference"] 
-== Gateway YAML reference
+=== Gateway YAML reference
 
 The xref:exporting-gateway[] describes how to create a gateway to apply on a separate machine using a gateway definition YAML file.
 

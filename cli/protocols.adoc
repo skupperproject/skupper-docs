@@ -1,6 +1,6 @@
 // Type: reference
 [id='protocols']
-= Supported standards and protocols
+== Supported standards and protocols
 
 Skupper supports the following protocols for your {service-network}:
 

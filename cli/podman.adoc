@@ -1,5 +1,4 @@
 include::../partials/attributes.adoc[]
-:context: skupper-podman
 //Category: skupper-cli
 // Type: assembly
 [id='using-skupper-podman']
@@ -190,10 +189,10 @@ After you have linked to a network, you can check the link status:
 $ skupper link status
 ----
 
-include::link-cost.adoc[leveloffset=+1]
+include::link-cost.adoc[leveloffset=0]
 
 // Type: concept
-[id="{context}_exposing-services-ns"] 
+[id="podman_exposing-services-ns"] 
 == Exposing services on the {service-network} from a Linux host
 
 After creating a {service-network}, exposed services can communicate across that network.
@@ -203,13 +202,13 @@ The general flow for working with services is the same for Kubernetes and Podman
 The `skupper` CLI has two options for exposing services that already exist on a host:
 
 * `expose` supports simple use cases, for example, a host with a single service.
-See xref:{context}_exposing-simple-services[] for instructions.
+See xref:podman_exposing-simple-services[] for instructions.
 
 * `service create` and `service bind` is a more flexible method of exposing services, for example, if you have multiple services for a host.
-See xref:exposing-complex-services[] for instructions.
+See xref:podman_exposing-complex-services[] for instructions.
 
 // Type: procedure
-[id="{context}_exposing-simple-services"] 
+[id="podman_exposing-simple-services"] 
 === Exposing simple services on the {service-network}
 This section describes how services can be enabled for a {service-network} for simple use cases.
 
@@ -265,6 +264,75 @@ NOTE: You can specify more than one port by repeating this option.
 ----
 $ skupper service create backend 8080
 ----
+
+
+// Type: procedure
+[id="podman_exposing-complex-services"] 
+=== Exposing complex services on the {service-network}
+
+This section describes how services can be enabled for a {service-network} for more complex use cases.
+
+.Prerequisites 
+
+* A Skupper Podman site
+
+.Procedure
+
+. Run a server, for example:
++
+[source, bash]
+----
+$ podman run --name backend-target --network skupper --detach --rm -p 8080:8080 quay.io/skupper/hello-world-backend
+----
++
+This step is not Skupper-specific, that is, this process is unchanged from standard processes for your host.
+
+. Create a service that can communicate on the {service-network}:
++
+--
+[source, bash]
+----
+$ skupper service create <name> <port>
+----
+
+where 
+
+* `<name>` is the name of the service you want to create
+* `<port>` is the port the service uses
+
+For the example deployment in step 1, you create a service using the following command:
+[source, bash]
+----
+$ skupper service create hello-world-backend 8080
+----
+
+
+--
+
+. Bind the service to a cluster service:
++
+--
+[source, bash]
+----
+$ skupper service bind <service-name> <target-type> <target-name>
+----
+
+where
+
+* `<service-name>` is the name of the service on the {service-network}
+
+* `<target-type>` is the object you want to expose, `host` is the only current valid value.
+
+* `<target-name>` is the name of the cluster service
+
+For the example deployment in step 1, you bind the service using the following command:
+[source, bash]
+----
+$ skupper service bind hello-world-backend host hello-world-backend
+----
+
+--
+
 
 // Type: procedure
 [id="consuming-simple-services"] 
