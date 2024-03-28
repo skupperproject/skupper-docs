@@ -197,7 +197,7 @@ $ skupper link delete <link-name>
 where `<link-name>` is the name of the link specified during creation.
 -- 
 
-include::link-cost.adoc[leveloffset=+1]
+include::link-cost.adoc[leveloffset=0]
 
 // Type: concept
 [id="kubernetes_exposing-services-ns"] 
@@ -391,13 +391,13 @@ $ skupper expose deployment/backend --port 8080 --target-namespace east-backend
 ----
 --
 
-include::./gateway.adoc[leveloffset=+1]
+include::./gateway.adoc[leveloffset=0]
 
-include::./network-status.adoc[leveloffset=+1]
+include::./network-status.adoc[leveloffset=0]
 
-include::./native-security-options.adoc[leveloffset=+1]
+include::./native-security-options.adoc[leveloffset=0]
 
-include::./protocols.adoc[leveloffset=+1]
+include::./protocols.adoc[leveloffset=0]
 
 // Type: reference
 [id="cli-global-options"] 

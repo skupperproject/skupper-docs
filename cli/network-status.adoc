@@ -1,6 +1,6 @@
 // Type: procedure
 [id='network-service']
-= Exploring a {service-network}
+== Exploring a {service-network}
 
 Skupper includes a command to allow you report all the sites and the services available on a {service-network}.
 

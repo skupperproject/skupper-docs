@@ -189,7 +189,7 @@ After you have linked to a network, you can check the link status:
 $ skupper link status
 ----
 
-include::link-cost.adoc[leveloffset=+1]
+include::link-cost.adoc[leveloffset=0]
 
 // Type: concept
 [id="podman_exposing-services-ns"] 
