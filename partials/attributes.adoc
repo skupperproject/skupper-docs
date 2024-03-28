@@ -14,6 +14,7 @@
 :glossary-link: ../overview/glossary.html[Glossary]
 :kube-ref-link: ../kubernetes-reference/index.html[Skupper Kubernetes CLI reference]
 :pod-ref-link: ../podman-reference/index.html[Skupper Podman CLI reference]
+:cost-link: ../cli/index.html#specifying-link-cost[Specifying link cost]
 
 
 :skupper-operator-name: Skupper operator
