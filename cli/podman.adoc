@@ -104,15 +104,29 @@ podman
 . Create a Skupper site:
 +
 --
-The simplest Skupper site allows you to link to other sites, but does not support linking _to_ the current site.
+
+Use the following command to create a site where tokens are created to link on any network interface:
 
 [source, bash]
 ----
 $ skupper init
+----
 
+The following output is displayed:
+
+[source, bash]
+----
 It is recommended to enable lingering for <username>, otherwise Skupper may not start on boot.
 Skupper is now installed for user '<username>'.  Use 'skupper status' to get more information.
 ----
+
+If you want to limit link creation to be a specific interface, for example to an interface associated with the IP address 192.168.1.10:
+
+[source, bash]
+----
+$ skupper init --ingress-host 192.168.1.10
+----
+
 
 If you do not require that other sites can link to the site you are creating:
 
