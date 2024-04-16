@@ -260,11 +260,11 @@ where
 .StatefulSets
 
 A StatefulSet in Kubernetes is typically associated with a headless service to provide stable, unique network identifiers for each pod.
-Use the `--headless` option to allow StatefulSets be exposed using Skupper.
+If `clusterIP` is set to `None`, use the `--headless` option to allow StatefulSets be exposed using Skupper.
 
 [source, bash]
 ----
-$ skupper expose statefulset <statefulsetname> --headless
+$ skupper expose statefulset <statefulsetname> [--headless]
 ----
 
 where 
