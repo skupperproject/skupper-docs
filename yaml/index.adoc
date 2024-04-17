@@ -106,6 +106,7 @@ See the xref:site-config-reference[] section for more reference.
 == Linking sites using YAML
 
 While it is not possible to declaratively link sites, you can create a token using YAML.
+Only use this procedure to create links if the Skupper CLI is not available in your environment.
 
 .Prerequisites
 
@@ -126,6 +127,8 @@ kind: Secret
 metadata:
   labels:
     skupper.io/type: connection-token-request
+  annotations:
+    skupper.io/cost: "2"
   name: secret-name
 ----
 
@@ -159,6 +162,12 @@ $ kubectl apply -f token.yml
 ----
 $ skupper link status --wait 60
 ----
+
+// tag::skupper-io[]
+Skupper recommends using the CLI to create links. 
+
+A future release of Skupper will provide an alternative declarative method to create links.
+// end::skupper-io[]
 
 include::annotations.adoc[leveloffset=+1]
 
