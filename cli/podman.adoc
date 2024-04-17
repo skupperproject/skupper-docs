@@ -120,6 +120,14 @@ It is recommended to enable lingering for <username>, otherwise Skupper may not 
 Skupper is now installed for user '<username>'.  Use 'skupper status' to get more information.
 ----
 
+Use the following command to start the site service at system start and persist over logouts:
+
+[source, bash]
+----
+# loginctl enable-linger <username>
+----
+
+
 If you want to limit link creation to be a specific interface, for example to an interface associated with the IP address 192.168.1.10:
 
 [source, bash]
