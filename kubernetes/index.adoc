@@ -125,6 +125,18 @@ $ kubectl create secret tls skupper-local-client --cert=certificate/tls.crt --ke
 
 $ kubectl patch secret skupper-local-client  -p="{\"data\":{\"ca.crt\": \"$($ kubectl get secret skupper-local-ca -o json -o=jsonpath="{.data.tls\.crt}")\"}}"
 
+$ kubectl patch secret skupper-local-client  -p="{\"data\":{\"connect.json\":\"$(echo '{
+    "scheme": "amqps",
+    "host": "skupper-router-local.YOUR_NAMESPACE.svc.cluster.local",
+    "port": "5671",
+    "tls": {
+        "ca": "/etc/messaging/ca.crt",
+        "cert": "/etc/messaging/tls.crt",
+        "key": "/etc/messaging/tls.key",
+        "verify": true
+    }
+}'  | base64 | tr -d '\n')\"}}"
+
 
 $ kubectl create secret tls skupper-local-server --cert=certificate/tls.crt --key=certificate/tls.key 
 
