@@ -127,14 +127,13 @@ Use the following command to start the site service at system start and persist 
 # loginctl enable-linger <username>
 ----
 
-By default, `skupper init` tries to include all IP addresses associated with local network Interfaces as valid ingress hosts.
-To limit link creation to be a specific interface, for example to an interface associated with the IP address 192.168.1.10:
+By default, `skupper init` tries to include all IP addresses associated with local network interfaces as valid ingress hosts.
+You can use `--ingress-host <IP/Hostname>` to restrict token ingress to a specific network context:
 
 [source, bash]
 ----
-$ skupper init --ingress-host 192.168.1.10
+$ skupper init --ingress-host my-cloud-vm.example.com
 ----
-
 
 If you do not require that other sites can link to the site you are creating:
 
