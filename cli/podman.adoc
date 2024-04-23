@@ -185,14 +185,12 @@ Linking two sites requires a single initial directional connection. However:
 $ skupper token create <filename>
 ----
 
-The `metadata` section of the resulting YAML file shows which interface is available for linking.
-
-To specify the interface, use `ifconfig` to determine the IP address of the interface you want to use.
-You can then specify that IP address when creating the token:
+If you created the site  without specifying an `ingress-host`, the token is valid for all network contexts.
+You can use `--ingress-host <IP/Hostname>` to restrict token ingress to a specific network context:
 
 [source, bash]
 ----
-$ skupper token create <filename> --ingress-host <IP Address>
+$ skupper token create <filename> --ingress-host <IP/Hostname>
 ----
 
 --
