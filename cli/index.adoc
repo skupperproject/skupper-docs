@@ -259,20 +259,26 @@ where
 
 .StatefulSets
 
-A StatefulSet in Kubernetes is typically associated with a headless service to provide stable, unique network identifiers for each pod.
-If `clusterIP` is set to `None`, use the `--headless` option to allow StatefulSets be exposed using Skupper.
+You can expose a statefulset using:
 
 [source, bash]
 ----
-$ skupper expose statefulset <statefulsetname> [--headless]
+$ skupper expose statefulset <statefulsetname>
 ----
 
-where 
+In this case, you can later expose a different deployment or statefulset from another site using the same address (routing key).
 
-* `<statefulsetname>` is the name of a statefulset
+A StatefulSet in Kubernetes is often associated with a headless service to provide stable, unique network identifiers for each pod.
+If you require stable network identifiers on the {service-network}, use the `--headless` option.
 
+[source, bash]
+----
+$ skupper expose statefulset  --headless
+----
 
-For the example deployment in step 1, you create a service using the following command:
+NOTE: When you use the `--headless` option, you can only expose the service from the current cluster.
+
+For the example deployment in step 1, you can create a service using the following command:
 ----
 $ skupper expose deployment/hello-world-backend --port 8080
 ----
