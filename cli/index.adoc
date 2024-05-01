@@ -266,17 +266,15 @@ You can expose a statefulset using:
 $ skupper expose statefulset <statefulsetname>
 ----
 
-In this case, you can later expose a different deployment or statefulset from another site using the same address (routing key).
-
 A StatefulSet in Kubernetes is often associated with a headless service to provide stable, unique network identifiers for each pod.
-If you require stable network identifiers on the {service-network}, use the `--headless` option.
+If you require stable network identifiers for each pod on the {service-network}, use the `--headless` option.
 
 [source, bash]
 ----
 $ skupper expose statefulset  --headless
 ----
 
-NOTE: When you use the `--headless` option, you can only expose the service from the current cluster.
+NOTE: When you use the '--headless" option, only one statefulset in the {service-network} can be exposed through the address (routing key).
 
 For the example deployment in step 1, you can create a service using the following command:
 ----
