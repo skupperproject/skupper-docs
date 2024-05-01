@@ -233,23 +233,55 @@ This step is not Skupper-specific, that is, this process is unchanged from stand
 . Create a service that can communicate on the {service-network}:
 +
 --
+
+.Deployments and pods
 [source, bash]
 ----
-$ skupper expose [deployment <name>|pods <selector>|statefulset <statefulsetname>|service <name>]
+$ skupper expose [deployment <name>|pods <selector>]
 ----
 
 where 
 
-* `<name>` is the name of your deployment 
+* `<name>` is the name of a deployment 
 * `<selector>` is a pod selector
-* `<statefulsetname>` is the name of a statefulset
 
-For the example deployment in step 1, you create a service using the following command:
+.Kubernetes services
+Specify a resulting service name using the `--address` option.
+[source, bash]
+----
+$ skupper expose service <name> --address <skupper-service-name>
+----
+
+where 
+
+* `<name>` is the name of a service
+* `<skupper-service-name>` is the name of the resulting service shared on the {service-network}.
+
+.StatefulSets
+
+You can expose a statefulset using:
+
+[source, bash]
+----
+$ skupper expose statefulset <statefulsetname>
+----
+
+A StatefulSet in Kubernetes is often associated with a headless service to provide stable, unique network identifiers for each pod.
+If you require stable network identifiers for each pod on the {service-network}, use the `--headless` option.
+
+[source, bash]
+----
+$ skupper expose statefulset  --headless
+----
+
+NOTE: When you use the '--headless" option, only one statefulset in the {service-network} can be exposed through the address (routing key).
+
+For the example deployment in step 1, you can create a service using the following command:
 ----
 $ skupper expose deployment/hello-world-backend --port 8080
 ----
 
-Options for this command include:
+Options for the `expose` command include:
 
 * `--port <port-number>`:: Specify the port number that this service is available on the {service-network}.
 NOTE: You can specify more than one port by repeating this option.
