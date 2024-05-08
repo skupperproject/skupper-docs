@@ -112,6 +112,9 @@ Use the following command to create a site where tokens are created to link on a
 $ skupper init
 ----
 
+NOTE: By default, this command times out after 2 minutes for podman sites.
+You can increase the time with the `--timeout` option.
+
 The following output is displayed:
 
 [source, bash]
