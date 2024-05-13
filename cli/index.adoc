@@ -293,7 +293,23 @@ NOTE: You can specify more than one port by repeating this option.
 NOTE: If you do not specify ports, `skupper` uses the `containerPort` value of the deployment.
 --
 
-. 
+. Check the status of services exposed on the {service-network} (`-v` is only available on Kubernetes):
++
+--
+[source, bash]
+----
+$ skupper service status -v
+Services exposed through Skupper:
+╰─ backend:8080 (tcp)
+   ╰─ Sites:
+      ├─ 4d80f485-52fb-4d84-b10b-326b96e723b2(west)
+      │  policy: disabled
+      ╰─ 316fbe31-299b-490b-9391-7b46507d76f1(east)
+         │ policy: disabled
+         ╰─ Targets:
+            ╰─ backend:8080 name=backend-9d84544df-rbzjx
+----
+
 
 // Type: procedure
 [id="exposing-complex-services"] 
