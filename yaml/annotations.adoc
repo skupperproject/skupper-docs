@@ -70,11 +70,16 @@ This allows you to delete and recreate the `backend` service without having to a
 
 [source, bash]
 ----
-$ skupper service status
+$ skupper service status -v
 Services exposed through Skupper:
-╰─ backend (tcp port 8080)
-   ╰─ Targets:
-      ╰─ app=hello-world-backend name=hello-world-backend
+╰─ backend:8080 (tcp)
+   ╰─ Sites:
+      ├─ 4d80f485-52fb-4d84-b10b-326b96e723b2(west)
+      │  policy: disabled
+      ╰─ 316fbe31-299b-490b-9391-7b46507d76f1(east)
+         │ policy: disabled
+         ╰─ Targets:
+            ╰─ backend:8080 name=backend-9d84544df-rbzjx
 ----
 
 NOTE: The related targets for services are only displayed when the target is available on the current cluster.

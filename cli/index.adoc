@@ -290,9 +290,10 @@ NOTE: You can specify more than one port by repeating this option.
 
 * `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
 
+NOTE: If you do not specify ports, `skupper` uses the `containerPort` value of the deployment.
 --
 
-NOTE: If you do not specify ports, `skupper` uses the `containerPort` value of the deployment.
+. 
 
 // Type: procedure
 [id="exposing-complex-services"] 
