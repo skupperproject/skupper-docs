@@ -79,21 +79,27 @@ The output shows:
 * Details for each site, for example the namespace names.
 --
 
-. Check the status of services exposed on the {service-network}:
+. Check the status of services exposed on the {service-network} (`-v` is only available on Kubernetes):
 +
 --
 [source, bash]
 ----
-$ skupper service status
+$ skupper service status -v
 Services exposed through Skupper:
-╰─ backend (tcp port 8080)
-   ╰─ Targets:
-      ╰─ app=backend name=backend
+╰─ backend:8080 (tcp)
+   ╰─ Sites:
+      ├─ 4d80f485-52fb-4d84-b10b-326b96e723b2(west)
+      │  policy: disabled
+      ╰─ 316fbe31-299b-490b-9391-7b46507d76f1(east)
+         │ policy: disabled
+         ╰─ Targets:
+            ╰─ backend:8080 name=backend-9d84544df-rbzjx
 ----
 
 The output shows the `backend` service and the related target of that service.
 
-NOTE: The related targets for services are only displayed when the target is available on the current cluster.
+NOTE: As part of output each site reports the status of the policy system on that cluster.
+
 --
 
 . List the Skupper events for a site:
