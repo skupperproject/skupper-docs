@@ -1,0 +1,14 @@
+include::../partials/attributes.adoc[]
+//Category: skupper-overview
+// Type: assembly
+[id="skupper-load"] 
+= Skupper load-balancing and failover
+
+Skupper allows you balance traffic across servers and fail over between servers located across the application network.
+
+You can configure the network so that a specific location handles all traffic until failure. 
+After failure at that location, all traffic is handled by a different location. 
+To achieve this behavior, you set the cost from the client to the backup server high as described in {cost-link}.
+
+To configure balancing traffic between locations, you set the cost between the clients and the server locations to be equal.
+However, it is important to note that traffic is measured in terms of concurrent TCP connections, so do not expect 'round robin' behavior.
