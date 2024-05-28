@@ -1,0 +1,39 @@
+name: Convert AsciiDoc and Check Links
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+
+    - name: Install dependencies
+      run: |
+        gem install asciidoctor
+        gem install html-proofer
+
+    - name: Convert AsciiDoc files to HTML
+      run: |
+        mkdir -p converted_files
+        for file in $(find . -name "*.adoc"); do
+          asciidoctor -o converted_files/$(basename ${file%.adoc}.html) $file
+        done
+
+    - name: Check links in converted HTML files
+      run: |
+        htmlproofer ./converted_files --disable-external
