@@ -1,6 +1,6 @@
 :service-network: service network
-:skupper-cli-version: 1.5
-:service-version: 1.5
+:skupper-cli-version: 1.7
+:service-version: 1.7
 
 :policy-link: ../policy/index.html[Securing a service network using policies]
 :console-link: ../console/index.html[Using the Skupper console]
