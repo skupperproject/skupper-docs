@@ -49,9 +49,15 @@ jobs:
           "kubernetes/deployment-concerns.adoc"
         )
         for file in "${files[@]}"; do
-          asciidoctor -o converted_files/$(basename ${file%.adoc}.html) $file
+          # Create the target directory if it doesn't exist
+          target_dir=converted_files/$(dirname "$file")
+          mkdir -p "$target_dir"
+          # Convert the AsciiDoc file and maintain directory structure
+          asciidoctor -o "$target_dir/$(basename ${file%.adoc}.html)" "$file"          
         done
+        cp -R images converted_files/
 
     - name: Check links in converted HTML files
+      #continue-on-error: true # Do not fail the job regardless of output
       run: |
         htmlproofer ./converted_files --disable-external
