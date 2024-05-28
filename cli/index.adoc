@@ -1,6 +1,7 @@
 include::../partials/attributes.adoc[]
 //Category: skupper-cli
 // Type: assembly
+:context: cli
 [id="skupper-cli"] 
 = Using the Skupper CLI
 
@@ -18,7 +19,7 @@ Installing the `skupper` command-line interface (CLI) provides a simple method t
 .Procedure
 
 // tag::skupper-io[]
-. Follow the instructions for link:/install/index.html[Installing Skupper].
+. Follow the instructions for link:https://skupper.io/install/index.html[Installing Skupper].
 // end::skupper-io[]
 
 . Verify the installation.
