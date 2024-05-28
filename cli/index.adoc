@@ -310,7 +310,7 @@ Services exposed through Skupper:
          ╰─ Targets:
             ╰─ backend:8080 name=backend-9d84544df-rbzjx
 ----
-
+--
 
 // Type: procedure
 [id="exposing-complex-services"] 

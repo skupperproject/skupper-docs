@@ -1,5 +1,5 @@
 // Type: procedure
-[id="{context}_link-cost"] 
+[id="specifying-link-cost"] 
 == Specifying link cost
 
 When linking sites, you can assign a cost to each link to influence the traffic flow. 
