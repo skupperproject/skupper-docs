@@ -5,8 +5,7 @@ on:
     branches:
       - main
   pull_request:
-    branches:
-      - main
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
@@ -27,10 +26,29 @@ jobs:
         gem install asciidoctor
         gem install html-proofer
 
-    - name: Convert AsciiDoc files to HTML
+    - name: Convert specified AsciiDoc files to HTML
       run: |
         mkdir -p converted_files
-        for file in $(find . -name "*.adoc"); do
+        # List of AsciiDoc files to convert
+        files=(
+          "cli/index.adoc"
+          "cli/tokens.adoc"
+          "cli/podman.adoc"
+          "cli/native-security-options.adoc"
+          "yaml/index.adoc"
+          "operator/index.adoc"
+          "console/index.adoc"
+          "policy/index.adoc"
+          "troubleshooting/index.adoc"
+          "overview/connectivity.adoc"
+          "overview/glossary.adoc"
+          "overview/index.adoc"
+          "overview/resources.adoc"
+          "overview/routing.adoc"
+          "overview/security.adoc"
+          "kubernetes/deployment-concerns.adoc"
+        )
+        for file in "${files[@]}"; do
           asciidoctor -o converted_files/$(basename ${file%.adoc}.html) $file
         done
 
