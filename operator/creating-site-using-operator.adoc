@@ -14,8 +14,7 @@ include::../examples/site-cm.yaml[]
 
 ----
 
-NOTE: The console is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
-Currently, you must enable the console on the same site as you enable the flow collector. This requirement may change before the console is fully supported by https://skupper.io[skupper.io].
+NOTE: Currently, you must enable the console on the same site as you enable the flow collector.
 
 You can also create a site without a console:
 
