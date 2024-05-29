@@ -1,7 +1,7 @@
 include::../partials/attributes.adoc[]
 //Category: skupper-cli
 // Type: assembly
-:context: cli
+:context: k8s
 [id="skupper-cli"] 
 = Using the Skupper CLI
 

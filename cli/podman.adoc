@@ -1,6 +1,7 @@
 include::../partials/attributes.adoc[]
 //Category: skupper-cli
 // Type: assembly
+:context: podman
 [id='using-skupper-podman']
 = Using Skupper Podman
 
