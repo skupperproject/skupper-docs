@@ -1,4 +1,3 @@
-include::../partials/attributes.adoc[]
 = Deployment options on Kubernetes
 
 When you create a site on Kubernetes, there are many options you can use.  For example, you can set the number of pods and the resources allocated to each pod.
@@ -101,5 +100,4 @@ data:
 
 Setting the number of routers to more than two does not provide increased availability and can adversely affect performance.
 
-Note that clients must reconnect when a router restarts or traffic is
-redirected to a backup router.
+Note: Clients must reconnect when a router restarts or traffic is redirected to a backup router.
