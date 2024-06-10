@@ -46,6 +46,7 @@ jobs:
           "overview/resources.adoc"
           "overview/routing.adoc"
           "overview/security.adoc"
+          "overview/load.adoc"
           "kubernetes/deployment-concerns.adoc"
         )
         for file in "${files[@]}"; do

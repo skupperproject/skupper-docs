@@ -22,7 +22,12 @@ If you want to preview changes for more complex contributions, follow this proce
 . Start the build:
 +
 ----
-$ bash scripts/convert-all.sh
+$ python scripts/convert-all.py ./scripts/convert
+-adoc.sh .github/workflows/asciidoc-convert-check.yml
 ----
+
+* `convert-adoc.sh` converts each adoc to HTML
+* `.github/workflows/asciidoc-convert-check.yml` is the single source of truth about which adoc files are published, see [GitHub: Source code for the Skupper project website]( https://github.com/skupperproject/skupper-website ).
+
 
 . See the `build` directory for the HTML output.
