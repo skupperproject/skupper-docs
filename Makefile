@@ -23,4 +23,4 @@ export PYTHONPATH := python
 
 .PHONY: generate-preview
 generate-preview:
-	bash ./scripts/convert-all.sh
+	python ./scripts/convert-all.py ./scripts/convert-adoc.sh .github/workflows/asciidoc-convert-check.yml
