@@ -78,6 +78,16 @@ The URL field shows the underlying communication and can be ignored.
 
 This section shows more advanced usage of skupper gateway.
 
+. If you want to create a service type gateway on Linux, you need the `skrouterd` binary in your path.
++
+Use the `yum` or `dnf` command to install the `skupper-router` package:
++
+----
+$ sudo dnf install skupper-router
+----
++
+For podman or docker type gateways, you can skip this step.
+
 . Create a Skupper gateway:
 +
 --
@@ -173,6 +183,7 @@ where
 
 // Type: procedure
 [id="exporting-gateway"] 
+
 === Creating a gateway and applying it on a different machine
 
 If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition bundle on the first machine and later apply that definition bundle on a second machine as described in this procedure.
@@ -322,6 +333,7 @@ This shows that there is only one exposed service and that service is only expos
 --
 
 NOTE: If you need to change the gateway definition, for example to change port, you need to remove the existing gateway and repeat this procedure from the start to redefine the gateway.
+
 
 // Type: procedure
 [id="gateway-reference"] 
