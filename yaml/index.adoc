@@ -163,15 +163,14 @@ $ kubectl apply -f token.yml
 $ skupper link status --wait 60
 ----
 
-// tag::skupper-io[]
 Skupper recommends using the CLI to create links. 
 
 A future release of Skupper will provide an alternative declarative method to create links.
+
 // end::skupper-io[]
 
 include::annotations.adoc[leveloffset=+1]
 
-// end::skupper-io[]
 
 
 // Type: reference

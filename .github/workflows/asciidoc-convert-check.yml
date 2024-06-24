@@ -30,25 +30,8 @@ jobs:
       run: |
         mkdir -p converted_files
         # List of AsciiDoc files to convert
-        files=(
-          "cli/index.adoc"
-          "cli/tokens.adoc"
-          "cli/podman.adoc"
-          "cli/native-security-options.adoc"
-          "yaml/index.adoc"
-          "operator/index.adoc"
-          "console/index.adoc"
-          "policy/index.adoc"
-          "troubleshooting/index.adoc"
-          "overview/connectivity.adoc"
-          "overview/glossary.adoc"
-          "overview/index.adoc"
-          "overview/resources.adoc"
-          "overview/routing.adoc"
-          "overview/security.adoc"
-          "overview/load.adoc"
-          "kubernetes/deployment-concerns.adoc"
-        )
+         mapfile -t files < published-adoc.txt
+        
         for file in "${files[@]}"; do
           # Create the target directory if it doesn't exist
           target_dir=converted_files/$(dirname "$file")
