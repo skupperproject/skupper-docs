@@ -313,6 +313,60 @@ Services exposed through Skupper:
 --
 
 // Type: procedure
+[id="kubernetes_deleting-services"] 
+=== Deleting services from the {service-network}
+This section describes how services can be disabled for a {service-network}.
+
+.Prerequisites
+
+* A {service-network}
+* An exposed service
+
+.Procedure
+
+. Navigate to the context where the service was exposed.
+
+. Delete the service:
++
+--
+[source, bash]
+----
+$ skupper service delete <service-name>
+----
+
+where `service-name` is the name of the service you want to remove.
+
+[NOTE]
+====
+TCP connections can remain active for an extended duration.
+After deleting the service, existing connections continue to communicate until the TCP connection is terminated.
+For example, if you exposed a database connection over the {service-network}, and then delete the service. 
+New database connections cannot be established.
+However, deleting the service does not affect existing connections.
+To terminate the existing connection, manually stop the database connection.
+====
+--
+
+. Check that the service is removed.
++
+--
+[source, bash]
+----
+$ skupper service status
+----
+
+The service should not be listed.
+
+[NOTE]
+====
+Typically, if the service is still listed, it is because you issued the `delete` command from the wrong site context.
+By default, when you expose a service from a site, that service becomes available on all other sites, however you can delete the service only from the original site context.
+====
+
+--
+
+
+// Type: procedure
 [id="exposing-complex-services"] 
 === Exposing complex services on the {service-network}
 
