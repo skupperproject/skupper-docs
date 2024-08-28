@@ -50,10 +50,10 @@ However, if there is no other server available, all traffic is directed to this 
 --
 
 . Expose the servers on the {service-network} for both sites.
+
+.. Create the service:
 +
 --
-On the first site:
-
 [source, bash]
 ----
 $ skupper service create <name> <port>
@@ -66,9 +66,16 @@ where
 
 By default, this service is now visible on both sites, although there is no server available to process requests to this service.
 
-If `enable-service-sync` is set to `false` you need to create the service on both sites.
+[NOTE]
+====
+By default, if you create a service on one site, it is available on all sites.
+However, if `enable-service-sync` is set to `false` you need to create the service on both sites.
+====
+--
 
-On both sites:
+.. Bind the service with the server on both sites.
++
+--
 
 [source, bash]
 ----
@@ -91,3 +98,5 @@ $ skupper service bind hello-world-backend deployment hello-world-backend
 --
 
 . You can use the console to check the traffic flow or monitor the services using your tooling.
+Clients can connect to either site, and the server on that site processes the requests until the server is not available.
+Further requests are processed by the server on the other site.
