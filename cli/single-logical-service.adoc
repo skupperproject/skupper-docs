@@ -1,0 +1,105 @@
+//Category: skupper-cli
+// Type: procedure
+:context: k8s
+[id='deploying-single-logical-service']
+== Deploying a single logical service across many sites for failover
+
+A typical scenario for using {skupper-name} is to deploy a server process on two sites with the intention that if one site fails, the other site seamlessly processes any further requests.
+In this scenario the primary server responds to all requests while that server is available and traffic is only directed to the secondary server when the primary server is not available.
+The procedure describes two servers, however this technique works for many servers.
+
+.Prerequisites
+
+* Two or more unlinked sites.
+* A basic understanding of {skupper-name} and its networking model.
+
+.Procedure
+
+. Create sites by using `skupper init`.
+. Deploy your servers on different sites.
+. Generate a token on the first site:
++
+--
+[source, bash]
+----
+$ skupper token create token.yaml 
+----
+
+This file contains a key and the location of the site that created it.
+
+[NOTE]
+====
+Access to this file provides access to the {service-network}. 
+Protect it appropriately.
+====
+--
+
+. Use the token on the cluster that you want to connect from:
++
+--
+
+To create a link to the first site:
+
+[source, bash]
+----
+$ skupper link create token.yaml --cost 99999
+----
+
+The high cost setting means that traffic is not directed to this site under normal circumstances.
+However, if there is no other server available, all traffic is directed to this site.
+--
+
+. Expose the servers on the {service-network} for both sites.
+
+.. Create the service:
++
+--
+[source, bash]
+----
+$ skupper service create <name> <port>
+----
+
+where 
+
+* `<name>` is the name of the service you want to create.
+* `<port>` is the port the service uses.
+
+By default, this service is now visible on both sites, although there is no server available to process requests to this service.
+
+[NOTE]
+====
+By default, if you create a service on one site, it is available on all sites.
+However, if `enable-service-sync` is set to `false` you need to create the service on both sites.
+====
+--
+
+.. Bind the service with the server on both sites.
++
+--
+
+[source, bash]
+----
+$ skupper service bind <service-name> <target-type> <target-name>
+----
+
+where
+
+* `<service-name>` is the name of the service on the {service-network}
+
+* `<target-type>` is the object you want to expose, `deployment`, `statefulset`, `pods`, or `service`.
+
+* `<target-name>` is the name of the cluster service
+
+For example:
+[source, bash]
+----
+$ skupper service bind hello-world-backend deployment hello-world-backend
+----
+--
+
+. You can use the console to check the traffic flow or monitor the services using your tooling.
+Clients can connect to either site, and the server on that site processes the requests until the server is not available.
+Further requests are processed by the server on the other site.
+
+If the server on the original site becomes available, it processes all further requests.
+However existing TCP connections to the secondary or backup server will persist until those TCP connections are closed.

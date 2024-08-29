@@ -447,6 +447,9 @@ include::./network-status.adoc[leveloffset=0]
 
 include::./native-security-options.adoc[leveloffset=0]
 
+include::./single-logical-service.adoc[leveloffset=0]
+
+
 include::./protocols.adoc[leveloffset=0]
 
 // Type: reference
