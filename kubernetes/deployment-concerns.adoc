@@ -5,6 +5,7 @@ This guide focusses on the following goals:
 
 * xref:increased-traffic[]
 * xref:high-availability[]
+* xref:service-sync[]
 
 // Type:procedure
 [id="increased-traffic"]
@@ -101,3 +102,6 @@ data:
 Setting the number of routers to more than two does not provide increased availability and can adversely affect performance.
 
 Note: Clients must reconnect when a router restarts or traffic is redirected to a backup router.
+
+
+include::service-sync.adoc[leveloffset=+1]
