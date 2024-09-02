@@ -274,7 +274,7 @@ This section describes how services can be enabled for a {service-network} for s
 $ podman run --name backend-target --network skupper --detach --rm -p 8080:8080 quay.io/skupper/hello-world-backend
 ----
 +
-This step is not Skupper-specific, that is, this process is unchanged from standard processes for your host.
+This step is not Skupper-specific, that is, this process is unchanged from standard processes for your host, for example you might have a native process you want to expose.
 
 
 . Create a service that can communicate on the {service-network}:
@@ -305,6 +305,13 @@ NOTE: You can specify more than one port by repeating this option.
 
 * `--protocol <protocol>` allows you specify the protocol you want to use, `tcp`, `http` or `http2`
 
+If you are exposing a service that is running on the same host as your site that is not a podman container, do not use `localhost`. 
+Instead, use `host.containers.internal` when exposing local services:
+
+[source, bash]
+----
+skupper expose host host.containers.internal --address backend --port 8080
+----
 --
 
 . Create the service on another site in the {service-network}:
@@ -354,7 +361,6 @@ For the example deployment in step 1, you create a service using the following c
 ----
 $ skupper service create hello-world-backend 8080
 ----
-
 
 --
 
@@ -428,20 +434,16 @@ $ podman ps -a --format "{{.ID}}  {{.Image}}  {{.Labels}}"
 
 . Make sure you are logged in as the user that created the site:
 +
---
 [source, bash]
 ----
 $ skupper status
 Skupper is enabled for "<username>" with site name "<machine-name>-<username>".
 ----
---
 
 . Delete the site and all podman resources (containers, volumes and networks) labeled with "application=skupper":
 +
---
 [source, bash]
 ----
 $ skupper delete
 Skupper is now removed for user "<username>".
 ----
---
