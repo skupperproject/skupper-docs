@@ -1,0 +1,24 @@
+include::../partials/attributes.adoc[]
+[id="metrics"] 
+= Flow metrics
+
+The following metrics are available to a Prometheus instance when you enable the flow collector using `skupper init --enable-flow-collector`
+
+flows_total:: For tcp protocol this is the total number of connections. 
+For http or http2 protocol this is the total number of distinct requests made.
+
+octets_total:: The total number of bytes processed by the router.
+
+active_flows:: The number of flows currently active including open tcp connections and _in flight_ http requests.
+
+address_last_time_seconds:: The time since a flow was last observed in seconds.
+
+flow_latency_microseconds:: The latency in microseconds, as observed by the first and last router involved in the flow.
+
+http_requests_method_total:: Total number of http requests grouped by method.
++
+Additional label: The http method, for example, `GET`, `HEAD`, `POST`.
+
+http_requests_result_total:: Total number of http requests by response code.
++
+Additional label: The http response code, for example `200`, `403`, `503`.
