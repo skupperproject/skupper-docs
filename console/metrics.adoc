@@ -23,6 +23,13 @@ http_requests_result_total:: Total number of http requests by response code.
 +
 Additional label: The http response code, for example `200`, `403`, `503`.
 
+activeLinks:: The total number of links between sites.
+
+activeRouters:: The total number of routers.
+
+activeSites:: The total number of sites.
+
+
 The following labels are common to these metrics allowing you to filter and categorize the data:
 
 address:: The address relating to the metric.
