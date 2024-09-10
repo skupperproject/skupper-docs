@@ -22,3 +22,24 @@ Additional label: The http method, for example, `GET`, `HEAD`, `POST`.
 http_requests_result_total:: Total number of http requests by response code.
 +
 Additional label: The http response code, for example `200`, `403`, `503`.
+
+The following labels are common to these metrics allowing you to filter and categorize the data:
+
+address:: The address relating to the metric.
+Typically, this is the service name.
+
+sourceSite:: The site where the flow originated for the metric. 
+This string is a combination of the site name and the site ID.
+
+destSite:: The site where the flow terminated for the metric. 
+This string is a combination of the site name and the site ID.
+
+direction:: The direction of flow.
+For traffic sent from a client to server the value is `incoming`.
+For traffic sent from a client to server the value is `outgoing`.
+
+protocol:: The protocol used by the flow, `tcp`, `http`, or `http2`.
+
+sourceProcess:: The name of the process originating the flow.
+
+destProcess:: The name of the process receiving the flow.
