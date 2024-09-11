@@ -2,35 +2,40 @@ include::../partials/attributes.adoc[]
 [id="metrics"] 
 = Flow metrics
 
-The following metrics are available to a Prometheus instance when you enable the flow collector using `skupper init --enable-flow-collector`
+This section shows the metrics available to a Prometheus instance when you enable the flow collector using `skupper init --enable-flow-collector`.
+Most metrics share a set of common labels as shown below, exceptions are shown beside appropriate metrics.
+
+NOTE: The metrics are available from `https://skupper.<namespace>.svc.clusterlocal:8010/api/v1alpha1/metrics`. Replace `<namespace>`` with the appropriate namespace where the {skupper-name} is deployed.
+
+.Metrics
+
+The following metrics are available to a Prometheus instance:
 
 flows_total:: For tcp protocol this is the total number of connections. 
 For http or http2 protocol this is the total number of distinct requests made.
 
-octets_total:: The total number of bytes processed by the router.
+octets_total:: The total number of bytes delivered through the {service-network}.
 
 active_flows:: The number of flows currently active including open tcp connections and _in flight_ http requests.
 
-address_last_time_seconds:: The time since a flow was last observed in seconds.
-
-flow_latency_microseconds:: The latency in microseconds, as observed by the first and last router involved in the flow.
-
 http_requests_method_total:: Total number of http requests grouped by method.
 +
-Additional label: The http method, for example, `GET`, `HEAD`, `POST`.
+Additional label: The http `method`, for example, `GET`, `HEAD`, `POST`.
 
 http_requests_result_total:: Total number of http requests by response code.
 +
-Additional label: The http response code, for example `200`, `403`, `503`.
+Additional label: The http response `code`, for example `200`, `403`, `503`.
 
-activeLinks:: The total number of links between sites.
+active_links:: The total number of links between sites. Only `sourceSite` and `direction` labels are available for these metrics.
 
-activeRouters:: The total number of routers.
+active_routers:: The total number of routers. No labels available for filtering.
 
-activeSites:: The total number of sites.
+active_sites:: The total number of sites. No labels available for filtering.
 
 
-The following labels are common to these metrics allowing you to filter and categorize the data:
+.Labels
+
+The following labels are common to most of the metrics allowing you to filter and categorize the data:
 
 address:: The address relating to the metric.
 Typically, this is the service name.
