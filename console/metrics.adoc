@@ -5,7 +5,8 @@ include::../partials/attributes.adoc[]
 This section shows the metrics available to a Prometheus instance when you enable the flow collector using `skupper init --enable-flow-collector`.
 Most metrics share a set of common labels as shown below, exceptions are shown beside appropriate metrics.
 
-NOTE: The metrics are available from `https://skupper.<namespace>.svc.clusterlocal:8010/api/v1alpha1/metrics`. Replace `<namespace>`` with the appropriate namespace where the {skupper-name} is deployed.
+NOTE: The metrics are available from `https://skupper.<namespace>.svc.clusterlocal:8010/api/v1alpha1/metrics` when `console-auth` is set to `internal` (default) or `unsecured`. 
+Replace `<namespace>`` with the appropriate namespace where the {skupper-name} is deployed.
 
 .Metrics
 
