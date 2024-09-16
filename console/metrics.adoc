@@ -1,0 +1,58 @@
+include::../partials/attributes.adoc[]
+[id="metrics"] 
+= Flow metrics
+
+This section shows the metrics available to a Prometheus instance when you enable the flow collector using `skupper init --enable-flow-collector`.
+Most metrics share a set of common labels as shown below, exceptions are shown beside appropriate metrics.
+
+NOTE: The metrics are available from `https://skupper.<namespace>.svc.clusterlocal:8010/api/v1alpha1/metrics` when `console-auth` is set to `internal` (default) or `unsecured`. 
+Replace `<namespace>`` with the appropriate namespace where the {skupper-name} is deployed.
+
+.Metrics
+
+The following metrics are available to a Prometheus instance:
+
+flows_total:: For tcp protocol this is the total number of connections. 
+For http or http2 protocol this is the total number of distinct requests made.
+
+octets_total:: The total number of bytes delivered through the {service-network}.
+
+active_flows:: The number of flows currently active including open tcp connections and _in flight_ http requests.
+
+http_requests_method_total:: Total number of http requests grouped by method.
++
+Additional label: The http `method`, for example, `GET`, `HEAD`, `POST`.
+
+http_requests_result_total:: Total number of http requests by response code.
++
+Additional label: The http response `code`, for example `200`, `403`, `503`.
+
+active_links:: The total number of links between sites. Only `sourceSite` and `direction` labels are available for these metrics.
+
+active_routers:: The total number of routers. No labels available for filtering.
+
+active_sites:: The total number of sites. No labels available for filtering.
+
+
+.Labels
+
+The following labels are common to most of the metrics allowing you to filter and categorize the data:
+
+address:: The address relating to the metric.
+Typically, this is the service name.
+
+sourceSite:: The site where the flow originated for the metric. 
+This string is a combination of the site name and the site ID.
+
+destSite:: The site where the flow terminated for the metric. 
+This string is a combination of the site name and the site ID.
+
+direction:: The direction of flow.
+For traffic sent from a client to server the value is `incoming`.
+For traffic sent from a client to server the value is `outgoing`.
+
+protocol:: The protocol used by the flow, `tcp`, `http`, or `http2`.
+
+sourceProcess:: The name of the process originating the flow.
+
+destProcess:: The name of the process receiving the flow.
