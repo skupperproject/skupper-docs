@@ -27,23 +27,25 @@ That gives you the ability to use your certificates to populate the Secrets befo
 
 == (1) Mutual TLS with a site
 
-Within a Skupper site, both the skupper-service-controller and the skupper-flow-collector (optional, but required for the console) need to connect to the skupper router. 
-These connections are secured using mutual TLS, and the required keys and certificates are stored in specific Secrets, all sharing the prefix skupper-local-:
+Within a {skupper-name} site, both the skupper-service-controller and the skupper-flow-collector (optional, but required for the console) need to connect to the skupper router. 
+These connections are secured using mutual TLS, and the required keys and certificates are stored in specific Secrets, all sharing the prefix *skupper-local-*:
 
 skupper-local-client:: Contains the key, and the certificate used by the skupper-service-controller and the skupper-flow-collector.
 skupper-local-server:: Contains the key, and the certificate used by the skupper router.
 
-If these Secrets do not exist, Skupper creates them using a certificate authority (CA) to sign the certificates. 
+If these Secrets do not exist, {skupper-name} creates them using a certificate authority (CA) to sign the certificates. 
 
-For this purpose, Skupper generates another secret:
+For this purpose, {skupper-name} generates another secret:
 
 skupper-local-ca:: Contains a key and a self-signed certificate. 
 
-NOTE: Skupper will only use this secret if skupper-local-server and skupper-local-client are not populated.
+NOTE: {skupper-name} will only use this secret if skupper-local-server and skupper-local-client are not populated.
 
 If skupper-local-client and skupper-local-server Secrets are provided by the user, there is no requirement for the skupper-local-ca Secret.
 
 == (2) Mutual TLS between sites
+
+
 
 == (3) TLS between a router and applications
 
@@ -73,7 +75,7 @@ If skupper-local-client and skupper-local-server Secrets are provided by the use
 | The flow collector is an optional component, required for console 
 
 
-| (2) Mutual TLS between Skupper Sites 
+| (2) Mutual TLS between {skupper-name} Sites 
 | skupper-site-ca 
 | core 
 | CA for signing certificates in skupper-site-server and client certificates for links. 
@@ -82,23 +84,23 @@ If skupper-local-client and skupper-local-server Secrets are provided by the use
 |  
 | skupper-site-server 
 | skupper-router 
-| Secures incoming connections from other Skupper sites. | Contains key, certificate, and CA certificate. 
+| Secures incoming connections from other {skupper-name} sites. | Contains key, certificate, and CA certificate. 
 
 |
 | <link-specific-secret> 
 | skupper-router 
-| Used by the initiating site's router to establish a link with another Skupper site. 
+| Used by the initiating site's router to establish a link with another {skupper-name} site. 
 | Labeled with `skupper.io/type=connection-token`
 
-| (3) TLS between Skupper Router and Applications | skupper-service-ca 
-| Skupper router, external services 
+| (3) TLS between {skupper-name} Router and Applications | skupper-service-ca 
+| {skupper-name} router, external services 
 | Manages CA certificates for TLS termination and connections. 
 | Created by default. Not used if user provides other secrets. 
 |
 
 |  
 | skupper-service-client 
-| Skupper router, external services 
+| {skupper-name} router, external services 
 | Secures TLS termination at the router and TLS connections to services. 
 | Users can provide their own secrets via \--tls-cert and annotations.
 
