@@ -7,17 +7,17 @@ By default, the traffic between sites is encrypted using mutual TLS providing se
 The traffic between internal components is also encrypted using mutual TLS.
 Optionally, the communication between an application and the {skupper-name} router can be encrypted using TLS.
 
-This section describes the Kubernetes secrets involved and when the certificates can be replaced with user-provided certificates.
+This section describes the Kubernetes Secrets involved for various scenarios so that you can populate those Secrets using custom certificates if required.
 
 == Overview
 
-By default, {skupper-name} creates Certificate Authority certificates to support TLS for the following:
+By default, {skupper-name} creates Certificate Authority (CA) certificates to support TLS for the following:
 
-(1)Within a site:: traffic flowing between the router and the service controller (and optionally the flow collector).
+(1) Within a site:: traffic flowing between the router and the service controller (and optionally the flow collector).
 
-(2)Between sites:: traffic flowing between a router in one site and a router in another site.
+(2) Between sites:: traffic flowing between a router in one site and a router in another site.
 
-(3)Between an application and a router:: traffic flowing between an application and a router.
+(3) Between an application and a router:: traffic flowing between an application and a router.
 
 When running in Kubernetes, {skupper-name} expects specific Secrets to exist in each namespace where it is installed. 
 These Secrets, which contain TLS keys and certificates for each of the scenarios above, are located in predefined locations. 
@@ -30,10 +30,12 @@ That gives you the ability to use your certificates to populate the Secrets befo
 For every scenario above, there is a Secret with the *-ca* suffix which is only required if the associated Secrets do not already exist.
 For example:
 
-* The skupper-local-ca Secret is only required if the skupper-local-client and skupper-local-server do not exist.
-* The skupper-site-ca Secret is only required if the skupper-site-server and the secret labelled `skupper.io/type=connection-token` do not exist.
+* The skupper-local-ca Secret is only required if the skupper-local-client and skupper-local-server Secrets do not exist.
+* The skupper-site-ca Secret is only required if the skupper-site-server Secret does not exist.
 
 ====
+
+TIP: See your provider documentation for generating certificates. For example, link:https://docs.openshift.com/container-platform/4.17/security/cert_manager_operator/cert-manager-creating-certificate.html#cert-manager-certificate-mgmt_cert-manager-creating-certificate[Creating certificates for user workloads] if you use `cert-manager` on OpenShift.
 
 == (1) Mutual TLS with a site
 
@@ -45,21 +47,50 @@ skupper-local-server:: Contains the key, and the certificate used by the skupper
 
 If these Secrets do not exist, {skupper-name} creates them using a certificate authority (CA) to sign the certificates. 
 
-For this purpose, {skupper-name} generates another secret:
+For this purpose, {skupper-name} generates another Secret:
 
 skupper-local-ca:: Contains a key and a self-signed certificate. 
 
-NOTE: {skupper-name} will only use this secret if skupper-local-server and skupper-local-client are not populated.
-
-If skupper-local-client and skupper-local-server Secrets are provided by the user, there is no requirement for the skupper-local-ca Secret.
+NOTE: {skupper-name} only uses this Secret if skupper-local-server and skupper-local-client are not populated.
 
 == (2) Mutual TLS between sites
 
+When two sites are linked, the routers communicate using mutual TLS and the required keys and certificates are stored in specific Secrets:
+
+skupper-site-server:: Contains the key, and the certificate used by the skupper-router when accepting links from other sites.
+<link-specific-name>:: Contains the key, and the certificate used by the skupper-router when creating links to other sites.
+
+To establish a link, both routers must verify the following:
+
+* The peer's certificate was signed by a trusted CA.
+* The certificate of the peer matches the hostname or IP address used to establish the link.
+
+If these Secrets do not exist, {skupper-name} creates them using a certificate authority (CA) to sign the certificates. 
+
+For this purpose, {skupper-name} generates another Secret:
+
+skupper-site-ca:: Contains a key and a self-signed certificate. 
+
+
+NOTE: {skupper-name} only uses this Secret if skupper-site-server is not populated.
 
 
 == (3) TLS between a router and applications
 
-== Summary of TLS related secrets
+When a TLS connection from a client of a service is terminated and re-encrypted at the router, or when the router establishes a TLS connection to a pod implementing the service, additional secrets are required.
+
+These secrets can always be provided by the user and specified through the `--tls-cert` and `--tls-trust` options to `skupper expose` or by using the equivalent annotations.
+
+By default, {skupper-name} generates the following secrets for this purpose, all sharing the prefix *skupper-service-*::
+
+skupper-service-client:: Contains credentials used for the TLS connection from the router to the pod implementing the service.
+
+skupper-service-ca:: Contains the trusted CA certificate used for validating client and server certificates in the TLS connection.
+
+NOTE: The use of these automatically generated secrets is optional; users may provide their own secrets instead.
+
+
+== Summary of TLS related Secrets
 
 [cols=5*]
 |===
@@ -69,8 +100,8 @@ If skupper-local-client and skupper-local-server Secrets are provided by the use
 | (1) Mutual TLS within a site 
 | skupper-local-ca 
 | core 
-| Certificate authority for signing skupper-local-client and skupper-local-server secrets. 
-| Created by default. Not used if user provides other secrets. 
+| Certificate authority for signing skupper-local-client and skupper-local-server Secrets. 
+| Created by default. Not used if user provides other Secrets. 
 
 |  
 | skupper-local-client 
@@ -89,7 +120,7 @@ If skupper-local-client and skupper-local-server Secrets are provided by the use
 | skupper-site-ca 
 | core 
 | CA for signing certificates in skupper-site-server and client certificates for links. 
-|  Created by default. Not used if user provides other secrets. 
+|  Created by default. Not used if user provides other Secrets. 
 
 |  
 | skupper-site-server 
@@ -97,7 +128,7 @@ If skupper-local-client and skupper-local-server Secrets are provided by the use
 | Secures incoming connections from other {skupper-name} sites. | Contains key, certificate, and CA certificate. 
 
 |
-| <link-specific-secret> 
+| <link-specific-Secret> 
 | skupper-router 
 | Used by the initiating site's router to establish a link with another {skupper-name} site. 
 | Labeled with `skupper.io/type=connection-token`
@@ -105,13 +136,13 @@ If skupper-local-client and skupper-local-server Secrets are provided by the use
 | (3) TLS between {skupper-name} Router and Applications | skupper-service-ca 
 | {skupper-name} router, external services 
 | Manages CA certificates for TLS termination and connections. 
-| Created by default. Not used if user provides other secrets. 
+| Created by default. Not used if user provides other Secrets. 
 |
 
 |  
 | skupper-service-client 
 | {skupper-name} router, external services 
 | Secures TLS termination at the router and TLS connections to services. 
-| Users can provide their own secrets via \--tls-cert and annotations.
+| Users can provide their own Secrets via \--tls-cert and annotations.
 
 |===
