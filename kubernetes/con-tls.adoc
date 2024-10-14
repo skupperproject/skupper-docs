@@ -25,6 +25,16 @@ These Secrets, which contain TLS keys and certificates for each of the scenarios
 When you create a site using the CLI or create a site declaratively using YAML, {skupper-name} creates the required Secrets if they do not already exist.
 That gives you the ability to use your certificates to populate the Secrets before the site is created. 
 
+[NOTE]
+====
+For every scenario above, there is a Secret with the *-ca* suffix which is only required if the associated Secrets do not already exist.
+For example:
+
+* The skupper-local-ca Secret is only required if the skupper-local-client and skupper-local-server do not exist.
+* The skupper-site-ca Secret is only required if the skupper-site-server and the secret labelled `skupper.io/type=connection-token` do not exist.
+
+====
+
 == (1) Mutual TLS with a site
 
 Within a {skupper-name} site, both the skupper-service-controller and the skupper-flow-collector (optional, but required for the console) need to connect to the skupper router. 
