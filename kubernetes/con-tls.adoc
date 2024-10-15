@@ -7,11 +7,21 @@ By default, the traffic between sites is encrypted using mutual TLS providing se
 The traffic between internal components is also encrypted using mutual TLS.
 Optionally, the communication between an application and the {skupper-name} router can be encrypted using TLS.
 
+In TLS, two key checks occur during the handshake establishing the connection:
+
+Trust of the peer’s certificate:: The certificate must be validated against a list of trusted Certificate Authorities (CAs). 
+If the certificate is signed by a trusted CA and the certificate chain is valid, the peer’s certificate is trusted.
+
+Identity match:: The peer’s identity (for example, domain name) must match the Common Name (CN) or Subject Alternative Names (SANs) in the certificate. 
+If there is a mismatch, the connection is considered insecure.
+
+Both conditions must be met for the connection to be secure.
+
 This section describes the Kubernetes Secrets involved for various scenarios so that you can populate those Secrets using custom certificates if required.
 
 == Overview
 
-By default, {skupper-name} creates Certificate Authority (CA) certificates to support TLS for the following traffic:
+By default, {skupper-name} creates Secrets to support TLS for the following traffic:
 
 (1) Within a site:: Traffic flowing between the router and the service controller (and optionally the flow collector).
 
@@ -19,21 +29,21 @@ By default, {skupper-name} creates Certificate Authority (CA) certificates to su
 
 (3) Between an application and a router:: Traffic flowing between an application and a router.
 
-When running in Kubernetes, {skupper-name} expects specific Secrets that support certificates to exist in each namespace where it is installed. 
+When running in Kubernetes, {skupper-name} expects specific Secrets that support TLS for each of the above scenarios in each namespace where it is installed. 
 These Secrets, which contain TLS keys and certificates for each of the scenarios above, are assigned predefined names.
-For example, the CA secrets always have a name with the suffix `-ca`.
 
 When you create a site using the CLI or create a site declaratively using YAML, {skupper-name} creates the required Secrets if they do not already exist.
+
 That gives you the ability to use your certificates to populate the Secrets before the site is created. 
 
 [NOTE]
 ====
+CA Secrets always have a name with the suffix `-ca`.
 For every scenario above, there is a Secret with the *-ca* suffix which is only required if the associated Secrets do not already exist.
 For example:
 
 * The `skupper-local-ca` Secret is only required if the `skupper-local-client` and `skupper-local-server` Secrets do not exist.
 * The `skupper-site-ca` Secret is only required if the `skupper-site-server` Secret does not exist.
-
 ====
 
 TIP: See your provider documentation for generating certificates. For example, link:https://docs.openshift.com/container-platform/4.17/security/cert_manager_operator/`cert-manager-creating`-certificate.html#`cert-manager-certificate`-mgmt_cert-`manager-creating-certificate`[Creating certificates for user workloads] if you use `cert-manager` on OpenShift.
@@ -43,8 +53,8 @@ TIP: See your provider documentation for generating certificates. For example, l
 Within a {skupper-name} site, both the `skupper-service-controller` and the `skupper-flow-collector` (optional, but required for the console) need to connect to the skupper router. 
 These connections are secured using mutual TLS, and the required keys and certificates are stored in specific Secrets, all sharing the prefix *skupper-local-*:
 
-`skupper-local-client`:: Contains the key, and the certificate used by the `skupper-service-controller` and the `skupper-flow-collector`.
-`skupper-local-server`:: Contains the key, and the certificate used by the skupper router.
+`skupper-local-client`:: Contains the key, certificate, and the CA certificate used by the `skupper-service-controller` and the `skupper-flow-collector`.
+`skupper-local-server`:: Contains the key, certificate, and the CA certificate used by the skupper router.
 
 If these Secrets do not exist, {skupper-name} creates them using a certificate authority (CA) to sign the certificates. 
 
@@ -58,8 +68,8 @@ NOTE: {skupper-name} only uses this Secret if `skupper-local-server` and `skuppe
 
 When two sites are linked, the routers communicate using mutual TLS and the required keys and certificates are stored in specific Secrets:
 
-`skupper-site-server`:: Contains the key, and the certificate used by the `skupper-router` when accepting links from other sites.
-`<link-specific-name>`:: Contains the key, and the certificate used by the `skupper-router` when creating links to other sites.
+`skupper-site-server`:: Contains the key, certificate, and the CA certificate used by the `skupper-router` when accepting links from other sites.
+`<link-specific-name>`:: Contains the key, certificate, and the CA certificate used by the `skupper-router` when creating links to other sites.
 
 To establish a link, both routers must verify the following:
 
@@ -80,15 +90,13 @@ NOTE: {skupper-name} only uses this Secret if `skupper-site-server` is not popul
 
 When a TLS connection from a client of a service is terminated and re-encrypted at the router, or when the router establishes a TLS connection to a pod implementing the service, additional secrets are required.
 
-These secrets can always be provided by the user and specified through the `--tls-cert` and `--tls-trust` options to `skupper expose` or by using the equivalent annotations.
+These secrets can be provided by the user and specified through the `--tls-cert` and `--tls-trust` options to `skupper expose` or by using the equivalent annotations.
 
-By default, {skupper-name} generates the following secrets for this purpose, all sharing the prefix *skupper-service-*::
+By default, {skupper-name} generates the following secrets for this purpose, all sharing the prefix *skupper-service-*:
 
 `skupper-service-client`:: Contains credentials used for the TLS connection from the router to the pod implementing the service.
 
 `skupper-service-ca`:: Contains the trusted CA certificate used for validating client and server certificates in the TLS connection.
-
-NOTE: The use of these automatically generated secrets is optional; users may provide their own secrets instead.
 
 
 == Summary of TLS related Secrets
