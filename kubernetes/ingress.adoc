@@ -34,3 +34,4 @@ data:
 If the default ingress is not suitable, an alternative is `nginx-ingress-v1`.
 Nginx uses Server Name Indication (SNI) to identify connection targets, which eliminates the need for assigning separate IP addresses as required by `loadbalancer`.
 
+NOTE: When using `nginx-ingress-v1` you must enable SSL Passthrough as described in link:https://kubernetes.github.io/ingress-nginx/user-guide/tls/#ssl-passthrough[Ingress-Nginx Controller documentation].
