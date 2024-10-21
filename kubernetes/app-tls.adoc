@@ -1,0 +1,21 @@
+[id=tls-router-app]
+= TLS traffic between a router and applications
+
+This section covers traffic between a client and the router in a site, and then between the router and the server in a different site.
+
+```
++-------------+       +------------+       +------------+       +------------+
+|  Client     |------>| Router West |------>| Router East |------>|  Server    |
++-------------+       +------------+       +------------+       +------------+
+```
+
+
+When a TLS connection from a client of a service is terminated and re-encrypted at the router, or when the router establishes a TLS connection to a pod implementing the service, additional secrets are required.
+
+These secrets can be provided by the user and specified through the `--tls-cert` and `--tls-trust` options to `skupper expose` or by using the equivalent annotations.
+
+By default, {skupper-name} generates the following secrets for this purpose, all sharing the prefix *skupper-service-*:
+
+`skupper-service-client`:: Contains credentials used for the TLS connection from the router to the pod implementing the service.
+
+`skupper-service-ca`:: Contains the trusted CA certificate used for validating client and server certificates in the TLS connection.
