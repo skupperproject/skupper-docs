@@ -83,7 +83,7 @@ For example, in a two site network linked with a high cost with servers and clie
 --
 
 A common use-case for specifying cost is to provide automatic failover.
-As described in xref:deploying-a-single-logical-service-across-many-sites-for-failover[], you might have two instances of a server with a high cost for the link to the backup server:
+As described in xref:deploying-single-logical-service[], you might have two instances of a server with a high cost for the link to the backup server:
 
 * local server (effective cost = 0)
 * remote server (link cost = 99999)
