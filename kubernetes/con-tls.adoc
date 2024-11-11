@@ -11,7 +11,7 @@ The traffic between {skupper-name} components within a site is also encrypted us
 image::../images/tls-traffic.png[Encrypted traffic internally for two sites and between those sites]
 
 
-The xref:tls-router-app[] section describes TLS traffic between a client and the router in a site, and then between the router and the server in a different site.
+NOTE: This section describes traffic between sites and traffic between {skupper-name} components within a site. In addition, the xref:tls-router-app[] section describes TLS traffic between a client and the router in a site, and then between the router and the server in a different site.
 
 In TLS, two key checks occur during the handshake establishing the connection:
 
@@ -25,14 +25,13 @@ Both conditions must be met for the connection to be established.
 
 This section describes the Kubernetes Secrets involved for various scenarios so that you can populate those Secrets using custom certificates if required.
 
-== Overview of TLS within and between sites
+== Overview of TLS between sites and within a site
 
 By default, {skupper-name} creates Secrets to support TLS for the following traffic:
 
-xref:tls-within-site[]:: Traffic flowing between a router and the service controller.
-
 xref:tls-between-sites[]:: Traffic flowing between routers, including between routers in different sites.
 
+xref:tls-within-site[]:: Traffic flowing between a router and the service controller.
 
 When running in Kubernetes, {skupper-name} expects specific Secrets that support TLS for each of the above scenarios in each namespace where it is installed. 
 These Secrets, which contain TLS keys and certificates for each of the scenarios above, are assigned predefined names.
@@ -48,20 +47,7 @@ These are only used to generate certificates if the associated Secrets do not al
 // Possible update would be to link to article outlining 'replacing CAs'
 ====
 
-TIP: See your provider documentation for generating certificates. For example, link:https://docs.openshift.com/container-platform/4.17/security/cert_manager_operator/`cert-manager-creating`-certificate.html#`cert-manager-certificate`-mgmt_cert-`manager-creating-certificate`[Creating certificates for user workloads] if you use `cert-manager` on OpenShift.
-
-[id="tls-within-site"]
-== Mutual TLS within a site
-
-Within a {skupper-name} site, the service controller pod needs to connect to the skupper router. 
-This connection is secured using mutual TLS, and the required keys and certificates are stored in specific Secrets, all sharing the prefix *skupper-local-*:
-
-`skupper-local-client`:: Contains the key and certificate for the service controller, along with a list of trusted certificates used for verifying peer certificates.
-`skupper-local-server`:: Contains the key and certificate for the router, along with a list of trusted certificates used for verifying peer certificates.
-
-If these Secrets do not exist, {skupper-name} generates and signs those certificates using a self-signed CA certificate created during site setup, which is then stored in the `skupper-local-ca` Secret.
-
-NOTE: {skupper-name} only uses the `skupper-local-ca` Secret if `skupper-local-server` and `skupper-local-client` are not populated.
+TIP: See your provider documentation for generating certificates. For example, link:https://docs.openshift.com/container-platform/4.17/security/cert_manager_operator/cert-manager-creating-certificate.html#cert-manager-certificate-mgmt_cert-manager-creating-certificate[Creating certificates for user workloads] if you use `cert-manager` on OpenShift.
 
 [id="tls-between-sites"]
 == Mutual TLS between sites
@@ -78,6 +64,20 @@ The router on the linking site must verify the certificate of the peer matches t
 If these Secrets do not exist, {skupper-name} generates and signs those certificates using a self-signed CA certificate created during site setup, which is then stored in the `skupper-site-ca` Secret.
 
 NOTE: {skupper-name} only uses the `skupper-site-ca` Secret if `skupper-site-server` is not populated.
+
+
+[id="tls-within-site"]
+== Mutual TLS within a site
+
+Within a {skupper-name} site, the service controller pod needs to connect to the skupper router. 
+This connection is secured using mutual TLS, and the required keys and certificates are stored in specific Secrets, all sharing the prefix *skupper-local-*:
+
+`skupper-local-client`:: Contains the key and certificate for the service controller, along with a list of trusted certificates used for verifying peer certificates.
+`skupper-local-server`:: Contains the key and certificate for the router, along with a list of trusted certificates used for verifying peer certificates.
+
+If these Secrets do not exist, {skupper-name} generates and signs those certificates using a self-signed CA certificate created during site setup, which is then stored in the `skupper-local-ca` Secret.
+
+NOTE: {skupper-name} only uses the `skupper-local-ca` Secret if `skupper-local-server` and `skupper-local-client` are not populated.
 
 
 include::app-tls.adoc[leveloffset=0]
