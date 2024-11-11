@@ -3,13 +3,14 @@ include::../partials/attributes.adoc[]
 [id="understanding-tls"] 
 = Understanding TLS certificates for Kubernetes sites
 
-The traffic between sites is encrypted using mutual TLS providing secure communication between Kubernetes clusters.
-If your organization mandates the use of custom certificates for traffic, you must familiarize yourself with how {skupper-name} leverages Kubernetes secrets to enable encryption.
-If you do not provide certificates as described in this section, certificates are generated to create the mutual TLS connection.
+Traffic between sites is encrypted using mutual TLS providing secure communication between Kubernetes clusters.
 The traffic between {skupper-name} components within a site is also encrypted using mutual TLS.
+If you do not provide certificates, certificates are generated to create the mutual TLS connection and are stored in Kubernetes Secrets.
+This section describes various traffic flows and how the certificates are generated and stored, allowing you to supply certificates for various scenarios as required.
 
 // https://docs.google.com/drawings/d/1o5af8M4alYq206SawaFpFoLnr_8QXxbC40hSRNnBW1w/edit
-image::../images/tls-traffic.png[Encrypted traffic internally for two sites and between those sites]
+.Traffic between two sites and traffic within a site
+image::../images/tls-traffic.png[Traffic between two sites and traffic within a site]
 
 
 NOTE: This section describes traffic between sites and traffic between {skupper-name} components within a site. In addition, the xref:tls-router-app[] section describes TLS traffic between a client and the router in a site, and then between the router and the server in a different site.
@@ -19,7 +20,7 @@ In TLS, two key checks occur during the handshake establishing the connection:
 Trust of the peer’s certificate:: The certificate must be validated against a list of trusted Certificate Authorities (CAs). 
 If the certificate is signed by a trusted CA and the certificate chain is valid, the peer’s certificate is trusted.
 
-Identity match:: The peer’s identity (for example, domain name) must match the Common Name (CN) or Subject Alternative Names (SANs) in the certificate. 
+Server identity match:: The hostname or IP address used by the client to connect to the server must match the Common Name (CN) or Subject Alternative Names (SANs) in the certificate supplied by the server. 
 If there is a mismatch, the connection is considered insecure.
 
 Both conditions must be met for the connection to be established.
@@ -57,7 +58,8 @@ TIP: See your provider documentation for generating certificates. For example, l
 When two sites are linked, the routers communicate using mutual TLS and the required keys and certificates are stored in specific Secrets:
 
 `skupper-site-server`:: Contains the key, certificate, and the CA certificate used by the `skupper-router` when accepting links from other sites.
-`<link-specific-name>`:: Contains the key, certificate, and the CA certificate used by the `skupper-router` when creating links to other sites.
+`<link-specific-name>`:: Contains the key, certificate, and the CA certificate used by the `skupper-router` when creating links to other sites. 
+The name of the Secret is the same as the link name.
 
 To establish a link, both routers must verify the peer's certificate was signed by a trusted CA.
 
@@ -71,7 +73,7 @@ NOTE: {skupper-name} only uses the `skupper-site-ca` Secret if `skupper-site-ser
 [id="tls-within-site"]
 == Mutual TLS within a site
 
-Within a {skupper-name} site, components need to communicate, for example, the service controller needs to connect to the skupper router. 
+The {skupper-name} components within a site need to communicate. For example, the service controller needs to connect to the Skupper router. 
 This connection is secured using mutual TLS, and the required keys and certificates are stored in specific Secrets, all sharing the prefix *skupper-local-*:
 
 `skupper-local-client`:: Contains the key and certificate for the service controller, along with a list of trusted certificates used for verifying peer certificates.
@@ -91,10 +93,27 @@ include::app-tls.adoc[leveloffset=0]
 
 | Scenario | Secret Name | Notes 
 
+| Mutual TLS between {skupper-name} sites 
+| `skupper-site-ca` 
+| Certificate authority for signing certificates in `skupper-site-server` and client certificates for links. 
+Created by default. 
+Not used if user provides other Secrets. 
+
+|  
+| `skupper-site-server` 
+| The key and certificate for securing incoming links from other sites.  
+
+
+|
+| `<link-specific-Secret>` 
+| The key and certificate for securing outgoing links to other sites.  
+Named using link name and labeled with `skupper.io/type=connection-token`.
+
 | Mutual TLS within a site 
 | `skupper-local-ca` 
 | Certificate authority for signing `skupper-local-client` and `skupper-local-server` Secrets. 
-Created by default. Not used if user provides other Secrets. 
+Created by default. 
+Not used if user provides other Secrets. 
 
 |  
 | `skupper-local-client` 
@@ -105,25 +124,11 @@ Created by default. Not used if user provides other Secrets.
 | The key and certificate for the router.
 
 
-| Mutual TLS between {skupper-name} sites 
-| `skupper-site-ca` 
-| Certificate authority for signing certificates in `skupper-site-server` and client certificates for links. 
-Created by default. Not used if user provides other Secrets. 
-
-|  
-| `skupper-site-server` 
-| The key and certificate for securing incoming links from other sites.  
-
-
-|
-| `<link-specific-Secret>` 
-| The key and certificate for securing outgoing links to other sites.  
-Labeled with `skupper.io/type=connection-token`
-
 | TLS between {skupper-name} Router and Applications 
 | `skupper-service-ca` 
 | Certificate authority for signing `skupper-service-client`.
-Created by default. Not used if user provides `skupper-service-client` Secret. 
+Created by default. 
+Not used if user provides `skupper-service-client` Secret. 
 
 
 |  
