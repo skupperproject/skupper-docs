@@ -2,9 +2,9 @@
 [id=tls-router-app]
 = Understanding TLS traffic between applications and routers
 
-This section covers traffic between a client and the router in a site, and then between the router and the server in a different site.
+This section covers traffic between an application client and the router in a site, and then between the router and an application server in a different site.
 
-If you need information about TLS traffic between sites or traffic between {skupper-name} components within a site, see xref:understanding-tls[].
+NOTE: If you need information about TLS traffic between sites or traffic between {skupper-name} components within a site, see xref:understanding-tls[].
 
 Consider the following scenarios:
 
@@ -14,11 +14,11 @@ image::../images/app-traffic.png[Three different network routing configurations 
 
 * An HTTP application that receives requests from a client in a remote site.
 The connection between the client and the router and the connection between the remote router and the server are unencrypted.
-The 
+The communication between routers is always encrypted.
 
 * An HTTPS application where the traffic is encrypted by the client and unencrypted by the remote server.
 
-* An HTTP application where traffic is encrypted at every stage: between the client and the router, between the routers, and between the router and the server at the remote site.
+* An HTTPS application where traffic is encrypted at every stage: between the client and the router, between the routers, and between the router and the server at the remote site.
 
 This section describes that third scenario, and the Secrets required to have TLS between the application and the router.
 

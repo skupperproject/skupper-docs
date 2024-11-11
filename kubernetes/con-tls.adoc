@@ -4,6 +4,7 @@ include::../partials/attributes.adoc[]
 = Understanding TLS certificates for Kubernetes sites
 
 The traffic between sites is encrypted using mutual TLS providing secure communication between Kubernetes clusters.
+If your organization mandates the use of custom certificates for traffic, you must familiarize yourself with how {skupper-name} leverages Kubernetes secrets to enable encryption.
 If you do not provide certificates as described in this section, certificates are generated to create the mutual TLS connection.
 The traffic between {skupper-name} components within a site is also encrypted using mutual TLS.
 
@@ -30,8 +31,9 @@ This section describes the Kubernetes Secrets involved for various scenarios so 
 By default, {skupper-name} creates Secrets to support TLS for the following traffic:
 
 xref:tls-between-sites[]:: Traffic flowing between routers, including between routers in different sites.
+Communication between routers is always encrypted, including routers in different sites.
 
-xref:tls-within-site[]:: Traffic flowing between a router and the service controller.
+xref:tls-within-site[]:: Traffic flowing between all {skupper-name} components within a site, for example, between a router and the service controller.
 
 When running in Kubernetes, {skupper-name} expects specific Secrets that support TLS for each of the above scenarios in each namespace where it is installed. 
 These Secrets, which contain TLS keys and certificates for each of the scenarios above, are assigned predefined names.
@@ -69,7 +71,7 @@ NOTE: {skupper-name} only uses the `skupper-site-ca` Secret if `skupper-site-ser
 [id="tls-within-site"]
 == Mutual TLS within a site
 
-Within a {skupper-name} site, the service controller pod needs to connect to the skupper router. 
+Within a {skupper-name} site, components need to communicate, for example, the service controller needs to connect to the skupper router. 
 This connection is secured using mutual TLS, and the required keys and certificates are stored in specific Secrets, all sharing the prefix *skupper-local-*:
 
 `skupper-local-client`:: Contains the key and certificate for the service controller, along with a list of trusted certificates used for verifying peer certificates.
