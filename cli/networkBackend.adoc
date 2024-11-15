@@ -33,3 +33,6 @@ network_backend = "netavark"
 $ podman info --format {{.Host.NetworkBackend}}
 ----
 
+.Additional information
+
+See link:{podman-link}[Using Skupper Podman].

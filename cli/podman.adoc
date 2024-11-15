@@ -74,7 +74,7 @@ To check if `netavark` is configured as the podman network backend:
 $ podman info --format {{.Host.NetworkBackend}}
 ----
 
-If the output is something other than `netavark`, see link:networkBackend.adoc[Configuring Podman networkBackend for {skupper-name}].
+If the output is something other than `netavark`, see link:{networkbackend-link}.
 
 --
 
