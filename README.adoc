@@ -22,8 +22,7 @@ If you want to preview changes for more complex contributions, follow this proce
 . Start the build:
 +
 ----
-$ python scripts/convert-all.py ./scripts/convert
--adoc.sh .github/workflows/asciidoc-convert-check.yml
+$ python scripts/convert-all.py ./scripts/convert-adoc.sh  published-adoc.txt
 ----
 
 * `convert-adoc.sh` converts each adoc to HTML

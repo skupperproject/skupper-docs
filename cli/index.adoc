@@ -454,8 +454,6 @@ include::./single-logical-service.adoc[leveloffset=0]
 
 include::./protocols.adoc[leveloffset=0]
 
-include::../kubernetes/ingress.adoc[leveloffset=1]
-
 // Type: reference
 [id="cli-global-options"] 
 == CLI options
