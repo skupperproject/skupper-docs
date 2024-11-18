@@ -1,6 +1,7 @@
 cli/index.adoc
 cli/tokens.adoc
 cli/podman.adoc
+cli/networkBackend.adoc
 cli/native-security-options.adoc
 yaml/index.adoc
 operator/index.adoc

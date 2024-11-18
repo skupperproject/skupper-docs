@@ -1,0 +1,38 @@
+include::../partials/attributes.adoc[]
+// Category: skupper-cli
+// Type: procedure
+[id='podman-networkbackend']
+= Configuring Podman networkBackend for {skupper-name}
+
+By default, Podman v4 and later use Netavark which works with {skupper-name}.
+However, if you upgraded from an earlier version of Podman, you might need to configure Podman to use Netavark.
+
+If you are using CNI, for example, if you upgrade from Podman v3, you must also install the `podman-plugins` package.
+For example, `dnf install podman-plugins` for RPM based distributions.
+
+NOTE: CNI will be deprecated in the future in preference of Netavark.
+
+.Procedure
+
+. To install `netavark` on rpm based Linux, for example, RHEL8:
++
+----
+$ sudo dnf install netavark
+----
+
+. Configure podman to use `netavark` by making sure the following lines exist in the `/etc/containers/containers.conf` file:
++
+----
+[network]
+network_backend = "netavark"
+----
+
+. Confirm that `netavark` is configured as the podman network backend:
++
+----
+$ podman info --format {{.Host.NetworkBackend}}
+----
+
+.Additional information
+
+See link:{podman-link}[Using Skupper Podman].
