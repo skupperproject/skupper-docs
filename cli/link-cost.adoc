@@ -1,3 +1,4 @@
+include::../partials/attributes.adoc[]
 // Type: procedure
 [id="specifying-link-cost"] 
 == Specifying link cost
@@ -80,3 +81,14 @@ You can view the traffic levels corresponding to each client.
 NOTE: If there are multiple clients on different sites, filter the view to each client to determine the effect of cost on traffic.
 For example, in a two site network linked with a high cost with servers and clients on both sites, you can see that a client is served by the local servers while a local server is available.
 --
+
+A common use-case for specifying cost is to provide automatic failover.
+As described in {single-link}, you might have two instances of a server with a high cost for the link to the backup server:
+
+* local server (effective cost = 0)
+* remote server (link cost = 99999)
+
+In this case, connections are always routed to the local server and fails over to the remote server when the local server becomes available.
+
+Some complex applications, especially stateful ones, require "orchestrated" failover, meaning you need control over the order in which traffic is redirected from one set of workloads to another. 
+{skupper-name} does not offer this type of orchestration, you need to implement that orchestration for those applications.
