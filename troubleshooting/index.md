@@ -1,0 +1,102 @@
+# Troubleshooting an application network{#troubleshooting} 
+
+Typically, you can create a network without referencing this troubleshooting guide.
+However, this guide provides some tips for situations when the network does not perform as expected.
+
+See [Resolving common problems](#resolving-common-problems) if you have encountered a specific issue using the `skupper` CLI.
+
+A typical troubleshooting workflow is to check all the sites and create debug tar files.
+
+## Checking sites
+
+Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting Skupper.
+
+1. Check the site status for a cluster:
+
+   ```bash
+   $ skupper site status
+   Site not initialized yet
+   NAME    STATUS          MESSAGE
+   east    Ready
+   west    Ready
+   ```
+
+   The output shows:
+
+   * Sites exist in the specified namespaces.
+
+2. Check connectors and listeners:
+
+   ```bash
+   $ skupper connector status
+   NAME    STATUS  ROUTING-KEY     HOST            PORT
+   backend Ok      backend         127.0.0.1       9090
+   ```
+
+   The output shows:
+
+   * There is one connector, named `backend`.
+   * The connector uses the `backend` routing key and port `9090`.
+
+   This result shows that you can create a listener using the `backend` routing key and port `9090` on a different site to access the `backend` service.
+
+3. Check the status of any links:
+
+   ```bash
+   $ skupper link status
+
+   ```
+
+   The output shows the links .
+
+   **📌 NOTE**\
+   As part of output each site reports the status of the policy system on that cluster.
+
+
+## Checking links
+
+You must link sites before you can expose services on the network.
+
+**📌 NOTE**\
+By default, tokens expire after 5 minutes and you can only use a token once.
+Generate a new token if the link is not connected.
+You can also generate tokens using the `-token-type cert` option for permanent reusable tokens.
+
+This section outlines some advanced options for checking links.
+
+1. Check the link status:
+
+   ```bash
+   $ skupper link status -n east
+   NAME                                            STATUS  COST    MESSAGE
+   west-48b5feee-89e9-4a53-b8d0-e94304cc951f       Ready   1       OK
+   ```
+
+   A link exists from the specified site to another site, meaning a token from another site was applied to the specified site.
+
+   The status of the link must be `Ready` to allow service traffic.
+
+   **📌 NOTE**\
+   Running `skupper link status` on a linked site produces output only if a token was used to create a link.   
+
+   If you use this command on a site where you did not create the link, but there is an incoming link to the site:
+   ```
+   $ skupper link status -n west
+
+   There are no link resources in the namespace
+   ```
+
+* [checking-sites](#checking-sites)
+
+
+## Improving Skupper router performance
+
+If you encounter Skupper router performance issues, you can scale the Skupper router to address those concerns.
+
+**📌 NOTE**\
+While you can address availability concerns by scaling the number of routers, typically this is not necessary.
+
+## Resolving common problems
+
+The following issues and workarounds might help you debug simple scenarios when evaluating Skupper.
+

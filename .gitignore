@@ -1,5 +1,4 @@
 .vscode/
 build/
-!antora-ui/build
-node_modules/
+__pycache__/
 *.html

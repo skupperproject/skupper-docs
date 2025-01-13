@@ -1,14 +1,9 @@
-
-include::../partials/attributes.adoc[]
-//Category: skupper-overview
-// Type: assembly
 [id="skupper-security"] 
 = Skupper security
 
 Skupper securely connects your services with TLS authentication and encryption.
 See how Skupper enables you to deploy your application securely across Kubernetes clusters.
 
-// Type: concept
 [id="skupper-security-challenges"] 
 == Security challenges in the cloud
 
@@ -18,7 +13,6 @@ Either your services must be exposed to the public internet, or you must adopt c
 Increasing the challenge, layer 3 network controls do not extend easily to multiple clusters.
 These network controls must be duplicated for each cluster.
 
-// Type: concept
 [id="service-network-isolation"] 
 == Built-in network isolation
 
@@ -26,11 +20,9 @@ Skupper provides default, built-in security that scales across clusters and clou
 In a Skupper network, the connections between Skupper routers are secured with mutual TLS using a private, dedicated certificate authority (CA).
 Each router is uniquely identified by its own certificate.
 
-image::../images/clusters-tls.svg[]
+![clusters-tls](../images/clusters-tls.svg)
 
 This means that the Skupper network is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
-
-.Additional information
 
 * link:{overview-link}
 * link:{connectivity-link}
