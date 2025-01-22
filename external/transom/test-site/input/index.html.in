@@ -1,0 +1,20 @@
+---
+title: Doorjamb
+test_attribute: |
+  abc
+---
+
+<h1 id="doorjamb">Doorjamb</h1>
+
+<a href="test-1.html">Test 1</a>
+<a href="test-2.html">Test 2</a>
+
+<!-- Duplicate link targets -->
+<h2 id="animal">Animal</h2>
+<h2 id="animal">Animal</h2>
+
+{{page.include("config/swatch.md")}}
+
+{{albert}}
+
+{{benny()}}

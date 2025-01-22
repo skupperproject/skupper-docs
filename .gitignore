@@ -1,4 +1,4 @@
 .vscode/
-build/
+output/
 __pycache__/
 *.html

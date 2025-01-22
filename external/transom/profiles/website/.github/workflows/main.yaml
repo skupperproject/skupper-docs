@@ -1,0 +1,42 @@
+# See https://github.com/actions/starter-workflows/blob/main/pages/static.yml
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  main:
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up environment
+        run: |
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          echo "PLANO_COLOR=1" >> "$GITHUB_ENV"
+          pip install build wheel
+      - name: Install Plano
+        run: |
+          curl -sfL https://github.com/ssorj/plano/archive/main.tar.gz | tar -xz
+          cd plano-main && make install
+      - name: Install Transom
+        run: |
+          curl -sfL https://github.com/ssorj/transom/archive/main.tar.gz | tar -xz
+          cd transom-main && ./plano install
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v4
+      - name: Render site output
+        run: |
+          plano render
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+      - uses: actions/deploy-pages@v4
+        id: deployment

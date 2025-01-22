@@ -1,0 +1,26 @@
+name: main
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * 0"
+jobs:
+  main:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.7, 3.x]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Set up environment
+        run: |
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          echo "PLANO_COLOR=1" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{matrix.python-version}}
+      - run: python -m pip install pyyaml
+      - run: ./plano install
+      - run: transom-self-test
