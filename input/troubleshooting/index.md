@@ -100,3 +100,14 @@ While you can address availability concerns by scaling the number of routers, ty
 
 The following issues and workarounds might help you debug simple scenarios when evaluating Skupper.
 
+
+* Container platform error:
+  ```
+  Failed to bootstrap: failed to load site state: error loading "/home/user/.local/share/skupper/namespaces/default/input/resources/sites/test.yaml": multiple sites found, but only one site is allowed for bootstrapping
+  ```
+
+* namespace error:
+  ```
+  there is already a site created for this namespace
+  ```
+  

@@ -21,12 +21,14 @@ contextA> skupper init
 contextA> skupper site create
 ```
 
-On Kubernetes, the site does not accept links by default.
+The site does not accept links by default.
 Use `--enable-link-access` to allow other sites link to the new site.
 
-On Podman, the site definition is created in `~/.local/share/skupper` and you must enter `skupper system setup` to initialize the site.
+On Podman, the site definition is created in `~/.local/share/skupper` and you must enter `skupper system setup` to complete site creation.
 
 ## Linking sites
+
+
 
 ```v1
 contextA> skupper token create ~/token.yaml
