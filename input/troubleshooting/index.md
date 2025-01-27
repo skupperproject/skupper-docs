@@ -16,21 +16,21 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
    ```bash
    $ skupper site status
    Site not initialized yet
-   NAME    STATUS          MESSAGE
-   east    Ready
-   west    Ready
+   NAME    STATUS  MESSAGE
+   west    Ready   OK   
    ```
 
    The output shows:
 
-   * Sites exist in the specified namespaces.
+   * Sites exist in the specified namespace on Kubernetes.
+   * On other platforms, the status shows all sites for the user.
 
 2. Check connectors and listeners:
 
    ```bash
    $ skupper connector status
-   NAME    STATUS  ROUTING-KEY     HOST            PORT
-   backend Ok      backend         127.0.0.1       9090
+   NAME    STATUS  ROUTING-KEY     SELECTOR        HOST    PORT    HAS MATCHING LISTENERMESSAGE
+   backend Ready   backend         app=backend             8080    true                 OK
    ```
 
    The output shows:
