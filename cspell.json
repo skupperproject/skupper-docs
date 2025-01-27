@@ -9,5 +9,8 @@
         "skupper"
     ],
     "ignoreWords": [],
-    "import": []
+    "import": [],
+    "enabledFileTypes": {
+        "markdown": false
+    }
 }

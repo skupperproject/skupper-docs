@@ -7,7 +7,7 @@ Terminology changes:
 
 * **service network**: Application network or just network
 * **service sync**: Services are not automatically available on other sites. You must create a *connector* on the site with the server process and a *listener* on the site with the client process. Also you must match the connector and listener with a *routing key* to expose a service.
-
+* **Skupper Custom Resources**: On non-Kubernetes sites, you can now define your network using YAML. The YAML format is similar to Kubernetes YAML.
 
 ## Creating sites
 
