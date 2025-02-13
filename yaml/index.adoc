@@ -82,11 +82,15 @@ include::../examples/my-site.yaml[]
 ----
 The YAML creates a site with a console and you can create tokens from this site.
 
-To create a site that has no ingress:
+To create a site that has no ingress and with `service-sync` disabled:
 
 ----
 include::../examples/no-ingress.yaml[]
 ----
+
+NOTE: By default, `service-sync` is enabled and if you create a service on one site, it is available on all sites.
+If `service-sync` is set to false for a site, you need to create the service on that site, for example `skupper service create backend 8080`.
+
 
 --
 . Apply the YAML file to your cluster:
