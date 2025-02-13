@@ -29,7 +29,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 * The `skupper` CLI is installed.
 * The Skupper controller is running on the Kubernetes cluster you are running or you are running on a platform.
 
-1. Set the `SKUPPER_PLATFORM` for your site:
+1. Set the `SKUPPER_PLATFORM` for your site if you are not using Kubernetes/OpenShift:
 
    * `kubernetes` - default
    * `podman`
@@ -54,6 +54,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    ```bash
    $ skupper system setup
    ```
+
 
 ## Advanced site creation
 
