@@ -1,0 +1,29 @@
+site_name: Skupper docs
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - content.tabs.link
+    - navigation.sections
+
+docs_dir: input
+site_dir: output
+
+nav:
+  - Overview: 
+    - Introduction: overview/index.md
+    - Resources: overview/resources.md
+    - Routing: overview/routing.md
+    - Connectivity: overview/connectivity.md
+    - Load balancing: overview/load-balancing.md
+    - Migrating from v1: overview/migrating.md
+  - Kubernetes CLI: kubernetes/cli.md
+  - Non Kubernetes CLI (Docker, Podman, Linux): non-kube/cli.md
+  - YAML: yaml/index.md
+  - Observability: console/index.md
+  - Troubleshooting: troubleshooting/index.md
+
+plugins:
+  - search

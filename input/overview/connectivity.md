@@ -42,6 +42,3 @@ Build large, robust networks of connected clusters.
 
 ![many-clusters](../images/many-clusters.svg)
 
-* link:{overview-link}
-* link:{routing-link}
-* link:{connectivity-link}

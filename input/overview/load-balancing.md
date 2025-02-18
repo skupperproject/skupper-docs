@@ -1,5 +1,4 @@
-[id="skupper-load"] 
-= Skupper load balancing and failover
+# Skupper load balancing and failover
 
 Skupper enables load balancing and failover across servers located across the service network.
 Specifically, Skupper balances **active TCP connections** across workloads deployed in distinct sites.
@@ -18,7 +17,7 @@ Skupper determines the perceived cost with the context of knowing the configured
 * Local workloads have a link cost of 0.
 * If connecting to a workload requires traversing two or more links, the total of all link costs constitutes the link cost.
 
-**📌 NOTE**\
+**📌 NOTE**
 Traffic load is based on the number of concurrent TCP connections, so 'round robin' behavior should not be expected.
 
 ## Using Skupper load balancing to achieve failover
@@ -27,6 +26,6 @@ You can configure the network so that a specific location handles all traffic un
 After failure at that location, all traffic is handled by a different location. 
 To achieve this behavior, you set the cost from the client to the backup server high, for example 9999,  as described in {cost-link}.
 
-**📌 NOTE**\
+**📌 NOTE**
 Link cost is configured for all services between two sites.
 It is currently not possible to set different costs for distinct services.
