@@ -89,7 +89,7 @@ include::../examples/no-ingress.yaml[]
 ----
 
 NOTE: By default, `service-sync` is enabled and if you create a service on one site, it is available on all sites.
-If `service-sync` is set to false for a site, you need to create the service on that site, for example `skupper service create backend 8080`.
+If `service-sync` is set to false for a site, you need to create the service on that site as described in xref:service-yaml[].
 
 
 --
@@ -174,8 +174,6 @@ A future release of Skupper will provide an alternative declarative method to cr
 // end::skupper-io[]
 
 include::annotations.adoc[leveloffset=+1]
-
-
 
 // Type: reference
 [id="site-config-reference"] 
