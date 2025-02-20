@@ -1,6 +1,6 @@
-# Using the Skupper CLI
+# Creating a site on Linux using the Skupper CLI
 
-Using the skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.
+Using the skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current user.
 
 A typical workflow is to create a site, link sites together, and expose services to the service network.
 
@@ -22,16 +22,16 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    origin-oauth-proxy      4.14.0
    ```
 
-## Creating a simple site using the CLI on Kubernetes/OpenShift
+## Creating a simple site using the CLI on Linux
 
 **Prerequisites**
 
 * The `skupper` CLI is installed.
-* The Skupper controller is running on the Kubernetes/OpenShift cluster you are running or you are running on a platform.
 
-1. Set the `SKUPPER_PLATFORM` for your site if you are not using Kubernetes/OpenShift:
+.Procedure
 
-   * `kubernetes` - default
+1. Set the `SKUPPER_PLATFORM` for type of site you want to install:
+
    * `podman`
    * `docker`
    * `linux`
@@ -48,19 +48,4 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    Site "my-site" is ready.
    ```
 
-
-3. Create a site on Docker/Podman/Linux
-
-   ```bash
-   $ skupper site create site-a
-   File written to /home/user/.local/share/skupper/namespaces/default/input/resources/sites/site-a.yaml
-   ```
-
-   To make the site active on non-Kubernetes sites:
-
-   ```bash
-   $ skupper system setup
-   ```
-
-
-  
+  📌 NOTE: On non-Kubernetes sites, you can create multiple sites per-user by specifying a *namespace*.

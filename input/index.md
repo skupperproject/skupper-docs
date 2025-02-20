@@ -17,21 +17,23 @@ Using Skupper with Kubernetes
 
 Learn how to use the Skupper CLI or YAML to create Kubernetes sites.
 
-* CLI guide
-* CLI reference
-* YAML guide
-* YAML reference
-* Using the Skupper Operator
-* Advanced deployments
+* Creating sites
+* Linking sites
+* Exposing services on the network
+* [CLI reference][cli-ref]
+* [YAML reference][yaml-ref]
+
+* [Installation][install]
 
 Using Skupper with non-Kubernetes platforms
 
 Learn how to use the Skupper CLI or YAML to create Docker, Podmand or Linux sites.
 
-* CLI guide
-* CLI reference
-* YAML guide
-* YAML reference
+* Creating sites
+* Linking sites
+* Exposing services on the network
+* [CLI reference][cli-ref]
+* [YAML reference][yaml-ref]
 
 
 [overview]: ./overview/index.html
@@ -41,3 +43,8 @@ Learn how to use the Skupper CLI or YAML to create Docker, Podmand or Linux site
 [load-balancing]: ./overview/load-balancing.html
 [glossary]: https://skupperproject.github.io/refdog/concepts/overview.html
 [getting-started]: https://skupper.io/start/index.html
+
+
+[cli-ref]: https://skupperproject.github.io/refdog/commands/index.html
+[yaml-ref]: https://skupperproject.github.io/refdog/resources/index.html
+[install]: ./install/index.html

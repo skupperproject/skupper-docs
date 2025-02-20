@@ -29,3 +29,4 @@ kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/cmd
 <!-- >
 ## Installing the Skupper controller using the Skupper Operator
 
+## Installing the Skupper controller using the Skupper Helm charts
