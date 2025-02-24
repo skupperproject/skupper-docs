@@ -4,10 +4,14 @@ Before you can create a site on Kubernetes, you must install the Skupper control
 You can install the controller using the following methods:
 
 * Directly using YAML
-* Operator (requires OLM)
 * Helm charts
+* Operator 
 
 ## Installing the Skupper controller using YAML
+
+.Prerequisites
+
+* cluster-admin access to cluster
 
 Install the latest version using the following commands:
 
@@ -26,7 +30,13 @@ kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/con
 kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/cmd/controller/deploy_cluster_scope.yaml
 ```
 
+## Installing the Skupper controller using the Skupper Helm charts
+
+.Prerequisites
+
+* cluster-admin access to cluster
+* helm (See https://helm.sh/docs/intro/install/)
+
 <!-- >
 ## Installing the Skupper controller using the Skupper Operator
 
-## Installing the Skupper controller using the Skupper Helm charts

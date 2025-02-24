@@ -4,7 +4,7 @@ Using the skupper command-line interface (CLI) allows you to create and manage S
 
 A typical workflow is to create a site, link sites together, and expose services to the service network.
 
-## Checking the Skupper CLI
+## Checking the Skupper CLI and environment
 
 Installing the skupper command-line interface (CLI) provides a simple method to get started with Skupper.
 
@@ -12,7 +12,8 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 2. Verify the installation.
    ```bash
-   $  skupper version
+   skupper version
+   
    COMPONENT               VERSION
    router                  3.2.0
    controller              2.0.0-rc1
@@ -20,6 +21,10 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    cli                     2.0.0-rc1
    prometheus              v3.0.1
    origin-oauth-proxy      4.14.0
+   ```
+3. For podman sites, the Podman socket must be available. To enable it:
+   ```bash
+   systemctl --user enable --now podman.socket
    ```
 
 ## Creating a simple site using the CLI on Linux
