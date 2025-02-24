@@ -16,9 +16,9 @@ A service account, role and role binding with this name are created to manage th
 Each Skupper site on Kubernetes consists of two deployments:
 
 * **skupper-router**
-provides the data plane for the {service-network}.
+provides the data plane for the application network.
 * **skupper-service-controller**
-provides the control plane for the {service-network}.
+provides the control plane for the application network.
 
 ## ConfigMaps
 
@@ -32,10 +32,10 @@ site settings, including:
 
   This ConfigMap is the root object for all the skupper resources; deleting it will remove the Skupper deployment from the namespace.
 * **skupper-services**
-internal representation of the services available on the {service-network}.
+internal representation of the services available on the application network.
 * **skupper-internal**
 internal router configuration.
-The service controller determines the values in this ConfigMap based on the services available on the {service-network}.
+The service controller determines the values in this ConfigMap based on the services available on the application network.
 
 ## Secrets
 
@@ -66,7 +66,7 @@ If a username and password are not specified, an `admin` user is created with a 
 
 ## Services
 
-In addition to the services that are exposed on the {service-network}, the following services are created:
+In addition to the services that are exposed on the application network, the following services are created:
 
 * **skupper-router-local**
 The service controller uses this service to connect to and configure the router. 

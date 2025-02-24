@@ -17,9 +17,9 @@ Using Skupper with Kubernetes
 
 Learn how to use the Skupper CLI or YAML to create Kubernetes sites.
 
-* Creating sites
-* Linking sites
-* Exposing services on the network
+* [Creating sites](./kube/site.html)
+* [Linking sites](./kube/link.html)
+* [Managing services on the network](./kube/service.html)
 * [CLI reference][cli-ref]
 * [YAML reference][yaml-ref]
 

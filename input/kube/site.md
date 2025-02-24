@@ -17,7 +17,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    router                  3.2.0
    controller              2.0.0-rc1
    network-observer        2.0.0-rc1
-   cli                     2.0.0-rc1
+   cli                     {{skupper_cli_version}}
    prometheus              v3.0.1
    origin-oauth-proxy      4.14.0
    ```
@@ -49,8 +49,12 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    Waiting for status...
    Site "my-site" is ready.
    ```
+There are many options to consider when creating sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
+
 
 ## Creating a simple site using YAML on Kubernetes
+
+You can use YAML to create and manage Skupper sites.
 
 **Prerequisites**
 
@@ -58,4 +62,37 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 .Procedure
 
-1. Create a site CR yaml file, for example
+1. Create a site CR YAML file named `my-site.yaml`, for example:
+
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: Site
+   metadata:
+     name: my-site
+   ```
+   This YAML creates a site named `my-site` in the current namespace.
+
+2. Create the site:
+   ```bash
+   kubectl apply -f my-site.yaml
+   ```
+
+3. Check the status of the site:
+   ```bash
+   kubectl get site
+   ```
+   You might need to issue the command multiple times before the site is ready:
+   ```
+   $ kubectl get site
+   NAME   STATUS    SITES IN NETWORK   MESSAGE
+   west   Pending                      containers with unready status: [router kube-adaptor]
+   $ kubectl get site
+   NAME   STATUS   SITES IN NETWORK   MESSAGE
+   west   Ready    1                  OK
+   ```
+   You can now link this site to another site to create an application network.
+
+There are many options to consider when creating sites using YAML, see [YAML Reference][yaml-ref], including *frequently used* options.
+
+[cli-ref]: https://skupperproject.github.io/refdog/commands/index.html
+[yaml-ref]: https://skupperproject.github.io/refdog/resources/index.html
