@@ -53,7 +53,8 @@ Listeners and connectors are matched using routing keys.
 .Procedure
 
 1. Identify a connector that you want to create a listener for.
-2. Create a listner:
+
+2. Create a listener:
    ```bash
    skupper connector create <name> <port> [--routing-key <name>]
    ```
@@ -63,6 +64,7 @@ Listeners and connectors are matched using routing keys.
    Waiting for create to complete...
    Listener "backend" is ready
    ```
+
 3. Check the listener status:
    ```bash
    skupper listener status
@@ -75,6 +77,7 @@ Listeners and connectors are matched using routing keys.
    NAME    STATUS  ROUTING-KEY     HOST    PORT    MATCHING-CONNECTOR      MESSAGE
    backend Ready   backend         backend 8080    true                    OK
    ```
+   
    **📌 NOTE**
    There must be a `MATCHING-CONNECTOR` for the service to operate.
    By default, the routing key name is the listener name.

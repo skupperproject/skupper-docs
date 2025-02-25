@@ -13,7 +13,7 @@ Learn about the concepts and technology behind application networks.
 
 
 
-Using Skupper with Kubernetes
+## Using Skupper with Kubernetes
 
 Learn how to use the Skupper CLI or YAML to create Kubernetes sites.
 
@@ -25,11 +25,11 @@ Learn how to use the Skupper CLI or YAML to create Kubernetes sites.
 
 * [Installation][install]
 
-Using Skupper with non-Kubernetes platforms
+## Using Skupper with non-Kubernetes platforms
 
 Learn how to use the Skupper CLI or YAML to create Docker, Podmand or Linux sites.
 
-* Creating sites
+* [Creating sites](./nonube/site.html)
 * Linking sites
 * Exposing services on the network
 * [CLI reference][cli-ref]
