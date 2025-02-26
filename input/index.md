@@ -12,28 +12,56 @@ Learn about the concepts and technology behind application networks.
 * [Getting started][getting-started]
 
 
+## Installation
 
-## Using Skupper with Kubernetes
-
-Learn how to use the Skupper CLI or YAML to create Kubernetes sites.
-
-* [Creating sites](./kube/site.html)
-* [Linking sites](./kube/link.html)
-* [Managing services on the network](./kube/service.html)
-* [CLI reference][cli-ref]
-* [YAML reference][yaml-ref]
+Learn about installing the Skupper CLI and the controller.
 
 * [Installation][install]
 
-## Using Skupper with non-Kubernetes platforms
 
-Learn how to use the Skupper CLI or YAML to create Docker, Podmand or Linux sites.
+## Using the Skupper CLI on Kubernetes
 
-* [Creating sites](./nonube/site.html)
-* Linking sites
-* Exposing services on the network
+Learn how to use the CLI on Kubernetes.
+
+* [Overview](./kube-cli/index.html)
+* [Configuring sites](./kube-cli/site-configuration.html)
+* [Linking sites](./kube-cli/site-linking.html)
+* [Managing services on the network](./kube-cli/service-exposure.html)
 * [CLI reference][cli-ref]
+
+## Using Skupper YAML on Kubernetes
+
+Learn how to use YAML on Kubernetes.
+
+* [Overview](./kube-yaml/index.html)
+* [Configuring sites](./kube-yaml/site-configuration.html)
+* [Linking sites](./kube-yaml/site-linking.html)
+* [Managing services on the network](./kube-yaml/service-exposure.html)
 * [YAML reference][yaml-ref]
+
+
+## Using the Skupper CLI on local systems
+
+Learn how to use the CLI on Docker, Podman or Linux systems.
+
+* [Overview](./system-cli/index.html)
+* [Configuring sites](./system-cli/site-configuration.html)
+* [Linking sites](./system-cli/site-linking.html)
+* [Managing services on the network](./system-cli/service-exposure.html)
+* [CLI reference][cli-ref]
+
+## Using Skupper YAML on local systems
+
+Learn how to use YAML on Docker, Podman or Linux systems.
+
+* [Overview](./system-yaml/index.html)
+* [Configuring sites](./system-yaml/site-configuration.html)
+* [Linking sites](./system-yaml/site-linking.html)
+* [Managing services on the network](./system-yaml/service-exposure.html)
+* [YAML reference][yaml-ref]
+
+
+
 
 
 [overview]: ./overview/index.html
