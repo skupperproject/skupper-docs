@@ -84,9 +84,9 @@ If these Secrets do not exist, {skupper-name} generates and signs those certific
 NOTE: {skupper-name} only uses the `skupper-local-ca` Secret if `skupper-local-server` and `skupper-local-client` are not populated.
 
 
-include::app-tls.adoc[leveloffset=0]
+include::app-tls.adoc[leveloffset=+1]
 
-= Summary of TLS related Secrets
+== Summary of TLS related Secrets
 
 [cols=3s*]
 |===

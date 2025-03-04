@@ -16,5 +16,4 @@ overview/routing.adoc
 overview/security.adoc
 overview/load-balancing.adoc
 kubernetes/deployment-concerns.adoc
-kubernetes/app-tls.adoc
 kubernetes/con-tls.adoc
