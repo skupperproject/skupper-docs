@@ -38,3 +38,7 @@ The Network console provides an overview of the following:
 * Components
 * Processes
 
+For example, consider the following service:
+
+![services](../images/console.png)
+
