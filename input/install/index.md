@@ -37,6 +37,20 @@ kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/cmd
 * cluster-admin access to cluster
 * helm (See https://helm.sh/docs/intro/install/)
 
-<!-- >
-## Installing the Skupper controller using the Skupper Operator
 
+.Procedure
+
+1. Run the following command to install the Skupper controller on a cluster:
+
+   ```
+   helm install skupper oci://quay.io/skupper/helm/skupper --version {{skupper_cli_version}}
+   ```
+2. Optionally install the network observer:
+   ```
+   helm install skupper-network-observer oci://quay.io/skupper/helm/network-observer --version {{skupper_cli_version}}
+   ```
+
+
+<!--
+## Installing the Skupper controller using the Skupper Operator
+-->
