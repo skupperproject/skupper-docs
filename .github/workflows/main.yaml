@@ -34,7 +34,7 @@ jobs:
       - uses: actions/configure-pages@v4
       - name: Render site output
         run: |
-          plano render
+          ./plano render
         env:
           SITE_PREFIX: /skupper-docs
           PLANO_COLOR: 1
