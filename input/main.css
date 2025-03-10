@@ -1,0 +1,471 @@
+/*
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+/* Standard variables */
+
+:root {
+    /* Colors */
+    --body-background-color: hsl(0, 0%, 100%);
+    --code-background-color: hsl(0, 0%, 97%);
+    --text-color: hsl(0, 0%, 20%);
+    --line-color: hsl(0, 0%, 95%);
+    --link-color: rgb(40, 100, 180);
+    --accent-color-1: hsl(6, 80%, 70%);
+    --selected-item-background-color: hsla(6, 80%, 70%, 0.3);
+    /* Fonts */
+    --body-font-family: sans-serif;
+    --body-line-height: 1.5em;
+    --code-font-family: monospace;
+    --heading-font-family: sans-serif;
+    /* Sizes */
+    --page-width: 1100px;
+}
+
+/* Standard CSS reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6,
+blockquote, p, pre,
+dl, ol, ul,
+table, figure {
+    margin: 1em 0;
+}
+
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child,
+blockquote:first-child, p:first-child, pre:first-child,
+dl:first-child, ol:first-child, ul:first-child,
+table:first-child, figure:first-child {
+    margin-top: 0;
+}
+
+h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:last-child,
+blockquote:last-child, p:last-child, pre:last-child,
+dl:last-child, ol:last-child, ul:last-child,
+table:last-child, figure:last-child {
+    margin-bottom: 0;
+}
+
+h1:only-child, h2:only-child, h3:only-child, h4:only-child, h5:only-child, h6:only-child,
+blockquote:only-child, p:only-child, pre:only-child,
+dl:only-child, ol:only-child, ul:only-child,
+table:only-child, figure:only-child {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+article, section {
+    margin: 1.5em 0;
+}
+
+article:first-child, section:first-child {
+    margin-top: 0;
+}
+
+article:last-child, section:last-child {
+    margin-bottom: 0;
+}
+
+article:only-child, section:only-child {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Standard page structure */
+
+html {
+    height: 100%;
+    overflow-y: scroll;
+    scroll-padding-top: 6em;
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: minmax(2em, 1fr) calc(var(--page-width) * 0.7) calc(var(--page-width) * 0.3) minmax(2em, 1fr);
+    grid-template-areas:
+        "header header header header"
+        ". main sidebar ."
+        "footer footer footer footer";
+    height: 100%;
+    color: var(--text-color);
+    background-color: var(--body-background-color);
+    font-family: var(--body-font-family);
+    line-height: var(--body-line-height);
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    justify-content: center;
+    background-color: var(--body-background-color);
+    padding: 1em 0;
+    border-bottom: 1px solid var(--line-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+header nav {
+    width: var(--page-width);
+}
+
+main {
+    grid-area: main;
+    position: relative;
+    top: 4em;
+    padding: 2em 0;
+}
+
+aside {
+    grid-area: sidebar;
+    position: relative;
+    top: 4em;
+    padding: 2em 0;
+    display: flex;
+}
+
+aside > div {
+    align-self: start; /* Important for sticky positioning */
+    position: sticky;
+    top: 6em;
+    margin: 0 0 0 2em;
+    padding: 0 0 0 2em;
+    border-left: 1px solid var(--line-color);
+}
+
+aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+aside nav > nav {
+    padding-left: 1em;
+    gap: 0.3em;
+    font-size: 0.95em;
+}
+
+footer {
+    grid-area: footer;
+    padding: 1em 0;
+}
+
+@media (max-width: 768px) {
+    body {
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+    }
+}
+
+/* Standard styles for prose elements */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font-family);
+}
+
+h1 {
+    font-size: 1.8em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+a {
+    text-decoration: none;
+    color: var(--link-color);
+    cursor: pointer;
+}
+
+a.selected {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+code {
+    font-family: var(--code-font-family);
+    font-size: 0.8em;
+    background-color: var(--code-background-color);
+}
+
+pre {
+    padding: 1em;
+    background-color: var(--code-background-color);
+}
+
+/* Standard styles for lists */
+
+/* XXX The handling of only versus multiple child elements needs work */
+
+ol, ul, dd {
+    padding: 0 0 0 1em;
+}
+
+li {
+    list-style-type: disc;
+}
+
+li, dt, dd {
+    margin: 0;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+li > ul, li > ol, dd > dl {
+    margin: 0;
+}
+
+li > p:last-child, dd > p:last-child {
+    margin-bottom: 1em;
+}
+
+li > p + ul {
+    margin-bottom: 1em !important;
+}
+
+li > table {
+    margin-bottom: 1em !important;
+}
+
+li > section {
+    margin-bottom: 1em !important;
+}
+
+/* Standard styles for tables */
+
+table {
+    border-collapse: collapse;
+}
+
+/* Standard styles for path navigation */
+
+.path-nav > a:not(:last-child)::after {
+    content: " \00a0\003e\00a0\00a0 ";
+    color: var(--text-color);
+}
+
+.path-nav > a:last-child {
+    color: var(--text-color);
+}
+
+/* Nothing Skupper-specific above here! */
+
+:root {
+    --heading-font-family: "Alegreya Sans", sans-serif;
+    --body-font-family: "Lato", sans-serif;
+    --code-font-family: "Roboto Mono", monospace;
+}
+
+/* Skupper-specific styles for the page structure */
+
+header {
+    border-bottom: 3px solid var(--line-color);
+}
+
+aside > div {
+    border-left: 3px solid var(--line-color);
+}
+
+aside h4 {
+    font-size: 0.8em !important;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1em;
+    margin-bottom: 1.9em;
+}
+
+/* Skupper-specific styles for prose elements */
+
+pre {
+    border-radius: 0.25em;
+}
+
+/* Refdog-specific styles for prose elements */
+
+/** Objects (resources and commands) **/
+
+body.object h2 {
+    font-size: 1.3em;
+}
+
+body.object main::after {
+    content: "";
+    display: block;
+    height: 100vh;
+}
+
+table.objects th {
+    width: 14em;
+    text-align: left;
+    font-weight: normal;
+}
+
+/** Attributes (resource properties and command options) **/
+
+section.attributes > div.attribute {
+    margin: 1em 1em 1.4em 1em;
+}
+
+div.attribute > div.attribute-heading {
+    display: inline;
+    margin-left: -1em;
+    padding: 0.2em 0.5em;
+    background-color: var(--code-background-color);
+    border-radius: 0.25em;
+}
+
+div.attribute > div.attribute-heading:hover {
+    cursor: pointer;
+}
+
+div.attribute > div.attribute-heading > * {
+    display: inline;
+    font-family: var(--body-font-family);
+    font-size: 1em;
+}
+
+div.attribute > div.attribute-heading > h3 {
+    margin-right: 0.2em;
+}
+
+div.attribute > div.attribute-heading > h3::before {
+    content: "\25be";
+    margin-right: 0.5em;
+    font-size: 0.8em;
+    color: #999;
+    vertical-align: top;
+}
+
+div.attribute > div.attribute-heading > div.attribute-type-info {
+}
+
+div.attribute > div.attribute-heading > div.attribute-flags {
+    margin-left: 0.3em;
+    font-style: italic;
+}
+
+div.attribute > div.attribute-body {
+    margin-top: 1em;
+}
+
+div.attribute.selected > div.attribute-heading {
+    background-color: var(--selected-item-background-color);
+}
+
+div.attribute.collapsed:not(.selected) > div.attribute-heading > h3::before {
+    content: "\25b8";
+}
+
+div.attribute.collapsed:not(.selected) > div.attribute-body {
+    display: none;
+}
+
+/** Tables **/
+
+table.fields td, table.fields th {
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 2px solid var(--line-color);
+    padding: 0.2em 0;
+}
+
+table.fields th {
+    min-width: 6em;
+    padding-right: 1em;
+    font-weight: normal;
+    font-style: italic;
+}
+
+table.choices {
+    position: relative;
+    top: -0.2em;
+    border: none;
+    font-style: normal !important;
+}
+
+table.choices th {
+    width: 6em;
+    padding-right: 1em;
+    border: none;
+    font-weight: normal;
+    font-style: normal !important;
+}
+
+table.choices td {
+    border: none;
+    font-style: normal !important;
+}
+
+.notes {
+    color: brown;
+}
+
+/* -- */
+
+span.shell-comment {
+    color: brown;
+}
+
+span.shell-command {
+    font-weight: 600;
+}
+
+span.shell-output {
+}
+
+/* -- */
+
+figure img {
+    max-width: 70%;
+    max-height: 20em;
+    margin: 1em;
+}
+
+figure {
+    text-align: center;
+}
+
+figcaption {
+    margin-top: -0.5em;
+    font-style: italic;
+}
