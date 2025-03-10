@@ -9,7 +9,7 @@ You can install the controller using the following methods:
 
 ## Installing the Skupper controller using YAML
 
-.Prerequisites
+**Prerequisites**
 
 * cluster-admin access to cluster
 
@@ -32,13 +32,13 @@ kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/cmd
 
 ## Installing the Skupper controller using the Skupper Helm charts
 
-.Prerequisites
+**Prerequisites**
 
 * cluster-admin access to cluster
 * helm (See https://helm.sh/docs/intro/install/)
 
 
-.Procedure
+**Procedure**
 
 1. Run the following command to install the Skupper controller on a cluster:
 

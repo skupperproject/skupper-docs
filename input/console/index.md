@@ -4,12 +4,12 @@ The Network console provides data and visualizations of the traffic flow between
 
 ## Enabling the Network console
 
-.Prerequisites
+**Prerequisites**
 
 * A Kubernetes site
 
 
-.Procedure
+**Procedure**
 
 1. Determine which site in your network is best to enable the Network console using the following criteria:
 
@@ -22,6 +22,39 @@ The Network console provides data and visualizations of the traffic flow between
 3. Deploy the network observer helm chart:
    ```
    helm install skupper-network-observer oci://quay.io/skupper/helm/network-observer --version {{skupper_cli_version}}
+   ```
+   The output is similar to the following:
+   ```
+   Pulled: quay.io/skupper/helm/network-observer:2.0.0
+   Digest: sha256:557c8a3f4b5d8bb6e779a81e6214fa87c2ad3ad0c957a5c08b8dd3cb20fc7cfe
+   NAME: skupper-network-observer
+   LAST DEPLOYED: Sun Mar  9 19:47:09 2025
+   NAMESPACE: default
+   STATUS: deployed
+   REVISION: 1
+   TEST SUITE: None
+   NOTES:
+   You have installed the skupper network observer!
+   
+   Accessing the console:
+   The network-observer application is exposed as a service inside of your
+   cluster. To access the application externally you must either enable an
+   ingress of some sort or use port forwarding to access the service
+   temporarily.
+   Expose the application at https://127.0.0.1:8443 with the command:
+   kubectl --namespace default port-forward service/skupper-network-observer 8443:443
+
+   Basic Authentication is enabled.
+
+   Users are configured in the skupper-network-observer-auth secret.
+   This secret has been prepopulated with a single user "skupper" and a randomly
+   generated password stored in plaintext. It is recommended that these
+   credentials be rotated and replaced with a secure password hash (bcrypt.)
+ 
+   Retrieve the password with this command:
+   kubectl --namespace default \
+         get secret skupper-network-observer-auth \
+         -o jsonpath='{.data.htpasswd}' | base64 -d | sed 's/\(.*\):{PLAIN}\(.*\)/\1 \2\n/'
    ```
 4. Expose the `skupper-network-observer` service to make the Network console available, for example on OpenShift:
 
@@ -40,5 +73,7 @@ The Network console provides an overview of the following:
 
 For example, consider the following service:
 
+<img src="../images/console.png" alt="adservice in london and berlin" style="width: 100%;">
+<!--
 ![services](../images/console.png)
-
+-->

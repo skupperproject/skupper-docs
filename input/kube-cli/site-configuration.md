@@ -1,6 +1,6 @@
 # Creating a site on Kubernetes using the Skupper CLI
 
-Using the skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.
+Using the skupper command-line interface (CLI) allows you to create and manage sites from the context of the current namespace.
 
 A typical workflow is to create a site, link sites together, and expose services to the service network.
 
@@ -14,12 +14,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    ```bash
    $  skupper version
    COMPONENT               VERSION
-   router                  3.2.0
-   controller              2.0.0-rc1
-   network-observer        2.0.0-rc1
    cli                     {{skupper_cli_version}}
-   prometheus              v3.0.1
-   origin-oauth-proxy      4.14.0
    ```
 
 ## Creating a simple site using the CLI on Kubernetes
@@ -29,7 +24,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 * The `skupper` CLI is installed.
 * The Skupper controller is running on the Kubernetes cluster you are running or you are running on a platform.
 
-.Procedure
+**Procedure**
 
 1. Check that the `SKUPPER_PLATFORM` environment is unset or set to `kubernetes`.
 
@@ -41,8 +36,9 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 2. Create a site on Kubernetes:
 
    ```bash
-   $ skupper site create <site-name>
+   $ skupper site create <site-name> --namespace <namespace>
    ```
+   Specifying the namespace is not required if the context is set to the namespace where you want to create the site.
    For example:
    ```bash
    $ skupper site create my-site
@@ -51,48 +47,42 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    ```
 There are many options to consider when creating sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
+For example
 
-## Creating a simple site using YAML on Kubernetes
+* `--enable-link-access`
+  
+  If enabled, this option allows you create tokens and link *to* this site.
+  By default, this option is disabled but you can change the setting later `skupper site update --enable-link-access`.
 
-You can use YAML to create and manage Skupper sites.
+* `--timeout <time>`
+
+  You can add the timeout option to specify the maximum time for the CLI wait for the site status to report `ready`.
+  ```
+  skupper site create my-site --timeout 2m
+  ```
+  The timeout option does not stop the site from being created, but if the site is not ready, the following is output:
+  
+  ```
+  Site "my-site" is not yet ready: Pending
+  ```
+  You can check the status of the site at any time using `skupper site status`.
+
+## Deleting a site using the CLI on Kubernetes
 
 **Prerequisites**
 
-* The Skupper controller is running on the Kubernetes cluster you are running or you are running on a platform.
+* The `skupper` CLI is installed.
 
-.Procedure
+**Procedure**
 
-1. Create a site CR YAML file named `my-site.yaml`, for example:
-
-   ```yaml
-   apiVersion: skupper.io/v2alpha1
-   kind: Site
-   metadata:
-     name: my-site
-   ```
-   This YAML creates a site named `my-site` in the current namespace.
-
-2. Create the site:
+1. Change context to the namespace where the site was created, for example:
    ```bash
-   kubectl apply -f my-site.yaml
+   kubectl config set-context --current --namespace west
    ```
 
-3. Check the status of the site:
+2. Enter the following command to delete a site:
    ```bash
-   kubectl get site
+   skupper site delete
    ```
-   You might need to issue the command multiple times before the site is ready:
-   ```
-   $ kubectl get site
-   NAME   STATUS    SITES IN NETWORK   MESSAGE
-   west   Pending                      containers with unready status: [router kube-adaptor]
-   $ kubectl get site
-   NAME   STATUS   SITES IN NETWORK   MESSAGE
-   west   Ready    1                  OK
-   ```
-   You can now link this site to another site to create an application network.
-
-There are many options to consider when creating sites using YAML, see [YAML Reference][yaml-ref], including *frequently used* options.
 
 [cli-ref]: https://skupperproject.github.io/refdog/commands/index.html
-[yaml-ref]: https://skupperproject.github.io/refdog/resources/index.html

@@ -1,0 +1,687 @@
+/*
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+ */
+
+:root {
+    --bg-color-1: white;
+    --bg-color-2: hsla(203, 30%, 90%, 1.0);
+    --bg-color-3: hsla(203, 30%, 30%, 1.0);
+    --fg-color-1: hsla(0, 0%, 0%, 0.95);
+    --fg-color-2: hsla(0, 0%, 0%, 0.95);
+    --fg-color-3: hsla(0, 0%, 100%, 0.95);
+    --accent-color-1: hsla(6, 80%, 70%, 1.0);
+    --accent-color-2: hsla(140, 40%, 55%, 1.0);
+    --link-color: hsla(203, 90%, 30%, 1.0);
+    --code-label-fg-color: rgba(0, 0, 0, 0.7);
+    --code-label-bg-color: rgba(0, 0, 0, 0.06);
+    --code-label-border-color: rgba(0, 0, 0, 0.2);
+    --code-label-fg-color-session-1: rgba(127, 64, 0, 0.7);
+    --code-label-bg-color-session-1: rgba(127, 64, 0, 0.06);
+    --code-label-border-color-session-1: rgba(127, 64, 0, 0.3);
+    --code-label-fg-color-session-2: rgba(0, 64, 127, 0.7);
+    --code-label-bg-color-session-2: rgba(0, 64, 127, 0.06);
+    --code-label-border-color-session-2: rgba(0, 64, 127, 0.3);
+    --code-fg-color: rgba(0, 0, 0, 0.95);
+    --code-bg-color: rgba(247, 247, 247, 1.0);
+    --heading-font-family: "Alegreya Sans", sans-serif;
+    --body-font-family: "Lato", sans-serif;
+    --mono-font-family: "Roboto Mono", monospace;
+}
+
+* {
+    padding: 0;
+    box-sizing: border-box;
+    border-style: none;
+}
+
+*:first-child {
+    margin-top: 0;
+}
+
+*:last-child {
+    margin-bottom: 0;
+}
+
+html {
+    overflow-y: scroll;
+    scroll-padding-top: 6.4em;
+}
+
+html,
+body,
+div,
+a,
+br {
+    margin: 0;
+}
+
+body {
+    font-family: var(--body-font-family);
+    font-size: 12pt;
+    line-height: 18pt;
+    font-weight: 400;
+    color: var(--fg-color-1);
+    background-color: var(--bg-color-3);
+}
+
+code,
+pre {
+    font-family: var(--mono-font-family);
+    font-size: 10pt;
+    font-weight: 400;
+    color: var(--code-fg-color);
+    position: relative;
+}
+
+a.copy-button {
+    position: sticky;
+    left: 100%;
+    height: 0;
+    width: 0;
+    overflow: visible;
+}
+
+a.copy-button > span {
+    color: var(--code-bg-color);
+    font-size: 1.2em;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+}
+
+pre:hover a.copy-button > span {
+    color: var(--code-fg-color);
+}
+
+a.copy-button:active > span {
+    top: 1px;
+    right: -1px;
+}
+
+p code, li code {
+    background-color: var(--code-bg-color);
+    padding: 0 0.1em;
+    font-size: 0.9em;
+}
+
+p a code, li a code {
+    color: inherit;
+}
+
+pre {
+    padding: 0.9em 1em 1em 1em;
+    margin-top: 0;
+    background-color: var(--code-bg-color);
+    overflow: auto;
+}
+
+.code-label {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    padding: 0.2em 0.6em 0 0.6em;
+    color: var(--code-label-fg-color);
+    background-color: var(--code-label-bg-color);
+    border-bottom: 0.1em solid var(--code-label-border-color);
+}
+
+.session-1 {
+    color: var(--code-label-fg-color-session-1);
+    background-color: var(--code-label-bg-color-session-1);
+    border-bottom: 0.1em solid var(--code-label-border-color-session-1);
+}
+
+.session-2 {
+    color: var(--code-label-fg-color-session-2);
+    background-color: var(--code-label-bg-color-session-2);
+    border-bottom: 0.1em solid var(--code-label-border-color-session-2);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--heading-font-family);
+    font-size: 14pt;
+    line-height: 19pt;
+    font-weight: 700;
+    position: relative;
+    margin-top: 1.2em;
+}
+
+h1 {
+    font-size: 1.8em;
+    line-height: 1.3em;
+    margin-top: 0;
+    margin-bottom: 1.2em;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 1.1em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+a:visited {
+    color: var(--link-color);
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+    color: inherit !important;
+}
+
+hr {
+    border-bottom: 1px solid #ddd;
+}
+
+blockquote {
+    margin-left: 2em;
+}
+
+ol, ul {
+    padding: 0 0 0 1em;
+}
+
+li {
+    margin: 0;
+}
+
+li > *:last-child {
+    margin-bottom: 1em;
+}
+
+table th, table td {
+    text-align: left;
+    padding-right: 1em;
+}
+
+nav.links > a {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+/* --- */
+
+header,
+footer {
+    margin: 0;
+}
+
+header > nav > div,
+footer > div,
+section > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+header {
+    color: var(--fg-color-1);
+    background-color: var(--bg-color-1);
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+
+header > nav > div {
+    display: flex;
+    align-items: center;
+}
+
+#-site-nav {
+    border-bottom: 3px solid rgba(0, 0, 0, 0.06);
+    height: 70px;
+}
+
+#-site-nav a {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    border-bottom: 3px solid transparent;
+    padding: 0.4em 0 0.2em 0;
+    color: inherit;
+}
+
+#-left-site-nav,
+#-right-site-nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+#-left-site-nav {
+    flex: 4;
+}
+
+#-left-site-nav > a {
+    margin-right: 2em;
+}
+
+#-left-site-nav > a:not(#-logotype):not(.selected):hover {
+    color: hsla(0, 0%, 0%, 0.6);
+    border-bottom: 3px solid hsla(0, 0%, 0%, 0.1);
+}
+
+#-left-site-nav > a.selected {
+    color: var(--fg-color-1);
+    border-bottom: 3px solid var(--accent-color-2);
+    cursor: default;
+}
+
+#-logotype {
+    font-family: var(--heading-font-family);
+    font-size: 16pt;
+    font-weight: 700;
+}
+
+#-logotype > img {
+    display: block;
+    height: 46px;
+    margin-right: 10px;
+    position: relative;
+    top: -2px;
+}
+
+#-right-sight-nav {
+    margin: 0;
+}
+
+#-right-site-nav > a {
+    flex: 0 1 auto;
+    margin-left: 2em;
+}
+
+#-small-device-header {
+    display: none;
+}
+
+#-small-device-header #-site-nav {
+    display: flex;
+    justify-content: space-between;
+    line-height: 1em;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.06);
+}
+
+#-small-device-header #-site-nav > a {
+    display: flex;
+    align-items: center;
+    color: var(--fg-color-1);
+    padding: 0.4em 1.2em;
+}
+
+#-small-device-header #-site-nav > a:nth-child(3) {
+    position: relative;
+    top: 0.1em;
+}
+
+#-site-menu-layer {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#-site-menu-layer > div {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 20em;
+    padding: 0.8em;
+    background: var(--bg-color-1);
+}
+
+#-site-menu-layer a {
+    color: var(--fg-color-1);
+    font-size: 1.2em;
+    padding: 1em;
+    border-top: 0.1em solid rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+#-site-menu-layer a:first-of-type {
+    border-top: none;
+}
+
+#-path-nav {
+    display: none;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.06);
+    padding: 0.5em 0;
+}
+
+#-path-nav a {
+    color: var(--fg-color-1);
+}
+
+.path-separator {
+    margin-left: 0.6em;
+    margin-right: 0.6em;
+}
+
+#-main-and-toc > div {
+    display: flex;
+    align-items: flex-start; /* Important for sticky positioning */
+}
+
+#-main-and-toc > div > main {
+    width: 70%;
+    padding-right: 2em;
+}
+
+#-toc {
+    display: none;
+    width: 30%;
+    border-left: 3px solid rgba(0, 0, 0, 0.06);
+    padding-left: 2em;
+    position: sticky;
+    top: 7em;
+}
+
+#-toc > h4 {
+    font-size: 0.9em;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+#-toc > div > a {
+    display: table;
+    margin-bottom: 1em;
+}
+
+#-toc > div > a:last-of-type {
+    margin-bottom: 0;
+}
+
+#-toc > div > a.selected {
+    color: var(--fg-color-1);
+    font-weight: 700;
+}
+
+section {
+    color: var(--fg-color-1);
+    background-color: var(--bg-color-1);
+}
+
+section:first-of-type > div {
+    padding-top: 7em;
+}
+
+section:last-of-type > div {
+    padding-bottom: 3em;
+}
+
+footer {
+    color: var(--fg-color-3);
+    background-color: var(--bg-color-3);
+    z-index: 1;
+}
+
+footer a,
+footer a:visited {
+    color: inherit;
+}
+
+footer > div {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+footer > div > div:nth-child(1) {
+    min-width: 8em;
+    margin-right: 8em;
+}
+
+footer > div > div:nth-child(2) {
+    margin-right: 8em;
+}
+
+img.diagram {
+    max-width: 100%;
+}
+
+.example-category {
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.column-list {
+    column-count: 2;
+}
+
+.benefits {
+    font-size: 1.2em;
+    line-height: 1.4em;
+}
+
+.illustration {
+}
+
+.pattern {
+    margin: 3em 0 5em 0;
+}
+
+.pattern > div {
+    display: flex;
+}
+
+.pattern > div > div:first-of-type > svg {
+    width: 20em;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pattern > div > div:last-of-type {
+    margin-left: 2em;
+}
+
+span.fab,
+span.fas {
+    margin-right: 0.2em;
+    vertical-align: -0.11em;
+}
+
+span.material-icons {
+    vertical-align: -0.25em;
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        font-size: 0.9em;
+    }
+
+    #-left-site-nav a:not([id="-logotype"]) {
+        display: none;
+    }
+
+    main {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    #-main-and-toc > div > main {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    #-toc {
+        display: none !important;
+    }
+
+    footer > div {
+        display: block;
+    }
+
+    footer > div > div {
+        margin-right: 0 !important;
+        margin-bottom: 2em;
+    }
+
+    .columns {
+        display: block !important;
+    }
+
+    .pattern {
+        margin: 0;
+    }
+
+    .pattern > div {
+        display: block;
+    }
+
+    .pattern > div > div:first-of-type > svg {
+        width: 100%;
+        position: intial;
+        transform: initial;
+        margin-top: 2em;
+        margin-bottom: 1em;
+    }
+
+    .pattern > div > div:last-of-type {
+        margin: 0;
+    }
+}
+
+/* --- */
+
+a.button {
+    display: inline-block;
+    font-weight: 700;
+    padding: 0.6em 1.1em;
+    color: var(--fg-color-3);
+    background-color: var(--accent-color-2);
+    border-radius: 0.2em;
+    cursor: pointer;
+}
+
+a.button > span.material-icons {
+    margin-left: -0.1em;
+    margin-right: 0.2em;
+}
+
+nav.button-group {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+nav.button-group > a {
+    margin-right: 1em;
+}
+
+/* --- */
+
+form input {
+    font-size: inherit;
+    padding: 0.5em;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.2em;
+    margin-right: 0.4em;
+}
+
+form button {
+    font-size: inherit;
+    font-weight: 700;
+    padding: 0.6em 1.1em;
+    color: var(--fg-color-3);
+    background-color: var(--accent-color-2);
+    border-radius: 0.2em;
+    cursor: pointer;
+}
+
+/* --- */
+
+nav.inline-links > a {
+    display: inline;
+    margin-right: 1em;
+}
+
+/* --- */
+
+.columns {
+    display: flex;
+}
+
+.columns > div {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-right: 4em;
+    margin-bottom: 2em;
+}
+
+.columns > div:last-child {
+    margin-right: 0;
+}
+
+/* --- */
+
+.doc h2 {
+    margin-top: 1.2em;
+}
+
+.doc .paragraph {
+    margin: 1em 0;
+}
+
+.doc .imageblock {
+    margin: 2em 0;
+}
+
+.doc .imageblock img {
+    max-width: 100%;
+}
+
+.doc .title {
+    margin-top: 1.2em;
+    font-size: 1.2em;
+    font-weight: 700;
+    font-family: var(--heading-font-family);
+}
+
+.doc .olist.arabic li {
+    margin-bottom: 1em;
+}
+
+.doc .admonitionblock .icon i::after {
+    content: attr(title);
+  }

@@ -1,0 +1,89 @@
+---
+title: Documentation
+body_template: config/wide-body.html
+---
+
+
+<h1>Skupper documentation</h1>
+
+<div class="columns">
+  <div>
+    <h2>Understanding the basics</h2>
+
+    <p>Learn about the concepts and technology behind virtual
+      application networks.</p>
+
+    <nav>
+      <li><a href="overview/index.html">Overview</a></li>
+      <li><a href="overview/security.html">Security</a></li>
+      <li><a href="overview/connectivity.html">Connectivity</a></li>
+      <li><a href="overview/routing.html">Routing</a></li>
+      <li><a href="overview/load.html">Load balancing</a></li>
+      <li><a href="/start/index.html">Getting started</a></li>
+      <li><a href="https://skupperproject.github.io/refdog/concepts/overview.html">Terms and concepts</a></li>
+
+    </nav>
+  </div>
+  <div>
+    <h2 id="installation">Installation</h2>
+    <p>Learn about installing the Skupper CLI and the controller.</p>
+    <nav>
+      <li><a href="./install/index.html">Installation</a></li>
+    </nav>
+  </div>
+
+  <div>
+    <h2 id="using-the-skupper-cli-on-kubernetes">Using the Skupper CLI on Kubernetes</h2>
+    <p>Learn how to use the CLI on Kubernetes.</p>
+    <nav>
+      <li><a href="./kube-cli/index.html">Overview</a></li>
+      <li><a href="./kube-cli/site-configuration.html">Configuring sites</a></li>
+      <li><a href="./kube-cli/site-linking.html">Linking sites</a></li>
+      <li><a href="./kube-cli/service-exposure.html">Managing services on the network</a></li>
+      <li><a href="https://skupperproject.github.io/refdog/commands/index.html">CLI reference</a></li>
+    </nav>
+  </div>
+
+</div>
+
+
+
+
+<div class="columns">
+
+  <div>
+    <h2 id="using-skupper-yaml-on-kubernetes">Using Skupper YAML on Kubernetes</h2>
+    <p>Learn how to use YAML on Kubernetes.</p>
+    <nav>
+      <li><a href="./kube-yaml/index.html">Overview</a></li>
+      <li><a href="./kube-yaml/site-configuration.html">Configuring sites</a></li>
+      <li><a href="./kube-yaml/site-linking.html">Linking sites</a></li>
+      <li><a href="./kube-yaml/service-exposure.html">Managing services on the network</a></li>
+      <li><a href="https://skupperproject.github.io/refdog/resources/index.html">YAML reference</a></li>
+    </nav>
+  </div>
+
+  <div>
+    <h2 id="using-the-skupper-cli-on-local-systems">Using the Skupper CLI on local systems</h2>
+    <p>Learn how to use the CLI on Docker, Podman or Linux systems.</p>
+    <nav>
+      <li><a href="./system-cli/index.html">Overview</a></li>
+      <li><a href="./system-cli/site-configuration.html">Configuring sites</a></li>
+      <li><a href="./system-cli/site-linking.html">Linking sites</a></li>
+      <li><a href="./system-cli/service-exposure.html">Managing services on the network</a></li>
+      <li><a href="https://skupperproject.github.io/refdog/commands/index.html">CLI reference</a></li>
+    </nav>
+  </div>
+
+  <div>
+    <h2 id="using-skupper-yaml-on-local-systems">Using Skupper YAML on local systems</h2>
+    <p>Learn how to use YAML on Docker, Podman or Linux systems.</p>
+    <nav>
+      <li><a href="./system-yaml/index.html">Overview</a></li>
+      <li><a href="./system-yaml/site-configuration.html">Configuring sites</a></li>
+      <li><a href="./system-yaml/site-linking.html">Linking sites</a></li>
+      <li><a href="./system-yaml/service-exposure.html">Managing services on the network</a></li>
+      <li><a href="https://skupperproject.github.io/refdog/resources/index.html">YAML reference</a></li>
+    </nav>
+  </div>
+</div>

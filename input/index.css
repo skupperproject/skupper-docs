@@ -1,0 +1,7 @@
+h2 {
+    font-size: 15pt;
+}
+
+nav > a {
+    display: table;
+}
