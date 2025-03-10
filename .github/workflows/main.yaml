@@ -36,7 +36,7 @@ jobs:
         run: |
           plano render
         env:
-          SITE_PREFIX: /docs
+          SITE_PREFIX: /skupper-docs
           PLANO_COLOR: 1
       - uses: actions/upload-pages-artifact@v3
         with:
