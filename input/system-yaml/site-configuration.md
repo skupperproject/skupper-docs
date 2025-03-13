@@ -1,3 +1,4 @@
+<a id="system-creating-site-yaml"></a>
 # Creating a site on local systems using YAML
 
 Using YAML allows you to create and manage sites on Docker, Podman and Linux.
@@ -6,6 +7,7 @@ A typical workflow is to create a site, link sites together, and expose services
 
 If you require more than one site, specify a unique namespace when using  `skupper`, for example `skupper --namespace second-site ...`.
 
+<a id="system-creating-simple-site-yaml"></a>
 ## Creating a simple site on local systems using YAML
 
 You can use YAML to create and manage Skupper sites.

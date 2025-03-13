@@ -1,4 +1,5 @@
-# Managing services on the application network using YAML
+<a id="kube-exposing-services-yaml"></a>
+# Exposing services on the application network using YAML
 
 After creating an application network by linking sites, you can expose services from one site using connectors and consume those services on other sites using listeners.
 A *routing key* is a string that matches one or more connectors with one or more listeners.
@@ -6,6 +7,8 @@ For example, if you create a connector with the routing key `backend`, you need 
 
 This section assumes you have created and linked at least two sites.
 
+<a id="kube-creating-connector-yaml"></a>
+<!-- Creating a connector on Kubernetes using YAML -->
 ## Creating a connector using YAML
 
 A connector binds a local workload to listeners in remote sites.
@@ -60,7 +63,8 @@ For more information about connectors see [Connector concept][connector]
 
 There are many options to consider when creating connectors using YAML, see [CLI Reference][cli-ref], including *frequently used* options.
 
-
+<a id="kube-creating-listener-yaml"></a>
+<!-- Creating a listener on Kubernetes using YAML -->
 ## Creating a listener using YAML
 
 A listener binds a local connection endpoint to connectors in remote sites. 
@@ -68,7 +72,8 @@ Listeners and connectors are matched using routing keys.
 
 **Procedure**
 
-1. Identify a connector that you want to use and note the routing key of that connector.
+1. Identify a connector that you want to use.
+   Note the routing key of that connector.
 
 2. Create a listener resource YAML file:
    ```yaml

@@ -1,4 +1,5 @@
-# Installing the Skupper controller
+<a id="kube-installing-controller"></a>
+# Installing the Skupper controller on Kubernetes
 
 Before you can create a site on Kubernetes, you must install the Skupper controller. 
 You can install the controller using the following methods:
@@ -7,29 +8,39 @@ You can install the controller using the following methods:
 * Helm charts
 * Operator 
 
+After installing the Skupper controller, you can create sites using the CLI or YAML:
+
+* [Creating a site using the CLI][cli-site]
+* [Creating a site using YAML][yaml-site]
+
+[cli-site]: ../kube-cli/site-configuration.html
+[yaml-site]: ../kube-yaml/site-configuration.html
+
+**NOTE**: If you install the controller scoped to cluster, you can create sites in any namespace.
+If you scope the controller to a namespace, you can only create sites in that namespace.
+
+
+<a id="kube-installing-controller-yaml"></a>
 ## Installing the Skupper controller using YAML
 
 **Prerequisites**
 
 * cluster-admin access to cluster
 
-Install the latest version using the following commands:
+Install a cluster-scoped controller using the following commands:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_access_grant_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_access_token_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_attached_connector_anchor_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_attached_connector_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_certificate_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_connector_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_link_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_listener_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_router_access_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_secured_access_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/config/crd/bases/skupper_site_crd.yaml
-kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/cmd/controller/deploy_cluster_scope.yaml
+kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-cluster-scope.yaml
 ```
 
+Install a namespace-scoped controller using the following commands:
+
+```
+kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-namespace-scope.yaml
+```
+
+
+<a id="kube-installing-controller-helm"></a>
 ## Installing the Skupper controller using the Skupper Helm charts
 
 **Prerequisites**
@@ -40,17 +51,28 @@ kubectl apply -f https://raw.githubusercontent.com/skupperproject/skupper/v2/cmd
 
 **Procedure**
 
-1. Run the following command to install the Skupper controller on a cluster:
+Run the following command to install a cluster-scoped controller:
 
-   ```
-   helm install skupper oci://quay.io/skupper/helm/skupper --version {{skupper_cli_version}}
-   ```
-2. Optionally install the network observer:
-   ```
-   helm install skupper-network-observer oci://quay.io/skupper/helm/network-observer --version {{skupper_cli_version}}
-   ```
+```
+helm install skupper oci://quay.io/skupper/helm/skupper --version {{skupper_cli_version}}
+```
+To install a namespace-scoped controller, add the `--set scope=namespace` option.
 
 
 <!--
+<a id="kube-installing-controller-operator"></a>
 ## Installing the Skupper controller using the Skupper Operator
+
+**Prerequisites**
+
+* cluster-admin access to cluster
+* OpenShift
+
+**Procedure**
+
+1. Navigate to the **OperatorHub** in the **Administrator** view.
+2. Search for `Skupper`, provided by `Skupper project`.
+3. Select **stable-2.0** from **Channel**.
+4. Select the latest **Version**.
+5. Click **Install**.
 -->
