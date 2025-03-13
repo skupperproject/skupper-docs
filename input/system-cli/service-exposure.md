@@ -1,4 +1,4 @@
-# Managing services on the application network using the CLI
+# Exposing services on the application network using the CLI
 
 After creating an application network by linking sites, you can expose services from one site using connectors and consume those services on other sites using listeners.
 A *routing key* is a string that matches one or more connectors with one or more listeners.
@@ -55,7 +55,8 @@ Listeners and connectors are matched using routing keys.
 
 **Procedure**
 
-1. Identify a connector that you want to use and note the routing key of that connector.
+1. Identify a connector that you want to use.
+   Note the routing key of that connector.
 
 2. Create a listener:
    ```bash
