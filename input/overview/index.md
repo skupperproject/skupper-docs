@@ -6,10 +6,10 @@ While such a solution provides many benefits, it also presents a unique challeng
 
 Skupper provides a solution to this challenge with an Application Network that simply and securely connects applications running in different network locations.
 
-<a id="virtual-application-networks"></a>
+<a id="application-networks"></a>
 ## Application Networks
 
-Skupper solves multi-cluster communication challenges through something called a Virtual Application Network (application network) or just application network.
+Skupper solves multi-cluster communication challenges through something called a Virtual Application Network or just application network.
 To understand the value of Skupper, it is helpful to first understand what an application network is.
 
 An application network connects the applications and services in your hybrid cloud into a virtual network so that they can communicate with each other as if they were all running in the same site.
@@ -30,7 +30,7 @@ They use **Layer 7 application routers** to route communication between **Layer 
 Layer 7 application routers form the backbone of an application network in the same way that conventional network routers form the backbone of a VPN.
 However, instead of routing IP packets between network endpoints, Layer 7 application routers route messages between application endpoints (called Layer 7 application services).
 
-## Layer 7 application services
+**Layer 7 application services**
 
 A Layer 7 application service represents an endpoint, or destination in the application network.
 When an application sends a communication to an service, the Layer 7 application routers distribute the communication to any other application in the application network that has the same service.

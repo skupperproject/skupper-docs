@@ -115,5 +115,86 @@ Listeners and connectors are matched using routing keys.
 
 There are many options to consider when creating connectors using YAML, see [CLI Reference][cli-ref], including *frequently used* options.
 
+
+<a id="kube-creating-attachedconnector-yaml"></a>
+## Creating a connector for a different namespace using YAML
+
+A connector binds a local workload to listeners in remote sites.
+
+If you create a site in one namespace and need to expose a service in a different namespace, use this procedure to create an *attached connector* in the other namespace and an *AttachedConnectorBinding* in the site namespace.
+
+* An attached connector is a connector in a peer namespace, that is, not the site namespace.
+* The AttachedConnectorBinding is a binding to an attached connector in a peer namespace and is created in the site namespace.
+
+**Procedure**
+
+1. Create a workload that you want to expose on the network in a non-site namespace, for example:
+   ```bash
+   kubectl create deployment backend --image quay.io/skupper/hello-world-backend --replicas 3
+   ```
+
+2. Create an AttachedConnector resource YAML file in the same namespace:
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: AttachedConnector
+   metadata:
+     name: backend
+     namespace: attached
+   spec:
+     siteNamespace: skupper
+     selector: app=backend
+     port: 8080
+   ```
+
+   To create the AttachedConnector resource:
+
+   ```bash
+   kubectl apply -f <filename>
+   ```
+
+   where `<filename>` is the name of a YAML file that is saved on your local filesystem.
+
+3. Create an AttachedConnectorBinding resource YAML file in the site namespace:
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: AttachedConnector
+   metadata:
+     name: backend
+     namespace: attached
+   spec:
+     siteNamespace: skupper
+     selector: app=backend
+     port: 8080
+   ```
+
+   To create the AttachedConnectorBinding resource:
+
+   ```bash
+   kubectl apply -f <filename>
+   ```
+
+   where `<filename>` is the name of a YAML file that is saved on your local filesystem.
+
+
+
+3. Check the AttachedConnectorBinding status from the context of the site namespace:
+   ```bash
+   kubectl get AttachedConnectorBinding
+   ```
+   
+   For example:
+   
+   ```
+   NAME      ROUTING KEY   CONNECTOR NAMESPACE   STATUS   HAS MATCHING LISTENER
+   backend   backend       attached              Ready    true
+   ```
+   **📌 NOTE**
+   By default, the routing key name is set to the name of the connector.
+   If you want to use a custom routing key, set the `--routing-key` to your custom name.
+
+There are many options to consider when creating connectors using YAML, see [CLI Reference][cli-ref], including *frequently used* options.
+
+
+
 [connector]: https://skupperproject.github.io/refdog/concepts/connector.html
 [listener]: https://skupperproject.github.io/refdog/concepts/listener.html

@@ -88,5 +88,4 @@ For example
    ```bash
    skupper site delete
    ```
-
 [cli-ref]: https://skupperproject.github.io/refdog/commands/index.html

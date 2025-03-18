@@ -1,3 +1,4 @@
+<a id="kube-linking-cli"></a>
 # Linking sites on Kubernetes using the Skupper CLI
 
 Using the Skupper command-line interface (CLI) allows you to create links between sites.
@@ -5,6 +6,7 @@ The link direction is not significant, and is typically determined by ease of co
 
 Once sites are linked, services can be exposed and consumed across the application network without the need to open ports or manage inter-site connectivity.
 
+<a id="kube-token-cli"></a>
 ## Linking sites using a token
 
 A token provides a secure method to link sites.
@@ -76,6 +78,7 @@ To link sites, you create a token on one site and redeem that token on the other
 
 There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
+<a id="kube-link-cli"></a>
 ## Linking sites using a `link` resource
 
 An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.

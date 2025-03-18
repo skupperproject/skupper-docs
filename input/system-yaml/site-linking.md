@@ -1,3 +1,4 @@
+<a id="system-linking-yaml"></a>
 # Linking sites on local systems using YAML
 
 
@@ -9,8 +10,8 @@ Once sites are linked, services can be exposed and consumed across the applicati
 The procedures below describe linking an existing site.
 Typically, it is easier to configure a site, links and services in a set of files and then create a configured site by placing all the YAML files in a directory, for example `local` and then using the following command to 
 
+<a id="system-link-yaml"></a>
 ## Linking sites using a `link` resource
-
 
 An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.
 
