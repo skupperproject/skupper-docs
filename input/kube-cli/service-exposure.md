@@ -14,7 +14,7 @@ This section assumes you have created and linked at least two sites.
 A connector binds a local workload to listeners in remote sites.
 Listeners and connectors are matched using routing keys.
 
-For more information about connectors see [Connector concept][connector]
+For more information about connectors, see [Connector concept][connector].
 
 **Procedure**
 
@@ -50,12 +50,18 @@ For more information about connectors see [Connector concept][connector]
 
 There are many options to consider when creating connectors using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
+**Additional information**
+
+If you need to expose a service from another namespace, you must use YAML as described in [Creating a connector for a different namespace using YAML][attached].
+
 <a id="kube-creating-listener-cli"></a>
 <!-- Creating a listener on Kubernetes using the CLI -->
 ## Creating a listener using the CLI
 
 A listener binds a local connection endpoint to connectors in remote sites. 
 Listeners and connectors are matched using routing keys.
+
+For more information about listeners. see [Listener concept][listener].
 
 **Procedure**
 
@@ -93,5 +99,8 @@ Listeners and connectors are matched using routing keys.
 
 There are many options to consider when creating connectors using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
+
+[cli-ref]: https://skupperproject.github.io/refdog/commands/index.html
 [connector]: https://skupperproject.github.io/refdog/concepts/connector.html
 [listener]: https://skupperproject.github.io/refdog/concepts/listener.html
+[attached]: ../kube-yaml/service-exposure.html#kube-creating-attachedconnector-yaml

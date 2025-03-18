@@ -14,7 +14,7 @@ This section assumes you have created and linked at least two sites.
 A connector binds a local workload to listeners in remote sites.
 Listeners and connectors are matched using routing keys.
 
-For more information about connectors see [Connector concept][connector]
+There are many options to consider when creating connectors using YAML, see [Connector resource][connector-resource].
 
 **Procedure**
 
@@ -70,6 +70,8 @@ There are many options to consider when creating connectors using YAML, see [CLI
 A listener binds a local connection endpoint to connectors in remote sites. 
 Listeners and connectors are matched using routing keys.
 
+For more information about listeners. see [Listener concept][listener].
+
 **Procedure**
 
 1. Identify a connector that you want to use.
@@ -113,7 +115,7 @@ Listeners and connectors are matched using routing keys.
    **📌 NOTE**
    There must be a `MATCHING-CONNECTOR` for the service to operate.
 
-There are many options to consider when creating connectors using YAML, see [CLI Reference][cli-ref], including *frequently used* options.
+There are many options to consider when creating listeners using YAML, see [Listener resource][listener-resource].
 
 
 <a id="kube-creating-attachedconnector-yaml"></a>
@@ -192,9 +194,12 @@ If you create a site in one namespace and need to expose a service in a differen
    By default, the routing key name is set to the name of the connector.
    If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
-There are many options to consider when creating connectors using YAML, see [CLI Reference][cli-ref], including *frequently used* options.
+There are many options to consider when creating connectors using YAML, see [Connector resource][connector-resource].
 
 
 
 [connector]: https://skupperproject.github.io/refdog/concepts/connector.html
 [listener]: https://skupperproject.github.io/refdog/concepts/listener.html
+
+[connector-resource]: https://skupperproject.github.io/refdog/resources/connector.html
+[listener-resource]: https://skupperproject.github.io/refdog/resources/listener.html
