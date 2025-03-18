@@ -9,4 +9,4 @@ def path_nav(page):
 
     return f"<nav id=\"-path-nav\"><div>{links}</div></nav>"
 
-skupper_cli_version = '2.0.0-rc1'
+skupper_cli_version = '2.0.0'

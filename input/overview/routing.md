@@ -4,16 +4,14 @@
 Skupper uses layer 7 addressing and routing to connect services.
 See how the power of application-layer addressing can bring new capabilities to your applications.
 
-<a id="multi-cluster-services"></a>
-## Multi-cluster services
+**Multi-cluster services**
 
 Deploy a single logical service across multiple clusters.
 
 Skupper can route requests to instances of a single service running on multiple clusters.
 If a provider or data center fails, the service instances running at unaffected sites can scale to meet the need and maintain availability.
 
-<a id="dynamic-load-balancing"></a>
-## Dynamic load balancing
+**Dynamic load balancing**
 
 Balance requests across clusters according to service capacity.
 
@@ -25,8 +23,6 @@ This enables you to configure a preference for one resource over another.
 If demand is normal, you can keep all traffic on your private cloud.
 If demand peaks, you can dynamically spill over to public cloud resources.
 
-See link:{cost-link} for more information.
-<a id="reliable-networks"></a>
-## Reliable networks
+**Reliable networks**
 
 Skupper uses redundant network paths and smart routing to provide highly available connectivity at scale.

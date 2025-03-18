@@ -1,3 +1,4 @@
+<a id="overview-load-balancing"></a>
 # Skupper load balancing and failover
 
 Skupper enables load balancing and failover across servers located across the service network.
@@ -7,7 +8,7 @@ For example, if you deploy the same backend code on two sites and expose the bac
 
 In a service network, the routing algorithm attempts to use the path with the lowest total **cost** from client to target server.
 
-## Understanding link cost
+**Understanding link cost**
 
 Link cost is a configurable value when creating links between sites.
 In the earlier example, the link cost from the client to each server is the same by default (1).
@@ -20,7 +21,7 @@ Skupper determines the perceived cost with the context of knowing the configured
 **📌 NOTE**
 Traffic load is based on the number of concurrent TCP connections, so 'round robin' behavior should not be expected.
 
-## Using Skupper load balancing to achieve failover
+**Using Skupper load balancing to achieve failover**
 
 You can configure the network so that a specific location handles all traffic until failure. 
 After failure at that location, all traffic is handled by a different location. 

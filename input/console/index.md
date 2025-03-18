@@ -1,7 +1,9 @@
+<a id="console"></a>
 # Using the Network console
 
 The Network console provides data and visualizations of the traffic flow between sites.
 
+<a id="console-enabling"></a>
 ## Enabling the Network console
 
 **Prerequisites**
@@ -23,6 +25,7 @@ The Network console provides data and visualizations of the traffic flow between
    ```
    helm install skupper-network-observer oci://quay.io/skupper/helm/network-observer --version {{skupper_cli_version}}
    ```
+
    The output is similar to the following:
    ```
    Pulled: quay.io/skupper/helm/network-observer:2.0.0
@@ -61,7 +64,9 @@ The Network console provides data and visualizations of the traffic flow between
    ```
    oc expose skupper-network-observer
    ```
-## Exploring the Skupper console
+
+<a id="console-exploring"></a>
+## Exploring the Network console
 
 The Network console provides an overview of the following:
 

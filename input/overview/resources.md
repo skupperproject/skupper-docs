@@ -1,25 +1,42 @@
+<a id="kube-resources"></a>
 # Skupper resources on Kubernetes
 
 The following sections describe the various Skupper resources on Kubernetes, for example, service accounts
 
+<a id="kube-resources-crds"></a>
+## Custom resource definitions
+
+To get start creating application networks, you create the following custom resources:
+
+* Sites
+* Links
+* Connectors
+* Listeners
+
+See [Resource Reference][yaml-ref] for explanations of all the custom resources.
+
+<a id="kube-resources-sa"></a>
 ## Service accounts, roles and role bindings
 
-When you create a Skupper site, the following resources are created.
+When you install the Skupper controller, the following resources are created:
 
-* **skupper-service-controller**
-A service account, role and role binding with this name are created to manage the Skupper service controller.
+* **skupper-controller**
+A service account, role and role binding with this name are created to manage the Skupper  controller.
+
+
+When you create a Skupper site, the following resources are created:
+
 * **skupper-router**
 A service account, role and role binding with this name are created to manage the Skupper router.
 
+<a id="kube-resources-deployments"></a>
 ## Deployments
 
-Each Skupper site on Kubernetes consists of two deployments:
+The Skupper controller deploys the **skupper-controller**, which provides the control plane for the application network.
 
-* **skupper-router**
-provides the data plane for the application network.
-* **skupper-service-controller**
-provides the control plane for the application network.
+Each Skupper site on Kubernetes deploys a **skupper-router**, which provides the data plane for the application network.
 
+<a id="kube-resources-cm"></a>
 ## ConfigMaps
 
 Do not edit these ConfigMap values directly.
@@ -37,6 +54,7 @@ internal representation of the services available on the application network.
 internal router configuration.
 The service controller determines the values in this ConfigMap based on the services available on the application network.
 
+<a id="kube-resources-secrets"></a>
 ## Secrets
 
 Each site has two `kubernetes.io/tls` type secrets, **skupper-local-ca** and **skupper-site-ca**:
@@ -45,25 +63,20 @@ Each site has two `kubernetes.io/tls` type secrets, **skupper-local-ca** and **s
 issues certs for local access. 
 
   The local certs are held in:  
-
-  * **skupper-local-client** used by the service controller.
   * **skupper-local-server** used by the router.
+
 * **skupper-site-ca**
 issues certs for remote access.
 
-  The site ca issued certs are **skupper-site-server** which holds the certs that identify the router to other routers that link to this site, **skupper-claims-server** which identifies the claims service, which is part of the service controller and is used when another site first established a link to exchange a restricted use token for a TLS certificate and **skupper-console-certs** which holds certs for the console.
+  The site ca issued certs are **skupper-site-server** which holds the certs that identify the router to other routers that link to this site.
 
 The tokens used to establish links creates the following secrets with variable names:
 +
-* The site that issues a claim token generates a secret with a UUID name that contains details of any usage restrictions, for example, the number of times you can use the token to create a link and the amount of time the token is valid for.
-* The site establishing the link will have a secret that contains the token claim or certificate. 
-These secrets are typically called `link1`, `link2`, and so on. 
+* The site that issues a token generates a secret with a UUID name that contains details of any usage restrictions, for example, the number of times you can use the token to create a link and the amount of time the token is valid for.
+* The site establishing the link will have a secret that contains the token. 
+These secrets are typically called `link-<remote-site-name>`. 
 
-* **skupper-console-users**
-If you configure console authentication using the default `internal` mode, this secret is created and contains the username(s) and password(s) that can be used to access the console. 
-A username and password can be specified using `skupper init --console-user <username> --console-password <password>`.
-If a username and password are not specified, an `admin` user is created with a generated password.
-
+<a id="kube-resources-svc"></a>
 ## Services
 
 In addition to the services that are exposed on the application network, the following services are created:
@@ -72,5 +85,6 @@ In addition to the services that are exposed on the application network, the fol
 The service controller uses this service to connect to and configure the router. 
 * **skupper-router**
 Other sites use this service to access the router over the inter-router or edge ports, although there may be other resources involved, for example, an ingress. 
-* **skupper**
-The console and claims-server are accessed through this service.
+
+
+[yaml-ref]: https://skupperproject.github.io/refdog/resources/index.html

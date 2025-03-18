@@ -1,3 +1,4 @@
+<a id="kube-exposing-services-cli"></a>
 # Exposing services on the application network using the CLI
 
 After creating an application network by linking sites, you can expose services from one site using connectors and consume those services on other sites using listeners.
@@ -6,6 +7,8 @@ For example, if you create a connector with the routing key `backend`, you need 
 
 This section assumes you have created and linked at least two sites.
 
+<a id="kube-creating-connector-cli"></a>
+<!-- Creating a connector on Kubernetes using the CLI -->
 ## Creating a connector using the CLI
 
 A connector binds a local workload to listeners in remote sites.
@@ -47,7 +50,8 @@ For more information about connectors see [Connector concept][connector]
 
 There are many options to consider when creating connectors using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
-
+<a id="kube-creating-listener-cli"></a>
+<!-- Creating a listener on Kubernetes using the CLI -->
 ## Creating a listener using the CLI
 
 A listener binds a local connection endpoint to connectors in remote sites. 
