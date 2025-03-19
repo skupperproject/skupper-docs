@@ -39,7 +39,7 @@ body_template: config/wide-body.html
       <li><a href="./kube-cli/index.html">Overview</a></li>
       <li><a href="./kube-cli/site-configuration.html">Configuring sites</a></li>
       <li><a href="./kube-cli/site-linking.html">Linking sites</a></li>
-      <li><a href="./kube-cli/service-exposure.html">Managing services on the network</a></li>
+      <li><a href="./kube-cli/service-exposure.html">Exposing services on the network</a></li>
       <li><a href="https://skupperproject.github.io/refdog/commands/index.html">CLI reference</a></li>
     </nav>
   </div>
@@ -58,7 +58,7 @@ body_template: config/wide-body.html
       <li><a href="./kube-yaml/index.html">Overview</a></li>
       <li><a href="./kube-yaml/site-configuration.html">Configuring sites</a></li>
       <li><a href="./kube-yaml/site-linking.html">Linking sites</a></li>
-      <li><a href="./kube-yaml/service-exposure.html">Managing services on the network</a></li>
+      <li><a href="./kube-yaml/service-exposure.html">Exposing services on the network</a></li>
       <li><a href="https://skupperproject.github.io/refdog/resources/index.html">YAML reference</a></li>
     </nav>
   </div>
@@ -70,7 +70,7 @@ body_template: config/wide-body.html
       <li><a href="./system-cli/index.html">Overview</a></li>
       <li><a href="./system-cli/site-configuration.html">Configuring sites</a></li>
       <li><a href="./system-cli/site-linking.html">Linking sites</a></li>
-      <li><a href="./system-cli/service-exposure.html">Managing services on the network</a></li>
+      <li><a href="./system-cli/service-exposure.html">Exposing services on the network</a></li>
       <li><a href="https://skupperproject.github.io/refdog/commands/index.html">CLI reference</a></li>
     </nav>
   </div>
@@ -82,7 +82,7 @@ body_template: config/wide-body.html
       <li><a href="./system-yaml/index.html">Overview</a></li>
       <li><a href="./system-yaml/site-configuration.html">Configuring sites</a></li>
       <li><a href="./system-yaml/site-linking.html">Linking sites</a></li>
-      <li><a href="./system-yaml/service-exposure.html">Managing services on the network</a></li>
+      <li><a href="./system-yaml/service-exposure.html">Exposing services on the network</a></li>
       <li><a href="https://skupperproject.github.io/refdog/resources/index.html">YAML reference</a></li>
     </nav>
   </div>
