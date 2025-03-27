@@ -14,12 +14,16 @@ Listeners and connectors are matched using routing keys.
 
 For more information about connectors see [Connector concept][connector]
 
+**Prerequisites**
+
+* The `skupper` CLI is installed.
+* The `SKUPPER_PLATFORM` environment variable is set to one of * `podman`,`docker` or `linux`.
+
+
 **Procedure**
 
-1. Create a workload that you want to expose on the network, for example:
-   ```bash
-   kubectl create deployment backend --image quay.io/skupper/hello-world-backend --replicas 3
-   ```
+1. Create a server that you want to expose on the network.
+   For example, run a HTTP server on port 8080.
 
 2. Create a connector:
    ```bash
@@ -28,7 +32,7 @@ For more information about connectors see [Connector concept][connector]
    For example:
 
    ```bash
-   skupper connector create backend 8080 --workload deployment/backend
+   skupper connector create my-server 8080 --host localhost
    ```
 3. Check the connector status:
    ```bash
@@ -39,12 +43,19 @@ For more information about connectors see [Connector concept][connector]
    
    ```
    $ skupper connector status
-   NAME    STATUS  ROUTING-KEY     SELECTOR        HOST    PORT    HAS MATCHING LISTENER    MESSAGE
-   backend Pending backend         app=backend             8080    false   No matching listeners
+   NAME		STATUS	ROUTING-KEY	HOST		PORT
+   my-server	Ok	my-server	localhost	8081
+
    ```
    **📌 NOTE**
    By default, the routing key name is set to the name of the connector.
    If you want to use a custom routing key, set the `--routing-key` to your custom name.
+
+   Apply the configuration using:
+   ```bash
+   skupper system reload
+   ```
+
 
 There are many options to consider when creating connectors using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
@@ -53,6 +64,11 @@ There are many options to consider when creating connectors using the CLI, see [
 
 A listener binds a local connection endpoint to connectors in remote sites. 
 Listeners and connectors are matched using routing keys.
+
+**Prerequisites**
+
+* The `skupper` CLI is installed.
+* The `SKUPPER_PLATFORM` environment variable is set to one of * `podman`,`docker` or `linux`.
 
 **Procedure**
 
@@ -65,12 +81,12 @@ Listeners and connectors are matched using routing keys.
    ```
    For example:
    ```
-   $ skupper listener create backend 8080
+   $ skupper listener create my-server 8080
    File written to /home/user/.local/share/skupper/namespaces/default/input/resources/Listener-backend.yaml
    ```
    Apply the configuration using:
    ```bash
-   skupper connector create <name> <port> [--routing-key <name>]
+   skupper system reload
    ```
 
 
@@ -84,12 +100,13 @@ Listeners and connectors are matched using routing keys.
    
    ```
    $ skupper listener status
-   NAME    STATUS  ROUTING-KEY     HOST    PORT    MATCHING-CONNECTOR      MESSAGE
-   backend Ready   backend         backend 8080    true                    OK
+   NAME		STATUS	ROUTING-KEY	HOST		PORT
+   my-server	Ok	my-server	localhost	8081
+
    ```
    
    **📌 NOTE**
-   There must be a `MATCHING-CONNECTOR` for the service to operate.
+   There must be a matching connector for the service to operate.
    By default, the routing key name is the listener name.
    If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
