@@ -3,7 +3,7 @@
 
 Using YAML allows you to create and manage sites on Docker, Podman and Linux.
 
-A typical workflow is to create a site, link sites together, and expose services to the service network.
+A typical workflow is to create a site, link sites together, and expose services to the application network.
 
 If you require more than one site, specify a unique namespace when using  `skupper`, for example `skupper --namespace second-site ...`.
 

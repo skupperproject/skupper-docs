@@ -1,12 +1,12 @@
 <a id="overview-load-balancing"></a>
 # Skupper load balancing and failover
 
-Skupper enables load balancing and failover across servers located across the service network.
+Skupper enables load balancing and failover across servers located across the application network.
 Specifically, Skupper balances **active TCP connections** across workloads deployed in distinct sites.
 If a workload at one site becomes unavailable, traffic is automatically rerouted to available sites. 
-For example, if you deploy the same backend code on two sites and expose the backend on the service network, concurrent requests from a third site to the backend service are processed by both sites.
+For example, if you deploy the same backend code on two sites and expose the backend on the application network, concurrent requests from a third site to the backend service are processed by both sites.
 
-In a service network, the routing algorithm attempts to use the path with the lowest total **cost** from client to target server.
+In an application network, the routing algorithm attempts to use the path with the lowest total **cost** from client to target server.
 
 **Understanding link cost**
 

@@ -3,7 +3,7 @@
 
 Using the skupper command-line interface (CLI) allows you to create and manage sites from the context of the current namespace.
 
-A typical workflow is to create a site, link sites together, and expose services to the service network.
+A typical workflow is to create a site, link sites together, and expose services to the application network.
 
 <a id="kube-checking-cli"></a>
 ## Checking the Skupper CLI

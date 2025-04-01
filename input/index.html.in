@@ -87,3 +87,16 @@ body_template: config/wide-body.html
     </nav>
   </div>
 </div>
+
+<div class="columns">
+
+  <div>
+    <h2 id="observability">Observability</h2>
+    <p>Learn how to monitor traffic using the Skupper console.</p>
+    <nav>
+      <li><a href="./console/index.html">Using the Skupper console</a></li>
+      
+    </nav>
+  </div>
+
+</div>
