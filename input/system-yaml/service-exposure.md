@@ -1,4 +1,4 @@
-<a id="system-exposing-services-yaml"></a>
+<a id="system-yaml-service-exposure"></a>
 # Exposing services on the application network using YAML
 
 After creating an application network by linking sites, you can expose services from one site using connectors and consume those services on other sites using listeners.
