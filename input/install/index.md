@@ -27,6 +27,34 @@ If you scope the controller to a namespace, you can only create sites in that na
 
 * cluster-admin access to cluster
 
+**Procedure**
+
+Install a cluster-scoped controller using the following commands:
+
+```bash
+kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-cluster-scope.yaml
+```
+
+Install a namespace-scoped controller using the following commands:
+
+```bash
+kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-namespace-scope.yaml
+```
+
+
+
+
+
+
+<a id="kube-installing-controller-helm"></a>
+## Installing the Skupper controller using Helm
+
+**Prerequisites**
+
+* cluster-admin access to cluster
+
+**Procedure**
+
 Install a cluster-scoped controller using the following commands:
 
 ```
