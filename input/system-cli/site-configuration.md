@@ -19,7 +19,8 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 2. Verify the installation.
    ```bash
-   $  skupper version
+   skupper version
+   
    COMPONENT               VERSION
    cli                     {{skupper_cli_version}}
    ```
@@ -53,11 +54,12 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 2. Create a site:
 
    ```bash
-   $ skupper site create <site-name>
+   skupper site create <site-name>
    ```
    For example:
    ```bash
-   $ skupper site create my-site
+   skupper site create my-site
+   
    Waiting for status...
    Site "my-site" is ready.
    ```

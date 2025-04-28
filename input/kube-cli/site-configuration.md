@@ -14,7 +14,8 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 2. Verify the installation.
    ```bash
-   $  skupper version
+   skupper version
+   
    COMPONENT               VERSION
    cli                     {{skupper_cli_version}}
    ```
@@ -39,12 +40,13 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 2. Create a site on Kubernetes:
 
    ```bash
-   $ skupper site create <site-name> --namespace <namespace>
+   skupper site create <site-name> --namespace <namespace>
    ```
    Specifying the namespace is not required if the context is set to the namespace where you want to create the site.
    For example:
    ```bash
-   $ skupper site create my-site
+   skupper site create my-site
+   
    Waiting for status...
    Site "my-site" is ready.
    ```

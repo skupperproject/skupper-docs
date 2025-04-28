@@ -18,7 +18,7 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 2. Check the site status for a cluster:
 
    ```bash
-   $ skupper site status
+   skupper site status
 
    NAME    STATUS  MESSAGE
    west    Ready   OK
@@ -32,7 +32,8 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
    On Kubernetes, you can also check the resource, for example:
 
    ```bash
-   $ kubectl get site -o yaml
+   kubectl get site -o yaml
+   
    apiVersion: v1
    items:
    - apiVersion: skupper.io/v2alpha1
@@ -91,7 +92,8 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 3. Check connectors and listeners:
 
    ```bash
-   $ skupper connector status
+   skupper connector status
+   
    NAME    STATUS  ROUTING-KEY     SELECTOR        HOST    PORT    HAS MATCHING LISTENERMESSAGE
    backend Ready   backend         app=backend             8080    true                 OK
    ```
@@ -106,7 +108,7 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 4. Check the status of any links:
 
    ```bash
-   $ skupper link status
+   skupper link status
 
    ```
 
@@ -127,7 +129,8 @@ This section outlines some advanced options for checking links.
 1. Check the link status:
 
    ```bash
-   $ skupper link status -n east
+   skupper link status -n east
+   
    NAME                                            STATUS  COST    MESSAGE
    west-48b5feee-89e9-4a53-b8d0-e94304cc951f       Ready   1       OK
    ```
@@ -142,7 +145,7 @@ This section outlines some advanced options for checking links.
    If you use this command on a site where you did not create the link, but there is an incoming link to the site:
 
    ```
-   $ skupper link status -n west
+   skupper link status -n west
 
    There are no link resources in the namespace
    ```
