@@ -70,7 +70,7 @@ For more information about listeners. see [Listener concept][listener].
 
 2. Create a listener:
    ```bash
-   skupper connector create <name> <port> [--routing-key <name>]
+   skupper listener create <name> <port> [--routing-key <name>]
    ```
    For example:
    ```
