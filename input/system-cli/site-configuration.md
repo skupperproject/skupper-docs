@@ -63,6 +63,11 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    Waiting for status...
    Site "my-site" is ready.
    ```
+   While the site is created, the site is not running at this point.
+   To run the site:
+   ```bash
+   skupper system setup
+   ```
 
   📌 NOTE: On non-Kubernetes sites, you can create multiple sites per-user by specifying a *namespace*.
 
