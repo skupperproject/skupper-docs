@@ -89,7 +89,7 @@ include::../examples/no-ingress.yaml[]
 ----
 
 NOTE: By default, `service-sync` is enabled and if you create a service on one site, {skupper-name} creates a matching service on all sites.
-If `service-sync` is set to false for a site, you need to create the service on that site as described in xref:service-yaml[].
+If `service-sync` is set to false for a site, you need to create the service on that site as described in the next section.
 
 
 --
@@ -103,6 +103,49 @@ kubectl apply -f ~/my-site.yml
 .Additional resources
 
 See the xref:site-config-reference[] section for more reference.
+
+
+// Type: procedure
+[id="service-yaml"] 
+=== Creating a service when service-sync is disabled
+
+If you set `service-sync: "false"` when creating a site and you want to consume a service exposed on another site:
+
+. Create `backend.yaml` similar to the following:
++
+--
+[source, yaml]
+----
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  annotations:
+    skupper.io/proxy: tcp
+    skupper.io/address: backend
+    skupper.io/port: "8080"
+    skupper.io/ingress-only: "true"
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+----
+
+NOTE: The `skupper.io/address` annotation must match the service name you have previously exposed on another site.
+--
+
+. Apply that yaml in the context of the site where `service-sync` is disabled:
++
+[source, yaml]
+----
+$ kubectl apply -f backend.yaml
+----
+
+. Test the service.
+
+
 
 // tag::skupper-io[]
 // Type: procedure
@@ -227,6 +270,8 @@ If you do not specify a value, the default ingress ('loadbalancer' on Kubernetes
 This allows you to create tokens usable from remote sites.
 
 NOTE: All ingress types are supported using the same parameters as the `skupper` CLI.
+
+
 
 // tag::skupper-io[]
 [id="watch-current-reference"] 
