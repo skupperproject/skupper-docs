@@ -5,3 +5,4 @@ metadata:
 data:
   name: my-site
   ingress: "none"
+  service-sync: "false"

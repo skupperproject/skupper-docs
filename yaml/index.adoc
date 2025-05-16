@@ -82,11 +82,15 @@ include::../examples/my-site.yaml[]
 ----
 The YAML creates a site with a console and you can create tokens from this site.
 
-To create a site that has no ingress:
+To create a site that has no ingress and with `service-sync` disabled:
 
 ----
 include::../examples/no-ingress.yaml[]
 ----
+
+NOTE: By default, `service-sync` is enabled and if you create a service on one site, {skupper-name} creates a matching service on all sites.
+If `service-sync` is set to false for a site, you need to create the service on that site as described in xref:service-yaml[].
+
 
 --
 . Apply the YAML file to your cluster:
@@ -170,8 +174,6 @@ A future release of Skupper will provide an alternative declarative method to cr
 // end::skupper-io[]
 
 include::annotations.adoc[leveloffset=+1]
-
-
 
 // Type: reference
 [id="site-config-reference"] 
