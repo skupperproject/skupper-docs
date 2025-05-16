@@ -88,7 +88,7 @@ To create a site that has no ingress and with `service-sync` disabled:
 include::../examples/no-ingress.yaml[]
 ----
 
-NOTE: By default, `service-sync` is enabled and if you create a service on one site, it is available on all sites.
+NOTE: By default, `service-sync` is enabled and if you create a service on one site, {skupper-name} creates a matching service on all sites.
 If `service-sync` is set to false for a site, you need to create the service on that site as described in xref:service-yaml[].
 
 

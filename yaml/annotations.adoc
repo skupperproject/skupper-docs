@@ -145,6 +145,7 @@ If you set `service-sync: "false"` when creating a site and you want to consume 
 
 . Create `backend.yaml` similar to the following:
 +
+--
 [source, yaml]
 ----
 apiVersion: v1
@@ -163,6 +164,9 @@ spec:
       port: 8080
       targetPort: 8080
 ----
+
+NOTE: The `skupper.io/address` annotation must match the service name you have previously exposed on another site.
+--
 
 . Apply that yaml in the context of the site where `service-sync` is disabled:
 +
