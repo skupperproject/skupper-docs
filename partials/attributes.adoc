@@ -1,6 +1,6 @@
 :service-network: service network
-:skupper-cli-version: 1.8
-:service-version: 1.8
+:skupper-cli-version: 1.9
+:service-version: 1.9
 :skupper-name: Skupper
 
 :policy-link: ../policy/index.html[Securing a service network using policies]

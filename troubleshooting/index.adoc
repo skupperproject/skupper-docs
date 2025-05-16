@@ -50,7 +50,7 @@ Sites:
 ├─ [local] a960b766-20bd-42c8-886d-741f3a9f6aa2(west) 
 │  │ namespace: west
 │  │ site name: west
-│  │ version: 1.8.1
+│  │ version: 1.9.1
 │  ╰─ Linked sites:
 │     ├─ 496ca1de-0c80-4e70-bbb4-d0d6ec2a09c0(east)
 │     │  direction: outgoing
@@ -59,13 +59,13 @@ Sites:
 ├─ [remote] 496ca1de-0c80-4e70-bbb4-d0d6ec2a09c0(east) 
 │  │ namespace: east
 │  │ site name: east
-│  │ version: 1.8.1
+│  │ version: 1.9.1
 │  ╰─ Linked sites:
 │     ╰─ a960b766-20bd-42c8-886d-741f3a9f6aa2(west)
 │        direction: incoming
 ╰─ [remote] 484cccc3-401c-4c30-a6ed-73382701b18a() 
    │ site name: vm-user-c3d98
-   │ version: 1.8.1
+   │ version: 1.9.1
    ╰─ Linked sites:
       ╰─ a960b766-20bd-42c8-886d-741f3a9f6aa2(west)
          direction: outgoing

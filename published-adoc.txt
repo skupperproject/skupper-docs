@@ -4,6 +4,7 @@ cli/podman.adoc
 cli/networkBackend.adoc
 cli/native-security-options.adoc
 yaml/index.adoc
+yaml/annotations.adoc
 operator/index.adoc
 console/index.adoc
 policy/index.adoc
