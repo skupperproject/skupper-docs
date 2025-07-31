@@ -40,6 +40,8 @@ For example, in this diagram, **Service B** sends a message with an application 
 
 ![overview-routers](../images/overview-routers.png)
 
+In the diagram, `skupper-router` is a container or systemd process that acts as a software router for service communication.
+
 Application networks provide multiple routing patterns, so communications can be distributed in anycast (balanced or closest) or multicast patterns.
 
 <a id="skupper"></a>
