@@ -10,15 +10,15 @@ The default server certificate is named `skupper-site-server` and is issued for 
 
 You can replace these defaults with your own CA or server certificate.
 
-## Mutual TLS between sites
+## About mutual TLS between sites
 
 When two Skupper sites are linked, the routers use mutual TLS (mTLS) for authentication. 
 
 ![Application traffic encrypted](../images/app-traffic.png)
 
+For information on TLS within sites, see [Encrypting service traffic](./encrypting-service-traffic.html)
 
-
-The certificates and keys for this process are stored in Kubernetes Secrets:
+The certificates and keys for traffic between sites are stored in Kubernetes Secrets:
 
 - **`skupper-site-server`**  
   Contains the key, certificate, and CA certificate used by the `skupper-router` when accepting incoming links from other sites.
@@ -31,7 +31,7 @@ If `skupper-site-server` or the client credential Secret are not provided, Skupp
 
 > **Note:** Skupper uses the `skupper-site-ca` Secret only if a custom `skupper-site-server` or client credential Secret is not already present.
 
-### Use a Custom Server Certificate
+## Using a custom server certificate
 
 To use your own server certificate, create a secret named `skupper-site-server` in the namespace of your Skupper site:
 
@@ -65,61 +65,52 @@ Secret exists but is not controlled by skupper
 
 ---
 
-### Generate a Link for Remote Sites
+## Generating a Link
 
 A **Link** lets a remote Skupper site connect securely to your site (incoming link). A link requires:
 
 - A `Link` resource with your site’s connection details.
 - A client certificate secret (`skupper-link`) that the remote site uses for authentication.
 
-If you provide `skupper-site-ca` to Skupper, it can create the client certificate secret for you. Example:
+1. Provide `skupper-site-ca` to Skupper, it can create the client certificate secret for you. Example:
 
-```bash
-kubectl create -f - <<EOF
-apiVersion: skupper.io/v2alpha1
-kind: Certificate
-metadata:
-  name: skupper-link
-spec:
-  ca: skupper-site-ca
-  client: true
-  subject: skupper.public.host
-EOF
-```
+    ```bash
+    kubectl create -f - <<EOF
+    apiVersion: skupper.io/v2alpha1
+    kind: Certificate
+    metadata:
+      name: skupper-link
+    spec:
+      ca: skupper-site-ca
+      client: true
+      subject: skupper.public.host
+    EOF
+    ```
 
----
-
-### Create the Link
-
+2. Create a Link resource:
 You can create a link in three ways:
 
-**1. Skupper CLI**
-- Auto-generate (when CA is available):
-  ```bash
-  skupper link generate
-  ```
-- Use existing secret:
-  ```bash
-  skupper link generate --tls-credentials skupper-link
-  ```
-- Provide your own secret:
-  ```bash
-  skupper link generate --generate-credential=false --tls-credentials=skupper-link
-  ```
+    **1. Skupper CLI**
+    - Auto-generate (when CA is available):
+      ```bash
+      skupper link generate
+      ```
+    - Use existing secret:
+      ```bash
+      skupper link generate --tls-credentials skupper-link
+      ```
+    - Provide your own secret:
+      ```bash
+      skupper link generate --generate-credential=false --tls-credentials=skupper-link
+      ```
+    
+    **2. kubectl**
+    Extract endpoints and create the `Link` YAML, then append the client secret.
+    
+    **3. Manual**
+    Get endpoints:
+    ```bash
+    kubectl get site -o yaml | yq -y .items[].status.endpoints
+    ```
+    Write a YAML file containing both the `Link` resource and the client secret.
 
-**2. kubectl**
-Extract endpoints and create the `Link` YAML, then append the client secret.
-
-**3. Manual**
-Get endpoints:
-```bash
-kubectl get site -o yaml | yq -y .items[].status.endpoints
-```
-Write a YAML file containing both the `Link` resource and the client secret.
-
----
-
-**Key points:**
-- Replace default certs to use your own trust setup.
-- Ensure hostname/IP in cert matches your site’s public address.
-- Links are for remote sites to connect **to** your site.
