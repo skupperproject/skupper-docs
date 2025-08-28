@@ -41,8 +41,24 @@ Install a namespace-scoped controller using the following commands:
 kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-namespace-scope.yaml
 ```
 
+<a id="installing-cli"></a>
+## Installing the Skupper CLI
 
 
+You can use the Skupper CLI with Kubernetes or on local systems (Podman, Docker, Linux). 
+
+On local systems, the CLI is all you require to create a site.
+
+**Procedure**
+
+
+To download the latest release:
+
+```bash
+curl https://skupper.io/v2/install.sh | sh
+```
+
+To download a specific version, download from [Releases](https://github.com/skupperproject/skupper/releases) page.
 
 
 
