@@ -1,5 +1,7 @@
 <a id="kube-installing-controller"></a>
-# Installing the Skupper controller on Kubernetes
+# Installing the Skupper controller
+
+If you are using Skupper on local systems (Podman, Docker, Linux), you must [install the CLI](#installing-cli).
 
 Before you can create a site on Kubernetes, you must install the Skupper controller. 
 You can install the controller using the following methods:
@@ -40,26 +42,6 @@ Install a namespace-scoped controller using the following commands:
 ```bash
 kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-namespace-scope.yaml
 ```
-
-<a id="installing-cli"></a>
-## Installing the Skupper CLI
-
-
-You can use the Skupper CLI with Kubernetes or on local systems (Podman, Docker, Linux). 
-
-On local systems, the CLI is all you require to create a site.
-
-**Procedure**
-
-
-To download the latest release:
-
-```bash
-curl https://skupper.io/v2/install.sh | sh
-```
-
-To download a specific version, download from [Releases](https://github.com/skupperproject/skupper/releases) page.
-
 
 
 <a id="kube-installing-controller-helm"></a>
@@ -120,3 +102,28 @@ To install a namespace-scoped controller, add the `--set scope=namespace` option
 4. Select the latest **Version**.
 5. Click **Install**.
 -->
+
+<a id="installing-cli"></a>
+## Installing the Skupper CLI
+
+
+You can use the Skupper CLI with Kubernetes or on local systems (Podman, Docker, Linux). 
+
+On local systems, the CLI is all you require to create a site.
+
+**Procedure**
+
+To download the latest release:
+
+```bash
+curl https://skupper.io/v2/install.sh | sh
+```
+
+To download a specific version, download from [Releases](https://github.com/skupperproject/skupper/releases) page.
+
+
+On local systems, you can install the controller using:
+
+```bash
+skupper system install -p  [podman, docker, linux]
+```
