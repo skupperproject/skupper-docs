@@ -51,7 +51,14 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    * `docker`
    * `linux`
 
-2. Create a site:
+2. Install the controller:
+
+   ```bash
+   skupper system install
+   ```
+   This runs a container to support site, link and service operations.
+
+3. Create a site:
 
    ```bash
    skupper site create <site-name>
@@ -69,7 +76,14 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    skupper system setup
    ```
 
-  📌 NOTE: On non-Kubernetes sites, you can create multiple sites per-user by specifying a *namespace*.
+By default, all sites are created with the namespace `default`.
+On non-Kubernetes sites, you can create multiple sites per-user by specifying a *namespace*, for example you can create multiple sites with different platforms as follows:
+
+```bash
+skupper site create systemd-site -p linux -n linux-ns
+skupper site create docker-site -p docker -n docker-ns
+```
+
 
 <a id="system-deleting-site-cli"></a>
 ## Deleting a site using the CLI on local systems
@@ -82,7 +96,10 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 1. Enter the following command to delete a site:
    ```bash
-   skupper system teardown
+   skupper site delete <sitename>
+   skupper system uninstall
    ```
+You can only uninstall the controller after deleting all existing sites.
+
 
 [cli-ref]: https://skupperproject.github.io/refdog/commands/index.html
