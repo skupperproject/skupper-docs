@@ -98,5 +98,14 @@ body_template: config/wide-body.html
       
     </nav>
   </div>
+ <div>
+    <h2 id="observability">Advanced deployments</h2>
+    <p>While Skupper provides many options, you may have specific requirements that fall outside the standard configurations.</p>
+    <nav>
+      <li><a href="./advanced-deployments/custom-certs.html">Using custom certificates</a></li>
+      
+      
+    </nav>
+  </div>
 
 </div>
