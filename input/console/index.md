@@ -28,7 +28,7 @@ The Network console provides data and visualizations of the traffic flow between
 
    The output is similar to the following:
    ```
-   Pulled: quay.io/skupper/helm/network-observer:2.0.0
+   Pulled: quay.io/skupper/helm/network-observer:2.1.1
    Digest: sha256:557c8a3f4b5d8bb6e779a81e6214fa87c2ad3ad0c957a5c08b8dd3cb20fc7cfe
    NAME: skupper-network-observer
    LAST DEPLOYED: Sun Mar  9 19:47:09 2025

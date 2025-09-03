@@ -71,7 +71,7 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
        controller:
          name: skupper-controller
          namespace: default
-         version: 2.0.0-rc1
+         version: 2.1.1-rc1
        defaultIssuer: skupper-site-ca
        message: OK
        network:
@@ -79,7 +79,7 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
          name: west
          namespace: default
          platform: kubernetes
-         version: 2.0.0-rc1
+         version: 2.1.1-rc1
        sitesInNetwork: 1
        status: Ready
    kind: List
