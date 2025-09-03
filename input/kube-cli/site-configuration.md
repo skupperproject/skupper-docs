@@ -17,7 +17,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    skupper version
    
    COMPONENT               VERSION
-   cli                     {{skupper_cli_version}}
+   cli                     {{{skupper_cli_version}}
    ```
 
 <a id="kube-creating-simple-site-cli"></a>
