@@ -62,7 +62,7 @@ The Network console provides data and visualizations of the traffic flow between
 4. Expose the `skupper-network-observer` service to make the Network console available, for example on OpenShift:
 
    ```
-   oc expose skupper-network-observer
+   oc create route passthrough skupper-console --service=skupper-network-observer --port=https
    ```
 
 <a id="console-exploring"></a>
