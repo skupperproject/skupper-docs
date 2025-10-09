@@ -120,9 +120,8 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 You must link sites before you can expose services on the network.
 
 **📌 NOTE**
-By default, tokens expire after 5 minutes and you can only use a token once.
+By default, tokens expire after 15 minutes and you can only use a token once.
 Generate a new token if the link is not connected.
-You can also generate tokens using the `-token-type cert` option for permanent reusable tokens.
 
 This section outlines some advanced options for checking links.
 
@@ -149,8 +148,6 @@ This section outlines some advanced options for checking links.
 
    There are no link resources in the namespace
    ```
-
-- [checking-sites](#checking-sites)
 
 <a id="resolving-common-problems"></a>
 ## Resolving common problems

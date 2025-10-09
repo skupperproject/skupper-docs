@@ -3,6 +3,7 @@ import os
 
 site.output_dir = "output"
 site_prefix = os.environ.get("SITE_PREFIX", "")
+site.prefix = site_prefix
 
 def path_nav(page):
     files = reversed(list(page.ancestors)[:-1])
