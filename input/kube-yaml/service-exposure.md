@@ -132,7 +132,7 @@ If you create a site in one namespace and need to expose a service in a differen
 
 1. Create a workload that you want to expose on the network in a non-site namespace, for example:
    ```bash
-   kubectl create deployment backend --image quay.io/skupper/hello-world-backend --replicas 3
+   kubectl create deployment backend --image quay.io/skupper/hello-world-backend --replicas 3 --namespace attached
    ```
 
 2. Create an AttachedConnector resource YAML file in the same namespace:
@@ -159,14 +159,13 @@ If you create a site in one namespace and need to expose a service in a differen
 3. Create an AttachedConnectorBinding resource YAML file in the site namespace:
    ```yaml
    apiVersion: skupper.io/v2alpha1
-   kind: AttachedConnector
+   kind: AttachedConnectorBinding
    metadata:
-     name: backend
-     namespace: attached
+     name: backend            
+     namespace: east            
    spec:
-     siteNamespace: skupper
-     selector: app=backend
-     port: 8080
+     connectorNamespace: attached
+     routingKey: backend
    ```
 
    To create the AttachedConnectorBinding resource:
@@ -179,7 +178,7 @@ If you create a site in one namespace and need to expose a service in a differen
 
 
 
-3. Check the AttachedConnectorBinding status from the context of the site namespace:
+4. Check the AttachedConnectorBinding status from the context of the site namespace:
    ```bash
    kubectl get AttachedConnectorBinding
    ```
@@ -190,9 +189,6 @@ If you create a site in one namespace and need to expose a service in a differen
    NAME      ROUTING KEY   CONNECTOR NAMESPACE   STATUS   HAS MATCHING LISTENER
    backend   backend       attached              Ready    true
    ```
-   **📌 NOTE**
-   By default, the routing key name is set to the name of the connector.
-   If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
 There are many options to consider when creating connectors using YAML, see [Connector resource][connector-resource].
 
