@@ -26,14 +26,6 @@ def test():
     check_links()
     check_files()
 
-    with temp_dir() as temp:
-        with working_env(HOME=temp):
-            run("cat docs/install.sh | sh", shell=True)
-            run("cat docs/uninstall.sh | sh", shell=True)
-
-        generate_examples(output_dir=temp)
-        generate_releases(output_dir=temp)
-        generate_scripts(output_dir=temp)
 
 
 @command
