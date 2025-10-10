@@ -44,27 +44,6 @@ kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{s
 ```
 
 
-<a id="kube-installing-controller-helm"></a>
-## Installing the Skupper controller using Helm
-
-**Prerequisites**
-
-* cluster-admin access to cluster
-
-**Procedure**
-
-Install a cluster-scoped controller using the following commands:
-
-```
-kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-cluster-scope.yaml
-```
-
-Install a namespace-scoped controller using the following commands:
-
-```
-kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-namespace-scope.yaml
-```
-
 
 <a id="kube-installing-controller-helm"></a>
 ## Installing the Skupper controller using the Skupper Helm charts
