@@ -6,20 +6,10 @@ Once sites are linked, services can be exposed and consumed across the applicati
 Terminology:
 
 * Connecting site: The site that initiates the link connection.
-* Listening site: The site receives the the link connection.
+* Listening site: The site receives the link connection.
 
 The link direction is not significant, and is typically determined by ease of connectivity. For example, if `east` is behind a firewall and `west` is a cluster on the public cloud, linking from `east` to `west` is the easiest option.
 
-There are two ways of linking sites on Kubernetes using YAML:
-
-* Using `AccessGrant` and `AccessToken` resources to produce a token on the listening site. The link is created when the `AccessToken` is applied to the connecting site. 
-
-* Using a `Link` resource on the listening site. The link is created when the `Link` is applied to the connecting site. 
-
-The advantage of using `AccessGrant` and `AccessToken` resources is that you can limit token usage. By default, a token can only be used once and must be used within 15 minutes to link sites.
-
-The procedures below describe linking an existing site.
-Typically, it is easier to configure a site, links and services in a set of files and then create a configured site by placing all the YAML files in a directory, for example `local` and then using the following command to 
 
 <a id="kube-access-yaml"></a>
 ## Linking sites using  `AccessGrant` and `AccessToken` resources
@@ -56,98 +46,51 @@ To link sites, you create `AccessGrant` and `AccessToken` resources on the liste
      redemptionsAllowed: 2        # default 1
      expirationWindow: 25m        # default 15m
    ```
-   For example, if you created `accessgrant.yaml`:
+   For example, if you created `accessgrant.yaml`, apply and check status:
    ```bash
    kubectl apply -f accessgrant.yaml
+   
+   kubectl get accessgrants
+   
+   NAME         REDEMPTIONS ALLOWED   REDEMPTIONS MADE   EXPIRATION             STATUS   MESSAGE
+   grant-west   20                    20                 2025-10-15T12:33:04Z   Ready    OK
    ```
-3. Populate environment variables to allow token generation:
+2. On the listening site, populate environment variables to allow token generation:
 
    ```bash
-   NS="west"
-   GRANT="grant-west"
-   
-   CODE=$(kubectl -n "$NS" get accessgrant "$GRANT" -o jsonpath='{.status.code}')
-   CA_RAW=$(kubectl -n "$NS" get accessgrant "$GRANT" -o jsonpath='{.status.ca}')
-   # Use bash's %q to escape safely for a single-line YAML string
-   CA_ESCAPED=$(printf '%q' "$CA_RAW")
+   CODE="$(kubectl get accessgrant grant-west -o template --template '{{ .status.code }}')"
+   URL="$(kubectl get accessgrant grant-west -o template --template '{{ .status.url }}')"
+   CA_RAW="$(kubectl get accessgrant grant-west -o template --template '{{ .status.ca }}')"
 
-   URL=$(kubectl -n "$NS" get accessgrant "$GRANT" -o jsonpath='{.status.url}')
    ```
    These environment variable settings support the next step of generating the token.
 
-4. Create a token YAML file:
+3. On the listening site, create a token YAML file:
    ```bash
    cat > token.yaml <<EOF
    apiVersion: skupper.io/v2alpha1
    kind: AccessToken
    metadata:
-     name: my-token
+     name: token-to-west
    spec:
-     code: "${CODE}"
-     ca: ${CA_ESCAPED}
-     url: "${URL}"
+     code: "$(printf '%s' "$CODE")"
+     ca: |- 
+   $(printf '%s\n' "$CA_RAW" | sed 's/^/    /')
+     url: "$(printf '%s' "$URL")"
    EOF
    ```
    where `token.yaml` is the name of the YAML file that is saved on your local filesystem.
 
-
-<a id="kube-link-yaml"></a>
-## Linking sites using a `link` resource
-
-An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.
-
-**Prerequisites**
-
-* A local kube site
-* A Kubernetes site with `enable-link-access` enabled.
-
-To link sites, you create a `link` resource YAML file on one site and apply that resource on the other site to create the link.
-
-**Procedure**
-
-1. On the site where you want to create a link , make sure link access is enabled:
+4. On the connecting site, apply the token and check status:
    ```bash
-   skupper site update --enable-link-access
+   kubectl apply -f token.yaml
+   kubectl get accesstokens 
+   NAME            URL                                                                REDEEMED   STATUS   MESSAGE
+   token-to-west   https://10.110.160.132:9090/87426fa9-5623-49af-a612-47d33b7a4200   true       Ready    OK
    ```
-2. Create a `link` resource YAML file:
+5. On the connecting site, check link status:
    ```bash
-   skupper link generate > <filename>
+   kubectl get link
+   NAME            STATUS   REMOTE SITE   MESSAGE
+   token-to-west   Ready    my-site       OK
    ```
-   where `<filename>` is the name of a YAML file that is saved on your local filekube.
-
-3. Apply the `link` resource YAML file on a local kube site to create a link:
-   ```bash
-   mv <filename> ~/.local/share/skupper/namespaces/default/input/resources/
-   skupper kube setup --force
-   ```
-   where `<filename>` is the name of a YAML file that is saved on your local filekube.
-
-   The path shown is specific to the `default` namespace.
-   If you are configuring a different namespace, use that name instead.
-
-   The site is recreated and you see some of the internal resources that are not affected, for example:
-   ```
-   Sources will be consumed from namespace "default"
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/tls.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/tls.key
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/ca.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/tls.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/tls.key
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/ca.crt
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/tls.crt
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/tls.key
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/ca.crt
-   
-   ```
-
-4. Check the status of the link:
-   ```bash
-   skupper link status
-   ```
-   The output shows the link name:
-   ```
-   $ skupper link status
-   NAME            STATUS
-   link-west       Ok
-   ```
-   You can now expose services on the application network.
