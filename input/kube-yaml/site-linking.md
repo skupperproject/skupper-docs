@@ -29,10 +29,15 @@ The link direction is not significant, and is typically determined by ease of co
    ```
 To link sites, you create `AccessGrant` and `AccessToken` resources on the listening site and apply the  `AccessToken` resource on the connecting site to create the link.
 
+**AccessGrant** is a permission on a listening site that allows redemption of access tokens to create links. 
+The component it gives permission to is the **GrantServer** which is a HTTPS server that ultimately sets up the link.
 
-**AccessGrant** is a server-side permission on a listening site that allows redemption of access tokens to create links. It exposes a URL, a secret code, and a CA for issuing certificates. The number of redemptions and the length of the redemption window is configurable.
+The GrantServer provides a URL, a secret code, and a cert that are bundled together to form an AccessToken.
+The number of times an AccessToken can be redeemed and how long it remains active are both configurable. 
+On OpenShift, the GrantServer is exposed by a Route, while other systems use a LoadBalancer to make it accessible.
 
-**AccessToken** is short-lived, usually single-use credential that contains the AccessGrant URL and secret code. A connecting site redeems this token to establish a link to the listening site.
+**AccessToken** is short-lived, usually single-use credential that contains the AccessGrant URL, secret code and a cert to establish a secure connection to the GrantServer. 
+A connecting site redeems this token for a `Link` resource to establish a link to the listening site.
 
 **Procedure**
 
@@ -58,12 +63,16 @@ To link sites, you create `AccessGrant` and `AccessToken` resources on the liste
 2. On the listening site, populate environment variables to allow token generation:
 
    ```bash
-   CODE="$(kubectl get accessgrant grant-west -o template --template '{{ .status.code }}')"
    URL="$(kubectl get accessgrant grant-west -o template --template '{{ .status.url }}')"
+   CODE="$(kubectl get accessgrant grant-west -o template --template '{{ .status.code }}')"
    CA_RAW="$(kubectl get accessgrant grant-west -o template --template '{{ .status.ca }}')"
 
    ```
    These environment variable settings support the next step of generating the token.
+
+   * URL is the URL of the GrantServer
+   * CODE is the secret code to access the GrantServer
+   * CA_RAW is the cert required to establish a HTTPS connection to the GrantServer
 
 3. On the listening site, create a token YAML file:
    ```bash
@@ -81,14 +90,24 @@ To link sites, you create `AccessGrant` and `AccessToken` resources on the liste
    ```
    where `token.yaml` is the name of the YAML file that is saved on your local filesystem.
 
-4. On the connecting site, apply the token and check status:
+   **📌 NOTE**
+   Access to this file provides access to the application network. 
+   Protect it appropriately.
+
+4. Securely transfer the `token.yaml` file to context of the connecting site.
+   If you have both sites available from your terminal session, this step is not required.
+
+5. On the connecting site, apply the token and check status:
    ```bash
    kubectl apply -f token.yaml
    kubectl get accesstokens 
    NAME            URL                                                                REDEEMED   STATUS   MESSAGE
    token-to-west   https://10.110.160.132:9090/87426fa9-5623-49af-a612-47d33b7a4200   true       Ready    OK
    ```
-5. On the connecting site, check link status:
+   The GrantServer has validated the AccessToken and redeemed it for a `Link` resource.
+   The connecting site uses `Link` resource to establish an mTLS connection between routers.
+
+6. On the connecting site, check link status:
    ```bash
    kubectl get link
    NAME            STATUS   REMOTE SITE   MESSAGE
