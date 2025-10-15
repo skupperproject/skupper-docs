@@ -28,6 +28,18 @@ Procedure
    This YAML creates a site named `my-site` in the `west` namespace.
    Specifying the namespace is not required if the context is set to the namespace where you want to create the site.
 
+   If you need to link to this site, enable link access:
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: Site
+   metadata:
+     name: my-site
+     namespace: west
+   spec:
+     linkAccess: default
+   ```
+   
+
 2. Create the site:
    ```bash
    kubectl apply -f my-site.yaml
