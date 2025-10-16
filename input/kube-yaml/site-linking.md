@@ -26,7 +26,7 @@ The link direction is not significant, and is typically determined by ease of co
     namespace: west
   spec:
     linkAccess: default
-   ```
+  ```
 To link sites, you create `AccessGrant` and `AccessToken` resources on the listening site and apply the  `AccessToken` resource on the connecting site to create the link.
 
 **AccessGrant** is a permission on a listening site that allows redemption of access tokens to create links. 
@@ -52,7 +52,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
      expirationWindow: 25m        # default 15m
    ```
    For example, if you created `accessgrant.yaml`, apply and check status:
-   ```bash
+   ```shell
    kubectl apply -f accessgrant.yaml
    
    kubectl get accessgrants
@@ -60,14 +60,15 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    NAME         REDEMPTIONS ALLOWED   REDEMPTIONS MADE   EXPIRATION             STATUS   MESSAGE
    grant-west   20                    20                 2025-10-15T12:33:04Z   Ready    OK
    ```
+
 2. On the listening site, populate environment variables to allow token generation:
 
-   ```bash
-   URL="$(kubectl get accessgrant grant-west -o template --template '{{ .status.url }}')"
-   CODE="$(kubectl get accessgrant grant-west -o template --template '{{ .status.code }}')"
-   CA_RAW="$(kubectl get accessgrant grant-west -o template --template '{{ .status.ca }}')"
-
+   ```shell
+   URL="$(kubectl get accessgrant grant-west -o template --template '{{{ .status.url }}}')"
+   CODE="$(kubectl get accessgrant grant-west -o template --template '{{{ .status.code }}}')"
+   CA_RAW="$(kubectl get accessgrant grant-west -o template --template '{{{ .status.ca }}}')"
    ```
+   
    These environment variable settings support the next step of generating the token.
 
    * URL is the URL of the GrantServer
@@ -75,7 +76,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    * CA_RAW is the cert required to establish a HTTPS connection to the GrantServer
 
 3. On the listening site, create a token YAML file:
-   ```bash
+   ```shell
    cat > token.yaml <<EOF
    apiVersion: skupper.io/v2alpha1
    kind: AccessToken
@@ -98,7 +99,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    If you have both sites available from your terminal session, this step is not required.
 
 5. On the connecting site, apply the token and check status:
-   ```bash
+   ```shell
    kubectl apply -f token.yaml
    kubectl get accesstokens 
    NAME            URL                                                                REDEEMED   STATUS   MESSAGE
@@ -108,7 +109,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    The connecting site uses `Link` resource to establish an mTLS connection between routers.
 
 6. On the connecting site, check link status:
-   ```bash
+   ```shell
    kubectl get link
    NAME            STATUS   REMOTE SITE   MESSAGE
    token-to-west   Ready    my-site       OK
