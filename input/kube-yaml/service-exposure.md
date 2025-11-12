@@ -127,6 +127,7 @@ If you create a site in one namespace and need to expose a service in a differen
 
 * An attached connector is a connector in a peer namespace, that is, not the site namespace.
 * The AttachedConnectorBinding is a binding to an attached connector in a peer namespace and is created in the site namespace.
+* Creating attached connectors requires that Skupper is deployed cluster wide.
 
 **Procedure**
 
