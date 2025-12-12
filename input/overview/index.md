@@ -21,19 +21,18 @@ In essence, the application network connects the services in a distributed appli
 
 ![overview-application](../images/overview-application.png)
 
-Application networks are able to provide connectivity across the hybrid cloud because they operate at Layer 7 (the application layer).
-They use **Layer 7 application routers** to route communication between **Layer 7 application services**.
+Application networks are able to provide connectivity across the hybrid cloud by using Skupper routers.
 
-<a id="layer-7-application-routers"></a>
-## Layer 7 application routers
+<a id="skupper-routers"></a>
+## Skupper routers
 
-Layer 7 application routers form the backbone of an application network in the same way that conventional network routers form the backbone of a VPN.
-However, instead of routing IP packets between network endpoints, Layer 7 application routers route messages between application endpoints (called Layer 7 application services).
+Skupper routers form the backbone of an application network in the same way that conventional network routers form the backbone of a VPN.
+However, instead of routing IP packets between network endpoints, Skupper routers route messages between application endpoints.
 
-**Layer 7 application services**
+**Application services**
 
-A Layer 7 application service represents an endpoint, or destination in the application network.
-When an application sends a communication to an service, the Layer 7 application routers distribute the communication to any other application in the application network that has the same service.
+An application service represents an endpoint, or destination in the application network.
+When an application sends a communication to an service, the Skupper routers distribute the communication to any other application in the application network that has the same service.
 
 For example, in this diagram, **Service B** sends a message with an application service to its local application router.
 **Service A** and **Service C** are subscribed to the same service, so the application router routes copies of the message through the application network until they arrive at each destination.

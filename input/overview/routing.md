@@ -1,7 +1,7 @@
 <a id="skupper-routing"></a>
 # Skupper routing
 
-Skupper uses layer 7 addressing and routing to connect services.
+Skupper uses routing keys and ports to connect servers and clients.
 See how the power of application-layer addressing can bring new capabilities to your applications.
 
 **Multi-cluster services**

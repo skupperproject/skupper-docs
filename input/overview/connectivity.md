@@ -15,7 +15,7 @@ But if you want to deploy your application across multiple clusters, your option
 You have to either expose your services to the public internet or set up a VPN.
 
 Skupper offers a third way.
-It connects clusters to a secure layer 7 network.
+It connects clusters to a secure application network, also known as a virtual application network (VAN).
 It uses that network to forward local service traffic to remote clusters.
 
 **Secure hybrid cloud communication**
