@@ -22,7 +22,7 @@ title: Documentation
 <h2 id="installation">Installation</h2>
 <p>Learn about installing the Skupper CLI and the controller.</p>
 <ul>
-  <li><a href="install/index.html">Installation</a></li>
+  <li><a href="install/index.html">Installation and upgrade</a></li>
 </ul>
 
 <h2 id="using-the-skupper-cli-on-kubernetes">Using the Skupper CLI on Kubernetes</h2>
