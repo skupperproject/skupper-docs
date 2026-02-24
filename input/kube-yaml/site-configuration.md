@@ -60,6 +60,112 @@ Procedure
    ```
    You can now link this site to another site to create an application network.
 
-There are many options to consider when creating sites using YAML, see [YAML Reference][yaml-ref], including *frequently used* options.
+By default, the router CPU allocation is BestEffort as described in [Pod Quality of Service Classes](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/) and this might affect performance under network load.
+Consider setting resources as described in [Setting site resources](#kube-site-resources-yaml).
+
+There are many options to consider when creating sites using YAML, see the [YAML Reference][yaml-ref], including *frequently used* options.
 
 [yaml-ref]: https://skupperproject.github.io/refdog/resources/index.html
+
+
+<a id="kube-site-resources-yaml"></a>
+## Setting site resources
+
+You can configure the Skupper Router and Kube Adaptor components with minimum and maximum CPU and memory resources by defining sizing models using ConfigMaps.
+
+**Note:** Increasing the number of routers does not improve network performance. An incoming router-to-router link is associated with just one active router. Additional routers do not receive traffic while that router is responding.
+
+**Prerequisites**
+
+* The Skupper V2 controller is running in your cluster.
+* You have determined the router CPU allocation you require.
+
+  Consider the following CPU allocation options:
+
+  | Router CPU | Description |
+  |------------|-------------|
+  | 1 | Helps avoid issues with BestEffort on low resource clusters |
+  | 2 | Suitable for production environments |
+  | 5 | Maximum performance |
+
+Procedure
+
+1. Create a sizing ConfigMap in the same namespace where your Skupper V2 controller is running.
+
+   The following example defines a sizing configuration named `medium` with 2 CPU cores suitable for production:
+
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: sizing-medium
+     labels:
+       skupper.io/site-sizing: "medium"
+     annotations:
+       skupper.io/default-site-sizing: "true"
+   data:
+     router-cpu-limit: "2"
+     router-memory-limit: 1024Mi
+   ```
+
+   The Skupper controller selects ConfigMaps based on the presence of a `skupper.io/site-sizing` label.
+   The label's value serves as an internal identifier for that particular sizing configuration.
+
+   To designate a sizing model as the default for all sites managed by your Skupper V2 controller instance, annotate the ConfigMap with `skupper.io/default-site-sizing: "true"`.
+
+   A sizing ConfigMap can define the following fields:
+
+   - `router-cpu-request`
+   - `router-cpu-limit`
+   - `router-memory-request`
+   - `router-memory-limit`
+   - `adaptor-cpu-request`
+   - `adaptor-cpu-limit`
+   - `adaptor-memory-request`
+   - `adaptor-memory-limit`
+
+   **Note:** If only the `limit` field is defined, Kubernetes will also set the `request` with the same value. If this is not what you want, make sure to set the respective `request` field with a smaller value.
+
+2. Apply the ConfigMap:
+
+   ```bash
+   kubectl apply -f sizing-medium.yaml
+   ```
+
+3. Assign the sizing configuration to a site by setting the `spec.settings.size` field in the site resource:
+
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: Site
+   metadata:
+     name: my-site
+   spec:
+     settings:
+       size: medium
+   ```
+
+4. Verify the resource limits have been applied by inspecting the `skupper-router` deployment:
+
+   ```bash
+   kubectl get deployment skupper-router -o json | jq .spec.template.spec.containers[].resources
+   ```
+
+   The output should look like:
+
+   ```json
+   {
+     "limits": {
+       "cpu": "1",
+       "memory": "1Gi"
+     },
+     "requests": {
+       "cpu": "500m",
+       "memory": "512Mi"
+     }
+   }
+   ```
+
+You can define multiple sizing configurations using separate ConfigMaps.
+Only one ConfigMap should be annotated as the default (`skupper.io/default-site-sizing: "true"`).
+The default annotation is optional. If no default is specified, sites will use the `small` sizing configuration with BestEffort QoS.
+

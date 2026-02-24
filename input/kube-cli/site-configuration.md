@@ -72,6 +72,10 @@ For example
   ```
   You can check the status of the site at any time using `skupper site status`.
 
+  By default, the router CPU allocation is BestEffort as described in [Pod Quality of Service Classes](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/) and this might affect performance under network load.
+  To configure site resources, see [Setting site resources](../kube-yaml/site-configuration.html#kube-site-resources-yaml).
+
+
 <a id="kube-deleting-site-cli"></a>
 ## Deleting a site using the CLI on Kubernetes
 
