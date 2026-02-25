@@ -126,13 +126,23 @@ Procedure
 
    **Note:** If only the `limit` field is defined, Kubernetes will also set the `request` with the same value. If this is not what you want, make sure to set the respective `request` field with a smaller value.
 
-2. Apply the ConfigMap:
+2. Determine the controller namespace.
+   Depending on your installation method, the controller namespace may be `skupper` or have a different name.
+   You can check that you have chosen the correct namespace by running:
+
+   ```
+   kubectl get pods
+   ```
+
+   Confirm that the skupper controller pod is running in the namespace.
+
+3. Apply the ConfigMap in the controller namespace:
 
    ```bash
    kubectl apply -f sizing-medium.yaml
    ```
 
-3. Assign the sizing configuration to a site by setting the `spec.settings.size` field in the site resource:
+4. Assign the sizing configuration to a site by setting the `spec.settings.size` field in the site resource:
 
    ```yaml
    apiVersion: skupper.io/v2alpha1
@@ -144,7 +154,7 @@ Procedure
        size: medium
    ```
 
-4. Verify the resource limits have been applied by inspecting the `skupper-router` deployment:
+5. Verify the resource limits have been applied by inspecting the `skupper-router` deployment:
 
    ```bash
    kubectl get deployment skupper-router -o json | jq .spec.template.spec.containers[].resources
