@@ -127,7 +127,7 @@ Procedure
    **Note:** If only the `limit` field is defined, Kubernetes will also set the `request` with the same value. If this is not what you want, make sure to set the respective `request` field with a smaller value.
 
 2. Determine the controller namespace.
-   Depending on your installation method, the controller namespace may be `skupper` or have a different name.
+   Depending on your installation method, the controller namespace may be `skupper`, `openshift-operators`, or have a different name.
    You can check that you have chosen the correct namespace by running:
 
    ```
