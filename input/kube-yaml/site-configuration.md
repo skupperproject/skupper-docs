@@ -177,5 +177,4 @@ Procedure
 
 You can define multiple sizing configurations using separate ConfigMaps.
 Only one ConfigMap should be annotated as the default (`skupper.io/default-site-sizing: "true"`).
-The default annotation is optional. If no default is specified, sites will use the `small` sizing configuration with BestEffort QoS.
 
