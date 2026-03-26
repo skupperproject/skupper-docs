@@ -26,7 +26,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 **Prerequisites**
 
 * The `skupper` CLI is installed.
-* The Skupper controller is running on the Kubernetes cluster you are running or you are running on a platform.
+* The Skupper controller is running on the Kubernetes cluster.
 
 **Procedure**
 

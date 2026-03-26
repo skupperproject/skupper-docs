@@ -12,7 +12,7 @@ You can use YAML to create and manage Skupper sites.
 
 **Prerequisites**
 
-* The Skupper controller is running on the Kubernetes cluster you are running or you are running on a platform.
+* The Skupper controller is running on the Kubernetes cluster.
 
 Procedure
 
