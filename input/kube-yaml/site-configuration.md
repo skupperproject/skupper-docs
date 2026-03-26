@@ -88,7 +88,7 @@ Procedure
    kind: Site
    metadata:
      name: ha-site
-     namespace: ha-site
+     namespace: west
    spec:
      ha: true
      linkAccess: default  # Optional: configure external access
