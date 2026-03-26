@@ -101,6 +101,10 @@ To link sites, you create a `link` resource YAML file on one site and apply that
    skupper link generate > <filename>
    ```
    where `<filename>` is the name of a YAML file that is saved on your local filesystem.
+   The `link` resource YAML file contains the following information:
+   * The name of the link
+   * The certificate used to authenticate the link
+   * The host and port of the listening site. If the listening site uses high availability mode, two host and port entries are included.
 
 3. Apply the `link` resource YAML file on a different site to create a link:
    ```bash
@@ -124,4 +128,3 @@ To link sites, you create a `link` resource YAML file on one site and apply that
    You can now expose services on the application network.
 
 There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
-
