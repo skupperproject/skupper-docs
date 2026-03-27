@@ -76,6 +76,38 @@ For example
   To configure site resources, see [Setting site resources](../kube-yaml/site-configuration.html#kube-site-resources-yaml).
 
 
+<a id="kube-ha-cli"></a>
+## Creating a high availability site using the CLI on Kubernetes
+
+You can create a site that is highly available by using the `ha` option.
+High availability mode is intended to maintain service continuity during router restarts or pod rescheduling, but it does not provide failover if network connectivity between sites is lost.
+
+**Prerequisites**
+
+* The `skupper` CLI is installed.
+* The Skupper controller is running on the Kubernetes cluster.
+
+**Procedure**
+
+1. Create a high availability site on Kubernetes:
+
+   ```bash
+   skupper site create <site-name> --enable-ha
+   ```
+   If the site already exists, you can use the `update` command to enable high availability:
+   ```bash
+   skupper site update --enable-ha
+   ```
+2. To verify that the site is running in high availability mode, run the following command:
+   ```bash
+   kubectl get site -o yaml | grep ha
+   ```
+   The output should be similar to the following:
+   ```
+   ha: true
+   ```
+   When high availability mode is enabled, multiple router pods are created so that traffic can continue if one pod restarts or is rescheduled.
+
 <a id="kube-deleting-site-cli"></a>
 ## Deleting a site using the CLI on Kubernetes
 
