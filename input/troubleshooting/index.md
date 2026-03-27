@@ -105,14 +105,6 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 
    This result shows that you can create a listener using the `backend` routing key and port `9090` on a different site to access the `backend` service.
 
-4. Check the status of any links:
-
-   ```bash
-   skupper link status
-
-   ```
-
-   The output shows the links .
 
 <a id="checking-links"></a>
 ## Checking links
@@ -139,9 +131,9 @@ This section outlines some advanced options for checking links.
    The status of the link must be `Ready` to allow service traffic.
 
    **📌 NOTE**\
-   Running `skupper link status` on a linked site produces output only if a token was used to create a link.
+   You must run `skupper link status` on a linking site.
 
-   If you use this command on a site where you did not create the link, but there is an incoming link to the site:
+   If you use this command on a listening site, there is a message:
 
    ```
    skupper link status -n west
@@ -149,18 +141,140 @@ This section outlines some advanced options for checking links.
    There are no link resources in the namespace
    ```
 
-<a id="resolving-common-problems"></a>
-## Resolving common problems
 
-The following issues and workarounds might help you debug simple scenarios when evaluating Skupper.
+<a id="checking-services"></a>
+## Checking services
 
-- Container platform error:
+In a virtual application network (VAN), a service represents a logical endpoint that allows workloads in different sites to communicate over the application network without exposing those workloads directly to the underlying network.
+Services are defined using listeners and connectors, which together describe where traffic enters the network and where it is delivered.
 
-  ```
-  Failed to bootstrap: failed to load site state: error loading "/home/user/.local/share/skupper/namespaces/default/input/resources/sites/test.yaml": multiple sites found, but only one site is allowed for bootstrapping
-  ```
+A listener defines how a service is exposed on a site.
+It creates an address on the virtual network and accepts incoming TCP connections.
+When a workload connects to the listener, the traffic is forwarded across the application network using the Skupper router in the listener site.
 
-- namespace error:
-  ```
-  there is already a site created for this namespace
-  ```
+A connector defines where the service traffic is sent.
+It associates the service with one or more backend workloads on Kubernetes or Linux, receiving the forwarded connections from the Skupper router in the connector site.
+Multiple connectors can exist for the same service, allowing load distribution across sites.
+
+Together, listeners and connectors allow a service to be reachable from any site in the application network while keeping the actual workloads local to their clusters.
+
+This section explains the normal lifecycle of a connector, and how to observe what happens when backend pods are added or removed.
+
+1. To observe the connector lifecycle, deploy a backend service and create a connector:
+
+   ```bash
+   kubectl create deployment backend --image=nginx
+   kubectl expose deployment backend --port 8080
+   ```
+
+   ```bash
+   skupper connector create backend 8080
+   ```
+
+2. Check the connector status:
+
+   ```bash
+   kubectl get connector
+   ```
+
+   ```bash
+   kubectl get connector backend -o yaml
+   ```
+
+   The connector can be in one of the following states:
+
+   * `Configured=False` - No backend pods are available
+   * `Configured=True` - Backend pods are available and connected
+
+   `Configured=False` reasons:   * No matches for selector - The selector does not match any pods
+
+3. When you scale up the backend deployment, the connector detects the new pods and establishes connections:
+
+   ```bash
+   kubectl scale deployment backend --replicas 1
+   ```
+
+   Watch the controller logs to observe the connector lifecycle:
+
+   ```bash
+   kubectl logs deploy/skupper-controller -f
+   ```
+
+   You should see the following events:
+
+   * Pod selected for connector
+   * Router config updated
+   * CREATE tcpConnector
+
+4. When you scale down the backend deployment, the connector removes the connections:
+
+   ```bash
+   kubectl scale deployment backend --replicas 0
+   ```
+
+   You should see the following events:
+
+   * DELETE tcpConnector
+   * No pods available for connector
+   * `Configured=False` status
+
+5. Monitor the router logs to see when connectors are created or deleted:
+
+   ```bash
+   kubectl logs deploy/skupper-router -f
+   ```
+
+   You should see events such as:
+
+   * CREATE tcpConnector
+   * DELETE tcpConnector
+
+6. When backend pods are unavailable, clients may encounter connection errors, for example:
+
+   Remove the backend pods:
+
+   ```bash
+   kubectl scale deployment backend --replicas 0
+   ```
+
+   Possible connection errors include:
+
+   * Connection reset
+   * EOF (End of File)
+   * Connection refused
+
+7. When the router restarts, existing connections are lost and must be re-established:
+
+   ```bash
+   kubectl rollout restart deploy/skupper-router
+   ```
+
+   During the restart, connections are lost. The router logs may show:
+
+   * Router is DOWN
+   * Router is UP
+
+8. When you delete a connector, the pod watcher stops and all connections are removed:
+
+   ```bash
+   skupper connector delete backend
+   ```
+
+   You should see the following events:
+
+   * Stopping pod watcher
+   * DELETE tcpConnector
+
+9. The following table summarizes messages and logs in the connector lifecycle:
+
+   Summary Table
+   
+   | Scenario | `kubectl logs` Component | Log Level | Log Message | CR Condition |
+   | --- | --- | --- | --- | --- |
+   | Connector pods → 0 (standard) | `kube.site.bindings` | DEBUG | `"No pods available for target selection"` | Connector: `Configured=False`, `message="No matches for selector"` |
+   | Connector pods → 0 (attached) | `kube.site.attached_connector` | INFO | `"No pods available for selector"` | AttachedConnector + Binding: `Configured=False`, `message="No matches for selector"` |
+   | No site for connector | `kube.site.site` | — (status only) | — | Connector: `Configured=False`, `message="No active site in namespace"` |
+   | Router pod removed | — | — (no log) | *(silent)* | Site: `Running=False`, `Ready=False`, `message="No router pod is ready"` |
+   | kube-adaptor: no AMQP | `kube.adaptor.configSync` | ERROR | `"sync failed"` + `"Could not get management agent"` | *(none — no CR updated)* |
+   | kube-adaptor: bridge sync fail | `kube.adaptor.configSync` | ERROR | `"sync failed"` + `"Error while syncing bridge config"` | *(none)* |
+   | kube-adaptor: init failure | `kube.adaptor.configSync` | ERROR | `"Error initialising config"` → exit(1) | *(none)* |
