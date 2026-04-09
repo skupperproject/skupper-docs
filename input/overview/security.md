@@ -22,3 +22,21 @@ Each router is uniquely identified by its own certificate.
 
 This means that the Skupper network is isolated from external access, preventing security risks such as lateral attacks, malware infestations, and data exfiltration.
 
+**Certificates and trust between sites**
+
+On Kubernetes, each site has its own certificate authority for inter-site communication.
+By default, Skupper generates the certificates needed to identify the router and to authenticate incoming and outgoing links.
+
+When two sites are linked, each router verifies the certificate presented by the remote router and checks that it is signed by a trusted CA.
+This mutual TLS exchange ensures that only sites with valid credentials can join the application network.
+
+If your environment requires certificates issued by your own PKI, you can replace the default server certificate that a site uses for incoming links and provide matching client credentials for connecting sites.
+This allows you to keep Skupper's mutual TLS model while aligning certificate management with your organization's security requirements.
+
+**Service level TLS**
+
+Skupper always encrypts traffic between sites.
+This protects traffic carried across the application network, even when workloads run in different clusters or clouds.
+
+This inter-site encryption is separate from any TLS configuration used by your application services.
+If a backend service also requires TLS, you can configure listener and connector resources with appropriate credentials for the application side of the connection.
