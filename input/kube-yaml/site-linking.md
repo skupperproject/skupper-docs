@@ -185,7 +185,7 @@ To link sites using custom certificates, you provide a custom server certificate
    ```
    Save the generated secret to a local file for use in the next step:
    ```shell
-   kubectl get secret skupper-link -o yaml | yq -y 'del(.metadata.namespace, .metadata.creationTimestamp, .metadata.resourceVersion, .metadata.uid, .metadata.managedFields)' > client-secret.yaml
+   kubectl get secret skupper-link -o yaml | yq eval -o=yaml 'del(.metadata.namespace, .metadata.creationTimestamp, .metadata.resourceVersion, .metadata.uid, .metadata.managedFields)' - > client-secret.yaml
    ```
 
    If you are providing the client certificate yourself, create a secret named `skupper-link`, for example:
@@ -206,14 +206,18 @@ To link sites using custom certificates, you provide a custom server certificate
    To generate the `Link` resource using `kubectl`, `jq`, and `yq`, retrieve the site endpoints and write the YAML file:
    ```shell
    endpoints="$(kubectl get site <site-name> -o json | jq -c '.status.endpoints')"
-   cat <<EOF | yq -y --argjson endpoints "$endpoints" '.spec.endpoints = $endpoints' > west-link.yaml
-   apiVersion: skupper.io/v2alpha1
-   kind: Link
-   metadata:
-     name: skupper-link
-   spec:
-     cost: 1
-     tlsCredentials: skupper-link
+   cat <<EOF | jq --argjson endpoints "$endpoints" '.spec.endpoints = $endpoints' | yq eval -P -o=yaml - > west-link.yaml
+   {
+     "apiVersion": "skupper.io/v2alpha1",
+     "kind": "Link",
+     "metadata": {
+       "name": "skupper-link"
+     },
+     "spec": {
+       "cost": 1,
+       "tlsCredentials": "skupper-link"
+     }
+   }
    EOF
    ```
    If you created a local client secret file, combine it with the `Link` resource:
@@ -224,7 +228,7 @@ To link sites using custom certificates, you provide a custom server certificate
 
    To create the YAML manually, first inspect the endpoints:
    ```shell
-   kubectl get site <site-name> -o yaml | yq -y '.status.endpoints'
+   kubectl get site <site-name> -o yaml | yq eval -o=yaml '.status.endpoints' -
    ```
    Then create a file that contains both the `Link` resource and the client `Secret`, for example:
    ```yaml
