@@ -1,10 +1,12 @@
 <a id="kube-resources"></a>
 # Skupper resources on Kubernetes
+<!--REFERENCE-->
 
 The following sections describe the various Skupper resources on Kubernetes, for example, service accounts
 
 <a id="kube-resources-crds"></a>
 ## Custom resource definitions
+<!--REFERENCE-->
 
 To get start creating application networks, you create the following custom resources:
 
@@ -17,6 +19,7 @@ See [Resource Reference][yaml-ref] for explanations of all the custom resources.
 
 <a id="kube-resources-sa"></a>
 ## Service accounts, roles and role bindings
+<!--REFERENCE-->
 
 When you install the Skupper controller, the following resources are created:
 
@@ -31,6 +34,7 @@ A service account, role and role binding with this name are created to manage th
 
 <a id="kube-resources-deployments"></a>
 ## Deployments
+<!--REFERENCE-->
 
 The Skupper controller deploys the **skupper-controller**, which provides the control plane for the application network.
 
@@ -38,6 +42,7 @@ Each Skupper site on Kubernetes deploys a **skupper-router**, which provides the
 
 <a id="kube-resources-cm"></a>
 ## ConfigMaps
+<!--REFERENCE-->
 
 Do not edit these ConfigMap values directly.
 
@@ -56,6 +61,7 @@ The service controller determines the values in this ConfigMap based on the serv
 
 <a id="kube-resources-secrets"></a>
 ## Secrets
+<!--REFERENCE-->
 
 Each site has two `kubernetes.io/tls` type secrets, **skupper-local-ca** and **skupper-site-ca**:
 
@@ -78,6 +84,7 @@ These secrets are typically called `link-<remote-site-name>`.
 
 <a id="kube-resources-svc"></a>
 ## Services
+<!--REFERENCE-->
 
 In addition to the services that are exposed on the application network, the following services are created:
 

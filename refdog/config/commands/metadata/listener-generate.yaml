@@ -1,0 +1,12 @@
+command: listener generate
+examples:
+- description: Generate a Listener resource and print it to the console
+  command: skupper listener generate backend 8080
+  output: "apiVersion: skupper.io/v2alpha1\nkind: Listener\nmetadata:\n  name: backend\n\
+    spec:\n  routingKey: backend\n  port: 8080\n  host: backend"
+- description: Generate a Listener resource and direct the output to a file
+  command: skupper listener generate backend 8080 > backend.yaml
+related_commands:
+- connector/generate
+related_resources:
+- listener

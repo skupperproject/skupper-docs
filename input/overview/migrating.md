@@ -1,5 +1,6 @@
 <a id="migrating"></a>
 # Migrating from Skupper v1
+<!--REFERENCE-->
 
 Skupper v1 sites are not compatible with Skupper v2 sites.
 While there are plans to create migration tooling, currently, the only way migrate an application network is to create a new network.
@@ -12,6 +13,7 @@ Terminology changes:
 
 <a id="migrating-sites"></a>
 ## Creating sites
+<!--REFERENCE-->
 
 Creating sites using CLI:
 
@@ -30,6 +32,9 @@ On Podman, the site definition is created in `~/.local/share/skupper` and you mu
 
 <a id="migrating-links"></a>
 ## Linking sites
+<!--REFERENCE-->
+
+These examples show how site-linking commands changed between Skupper v1 and Skupper v2.
 
 
 
@@ -45,6 +50,9 @@ contextA> skupper token redeem ~/token.yaml
 
 <a id="migrating-services"></a>
 ## Exposing services
+<!--REFERENCE-->
+
+These examples show how service-exposure commands changed between Skupper v1 and Skupper v2.
 
 ```v1
 contextA> skupper expose deployment/backend --port 8080

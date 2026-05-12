@@ -1,0 +1,48 @@
+name: AccessToken
+related_concepts: [access-token]
+related_resources: [access-grant]
+related_commands: [token/issue, token/redeem]
+links: [skupper/site-linking]
+description: |
+  A short-lived credential used to create a link.  An access token
+  contains the URL and secret code of a corresponding access grant.
+
+  **Note:** Access tokens are often [issued][issue] and
+  [redeemed][redeem] using the Skupper CLI.
+
+  [issue]: {{site.prefix}}/commands/token/issue.html
+  [redeem]: {{site.prefix}}/commands/token/redeem.html
+metadata:
+  include_properties: [metadata/*]
+spec:
+  include_properties: [settings]
+  properties:
+    - name: url
+      description: |
+        The URL of the grant service at the remote site.
+    - name: ca
+      required: false
+      description: |
+        The trusted server certificate of the grant service at the
+        remote site.
+    - name: code
+      description: |
+        The secret code used to authenticate the token when
+        submitted for redemption.
+    - name: linkCost
+      default: 1
+      links: [skupper/load-balancing]
+      description: |
+        The link cost to use when creating the link.
+status:
+  include_properties: [status/*]
+  properties:
+    - name: redeemed
+      description: |
+        True if the token has been redeemed.  Once a token is
+        redeemed, it cannot be used again.
+    - name: conditions
+      description: |
+        @description@
+
+        - `Redeemed`: The token has been exchanged for a link.

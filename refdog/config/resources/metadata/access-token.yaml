@@ -1,0 +1,11 @@
+name: AccessToken
+related_resources:
+- access-grant
+related_concepts:
+- access-token
+links:
+- skupper/site-linking
+properties:
+  linkCost:
+    links:
+    - skupper/load-balancing

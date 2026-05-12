@@ -1,0 +1,23 @@
+command: site delete
+examples:
+- description: Delete the current site
+  command: skupper site delete
+  output: 'Waiting for deletion...
+
+    Site "west" is deleted.'
+- description: Delete the current site and all of its associated Skupper resources
+  command: skupper site delete --all
+related_resources:
+- site
+errors:
+- message: No site resource exists
+  description: 'There is no existing Skupper site resource to delete.
+
+    '
+wait:
+  default: Deletion
+  description: Waits for Deletion status by default
+options:
+  all:
+    type: bool
+    group: frequently-used

@@ -1,0 +1,14 @@
+command: token redeem
+examples:
+- description: Redeem an access token
+  command: skupper token redeem ~/token.yaml
+  output: 'Waiting for status...
+
+    Link "west-6bfn6" is active.
+
+    You can now safely delete /home/fritz/token.yaml.'
+related_commands:
+- token/issue
+related_resources:
+- access-grant
+- access-token

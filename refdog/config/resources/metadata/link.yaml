@@ -1,0 +1,14 @@
+name: Link
+related_resources:
+- access-token
+links:
+- skupper/site-linking
+properties:
+  cost:
+    links:
+    - skupper/load-balancing
+  tlsCredentials:
+    links:
+    - skupper/router-tls
+    - kubernetes/tls-secrets
+    - skupper/system-tls-credentials

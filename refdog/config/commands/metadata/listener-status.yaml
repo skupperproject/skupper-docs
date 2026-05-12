@@ -1,0 +1,28 @@
+command: listener status
+examples:
+- description: Show the status of all listeners in the current site
+  command: skupper listener status
+  output: 'NAME       STATUS   ROUTING-KEY   HOST       PORT   CONNECTORS
+
+    backend    Ready    backend       backend    8080   true
+
+    database   Ready    database      database   5432   true'
+- description: Show the status of one listener
+  command: skupper listener status backend
+  output: 'Name:                      backend
+
+    Status:                    Ready
+
+    Message:                   <none>
+
+    Routing key:               backend
+
+    Host:                      backend
+
+    Port:                      8080
+
+    Has matching connectors:   true'
+related_commands:
+- connector/status
+related_resources:
+- listener

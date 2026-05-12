@@ -1,0 +1,13 @@
+...@common
+
+Site 1.class: neutral
+Site 1.Database\nserver.style.fill: white
+
+Site 2.class: neutral
+Site 2.Database\nserver.style.fill: white
+
+Listeners.class: notion
+
+Listeners -- Routing key\n\"database\" -- Site 1.Connector -> Site 1.Database\nserver
+
+Routing key\n\"database\" -- Site 2.Connector -> Site 2.Database\nserver

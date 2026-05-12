@@ -1,0 +1,114 @@
+site_name: Skupper Documentation
+site_url: https://skupper.io/docs/
+docs_dir: input
+site_dir: output/docs
+
+# Extra configuration
+# site_prefix controls navigation links in header/footer
+#
+# For production (skupper.io): use empty string (relative paths)
+# For staging/preview: use full URL without trailing slash
+# For local dev: use http://localhost:8000 or your local server
+#
+# Examples:
+#   Production:  site_prefix: ""
+#   Staging:     site_prefix: "https://skupper-mkdocs.netlify.app"
+#   Local:       site_prefix: "http://localhost:8000"
+extra:
+  site_prefix: "https://skupper-mkdocs.netlify.app"
+
+# Support .html links in markdown (Transom compatibility)
+use_directory_urls: false
+
+theme:
+  name: material
+  custom_dir: config/mkdocs-overrides
+  palette:
+    primary: blue
+    accent: green
+  features:
+    # - navigation.tabs  # REMOVED: This puts nav in horizontal tabs at top
+    - navigation.sections  # Show sections in sidebar
+    - navigation.expand    # Auto-expand sections in sidebar
+    - navigation.top       # Back to top button
+    - navigation.indexes   # Section index pages
+    - search.suggest       # Search suggestions
+    - search.highlight     # Highlight search terms
+    - content.code.copy    # Copy button for code blocks
+    - content.code.annotate # Code annotations
+    - toc.integrate        # Integrate table of contents into sidebar
+
+extra_css:
+  - stylesheets/skupper-overrides.css
+
+nav:
+  - Home: index.md
+  - Overview:
+    - Introduction: overview/index.md
+    - Connectivity: overview/connectivity.md
+    - Security: overview/security.md
+    - Routing: overview/routing.md
+    - Load Balancing: overview/load-balancing.md
+    - Resources: overview/resources.md
+    - Migrating: overview/migrating.md
+  - Installation: install/index.md
+  - Kubernetes CLI:
+    - Overview: kube-cli/index.md
+    - Site Configuration: kube-cli/site-configuration.md
+    - Site Linking: kube-cli/site-linking.md
+    - Service Exposure: kube-cli/service-exposure.md
+  - Kubernetes YAML:
+    - Overview: kube-yaml/index.md
+    - Site Configuration: kube-yaml/site-configuration.md
+    - Site Linking: kube-yaml/site-linking.md
+    - Service Exposure: kube-yaml/service-exposure.md
+  - System CLI:
+    - Overview: system-cli/index.md
+    - Site Configuration: system-cli/site-configuration.md
+    - Site Linking: system-cli/site-linking.md
+    - Service Exposure: system-cli/service-exposure.md
+  - System YAML:
+    - Overview: system-yaml/index.md
+    - Site Configuration: system-yaml/site-configuration.md
+    - Site Linking: system-yaml/site-linking.md
+    - Service Exposure: system-yaml/service-exposure.md
+  - Console: console/index.md
+  - Troubleshooting: troubleshooting/index.md
+  - ...
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+# Validation settings
+validation:
+  links:
+    not_found: warn  # Warn but don't fail on missing links
+    absolute_links: warn
+    unrecognized_links: warn
+
+plugins:
+  - search
+  - awesome-pages
+  - macros:
+      module_name: config/mkdocs_macros
+
+extra:
+  # Static values for MVP - will be dynamic with macros plugin
+  skupper_version: "2.1.1"
+  skupper_cli_version: "2.1.1"
+  skupper_version_v1: "1.9.2"
+  site_prefix: ""
+
+# Made with Bob

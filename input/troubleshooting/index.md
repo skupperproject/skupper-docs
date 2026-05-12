@@ -1,17 +1,23 @@
 <a id="troubleshooting"></a>
 # Troubleshooting an application network
+<!--ASSEMBLY-->
 
 Typically, you can create a network without referencing this troubleshooting guide.
 However, this guide provides some tips for situations when the network does not perform as expected.
 
-See [Resolving common problems](#resolving-common-problems) if you have encountered a specific issue using the `skupper` CLI.
+See the resolving common problems section if you have encountered a specific issue using the `skupper` CLI.
 
 A typical troubleshooting workflow is to check all the sites and create debug tar files.
 
 <a id="checking-sites"></a>
 ## Checking sites
+<!--PROCEDURE-->
+
+Check site, connector, listener, and link status to confirm that the application network is operating correctly.
 
 Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting Skupper.
+
+**Procedure**
 
 1. Check the controller on Kubernetes.
    On Kubernetes the controller must be installed before you attempt to create an application network.
@@ -116,6 +122,9 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 
 <a id="checking-links"></a>
 ## Checking links
+<!--PROCEDURE-->
+
+Check link status to confirm that sites can exchange traffic across the application network.
 
 You must link sites before you can expose services on the network.
 
@@ -124,6 +133,8 @@ By default, tokens expire after 15 minutes and you can only use a token once.
 Generate a new token if the link is not connected.
 
 This section outlines some advanced options for checking links.
+
+**Procedure**
 
 1. Check the link status:
 
@@ -138,7 +149,7 @@ This section outlines some advanced options for checking links.
 
    The status of the link must be `Ready` to allow service traffic.
 
-   **📌 NOTE**\
+   **📌 NOTE**
    Running `skupper link status` on a linked site produces output only if a token was used to create a link.
 
    If you use this command on a site where you did not create the link, but there is an incoming link to the site:
@@ -151,6 +162,9 @@ This section outlines some advanced options for checking links.
 
 <a id="resolving-common-problems"></a>
 ## Resolving common problems
+<!--REFERENCE-->
+
+Use these common symptoms and messages to identify simple Skupper configuration problems.
 
 The following issues and workarounds might help you debug simple scenarios when evaluating Skupper.
 

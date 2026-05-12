@@ -1,0 +1,18 @@
+...@common
+
+Connection endpoint.class: notion
+
+Site -- Listener: {
+  source-arrowhead: 1
+  target-arrowhead: n
+}
+
+Listener -- Connection endpoint: {
+  source-arrowhead: 1
+  target-arrowhead: 1
+}
+
+Listener -- Routing key: {
+  source-arrowhead: n
+  target-arrowhead: 1
+}

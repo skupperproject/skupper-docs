@@ -1,0 +1,16 @@
+command: listener create
+examples:
+- description: Create a listener for a database
+  command: skupper listener create database 5432
+  output: 'Waiting for status...
+
+    Listener "database" is configured.'
+- description: Set the routing key and host explicitly
+  command: skupper listener create backend 8080 --routing-key be1 --host apiserver
+related_commands:
+- connector/create
+related_resources:
+- listener
+wait:
+  default: Configured
+  description: Waits for Configured status by default

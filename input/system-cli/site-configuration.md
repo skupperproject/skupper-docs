@@ -1,5 +1,6 @@
 <a id="system-creating-site-cli"></a>
 # Creating a site on a local system using the Skupper CLI
+<!--ASSEMBLY-->
 
 Using the skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current user.
 
@@ -12,8 +13,11 @@ If you require more than one site, specify a unique namespace when using  `skupp
 
 <a id="system-checking-cli"></a>
 ## Checking the Skupper CLI and environment
+<!--PROCEDURE-->
 
 Installing the skupper command-line interface (CLI) provides a simple method to get started with Skupper.
+
+**Procedure**
 
 1. Follow the instructions for [Installing Skupper](https://skupper.io/releases/index.html).
 
@@ -38,10 +42,21 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 <a id="system-creating-simple-site-cli"></a>
 ## Creating a simple site using the CLI on local systems
+<!--PROCEDURE-->
+
+Use the Skupper CLI to create a site on a local system.
 
 **Prerequisites**
 
 * The `skupper` CLI is installed.
+
+By default, all sites are created with the namespace `default`.
+On non-Kubernetes sites, you can create multiple sites per-user by specifying a *namespace*, for example:
+
+```bash
+skupper site create systemd-site -p linux -n linux-ns
+skupper site create docker-site -p docker -n docker-ns
+```
 
 **Procedure**
 
@@ -77,17 +92,11 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    skupper system start
    ```
 
-By default, all sites are created with the namespace `default`.
-On non-Kubernetes sites, you can create multiple sites per-user by specifying a *namespace*, for example you can create multiple sites with different platforms as follows:
-
-```bash
-skupper site create systemd-site -p linux -n linux-ns
-skupper site create docker-site -p docker -n docker-ns
-```
-
-
 <a id="system-deleting-site-cli"></a>
 ## Deleting a site using the CLI on local systems
+<!--PROCEDURE-->
+
+Delete a Skupper site on a local system by using the CLI.
 
 **Prerequisites**
 
@@ -108,6 +117,9 @@ skupper site create docker-site -p docker -n docker-ns
 
 <a id="system-creating-site-bundle"></a>
 ## Creating a site bundle using the CLI on local systems
+<!--PROCEDURE-->
+
+Create a site bundle when you want to prepare a site on one system and install it on a remote host.
 
 Sometimes, you might want to create all the configuration for a site and apply it automatically to a remote host.
 To support this, Skupper allows you create a `.tar.gz` file with all the required files and an `install.sh` script to start the remote site.
@@ -152,7 +164,7 @@ To support this, Skupper allows you create a `.tar.gz` file with all the require
     skupper system generate-bundle remote-site
    ```
    The output shows the location of the generated `.tar.gz` file, for example:
-   ```
+   ```text
    Site "remote-site" has been created (as a distributable bundle)
    Installation bundle available at: /home/user/.local/share/skupper/bundles/remote-site.tar.gz
    Default namespace: default

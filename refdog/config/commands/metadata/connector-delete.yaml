@@ -1,0 +1,14 @@
+command: connector delete
+examples:
+- description: Delete a connector
+  command: skupper connector delete database
+  output: 'Waiting for deletion...
+
+    Connector "database" is deleted.'
+related_commands:
+- listener/delete
+related_resources:
+- connector
+wait:
+  default: Deletion
+  description: Waits for Deletion status by default

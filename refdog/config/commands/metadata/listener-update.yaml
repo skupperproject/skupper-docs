@@ -1,0 +1,20 @@
+command: listener update
+examples:
+- description: Change the host and port
+  command: skupper listener update database --host mysql --port 3306
+  output: 'Waiting for status...
+
+    Listener "database" is configured.'
+- description: Change the routing key
+  command: skupper listener update backend --routing-key be2
+related_commands:
+- connector/update
+related_resources:
+- listener
+wait:
+  default: Configured
+  description: Waits for Configured status by default
+options:
+  port:
+    type: int
+    group: frequently-used

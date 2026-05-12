@@ -1,0 +1,12 @@
+name: Connector
+examples:
+- description: 'A connector in site East for the Hello World backend service
+
+    '
+  yaml: "apiVersion: skupper.io/v2alpha1\nkind: Connector\nmetadata:\n  name: backend\n\
+    \  namespace: hello-world-east\nspec:\n  routingKey: backend\n  selector: app=backend\n\
+    \  port: 8080\n"
+related_resources:
+- listener
+links:
+- skupper/service-exposure

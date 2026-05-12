@@ -1,5 +1,8 @@
 <a id="system-linking-cli"></a>
 # Linking sites on local systems using the Skupper CLI
+<!--ASSEMBLY-->
+
+Use the Skupper CLI on local systems to create links between sites.
 
 Using the Skupper command-line interface (CLI) allows you to create links between sites.
 The link direction is not significant, and is typically determined by ease of connectivity. For example, if east is behind a firewall, linking from east to west is the easiest option.
@@ -13,6 +16,9 @@ However, you can redeem tokens on a local system, and you can create and use 'li
 
 <a id="system-token-cli"></a>
 ## Linking to Kubernetes sites using a token
+<!--PROCEDURE-->
+
+A token lets a local system site link securely to a Kubernetes site.
 
 A token provides a secure method to link sites.
 By default, a token can only be used once and must be used within 15 minutes to link sites.
@@ -24,6 +30,8 @@ This procedure describes how to issue a token from a Kubernetes site and redeem 
 * A Kubernetes site with `enable-link-access` enabled.
 
 To link sites, you create a token on the Kubernetes site and redeem that token on the local system site to create the link.
+
+There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
 **Procedure**
 
@@ -71,7 +79,7 @@ To link sites, you create a token on the Kubernetes site and redeem that token o
    skupper link status
    ```
    You might need to issue the command multiple times before the link is ready:
-   ```
+   ```text
    $ skupper link status
    NAME                                            STATUS  COST    MESSAGE
    west-12f75bc8-5dda-4256-88f8-9df48150281a       Pending 1       Not Operational
@@ -81,10 +89,9 @@ To link sites, you create a token on the Kubernetes site and redeem that token o
    ```
    You can now expose services on the application network.
 
-There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
-
-<a id="kube-link-cli"></a>
+<a id="system-link-cli"></a>
 ## Linking sites using a `link` resource
+<!--PROCEDURE-->
 
 An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.
 
@@ -94,6 +101,8 @@ An alternative approach to linking sites using tokens is to create a `link` reso
 * At least one site with `enable-link-access` enabled.
 
 To link sites, you create a `link` resource YAML file on one site and apply that resource on the other site to create the link.
+
+There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
 **Procedure**
 
@@ -119,7 +128,7 @@ To link sites, you create a `link` resource YAML file on one site and apply that
    skupper link status
    ```
    You might need to issue the command multiple times before the link is ready:
-   ```
+   ```text
    $ skupper link status
    NAME                                            STATUS  COST    MESSAGE
    west                                            Pending 1       Not Operational
@@ -128,6 +137,3 @@ To link sites, you create a `link` resource YAML file on one site and apply that
    west                                            Ready   1       OK
    ```
    You can now expose services on the application network.
-
-There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
-

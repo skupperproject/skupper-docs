@@ -1,0 +1,17 @@
+name: AccessGrant
+related_resources:
+- access-token
+related_concepts:
+- access-token
+links:
+- skupper/site-linking
+properties:
+  code:
+    group: advanced
+  issuer:
+    group: advanced
+    platforms:
+    - Kubernetes
+    links:
+    - skupper/router-tls
+    - kubernetes/tls-secrets

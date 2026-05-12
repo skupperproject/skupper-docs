@@ -1,0 +1,3 @@
+command: system start
+related_commands:
+- system/stop

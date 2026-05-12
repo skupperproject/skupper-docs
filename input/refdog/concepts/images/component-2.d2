@@ -1,0 +1,29 @@
+...@common
+
+direction: down
+
+Application "Hello World".class: neutral
+Site*.class: neutral
+
+Application "Hello World": {
+  Component "frontend"
+  Component "backend"
+}
+
+Site 1: {
+  Workload "frontend"
+}
+
+Site 2: {
+  Workload "frontend"
+  Workload "backend"
+}
+
+Site 3: {
+  Workload "backend"
+}
+
+Application "Hello World".Component "frontend" -- Site 1.Workload "frontend"
+Application "Hello World".Component "frontend" -- Site 2.Workload "frontend"
+Application "Hello World".Component "backend" -- Site 2.Workload "backend"
+Application "Hello World".Component "backend" -- Site 3.Workload "backend"

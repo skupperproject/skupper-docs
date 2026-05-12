@@ -1,0 +1,10 @@
+command: debug dump
+examples:
+- description: Generate a dump file
+  command: skupper debug dump
+  output: 'Debug dump file: /home/fritz/skupper-dump-west-2024-12-09.tar.gz'
+- description: Generate a dump file to a particular path
+  command: skupper debug dump /tmp/abc.tar.gz
+  output: 'Debug dump file: /tmp/abc.tar.gz'
+links:
+- skupper/debug-dumps

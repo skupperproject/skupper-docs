@@ -1,0 +1,109 @@
+name: system
+platforms: [Kubernetes, Docker, Podman, Linux]
+related_concepts: [platform]
+subcommands:
+  - name: install
+    related_commands: [system/uninstall]
+    description: |
+      Install local system infrastructure and configure the environment.
+
+      It does the following:
+
+      - Checks the local environment for required resources and
+        configuration.
+      - In some instances, configures the local environment.  On
+        Podman, it starts the Podman API service if it is not already
+        available.
+
+      **Note:** With a long-lived controller, this operation would
+      also start the controller as a user-scoped systemd service.
+    include_options: [global/*]
+  - name: uninstall
+    related_commands: [system/install]
+    description: |
+      Remove local system infrastructure.
+
+      This operation fails if sites are present.  Use the
+      `--force` option to override.
+    include_options: [global/*]
+    options:
+      - name: force
+        type: boolean
+  - name: start
+    related_commands: [system/stop]
+    description: |
+      Start the Skupper router for the current site.  This starts the
+      systemd service for the current namespace.
+
+      **Note:** In the absence of a long-lived controller, this
+      operation first reads the input resources and updates the router
+      configuration.  With a long-lived controller, that config update
+      would have already taken place.
+    include_options: [context/namespace, global/*]
+  - name: stop
+    related_commands: [system/start]
+    description: |
+      Stop the Skupper router for the current site.  This stops the
+      systemd service for the current namespace.
+    include_options: [context/namespace, global/*]
+  - name: reload
+    description: |
+      Reload the site configuration.  This restarts the systemd
+      service for the current namespace.
+
+      **Note:** This is currently equivalent to start then stop.  With
+      a router adaptor service, we could avoid a router restart for some
+      config changes.
+  - name: apply
+    description: |
+      Create or update resources using files or standard input.
+
+      <!-- File locations and names -->
+      <!-- Need to run reload after -->
+    include_options: [context/namespace, global/*]
+    options:
+      - name: filename
+        type: string
+        short_option: f
+  - name: delete
+    description: |
+      Delete resources using files or standard input.
+
+      <!-- File locations and names -->
+      <!-- Need to run reload after -->
+    include_options: [context/namespace, global/*]
+    options:
+      - name: filename
+        type: string
+        short_option: f
+  - name: generate-bundle
+    description: |
+      Generate a self-contained site bundle for use on another
+      machine.
+    include_options: [context/namespace, global/*]
+    options:
+      - name: bundle-file
+        type: string
+        positional: true
+        required: true
+        description: |
+          The name of the bundle file to generate.
+
+          The command exits with an error if the file already exists.
+      - name: input
+        type: string
+        default: $HOME/.local/share/skupper/namespaces/<namespace>/input/resources
+        description: |
+          The location of the Skupper resources defining the site.
+      - name: type
+        type: string
+        default: tarball
+        choices:
+          - name: tarball
+            description: A gzipped tar file
+          - name: shell-script
+            description: A self-extracting shell script
+  # - name: status
+  #   description: |
+  #     Display the status of the system.
+  #   include_options: [context/namespace, global/*]

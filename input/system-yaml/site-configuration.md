@@ -1,5 +1,6 @@
 <a id="system-yaml-site-configuration"></a>
 # Creating a site on local systems using YAML
+<!--ASSEMBLY-->
 
 Using YAML allows you to create and manage sites on Docker, Podman and Linux.
 
@@ -9,6 +10,7 @@ If you require more than one site, specify a unique namespace when using  `skupp
 
 <a id="system-creating-simple-site-yaml"></a>
 ## Creating a simple site on local systems using YAML
+<!--PROCEDURE-->
 
 You can use YAML to create and manage Skupper sites.
 
@@ -16,6 +18,7 @@ You can use YAML to create and manage Skupper sites.
 
 * The `skupper` CLI is installed.
 
+There are many options to consider when creating sites using YAML, see [YAML Reference][yaml-ref], including *frequently used* options.
 
 **Procedure**
 
@@ -41,12 +44,10 @@ You can use YAML to create and manage Skupper sites.
    skupper site status
    ```
    You might need to issue the command multiple times before the site is ready:
-   ```
+   ```text
    NAME    STATUS  MESSAGE
    default Ready   OK
    ```
    You can now link this site to another site to create an application network.
-
-There are many options to consider when creating sites using YAML, see [YAML Reference][yaml-ref], including *frequently used* options.
 
 [yaml-ref]: https://skupperproject.github.io/refdog/resources/index.html

@@ -1,0 +1,18 @@
+command: connector create
+examples:
+- description: Create a connector for a database
+  command: skupper connector create database 5432
+  output: 'Waiting for status...
+
+    Connector "database" is configured.'
+- description: Set the routing key and selector explicitly
+  command: skupper connector create backend 8080 --routing-key be1 --selector app=be1
+- description: Use the workload option to select pods
+  command: skupper connector create backend 8080 --workload deployment/backend
+related_commands:
+- listener/create
+related_resources:
+- connector
+wait:
+  default: Configured
+  description: Waits for Configured status by default

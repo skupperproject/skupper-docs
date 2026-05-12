@@ -1,0 +1,16 @@
+command: connector update
+examples:
+- description: Change the workload and port
+  command: skupper connector update database --workload deployment/mysql --port 3306
+  output: 'Waiting for status...
+
+    Connector "database" is configured.'
+- description: Change the routing key
+  command: skupper connector update backend --routing-key be2
+related_commands:
+- listener/update
+related_resources:
+- connector
+wait:
+  default: Configured
+  description: Waits for Configured status by default

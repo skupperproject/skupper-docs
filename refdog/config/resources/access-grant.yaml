@@ -1,0 +1,79 @@
+name: AccessGrant
+related_concepts: [access-token]
+related_resources: [access-token]
+related_commands: [token/issue]
+links: [skupper/site-linking]
+description: |
+  Permission to redeem access tokens for links to the local
+  site.  A remote site can use a token containing the grant
+  URL and secret code to obtain a certificate signed by the
+  grant's certificate authority (CA), within a certain
+  expiration window and for a limited number of redemptions.
+
+  The `code`, `url`, and `ca` properties of the resource
+  status are used to generate access tokens from the grant.
+metadata:
+  include_properties: [metadata/*]
+spec:
+  include_properties: [settings]
+  properties:
+    - name: redemptionsAllowed
+      description: |
+        The number of times an access token for this grant can
+        be redeemed.
+      default: 1
+    - name: expirationWindow
+      description: |
+        The period of time in which an access token for this
+        grant can be redeemed.
+      default: 15m
+    - name: code
+      group: advanced
+      description: |
+        The secret code to use to authenticate access tokens submitted
+        for redemption.
+
+        If not set, a value is generated and placed in the `code`
+        status property.
+    - name: issuer
+      group: advanced
+      platforms: [Kubernetes]
+      links: [skupper/router-tls, kubernetes/tls-secrets]
+      description: |
+        The name of a Kubernetes secret used to generate a
+        certificate when redeeming a token for this grant.
+
+        If not set, `defaultIssuer` on the Site rsource is used.
+status:
+  include_properties: [status/*]
+  properties:
+    - name: status
+    - name: message
+    - name: redemptions
+      description: |
+        The number of times a token for this grant has been
+        redeemed.
+    - name: expirationTime
+      description: |
+        The point in time when the grant expires.
+    - name: url
+      description: |
+        The URL of the token-redemption service for this grant.
+    - name: ca
+      description: |
+        The trusted server certificate of the token-redemption
+        service for this grant.
+    - name: code
+      description: |
+        The secret code used to authenticate access tokens
+        submitted for redemption.
+      default: _Generated_
+    - name: conditions
+      description: |
+        @description@
+
+        - `Processed`: The controller has accepted the grant.
+        - `Resolved`: The grant service is available to process tokens
+          for this grant.
+        - `Ready`: The grant is ready to use.  All other
+          conditions are true.

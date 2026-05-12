@@ -1,0 +1,18 @@
+...@common
+
+Site 1.class: neutral
+Site 1.Frontend.style.fill: white
+
+Site 2.class: neutral
+Site 2.Frontend.style.fill: white
+
+Site 3.class: neutral
+Site 3.Backend.style.fill: white
+
+Site 4.class: neutral
+Site 4.Backend.style.fill: white
+
+Routing key.label: Routing key\n\"backend\"
+
+Site 1.Frontend -> Site 1.Listener -- Routing key -- Site 3.Connector -> Site 3.Backend
+Site 2.Frontend -> Site 2.Listener -- Routing key -- Site 4.Connector -> Site 4.Backend

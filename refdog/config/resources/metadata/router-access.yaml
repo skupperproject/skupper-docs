@@ -1,0 +1,32 @@
+name: RouterAccess
+related_resources:
+- site
+- link
+links:
+- skupper/site-linking
+properties:
+  tlsCredentials:
+    links:
+    - skupper/router-tls
+    - kubernetes/tls-secrets
+    - skupper/system-tls-credentials
+  accessType:
+    platforms:
+    - Kubernetes
+    choices:
+    - name: route
+      description: Use an OpenShift route.  _OpenShift only._
+    - name: loadbalancer
+      description: Use a Kubernetes load balancer.
+  bindHost:
+    platforms:
+    - Docker
+    - Podman
+    - Linux
+  subjectAlternativeNames:
+    platforms:
+    - Docker
+    - Podman
+    - Linux
+  endpoints:
+    group: advanced

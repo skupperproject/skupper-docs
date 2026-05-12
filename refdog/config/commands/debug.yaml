@@ -1,0 +1,32 @@
+name: debug
+description: |
+  Display help for debug commands and exit.
+include_options: [global/*]
+subcommands:
+  - name: check
+    description: |
+      Run diagnostic checks.
+    include_options: [context/*, global/*]
+  - name: dump
+    links: [skupper/debug-dumps]
+    description: |
+      Generate a debug dump file.  Debug dumps collect the details of
+      a site so another party can identify and fix a problem.
+    examples: |
+      # Generate a dump file
+      $ skupper debug dump
+      Debug dump file: /home/fritz/skupper-dump-west-2024-12-09.tar.gz
+
+      # Generate a dump file to a particular path
+      $ skupper debug dump /tmp/abc.tar.gz
+      Debug dump file: /tmp/abc.tar.gz
+    include_options: [context/*, global/*]
+    options:
+      - name: file
+        type: string
+        positional: true
+        default: "`skupper-dump-<site-name>-<date>.tar.gz`"
+        description: |
+          The name of the file to generate.
+
+          The command exits with an error if the file already exists.

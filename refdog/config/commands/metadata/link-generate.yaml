@@ -1,0 +1,20 @@
+command: link generate
+examples:
+- description: Generate a Link resource and print it to the console
+  command: skupper link generate
+  output: "apiVersion: skupper.io/v2alpha1\nkind: Link\nmetadata:\n  name: south-ac619\n\
+    spec:\n  endpoints:\n    - group: skupper-router-1\n      host: 10.97.161.185\n\
+    \      name: inter-router\n      port: \"55671\"\n    - group: skupper-router-1\n\
+    \      host: 10.97.161.185\n      name: edge\n      port: \"45671\"\n  tlsCredentials:\
+    \ south-ac619\n---\napiVersion: v1\nkind: Secret\ntype: kubernetes.io/tls\nmetadata:\n\
+    \  name: south-ac619\ndata:\n  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJB\
+    \ [...]\n  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURORENDQWh5Z0F3SUJ\
+    \ [...]\n  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0N\
+    \ [...]"
+- description: Generate a Link resource and direct the output to a file
+  command: skupper link generate > link.yaml
+related_resources:
+- link
+wait:
+  default: Site resource ready
+  description: Waits for Site resource ready status by default

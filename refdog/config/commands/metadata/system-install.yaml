@@ -1,0 +1,3 @@
+command: system install
+related_commands:
+- system/uninstall

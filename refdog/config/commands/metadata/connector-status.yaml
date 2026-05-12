@@ -1,0 +1,30 @@
+command: connector status
+examples:
+- description: Show the status of all connectors in the current site
+  command: skupper connector status
+  output: 'NAME       STATUS   ROUTING-KEY   SELECTOR         HOST     PORT   LISTENERS
+
+    backend    Ready    backend       app=backend      <none>   8080   true
+
+    database   Ready    database      app=postgresql   <none>   5432   true'
+- description: Show the status of one connector
+  command: skupper connector status backend
+  output: 'Name:                     backend
+
+    Status:                   Ready
+
+    Message:                  <none>
+
+    Routing key:              backend
+
+    Selector:                 app=backend
+
+    Host:                     <none>
+
+    Port:                     8080
+
+    Has matching listeners:   1'
+related_commands:
+- listener/status
+related_resources:
+- connector

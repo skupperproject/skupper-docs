@@ -1,0 +1,19 @@
+command: site create
+examples:
+- description: Create a site
+  command: skupper site create west
+  output: 'Waiting for status...
+
+    Site "west" is ready.'
+- description: Create a site that can accept links from remote sites
+  command: skupper site create west --enable-link-access
+related_resources:
+- site
+errors:
+- message: A site resource already exists
+  description: 'There is already a site resource defined for the namespace.
+
+    '
+wait:
+  default: Ready
+  description: Waits for Ready status by default

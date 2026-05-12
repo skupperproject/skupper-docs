@@ -1,0 +1,102 @@
+name: token
+resource: access-token
+related_concepts: [access-token]
+related_resources: [access-grant, access-token]
+description: |
+  Display help for token commands and exit.
+include_options: [global/*]
+subcommands:
+  - name: issue
+    wait: Ready
+    resource: access-grant
+    platforms: [Kubernetes]
+    related_commands: [token/redeem]
+    description: |
+      Issue a token file redeemable for a link to the current site.
+
+      This command first creates an access grant in order to issue
+      the token.
+
+      Issuing a token requires a site with link access enabled.
+      The command waits for the site to enter the ready state
+      before producing the token.
+    examples: |
+      # Issue an access token
+      $ skupper token issue ~/token.yaml
+      Waiting for status...
+      Access grant "west-6bfn6" is ready.
+      Token file /home/fritz/token.yaml created.
+
+      Transfer this file to a remote site. At the remote site,
+      create a link to this site using the 'skupper token
+      redeem' command:
+
+          $ skupper token redeem <file>
+
+      The token expires after 1 use or after 15 minutes.
+
+      # Issue an access token with non-default limits
+      $ skupper token issue ~/token.yaml --expiration-window 24h --redemptions-allowed 3
+
+      # Issue a token using an existing access grant
+      $ skupper token issue ~/token.yaml --grant west-1
+    include_options: [context/*, global/*]
+    options:
+      - name: file
+        type: string
+        required: true
+        description: |
+          The name of the token file to create.
+      - name: timeout
+        type: string
+        placeholder: duration
+        default: 60s
+        description: |
+          Raise an error if the operation does not complete in the given
+          period of time.
+      - name: expiration-window
+        property: expirationWindow
+        placeholder: duration
+      - name: redemptions-allowed
+        property: redemptionsAllowed
+      - name: grant
+        group: advanced
+        type: string
+        placeholder: name
+        description: |
+          Use the named access grant instead of creating a new
+          one.
+    errors:
+      - message: Link access is not enabled
+        description: |
+          Link access at this site is not currently enabled.  You
+          can use "skupper site update --enable-link-access" to
+          enable it.
+  - name: redeem
+    resource: access-token
+    related_commands: [token/issue]
+    description: |
+      Redeem a token file in order to create a link to a remote
+      site.
+    examples: |
+      # Redeem an access token
+      $ skupper token redeem ~/token.yaml
+      Waiting for status...
+      Link "west-6bfn6" is active.
+      You can now safely delete /home/fritz/token.yaml.
+    include_options: [context/*, global/*]
+    options:
+      - name: file
+        type: string
+        required: true
+        description: |
+          The name of the token file to use.
+      - name: timeout
+        type: string
+        placeholder: duration
+        default: 60s
+        description: |
+          Raise an error if the operation does not complete in the given
+          period of time.
+      - name: link-cost
+        property: linkCost

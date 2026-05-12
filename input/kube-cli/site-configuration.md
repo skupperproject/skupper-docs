@@ -1,5 +1,6 @@
 <a id="kube-creating-site-cli"></a>
 # Creating a site on Kubernetes using the Skupper CLI
+<!--ASSEMBLY-->
 
 Using the skupper command-line interface (CLI) allows you to create and manage sites from the context of the current namespace.
 
@@ -7,8 +8,11 @@ A typical workflow is to create a site, link sites together, and expose services
 
 <a id="kube-checking-cli"></a>
 ## Checking the Skupper CLI
+<!--PROCEDURE-->
 
 Installing the skupper command-line interface (CLI) provides a simple method to get started with Skupper.
+
+**Procedure**
 
 1. Follow the instructions for [Installing Skupper](https://skupper.io/releases/index.html).
 
@@ -22,6 +26,9 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 <a id="kube-creating-simple-site-cli"></a>
 ## Creating a simple site using the CLI on Kubernetes
+<!--PROCEDURE-->
+
+Use the Skupper CLI to create a site on Kubernetes from the current namespace context.
 
 **Prerequisites**
 
@@ -52,32 +59,31 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    ```
 There are many options to consider when creating sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
-For example
+   For example, `--enable-link-access` allows you to create tokens and link *to* this site.
+   By default, this option is disabled, but you can change the setting later:
+   ```bash
+   skupper site update --enable-link-access
+   ```
 
-* `--enable-link-access`
-  
-  If enabled, this option allows you create tokens and link *to* this site.
-  By default, this option is disabled but you can change the setting later `skupper site update --enable-link-access`.
+   You can use `--timeout <time>` to specify the maximum time that the CLI waits for the site status to report `ready`.
+   ```bash
+   skupper site create my-site --timeout 2m
+   ```
+   The timeout option does not stop the site from being created, but if the site is not ready, the following is output:
+   ```bash
+   Site "my-site" is not yet ready: Pending
+   ```
+   You can check the status of the site at any time by using `skupper site status`.
 
-* `--timeout <time>`
-
-  You can add the timeout option to specify the maximum time for the CLI wait for the site status to report `ready`.
-  ```
-  skupper site create my-site --timeout 2m
-  ```
-  The timeout option does not stop the site from being created, but if the site is not ready, the following is output:
-  
-  ```
-  Site "my-site" is not yet ready: Pending
-  ```
-  You can check the status of the site at any time using `skupper site status`.
-
-  By default, the router CPU allocation is BestEffort as described in [Pod Quality of Service Classes](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/) and this might affect performance under network load.
-  To configure site resources, see [Setting site resources](../kube-yaml/site-configuration.html#kube-site-resources-yaml).
+   By default, the router CPU allocation is BestEffort as described in [Pod Quality of Service Classes](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/), and this might affect performance under network load.
+   To configure site resources, see [Setting site resources](../kube-yaml/site-configuration.html#kube-site-resources-yaml).
 
 
 <a id="kube-ha-cli"></a>
 ## Creating a high availability site using the CLI on Kubernetes
+<!--PROCEDURE-->
+
+Create a highly available Skupper site on Kubernetes by enabling HA mode in the CLI.
 
 You can create a site that is highly available by using the `ha` option.
 High availability mode is intended to maintain service continuity during router restarts or pod rescheduling, but it does not provide failover if network connectivity between sites is lost.
@@ -112,6 +118,9 @@ High availability mode deploys two router pods with anti-affinity rules to ensur
 
 <a id="kube-deleting-site-cli"></a>
 ## Deleting a site using the CLI on Kubernetes
+<!--PROCEDURE-->
+
+Delete a Skupper site on Kubernetes by using the CLI from the namespace where the site was created.
 
 **Prerequisites**
 

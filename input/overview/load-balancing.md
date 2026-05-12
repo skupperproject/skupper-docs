@@ -1,5 +1,8 @@
 <a id="overview-load-balancing"></a>
 # Skupper load balancing and failover
+<!--CONCEPT-->
+
+Skupper balances active connections across sites and reroutes traffic when a site fails.
 
 Skupper enables load balancing and failover across servers located across the application network.
 Specifically, Skupper balances **active TCP connections** across workloads deployed in distinct sites.

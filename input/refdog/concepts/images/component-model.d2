@@ -1,0 +1,22 @@
+...@common
+
+
+Application -- Component: {
+  source-arrowhead: 1
+  target-arrowhead: 1..n
+}
+
+Component -> Interface: provides {
+  source-arrowhead: 1
+  target-arrowhead: n
+}
+
+Component -> Interface: requires {
+  source-arrowhead: 1
+  target-arrowhead: n
+}
+
+Component <- Workload: implements {
+  source-arrowhead: 1
+  target-arrowhead: n
+}

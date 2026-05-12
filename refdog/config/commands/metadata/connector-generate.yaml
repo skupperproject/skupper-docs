@@ -1,0 +1,12 @@
+command: connector generate
+examples:
+- description: Generate a Connector resource and print it to the console
+  command: skupper connector generate backend 8080
+  output: "apiVersion: skupper.io/v2alpha1\nkind: Connector\nmetadata:\n  name: backend\n\
+    spec:\n  routingKey: backend\n  port: 8080\n  selector: app=backend"
+- description: Generate a Connector resource and direct the output to a file
+  command: skupper connector generate backend 8080 > backend.yaml
+related_commands:
+- listener/generate
+related_resources:
+- connector

@@ -1,0 +1,10 @@
+command: site generate
+examples:
+- description: Generate a Site resource and print it to the console
+  command: skupper site generate west --enable-link-access
+  output: "apiVersion: skupper.io/v2alpha1\nkind: Site\nmetadata:\n  name: west\n\
+    spec:\n  linkAccess: default"
+- description: Generate a Site resource and direct the output to a file
+  command: skupper site generate east > east.yaml
+related_resources:
+- site

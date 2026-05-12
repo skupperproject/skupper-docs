@@ -1,0 +1,33 @@
+name: Connector
+related_resources: [listener]
+links: [skupper/service-exposure]
+description: |
+  A connector binds a local workload to [listeners](listener.html) in
+  remote [sites](site.html).  Listeners and connectors are matched by
+  routing key.
+
+  On Kubernetes, a Connector resource has a selector and port for
+  specifying workload pods.
+
+  On Docker, Podman, and Linux, a Connector resource has a host and
+  port for specifying a local server.  Optionally, Kubernetes can also
+  use a host and port.
+examples:
+  - description: |
+      A connector in site East for the Hello World backend service
+    yaml: |
+      apiVersion: skupper.io/v2alpha1
+      kind: Connector
+      metadata:
+        name: backend
+        namespace: hello-world-east
+      spec:
+        routingKey: backend
+        selector: app=backend
+        port: 8080
+metadata:
+  include_properties: [metadata/*]
+spec:
+  include_properties: [connector/spec/*, settings]
+status:
+  include_properties: [status/*, connector/status/*]

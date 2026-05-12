@@ -1,0 +1,16 @@
+...@common
+
+Site 1.class: neutral
+Site 2.class: neutral
+
+Site 1.Clients.style.fill: white
+
+Site 1: {
+  Clients -> Listener
+}
+
+Site 2: {
+  Connector -> Workload
+}
+
+Site 1.Listener -- Site 2.Connector

@@ -1,0 +1,161 @@
+metadata/name:
+  name: name
+  type: string
+  updatable: false
+  required: true
+  links: [kubernetes/object-names]
+  description: |
+    The name of the resource.
+metadata/namespace:
+  name: namespace
+  type: string
+  updatable: false
+  related_concepts: [platform]
+  links: [kubernetes/namespaces, skupper/system-namespaces]
+  description: |
+    The namespace of the resource.
+settings:
+  name: settings
+  group: advanced
+  type: object
+  links: [skupper/resource-settings]
+  description: |
+    A map containing additional settings.  Each map entry has a
+    string name and a string value.
+
+    **Note:** In general, we recommend not changing settings from
+    their default values.
+status/status:
+  name: status
+  links: [skupper/resource-status]
+  description: |
+    The current state of the resource.
+
+    - `Pending`: The resource is being processed.
+    - `Error`: There was an error processing the resource.  See
+      `message` for more information.
+    - `Ready`: The resource is ready to use.
+status/message:
+  name: message
+  links: [skupper/resource-status]
+  description: |
+    A human-readable status message.  Error messages are reported
+    here.
+status/conditions:
+  name: conditions
+  group: advanced
+  platforms: [Kubernetes]
+  links: [skupper/resource-status, kubernetes/conditions]
+  description: |
+    A set of named conditions describing the current state of the
+    resource.
+connector/spec/routingKey:
+  name: routingKey
+  updatable: true
+  related_concepts: [routing-key]
+  description: |
+    The identifier used to route traffic from listeners to
+    connectors.  To expose a local workload to a remote site, the
+    remote listener and the local connector must have matching
+    routing keys.
+connector/spec/port:
+  name: port
+  updatable: true
+  description: |
+    The port on the target server to connect to.
+connector/spec/selector:
+  name: selector
+  group: frequently-used
+  updatable: true
+  platforms: [Kubernetes]
+  links: [kubernetes/label-selectors]
+  description: |
+    A Kubernetes label selector for specifying target server pods.  It
+    uses `<label-name>=<label-value>` syntax.
+
+    On Kubernetes, either `selector` or `host` is required.
+connector/spec/host:
+  name: host
+  group: frequently-used
+  updatable: true
+  description: |
+    The hostname or IP address of the server.  This is an
+    alternative to `selector` for specifying the target server.
+
+    On Kubernetes, either `selector` or `host` is required.
+
+    On Docker, Podman, or Linux, `host` is required.
+connector/spec/includeNotReadyPods:
+  name: includeNotReadyPods
+  group: advanced
+  platforms: [Kubernetes]
+  description: |
+    If true, include server pods in the `NotReady` state.
+connector/spec/exposePodsByName:
+  name: exposePodsByName
+  group: advanced
+  type: boolean
+  platforms: [Kubernetes]
+  links: [skupper/individual-pod-services]
+  description: |
+    If true, expose each pod as an individual service.
+connector/spec/tlsCredentials:
+  name: tlsCredentials
+  group: advanced
+  links: [skupper/application-tls, kubernetes/tls-secrets, skupper/system-tls-credentials]
+  description: |
+    The name of a bundle of TLS certificates used for secure
+    router-to-server communication.  The bundle contains the trusted
+    server certificate (usually a CA).  It optionally includes a
+    client certificate and key for mutual TLS.
+
+    On Kubernetes, the value is the name of a Secret in the current
+    namespace. On Docker, Podman, and Linux, the value is the name of
+    a directory under `input/certs/` in the current namespace.
+connector/spec/useClientCert:
+  name: useClientCert
+  group: advanced
+  type: boolean
+  links: [skupper/application-tls]
+  description: |
+    Send the client certificate when connecting in order to enable
+    mutual TLS.
+connector/spec/verifyHostname:
+  name: verifyHostname
+  group: advanced
+  type: boolean
+  links: [skupper/application-tls]
+  description: |
+    If true, require that the hostname of the server connected to
+    matches the hostname in the server's certificate.
+connector/spec/type:
+  name: type
+  hidden: true
+  group: advanced
+  default: tcp
+  description: |
+    The connector type.
+connector/status/hasMatchingListener:
+  name: hasMatchingListener
+  type: boolean
+  related_concepts: [routing-key]
+  description: |
+    True if there is at least one listener with a matching routing
+    key (usually in a remote site).
+connector/status/selectedPods:
+  name: selectedPods
+  group: advanced
+  type: array
+connector/status/conditions:
+  name: conditions
+  group: advanced
+  description: |
+    A set of named conditions describing the current state of the
+    resource.
+
+    - `Configured`: The connector configuration has been applied
+      to the router.
+    - `Matched`: There is at least one listener corresponding to
+      this connector.
+    - `Ready`: The connector is ready to use.  All other conditions
+      are true.

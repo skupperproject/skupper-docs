@@ -1,0 +1,104 @@
+name: listener
+resource: listener
+related_commands: [connector]
+description: |
+  Display help for listener commands and exit.
+include_options: [global/*]
+subcommands:
+  - name: create
+    wait: Configured
+    related_commands: [connector/create]
+    description: |
+      Create a listener.
+    examples: |
+      # Create a listener for a database
+      $ skupper listener create database 5432
+      Waiting for status...
+      Listener "database" is configured.
+
+      # Set the routing key and host explicitly
+      $ skupper listener create backend 8080 --routing-key be1 --host apiserver
+    include_options: [listener/*, create/*, context/*, global/*]
+    options:
+      - name: name
+        description: |
+          @description@
+
+          The name is the default routing key and host if the
+          `--routing-key` and `--host` options are not specified.
+      - name: port
+  - name: update
+    wait: Configured
+    related_commands: [connector/update]
+    description: |
+      Update a listener.
+    examples: |
+      # Change the host and port
+      $ skupper listener update database --host mysql --port 3306
+      Waiting for status...
+      Listener "database" is configured.
+
+      # Change the routing key
+      $ skupper listener update backend --routing-key be2
+    include_options: [listener/*, update/*, context/*, global/*]
+    options:
+      - name: name
+      - name: host
+      - name: port
+        group: frequently-used
+        required: false
+        positional: false
+  - name: delete
+    wait: Deletion
+    related_commands: [connector/delete]
+    description: |
+      Delete a listener.
+    examples: |
+      # Delete a listener
+      $ skupper listener delete database
+      Waiting for deletion...
+      Listener "database" is deleted.
+    include_options: [delete/*, context/*, global/*]
+  - name: status
+    related_commands: [connector/status]
+    description: |
+      Display the status of listeners in the current site.
+    examples: |
+      # Show the status of all listeners in the current site
+      $ skupper listener status
+      NAME       STATUS   ROUTING-KEY   HOST       PORT   CONNECTORS
+      backend    Ready    backend       backend    8080   true
+      database   Ready    database      database   5432   true
+
+      # Show the status of one listener
+      $ skupper listener status backend
+      Name:                      backend
+      Status:                    Ready
+      Message:                   <none>
+      Routing key:               backend
+      Host:                      backend
+      Port:                      8080
+      Has matching connectors:   true
+    include_options: [status/*, context/*, global/*]
+  - name: generate
+    related_commands: [connector/generate]
+    description: |
+      Generate a Listener resource.
+    examples: |
+      # Generate a Listener resource and print it to the console
+      $ skupper listener generate backend 8080
+      apiVersion: skupper.io/v2alpha1
+      kind: Listener
+      metadata:
+        name: backend
+      spec:
+        routingKey: backend
+        port: 8080
+        host: backend
+
+      # Generate a Listener resource and direct the output to a file
+      $ skupper listener generate backend 8080 > backend.yaml
+    include_options: [listener/*, generate/*, global/*]
+    options:
+      - name: name
+      - name: port

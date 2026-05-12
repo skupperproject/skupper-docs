@@ -1,0 +1,14 @@
+command: listener delete
+examples:
+- description: Delete a listener
+  command: skupper listener delete database
+  output: 'Waiting for deletion...
+
+    Listener "database" is deleted.'
+related_commands:
+- connector/delete
+related_resources:
+- listener
+wait:
+  default: Deletion
+  description: Waits for Deletion status by default

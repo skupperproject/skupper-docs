@@ -1,0 +1,26 @@
+command: link status
+examples:
+- description: Show the status of all links in the current site
+  command: skupper link status
+  output: 'NAME          STATUS   COST
+
+    west-6bfn6    Ready    1
+
+    south-ac619   Error    10
+
+
+    Links from remote sites:
+
+
+    <none>'
+- description: Show the status of one link
+  command: skupper link status west-6bfn6
+  output: 'Name:     west-6bfn6
+
+    Status:   Ready
+
+    Message:  <none>
+
+    Cost:     1'
+related_resources:
+- link

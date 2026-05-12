@@ -1,0 +1,31 @@
+name: AttachedConnector
+platforms: [Kubernetes]
+related_resources: [attached-connector-binding]
+links: [skupper/attached-connectors]
+description: |
+  A connector in a peer namespace.
+metadata:
+  include_properties: [metadata/*]
+  properties:
+    - name: name
+      description: |
+        @description@
+
+        The name must be the same as that of the associated
+        AttachedConnectorBinding resource in the site namespace.
+spec:
+  include_properties: [connector/spec/*, settings]
+  exclude_properties:
+    - connector/spec/routingKey
+    - connector/spec/host
+    - connector/spec/exposePodsByName
+    - connector/spec/useClientCert
+    - connector/spec/verifyHostname
+  properties:
+    - name: siteNamespace
+      description: |
+        The name of the namespace in which the site this connector
+        should be attached to is defined.
+status:
+  include_properties: [status/*, connector/status/selectedPods]
+  exclude_properties: [status/message]

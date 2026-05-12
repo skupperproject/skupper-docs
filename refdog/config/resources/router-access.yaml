@@ -1,0 +1,74 @@
+name: RouterAccess
+related_resources: [site, link]
+links: [skupper/site-linking]
+description: |
+  Configuration for secure access to the site router.  The
+  configuration includes TLS credentials and router ports.  The
+  RouterAccess resource is used to implement link access for sites.
+metadata:
+  include_properties: [metadata/*]
+spec:
+  include_properties: [settings]
+  properties:
+    - name: roles
+      description: |
+        The named interfaces by which a router can be accessed.  These
+        include "inter-router" for links between interior routers and
+        "edge" for links from edge routers to interior routers.
+    - name: tlsCredentials
+      links: [skupper/router-tls, kubernetes/tls-secrets, skupper/system-tls-credentials]
+      description: |
+        The name of a bundle of TLS certificates used for mutual TLS
+        router-to-router communication.  The bundle contains the
+        server certificate and key and the trusted client certificate
+        (usually a CA).
+
+        On Kubernetes, the value is the name of a Secret in the
+        current namespace.
+
+        On Docker, Podman, and Linux, the value is the name of a
+        directory under `input/certs/` in the current namespace.
+    - name: generateTlsCredentials
+    - name: issuer
+    - name: accessType
+      platforms: [Kubernetes]
+      default: |
+        _On OpenShift, the default is `route`.  For other
+        Kubernetes flavors, the default is `loadbalancer`._
+      choices:
+        - name: route
+          description: Use an OpenShift route.  _OpenShift only._
+        - name: loadbalancer
+          description: Use a Kubernetes load balancer.
+    - name: bindHost
+      default: 0.0.0.0
+      platforms: [Docker, Podman, Linux]
+      description: |
+        The hostname or IP address of the network interface to bind
+        to.  By default, Skupper binds all the interfaces on the host.
+    - name: subjectAlternativeNames
+      platforms: [Docker, Podman, Linux]
+      default: |
+        _The current hostname and the IP address of each bound network
+        interface_
+      description: |
+        The hostnames and IPs secured by the router TLS certificate.
+status:
+  include_properties: [status/*]
+  properties:
+    - name: status
+    - name: message
+    - name: conditions
+      description: |
+        @description@
+
+        - `Configured`: The router access configuration has been applied to
+          the router.
+        - `Resolved`: The connection endpoints are available.
+        - `Ready`: The router access is ready to use.  All other
+          conditions are true.
+    - name: endpoints
+      group: advanced
+      description: |
+        An array of connection endpoints.  Each item has a name, host,
+        port, and group.

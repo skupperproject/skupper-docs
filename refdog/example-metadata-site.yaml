@@ -1,0 +1,104 @@
+# Example: Minimal metadata file for Site resource
+# This supplements the CRD with documentation-specific information
+# CRD provides: descriptions, types, validation, required fields
+# This file provides: examples, grouping, cross-references, links
+
+name: Site
+
+# 1. EXAMPLES - Usage examples for documentation
+examples:
+  - description: A minimal site
+    yaml: |
+      apiVersion: skupper.io/v2alpha1
+      kind: Site
+      metadata:
+        name: east
+        namespace: hello-world-east
+  
+  - description: A site configured to accept links
+    yaml: |
+      apiVersion: skupper.io/v2alpha1
+      kind: Site
+      metadata:
+        name: west
+        namespace: hello-world-west
+      spec:
+        linkAccess: default
+
+# 2. CROSS-REFERENCES - Links to related resources/concepts
+related_resources: [link]
+related_concepts: [network, platform]
+
+# 3. EXTERNAL LINKS - References to external documentation
+links: [skupper/site-configuration]
+
+# 4. PROPERTY METADATA - Supplementary info for each property
+# (CRD already has descriptions, types, defaults)
+properties:
+  # Spec properties
+  linkAccess:
+    group: frequently-used          # 2. Property grouping
+    updatable: true                 # 5. Updatable flag
+    related_concepts: [link]        # 3. Cross-references
+    links: [skupper/site-linking]   # 3. External links
+    # 7. Choice descriptions (if CRD enum lacks detail)
+    choices:
+      - name: none
+        description: No linking to this site is permitted.
+      - name: default
+        platforms: [Kubernetes]     # 6. Platform-specific notes
+        description: |
+          Use the default link access for the current platform.
+          On OpenShift, the default is `route`. For other
+          Kubernetes flavors, the default is `loadbalancer`.
+      - name: route
+        description: Use an OpenShift route. _OpenShift only._
+      - name: loadbalancer
+        description: Use a Kubernetes load balancer.
+  
+  ha:
+    updatable: true                 # 5. Updatable flag
+    platforms: [Kubernetes]         # 6. Platform-specific notes
+    links: [skupper/high-availability]  # 3. External links
+  
+  defaultIssuer:
+    group: advanced                 # 2. Property grouping
+    updatable: true                 # 5. Updatable flag
+    platforms: [Kubernetes]         # 6. Platform-specific notes
+    links: [skupper/router-tls, kubernetes/tls-secrets]  # 3. External links
+  
+  edge:
+    group: advanced                 # 2. Property grouping
+    links: [skupper/large-networks] # 3. External links
+  
+  serviceAccount:
+    group: advanced                 # 2. Property grouping
+    platforms: [Kubernetes]         # 6. Platform-specific notes
+    links: [kubernetes/service-accounts]  # 3. External links
+  
+  settings:
+    group: advanced                 # 2. Property grouping
+    # Note: CRD already has description with setting details
+
+  # Status properties
+  conditions:
+    group: advanced                 # 2. Property grouping
+  
+  defaultIssuer:
+    group: advanced                 # 2. Property grouping
+    platforms: [Kubernetes]         # 6. Platform-specific notes
+    links: [skupper/router-tls, kubernetes/tls-secrets]  # 3. External links
+  
+  endpoints:
+    group: advanced                 # 2. Property grouping
+    related_concepts: [link]        # 3. Cross-references
+    links: [skupper/site-linking]   # 3. External links
+  
+  network:
+    group: advanced                 # 2. Property grouping
+  
+  sitesInNetwork:
+    group: advanced                 # 2. Property grouping
+    related_concepts: [network]     # 3. Cross-references
+
+# Made with Bob

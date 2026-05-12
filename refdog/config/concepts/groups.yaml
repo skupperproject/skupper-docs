@@ -1,0 +1,19 @@
+- title: Sites
+  objects:
+    - site
+    - workload
+    - platform
+- title: Networks
+  objects:
+    - network
+    - link
+    - access-token
+- title: Services
+  objects:
+    - listener
+    - connector
+    - routing-key
+- title: Applications
+  objects:
+    - application
+    - component

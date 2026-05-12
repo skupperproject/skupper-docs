@@ -1,0 +1,324 @@
+create/name:
+  name: name
+  type: string
+  required: true
+  links: [kubernetes/object-names]
+  description: |
+    The name of the resource to be created.
+create/timeout:
+  name: timeout
+  type: string
+  placeholder: duration
+  default: 60s
+  platforms: [Kubernetes]
+  links: [kubernetes/duration-format]
+  description: |
+    Raise an error if the operation does not complete in the given
+    period of time.
+create/wait:
+  name: wait
+  type: string
+  placeholder: status
+  default: ready
+  platforms: [Kubernetes]
+  links: [skupper/resource-status]
+  description: |
+    Wait for the given status before exiting.
+  choices:
+    - name: none
+      description: Do not wait.
+    - name: configured
+      description: Wait until the configuration is applied.
+    - name: ready
+      description: Wait until the resource is ready to use.
+update/name:
+  name: name
+  type: string
+  required: true
+  links: [kubernetes/object-names]
+  description: |
+    The name of the resource to be updated.
+update/timeout:
+  name: timeout
+  type: string
+  placeholder: duration
+  default: 60s
+  platforms: [Kubernetes]
+  description: |
+    Raise an error if the operation does not complete in the given
+    period of time.
+update/wait:
+  name: wait
+  type: string
+  placeholder: status
+  default: ready
+  platforms: [Kubernetes]
+  links: [skupper/resource-status]
+  description: |
+    Wait for the given status before exiting.
+  choices:
+    - name: none
+      description: _Do not wait_
+    - name: configured
+      description: Configured
+    - name: ready
+      description: Ready
+delete/name:
+  name: name
+  type: string
+  required: true
+  links: [kubernetes/object-names]
+  description: |
+    The name of the resource to be deleted.
+delete/timeout:
+  name: timeout
+  type: string
+  placeholder: duration
+  default: 60s
+  platforms: [Kubernetes]
+  description: |
+    Raise an error if the operation does not complete in the given
+    period of time.
+delete/wait:
+  name: wait
+  type: boolean
+  default: true
+  platforms: [Kubernetes]
+  description: |
+    Wait for deletion to complete before exiting.
+status/name:
+  name: name
+  type: string
+  required: false
+  positional: true
+  links: [kubernetes/object-names]
+  description: |
+    An optional resource name.  If set, the status command reports
+    status for the named resource only.
+status/timeout:
+  name: timeout
+  type: string
+  placeholder: duration
+  default: 60s
+  platforms: [Kubernetes]
+  links: [kubernetes/duration-format]
+  description: |
+    Raise an error if the operation does not complete in the given
+    period of time.
+status/output:
+  name: output
+  type: string
+  placeholder: format
+  short_option: o
+  description: |
+    Print status to the console in a structured output format.
+  choices:
+    - name: json
+      description: Produce JSON output
+    - name: yaml
+      description: Produce YAML output
+generate/name:
+  name: name
+  type: string
+  required: true
+  links: [kubernetes/object-names]
+  description: |
+    The name of the resource to be generated.
+generate/output:
+  name: output
+  type: string
+  placeholder: format
+  default: yaml
+  short_option: o
+  description: |
+    Select the output format.
+  choices:
+    - name: json
+      description: Produce JSON output
+    - name: yaml
+      description: Produce YAML output
+site/enable-link-access:
+  name: enable-link-access
+  group: frequently-used
+  type: boolean
+  related_concepts: [link]
+  links: [skupper/site-linking]
+  description: |
+    Allow external access for links from remote sites.
+
+    Sites and links are the basis for creating application
+    networks. In a simple two-site network, at least one of the
+    sites must have link access enabled.
+site/link-access-type:
+  name: link-access-type
+  property: linkAccess
+  placeholder: type
+  group: null
+  platforms: [Kubernetes]
+  default: default
+  choices:
+    - name: default
+      description: |
+        Use the default link access.  On OpenShift, the
+        default is `route`.  For other Kubernetes flavors,
+        the default is `loadbalancer`.
+    - name: route
+      description: Use an OpenShift route.  _OpenShift only._
+    - name: loadbalancer
+      description: Use a Kubernetes load balancer.  _Kubernetes only._
+site/enable-ha:
+  name: enable-ha
+  property: ha
+link/cost:
+  name: cost
+  property: cost
+connector/name:
+  name: name
+  type: string
+  required: true
+  description: |
+    The name of the Connector resource.
+connector/port:
+  name: port
+  property: port
+  positional: true
+connector/routing-key:
+  name: routing-key
+  group: frequently-used
+  required: false
+  property: routingKey
+  default: _Value of name_
+connector/selector:
+  name: selector
+  property: selector
+  default: app=[value-of-name]
+  description: |
+    A Kubernetes label selector for specifying target server pods.  It
+    uses `<label-name>=<label-value>` syntax.
+
+    This is an alternative to setting the `--workload` or
+    `--host` options.
+connector/workload:
+  name: workload
+  group: frequently-used
+  type: string
+  placeholder: resource
+  platforms: [Kubernetes]
+  links: [kubernetes/workloads]
+  description: |
+    A Kubernetes resource name that identifies a workload.  It uses
+    `<resource-type>/<resource-name>` syntax and resolves to an
+    equivalent pod selector.
+
+    This is an alternative to setting the `--selector` or
+    `--host` options.
+connector/host:
+  name: host
+  required: false
+  property: host
+  default: |
+    _On Kubernetes: Value of name_<br/>_On Docker, Podman, and Linux:_ `localhost`
+  description: |
+    The hostname or IP address of the server.  This is an
+    alternative to `selector` for specifying the target server.
+
+    This is an alternative to setting the `--selector` or
+    `--workload` options.
+connector/wait:
+  name: wait
+  type: string
+  placeholder: status
+  default: configured
+  description: |
+    Wait for the given status before exiting.
+  choices:
+    - name: none
+      description: _Do not wait_
+    - name: configured
+      description: Configured
+    - name: ready
+      description: Ready
+listener/port:
+  name: port
+  property: port
+  positional: true
+listener/routing_key:
+  name: routing-key
+  group: frequently-used
+  required: false
+  property: routingKey
+  default: _Value of name_
+listener/host:
+  name: host
+  group: frequently-used
+  required: false
+  property: host
+  default: _Value of name_
+listener/wait:
+  name: wait
+  type: string
+  placeholder: status
+  default: configured
+  description: |
+    Wait for the given status before exiting.
+  choices:
+    - name: none
+      description: _Do not wait_
+    - name: configured
+      description: Configured
+    - name: ready
+      description: Ready
+context/context:
+  name: context
+  group: global
+  type: string
+  placeholder: name
+  platforms: [Kubernetes]
+  links: [kubernetes/kubeconfigs]
+  description: |
+    Set the kubeconfig context.
+context/kubeconfig:
+  name: kubeconfig
+  group: global
+  type: string
+  placeholder: file
+  platforms: [Kubernetes]
+  links: [kubernetes/kubeconfigs]
+  description: |
+    Set the path to the kubeconfig file.
+context/namespace:
+  name: namespace
+  group: global
+  type: string
+  placeholder: name
+  short_option: n
+  links: [kubernetes/namespaces, skupper/system-namespaces]
+  description: |
+    Set the current namespace.
+global/platform:
+  name: platform
+  group: global
+  type: string
+  placeholder: platform
+  default: kubernetes
+  choices:
+    - name: kubernetes
+      description: Kubernetes
+    - name: docker
+      description: Docker
+    - name: podman
+      description: Podman
+    - name: linux
+      description: Linux
+  related_concepts: [platform]
+  description: |
+    Set the Skupper platform.
+
+    <!-- You can also use the `SKUPPER_PLATFORM` environment variable. -->
+global/help:
+  name: help
+  group: global
+  type: boolean
+  short_option: h
+  description: |
+    Display help and exit.

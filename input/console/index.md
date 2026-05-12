@@ -1,10 +1,14 @@
 <a id="console"></a>
 # Using the Network console
+<!--ASSEMBLY-->
 
 The Network console provides data and visualizations of the traffic flow between sites.
 
 <a id="console-enabling"></a>
 ## Enabling the Network console
+<!--PROCEDURE-->
+
+Enable the Network console on a Kubernetes site by installing the observer Helm chart and exposing its service.
 
 **Prerequisites**
 
@@ -67,6 +71,7 @@ The Network console provides data and visualizations of the traffic flow between
 
 <a id="console-exploring"></a>
 ## Exploring the Network console
+<!--REFERENCE-->
 
 The Network console provides an overview of the following:
 

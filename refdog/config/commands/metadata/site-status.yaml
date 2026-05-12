@@ -1,0 +1,11 @@
+command: site status
+examples:
+- description: Show the status of the current site
+  command: skupper site status
+  output: 'Name:      west
+
+    Status:    Ready
+
+    Message:   -'
+related_resources:
+- site

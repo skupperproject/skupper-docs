@@ -1,0 +1,161 @@
+name: Site
+related_resources: [link]
+links: [skupper/site-configuration]
+description: |
+  A site is a place on the network where application workloads are
+  running.  Sites are joined by [links](link.html).
+
+  The Site resource is the basis for site configuration.  It is the
+  parent of all Skupper resources in its namespace.  There can be only
+  one active Site resource per namespace.
+examples:
+  - description: A minimal site
+    yaml: |
+      apiVersion: skupper.io/v2alpha1
+      kind: Site
+      metadata:
+        name: east
+        namespace: hello-world-east
+  - description: A site configured to accept links
+    yaml: |
+      apiVersion: skupper.io/v2alpha1
+      kind: Site
+      metadata:
+        name: west
+        namespace: hello-world-west
+      spec:
+        linkAccess: default
+metadata:
+  include_properties: [metadata/*]
+  properties:
+    - name: name
+spec:
+  include_properties: [settings]
+  properties:
+    - name: linkAccess
+      group: frequently-used
+      default: none
+      updatable: true
+      related_concepts: [link]
+      links: [skupper/site-linking]
+      description: |
+        Configure external access for links from remote sites.
+
+        Sites and links are the basis for creating application
+        networks.  In a simple two-site network, at least one of
+        the sites must have link access enabled.
+      choices:
+        - name: none
+          description: No linking to this site is permitted.
+        - name: default
+          platforms: [Kubernetes]
+          description: |
+            Use the default link access for the current platform.
+            On OpenShift, the default is `route`.  For other
+            Kubernetes flavors, the default is `loadbalancer`.
+        - name: route
+          description: Use an OpenShift route.  _OpenShift only._
+        - name: loadbalancer
+          description: Use a Kubernetes load balancer.
+    - name: ha
+      updatable: true
+      platforms: [Kubernetes]
+      links: [skupper/high-availability]
+      description: |
+        Configure the site for high availability (HA).  HA sites
+        have two active routers.
+
+        Note that Skupper routers are stateless, and they restart
+        after failure.  This already provides a high level of
+        availability.  Enabling HA goes further and reduces the
+        window of downtime caused by restarts.
+    - name: defaultIssuer
+      group: advanced
+      default: skupper-site-ca
+      updatable: true
+      platforms: [Kubernetes]
+      links: [skupper/router-tls, kubernetes/tls-secrets]
+      description: |
+        The name of a Kubernetes secret containing the signing CA
+        used to generate a certificate from a token.  A secret is
+        generated if none is specified.
+
+        This issuer is used by AccessGrant and RouterAccess if a
+        specific issuer is not set.
+    - name: edge
+      group: advanced
+      type: boolean
+      links: [skupper/large-networks]
+      description: |
+        Configure the site to operate in edge mode.  Edge sites
+        cannot accept links from remote sites.
+
+        Edge mode can help you scale your network to large numbers
+        of sites.  However, for networks with 16 or fewer sites,
+        there is little benefit.
+
+        Currently, edge sites cannot also have HA enabled.
+
+        <!-- Future: An edge site has the exclusive ability to set a
+        "VAN ID" that enables multiple VANs to operate on shared
+        router infrastructure. -->
+    - name: serviceAccount
+      group: advanced
+      default: _Generated_
+      platforms: [Kubernetes]
+      links: [kubernetes/service-accounts]
+      description: |
+        The name of the Kubernetes service account under which to run
+        the Skupper router.  A service account is generated if none is
+        specified.
+    - name: settings
+      description: |
+        @description@
+
+        - `routerDataConnections`: Set the number of data
+          connections the router uses when linking to other
+          routers.<br/>
+          Default: *Computed based on the number of router worker
+          threads.  Minimum 2.*
+        - `routerLogging`: Set the router logging level.<br/>
+          Default: `info`.  Choices: `info`, `warning`, `error`.
+status:
+  include_properties: [status/*]
+  properties:
+    - name: status
+    - name: message
+    - name: conditions
+      group: advanced
+      description: |
+        @description@
+
+        - `Configured`: The output resources for this resource have
+          been created.
+        - `Running`: There is at least one router pod running.
+        - `Resolved`: The hostname or IP address for link access is
+          available.
+        - `Ready`: The site is ready for use.  All other conditions
+          are true.
+    - name: defaultIssuer
+      group: advanced
+      platforms: [Kubernetes]
+      links: [skupper/router-tls, kubernetes/tls-secrets]
+      description: |
+        The name of the Kubernetes secret containing the active
+        default signing CA.
+    - name: endpoints
+      group: advanced
+      related_concepts: [link]
+      links: [skupper/site-linking]
+      description: |
+        An array of connection endpoints.  Each item has a name, host,
+        port, and group.
+
+        These include connection endpoints for link access.
+      notes: |
+        Why is this here in status?  Does it duplicate what we have in RouterAccess?
+    - name: network
+      group: advanced
+    - name: sitesInNetwork
+      group: advanced
+      related_concepts: [network]

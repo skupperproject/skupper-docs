@@ -1,0 +1,26 @@
+...@common
+
+direction: down
+
+Application "Online Boutique": {
+  class: neutral
+
+  Component\n"frontend" -> Component\n"ad"
+  Component\n"frontend" -> Component\n"shipping"
+  Component\n"frontend" -> Component\n"recommendation"
+  Component\n"frontend" -> Component\n"checkout"
+  Component\n"frontend" -> Component\n"cart"
+  Component\n"frontend" -> Component\n"productcatalog"
+
+  Component\n"recommendation" -> Component\n"productcatalog"
+
+  Component\n"checkout" -> Component\n"productcatalog"
+  Component\n"checkout" -> Component\n"payment"
+  Component\n"checkout" -> Component\n"email"
+  Component\n"checkout" -> Component\n"cart"
+  Component\n"checkout" -> Component\n"currency"
+
+  Component\n"frontend" -> Component\n"currency"
+
+  Component\n"cart" -> Component\n"Redis cache"
+}

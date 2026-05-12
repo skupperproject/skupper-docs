@@ -1,0 +1,110 @@
+name: link
+resource: link
+related_commands: [token]
+description: |
+  Display help for link commands and exit.
+include_options: [global/*]
+subcommands:
+  - name: update
+    wait: Ready
+    description: |
+      Change link settings.
+    examples: |
+      # Change the link cost
+      $ skupper link update west-6bfn6 --cost 10
+      Waiting for status...
+      Link "west-6bfn6" is ready.
+    include_options: [link/*, update/*, context/*, global/*]
+  - name: delete
+    wait: Deletion
+    description: |
+      Delete a link.
+    examples: |
+      # Delete a link
+      $ skupper link delete west-6bfn6
+      Waiting for deletion...
+      Link "west-6bfn6" is deleted.
+    include_options: [delete/*, context/*, global/*]
+  - name: status
+    description: |
+      Display the status of links in the current site.
+    examples: |
+      # Show the status of all links in the current site
+      $ skupper link status
+      NAME          STATUS   COST
+      west-6bfn6    Ready    1
+      south-ac619   Error    10
+
+      Links from remote sites:
+
+      <none>
+
+      # Show the status of one link
+      $ skupper link status west-6bfn6
+      Name:     west-6bfn6
+      Status:   Ready
+      Message:  <none>
+      Cost:     1
+    include_options: [status/*, context/*, global/*]
+  - name: generate
+    wait: Site resource ready
+    description: |
+      Generate a Link resource for use in a remote site.
+
+      Generating a link requires a site with link access enabled.
+      The command waits for the site to enter the ready state
+      before producing the link.
+
+    # - Link generate is a little different from the other generate
+    #   commands.  In general, the generate commands are helping you
+    #   produce resources for your current site.  By contrast, link
+    #   generates a link resource (and a secret to go with it) for use
+    #   in a *remote* site, *to* the current site.
+
+    # - The generate commands usually don't need to wait for a status.  Link
+    #   generate is the exception - it needs the site to be ready.
+
+    # - Using this skips the grant and token procedure
+    # - The generated output includes a Skupper Link and an associated secret
+    # - You can apply the link at a remote site to create a link to this site
+    examples: |
+      # Generate a Link resource and print it to the console
+      $ skupper link generate
+      apiVersion: skupper.io/v2alpha1
+      kind: Link
+      metadata:
+        name: south-ac619
+      spec:
+        endpoints:
+          - group: skupper-router-1
+            host: 10.97.161.185
+            name: inter-router
+            port: "55671"
+          - group: skupper-router-1
+            host: 10.97.161.185
+            name: edge
+            port: "45671"
+        tlsCredentials: south-ac619
+      ---
+      apiVersion: v1
+      kind: Secret
+      type: kubernetes.io/tls
+      metadata:
+        name: south-ac619
+      data:
+        ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJB [...]
+        tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURORENDQWh5Z0F3SUJ [...]
+        tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0N [...]
+
+      # Generate a Link resource and direct the output to a file
+      $ skupper link generate > link.yaml
+    include_options: [link/*, generate/*, context/*, global/*]
+    options:
+      - name: name
+        positional: true
+        required: false
+        description: |
+          The name of the resource to be generated.  A name is
+          generated if none is provided.
+    notes: |
+      Should the default generated link have useClientCert: true?

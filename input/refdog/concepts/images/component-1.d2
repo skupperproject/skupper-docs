@@ -1,0 +1,8 @@
+...@common
+
+Application "Hello World".class: neutral
+Site 1.class: neutral
+Site 2.class: neutral
+
+Application "Hello World".Component "backend" -- Site 1.Workload "backend"
+Application "Hello World".Component "backend" -- Site 2.Workload "backend"

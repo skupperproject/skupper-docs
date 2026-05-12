@@ -1,6 +1,8 @@
 <a id="system-yaml-site-linking"></a>
 # Linking sites on local systems using YAML
+<!--ASSEMBLY-->
 
+Use a `link` resource YAML file to create links between local system and Kubernetes sites.
 
 Using a `link` resource YAML file allows you to create links between sites.
 The link direction is not significant, and is typically determined by ease of connectivity. For example, if east is behind a firewall, linking from east to west is the easiest option.
@@ -8,10 +10,13 @@ The link direction is not significant, and is typically determined by ease of co
 Once sites are linked, services can be exposed and consumed across the application network without the need to open ports or manage inter-site connectivity.
 
 The procedures below describe linking an existing site.
-Typically, it is easier to configure a site, links and services in a set of files and then create a configured site by placing all the YAML files in a directory, for example `local` and then using the following command to 
+Typically, it is easier to configure a site, links, and services in a set of files and then create a configured site by placing all the YAML files in a directory such as `local` before running `skupper system setup`.
 
 <a id="system-link-yaml"></a>
 ## Linking sites using a `link` resource
+<!--PROCEDURE-->
+
+Create a `link` resource YAML file and apply it to the local system site to establish a link.
 
 An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.
 
@@ -45,7 +50,7 @@ To link sites, you create a `link` resource YAML file on one site and apply that
    If you are configuring a different namespace, use that name instead.
 
    The site is recreated and you see some of the internal resources that are not affected, for example:
-   ```
+   ```text
    Sources will be consumed from namespace "default"
    2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/tls.crt
    2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/tls.key
@@ -64,7 +69,7 @@ To link sites, you create a `link` resource YAML file on one site and apply that
    skupper link status
    ```
    The output shows the link name:
-   ```
+   ```text
    $ skupper link status
    NAME            STATUS
    link-west       Ok

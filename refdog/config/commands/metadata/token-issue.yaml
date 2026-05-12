@@ -1,0 +1,42 @@
+command: token issue
+examples:
+- description: Issue an access token
+  command: skupper token redeem <file>
+  output: 'Waiting for status...
+
+    Access grant "west-6bfn6" is ready.
+
+    Token file /home/fritz/token.yaml created.
+
+
+    Transfer this file to a remote site. At the remote site,
+
+    create a link to this site using the ''skupper token
+
+    redeem'' command:
+
+
+
+    The token expires after 1 use or after 15 minutes.'
+- description: Issue an access token with non-default limits
+  command: skupper token issue ~/token.yaml --expiration-window 24h --redemptions-allowed
+    3
+- description: Issue a token using an existing access grant
+  command: skupper token issue ~/token.yaml --grant west-1
+related_commands:
+- token/redeem
+related_resources:
+- access-grant
+- access-token
+errors:
+- message: Link access is not enabled
+  description: 'Link access at this site is not currently enabled.  You
+
+    can use "skupper site update --enable-link-access" to
+
+    enable it.
+
+    '
+wait:
+  default: Ready
+  description: Waits for Ready status by default

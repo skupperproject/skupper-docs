@@ -1,0 +1,74 @@
+name: Site
+examples:
+- description: A minimal site
+  yaml: "apiVersion: skupper.io/v2alpha1\nkind: Site\nmetadata:\n  name: east\n  namespace:\
+    \ hello-world-east\n"
+- description: A site configured to accept links
+  yaml: "apiVersion: skupper.io/v2alpha1\nkind: Site\nmetadata:\n  name: west\n  namespace:\
+    \ hello-world-west\nspec:\n  linkAccess: default\n"
+related_resources:
+- link
+links:
+- skupper/site-configuration
+properties:
+  linkAccess:
+    group: frequently-used
+    updatable: true
+    related_concepts:
+    - link
+    links:
+    - skupper/site-linking
+    choices:
+    - name: none
+      description: No linking to this site is permitted.
+    - name: default
+      description: 'Use the default link access for the current platform.
+
+        On OpenShift, the default is `route`.  For other
+
+        Kubernetes flavors, the default is `loadbalancer`.
+
+        '
+      platforms:
+      - Kubernetes
+    - name: route
+      description: Use an OpenShift route.  _OpenShift only._
+    - name: loadbalancer
+      description: Use a Kubernetes load balancer.
+  ha:
+    updatable: true
+    platforms:
+    - Kubernetes
+    links:
+    - skupper/high-availability
+  defaultIssuer:
+    group: advanced
+    platforms:
+    - Kubernetes
+    links:
+    - skupper/router-tls
+    - kubernetes/tls-secrets
+  edge:
+    group: advanced
+    links:
+    - skupper/large-networks
+  serviceAccount:
+    group: advanced
+    platforms:
+    - Kubernetes
+    links:
+    - kubernetes/service-accounts
+  conditions:
+    group: advanced
+  endpoints:
+    group: advanced
+    related_concepts:
+    - link
+    links:
+    - skupper/site-linking
+  network:
+    group: advanced
+  sitesInNetwork:
+    group: advanced
+    related_concepts:
+    - network

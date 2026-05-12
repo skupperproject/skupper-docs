@@ -1,0 +1,5 @@
+name: AttachedConnector
+related_resources:
+- attached-connector-binding
+links:
+- skupper/attached-connectors

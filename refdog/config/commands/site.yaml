@@ -1,0 +1,122 @@
+name: site
+resource: site
+description: |
+  Display help for site commands and exit.
+include_options: [global/*]
+subcommands:
+  - name: create
+    wait: Ready
+    description: |
+      Create a site.
+    examples: |
+      # Create a site
+      $ skupper site create west
+      Waiting for status...
+      Site "west" is ready.
+
+      # Create a site that can accept links from remote sites
+      $ skupper site create west --enable-link-access
+    include_options: [site/*, create/*, context/*, global/*]
+    options:
+      - name: name
+        description: |
+          A name of your choice for the Skupper site.  This name is
+          displayed in the console and CLI output.
+    errors:
+      - message: A site resource already exists
+        description: |
+          There is already a site resource defined for the namespace.
+  - name: update
+    wait: Ready
+    description: |
+      Change site settings.
+    examples: |
+      # Update the current site to accept links
+      $ skupper site update --enable-link-access
+      Waiting for status...
+      Site "west" is ready.
+
+      # Update multiple settings
+      $ skupper site update --enable-link-access --enable-ha
+    include_options: [site/*, update/*, context/*, global/*]
+    options:
+      - name: name
+        required: false
+        positional: true
+        description: |
+          The name of the site resource.
+
+          If not specified, the name is that of the site
+          associated with the current namespace.
+    errors:
+      - message: No site resource exists
+        description: |
+          There is no existing Skupper site resource to update.
+  - name: delete
+    wait: Deletion
+    description: |
+      Delete a site.
+    examples: |
+      # Delete the current site
+      $ skupper site delete
+      Waiting for deletion...
+      Site "west" is deleted.
+
+      # Delete the current site and all of its associated Skupper resources
+      $ skupper site delete --all
+    include_options: [delete/*, context/*, global/*]
+    options:
+      - name: name
+        required: false
+        positional: true
+        description: |
+          The name of the site resource.
+
+          If not specified, the name is that of the site
+          associated with the current namespace.
+      - name: all
+        group: frequently-used
+        type: boolean
+        description: |
+          In addition the site resource, delete all of the Skupper
+          resources associated with the site in the current
+          namespace.
+    errors:
+      - message: No site resource exists
+        description: |
+          There is no existing Skupper site resource to delete.
+  - name: status
+    description: |
+      Display the status of a site.
+    examples: |
+      # Show the status of the current site
+      $ skupper site status
+      Name:      west
+      Status:    Ready
+      Message:   -
+    include_options: [status/*, context/*, global/*]
+    options:
+      - name: name
+        required: false
+        positional: true
+        description: |
+          The name of the site resource.
+
+          If not specified, the name is that of the site
+          associated with the current namespace.
+  - name: generate
+    description: |
+      Generate a Site resource.
+    examples: |
+      # Generate a Site resource and print it to the console
+      $ skupper site generate west --enable-link-access
+      apiVersion: skupper.io/v2alpha1
+      kind: Site
+      metadata:
+        name: west
+      spec:
+        linkAccess: default
+
+      # Generate a Site resource and direct the output to a file
+      $ skupper site generate east > east.yaml
+    include_options: [generate/*, site/*, global/*]

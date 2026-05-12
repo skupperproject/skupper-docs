@@ -1,0 +1,104 @@
+name: Listener
+related_resources: [connector]
+links: [skupper/service-exposure]
+description: |
+  A listener binds a local connection endpoint to
+  [connectors](connector.html) in remote [sites](site.html).
+  Listeners and connectors are matched by routing key.
+
+  A Listener resource specifies a host and port for accepting
+  connections from local clients.  To expose a multi-port service,
+  create multiple listeners with the same host value.
+examples:
+  - description: |
+      A listener in site West for the Hello World backend service
+      in site East
+    yaml: |
+      apiVersion: skupper.io/v2alpha1
+      kind: Listener
+      metadata:
+        name: backend
+        namespace: hello-world-west
+      spec:
+        routingKey: backend
+        host: backend
+        port: 8080
+metadata:
+  include_properties: [metadata/*]
+spec:
+  include_properties: [settings]
+  properties:
+    - name: routingKey
+      updatable: true
+      related_concepts: [routing-key]
+      description: |
+        The identifier used to route traffic from listeners to
+        connectors.  To enable connecting to a service at a
+        remote site, the local listener and the remote connector
+        must have matching routing keys.
+    - name: host
+      updatable: true
+      description: |
+        The hostname or IP address of the local listener.  Clients
+        at this site use the listener host and port to
+        establish connections to the remote service.
+    - name: port
+      updatable: true
+      description: |
+        The port of the local listener.  Clients at this site use
+        the listener host and port to establish connections to
+        the remote service.
+    - name: exposePodsByName
+      type: boolean
+      group: advanced
+      platforms: [Kubernetes]
+      links: [skupper/individual-pod-services]
+      description: |
+        If true, expose each pod as an individual service.
+    - name: tlsCredentials
+      group: advanced
+      links: [skupper/application-tls, kubernetes/tls-secrets, skupper/system-tls-credentials]
+      description: |
+        The name of a bundle of TLS certificates used for secure
+        client-to-router communication.  The bundle contains the
+        server certificate and key.  It optionally includes the
+        trusted client certificate (usually a CA) for mutual TLS.
+
+        On Kubernetes, the value is the name of a Secret in the
+        current namespace.  On Docker, Podman, and Linux, the value is
+        the name of a directory under `input/certs/` in the current
+        namespace.
+    - name: type
+      hidden: true
+      group: advanced
+      default: tcp
+      description: |
+        The listener type.
+    - name: settings
+      description: |
+        @description@
+
+        - `observer`: Set the protocol observer used to generate
+          traffic metrics.<br/>
+          Default: `auto`.  Choices: `auto`, `none`, `http1`, `http2`.
+status:
+  include_properties: [status/*]
+  properties:
+    - name: status
+    - name: message
+    - name: hasMatchingConnector
+      type: boolean
+      related_concepts: [routing-key]
+      description: |
+        True if there is at least one connector with a matching
+        routing key (usually in a remote site).
+    - name: conditions
+      description: |
+        @description@
+
+        - `Configured`: The listener configuration has been applied
+          to the router.
+        - `Matched`: There is at least one connector corresponding to
+          this listener.
+        - `Ready`: The listener is ready to use.  All other conditions
+          are true.

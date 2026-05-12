@@ -1,5 +1,8 @@
 <a id="skupper-routing"></a>
 # Skupper routing
+<!--CONCEPT-->
+
+Skupper routes application traffic by using routing keys, ports, and site-aware paths.
 
 Skupper uses routing keys and ports to connect servers and clients.
 See how the power of application-layer addressing can bring new capabilities to your applications.
@@ -18,7 +21,7 @@ Balance requests across clusters according to service capacity.
 The Skupper network has cross-cluster visibility.
 It can see which services are already loaded and which have spare capacity, and it directs requests accordingly.
 
-You can assign a cost to each inter-cluster connection.
+You can assign a cost to each inter-site connection.
 This enables you to configure a preference for one resource over another.
 If demand is normal, you can keep all traffic on your private cloud.
 If demand peaks, you can dynamically spill over to public cloud resources.

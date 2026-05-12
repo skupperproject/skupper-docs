@@ -1,0 +1,66 @@
+name: Link
+related_resources: [access-token]
+links: [skupper/site-linking]
+description: |
+  A link is a channel for communication between [sites](site.html).
+  Links carry application connections and requests.  A set of linked
+  sites constitutes a network.
+
+  A Link resource specifies remote connection endpoints and TLS
+  credentials for establishing a mutual TLS connection to a remote
+  site.  To create an active link, the remote site must first enable
+  _link access_.  Link access provides an external access point for
+  accepting links.
+
+  **Note:** Links are not usually created directly.  Instead, you can
+  use an [access token][token] to obtain a link.
+
+  [token]: access-token.html
+metadata:
+  include_properties: [metadata/*]
+spec:
+  include_properties: [endpoints, settings]
+  properties:
+    - name: cost
+      default: 1
+      links: [skupper/load-balancing]
+      description: |
+        The configured routing cost of sending traffic over
+        the link.
+    - name: endpoints
+      description: |
+        An array of connection endpoints. Each item has a name, host,
+        port, and group.
+    - name: tlsCredentials
+      links: [skupper/router-tls, kubernetes/tls-secrets, skupper/system-tls-credentials]
+      description: |
+        The name of a bundle of certificates used for mutual TLS
+        router-to-router communication.  The bundle contains the
+        client certificate and key and the trusted server certificate
+        (usually a CA).
+
+        On Kubernetes, the value is the name of a Secret in the
+        current namespace.
+
+        On Docker, Podman, and Linux, the value is the name of a
+        directory under `input/certs/` in the current namespace.
+status:
+  include_properties: [status/*]
+  properties:
+    - name: status
+    - name: message
+    - name: remoteSiteId
+      description: |
+        The unique ID of the site linked to.
+    - name: remoteSiteName
+      description: |
+        The name of the site linked to.
+    - name: conditions
+      description: |
+        @description@
+
+        - `Configured`: The link configuration has been applied to
+          the router.
+        - `Operational`: The link to the remote site is active.
+        - `Ready`: The link is ready to use.  All other conditions
+          are true.

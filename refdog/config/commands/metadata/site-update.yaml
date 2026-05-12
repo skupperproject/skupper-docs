@@ -1,0 +1,19 @@
+command: site update
+examples:
+- description: Update the current site to accept links
+  command: skupper site update --enable-link-access
+  output: 'Waiting for status...
+
+    Site "west" is ready.'
+- description: Update multiple settings
+  command: skupper site update --enable-link-access --enable-ha
+related_resources:
+- site
+errors:
+- message: No site resource exists
+  description: 'There is no existing Skupper site resource to update.
+
+    '
+wait:
+  default: Ready
+  description: Waits for Ready status by default

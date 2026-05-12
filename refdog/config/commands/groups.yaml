@@ -1,0 +1,20 @@
+- title: Site operations
+  objects:
+    - site
+- title: Site linking
+  objects:
+    - token
+    - link
+- title: Service exposure
+  objects:
+    - listener
+    - connector
+- title: System operations
+  objects:
+    - system
+- title: Debugging operations
+  objects:
+    - debug
+- title: Other operations
+  objects:
+    - version

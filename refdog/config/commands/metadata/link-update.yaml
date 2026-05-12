@@ -1,0 +1,12 @@
+command: link update
+examples:
+- description: Change the link cost
+  command: skupper link update west-6bfn6 --cost 10
+  output: 'Waiting for status...
+
+    Link "west-6bfn6" is ready.'
+related_resources:
+- link
+wait:
+  default: Ready
+  description: Waits for Ready status by default

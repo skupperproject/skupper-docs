@@ -1,0 +1,77 @@
+kubernetes/conditions:
+  title: Kubernetes conditions
+  url: https://maelvls.dev/kubernetes-conditions/
+kubernetes/duration-format:
+  title: Duration format
+  url: https://pkg.go.dev/time#ParseDuration
+kubernetes/kubeconfigs:
+  title: Kubernetes kubeconfigs
+  url: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/
+kubernetes/label-selectors:
+  title: Kubernetes label selectors
+  url: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
+kubernetes/namespaces:
+  title: Kubernetes namespaces
+  url: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+kubernetes/object-names:
+  title: Kubernetes object names
+  url: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/
+kubernetes/service-accounts:
+  title: Kubernetes service accounts
+  url: https://kubernetes.io/docs/concepts/security/service-accounts/
+kubernetes/tls-secrets:
+  title: Kubernetes TLS secrets
+  url: https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets
+kubernetes/workloads:
+  title: Kubernetes workloads
+  url: https://kubernetes.io/docs/concepts/workloads/
+skupper/application-tls:
+  title: Application TLS
+  url: /topics/application-tls.html
+skupper/attached-connectors:
+  title: Attached connectors
+  url: /topics/attached-connectors.html
+skupper/debug-dumps:
+  title: Debug dumps
+  url: /topics/debug-dumps.html
+skupper/high-availability:
+  title: High availability
+  url: /topics/high-availability.html
+skupper/individual-pod-services:
+  title: Individual pod services
+  url: /topics/individual-pod-services.html
+skupper/load-balancing:
+  title: Load balancing
+  url: /topics/load-balancing.html
+skupper/large-networks:
+  title: Large networks
+  url: /topics/large-networks.html
+skupper/router-tls:
+  title: Router TLS
+  url: /topics/router-tls.html
+skupper/service-exposure:
+  title: Service exposure
+  url: /topics/service-exposure.html
+skupper/site-configuration:
+  title: Site configuration
+  url: /topics/site-configuration.html
+skupper/site-linking:
+  title: Site linking
+  url: /topics/site-linking.html
+skupper/system-namespaces:
+  title: System namespaces
+  url: /topics/system-namespaces.html
+skupper/system-tls-credentials:
+  title: System TLS credentials
+  url: /topics/system-tls-credentials.html
+skupper/resource-settings:
+  title: Resource settings
+  url: /topics/resource-settings.html
+skupper/resource-status:
+  title: Resource status
+  url: /topics/resource-status.html
+
+## CLI overview
+# cli/status-commands
+# cli/generate-commands
+# cli waiting and timeouts

@@ -1,0 +1,334 @@
+/*
+ * Skupper MkDocs Material Theme Overrides
+ *
+ * This file bridges Material Design theme with Skupper's existing CSS.
+ * It hides Material's header/footer and adjusts layout for Skupper's custom header/footer.
+ */
+
+/* Reset Material's large font sizes to match homepage */
+html {
+    font-size: 16px;  /* Browser default, not Material's 20px */
+}
+
+.md-typeset {
+    font-size: 1rem;  /* Reset from Material's 1.25rem */
+    line-height: 1.5;  /* Match homepage line-height */
+}
+
+.md-typeset h1 {
+    font-size: 2em;  /* Reset from Material's larger size */
+    line-height: 1.2;
+}
+
+.md-typeset h2 {
+    font-size: 1.5em;  /* Reset from Material's larger size */
+    line-height: 1.3;
+}
+
+.md-typeset h3 {
+    font-size: 1.25em;  /* Reset from Material's larger size */
+    line-height: 1.4;
+}
+
+.md-typeset h4 {
+    font-size: 1.1em;
+    line-height: 1.4;
+}
+
+.md-typeset p, .md-typeset li {
+    font-size: 1rem;  /* Match body text */
+}
+
+/* Hide Material's default header and footer visually but keep in DOM for JS */
+.md-header {
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+}
+
+.md-footer {
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+}
+
+/* Adjust main content area to account for Skupper header */
+.md-main {
+    margin-top: 0;
+}
+
+.md-container {
+    padding-top: 0;
+}
+
+/* Ensure Skupper header is at the top */
+body > header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Ensure Skupper footer is at the bottom */
+body > footer {
+    margin-top: auto;
+}
+
+/* Make body a flex container for sticky footer */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Ensure main content grows to push footer down */
+.md-container {
+    flex: 1;
+}
+
+/* Adjust sidebar positioning to account for Skupper header */
+.md-sidebar {
+    top: 0;
+    padding-top: 1em;
+}
+
+.md-sidebar--primary {
+    top: 0;
+}
+
+.md-sidebar--secondary {
+    top: 0;
+}
+
+/* Match Skupper's link colors in content */
+.md-content a {
+    color: #306b8f;
+}
+
+.md-content a:hover {
+    color: #5eba7d;
+}
+
+/* Match Skupper's code block styling */
+.md-typeset code {
+    background-color: hsl(0, 0%, 97%);
+}
+
+.md-typeset pre {
+    background-color: hsl(0, 0%, 97%);
+}
+
+/* Adjust content width and layout to match Skupper's layout */
+.md-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.md-content__inner {
+    max-width: none;
+    margin: 0;
+    padding: 2.4em 1em;
+}
+
+/* Ensure proper spacing for main content area */
+.md-main__inner {
+    margin-top: 0;
+}
+
+/* Ensure header uses flexbox layout - Font 1.5x, Other params 1.3x */
+header {
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 1.3em 0;  /* Remove horizontal padding */
+    position: sticky;
+    top: 0;
+}
+
+/* Logo on the left - Fixed to left edge */
+header > a#-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.65em;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.8em;
+    font-weight: 700;
+    font-family: var(--heading-font-family);
+    margin-left: 2em;  /* Fixed distance from left edge */
+}
+
+header > a#-logo img {
+    height: 3.9em;  /* 20% bigger than original 3.25em (3.25 * 1.2 = 3.9) */
+}
+
+/* Center section with nav and GitHub */
+header > div {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2em;
+}
+
+/* Navigation tabs in center - Font 1.5x, Gap 1.3x */
+header nav#-tabs {
+    display: flex;
+    gap: 2.1em;  /* 1.3x from 2em */
+    font-size: 1.9em;  /* 1.5x scaling - KEEP */
+}
+
+header nav#-tabs a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 0.65em 0;  /* 1.3x from 0.5em 0 */
+    border-bottom: 3.9px solid transparent;  /* 1.3x from 3px */
+}
+
+header nav#-tabs a:hover {
+    border-bottom-color: var(--accent-color-1);
+}
+
+header nav#-tabs a.selected {
+    border-bottom-color: var(--accent-color-2);
+    font-weight: 700;
+}
+
+/* GitHub link - Positioned at right edge */
+header > div > a[href*="github"] {
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.39em;
+    font-size: 1.5em;
+    position: absolute;
+    right: 2em;
+}
+
+/* Hide "GitHub" text, show only icon */
+header > div > a[href*="github"] div {
+    font-size: 0;
+}
+
+header > div > a[href*="github"] span {
+    font-size: 1.5rem;  /* Restore icon size */
+}
+
+/* Center the footer content and match home page styling */
+footer {
+    border: 0 !important;
+    background-color: var(--footer-background-color) !important;
+    color: white !important;
+    padding: 3em 1em !important;
+    display: flex !important;
+    justify-content: center !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+}
+
+footer a {
+    color: white !important;
+}
+
+footer h4 {
+    font-size: 1.1rem !important;
+    margin: 0.5em 0 !important;
+}
+
+footer p {
+    font-size: 1rem !important;
+    margin: 0.5em 0 !important;
+}
+
+footer > div {
+    max-width: 1200px !important;
+    width: var(--page-width) !important;
+    padding: 2em !important;
+    display: flex !important;
+    gap: 2em !important;
+}
+
+footer > div > div {
+    flex: 1;
+}
+
+footer > div > div:first-child {
+    flex: 0;
+    min-width: 10em;
+}
+
+/* Ensure sidebar navigation matches Skupper styling */
+.md-nav__link {
+    color: hsl(0, 0%, 20%);
+}
+
+.md-nav__link:hover {
+    color: #306b8f;
+}
+
+.md-nav__link--active {
+    color: #306b8f;
+    font-weight: 700;
+}
+
+/* Match Skupper's heading styles */
+.md-typeset h1 {
+    color: hsl(0, 0%, 20%);
+}
+
+.md-typeset h2 {
+    color: hsl(0, 0%, 20%);
+}
+
+.md-typeset h3 {
+    color: hsl(0, 0%, 20%);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 76.1875em) {
+    .md-sidebar--primary {
+        transform: translateX(-100%);
+    }
+    
+    [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+        transform: translateX(0);
+    }
+}
+
+/* Ensure proper spacing around content */
+.md-content {
+    padding: 2em 1em;
+}
+
+/* Match Skupper's table styling */
+.md-typeset table:not([class]) {
+    border-collapse: collapse;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+    border: 1px solid hsl(0, 0%, 90%);
+    padding: 0.5em 1em;
+}
+
+/* Adjust search box styling to match Skupper */
+.md-search__input {
+    background-color: hsl(0, 0%, 97%);
+}
+
+/* Fix any z-index issues between Skupper header and Material sidebar */
+.md-sidebar {
+    z-index: 999;
+}
+
+body > header {
+    z-index: 1000;
+}
+
+/* Made with Bob */

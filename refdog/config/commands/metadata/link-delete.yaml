@@ -1,0 +1,12 @@
+command: link delete
+examples:
+- description: Delete a link
+  command: skupper link delete west-6bfn6
+  output: 'Waiting for deletion...
+
+    Link "west-6bfn6" is deleted.'
+related_resources:
+- link
+wait:
+  default: Deletion
+  description: Waits for Deletion status by default

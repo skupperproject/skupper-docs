@@ -1,0 +1,44 @@
+name: version
+description: |
+  Display versions of Skupper components.
+examples: |
+  # Show component versions
+  $ skupper version
+  COMPONENT          VERSION
+  cli                2.0.0
+  controller         2.0.0
+  router             3.0.0
+
+  # Show version details in YAML format
+  $ skupper version --output yaml
+  components:
+    cli:
+      version: 2.0.0
+    controller:
+      version: 2.0.0
+      images:
+        controller:
+          name: quay.io/skupper/controller:2.0.0
+          digest: sha256:663d97f86ff3fcce27a3842cd2b3a8e32af791598a46d815c07b0aec07505f55
+    router:
+      version: 3.0.0
+      images:
+        router:
+          name: quay.io/skupper/router:3.0.0
+          digest: sha256:dc5e27385a1e110dd2db1903ba7ec3e0d50b57f742aa02d7dd0a7b1b68c34394
+        kube-adaptor:
+          name: quay.io/skupper/kube-adaptor:2.0.0
+          digest: sha256:4dc24bb3d605ed3fcec2f8ef7d45ca883d9d87b278bfedd5fcca74281d617a5e
+include_options: [context/*, global/*]
+options:
+  - name: output
+    type: string
+    placeholder: format
+    short_option: o
+    description: |
+      Produce verbose structured output.
+    choices:
+      - name: json
+        description: Produce JSON output
+      - name: yaml
+        description: Produce YAML output

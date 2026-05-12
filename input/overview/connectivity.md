@@ -1,5 +1,8 @@
 <a id="overview-connectivity"></a>
 # Skupper connectivity
+<!--CONCEPT-->
+
+Skupper provides secure connectivity for services running across multiple clusters.
 
 Skupper represents a new approach to connecting services across multiple Kubernetes clusters.
 See how Skupper can give you the flexibility to deploy your services where you need them.
@@ -42,4 +45,3 @@ You can add and remove sites on demand.
 Build large, robust networks of connected clusters.
 
 ![many-clusters](../images/many-clusters.svg)
-

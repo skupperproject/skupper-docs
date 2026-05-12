@@ -1,0 +1,103 @@
+name: connector
+resource: connector
+related_commands: [listener]
+description: |
+  Display help for connector commands and exit.
+include_options: [global/*]
+subcommands:
+  - name: create
+    wait: Configured
+    related_commands: [listener/create]
+    description: |
+      Create a connector.
+    examples: |
+      # Create a connector for a database
+      $ skupper connector create database 5432
+      Waiting for status...
+      Connector "database" is configured.
+
+      # Set the routing key and selector explicitly
+      $ skupper connector create backend 8080 --routing-key be1 --selector app=be1
+
+      # Use the workload option to select pods
+      $ skupper connector create backend 8080 --workload deployment/backend
+    include_options: [connector/*, create/*, context/*, global/*]
+    options:
+      - name: name
+        description: |
+          @description@
+
+          The name is the default routing key if the `--routing-key`
+          option is not specified.  On Kubernetes, the name defines
+          the default pod selector if the `--selector` and
+          `--workload` options are not specified.
+      - name: port
+  - name: update
+    wait: Configured
+    related_commands: [listener/update]
+    description: |
+      Update a connector.
+    examples: |
+      # Change the workload and port
+      $ skupper connector update database --workload deployment/mysql --port 3306
+      Waiting for status...
+      Connector "database" is configured.
+
+      # Change the routing key
+      $ skupper connector update backend --routing-key be2
+    include_options: [connector/*, update/*, context/*, global/*]
+  - name: delete
+    wait: Deletion
+    related_commands: [listener/delete]
+    description: |
+      Delete a connector.
+    examples: |
+      # Delete a connector
+      $ skupper connector delete database
+      Waiting for deletion...
+      Connector "database" is deleted.
+    include_options: [delete/*, context/*, global/*]
+  - name: status
+    related_commands: [listener/status]
+    description: |
+      Display the status of connectors in the current site.
+    examples: |
+      # Show the status of all connectors in the current site
+      $ skupper connector status
+      NAME       STATUS   ROUTING-KEY   SELECTOR         HOST     PORT   LISTENERS
+      backend    Ready    backend       app=backend      <none>   8080   true
+      database   Ready    database      app=postgresql   <none>   5432   true
+
+      # Show the status of one connector
+      $ skupper connector status backend
+      Name:                     backend
+      Status:                   Ready
+      Message:                  <none>
+      Routing key:              backend
+      Selector:                 app=backend
+      Host:                     <none>
+      Port:                     8080
+      Has matching listeners:   1
+    include_options: [status/*, context/*, global/*]
+  - name: generate
+    related_commands: [listener/generate]
+    description: |
+      Generate a Connector resource.
+    examples: |
+      # Generate a Connector resource and print it to the console
+      $ skupper connector generate backend 8080
+      apiVersion: skupper.io/v2alpha1
+      kind: Connector
+      metadata:
+        name: backend
+      spec:
+        routingKey: backend
+        port: 8080
+        selector: app=backend
+
+      # Generate a Connector resource and direct the output to a file
+      $ skupper connector generate backend 8080 > backend.yaml
+    include_options: [connector/*, generate/*, global/*]
+    options:
+      - name: name
+      - name: port

@@ -1,0 +1,40 @@
+name: Listener
+examples:
+- description: 'A listener in site West for the Hello World backend service
+
+    in site East
+
+    '
+  yaml: "apiVersion: skupper.io/v2alpha1\nkind: Listener\nmetadata:\n  name: backend\n\
+    \  namespace: hello-world-west\nspec:\n  routingKey: backend\n  host: backend\n\
+    \  port: 8080\n"
+related_resources:
+- connector
+links:
+- skupper/service-exposure
+properties:
+  routingKey:
+    updatable: true
+    related_concepts:
+    - routing-key
+  host:
+    updatable: true
+  port:
+    updatable: true
+  exposePodsByName:
+    group: advanced
+    platforms:
+    - Kubernetes
+    links:
+    - skupper/individual-pod-services
+  tlsCredentials:
+    group: advanced
+    links:
+    - skupper/application-tls
+    - kubernetes/tls-secrets
+    - skupper/system-tls-credentials
+  type:
+    group: advanced
+  hasMatchingConnector:
+    related_concepts:
+    - routing-key
