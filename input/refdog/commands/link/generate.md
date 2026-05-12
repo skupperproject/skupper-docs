@@ -2,7 +2,7 @@
 body_class: object command
 refdog_links:
 - title: Site linking
-  url: /topics/site-linking.html
+  url: /docs/refdog/topics/site-linking.html
 - title: Link concept
   url: /docs/refdog/concepts/link.html
 - title: Link resource
@@ -10,6 +10,7 @@ refdog_links:
 - title: Token command
   url: /docs/refdog/commands/token/index.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # Link generate command

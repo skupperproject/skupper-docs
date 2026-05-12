@@ -5,6 +5,7 @@ refdog_links:
   url: /docs/refdog/concepts/application.html
 - title: Workload concept
   url: /docs/refdog/concepts/workload.html
+render_macros: false
 ---
 
 # Component concept

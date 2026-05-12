@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Load balancing
 
 - Skupper load balances connections (not requests) across connectors

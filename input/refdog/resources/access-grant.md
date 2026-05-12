@@ -2,7 +2,7 @@
 body_class: object resource
 refdog_links:
 - title: Site linking
-  url: /topics/site-linking.html
+  url: /docs/refdog/topics/site-linking.html
 - title: Access token concept
   url: /docs/refdog/concepts/access-token.html
 - title: AccessToken resource
@@ -10,6 +10,7 @@ refdog_links:
 - title: Token issue command
   url: /docs/refdog/commands/token/issue.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # AccessGrant resource
@@ -49,7 +50,7 @@ The name of the resource.
 
 The namespace of the resource.
 
-<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/docs/refdog/concepts/platform.html">Platform concept</a>, <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes namespaces</a></td></table>
+<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/concepts/platform.html">Platform concept</a>, <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes namespaces</a></td></table>
 
 </div>
 </div>

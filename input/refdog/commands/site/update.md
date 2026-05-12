@@ -2,12 +2,13 @@
 body_class: object command
 refdog_links:
 - title: Site configuration
-  url: /topics/site-configuration.html
+  url: /docs/refdog/topics/site-configuration.html
 - title: Site concept
   url: /docs/refdog/concepts/site.html
 - title: Site resource
   url: /docs/refdog/resources/site.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # Site update command

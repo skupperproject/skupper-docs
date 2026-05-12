@@ -1,7 +1,6 @@
 import mistune as _mistune
 import plano as _plano
 import re as _re
-import os as _os
 
 StringBuilder = _plano.StringBuilder
 capitalize, join, plural = _plano.capitalize, _plano.join, _plano.plural
@@ -11,11 +10,7 @@ emit_yaml, read_yaml = _plano.emit_yaml, _plano.read_yaml
 list_dir, make_dir = _plano.list_dir, _plano.make_dir
 string_matches_glob = _plano.string_matches_glob
 
-# Link prefix - configurable via environment variable
-# Default: {{site.prefix}} for Transom/Jekyll template substitution
-# Set to "" for MkDocs with refdog at doc root
-# Set to "/refdog" for MkDocs with refdog in subdirectory
-SITE_PREFIX = _os.getenv('REFDOG_SITE_PREFIX', '{{site.prefix}}')
+REFDOG_PREFIX = "/docs/refdog"
 
 _named_links = read_yaml("config/links.yaml")
 
@@ -32,7 +27,7 @@ def generate_object_metadata(obj):
     def add_link(other):
         link_data.append({
             "title": other.title_with_type,
-            "url": other.href.removeprefix("{{site.prefix}}"),
+            "url": other.href,
         })
 
     for name in obj.links:
@@ -41,7 +36,7 @@ def generate_object_metadata(obj):
 
         link_data.append({
             "title": _named_links[name]["title"],
-            "url": _named_links[name]["url"],
+            "url": _apply_refdog_prefix(_named_links[name]["url"]),
         })
 
     for other in obj.corresponding_objects:
@@ -58,6 +53,7 @@ def generate_object_metadata(obj):
 
     data = {
         "body_class": "object {}".format(obj.__class__.__name__.lower()),
+        "render_macros": False,
         "refdog_object_has_attributes": True,
         "refdog_links": link_data,
     }
@@ -124,11 +120,20 @@ def generate_attribute_links(attr):
         title, url = link
 
         if url.startswith("/"):
-            url = SITE_PREFIX + url
+            url = _apply_refdog_prefix(url)
 
         out.append(f"<a href=\"{url}\">{title}</a>")
 
     return ", ".join(out)
+
+def _apply_refdog_prefix(url):
+    if not url.startswith("/"):
+        return url
+
+    if url == REFDOG_PREFIX or url.startswith(f"{REFDOG_PREFIX}/"):
+        return url
+
+    return REFDOG_PREFIX + url
 
 def object_property(name, default=None, required=False):
     def get(obj):
@@ -258,7 +263,7 @@ class ModelObject:
     @property
     def href(self):
         type = self.__class__.__name__.lower()
-        return f"{SITE_PREFIX}/{plural(type)}/{self.id}.html"
+        return f"{REFDOG_PREFIX}/{plural(type)}/{self.id}.html"
 
     @property
     def corresponding_objects(self):

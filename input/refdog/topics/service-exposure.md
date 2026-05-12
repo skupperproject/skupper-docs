@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Service exposure
 
 - To expose multi-port services, create multiple listeners and

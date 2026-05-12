@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Attached connectors
 
 - An attached connector is one not directly in the site namespace but

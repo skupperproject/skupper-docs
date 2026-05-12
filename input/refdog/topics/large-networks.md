@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Large networks
 
 - Skupper can scale up to networks with many sites.

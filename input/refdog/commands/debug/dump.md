@@ -2,8 +2,9 @@
 body_class: object command
 refdog_links:
 - title: Debug dumps
-  url: /topics/debug-dumps.html
+  url: /docs/refdog/topics/debug-dumps.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # Debug dump command

@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # System TLS credentials
 
 - Kubernetes already has secrets.  The Docker, Podman, and Linux

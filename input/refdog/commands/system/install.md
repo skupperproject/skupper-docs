@@ -6,6 +6,7 @@ refdog_links:
 - title: System uninstall command
   url: /docs/refdog/commands/system/uninstall.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # System install command
@@ -29,9 +30,24 @@ service if it is not already available.
 </div>
 <div class="attribute-body">
 
-help for install ``` ``` -c, --context string      Set the kubeconfig context
+help for install
 
 
+
+</div>
+</div>
+
+<div class="attribute">
+<div class="attribute-heading">
+<h3 id="option-reload-type">--reload-type</h3>
+<div class="attribute-type-info">&lt;string&gt;</div>
+</div>
+<div class="attribute-body">
+
+Specify the type of reload to perform. Choices: manual, auto (default "manual") ``` ``` -c, --context string      Set the kubeconfig context
+
+<table class="fields"><tr><th>Default</th><td><p><code>&quot;manual&quot;</code></p>
+</td></table>
 
 </div>
 </div>

@@ -5,6 +5,7 @@ refdog_links:
   url: /docs/refdog/concepts/network.html
 - title: Component concept
   url: /docs/refdog/concepts/component.html
+render_macros: false
 ---
 
 # Application concept

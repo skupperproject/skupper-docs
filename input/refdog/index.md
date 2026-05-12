@@ -1,5 +1,6 @@
 ---
 body_class: object index
+render_macros: false
 ---
 
 # Refdog

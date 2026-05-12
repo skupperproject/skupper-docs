@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Controller configuration
 
 The controller configuration controls two aspects at present: the

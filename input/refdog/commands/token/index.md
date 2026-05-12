@@ -2,7 +2,7 @@
 body_class: object command
 refdog_links:
 - title: Site linking
-  url: /topics/site-linking.html
+  url: /docs/refdog/topics/site-linking.html
 - title: Access token concept
   url: /docs/refdog/concepts/access-token.html
 - title: AccessGrant resource
@@ -10,6 +10,7 @@ refdog_links:
 - title: AccessToken resource
   url: /docs/refdog/resources/access-token.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # Token command

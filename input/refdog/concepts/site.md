@@ -13,6 +13,7 @@ refdog_links:
   url: /docs/refdog/concepts/platform.html
 - title: Workload concept
   url: /docs/refdog/concepts/workload.html
+render_macros: false
 ---
 
 # Site concept

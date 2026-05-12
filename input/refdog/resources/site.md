@@ -2,7 +2,7 @@
 body_class: object resource
 refdog_links:
 - title: Site configuration
-  url: /topics/site-configuration.html
+  url: /docs/refdog/topics/site-configuration.html
 - title: Site concept
   url: /docs/refdog/concepts/site.html
 - title: Site command
@@ -10,6 +10,7 @@ refdog_links:
 - title: Link resource
   url: /docs/refdog/resources/link.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # Site resource
@@ -71,7 +72,7 @@ The name of the resource.
 
 The namespace of the resource.
 
-<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/docs/refdog/concepts/platform.html">Platform concept</a>, <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes namespaces</a></td></table>
+<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/concepts/platform.html">Platform concept</a>, <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes namespaces</a></td></table>
 
 </div>
 </div>
@@ -97,7 +98,7 @@ the sites must have link access enabled.
 </td></tr><tr><th><code>default</code></th><td><p>Use the default link access for the current platform. On OpenShift, the default is <code>route</code>.  For other Kubernetes flavors, the default is <code>loadbalancer</code>.</p>
 </td></tr><tr><th><code>route</code></th><td><p>Use an OpenShift route.  <em>OpenShift only.</em></p>
 </td></tr><tr><th><code>loadbalancer</code></th><td><p>Use a Kubernetes load balancer.</p>
-</td></tr></table></td><tr><th>Updatable</th><td>True</td><tr><th>See also</th><td><a href="/docs/refdog/docs/refdog/concepts/link.html">Link concept</a></td></table>
+</td></tr></table></td><tr><th>Updatable</th><td>True</td><tr><th>See also</th><td><a href="/docs/refdog/concepts/link.html">Link concept</a></td></table>
 
 </div>
 </div>
@@ -305,7 +306,7 @@ port, and group.
 
 These include connection endpoints for link access.
 
-<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/docs/refdog/concepts/link.html">Link concept</a></td></table>
+<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/concepts/link.html">Link concept</a></td></table>
 
 </div>
 </div>
@@ -331,7 +332,7 @@ These include connection endpoints for link access.
 </div>
 <div class="attribute-body">
 
-<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/docs/refdog/concepts/network.html">Network concept</a></td></table>
+<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/concepts/network.html">Network concept</a></td></table>
 
 </div>
 </div>

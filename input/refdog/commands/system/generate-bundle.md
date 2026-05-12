@@ -4,6 +4,7 @@ refdog_links:
 - title: Platform concept
   url: /docs/refdog/concepts/platform.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # System generate-bundle command

@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Components
 
 - The controller is focused on interacting with the Kube API

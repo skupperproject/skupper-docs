@@ -6,6 +6,7 @@ refdog_links:
 - title: System start command
   url: /docs/refdog/commands/system/start.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # System stop command

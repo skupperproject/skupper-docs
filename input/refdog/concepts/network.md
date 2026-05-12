@@ -2,11 +2,12 @@
 body_class: object concept
 refdog_links:
 - title: Site linking
-  url: /topics/site-linking.html
+  url: /docs/refdog/topics/site-linking.html
 - title: Site concept
   url: /docs/refdog/concepts/site.html
 - title: Link concept
   url: /docs/refdog/concepts/link.html
+render_macros: false
 ---
 
 # Network concept

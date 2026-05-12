@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # System namespaces
 
 - Kubernetes already has namespaces.  This is for non-Kubernetes

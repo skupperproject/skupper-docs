@@ -7,6 +7,7 @@ refdog_links:
   url: /docs/refdog/concepts/site.html
 - title: Connector concept
   url: /docs/refdog/concepts/connector.html
+render_macros: false
 ---
 
 # Workload concept

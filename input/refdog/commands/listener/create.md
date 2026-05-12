@@ -2,7 +2,7 @@
 body_class: object command
 refdog_links:
 - title: Service exposure
-  url: /topics/service-exposure.html
+  url: /docs/refdog/topics/service-exposure.html
 - title: Listener concept
   url: /docs/refdog/concepts/listener.html
 - title: Listener resource
@@ -12,6 +12,7 @@ refdog_links:
 - title: Connector command
   url: /docs/refdog/commands/connector/index.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # Listener create command

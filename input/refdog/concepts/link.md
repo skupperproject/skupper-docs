@@ -2,7 +2,7 @@
 body_class: object concept
 refdog_links:
 - title: Site linking
-  url: /topics/site-linking.html
+  url: /docs/refdog/topics/site-linking.html
 - title: Link resource
   url: /docs/refdog/resources/link.html
 - title: Link command
@@ -13,6 +13,7 @@ refdog_links:
   url: /docs/refdog/concepts/site.html
 - title: Access token concept
   url: /docs/refdog/concepts/access-token.html
+render_macros: false
 ---
 
 # Link concept

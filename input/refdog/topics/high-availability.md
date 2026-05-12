@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # High availability
 
 - Multiple routers, not controllers.

@@ -1,10 +1,11 @@
 ---
 title: Commands
+render_macros: false
 refdog_links:
   - title: Concepts
-    url: /concepts/index.html
+    url: /docs/refdog/concepts/index.html
   - title: Resources
-    url: /resources/index.html
+    url: /docs/refdog/resources/index.html
 ---
 
 # Skupper CLI commands

@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Resource settings
 
 - Each Skupper resource has a set of additional settings.

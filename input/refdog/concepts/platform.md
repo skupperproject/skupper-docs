@@ -3,6 +3,7 @@ body_class: object concept
 refdog_links:
 - title: Site concept
   url: /docs/refdog/concepts/site.html
+render_macros: false
 ---
 
 # Platform concept

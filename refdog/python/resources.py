@@ -9,11 +9,12 @@ def generate(model):
 
     append("---")
     append("title: Resources")
+    append("render_macros: false")
     append("refdog_links:")
     append("  - title: Concepts")
-    append("    url: /concepts/index.html")
+    append("    url: /docs/refdog/concepts/index.html")
     append("  - title: Commands")
-    append("    url: /commands/index.html")
+    append("    url: /docs/refdog/commands/index.html")
     append("---")
     append()
     append("# Skupper API resources")
@@ -61,8 +62,7 @@ def generate_resource(resource):
     append()
 
     if resource.description:
-        # Replace {{site.prefix}} template syntax with actual prefix
-        description = resource.description.strip().replace("{{site.prefix}}", SITE_PREFIX)
+        description = resource.description.strip().replace("{{site.prefix}}", REFDOG_PREFIX)
         append(description)
         append()
 

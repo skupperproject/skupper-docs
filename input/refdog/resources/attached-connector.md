@@ -2,10 +2,11 @@
 body_class: object resource
 refdog_links:
 - title: Attached connectors
-  url: /topics/attached-connectors.html
+  url: /docs/refdog/topics/attached-connectors.html
 - title: AttachedConnectorBinding resource
   url: /docs/refdog/resources/attached-connector-binding.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # AttachedConnector resource
@@ -42,7 +43,7 @@ AttachedConnectorBinding resource in the site namespace.
 
 The namespace of the resource.
 
-<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/docs/refdog/concepts/platform.html">Platform concept</a>, <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes namespaces</a></td></table>
+<table class="fields"><tr><th>See also</th><td><a href="/docs/refdog/concepts/platform.html">Platform concept</a>, <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Kubernetes namespaces</a></td></table>
 
 </div>
 </div>

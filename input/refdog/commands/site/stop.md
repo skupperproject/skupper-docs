@@ -1,4 +1,5 @@
 ---
+render_macros: false
 body_class: object command
 links:
   - name: Site concept

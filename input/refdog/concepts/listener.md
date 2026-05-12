@@ -2,7 +2,7 @@
 body_class: object concept
 refdog_links:
 - title: Service exposure
-  url: /topics/service-exposure.html
+  url: /docs/refdog/topics/service-exposure.html
 - title: Listener resource
   url: /docs/refdog/resources/listener.html
 - title: Listener command
@@ -11,6 +11,7 @@ refdog_links:
   url: /docs/refdog/concepts/connector.html
 - title: Routing key concept
   url: /docs/refdog/concepts/routing-key.html
+render_macros: false
 ---
 
 # Listener concept

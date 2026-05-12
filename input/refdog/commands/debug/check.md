@@ -2,6 +2,7 @@
 body_class: object command
 refdog_links: []
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # Debug check command
@@ -80,7 +81,7 @@ Set the Skupper platform.
 </td></tr><tr><th><code>docker</code></th><td><p>Docker</p>
 </td></tr><tr><th><code>podman</code></th><td><p>Podman</p>
 </td></tr><tr><th><code>linux</code></th><td><p>Linux</p>
-</td></tr></table></td><tr><th>See also</th><td><a href="/docs/refdog/docs/refdog/concepts/platform.html">Platform concept</a></td></table>
+</td></tr></table></td><tr><th>See also</th><td><a href="/docs/refdog/concepts/platform.html">Platform concept</a></td></table>
 
 </div>
 </div>

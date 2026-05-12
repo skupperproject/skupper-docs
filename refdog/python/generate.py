@@ -42,6 +42,7 @@ def generate_index():
 
     append("---")
     append("body_class: object index")
+    append("render_macros: false")
     append("---")
     append()
     append("# Refdog")

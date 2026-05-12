@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Debug dumps
 
 - The purpose of a debug dump is to package up the details of a site

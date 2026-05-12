@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Individual pod services
 
 - Directly connect to individual pods across a Skupper network.

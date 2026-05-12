@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Router TLS
 
 - Routers always communicate using mutual TLS.

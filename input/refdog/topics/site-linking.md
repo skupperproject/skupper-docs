@@ -1,3 +1,7 @@
+---
+render_macros: false
+---
+
 # Site linking
 
 - Using tokens and the CLI

@@ -2,6 +2,7 @@
 body_class: object command
 refdog_links: []
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # Debug command

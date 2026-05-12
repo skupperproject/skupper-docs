@@ -11,11 +11,12 @@ def generate(model):
 
     append("---")
     append("title: Commands")
+    append("render_macros: false")
     append("refdog_links:")
     append("  - title: Concepts")
-    append("    url: /concepts/index.html")
+    append("    url: /docs/refdog/concepts/index.html")
     append("  - title: Resources")
-    append("    url: /resources/index.html")
+    append("    url: /docs/refdog/resources/index.html")
     append("---")
     append()
     append("# Skupper CLI commands")
@@ -470,7 +471,7 @@ class Command(ModelObject):
     @property
     def href(self):
         if self.subcommands:
-            return f"{SITE_PREFIX}/commands/{self.id}/index.html"
+            return f"{REFDOG_PREFIX}/commands/{self.id}/index.html"
 
         return super().href
 

@@ -6,6 +6,7 @@ refdog_links:
 - title: System install command
   url: /docs/refdog/commands/system/install.html
 refdog_object_has_attributes: true
+render_macros: false
 ---
 
 # System uninstall command
