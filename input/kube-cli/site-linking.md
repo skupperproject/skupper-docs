@@ -243,5 +243,3 @@ To link sites through a proxy, you create a Secret containing the proxy configur
    ```
 
 All inter-site traffic is protected by mutual TLS and routed through the HTTP CONNECT proxy tunnel.
-
-There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
