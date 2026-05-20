@@ -187,7 +187,6 @@ To link sites through a proxy, you create a Secret containing the proxy configur
      port: "3128"
      username: myuser
    ```
-   The password is stored separately in a credentials file that is automatically mounted into the router pod.
 
 3. On the listening site, make sure link access is enabled:
    ```bash
@@ -240,6 +239,10 @@ To link sites through a proxy, you create a Secret containing the proxy configur
 8. To troubleshoot connection issues, check the router logs to see the HTTP CONNECT proxy exchange:
    ```bash
    kubectl logs deployment/skupper-router -f
+   ```
+   If you update the  `my-proxy-config`  secret, you must update the link resource to force the controller to update the configuration, for example:
+   ```bash
+   kubectl annotate link link-to-remote-site -n east reconcile=$(date +%s) --overwrite
    ```
 
 All inter-site traffic is protected by mutual TLS and routed through the HTTP CONNECT proxy tunnel.
