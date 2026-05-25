@@ -149,20 +149,31 @@ This feature is only available when using `link` resources, not tokens.
 
 * Two sites
 * At least one site with `enable-link-access` enabled.
-* An HTTP CONNECT proxy accessible from the linking site.
-* Network connectivity from the proxy to the listening site's router endpoints.
+* An HTTP CONNECT proxy accessible from the linking site
+* Network connectivity from the proxy to the listening site's router endpoints
+* The proxy must allow HTTP CONNECT requests to ports 55671 (inter-router) and 45671 (edge). For example, Squid requires:
+  ```
+  acl skupper_ports port 55671 45671  
+  http_access allow CONNECT skupper_ports
+  ```
 
 To link sites through a proxy, you create a Secret containing the proxy configuration, generate a `link` resource YAML file, reference the proxy Secret in the link settings, and apply that resource to create the link.
 
 **Procedure**
 
-1. Make sure the proxy allows CONNECT to the listening site's router ports, typically 55671 and 45671. For example Squid configuration:
-   ```
-   acl skupper_ports port 55671 45671  
-   http_access allow CONNECT skupper_ports
+1. On the listening site, make sure link access is enabled:
+   ```bash
+   skupper site update --enable-link-access
    ```
 
-2. On the site where you want to create a link through a proxy, create a Secret with the proxy configuration:
+2. On the listening site, create a `link` resource YAML file:
+   ```bash
+   skupper link generate > link.yaml
+   ```
+
+3. Copy the generated `link.yaml` file to the linking site.
+
+4. On the linking site, create a Secret with the proxy configuration:
    ```yaml
    apiVersion: v1
    kind: Secret
@@ -179,26 +190,21 @@ To link sites through a proxy, you create a Secret containing the proxy configur
    ```
    
    **📌 NOTE**
-   If your proxy requires authentication, add the username to the Secret:
+   If your proxy requires authentication, add the username and password to the Secret:
    ```yaml
-   ...
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: my-proxy-config
+   type: kubernetes.io/basic-auth
    stringData:
      host: proxy.example.com
      port: "3128"
      username: myuser
+     password: mypassword
    ```
 
-3. On the listening site, make sure link access is enabled:
-   ```bash
-   skupper site update --enable-link-access
-   ```
-
-4. On the listening site, create a `link` resource YAML file:
-   ```bash
-   skupper link generate > link.yaml
-   ```
-
-5. Edit the generated `link.yaml` file to add the proxy configuration in the settings section:
+5. On the linking site, edit the `link.yaml` file to add the proxy configuration in the settings section:
    ```yaml
    apiVersion: skupper.io/v2alpha1
    kind: Link
@@ -217,9 +223,9 @@ To link sites through a proxy, you create a Secret containing the proxy configur
      settings:
        proxy-configuration: my-proxy-config
    ```
-   where `my-proxy-config` is the name of the Secret created in step 2.
+   where `my-proxy-config` is the name of the Secret created in step 4.
 
-6. Apply the `link` resource YAML file to create the link:
+6. On the linking site, apply the `link` resource YAML file to create the link:
    ```bash
    kubectl apply -f link.yaml
    ```
@@ -228,21 +234,21 @@ To link sites through a proxy, you create a Secret containing the proxy configur
    ```bash
    skupper link status
    ```
+   You might need to issue the command multiple times before the link is ready.
    
-   **📌 NOTE**
-   The proxy must allow HTTP CONNECT requests to the ports used by Skupper (typically 55671 for inter-router and 45671 for edge connections).
    If the link remains in "Pending" or "Not Operational" status, check:
    
    * The proxy Secret exists and contains the correct host and port
    * The proxy is accessible from the router pod
+   * Router logs for connection errors: `kubectl logs deployment/skupper-router`
 
-8. To troubleshoot connection issues, check the router logs to see the HTTP CONNECT proxy exchange:
+   **📌 NOTE**
+   If you update the proxy Secret, you must trigger a reconciliation to apply the changes:
    ```bash
-   kubectl logs deployment/skupper-router -f
-   ```
-   If you update the  `my-proxy-config`  secret, you must update the link resource to force the controller to update the configuration, for example:
-   ```bash
-   kubectl annotate link link-to-remote-site -n east reconcile=$(date +%s) --overwrite
+   kubectl annotate link <link-name> reconcile=$(date +%s) --overwrite
    ```
 
 All inter-site traffic is protected by mutual TLS and routed through the HTTP CONNECT proxy tunnel.
+You can now expose services on the application network.
+
+There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
