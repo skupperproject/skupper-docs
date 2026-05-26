@@ -54,21 +54,7 @@ Has matching connectors:   true
 </div>
 <div class="attribute-body">
 
-help for status -o, --output string   print resources to the console instead of submitting them to the Skupper controller. Choices: json, yaml ``` ``` -c, --context string      Set the kubeconfig context
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-kubeconfig">--kubeconfig</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Path to the kubeconfig file to use -n, --namespace string    Set the namespace -p, --platform string     Set the platform type to use [kubernetes, podman, docker, linux] ```
+help for status -o, --output string   print resources to the console instead of submitting them to the Skupper controller. Choices: json, yaml ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
 
 
 

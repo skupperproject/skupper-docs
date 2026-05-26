@@ -19,7 +19,7 @@ render_macros: false
 skupper link generate [options]
 ~~~
 
-Generate a new link resource as a YAML output, unless explicitly specified otherwise using the --output flag. The resultant
+Generate a new link resource as a YAML output The resultant
 output needs to be applied in the site in which we want to create the link.
 
 <table class="fields"><tr><th>Platforms</th><td>Kubernetes, Docker, Podman, Linux</td><tr><th>Waits for</th><td>Site resource ready</td></table>
@@ -63,72 +63,26 @@ $ skupper link generate > link.yaml
 
 <div class="attribute">
 <div class="attribute-heading">
-<h3 id="option-cost">--cost</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-the configured "expense" of sending traffic over the link. (default "1")
-
-<table class="fields"><tr><th>Default</th><td><p><code>&quot;1&quot;</code></p>
-</td></table>
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-generate-credential">--generate-credential</h3>
-<div class="attribute-type-info">boolean</div>
-</div>
-<div class="attribute-body">
-
-generate the necessary credentials to create the link (default true)
-
-<table class="fields"><tr><th>Default</th><td><p><code>true</code></p>
-</td></table>
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
 <h3 id="option-help">--help</h3>
 <div class="attribute-type-info">boolean</div>
 </div>
 <div class="attribute-body">
 
-help for generate -o, --output string            print resources to the console instead of submitting them to the Skupper controller. Choices: json, yaml (default "yaml")
+help for generate
 
-<table class="fields"><tr><th>Default</th><td><p><code>&quot;yaml&quot;</code></p>
-</td></table>
 
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-timeout">--timeout</h3>
-<div class="attribute-type-info">&lt;duration&gt;</div>
-</div>
-<div class="attribute-body">
-
-raise an error if the operation does not complete in the given period of time (expressed in seconds). (default 1m0s)
-
-<table class="fields"><tr><th>Default</th><td><p><code>1m0s</code></p>
-</td></table>
 
 </div>
 </div>
 
 <div class="attribute">
 <div class="attribute-heading">
-<h3 id="option-tls-credentials">--tls-credentials</h3>
+<h3 id="option-host">--host</h3>
 <div class="attribute-type-info">&lt;string&gt;</div>
 </div>
 <div class="attribute-body">
 
-the name of a Kubernetes secret containing the generated or externally-supplied TLS credentials. ``` ``` -c, --context string      Set the kubeconfig context
+Endpoint Host
 
 
 
@@ -137,12 +91,12 @@ the name of a Kubernetes secret containing the generated or externally-supplied 
 
 <div class="attribute">
 <div class="attribute-heading">
-<h3 id="option-kubeconfig">--kubeconfig</h3>
+<h3 id="option-name">--name</h3>
 <div class="attribute-type-info">&lt;string&gt;</div>
 </div>
 <div class="attribute-body">
 
-Path to the kubeconfig file to use -n, --namespace string    Set the namespace -p, --platform string     Set the platform type to use [kubernetes, podman, docker, linux] ```
+Router Access Name ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
 
 
 

@@ -34,6 +34,7 @@ refdog_links:
 
 <table class="objects">
 <tr><th><a href="/docs/refdog/concepts/listener.html">Listener</a></th><td>A listener binds a local connection endpoint to connectors in remote sites</td></tr>
+<tr><th><a href="/docs/refdog/concepts/multi-key-listener.html">Multi-key-listener</a></th><td>A multi-key listener binds a single local connection endpoint to multiple connectors in remote sites using a strategy that matches multiple routing keys</td></tr>
 <tr><th><a href="/docs/refdog/concepts/connector.html">Connector</a></th><td>A connector binds a local workload to listeners in remote sites</td></tr>
 <tr><th><a href="/docs/refdog/concepts/routing-key.html">Routing key</a></th><td>A routing key is a string identifier for matching listeners and connectors</td></tr>
 </table>

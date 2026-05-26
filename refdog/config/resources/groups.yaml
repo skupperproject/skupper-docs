@@ -14,6 +14,7 @@
 - title: Service exposure
   objects:
     - listener
+    - multi-key-listener
     - connector
     - attached-connector
     - attached-connector-binding

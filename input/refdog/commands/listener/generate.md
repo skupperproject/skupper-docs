@@ -110,24 +110,10 @@ the name of a Kubernetes secret containing the generated or externally-supplied 
 </div>
 <div class="attribute-body">
 
-The listener type. Choices: [tcp]. (default "tcp") ``` ``` -c, --context string      Set the kubeconfig context
+The listener type. Choices: [tcp]. (default "tcp") ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
 
 <table class="fields"><tr><th>Default</th><td><p><code>&quot;tcp&quot;</code></p>
 </td><tr><th>Choices</th><td><table class="choices"><tr><th><code>tcp</code></th><td></td></tr></table></td></table>
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-kubeconfig">--kubeconfig</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Path to the kubeconfig file to use -n, --namespace string    Set the namespace -p, --platform string     Set the platform type to use [kubernetes, podman, docker, linux] ```
-
-
 
 </div>
 </div>

@@ -41,7 +41,7 @@ refdog_links:
 <tr><th><a href="/docs/refdog/commands/link/delete.html">Link delete</a></th><td>Delete a link by name
 </td></tr>
 <tr><th><a href="/docs/refdog/commands/link/status.html">Link status</a></th><td>Display the status of links in the current site</td></tr>
-<tr><th><a href="/docs/refdog/commands/link/generate.html">Link generate</a></th><td>Generate a new link resource as a YAML output, unless explicitly specified otherwise using the --output flag</td></tr>
+<tr><th><a href="/docs/refdog/commands/link/generate.html">Link generate</a></th><td>Generate a new link resource as a YAML output The resultant output needs to be applied in the site in which we want to create the link</td></tr>
 </table>
 
 <h4>Service exposure</h4>

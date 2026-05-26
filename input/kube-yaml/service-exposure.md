@@ -132,7 +132,7 @@ With multi-key listeners, you must choose a strategy which determines how the tr
 * weighted - Uses the routing keys in proportion to the assigned weights. For example, if `backend1` is assigned 25 and `backend2` is assigned 75, then only a quarter of the TCP connections are directed to `backend1`.
 
 
-For configuration details, see [Listener resource][listener-resource].
+For configuration details, see [MultiKeyListener resource][multikeylistener-resource].
 
 **Prerequisites**
 
@@ -278,3 +278,4 @@ For configuration details, see [Connector resource][connector-resource].
 
 [connector-resource]: https://skupperproject.github.io/refdog/resources/connector.html
 [listener-resource]: https://skupperproject.github.io/refdog/resources/listener.html
+[multikeylistener-resource]: https://skupperproject.github.io/refdog/resources/multi-key-listener.html
