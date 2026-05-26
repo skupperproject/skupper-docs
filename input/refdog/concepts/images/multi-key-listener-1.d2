@@ -1,0 +1,89 @@
+direction: down
+
+vars: {
+  blue: "#0b57d0"
+  purple: "#5b2bbf"
+  green: "#16833a"
+  teal: "#087d8f"
+  orange: "#d97706"
+  light-blue: "#eef5ff"
+  light-purple: "#f5f0ff"
+  light-green: "#effaf2"
+  light-teal: "#edf9fb"
+  light-orange: "#fff7e6"
+  border: "#c7ccd6"
+}
+
+classes: {
+  main-box: {
+    style: {
+      border-radius: 14
+      stroke-width: 2
+      fill: ${light-blue}
+      stroke: ${blue}
+      shadow: true
+    }
+  }
+  van-box: {
+    style: {
+      border-radius: 16
+      stroke-width: 2
+      fill: ${light-purple}
+      stroke: ${purple}
+    }
+  }
+  site-box: {
+    style: {
+      border-radius: 14
+      stroke-width: 2
+      fill: ${light-green}
+      stroke: ${green}
+    }
+  }
+}
+
+client: {
+  shape: person
+  label: "Client\nlocal application"
+  style.fill: "#ffffff"
+}
+
+listener: {
+  class: main-box
+  label: "MultiKeyListener\n\nname: mkl-backend\nhost: mkl-backend\nport: 9092\n\nstrategy: weighted\nRouting keys:\n  east-backend: 3\n  west-backend: 1"
+}
+
+van: {
+  class: van-box
+  label: "Application Network\n\nDistributes traffic by weight across routing keys"
+}
+
+east_site: {
+  class: site-box
+  label: "SITE — east\n\nConnector\nrouting key: east-backend\n\nforwards to\n↓\nLocal workload\napplication service"
+}
+
+west_site: {
+  class: site-box
+  label: "SITE — west\n\nConnector\nrouting key: west-backend\n\nforwards to\n↓\nLocal workload\napplication service"
+}
+
+client -> listener: "local TCP connection" {
+  style.stroke: ${blue}
+  style.stroke-width: 3
+}
+
+listener -> van: "distributes connections" {
+  style.stroke: ${purple}
+  style.stroke-width: 3
+}
+
+van -> east_site: "75% of traffic\n(weight: 3)" {
+  style.stroke: ${green}
+  style.stroke-width: 4
+}
+
+van -> west_site: "25% of traffic\n(weight: 1)" {
+  style.stroke: ${green}
+  style.stroke-width: 2
+}

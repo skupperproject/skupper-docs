@@ -12,14 +12,18 @@ description: |
   weighted load balancing.
 
   <figure>
-    <img src="images/routing-key-model.svg"/>
-    <figcaption>Multi-key listeners match multiple routing keys</figcaption>
+    <img src="images/multi-key-listener-1.svg"/>
+    <figcaption>Weighted strategy distributes traffic evenly across multiple routing keys</figcaption>
   </figure>
 
-  A multi-key listener exposes a single host and port endpoint, but
-  routes traffic to different connectors based on its configured
+  A multi-key listener exposes a single host and port endpoint that
+  distributes traffic to different connectors based on its configured
   strategy.  This allows you to aggregate multiple backend services
   behind a single service endpoint.
+
+  **Key idea:** The multi-key listener does not choose a remote IP
+  address. It chooses **routing keys**. Connectors that advertise
+  those routing keys forward the streams to their local workloads.
 
   ## Strategies
 
