@@ -126,15 +126,28 @@ For configuration details, see [Listener resource][listener-resource].
 A multi-key listener binds a single local host and port to multiple routing keys in remote sites.
 Use a multi-key listener when you want one service endpoint to aggregate traffic from multiple connectors.
 
+With multi-key listeners, you must choose a strategy which determines how the traffic is distributed:
+
+* priority - Uses the first routing key in list that is available for traffic. If the connector becomes unavailable, the listener matches with the next available routing key in list.
+* weighted - Uses the routing keys in proportion to the assigned weights. For example, if `backend1` is assigned 25 and `backend2` is assigned 75, then only a quarter of the TCP connections are directed to `backend1`.
+
+
 For configuration details, see [Listener resource][listener-resource].
+
+**Prerequisites**
+
+* Multiple connectors created with different routing keys. See [Creating a connector using YAML](#kube-creating-connector-yaml).
 
 **Procedure**
 
 1. Identify the connectors that you want to aggregate.
    Note the routing keys for each connector.
 
-2. Create a multi-key listener resource YAML file.
-   For example, the `west/listeners.yaml` file in this repository defines a weighted TCP listener:
+2. Determine which strategy is best for your use case. For example, failover is best achieved using the `priority` strategy.
+
+
+3. Create a multi-key listener resource YAML file.
+   For example:
    ```yaml
    apiVersion: skupper.io/v2alpha1
    kind: MultiKeyListener
@@ -150,22 +163,6 @@ For configuration details, see [Listener resource][listener-resource].
            west-backend: 1
    ```
    This creates a listener named `mkl-backend` that exposes a single endpoint on port 9092 and distributes traffic evenly across the `east-backend` and `west-backend` routing keys.
-
-   The same file also defines a weighted HTTP listener:
-   ```yaml
-   apiVersion: skupper.io/v2alpha1
-   kind: MultiKeyListener
-   metadata:
-     name: mkl-backend-http
-   spec:
-     host: mkl-backend-http
-     port: 9091
-     strategy:
-       weighted:
-         routingKeys:
-           east-backend-http: 1
-           west-backend-http: 1
-   ```
 
    To prefer one routing key first and fall back to another, use the `priority` strategy:
    ```yaml
@@ -191,7 +188,7 @@ For configuration details, see [Listener resource][listener-resource].
 
    where `<filename>` is the name of a YAML file that is saved on your local filesystem.
 
-3. Check the multi-key listener status:
+4. Check the multi-key listener status:
    ```bash
    kubectl get multikeylistener
    ```
