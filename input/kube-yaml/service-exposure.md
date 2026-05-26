@@ -119,6 +119,87 @@ For configuration details, see [Listener resource][listener-resource].
    **📌 NOTE**
    There must be a `MATCHING-CONNECTOR` for the service to operate.
 
+<a id="kube-creating-multikeylistener-yaml"></a>
+## Creating a multi-key listener using YAML
+<!--PROCEDURE-->
+
+A multi-key listener binds a single local host and port to multiple routing keys in remote sites.
+Use a multi-key listener when you want one service endpoint to aggregate traffic from multiple connectors.
+
+For configuration details, see [Listener resource][listener-resource].
+
+**Procedure**
+
+1. Identify the connectors that you want to aggregate.
+   Note the routing keys for each connector.
+
+2. Create a multi-key listener resource YAML file.
+   For example, the `west/listeners.yaml` file in this repository defines a weighted TCP listener:
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: MultiKeyListener
+   metadata:
+     name: mkl-backend
+   spec:
+     host: mkl-backend
+     port: 9092
+     strategy:
+       weighted:
+         routingKeys:
+           east-backend: 1
+           west-backend: 1
+   ```
+   This creates a listener named `mkl-backend` that exposes a single endpoint on port 9092 and distributes traffic evenly across the `east-backend` and `west-backend` routing keys.
+
+   The same file also defines a weighted HTTP listener:
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: MultiKeyListener
+   metadata:
+     name: mkl-backend-http
+   spec:
+     host: mkl-backend-http
+     port: 9091
+     strategy:
+       weighted:
+         routingKeys:
+           east-backend-http: 1
+           west-backend-http: 1
+   ```
+
+   To prefer one routing key first and fall back to another, use the `priority` strategy:
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: MultiKeyListener
+   metadata:
+     name: mkl-backend-priority
+   spec:
+     host: mkl-backend-priority
+     port: 9095
+     strategy:
+       priority:
+         routingKeys:
+           - east-backend-http
+           - west-backend-http
+   ```
+
+   To create the multi-key listener resource:
+
+   ```bash
+   kubectl apply -f <filename>
+   ```
+
+   where `<filename>` is the name of a YAML file that is saved on your local filesystem.
+
+3. Check the multi-key listener status:
+   ```bash
+   kubectl get multikeylistener
+   ```
+
+   **📌 NOTE**
+   Use the `weighted` strategy to spread traffic across multiple routing keys.
+   Use the `priority` strategy when you want routing keys to be selected in order.
+
 <a id="kube-creating-attachedconnector-yaml"></a>
 ## Creating a connector for a different namespace using YAML
 <!--PROCEDURE-->
