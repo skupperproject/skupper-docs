@@ -74,6 +74,13 @@ skupper site create docker-site -p docker -n docker-ns
    This runs a container to support site, link and service operations.
    This feature is not available on Linux local system sites (systemd).
 
+   **Optional:** Enable the Dynamic System Controller to automatically process YAML resources:
+   ```bash
+   export SKUPPER_SYSTEM_RELOAD_TYPE=auto
+   skupper system install
+   ```
+   With this feature enabled, you can create sites, links, connectors and listeners without needing a system reload to apply your configuration.
+
 3. Create a site:
 
    ```bash
@@ -144,6 +151,13 @@ To support this, Skupper allows you create a `.tar.gz` file with all the require
    ```
    This runs a container to support site, link and service operations.
    This feature is not available on Linux local system sites (systemd).
+
+   **Optional:** Enable the Dynamic System Controller to automatically process YAML resources:
+   ```bash
+   export SKUPPER_SYSTEM_RELOAD_TYPE=auto
+   skupper system install
+   ```
+   With this feature enabled, you can create sites, links, connectors and listeners without needing a system reload to apply your configuration.
 
 3. Create a site:
 

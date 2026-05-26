@@ -39,6 +39,13 @@ There are many options to consider when creating sites using YAML, see [YAML Ref
    Skupper attempts to process any files in the `local` directory.
    Typically, you create all resources you require for a site before running `skupper system setup`.
 
+   **Optional:** Enable the Dynamic System Controller to automatically process YAML resources:
+   ```bash
+   export SKUPPER_SYSTEM_RELOAD_TYPE=auto
+   skupper system install
+   ```
+   With this feature enabled, you can create sites, links, connectors and listeners without needing a system reload to apply your configuration.
+   
 3. Check the status of the site:
    ```bash
    skupper site status
