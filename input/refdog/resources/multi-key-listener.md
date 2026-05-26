@@ -28,6 +28,11 @@ Unlike a standard [listener](listener.html) which maps to a single
 routing key, a MultiKeyListener can route to multiple connectors using
 either priority-based or weighted distribution strategies.
 
+**Important:** Multi-key listener configurations are **not influenced
+by link costs**. Traffic distribution is controlled entirely by the
+configured strategy (priority or weighted), providing predictable
+behavior from the client side.
+
 ## Examples
 
 A weighted multi-key listener that distributes traffic evenly across
@@ -147,6 +152,11 @@ more connector instances by routing key.
 Must specify exactly one of:
 - `priority`: Route to routing keys in priority order (failover)
 - `weighted`: Distribute traffic across routing keys by weight (load balancing)
+
+The strategy operates independently of link costs and provides
+predictable, client-side traffic control. If multiple multi-key
+listeners reference the same routing keys, each listener assigns
+connections autonomously without coordination.
 
 **Note:** The strategy is immutable and cannot be changed after creation.
 
