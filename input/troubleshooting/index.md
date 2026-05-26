@@ -160,6 +160,62 @@ This section outlines some advanced options for checking links.
    There are no link resources in the namespace
    ```
 
+
+<a id="debug-dump"></a>
+## Creating a Skupper debug tar file
+<!--PROCEDURE-->
+
+Create a debug tar file containing diagnostic information about a Skupper site to troubleshoot issues or share with support.
+
+The `skupper debug dump` command creates a compressed tarball (`.tar.gz`) containing logs, configurations, and resource status from a site. The output file is named using the pattern `<filename>-<namespace>-<datetime>.tar.gz`. If no filename is provided, it defaults to `skupper-dump`.
+
+This procedure applies to both Kubernetes and local system sites.
+
+**Procedure**
+
+1. Create the debug tar file for a site:
+
+   ```bash
+   skupper debug dump
+   ```
+
+   Or specify a custom filename:
+
+   ```bash
+   skupper debug dump mysite-debug
+   ```
+
+   The command creates a file such as `skupper-dump-default-20250526-143022.tar.gz`.
+
+2. Extract the tar file to examine its contents:
+
+   ```bash
+   tar -xzf skupper-dump-default-20250526-143022.tar.gz
+   cd skupper-dump-default-20250526-143022
+   ```
+
+3. Check the Skupper and platform versions:
+
+   - `/versions/kubernetes.yaml` - Kubernetes version (on Kubernetes platforms)
+   - `/versions/skupper.yaml` - Versions of Skupper components
+
+4. Check the site configuration and ingress:
+
+   - `/site-namespace/resources/Site-<name>.yaml` - Site specification and status
+   - `/site-namespace/resources/RouterAccess-<name>.yaml` - Ingress and access type configured for the site
+
+5. Check linking and service configuration:
+
+   - `/site-namespace/resources/Link-<name>.yaml` - Link status between sites
+   - `/site-namespace/resources/Accessgrant-<name>.yaml` - Access grants for tokens
+   - `/site-namespace/resources/AccessTokens-<name>.yaml` - Token usage information
+   - `/site-namespace/resources/Connector-<name>.yaml` - Connector configuration and status
+   - `/site-namespace/resources/Listener-<name>.yaml` - Listener configuration and status
+
+
+
+
+
 <a id="resolving-common-problems"></a>
 ## Resolving common problems
 <!--REFERENCE-->
