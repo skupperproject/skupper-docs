@@ -195,8 +195,7 @@ For configuration details, see [MultiKeyListener resource][multikeylistener-reso
    ```
 
    **📌 NOTE**
-   Use the `weighted` strategy to spread traffic across multiple routing keys.
-   Use the `priority` strategy when you want routing keys to be selected in order.
+   If you need to change strategy after you created a multi-key listener, you must delete and recreate the resource. This does not affect changing routing keys or weights.
 
 <a id="kube-creating-attachedconnector-yaml"></a>
 ## Creating a connector for a different namespace using YAML
