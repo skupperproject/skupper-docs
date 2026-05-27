@@ -27,7 +27,7 @@ weighted load balancing.
 
 <figure>
   <img src="images/multi-key-listener-1.svg"/>
-  <figcaption>Weighted strategy distributes traffic evenly across multiple routing keys</figcaption>
+  <figcaption>Weighted strategy distributes traffic proportionally across multiple routing keys</figcaption>
 </figure>
 
 A multi-key listener exposes a single host and port endpoint that
@@ -107,16 +107,3 @@ capacity or proximity.
 **Geographic distribution**: Use a weighted strategy to balance traffic
 across multiple data centers, adjusting weights based on load or
 performance characteristics.
-
-## Platform implementation
-
-On Kubernetes, a multi-key listener is implemented as a
-[Service][kube-service] with custom routing logic in the Skupper
-router.  On Docker, Podman, and Linux, it is a listening socket bound
-to a local network interface.
-
-[kube-service]: https://kubernetes.io/docs/concepts/services-networking/service/
-
-The Skupper router monitors the availability of connectors for each
-routing key and adjusts traffic routing based on the configured
-strategy.
