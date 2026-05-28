@@ -187,7 +187,7 @@ The Dynamic System Controller feature (available on Docker and Podman platforms 
 
 Use this section to diagnose issues when resources are not being automatically detected or processed.
 
-By default, the reload type is set to `manual`, meaning resources must be processed by using `skupper system reload`.
+By default, the reload type is set to `manual`, meaning resources must be processed by using `skupper system start` and `skupper system reload` for subsequent changes.
 
 **Procedure**
 
