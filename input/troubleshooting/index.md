@@ -190,8 +190,9 @@ This procedure applies to both Kubernetes and local system sites.
 2. Extract the tar file to examine its contents:
 
    ```bash
-   tar -xzf skupper-dump-default-20250526-143022.tar.gz
-   cd skupper-dump-default-20250526-143022
+   mkdir skupper-dump
+   tar -xzf skupper-dump-default-20250526-143022.tar.gz -C skupper-dump
+   cd skupper-dump
    ```
 
 3. Check the Skupper and platform versions:
