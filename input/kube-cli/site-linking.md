@@ -179,7 +179,7 @@ To link sites through a proxy, you create a Secret containing the proxy configur
    kind: Secret
    metadata:
      name: my-proxy-config
-   type: Opaque
+   type: kubernetes.io/basic-auth
    stringData:
      host: proxy.example.com
      port: "3128"
