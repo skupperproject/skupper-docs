@@ -12,10 +12,6 @@ description: |
   routing key, a MultiKeyListener can route to multiple connectors using
   either priority-based or weighted distribution strategies.
 
-  **Important:** Multi-key listener configurations are **not influenced
-  by link costs**. Traffic distribution is controlled entirely by the
-  configured strategy (priority or weighted), providing predictable
-  behavior from the client side.
 examples:
   - description: |
       A weighted multi-key listener that distributes traffic evenly across
@@ -85,30 +81,23 @@ spec:
         connections autonomously without coordination.
 
         **Note:** The strategy is immutable and cannot be changed after creation.
-    - name: strategy.priority
+    - name: observer
+      group: advanced
+      choices:
+        - name: auto
+          description: Automatically detect application protocols and produce telemetry
+        - name: none
+          description: Disable protocol inspection to reduce overhead
+        - name: http1
+          description: Restrict inspection to HTTP/1 protocol only
+        - name: http2
+          description: Restrict inspection to HTTP/2 protocol only
       description: |
-        Priority-based routing strategy. Uses the first routing key in the
-        list that is available for traffic. If the connector becomes
-        unavailable, the listener matches with the next available routing
-        key in the list.
-    - name: strategy.priority.routingKeys
-      type: array
-      description: |
-        Ordered list of routing keys to route traffic to, from highest to
-        lowest priority. Must contain 1-256 unique routing keys.
-    - name: strategy.weighted
-      description: |
-        Weighted routing strategy. Uses the routing keys in proportion to
-        the assigned weights. Routing keys with higher weights receive a
-        larger portion of the traffic. If all keys are assigned the same
-        weight, traffic is split equally between them.
-    - name: strategy.weighted.routingKeys
-      type: object
-      description: |
-        Mapping of routing keys to their weight values. Must contain 1-256
-        routing keys. For example, if `backend1` is assigned 25 and
-        `backend2` is assigned 75, then only a quarter of the TCP
-        connections are directed to `backend1`.
+        Controls how the listener inspects network traffic for application-level
+        protocol information. When unset or set to `auto`, the listener inspects
+        traffic to detect known application protocols and produces telemetry events.
+        Set to a specific protocol to restrict inspection, or `none` to disable
+        inspection and reduce overhead.
     - name: tlsCredentials
       group: advanced
       links: [skupper/application-tls, kubernetes/tls-secrets, skupper/system-tls-credentials]
@@ -150,23 +139,8 @@ status:
     - name: strategy
       description: |
         Current state of the routing strategy, including which routing
-        keys are reachable.
-    - name: strategy.priority
-      description: |
-        Priority strategy status information.
-    - name: strategy.priority.routingKeysReachable
-      type: array
-      description: |
-        List of routing keys with at least one reachable connector,
-        given in priority order.
-    - name: strategy.weighted
-      description: |
-        Weighted strategy status information.
-    - name: strategy.weighted.routingKeysReachable
-      type: object
-      description: |
-        Mapping of routing keys to weights for keys with at least one
-        reachable connector.
+        keys are reachable. Contains either `priority` or `weighted` status
+        depending on the configured strategy.
     - name: conditions
       description: |
         @description@
