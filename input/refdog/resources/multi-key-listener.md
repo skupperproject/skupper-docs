@@ -28,11 +28,6 @@ Unlike a standard [listener](listener.html) which maps to a single
 routing key, a MultiKeyListener can route to multiple connectors using
 either priority-based or weighted distribution strategies.
 
-**Important:** Multi-key listener configurations are **not influenced
-by link costs**. Traffic distribution is controlled entirely by the
-configured strategy (priority or weighted), providing predictable
-behavior from the client side.
-
 ## Examples
 
 A weighted multi-key listener that distributes traffic evenly across
@@ -165,68 +160,25 @@ connections autonomously without coordination.
 </div>
 </div>
 
-<div class="attribute">
+<div class="attribute collapsed">
 <div class="attribute-heading">
-<h3 id="spec-strategy.priority">strategy.priority</h3>
-<div class="attribute-type-info">None</div>
+<h3 id="spec-observer">observer</h3>
+<div class="attribute-type-info">string</div>
+<div class="attribute-flags">advanced</div>
 </div>
 <div class="attribute-body">
 
-Priority-based routing strategy. Uses the first routing key in the
-list that is available for traffic. If the connector becomes
-unavailable, the listener matches with the next available routing
-key in the list.
+Controls how the listener inspects network traffic for application-level
+protocol information. When unset or set to `auto`, the listener inspects
+traffic to detect known application protocols and produces telemetry events.
+Set to a specific protocol to restrict inspection, or `none` to disable
+inspection and reduce overhead.
 
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="spec-strategy.priority.routing-keys">strategy.priority.routingKeys</h3>
-<div class="attribute-type-info">array</div>
-</div>
-<div class="attribute-body">
-
-Ordered list of routing keys to route traffic to, from highest to
-lowest priority. Must contain 1-256 unique routing keys.
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="spec-strategy.weighted">strategy.weighted</h3>
-<div class="attribute-type-info">None</div>
-</div>
-<div class="attribute-body">
-
-Weighted routing strategy. Uses the routing keys in proportion to
-the assigned weights. Routing keys with higher weights receive a
-larger portion of the traffic. If all keys are assigned the same
-weight, traffic is split equally between them.
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="spec-strategy.weighted.routing-keys">strategy.weighted.routingKeys</h3>
-<div class="attribute-type-info">object</div>
-</div>
-<div class="attribute-body">
-
-Mapping of routing keys to their weight values. Must contain 1-256
-routing keys. For example, if `backend1` is assigned 25 and
-`backend2` is assigned 75, then only a quarter of the TCP
-connections are directed to `backend1`.
-
-
+<table class="fields"><tr><th>Choices</th><td><table class="choices"><tr><th><code>auto</code></th><td><p>Automatically detect application protocols and produce telemetry</p>
+</td></tr><tr><th><code>none</code></th><td><p>Disable protocol inspection to reduce overhead</p>
+</td></tr><tr><th><code>http1</code></th><td><p>Restrict inspection to HTTP/1 protocol only</p>
+</td></tr><tr><th><code>http2</code></th><td><p>Restrict inspection to HTTP/2 protocol only</p>
+</td></tr></table></td></table>
 
 </div>
 </div>
@@ -354,65 +306,8 @@ routing key matched by the strategy.
 <div class="attribute-body">
 
 Current state of the routing strategy, including which routing
-keys are reachable.
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="status-strategy.priority">strategy.priority</h3>
-<div class="attribute-type-info">None</div>
-</div>
-<div class="attribute-body">
-
-Priority strategy status information.
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="status-strategy.priority.routing-keys-reachable">strategy.priority.routingKeysReachable</h3>
-<div class="attribute-type-info">array</div>
-</div>
-<div class="attribute-body">
-
-List of routing keys with at least one reachable connector,
-given in priority order.
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="status-strategy.weighted">strategy.weighted</h3>
-<div class="attribute-type-info">None</div>
-</div>
-<div class="attribute-body">
-
-Weighted strategy status information.
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="status-strategy.weighted.routing-keys-reachable">strategy.weighted.routingKeysReachable</h3>
-<div class="attribute-type-info">object</div>
-</div>
-<div class="attribute-body">
-
-Mapping of routing keys to weights for keys with at least one
-reachable connector.
+keys are reachable. Contains either `priority` or `weighted` status
+depending on the configured strategy.
 
 
 
