@@ -21,8 +21,8 @@ description: |
   strategy.  This allows you to aggregate multiple backend services
   behind a single service endpoint.
 
-  **Key idea:** The multi-key listener does not choose a remote IP
-  address. It chooses **routing keys**. Connectors that advertise
+  **Key idea:** The multi-key listener is not limited to a single routing key.
+  It chooses from a set of routing keys. Connectors that advertise
   those routing keys forward the streams to their local workloads.
 
   ## Multi-key listeners vs link cost
@@ -73,12 +73,16 @@ description: |
 
   The weighted strategy distributes traffic across multiple routing keys
   in proportion to their assigned weights. Routing keys with higher
-  weights receive a larger share of the traffic.
+  weights receive a larger share of incoming TCP connections.
 
   Use the weighted strategy when you want:
   - **Load balancing** across multiple backends
   - **Traffic distribution** based on capacity (e.g., 70% to one site, 30% to another)
   - **Equal distribution** when all weights are the same
+
+  **Note:** The weighted strategy does not guarantee an exact distribution of traffic, 
+  especially in small samples, but over time it will approximate the configured weights, 
+  using a probabilistic approach to routing decisions.
 
   ## Use cases
 

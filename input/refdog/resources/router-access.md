@@ -134,10 +134,16 @@ Configures the access type for the router endpoints.
 Available access types and the default selection is
 configured on the Skupper controller for Kubernetes.
 
-The options available by default are:
-  - `local`: No external ingress. Implies a Kubernetes Service with type CluterIP.
+Additional options when enabled on the Skupper controller include:
+  - `local`: No external ingress. Implies a Kubernetes Service with type ClusterIP.
   - `route`: Exposed via an OpenShift Route.
   - `loadbalancer`: Exposed via a Kubernetes Service with type LoadBalancer.
+  - `ingress`: Exposed via a Kubernetes Ingress (no nginx-specific annotations).
+  - `ingress-nginx`: Exposed via Ingress with the NGINX Ingress Controller annotations.
+
+To select which IngressClass handles Skupper-managed Ingress resources, set
+controller flag/env `SKUPPER_INGRESS_CLASS_NAME` or per-site
+`spec.settings.ingressClassName` on this resource.
 
 <table class="fields"><tr><th>Default</th><td><p><em>On OpenShift, the default is <code>route</code>.  For other
 Kubernetes flavors, the default is <code>loadbalancer</code>.</em></p>
