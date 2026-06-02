@@ -238,11 +238,6 @@ string name and a string value.
 their default values.
 
 
-- `observer`: Set the protocol observer used to generate
-  traffic metrics.<br/>
-  Default: `auto`. Choices: `auto`, `none`, `http1`, `http2`.
-
-
 
 </div>
 </div>
