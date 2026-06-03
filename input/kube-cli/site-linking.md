@@ -70,12 +70,19 @@ To link sites, you create a token on one site and redeem that token on the other
    skupper link status
    ```
    You might need to issue the command multiple times before the link is ready:
-
    ```bash
-   $ skupper link status
+   skupper link status
+   ```
+   Example output:
+   ```text
    NAME                                            STATUS  COST    MESSAGE
    west-12f75bc8-5dda-4256-88f8-9df48150281a       Pending 1       Not Operational
-   $ skupper link status
+   ```
+   ```bash
+   skupper link status
+   ```
+   Example output:
+   ```text
    NAME                                            STATUS  COST    MESSAGE
    west-12f75bc8-5dda-4256-88f8-9df48150281a       Ready   1       OK
    ```
@@ -125,12 +132,19 @@ To link sites, you create a `link` resource YAML file on one site and apply that
    skupper link status
    ```
    You might need to issue the command multiple times before the link is ready:
-
    ```bash
-   $ skupper link status
+   skupper link status
+   ```
+   Example output:
+   ```text
    NAME                                            STATUS  COST    MESSAGE
    west-12f75bc8-5dda-4256-88f8-9df48150281a       Pending 1       Not Operational
-   $ skupper link status
+   ```
+   ```bash
+   skupper link status
+   ```
+   Example output:
+   ```text
    NAME                                            STATUS  COST    MESSAGE
    west-12f75bc8-5dda-4256-88f8-9df48150281a       Ready   1       OK
    ```

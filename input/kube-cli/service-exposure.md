@@ -31,7 +31,6 @@ For more information about connectors, see [Connector concept][connector].
    skupper connector create <name> <port> [--routing-key <name>]
    ```
    For example:
-
    ```bash
    skupper connector create backend 8080 --workload deployment/backend
    ```
@@ -40,9 +39,11 @@ For more information about connectors, see [Connector concept][connector].
    skupper connector status
    ```
    For example:
-
    ```bash
-   $ skupper connector status
+   skupper connector status
+   ```
+   Example output:
+   ```text
    NAME    STATUS  ROUTING-KEY     SELECTOR        HOST    PORT    HAS MATCHING LISTENER    MESSAGE
    backend Pending backend         app=backend             8080    false   No matching listeners
    ```
@@ -76,9 +77,11 @@ For more information about listeners. see [Listener concept][listener].
    skupper listener create <name> <port> [--routing-key <name>]
    ```
    For example:
-
    ```bash
-   $ skupper listener create backend 8080
+   skupper listener create backend 8080
+   ```
+   Example output:
+   ```text
    Waiting for create to complete...
    Listener "backend" is ready
    ```
@@ -88,9 +91,11 @@ For more information about listeners. see [Listener concept][listener].
    skupper listener status
    ```
    For example:
-
    ```bash
-   $ skupper listener status
+   skupper listener status
+   ```
+   Example output:
+   ```text
    NAME    STATUS  ROUTING-KEY     HOST    PORT    MATCHING-CONNECTOR      MESSAGE
    backend Ready   backend         backend 8080    true                    OK
    ```
