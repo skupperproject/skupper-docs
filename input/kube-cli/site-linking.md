@@ -183,27 +183,13 @@ To link sites through a proxy, you create a Secret containing the proxy configur
    stringData:
      host: proxy.example.com
      port: "3128"
-   ```
-   Apply the Secret:
-   ```bash
-   kubectl apply -f proxy-secret.yaml
-   ```
-   
-   **📌 NOTE**
-   If your proxy requires authentication, add the username and password to the Secret:
-   ```yaml
-   apiVersion: v1
-   kind: Secret
-   metadata:
-     name: my-proxy-config
-   type: kubernetes.io/basic-auth
-   stringData:
-     host: proxy.example.com
-     port: "3128"
      username: myuser
      password: mypassword
    ```
-
+  
+   **📌 NOTE**
+   If your proxy does not require authentication, remove the username and password.
+ 
 5. On the linking site, edit the `link.yaml` file to add the proxy configuration in the settings section:
    ```yaml
    apiVersion: skupper.io/v2alpha1
