@@ -69,9 +69,7 @@ nav:
     - Site Configuration: system-yaml/site-configuration.md
     - Site Linking: system-yaml/site-linking.md
     - Service Exposure: system-yaml/service-exposure.md
-  - Console:
-    - Overview: console/index.md
-    - Configuration: console/configuration.md
+  - Console: console/index.md
   - Troubleshooting: troubleshooting/index.md
   - ...
 
