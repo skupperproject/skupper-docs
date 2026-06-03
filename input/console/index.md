@@ -18,10 +18,9 @@ Enable the Network console on a Kubernetes site by installing the observer Helm 
 **Procedure**
 
 1. Determine which site in your network is best to enable the Network console using the following criteria:
-
-   * Does the application network cross a firewall? For example, if you want the console to be available only inside the firewall, you need to locate the Network console on a site inside the firewall.
-   * Is there a site that processes more traffic than other sites? For example, if you have a frontend component that calls a set of services from other sites, it might make sense to locate the Network console on that site to minimize data traffic.
-   * Is there a site with more or cheaper resources that you want to use? For example, if you have two sites, A and B, and resources are more expensive on site A, you might want to locate the Network console on site B.
+    * Does the application network cross a firewall? For example, if you want the console to be available only inside the firewall, you need to locate the Network console on a site inside the firewall.
+    * Is there a site that processes more traffic than other sites? For example, if you have a frontend component that calls a set of services from other sites, it might make sense to locate the Network console on that site to minimize data traffic.
+    * Is there a site with more or cheaper resources that you want to use? For example, if you have two sites, A and B, and resources are more expensive on site A, you might want to locate the Network console on site B.
 
 2. Change context to a site namespace.
 
@@ -29,8 +28,7 @@ Enable the Network console on a Kubernetes site by installing the observer Helm 
    ```
    helm install skupper-network-observer oci://quay.io/skupper/helm/network-observer --version {{skupper_cli_version}}
    ```
-
-   The output is similar to the following:
+   Example output:
    ```
    Pulled: quay.io/skupper/helm/network-observer:2.1.1
    Digest: sha256:557c8a3f4b5d8bb6e779a81e6214fa87c2ad3ad0c957a5c08b8dd3cb20fc7cfe
@@ -64,10 +62,40 @@ Enable the Network console on a Kubernetes site by installing the observer Helm 
          -o jsonpath='{.data.htpasswd}' | base64 -d | sed 's/\(.*\):{PLAIN}\(.*\)/\1 \2\n/'
    ```
 4. Expose the `skupper-network-observer` service to make the Network console available, for example on OpenShift:
-
    ```
    oc create route passthrough skupper-console --service=skupper-network-observer --port=https
    ```
+
+<a id="console-advanced"></a>
+## Advanced Configuration
+<!--CONCEPT-->
+
+The Network Observer Helm chart includes advanced configuration options for Prometheus monitoring, data persistence, and metrics collection.
+
+**Key features:**
+
+* **Custom Prometheus configuration** — Supply your own `prometheus.yml` and process flags
+* **Persistent storage** — Optionally store Prometheus time-series data in a PersistentVolumeClaim
+* **Dedicated metrics endpoint** — A separate Service on port 9000 for cluster monitoring tools to scrape
+
+For complete configuration details and examples, see [Network Observer Configuration](configuration.md).
+
+**Example: Enable persistent storage**
+
+Create a values file with persistence enabled:
+
+```yaml
+prometheus:
+  persistence:
+    enabled: true
+    size: 8Gi
+```
+
+Install or upgrade the chart with your values:
+
+```bash
+helm upgrade --install skupper-network-observer oci://quay.io/skupper/helm/network-observer --version {{skupper_cli_version}} -f values.yaml
+```
 
 <a id="console-exploring"></a>
 ## Exploring the Network console
