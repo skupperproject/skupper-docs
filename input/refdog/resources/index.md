@@ -37,6 +37,7 @@ refdog_links:
 
 <table class="objects">
 <tr><th><a href="/docs/refdog/resources/listener.html">Listener</a></th><td>A listener binds a local connection endpoint to connectors in remote sites</td></tr>
+<tr><th><a href="/docs/refdog/resources/multi-key-listener.html">MultiKeyListener</a></th><td>A multi-key listener binds a single local host and port to multiple routing keys in remote sites</td></tr>
 <tr><th><a href="/docs/refdog/resources/connector.html">Connector</a></th><td>A connector binds a local workload to listeners in remote sites</td></tr>
 <tr><th><a href="/docs/refdog/resources/attached-connector.html">AttachedConnector</a></th><td>A connector in a peer namespace</td></tr>
 <tr><th><a href="/docs/refdog/resources/attached-connector-binding.html">AttachedConnectorBinding</a></th><td>A binding to an attached connector in a peer namespace</td></tr>

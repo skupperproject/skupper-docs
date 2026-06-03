@@ -28,21 +28,7 @@ Start the Skupper router for the current site. This starts the systemd service f
 </div>
 <div class="attribute-body">
 
-help for start ``` ``` -c, --context string      Set the kubeconfig context
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-kubeconfig">--kubeconfig</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Path to the kubeconfig file to use -n, --namespace string    Set the namespace -p, --platform string     Set the platform type to use [kubernetes, podman, docker, linux] ```
+help for start ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
 
 
 

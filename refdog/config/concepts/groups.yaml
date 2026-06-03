@@ -11,6 +11,7 @@
 - title: Services
   objects:
     - listener
+    - multi-key-listener
     - connector
     - routing-key
 - title: Applications

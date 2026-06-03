@@ -54,24 +54,10 @@ The location of the Skupper resources defining the site.
 </div>
 <div class="attribute-body">
 
-The bundle type to be produced. Choices: tarball, shell-script (default "tarball") ``` ``` -c, --context string      Set the kubeconfig context
+The bundle type to be produced. Choices: tarball, shell-script (default "tarball") ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
 
 <table class="fields"><tr><th>Default</th><td><p><code>&quot;tarball&quot;</code></p>
 </td></table>
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-kubeconfig">--kubeconfig</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Path to the kubeconfig file to use -n, --namespace string    Set the namespace -p, --platform string     Set the platform type to use [kubernetes, podman, docker, linux] ```
-
-
 
 </div>
 </div>

@@ -61,23 +61,10 @@ help for update
 </div>
 <div class="attribute-body">
 
-The hostname or IP address of the local connector
+The hostname or IP address of the local connector (default "localhost")
 
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-include-not-ready">--include-not-ready</h3>
-<div class="attribute-type-info">boolean</div>
-</div>
-<div class="attribute-body">
-
-If true, include server pods that are not in the ready state.
-
-
+<table class="fields"><tr><th>Default</th><td><p><code>&quot;localhost&quot;</code></p>
+</td></table>
 
 </div>
 </div>
@@ -92,35 +79,6 @@ If true, include server pods that are not in the ready state.
 The port of the local connector -r, --routing-key string       The identifier used to route traffic from listeners to connectors
 
 
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-selector">--selector</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-A Kubernetes label selector for specifying target server pods.
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-timeout">--timeout</h3>
-<div class="attribute-type-info">&lt;duration&gt;</div>
-</div>
-<div class="attribute-body">
-
-raise an error if the operation does not complete in the given period of time (expressed in seconds). (default 1m0s)
-
-<table class="fields"><tr><th>Default</th><td><p><code>1m0s</code></p>
-</td></table>
 
 </div>
 </div>
@@ -146,53 +104,10 @@ the name of a Kubernetes secret containing the generated or externally-supplied 
 </div>
 <div class="attribute-body">
 
-The connector type. Choices: [tcp]. (default "tcp")
+The connector type. Choices: [tcp]. (default "tcp") ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
 
 <table class="fields"><tr><th>Default</th><td><p><code>&quot;tcp&quot;</code></p>
 </td><tr><th>Choices</th><td><table class="choices"><tr><th><code>tcp</code></th><td></td></tr></table></td></table>
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-wait">--wait</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Wait for the given status before exiting. Choices: configured, ready, none (default "configured")
-
-<table class="fields"><tr><th>Default</th><td><p><code>&quot;configured&quot;</code></p>
-</td></table>
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-workload">--workload</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-A Kubernetes resource name that identifies a workload expressed like resource-type/resource-name. Expected resource types: service, daemonset, deployment, and statefulset. ``` ``` -c, --context string      Set the kubeconfig context
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-kubeconfig">--kubeconfig</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Path to the kubeconfig file to use -n, --namespace string    Set the namespace -p, --platform string     Set the platform type to use [kubernetes, podman, docker, linux] ```
-
-
 
 </div>
 </div>

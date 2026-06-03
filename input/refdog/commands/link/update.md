@@ -85,36 +85,7 @@ raise an error if the operation does not complete in the given period of time (e
 </div>
 <div class="attribute-body">
 
-the name of a Kubernetes secret containing the generated or externally-supplied TLS credentials.
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-wait">--wait</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Wait for the given status before exiting. Choices: configured, ready, none (default "ready") ``` ``` -c, --context string      Set the kubeconfig context
-
-<table class="fields"><tr><th>Default</th><td><p><code>&quot;ready&quot;</code></p>
-</td></table>
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-kubeconfig">--kubeconfig</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Path to the kubeconfig file to use -n, --namespace string    Set the namespace -p, --platform string     Set the platform type to use [kubernetes, podman, docker, linux] ```
+the name of a Kubernetes secret containing the generated or externally-supplied TLS credentials. ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
 
 
 

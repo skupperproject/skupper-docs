@@ -110,41 +110,78 @@ def find_crd_file(crds_dir, resource_name):
 
 def compare_descriptions(yaml_desc, crd_desc):
     """Compare descriptions (normalize whitespace)."""
+    import re
+
     yaml_normalized = ' '.join(yaml_desc.split())
     crd_normalized = ' '.join(crd_desc.split())
-    
+
+    # Strip markdown links from YAML for fairer comparison
+    # [text](url) -> text
+    yaml_no_links = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', yaml_normalized)
+
     # Check if YAML description is a subset or similar
-    if yaml_normalized.lower() in crd_normalized.lower():
+    if yaml_no_links.lower() in crd_normalized.lower():
         return True
-    if crd_normalized.lower() in yaml_normalized.lower():
+    if crd_normalized.lower() in yaml_no_links.lower():
         return True
-    
+
     # Check for significant differences
-    yaml_words = set(yaml_normalized.lower().split())
+    # Use 50% threshold to balance between:
+    # - Allowing documentation-focused descriptions (more verbose)
+    # - Catching truly unrelated/outdated descriptions
+    yaml_words = set(yaml_no_links.lower().split())
     crd_words = set(crd_normalized.lower().split())
-    
+
     common = yaml_words & crd_words
-    if len(common) / max(len(yaml_words), len(crd_words)) > 0.7:
+    overlap = len(common) / max(len(yaml_words), len(crd_words))
+
+    if overlap >= 0.50:
         return True
-    
+
     return False
 
 def compare_resource(yaml_data, crd_data, resource_name):
     """Compare YAML config with CRD data."""
     issues = []
-    
+
+    # Compare structure first
+    yaml_spec_props = set(yaml_data['spec_properties'].keys())
+    crd_spec_props = set(crd_data['spec_properties'].keys())
+    yaml_status_props = set(yaml_data['status_properties'].keys())
+    crd_status_props = set(crd_data['status_properties'].keys())
+
+    spec_match = yaml_spec_props == crd_spec_props
+    status_match = yaml_status_props == crd_status_props
+    structure_match = spec_match and status_match
+
+    if structure_match:
+        issues.append({
+            'type': 'structure_match',
+            'severity': 'success',
+            'message': 'Structure matches CRD'
+        })
+    else:
+        mismatch_parts = []
+        if not spec_match:
+            mismatch_parts.append('spec')
+        if not status_match:
+            mismatch_parts.append('status')
+        issues.append({
+            'type': 'structure_mismatch',
+            'severity': 'info',
+            'message': f"Structure mismatch in {', '.join(mismatch_parts)}"
+        })
+
     # Compare descriptions
     if yaml_data['description'] and crd_data['description']:
         if not compare_descriptions(yaml_data['description'], crd_data['description']):
             issues.append({
                 'type': 'description_diff',
                 'severity': 'info',
-                'message': 'Description differs significantly from CRD'
+                'message': 'Description might need attention - differs significantly from CRD'
             })
-    
-    # Compare spec properties
-    yaml_spec_props = set(yaml_data['spec_properties'].keys())
-    crd_spec_props = set(crd_data['spec_properties'].keys())
+
+    # Compare spec properties (already have the sets from structure check)
     
     # Properties in YAML but not in CRD
     extra_in_yaml = yaml_spec_props - crd_spec_props
@@ -222,10 +259,7 @@ def compare_resource(yaml_data, crd_data, resource_name):
                     'message': f"Property '{prop_name}' type mismatch: YAML={yaml_type}, CRD={crd_type}"
                 })
     
-    # Compare status properties
-    yaml_status_props = set(yaml_data['status_properties'].keys())
-    crd_status_props = set(crd_data['status_properties'].keys())
-    
+    # Compare status properties (already have the sets from structure check)
     extra_in_yaml_status = yaml_status_props - crd_status_props
     if extra_in_yaml_status:
         for prop_name in extra_in_yaml_status:
@@ -305,16 +339,35 @@ def main():
         
         # Compare
         issues = compare_resource(yaml_data, crd_data, resource_name)
-        
-        if issues:
-            all_issues.extend(issues)
-            print(f"⚠️  {resource_name}: {len(issues)} issues")
-            for issue in issues:
+
+        # Separate structure status from other issues
+        structure_issues = [i for i in issues if i['type'] in ['structure_match', 'structure_mismatch']]
+        other_issues = [i for i in issues if i['type'] not in ['structure_match', 'structure_mismatch']]
+
+        all_issues.extend(other_issues)  # Don't count structure status as an issue
+
+        # Show structure status first
+        if structure_issues:
+            struct_issue = structure_issues[0]
+            if struct_issue['type'] == 'structure_match':
+                status_icon = "✅"
+            else:
+                status_icon = "⚠️ "
+        else:
+            status_icon = "❓"
+
+        if other_issues:
+            print(f"{status_icon} {resource_name}: {len(other_issues)} issues")
+            if structure_issues:
+                print(f"    ℹ️  {structure_issues[0]['message']}")
+            for issue in other_issues:
                 severity_icon = "⚠️ " if issue['severity'] == 'warning' else "ℹ️ "
                 section = f"[{issue.get('section', 'general')}]" if 'section' in issue else ""
                 print(f"    {severity_icon}{section} {issue['message']}")
         else:
             print(f"✅ {resource_name}")
+            if structure_issues:
+                print(f"    ℹ️  {structure_issues[0]['message']}")
     
     # Summary
     print("\n" + "="*60)

@@ -44,20 +44,6 @@ $ skupper site generate east > east.yaml
 
 <div class="attribute">
 <div class="attribute-heading">
-<h3 id="option-enable-ha">--enable-ha</h3>
-<div class="attribute-type-info">boolean</div>
-</div>
-<div class="attribute-body">
-
-Configure the site for high availability (EnableHA). EnableHA sites have two active routers
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
 <h3 id="option-enable-link-access">--enable-link-access</h3>
 <div class="attribute-type-info">boolean</div>
 </div>
@@ -78,38 +64,10 @@ allow access for incoming links from remote sites (default: false)
 </div>
 <div class="attribute-body">
 
-help for generate
-
-
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-link-access-type">--link-access-type</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-configure external access for links from remote sites. Choices: [route|loadbalancer]. Default: On OpenShift, route is the default; for other Kubernetes flavors, loadbalancer is the default. -o, --output string             print resources to the console instead of submitting them to the Skupper controller. Choices: json, yaml (default "yaml") ``` ``` -c, --context string      Set the kubeconfig context
+help for generate -o, --output string        print resources to the console instead of submitting them to the Skupper controller. Choices: json, yaml (default "yaml") ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
 
 <table class="fields"><tr><th>Default</th><td><p><code>&quot;yaml&quot;</code></p>
-</td><tr><th>Choices</th><td><table class="choices"><tr><th><code>route</code></th><td></td></tr><tr><th><code>loadbalancer</code></th><td></td></tr></table></td></table>
-
-</div>
-</div>
-
-<div class="attribute">
-<div class="attribute-heading">
-<h3 id="option-kubeconfig">--kubeconfig</h3>
-<div class="attribute-type-info">&lt;string&gt;</div>
-</div>
-<div class="attribute-body">
-
-Path to the kubeconfig file to use -n, --namespace string    Set the namespace -p, --platform string     Set the platform type to use [kubernetes, podman, docker, linux] ```
-
-
+</td></table>
 
 </div>
 </div>
