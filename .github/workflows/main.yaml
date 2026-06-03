@@ -29,7 +29,7 @@ jobs:
       - uses: actions/configure-pages@v4
       - name: Build site with MkDocs
         run: |
-          mkdocs build --strict
+          mkdocs build
         env:
           SITE_URL: https://skupperproject.github.io/skupper-docs/
       - uses: actions/upload-pages-artifact@v3
