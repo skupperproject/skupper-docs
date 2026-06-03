@@ -178,3 +178,61 @@ The following issues and workarounds might help you debug simple scenarios when 
   ```
   there is already a site created for this namespace
   ```
+
+<a id="dynamic-system-controller"></a>
+## Troubleshooting the Dynamic System Controller
+<!--PROCEDURE-->
+
+The Dynamic System Controller feature (available on Docker and Podman platforms only) enables automatic processing of YAML resources when `--reload-type=auto` is enabled during installation. 
+
+Use this section to diagnose issues when resources are not being automatically detected or processed.
+
+By default, the reload type is set to `manual`, meaning resources must be processed by using `skupper system start` and `skupper system reload` for subsequent changes.
+
+**Procedure**
+
+1. Verify the controller is configured for auto-reload:
+
+   Check the system controller container logs:
+   ```bash
+   podman logs <username>-skupper-controller
+   # or
+   docker logs <username>-skupper-controller
+   ```
+
+   Look for the configuration line:
+   ```
+   INFO System Reload: type=auto
+   ```
+
+2. Monitor resource detection:
+
+   When the controller detects a new resource file, it logs:
+   ```
+   Resource has been created: backend.yaml
+   ```
+
+   If you don't see this message after copying a YAML file to the `/input/resources` directory, check:
+   - The file is in the correct directory for the namespace
+   - The file has valid YAML syntax
+   - The file has correct permissions
+
+3. Verify resource processing:
+
+   Check that files copied to the `/input/resources` directory appear in the `/runtime/resources` directory after processing.
+
+   Check the status of resources using the CLI:
+   ```bash
+   skupper connector status
+   skupper listener status
+   skupper link status
+   ```
+
+4. Review controller logs for errors:
+
+   Look for processing errors or validation failures:
+   ```bash
+   podman logs <username>-skupper-controller | grep -i error
+   # or
+   docker logs <username>-skupper-controller | grep -i error
+   ```
