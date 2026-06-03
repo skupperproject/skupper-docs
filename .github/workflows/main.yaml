@@ -17,29 +17,23 @@ jobs:
       url: ${{steps.deployment.outputs.page_url}}
     runs-on: ubuntu-latest
     steps:
-      - name: Set up environment
-        run: |
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          echo "PLANO_COLOR=1" >> "$GITHUB_ENV"
-          pip install build wheel
-      - name: Install Plano
-        run: |
-          curl -sfL https://github.com/ssorj/plano/archive/main.tar.gz | tar -xz
-          cd plano-main && make install
-      - name: Install Transom
-        run: |
-          curl -sfL https://github.com/ssorj/transom/archive/main.tar.gz | tar -xz
-          cd transom-main && ./plano install
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v4
-      - name: Render site output
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - name: Install MkDocs and dependencies
         run: |
-          ./plano render
+          pip install -r requirements.txt
+      - uses: actions/configure-pages@v4
+      - name: Build site with MkDocs
+        run: |
+          mkdocs build --strict
         env:
-          SITE_PREFIX: /skupper-docs
-          PLANO_COLOR: 1
+          SITE_URL: https://skupperproject.github.io/skupper-docs/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: output
+          path: output/docs
       - uses: actions/deploy-pages@v4
         id: deployment
