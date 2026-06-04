@@ -1,21 +1,18 @@
 site_name: Skupper Documentation
 site_url: https://skupper.io/docs/
-docs_dir: docs-input
+docs_dir: doc-input
 site_dir: output/docs
 
-# Extra configuration
-# site_prefix controls navigation links in header/footer
-#
-# For production (skupper.io): use empty string (relative paths)
-# For staging/preview: use full URL without trailing slash
-# For local dev: use http://localhost:8000 or your local server
-#
-# Examples:
-#   Production:  site_prefix: ""
-#   Staging:     site_prefix: "https://skupper-mkdocs.netlify.app"
-#   Local:       site_prefix: "http://localhost:8000"
 extra:
-  site_prefix: "https://skupper-mkdocs.netlify.app"
+  # Static values for MVP - will be dynamic with macros plugin
+  skupper_version: "2.2.1"
+  skupper_cli_version: "2.2.1"
+  skupper_version_v1: "1.9.2"
+  # site_prefix controls navigation links in header/footer
+  # For production (skupper.io): use empty string (relative paths)
+  # For staging/preview: use full URL without trailing slash
+  # For local dev: use http://localhost:8000 or your local server
+  site_prefix: ""
 
 # Support .html links in markdown (Transom compatibility)
 use_directory_urls: false
@@ -29,7 +26,7 @@ theme:
   features:
     # - navigation.tabs  # REMOVED: This puts nav in horizontal tabs at top
     - navigation.sections  # Show sections in sidebar
-    # - navigation.expand    # Auto-expand sections in sidebar (disabled for collapsible nav)
+    #- navigation.expand    # Auto-expand sections in sidebar
     - navigation.top       # Back to top button
     - navigation.indexes   # Section index pages
     - search.suggest       # Search suggestions
@@ -104,11 +101,4 @@ plugins:
   - awesome-pages
   - macros:
       module_name: config/mkdocs_macros
-
-extra:
-  # Static values for MVP - will be dynamic with macros plugin
-  skupper_version: "2.2.1"
-  skupper_cli_version: "2.2.1"
-  skupper_version_v1: "1.9.2"
-  site_prefix: ""
 
