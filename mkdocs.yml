@@ -1,6 +1,6 @@
 site_name: Skupper Documentation
-site_url: !ENV [SITE_URL, 'http://localhost:8000']
-docs_dir: input
+site_url: https://skupper.io/docs/
+docs_dir: docs-input
 site_dir: output/docs
 
 # Extra configuration
@@ -29,7 +29,7 @@ theme:
   features:
     # - navigation.tabs  # REMOVED: This puts nav in horizontal tabs at top
     - navigation.sections  # Show sections in sidebar
-    - navigation.expand    # Auto-expand sections in sidebar
+    # - navigation.expand    # Auto-expand sections in sidebar (disabled for collapsible nav)
     - navigation.top       # Back to top button
     - navigation.indexes   # Section index pages
     - search.suggest       # Search suggestions
@@ -73,6 +73,7 @@ nav:
     - Site Linking: system-yaml/site-linking.md
     - Service Exposure: system-yaml/service-exposure.md
   - Console: console/index.md
+  - API Reference: /api/
   - Troubleshooting: troubleshooting/index.md
   - ...
 
@@ -106,9 +107,8 @@ plugins:
 
 extra:
   # Static values for MVP - will be dynamic with macros plugin
-  skupper_version: "2.1.1"
-  skupper_cli_version: "2.1.1"
+  skupper_version: "2.2.1"
+  skupper_cli_version: "2.2.1"
   skupper_version_v1: "1.9.2"
   site_prefix: ""
 
-# Made with Bob
