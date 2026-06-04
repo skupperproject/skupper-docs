@@ -2,9 +2,8 @@
 <!--REFERENCE-->
 # Network Observer Configuration Reference
 
-Complete reference of all configuration options for the Skupper Network Observer. These options apply to both Helm chart deployments (`values.yaml`) and Operator-managed Custom Resource deployments (`spec` field).
+The following configuration options are for the Skupper Network Observer which enables the network console.
 
-> **Deployment guides:** See the Helm deployment guide for format-specific examples.
 
 ## Configuration Path Format
 
@@ -27,7 +26,7 @@ spec:
 ```
 
 <a id="observer-external-access"></a>
-## External Access
+## External access
 
 ### Ingress
 
@@ -232,7 +231,6 @@ By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-
 **Procedure**
 
 1. Configure persistence in your values file:
-
    ```yaml
    prometheus:
      persistence:
@@ -244,13 +242,11 @@ By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-
    ```
 
 2. Install or upgrade the chart with your values:
-
    ```bash
    helm upgrade --install skupper-network-observer oci://quay.io/skupper/helm/network-observer --version {{skupper_cli_version}} -f values.yaml
    ```
 
 3. Verify the PersistentVolumeClaim is bound:
-
    ```bash
    kubectl get pvc
    ```

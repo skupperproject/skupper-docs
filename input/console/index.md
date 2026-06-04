@@ -1,34 +1,20 @@
 <a id="console"></a>
-# Using the Network console
+# Using the Skupper network console
 <!--ASSEMBLY-->
 
-The Network console provides data and visualizations of the traffic flow between sites.
+The Network console provides data and visualizations of the traffic flow between sites using the Network Observer component which also deploys an API endpoint.
 
-<a id="console-prerequisites"></a>
-## Prerequisites
+See [API documentation](/api/) for the OpenAPI documentation.
+
+<a id="console-quickstart"></a>
+## Getting started with Skupper network console
 <!--CONCEPT-->
 
-Before installing the Network console, ensure you have:
-
-* Helm 3.x installed
+* Helm 3.8 or later
 * kubectl access to target Kubernetes cluster
-* Skupper controller installed (for certificate provisioning)
-* (Optional) Ingress controller for external access
-* (Optional) StorageClass for persistent metrics storage
+* A Skupper site 
 
-**Verify prerequisites:**
 
-```bash
-helm version
-kubectl cluster-info
-kubectl get deploy -n skupper skupper-site-controller
-```
-
-<a id="console-enabling"></a>
-## Enabling the Network console
-<!--PROCEDURE-->
-
-Enable the Network console on a Kubernetes site by installing the observer Helm chart and exposing its service.
 
 **Site Selection Criteria**
 
@@ -37,24 +23,23 @@ Enable the Network console on a Kubernetes site by installing the observer Helm 
     * Is there a site that processes more traffic than other sites? For example, if you have a frontend component that calls a set of services from other sites, it might make sense to locate the Network console on that site to minimize data traffic.
     * Is there a site with more or cheaper resources that you want to use? For example, if you have two sites, A and B, and resources are more expensive on site A, you might want to locate the Network console on site B.
 
-**Quick Start Installation**
 
-1. Change context to a site namespace.
+2. Change context to a site namespace.
 
-2. Install with defaults:
+3. Install with defaults:
    ```bash
-   helm upgrade --install skupper-network-observer \
+   helm install skupper-network-observer \
      oci://quay.io/skupper/helm/network-observer \
      --version {{skupper_cli_version}}
    ```
 
-3. Access via port-forward:
+4. Access via port-forward:
    ```bash
    kubectl port-forward svc/skupper-network-observer 8443:443
    # Visit https://localhost:8443
    ```
 
-4. Retrieve the generated password:
+5. Retrieve the generated password:
    ```bash
    kubectl get secret skupper-network-observer-users \
      -o jsonpath='{.data.password}' | base64 -d
@@ -66,7 +51,7 @@ Enable the Network console on a Kubernetes site by installing the observer Helm 
 Install with custom values file:
 
 ```bash
-helm upgrade --install skupper-network-observer \
+helm install skupper-network-observer \
   oci://quay.io/skupper/helm/network-observer \
   --version {{skupper_cli_version}} \
   -f my-values.yaml
@@ -124,7 +109,6 @@ The Network Observer Helm chart includes advanced configuration options for Prom
 
 **Key features:**
 
-* **Authentication strategies** — Basic auth, OpenShift OAuth, or no auth (development)
 * **Custom Prometheus configuration** — Supply your own `prometheus.yml` and process flags
 * **Persistent storage** — Store Prometheus time-series data in a PersistentVolumeClaim
 * **Dedicated metrics endpoint** — Separate Service on port 9000 for cluster monitoring tools
