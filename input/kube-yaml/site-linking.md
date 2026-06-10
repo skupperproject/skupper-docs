@@ -121,9 +121,9 @@ A connecting site redeems this token for a `Link` resource to establish a link t
 By default, the Skupper V2 controller generates internal Certificate Authorities (CAs) and self-signed certificates.  
 For example, it creates certificates to authenticate incoming Skupper links from external Skupper sites.
 
-The CA and server certificate used for this authentication are named `skupper-site-ca` (default issuer for a Skupper Site) and `skupper-site-server`, respectively.
+The CA and server certificate used for this authentication are named `skupper-site-ca` (default signing `Certificate` resource for a Skupper Site) and `skupper-site-server`, respectively.
 
-The self-signed server certificate (`skupper-site-server`) is issued for the public hostname or IP address associated with the `skupper-router` service. This depends on the ingress method used, for example an OpenShift Route or a Kubernetes LoadBalancer Service.
+The server certificate (`skupper-site-server`) issued by the self-signed CA `skupper-site-ca` is issued for the public hostname or IP address associated with the `skupper-router` service. This depends on the ingress method used, for example an OpenShift Route or a Kubernetes LoadBalancer Service.
 
 Although this behavior is automatic, you can override it by providing your own custom server certificate or even your own CA.
 
@@ -182,7 +182,7 @@ To link sites using custom certificates, you provide a custom server certificate
 
 3. On the listening site, create client credentials for the connecting site.
 
-   Once your Skupper site is configured to use your custom server certificate, you can create a `Link` resource and an associated client `Secret`. If the `skupper-site-ca` Issuer has been provided, you can create a Certificate resource and Skupper will generate the client Secret to be used, but it is only possible if the Issuer has been provided, otherwise, you have to provide the client Secret yourself.
+   Once your Skupper site is configured to use your custom server certificate, you can create a `Link` resource and an associated client `Secret`. If the `skupper-site-ca` signing `Certificate` resource has been provided, you can create a Certificate resource and Skupper will generate the client Secret to be used, but it is only possible if the signing `Certificate` resource has been provided, otherwise, you have to provide the client Secret yourself.
 
    If the listening site provides the `skupper-site-ca` issuer, create a `Certificate` resource so that Skupper generates a client secret named `skupper-link`:
    ```yaml
@@ -233,7 +233,7 @@ To link sites using custom certificates, you provide a custom server certificate
 
    The following command uses `kubectl`, `yq`, `jq` and `tee` to extract and compose the information needed to define a Link, storing the Link document into `skupper-link.yaml`:
    ```shell
-   endpoints=$(kubectl get site <site-name> -o json | jq -r '.items[].status.endpoints')
+   endpoints=$(kubectl get site <site-name> -o json | jq -r '.status.endpoints')
    cat << EOF | yq -y --argjson endpoints "${endpoints}" '.spec.endpoints = $endpoints' | tee skupper-link.yaml
    apiVersion: skupper.io/v2alpha1
    kind: Link
@@ -254,7 +254,7 @@ To link sites using custom certificates, you provide a custom server certificate
 
    You can retrieve the list of endpoints from the Site definition, using:
    ```shell
-   kubectl get site <site-name> -o yaml | yq -y .items[].status.endpoints
+   kubectl get site <site-name> -o yaml | yq -y .status.endpoints
    ```
    The command above uses both `kubectl` and `yq`. And the output should be something like:
    ```yaml
