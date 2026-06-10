@@ -1,5 +1,10 @@
+---
+render_macros: false
+---
+<!-- Macro rendering is disabled because this page contains literal Go template expressions. -->
 <a id="kube-yaml-site-linking"></a>
 # Linking sites on Kubernetes using YAML
+<!--ASSEMBLY-->
 
 Once sites are linked, services can be exposed and consumed across the application network without the need to open ports or manage inter-site connectivity.
 
@@ -12,7 +17,10 @@ The link direction is not significant, and is typically determined by ease of co
 
 
 <a id="kube-access-yaml"></a>
-## Linking sites using  `AccessGrant` and `AccessToken` resources
+## Linking sites using `AccessGrant` and `AccessToken` resources
+<!--PROCEDURE-->
+
+Use `AccessGrant` and `AccessToken` resources to create a link between two Kubernetes sites using YAML.
 
 **Prerequisites**
 
@@ -63,10 +71,10 @@ A connecting site redeems this token for a `Link` resource to establish a link t
 
 2. On the listening site, populate environment variables to allow token generation:
 
-   ```shell
-   URL="$(kubectl get accessgrant grant-west -o template --template '{{{ .status.url }}}')"
-   CODE="$(kubectl get accessgrant grant-west -o template --template '{{{ .status.code }}}')"
-   CA_RAW="$(kubectl get accessgrant grant-west -o template --template '{{{ .status.ca }}}')"
+   ```bash
+   URL="$(kubectl get accessgrant grant-west -o template --template '{{ .status.url }}')"
+   CODE="$(kubectl get accessgrant grant-west -o template --template '{{ .status.code }}')"
+   CA_RAW="$(kubectl get accessgrant grant-west -o template --template '{{ .status.ca }}')"
    ```
    
    These environment variable settings support the next step of generating the token.
