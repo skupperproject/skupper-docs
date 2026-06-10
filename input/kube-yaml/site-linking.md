@@ -284,7 +284,6 @@ Although this behavior is automatic, you can override it by providing your own c
 * The listening site must have `link-access` enabled
 * A server certificate and key for the listening site
 * `jq` and `yq` installed if using the kubectl method to generate the `Link` resource
-* `skupper` CLI installed if using the CLI method to generate the `Link` resource
 
 To link sites using custom certificates, you provide a custom server certificate on the listening site and create a `Link` resource on the connecting site that references matching client credentials.
 
@@ -303,6 +302,7 @@ To link sites using custom certificates, you provide a custom server certificate
    ```
    Apply the secret:
    ```shell
+   kubectl delete secret skupper-site-server # delete existing secret
    kubectl apply -f skupper-site-server.yaml
    ```
    
@@ -323,7 +323,7 @@ To link sites using custom certificates, you provide a custom server certificate
    
    Again, if your Site has already been created, Skupper will recognize your custom secret. You can confirm this with the following command:
    ```shell
-   kubectl get certificate skupper-site-server -o json | jq -r '.status.conditions[].message'
+   kubectl get certificate.skupper.io skupper-site-server -o json | jq -r '.status.conditions[].message'
    ```
    You should see a message like:
    ```
