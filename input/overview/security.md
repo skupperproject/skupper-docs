@@ -1,5 +1,8 @@
 <a id="skupper-security"></a>
 # Skupper security
+<!--CONCEPT-->
+
+Skupper protects service-to-service communication with built-in mutual TLS security.
 
 Skupper securely connects your services with TLS authentication and encryption.
 See how Skupper enables you to deploy your application securely across Kubernetes clusters.
