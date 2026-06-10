@@ -125,3 +125,12 @@ To link sites, you create a `link` resource YAML file on one site and apply that
 
 There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
+## Using custom certificates
+
+For information about linking sites using custom certificates instead of the default Skupper-generated certificates, see [Linking sites using custom certificates][custom-certs-yaml].
+
+**📌 NOTE**  
+The YAML approach is recommended for custom certificate workflows as it provides more control over certificate management and integration with existing PKI infrastructure.
+
+[custom-certs-yaml]: ../kube-yaml/site-linking.html#kube-link-custom-certs-yaml
+
