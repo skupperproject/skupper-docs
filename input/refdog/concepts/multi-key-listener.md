@@ -39,34 +39,6 @@ behind a single service endpoint.
 It chooses from a set of routing keys. Connectors that advertise
 those routing keys forward the streams to their local workloads.
 
-## Multi-key listeners vs link cost
-
-Multi-key listeners provide predictable, client-side traffic control
-that is **not influenced by link costs**. This is an important
-distinction from standard listeners.
-
-When multiple [connectors](connector.html) share the same routing
-key, the router distributes TCP connections across matching
-connectors based on associated link costs. However, this
-configuration can be unpredictable in real-world situations for use
-cases other than failover.
-
-With standard listeners, you can configure failover behavior by
-setting the link cost from the client to the backup server very high
-(for example, 9999). This ensures a specific location handles all
-traffic until failure, then fails over to a different location.
-
-Multi-key listeners with the **priority strategy** provide an
-alternative, more explicit approach to failover that does not depend
-on link costs. Similarly, the **weighted strategy** provides
-predictable load balancing without the unpredictability of link cost
-calculations.
-
-**Note:** If multiple multi-key listeners reference the same set of
-routing keys, each listener calculates weights and assigns
-connections autonomously. There is no coordination or shared state
-between listeners when making load-balancing decisions.
-
 ## Strategies
 
 Multi-key listeners support two routing strategies:
@@ -111,3 +83,33 @@ capacity or proximity.
 **Geographic distribution**: Use a weighted strategy to balance traffic
 across multiple data centers, adjusting weights based on load or
 performance characteristics.
+
+
+**Note:** If multiple multi-key listeners reference the same set of
+routing keys, each listener calculates weights and assigns
+connections autonomously. There is no coordination or shared state
+between listeners when making load-balancing decisions.
+
+
+## Multi-key listeners vs link cost
+
+Multi-key listeners provide predictable, client-side traffic control
+that is **not influenced by link costs**. This is an important
+distinction from standard listeners.
+
+When multiple [connectors](connector.html) share the same routing
+key, the router distributes TCP connections across matching
+connectors based on associated link costs. However, this
+configuration can be unpredictable in real-world situations for use
+cases other than failover.
+
+With standard listeners, you can configure failover behavior by
+setting the link cost from the client to the backup server very high
+(for example, 9999). This ensures a specific location handles all
+traffic until failure, then fails over to a different location.
+
+Multi-key listeners with the **priority strategy** provide an
+alternative, more explicit approach to failover that does not depend
+on link costs. Similarly, the **weighted strategy** provides
+predictable load balancing without link cost calculations.
+
