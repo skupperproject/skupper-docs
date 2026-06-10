@@ -283,7 +283,7 @@ Although this behavior is automatic, you can override it by providing your own c
 * Two sites
 * The listening site must have `link-access` enabled
 * A server certificate and key for the listening site
-* `jq` and `yq` installed if using the kubectl method to generate the `Link` resource
+* `jq` and `yq` (mikefarah/yq, the Go-based implementation) installed if using the kubectl method to generate the `Link` resource
 
 To link sites using custom certificates, you provide a custom server certificate on the listening site and create a `Link` resource on the connecting site that references matching client credentials.
 
@@ -382,18 +382,18 @@ To link sites using custom certificates, you provide a custom server certificate
 
    **Option A: Using kubectl with jq and yq**
 
-   The following command uses `kubectl`, `yq`, `jq` and `tee` to extract and compose the information needed to define a Link, storing the Link document into `skupper-link.yaml`:
+   The following command uses `kubectl`, `jq`, and `yq` to extract and compose the information needed to define a Link, storing the Link document into `skupper-link.yaml`:
    ```shell
-   endpoints=$(kubectl get site <site-name> -o json | jq -r '.status.endpoints')
-   cat << EOF | yq -y --argjson endpoints "${endpoints}" '.spec.endpoints = $endpoints' | tee skupper-link.yaml
-   apiVersion: skupper.io/v2alpha1
-   kind: Link
-   metadata:
-     name: skupper-link
-   spec:
-     cost: 1
-     tlsCredentials: skupper-link
-   EOF
+   kubectl get site <site-name> -o json | jq '{
+     apiVersion: "skupper.io/v2alpha1",
+     kind: "Link",
+     metadata: {name: "skupper-link"},
+     spec: {
+       cost: 1,
+       tlsCredentials: "skupper-link",
+       endpoints: .status.endpoints
+     }
+   }' | yq -P > skupper-link.yaml
    ```
    Then you need to combine it in a YAML file that contains both the Link above and the client Secret. Suppose your client Secret is stored in a file named `client-secret.yaml`, you could run:
    ```shell
@@ -405,7 +405,7 @@ To link sites using custom certificates, you provide a custom server certificate
 
    You can retrieve the list of endpoints from the Site definition, using:
    ```shell
-   kubectl get site <site-name> -o yaml | yq -y .status.endpoints
+   kubectl get site <site-name> -o yaml | yq '.status.endpoints'
    ```
    The command above uses both `kubectl` and `yq`. And the output should be something like:
    ```yaml
