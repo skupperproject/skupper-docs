@@ -9,7 +9,7 @@ target server.
 
 **📌 NOTE**
 For most load-balancing and failover use cases, a [multi-key listener][mkl]
-provides more predictable, per-service control than link cost.
+provides per-service control.
 Link cost applies to **all services** that traverse a link; it is not
 possible to set different costs for distinct services on the same link.
 
@@ -26,16 +26,11 @@ Understanding link cost behavior:
   that threshold is reached, new connections are spread across both paths.
 * Traffic distribution is statistical, not round robin.
 
-**Prerequisites**
-
-* Two or more linked sites.
-* The name of the link whose cost you want to set.
+The following procedure describes how to set link cost in various scenarios:
 
 **Procedure**
 
-**Option A — Set cost when redeeming a token**
-
-1. Redeem the token and specify the cost:
+1. To redeem a token and specify the cost:
 
    ```bash
    skupper token redeem <filename> --link-cost <integer-cost>
@@ -48,20 +43,8 @@ Understanding link cost behavior:
    skupper token redeem token.yaml --link-cost 2
    ```
 
-**Option B — Update cost on an existing link**
 
-1. List the links to find the link name:
-
-   ```
-   skupper link status
-   ```
-   Example output:
-   ```
-   NAME          STATUS   COST
-   west-6bfn6    Ready    1
-   ```
-
-2. Update the cost on the link:
+2. To Update the cost on an existing link:
 
    ```
    skupper link update <link-name> --cost <integer-cost>
@@ -73,20 +56,18 @@ Understanding link cost behavior:
    Link "west-6bfn6" is ready.
    ```
 
-**Verifying link cost**
+3. To check the cost of a specific link:
 
-- Check the cost of a specific link:
-
-  ```
-  skupper link status <link-name>
-  ```
-  Example output:
-  ```
-  Name:     west-6bfn6
-  Status:   Ready
-  Message:  <none>
-  Cost:     2
-  ```
+   ```
+   skupper link status <link-name>
+   ```
+   Example output:
+   ```
+   Name:     west-6bfn6
+   Status:   Ready
+   Message:  <none>
+   Cost:     2
+   ```
 
 **Additional information**
 
