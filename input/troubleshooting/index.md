@@ -214,8 +214,7 @@ This procedure applies to both Kubernetes and local system sites.
    - `/site-namespace/resources/Listener-<name>.yaml` - Listener configuration and status
 
 
-Skupper manages the lifecycle of your site by creating and maintaining various Kubernetes resources. 
-You may notice resources that contain labels or annotations prefixed with `internal.skupper.io/`.
+You may notice resources that contain labels prefixed with `internal.skupper.io/`.
 
 **📌 NOTE**
 Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels. 
