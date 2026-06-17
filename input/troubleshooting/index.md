@@ -218,7 +218,7 @@ Skupper manages the lifecycle of your site by creating and maintaining various K
 You may notice resources that contain labels or annotations prefixed with `internal.skupper.io/`.
 
 **📌 NOTE**
-Resources prefixed with `internal.skupper.io/` are **internal-only**. They are managed directly by the Skupper controller and are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these resources. 
+Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels. 
 
 
 <a id="resolving-common-problems"></a>
