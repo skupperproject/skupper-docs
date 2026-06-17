@@ -261,7 +261,7 @@ For information about linking sites using custom certificates instead of the def
 **📌 NOTE**  
 For custom certificate workflows YAML provides more control over certificate management and integration with existing PKI infrastructure, although you can still use the Skupper CLI to generate links for those workflows.
 
-[custom-certs-yaml]: ../kube-yaml/site-linking.html#kube-link-custom-certs-yaml
+[custom-certs-yaml]: ../kube-yaml/custom-certs.md
 
 
 <a id="kube-link-cost-cli"></a>

@@ -58,6 +58,7 @@ nav:
     - Overview: kube-yaml/index.md
     - Site Configuration: kube-yaml/site-configuration.md
     - Site Linking: kube-yaml/site-linking.md
+    - Custom Certificates: kube-yaml/custom-certs.md
     - Service Exposure: kube-yaml/service-exposure.md
   - System CLI:
     - Overview: system-cli/index.md
