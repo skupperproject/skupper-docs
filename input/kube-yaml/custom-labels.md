@@ -7,10 +7,10 @@ Skupper allows you to propagate custom labels and annotations onto the Kubernete
 A label template is a standard Kubernetes ConfigMap that carries the label `skupper.io/label-template: "true"`. 
 When the Skupper controller detects such a ConfigMap, it copies the ConfigMap's own labels and annotations onto the Skupper-managed resources in the same namespace (and optionally across all watched namespaces).
 
-You may notice resources that contain labels or annotations prefixed with `internal.skupper.io/`.
+You may notice resources that contain labels prefixed with `internal.skupper.io/`.
 
 **📌 NOTE**
-Resources prefixed with `internal.skupper.io/` are **internal-only**. They are managed directly by the Skupper controller and are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these resources. 
+Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels. 
 
 
 The controller watches these ConfigMaps dynamically: adding, updating, or deleting a label template takes effect on existing Skupper resources without restarting anything.
