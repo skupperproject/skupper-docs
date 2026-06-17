@@ -287,6 +287,8 @@ Although this behavior is automatic, you can override it by providing your own c
 
 To link sites using custom certificates, you provide a custom server certificate on the listening site and create a `Link` resource on the connecting site that references matching client credentials.
 
+NOTE: In this procedure you delete and recreate your site to make sure the certificate configuration is applied.
+
 **Procedure**
 
 1. On the listening site, create a secret named `skupper-site-server`, for example:
@@ -302,10 +304,12 @@ To link sites using custom certificates, you provide a custom server certificate
    ```
    Apply the secret:
    ```shell
-   kubectl delete secret skupper-site-server # delete existing secret
+   kubectl delete site <site-name> # delete the site
    kubectl apply -f skupper-site-server.yaml
+   kubectl apply -f site.yaml # recreate the site
    ```
-   
+   NOTE: If you attempt to apply the secret on an existing site, the Skupper controller overwrites your changes. Make sure to create the secret before creating your site.
+
    Make sure the certificate specified in `tls.crt` is valid for the hostname or IP address that will be referenced in your `Link` resource. In this example, consider the server certificate as being valid for the hostname: `skupper.public.host`.
 
 2. Determine the hostname or IP address for the listening site.
