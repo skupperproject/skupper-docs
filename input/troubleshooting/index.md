@@ -4,8 +4,6 @@
 Typically, you can create a network without referencing this troubleshooting guide.
 However, this guide provides some tips for situations when the network does not perform as expected.
 
-See [Resolving common problems](#resolving-common-problems) if you have encountered a specific issue using the `skupper` CLI.
-
 A typical troubleshooting workflow is to check all the sites and create debug tar files.
 
 <a id="checking-sites"></a>
