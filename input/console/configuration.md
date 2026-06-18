@@ -5,26 +5,6 @@
 The following configuration options are for the Skupper Network Observer which enables the network console.
 
 
-## Configuration Path Format
-
-| Deployment Method | Configuration Path |
-|-------------------|-------------------|
-| **Helm** | Direct path in `values.yaml` |
-| **Operator** | Same path under `spec:` in NetworkObserver CR |
-
-**Example:**
-
-```yaml
-# Helm values.yaml
-auth:
-  strategy: basic
-
-# NetworkObserver CR
-spec:
-  auth:
-    strategy: basic
-```
-
 <a id="observer-external-access"></a>
 ## External access
 
