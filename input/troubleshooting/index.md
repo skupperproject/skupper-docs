@@ -271,12 +271,12 @@ By default, the reload type is set to `manual`, meaning resources must be proces
 
 
 <a id="connector-lifecycle-kubernetes"></a>
-## Observing connector lifecycle on Kubernetes
+## Observing connector lifecycle on Kubernetes sites
 <!--PROCEDURE-->
 
 Monitor how connectors respond to backend pod changes by observing the connector status and controller logs.
 
-On Kubernetes, a connector uses a pod selector to discover backend pods dynamically. The Skupper controller watches for pod changes and updates the router configuration accordingly.
+On Kubernetes sites, a connector uses a pod selector to discover backend pods dynamically. The Skupper controller watches for pod changes and updates the router configuration accordingly.
 
 Each matching pod gets its own `tcpConnector` entry in the router, named `connector/<name>@<pod-IP>`.
 
@@ -327,13 +327,13 @@ Each matching pod gets its own `tcpConnector` entry in the router, named `connec
    The log messages `Pod selected for connector`, `Pod not running for connector`, `Pod not ready for connector`, and `Stopping pod watcher` are all `Debug`-level. They are not visible unless debug logging is explicitly enabled on the controller.
 
 
-<a id="connector-lifecycle-linux"></a>
-## Observing connector lifecycle on Linux
+<a id="connector-lifecycle-local"></a>
+## Observing connector lifecycle on local system sites
 <!--PROCEDURE-->
 
-Monitor static host connectors on Linux platforms to understand connection behavior.
+Monitor static host connectors on local system sites to understand connection behavior.
 
-On Linux, connectors specify a `host` and `port` directly rather than a pod selector. There is no dynamic pod discovery. The router maintains a persistent TCP connection to the configured host.
+On local system sites, connectors specify a `host` and `port` directly rather than a pod selector. There is no dynamic pod discovery. The router maintains a persistent TCP connection to the configured host.
 
 **Procedure**
 
@@ -378,7 +378,7 @@ New connections attempted after the connector is removed will receive `connectio
 
 
 <a id="router-failures-kubernetes"></a>
-## Detecting router failures on Kubernetes
+## Detecting router failures on Kubernetes sites
 <!--PROCEDURE-->
 
 Monitor router pod health and detect when the router becomes unavailable.
@@ -427,13 +427,13 @@ The Skupper controller monitors router pods. When no router pod is running and r
    All existing TCP connections through the router are lost when the router pod is terminated. Clients will see `connection reset` or `EOF`. After the router restarts, new connections can be established, but existing connections are not restored.
 
 
-<a id="router-failures-linux"></a>
-## Detecting router failures on Linux
+<a id="router-failures-local"></a>
+## Detecting router failures on local system sites
 <!--PROCEDURE-->
 
-Monitor router process health on Linux platforms using heartbeat logs and site status.
+Monitor router process health on local system sites using heartbeat logs and site status.
 
-On Linux, the Skupper controller monitors the router using AMQP heartbeats. The `heartbeat.client` component logs state changes when the router becomes unavailable or recovers.
+On local system sites, the Skupper controller monitors the router using AMQP heartbeats. The `heartbeat.client` component logs state changes when the router becomes unavailable or recovers.
 
 **Procedure**
 
