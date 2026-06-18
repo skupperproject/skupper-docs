@@ -111,15 +111,6 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 
    This result shows that you can create a listener using the `backend` routing key and port `9090` on a different site to access the `backend` service.
 
-4. Check the status of any links:
-
-   ```bash
-   skupper link status
-
-   ```
-
-   The output shows the links .
-
 <a id="checking-links"></a>
 ## Checking links
 <!--PROCEDURE-->
@@ -150,9 +141,9 @@ This section outlines some advanced options for checking links.
    The status of the link must be `Ready` to allow service traffic.
 
    **📌 NOTE**
-   Running `skupper link status` on a linked site produces output only if a token was used to create a link.
+   You must run `skupper link status` on a linking site.
 
-   If you use this command on a site where you did not create the link, but there is an incoming link to the site:
+   If you use this command on a connecting site, there is a message:
 
    ```
    skupper link status -n west
@@ -293,3 +284,4 @@ By default, the reload type is set to `manual`, meaning resources must be proces
    # or
    docker logs <username>-skupper-controller | grep -i error
    ```
+
