@@ -1,15 +1,23 @@
 <a id="troubleshooting"></a>
 # Troubleshooting an application network
+<!--ASSEMBLY-->
 
 Typically, you can create a network without referencing this troubleshooting guide.
 However, this guide provides some tips for situations when the network does not perform as expected.
+
+See the resolving common problems section if you have encountered a specific issue using the `skupper` CLI.
 
 A typical troubleshooting workflow is to check all the sites and create debug tar files.
 
 <a id="checking-sites"></a>
 ## Checking sites
+<!--PROCEDURE-->
+
+Check site, connector, listener, and link status to confirm that the application network is operating correctly.
 
 Using the `skupper` command-line interface (CLI) provides a simple method to get started with troubleshooting Skupper.
+
+**Procedure**
 
 1. Check the controller on Kubernetes.
    On Kubernetes the controller must be installed before you attempt to create an application network.
@@ -103,9 +111,11 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
 
    This result shows that you can create a listener using the `backend` routing key and port `9090` on a different site to access the `backend` service.
 
-
 <a id="checking-links"></a>
 ## Checking links
+<!--PROCEDURE-->
+
+Check link status to confirm that sites can exchange traffic across the application network.
 
 You must link sites before you can expose services on the network.
 
@@ -114,6 +124,8 @@ By default, tokens expire after 15 minutes and you can only use a token once.
 Generate a new token if the link is not connected.
 
 This section outlines some advanced options for checking links.
+
+**Procedure**
 
 1. Check the link status:
 
@@ -128,14 +140,148 @@ This section outlines some advanced options for checking links.
 
    The status of the link must be `Ready` to allow service traffic.
 
-   **📌 NOTE**\
+   **📌 NOTE**
    You must run `skupper link status` on a linking site.
 
-   If you use this command on a listening site, there is a message:
+   If you use this command on a connecting site, there is a message:
 
    ```
    skupper link status -n west
 
    There are no link resources in the namespace
+   ```
+
+
+<a id="debug-dump"></a>
+## Creating a Skupper debug tar file
+<!--PROCEDURE-->
+
+Create a debug tar file containing diagnostic information about a Skupper site to troubleshoot issues or share with support.
+
+The `skupper debug dump` command creates a compressed tarball (`.tar.gz`) containing logs, configurations, and resource status from a site. The output file is named using the pattern `<filename>-<namespace>-<datetime>.tar.gz`. If no filename is provided, it defaults to `skupper-dump`.
+
+This procedure applies to both Kubernetes and local system sites.
+
+**Procedure**
+
+1. Create the debug tar file for a site:
+
+   ```bash
+   skupper debug dump
+   ```
+
+   Or specify a custom filename:
+
+   ```bash
+   skupper debug dump mysite-debug
+   ```
+
+   The command creates a file such as `skupper-dump-default-20250526-143022.tar.gz`.
+
+2. Extract the tar file to examine its contents:
+
+   ```bash
+   mkdir skupper-dump
+   tar -xzf skupper-dump-default-20250526-143022.tar.gz -C skupper-dump
+   cd skupper-dump
+   ```
+
+3. Check the Skupper and platform versions:
+
+   - `/versions/kubernetes.yaml` - Kubernetes version (on Kubernetes platforms)
+   - `/versions/skupper.yaml` - Versions of Skupper components
+
+4. Check the site configuration and ingress:
+
+   - `/site-namespace/resources/Site-<name>.yaml` - Site specification and status
+   - `/site-namespace/resources/RouterAccess-<name>.yaml` - Ingress and access type configured for the site
+
+5. Check linking and service configuration:
+
+   - `/site-namespace/resources/Link-<name>.yaml` - Link status between sites
+   - `/site-namespace/resources/Accessgrant-<name>.yaml` - Access grants for tokens
+   - `/site-namespace/resources/AccessTokens-<name>.yaml` - Token usage information
+   - `/site-namespace/resources/Connector-<name>.yaml` - Connector configuration and status
+   - `/site-namespace/resources/Listener-<name>.yaml` - Listener configuration and status
+
+
+
+
+
+<a id="resolving-common-problems"></a>
+## Resolving common problems
+<!--REFERENCE-->
+
+Use these common symptoms and messages to identify simple Skupper configuration problems.
+
+The following issues and workarounds might help you debug simple scenarios when evaluating Skupper.
+
+- Container platform error:
+
+  ```
+  Failed to bootstrap: failed to load site state: error loading "/home/user/.local/share/skupper/namespaces/default/input/resources/sites/test.yaml": multiple sites found, but only one site is allowed for bootstrapping
+  ```
+
+- namespace error:
+  ```
+  there is already a site created for this namespace
+  ```
+
+<a id="dynamic-system-controller"></a>
+## Troubleshooting the Dynamic System Controller
+<!--PROCEDURE-->
+
+The Dynamic System Controller feature (available on Docker and Podman platforms only) enables automatic processing of YAML resources when `--reload-type=auto` is enabled during installation. 
+
+Use this section to diagnose issues when resources are not being automatically detected or processed.
+
+By default, the reload type is set to `manual`, meaning resources must be processed by using `skupper system start` and `skupper system reload` for subsequent changes.
+
+**Procedure**
+
+1. Verify the controller is configured for auto-reload:
+
+   Check the system controller container logs:
+   ```bash
+   podman logs <username>-skupper-controller
+   # or
+   docker logs <username>-skupper-controller
+   ```
+
+   Look for the configuration line:
+   ```
+   INFO System Reload: type=auto
+   ```
+
+2. Monitor resource detection:
+
+   When the controller detects a new resource file, it logs:
+   ```
+   Resource has been created: backend.yaml
+   ```
+
+   If you don't see this message after copying a YAML file to the `/input/resources` directory, check:
+   - The file is in the correct directory for the namespace
+   - The file has valid YAML syntax
+   - The file has correct permissions
+
+3. Verify resource processing:
+
+   Check that files copied to the `/input/resources` directory appear in the `/runtime/resources` directory after processing.
+
+   Check the status of resources using the CLI:
+   ```bash
+   skupper connector status
+   skupper listener status
+   skupper link status
+   ```
+
+4. Review controller logs for errors:
+
+   Look for processing errors or validation failures:
+   ```bash
+   podman logs <username>-skupper-controller | grep -i error
+   # or
+   docker logs <username>-skupper-controller | grep -i error
    ```
 
