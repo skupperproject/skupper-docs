@@ -58,6 +58,6 @@ For details on configuring link cost, see:
 * [Specifying link cost using the CLI][link-cost-cli]
 * [Specifying link cost using YAML][link-cost-yaml]
 
-[link-cost-cli]: ../kube-cli/link-cost.html
-[link-cost-yaml]: ../kube-yaml/link-cost.html
+[link-cost-cli]: ../kube-cli/site-linking.html#kube-link-cost-cli
+[link-cost-yaml]: ../kube-yaml/site-linking.html#kube-link-cost-yaml
 [mkl]: ../kube-yaml/service-exposure.html#kube-creating-multikeylistener-yaml

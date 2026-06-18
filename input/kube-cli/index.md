@@ -13,5 +13,5 @@ The Skupper CLI is designed to generate and consume standard resources, ensuring
 
 [site-configuration]: ./site-configuration.html
 [site-linking]: ./site-linking.html
-[link-cost]: ./link-cost.html
+[link-cost]: ./site-linking.html#kube-link-cost-cli
 [service-exposure]: ./service-exposure.html

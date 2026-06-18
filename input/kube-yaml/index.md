@@ -11,5 +11,5 @@ You can use YAML on Kubernetes after installing the Skupper controller to create
 
 [site-configuration]: ./site-configuration.html
 [site-linking]: ./site-linking.html
-[link-cost]: ./link-cost.html
+[link-cost]: ./site-linking.html#kube-link-cost-yaml
 [service-exposure]: ./service-exposure.html
