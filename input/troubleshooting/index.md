@@ -269,3 +269,203 @@ By default, the reload type is set to `manual`, meaning resources must be proces
    docker logs <username>-skupper-controller | grep -i error
    ```
 
+
+<a id="connector-lifecycle-kubernetes"></a>
+## Observing connector lifecycle on Kubernetes
+<!--PROCEDURE-->
+
+Monitor how connectors respond to backend pod changes by observing the connector status and controller logs.
+
+On Kubernetes, a connector uses a pod selector to discover backend pods dynamically. The Skupper controller watches for pod changes and updates the router configuration accordingly.
+
+Each matching pod gets its own `tcpConnector` entry in the router, named `connector/<name>@<pod-IP>`.
+
+**Procedure**
+
+1. Check connector status:
+
+   ```bash
+   kubectl get connector <name> -o yaml
+   ```
+
+   The `Configured` condition in the status reflects whether backend pods are available:
+
+   | Condition | Meaning |
+   | --- | --- |
+   | `Configured=True` | At least one matching pod is running and ready |
+   | `Configured=False`, `message="No matches for selector"` | No pods match the selector, or no pods are running and ready |
+
+2. Observe the controller when pods are added:
+
+   ```bash
+   kubectl logs deploy/skupper-controller -f
+   ```
+
+   With debug logging enabled, you will see:
+
+   ```
+   component=kube.site.bindings  Pod selected for connector  pod=<pod-name>
+   ```
+
+   Without debug logging, the controller updates the router configuration silently. You can confirm the router received the update by checking that the connector status transitions to `Configured=True`.
+
+3. Observe the controller when pods are removed:
+
+   When all matching pods are removed (scale to zero, eviction, or crash), the controller removes the `tcpConnector` entries from the router and sets:
+
+   ```
+   Configured=False  message="No matches for selector"
+   ```
+
+   With debug logging enabled:
+
+   ```
+   component=kube.site.bindings  No pods available for target selection
+   ```
+
+   **📌 NOTE**
+   The log messages `Pod selected for connector`, `Pod not running for connector`, `Pod not ready for connector`, and `Stopping pod watcher` are all `Debug`-level. They are not visible unless debug logging is explicitly enabled on the controller.
+
+
+<a id="connector-lifecycle-linux"></a>
+## Observing connector lifecycle on Linux
+<!--PROCEDURE-->
+
+Monitor static host connectors on Linux platforms to understand connection behavior.
+
+On Linux, connectors specify a `host` and `port` directly rather than a pod selector. There is no dynamic pod discovery. The router maintains a persistent TCP connection to the configured host.
+
+**Procedure**
+
+1. Check the connector configuration:
+
+   ```bash
+   skupper connector status
+   ```
+
+   The connector shows the configured host and port.
+
+2. Monitor connection behavior:
+
+   If the host becomes unreachable, the router retries the connection automatically. There is no CR condition equivalent to `Configured=False` for host-based connectors — availability is determined by whether the router can establish a connection to the host.
+
+3. Check router logs for connection errors:
+
+   ```bash
+   podman logs <username>-skupper-router
+   # or
+   docker logs <username>-skupper-router
+   ```
+
+
+<a id="tcp-client-errors"></a>
+## Understanding TCP client errors when backends fail
+<!--REFERENCE-->
+
+Understand the errors TCP clients receive when backend pods are removed or crash.
+
+When backend pods are removed or crash, the router removes the corresponding `tcpConnector` entries. Existing TCP connections that were routed through those connectors are terminated. The error seen by the TCP client depends on how the pod was removed:
+
+| Scenario | Client-visible error |
+| --- | --- |
+| Graceful pod termination (SIGTERM, scale-down) | `EOF` or `connection reset` — the pod closes its socket before the router removes the connector |
+| Pod crash or OOM kill | `connection reset` — the kernel sends a TCP RST |
+| Router removes connector before pod terminates | `connection reset` or `EOF` depending on timing |
+
+There is no grace period or connection draining at the Skupper router level when a `tcpConnector` is deleted. Clients must implement reconnect logic to recover from these errors.
+
+New connections attempted after the connector is removed will receive `connection refused` if no backend pods are available, because the router has no target to forward to.
+
+
+<a id="router-failures-kubernetes"></a>
+## Detecting router failures on Kubernetes
+<!--PROCEDURE-->
+
+Monitor router pod health and detect when the router becomes unavailable.
+
+The Skupper controller monitors router pods. When no router pod is running and ready, the Site CR status is updated to reflect the router's unavailability.
+
+**Procedure**
+
+1. Check site status when router issues are suspected:
+
+   ```bash
+   kubectl get site -o yaml
+   ```
+
+   The `Running` condition transitions to `False`:
+
+   ```yaml
+   Running=False  message="No router pod is ready"  
+   Ready=False
+   ```
+
+2. Monitor kube-adaptor logs for router connectivity issues:
+
+   The `kube-adaptor` sidecar (component `kube.adaptor.configSync`) will log errors when it cannot reach the router over AMQP:
+
+   ```bash
+   kubectl logs deploy/skupper-controller -c kube-adaptor
+   ```
+
+   Look for:
+
+   ```
+   component=kube.adaptor.configSync  level=ERROR  msg="sync failed"  error="Could not get management agent : ..."
+   ```
+
+3. Observe router pod restarts:
+
+   ```bash
+   kubectl get events -n <namespace> --field-selector reason=Killing
+   kubectl rollout status deploy/skupper-router
+   ```
+
+   When the router pod restarts and becomes ready, the controller sets `Running=True` and `Ready=True`. The `kube-adaptor` reconnects and re-syncs the bridge configuration.
+
+   **📌 NOTE**
+   All existing TCP connections through the router are lost when the router pod is terminated. Clients will see `connection reset` or `EOF`. After the router restarts, new connections can be established, but existing connections are not restored.
+
+
+<a id="router-failures-linux"></a>
+## Detecting router failures on Linux
+<!--PROCEDURE-->
+
+Monitor router process health on Linux platforms using heartbeat logs and site status.
+
+On Linux, the Skupper controller monitors the router using AMQP heartbeats. The `heartbeat.client` component logs state changes when the router becomes unavailable or recovers.
+
+**Procedure**
+
+1. Monitor controller logs for router heartbeat status:
+
+   ```bash
+   podman logs <username>-skupper-controller -f
+   # or
+   docker logs <username>-skupper-controller -f
+   ```
+
+   Look for:
+
+   ```
+   component=heartbeat.client  Router is DOWN  reason=<reason>
+   component=heartbeat.client  Router is UP
+   ```
+
+   `Router is DOWN` is logged when the heartbeat connection to the router is lost (for example, the router process exits or is killed). `Router is UP` is logged when the heartbeat connection is re-established.
+
+2. Check site status:
+
+   ```bash
+   skupper site status
+   ```
+
+   This shows whether the router process is running and healthy.
+
+3. Understand service behavior during router downtime:
+
+   The controller stops all dependent services when the router goes down and restarts them when the router comes back up.
+
+   **📌 NOTE**
+   All existing TCP connections through the router are lost when the router process exits. Clients will see `connection reset` or `EOF`. After the router restarts and the controller logs `Router is UP`, new connections can be established.
+
