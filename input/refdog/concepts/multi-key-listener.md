@@ -91,25 +91,27 @@ connections autonomously. There is no coordination or shared state
 between listeners when making load-balancing decisions.
 
 
-## Multi-key listeners vs link cost
+## Multi-key listeners and link cost
 
-Multi-key listeners provide predictable, client-side traffic control
-that is **not influenced by link costs**. This is an important
-distinction from standard listeners.
+Multi-key listeners and link cost are independent mechanisms that
+work together to control traffic routing.
 
-When multiple [connectors](connector.html) share the same routing
-key, the router distributes TCP connections across matching
-connectors based on associated link costs. However, this
-configuration can be unpredictable in real-world situations for use
-cases other than failover.
+**Multi-key listeners** select between routing keys using the
+configured strategy (priority or weighted). This selection happens
+at the listener and is independent of link costs.
 
-With standard listeners, you can configure failover behavior by
-setting the link cost from the client to the backup server very high
-(for example, 9999). This ensures a specific location handles all
-traffic until failure, then fails over to a different location.
+**Link cost** determines which connector to use when multiple
+connectors share the same routing key. This applies to both standard
+listeners and multi-key listeners.
 
-Multi-key listeners with the **priority strategy** provide an
-alternative, more explicit approach to failover that does not depend
-on link costs. Similarly, the **weighted strategy** provides
-predictable load balancing without link cost calculations.
+For example, with a weighted multi-key listener:
+1. The listener's strategy selects a routing key (e.g., `east-backend`)
+2. If multiple connectors use that routing key, link cost determines which connector handles the connection
+3. The next connection may select a different routing key based on the weights
+
+Multi-key listeners with the **priority strategy** provide explicit
+failover control at the routing key level, independent of link costs.
+The **weighted strategy** provides predictable load balancing across
+routing keys, while link cost still affects connector selection
+within each routing key.
 
