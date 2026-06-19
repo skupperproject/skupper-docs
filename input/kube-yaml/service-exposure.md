@@ -40,7 +40,7 @@ There are many options to consider when creating connectors using YAML, see [Con
    ```
    This creates a connector in the `east` site and exposes the `backend` deployment on the network on port 8080.
    You can create a listener on a different site using the matching routing key `backend` to address this service.
-
+   
    To create the connector resource:
 
    ```bash
@@ -95,7 +95,7 @@ For configuration details, see [Listener resource][listener-resource].
    ```
    This creates a listener in the `west` site and matches with the connector that uses the routing key `backend`. 
    It also creates a service named  `east-backend` exposed on port 8080 in the current namespace.
-
+   
    To create the listener resource:
 
    ```bash
@@ -128,10 +128,11 @@ Use a multi-key listener when you want one service endpoint to aggregate traffic
 
 With multi-key listeners, you must choose a strategy which determines how the traffic is distributed:
 
-* priority - Uses the first routing key in list that is available for traffic. If the connector becomes unavailable, the listener matches with the next available routing key in list.
+* priority - Uses the first routing key in list that is available for traffic. If the connectors for that routing key become unavailable, the listener matches with the next routing key in list.
 * weighted - Uses the routing keys in proportion to the assigned weights. For example, if `backend1` is assigned 25 and `backend2` is assigned 75, then only a quarter of the TCP connections are directed to `backend1`.
 
-Multi-key listeners provide predictable traffic distribution from the client side and typically are not influenced by link costs.
+**📌 NOTE**
+Multi-key listeners select between routing keys using the configured strategy. Each routing key may have multiple connectors, and link cost determines which connector is used within each routing key. The two mechanisms are independent.
 
 For configuration details, see [MultiKeyListener resource][multikeylistener-resource].
 
@@ -145,7 +146,6 @@ For configuration details, see [MultiKeyListener resource][multikeylistener-reso
    Note the routing keys for each connector.
 
 2. Determine which strategy is best for your use case. For example, failover is best achieved using the `priority` strategy.
-
 
 3. Create a multi-key listener resource YAML file.
    For example:
@@ -163,8 +163,8 @@ For configuration details, see [MultiKeyListener resource][multikeylistener-reso
            east-backend: 1
            west-backend: 1
    ```
-   This creates a listener named `mkl-backend` that exposes a single endpoint on port 9092 and distributes traffic evenly across the `east-backend` and `west-backend` routing keys.
-
+   This creates a listener named `mkl-backend` that exposes a single endpoint on port 9092 and distributes traffic evenly between the `east-backend` and `west-backend` routing keys. Each routing key may have multiple connectors; link cost determines which connector is used within each routing key.
+   
    To prefer one routing key first and fall back to another, use the `priority` strategy:
    ```yaml
    apiVersion: skupper.io/v2alpha1
@@ -180,13 +180,10 @@ For configuration details, see [MultiKeyListener resource][multikeylistener-reso
            - east-backend-http
            - west-backend-http
    ```
-
    To create the multi-key listener resource:
-
    ```bash
    kubectl apply -f <filename>
    ```
-
    where `<filename>` is the name of a YAML file that is saved on your local filesystem.
 
 4. Check the multi-key listener status:

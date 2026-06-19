@@ -75,8 +75,9 @@ spec:
         - `priority`: Route to routing keys in priority order (failover)
         - `weighted`: Distribute traffic across routing keys by weight (load balancing)
 
-        The strategy operates independently of link costs and provides
-        predictable, client-side traffic control. If multiple multi-key
+        The strategy selects between routing keys independently of link costs.
+        Each routing key may have multiple connectors; link cost determines which
+        connector is used within each routing key. If multiple multi-key
         listeners reference the same routing keys, each listener assigns
         connections autonomously without coordination.
 
