@@ -109,6 +109,7 @@ High availability mode deploys two router pods with anti-affinity rules to ensur
    ```
 
 <a id="kube-site-resources-yaml"></a>
+
 ## Setting site resources
 <!--PROCEDURE-->
 
