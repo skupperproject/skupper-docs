@@ -188,7 +188,6 @@ For configuration details, see [Listener resource][listener-resource].
 
    where `<filename>` is the name of a YAML file that is saved on your local filesystem.
 
-   ```
 
    **📌 NOTE**
    If you need to change strategy after you created a multi-key listener, you must delete and recreate the resource. This does not affect changing routing keys or weights.
