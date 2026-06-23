@@ -53,4 +53,4 @@ def update_cli():
     """
     Update the CLI files using ../skupper/generate-doc
     """
-    run("../skupper/generate-doc ./cli-doc")
+    run("../../skupper/generate-doc ./cli-doc")

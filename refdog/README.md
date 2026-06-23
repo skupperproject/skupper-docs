@@ -55,7 +55,30 @@ For example, `config/commands/overview.md` is appended into the generated comman
 
 Commands are generated from `cli-doc/*.md`.
 
-This path is active now and is the main thing users should maintain for releases.
+**Source**: CLI documentation markdown is auto-generated from the Skupper CLI Go source code using the `generate-doc` tool (built from the Skupper repository).
+
+**Prerequisites for updating CLI docs**:
+
+1. Clone the Skupper repository adjacent to this repo:
+   ```bash
+   # From the parent directory containing skupper-docs-main/
+   git clone https://github.com/skupperproject/skupper.git
+   ```
+
+2. Build the `generate-doc` tool in the Skupper repo:
+   ```bash
+   cd skupper
+   make generate-doc
+   # Or manually: go build -o generate-doc ./internal/cmd/generate-doc
+   ```
+
+**Updating CLI docs**:
+
+```bash
+./plano update_cli
+```
+
+This runs `../skupper/generate-doc ./cli-doc`, which generates the CLI reference markdown directly into the `cli-doc/` directory.
 
 ### Resources
 
@@ -67,9 +90,12 @@ From `refdog/`:
 
 ```bash
 # 1. Update source files
-cp /path/to/skupper/cli-doc/*.md cli-doc/
-# Optional if resource source changed
-cp /path/to/skupper/crds/*.yaml crds/
+
+# Update CLI docs (requires generate-doc built in ../skupper)
+./plano update_cli
+
+# Optional: Update CRDs if resource source changed
+./plano update_crds
 
 # 2. Regenerate refdog markdown
 ./plano generate
