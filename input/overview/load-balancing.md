@@ -2,10 +2,10 @@
 # Skupper load balancing and failover
 <!--CONCEPT-->
 
-Skupper balances active connections across sites and reroutes traffic when a site fails.
+Skupper balances new TCP connections across sites and reroutes traffic when a site fails.
 
 Skupper enables load balancing and failover across servers located across the application network.
-Specifically, Skupper balances **active TCP connections** across workloads deployed in distinct sites.
+Specifically, Skupper balances **new TCP connections** across workloads deployed in distinct sites.
 If a workload at one site becomes unavailable, traffic is automatically rerouted to available sites. 
 For example, if you deploy the same backend code on two sites and expose the backend on the application network, concurrent requests from a third site to the backend service are processed by both sites.
 
