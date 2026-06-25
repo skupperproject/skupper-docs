@@ -10,7 +10,8 @@ When the Skupper controller detects such a ConfigMap, it copies the ConfigMap's 
 You may notice resources that contain labels prefixed with `internal.skupper.io/`.
 
 **📌 NOTE**
-Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels. 
+Labels prefixed with `internal.skupper.io/` are generally reserved for system operations and subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels.
+There is one exception to this advice, the `internal.skupper.io/listener` label is explicitly supported for use within label templates to allow you to target specific listener services. 
 
 
 The controller watches these ConfigMaps dynamically: adding, updating, or deleting a label template takes effect on existing Skupper resources without restarting anything.
