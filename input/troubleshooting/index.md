@@ -211,25 +211,6 @@ You may notice resources that contain labels prefixed with `internal.skupper.io/
 Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels. 
 
 
-<a id="resolving-common-problems"></a>
-## Resolving common problems
-<!--REFERENCE-->
-
-Use these common symptoms and messages to identify simple Skupper configuration problems.
-
-The following issues and workarounds might help you debug simple scenarios when evaluating Skupper.
-
-- Container platform error:
-
-  ```
-  Failed to bootstrap: failed to load site state: error loading "/home/user/.local/share/skupper/namespaces/default/input/resources/sites/test.yaml": multiple sites found, but only one site is allowed for bootstrapping
-  ```
-
-- namespace error:
-  ```
-  there is already a site created for this namespace
-  ```
-
 <a id="dynamic-system-controller"></a>
 ## Troubleshooting the Dynamic System Controller
 <!--PROCEDURE-->
