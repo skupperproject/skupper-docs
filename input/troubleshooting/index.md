@@ -253,23 +253,73 @@ On local system sites, the Skupper controller monitors the router using AMQP hea
 
 <a id="tcp-client-errors"></a>
 ## Understanding TCP client errors when backends fail
-<!--REFERENCE-->
+<!--PROCEDURE-->
 
-  
-When backend pods are removed or crash, Skupper removes the corresponding  routing entries from the router. 
-Existing TCP connections that were routed  through those backends are terminated. 
-The error seen by the TCP client  depends on how the pod was removed:  
-  
-| Scenario | Client-visible error |  
-| --- | --- |  
-| Graceful pod termination (SIGTERM, scale-down) | `EOF` or `connection reset` — the pod closes its socket before the router removes the backend |  
-| Pod crash or OOM kill | `connection reset` — the kernel sends a TCP RST |  
-| Router removes the backend before pod terminates | `connection reset` or `EOF` depending on timing |  
-  
-There is no grace period or connection draining at the Skupper router level when a backend is removed. 
-Clients must implement reconnect logic to recover from these errors.  
-  
-New connections attempted after the backend is removed will receive  `connection refused` if no backend pods are available, because the router has no target to forward to.
+Diagnose backend pod failures by checking connector status and understanding the client-visible errors.
+
+When backend pods are removed or crash, Skupper detects the change through its pod watcher and removes the corresponding routing entries from the router. This is reflected immediately in the `Connector` status.
+
+**Procedure**
+
+1. Check connector status to understand backend availability:
+
+   ```bash
+   kubectl get connector <name> -o yaml
+   ```
+
+   The `Configured` condition transitions to `False` whenever no pods match the connector's selector — whether due to graceful scale-down, a crash, or an OOM kill:
+
+   ```yaml
+   status:
+     status: Error
+     message: "No matches for selector"
+     selectedPods: []
+     conditions:
+     - type: Configured
+       status: "False"
+       message: "No matches for selector"
+     - type: Ready
+       status: "False"
+   ```
+
+   When at least one backend pod is running and ready, `selectedPods` is populated and `Configured` returns to `True`:
+
+   ```yaml
+   status:
+     status: Ready
+     selectedPods:
+     - name: backend-8485574c8b-254ms
+       ip: 10.244.0.9
+     conditions:
+     - type: Configured
+       status: "True"
+     - type: Ready
+       status: "True"
+   ```
+
+2. (Optional) Monitor connector status changes:
+
+   Watch for the transition using `kubectl wait`:
+
+   ```bash
+   # Wait until a backend becomes available
+   kubectl wait connector/<name> --for=condition=Configured=True --timeout=60s
+
+   # Or detect loss of backends
+   kubectl wait connector/<name> --for=condition=Configured=False --timeout=60s
+   ```
+
+3. Understand client-visible errors by scenario:
+
+   | Connector `Configured` | Scenario | Client-visible error |
+   | --- | --- | --- |
+   | Transitions `True` → `False` | Graceful pod termination (SIGTERM, scale-down) | `EOF` or `connection reset` — the pod closes its socket before the router removes the backend |
+   | Transitions `True` → `False` | Pod crash or OOM kill | `connection reset` — the kernel sends a TCP RST |
+   | Transitions `True` → `False` | Router removes backend before pod terminates | `connection reset` or `EOF` depending on timing |
+   | Stays `False` | New connection attempted with no backends | `connection refused` — the router has no target to forward to |
+
+   **📌 NOTE**
+   There is no grace period or connection draining at the Skupper router level. The `Configured=False` condition covers all backend-unavailable scenarios (removal, crash, or error). Clients must implement reconnect logic to recover from these errors.
 
 
 <a id="dynamic-system-controller"></a>
