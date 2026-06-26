@@ -60,9 +60,76 @@ There are many options to consider when creating connectors using YAML, see [Con
    NAME    STATUS  ROUTING-KEY     SELECTOR        HOST    PORT    HAS MATCHING LISTENER    MESSAGE
    backend Pending backend         app=backend             8080    false   No matching listeners
    ```
+
+   Understanding connector status:
+
+   | Configured | Matched | Status | Example status.message | Meaning & User Action |
+   | --- | --- | --- | --- | --- |
+   | - | - | Pending | "Not Configured" | The Skupper controller hasn't processed the YAML yet. Wait a few seconds. |
+   | FALSE | - | Error | "No matches for selector..." | Skupper cannot find your application pods. Check that your deployment's labels match your connector's selector. |
+   | TRUE | FALSE | Pending | "No matching listeners" | Your local setup is correct, but Skupper cannot find a remote listener using that routing key. Check the remote site listener configuration. |
+   | TRUE | TRUE | Ready | "OK" | Traffic can flow from client to server and from server to client. |
+
    **📌 NOTE**
    By default, the routing key name is set to the name of the connector.
    If you want to use a custom routing key, set `spec.routingKey` to your custom value.
+
+<a id="connector-lifecycle-kubernetes"></a>
+## Observing connector lifecycle on Kubernetes sites
+<!--PROCEDURE-->
+
+Monitor how connectors respond to backend pod changes by observing the connector status and controller logs.
+
+On Kubernetes sites, a connector uses a pod selector to discover backend pods dynamically. The Skupper controller watches for pod changes and updates the router configuration accordingly.
+
+Each matching pod gets its own `tcpConnector` entry in the router, named `connector/<name>@<pod-IP>`.
+
+**Procedure**
+
+1. Check connector status:
+
+   ```bash
+   kubectl get connector <name> -o yaml
+   ```
+
+   The `Configured` condition in the status reflects whether backend pods are available:
+
+   | Condition | Meaning |
+   | --- | --- |
+   | `Configured=True` | At least one matching pod is running and ready |
+   | `Configured=False`, `message="No matches for selector"` | No pods match the selector, or no pods are running and ready |
+
+2. Observe the controller when pods are added:
+
+   ```bash
+   kubectl logs deploy/skupper-controller -f
+   ```
+
+   With [debug logging](../troubleshooting/index.md#setting-log-levels) enabled, you will see:
+
+   ```
+   component=kube.site.bindings  Pod selected for connector  pod=<pod-name>
+   ```
+
+   Without debug logging, the controller updates the router configuration silently. You can confirm the router received the update by checking that the connector status transitions to `Configured=True`.
+
+3. Observe the controller when pods are removed:
+
+   When all matching pods are removed (scale to zero, eviction, or crash), the controller removes the `tcpConnector` entries from the router and sets:
+
+   ```
+   Configured=False  message="No matches for selector"
+   ```
+
+   With [debug logging](../troubleshooting/index.md#setting-log-levels) enabled:
+
+   ```
+   component=kube.site.bindings  No pods available for target selection
+   ```
+
+   **📌 NOTE**
+   The log messages `Pod selected for connector`, `Pod not running for connector`, `Pod not ready for connector`, and `Stopping pod watcher` are all `Debug`-level. They are not visible unless debug logging is explicitly enabled on the controller. See [Setting controller log levels](../troubleshooting/index.md#setting-log-levels) for how to enable debug logging.
+
 
 <!-- Creating a listener on Kubernetes using YAML -->
 <a id="kube-creating-listener-yaml"></a>
