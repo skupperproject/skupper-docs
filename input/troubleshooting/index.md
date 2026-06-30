@@ -150,6 +150,57 @@ This section outlines some advanced options for checking links.
    ```
 
 
+<a id="checking-controller"></a>
+## Checking and resolving controller issues
+<!--PROCEDURE-->
+
+Check the Skupper controller deployment, logs, and status to diagnose controller-level problems.
+
+The controller watches for Skupper custom resources and translates them into the actual Kubernetes infrastructure needed to run the network.
+Typically, the controller does not require debugging. 
+The controller deployment is named `skupper-controller`. Its location depends on how Skupper was installed.
+
+**Procedure**
+
+1. Find the controller:
+
+   The location depends on the installation scope:
+
+   - **Cluster-scoped install**: Check with the person who installed Skupper. Typically deployed in the `skupper` or `openshift-operators` namespace
+   - **Namespace-scoped install**: deployed in your namespace
+
+2. Check the controller pod:
+
+   ```bash
+   kubectl get pods -l application=skupper-controller -n <namespace>
+   kubectl describe pod -l application=skupper-controller -n <namespace>
+   ```
+
+   The controller pod has a single container named `controller`.
+
+3. View logs:
+
+   ```bash
+   kubectl logs -l application=skupper-controller -n <namespace> -c controller
+   ```
+
+   To include logs from a previously crashed container:
+
+   ```bash
+   kubectl logs -l application=skupper-controller -n <namespace> -c controller --previous
+   ```
+
+   Look for lines containing `level=ERROR` or `"level":"ERROR"`.
+
+4. Restart the controller:
+
+   ```bash
+   kubectl rollout restart deployment/skupper-controller -n <namespace>
+   ```
+
+   The controller automatically recovers all existing sites and resources on startup.
+
+
 <a id="checking-kube-router"></a>
 ## Checking the router on Kubernetes sites
 <!--PROCEDURE-->
@@ -180,6 +231,9 @@ The Skupper controller monitors router pods. When no router pod is running and r
    ```
 
    Look at the `Conditions` and `Events` sections.
+
+   **📌 NOTE**
+   If you're running a high availability (HA) configuration, you'll see data for two router pods. See the site configuration documentation for details on HA setup.
 
 2. Check kube-adaptor logs for AMQP connectivity issues:
 
@@ -218,7 +272,17 @@ On local system sites, the Skupper controller monitors the router using AMQP hea
 
 **Procedure**
 
-1. Monitor controller logs for router heartbeat status:
+1. Check if the router container is running:
+
+   ```bash
+   podman ps
+   # or
+   docker ps
+   ```
+
+   Look for a container named `<username>-skupper-router` with status `Up`. If the container is not listed or shows status `Exited`, the router is not running.
+
+2. Monitor controller logs for router heartbeat status:
 
    ```bash
    podman logs <username>-skupper-controller -f
@@ -235,7 +299,7 @@ On local system sites, the Skupper controller monitors the router using AMQP hea
 
    `Router is DOWN` is logged when the heartbeat connection to the router is lost (for example, the router process exits or is killed). `Router is UP` is logged when the heartbeat connection is re-established.
 
-2. Check site status:
+3. Check site status:
 
    ```bash
    skupper site status
@@ -243,7 +307,7 @@ On local system sites, the Skupper controller monitors the router using AMQP hea
 
    This shows whether the router process is running and healthy.
 
-3. Understand service behavior during router downtime:
+4. Understand service behavior during router downtime:
 
    The controller stops all dependent services when the router goes down and restarts them when the router comes back up.
 
@@ -267,7 +331,7 @@ When backend pods are removed or crash, Skupper detects the change through its p
    kubectl get connector <name> -o yaml
    ```
 
-   The `Configured` condition transitions to `False` whenever no pods match the connector's selector — whether due to graceful scale-down, a crash, or an OOM kill:
+   The `Configured` condition transitions to `False` whenever no pods match the connector's selector:
 
    ```yaml
    status:

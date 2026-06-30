@@ -63,12 +63,12 @@ There are many options to consider when creating connectors using YAML, see [Con
 
    Understanding connector status:
 
-   | Configured | Matched | Status | Example status.message | Meaning & User Action |
-   | --- | --- | --- | --- | --- |
-   | - | - | Pending | "Not Configured" | The Skupper controller hasn't processed the YAML yet. Wait a few seconds. |
-   | FALSE | - | Error | "No matches for selector..." | Skupper cannot find your application pods. Check that your deployment's labels match your connector's selector. |
-   | TRUE | FALSE | Pending | "No matching listeners" | Your local setup is correct, but Skupper cannot find a remote listener using that routing key. Check the remote site listener configuration. |
-   | TRUE | TRUE | Ready | "OK" | Traffic can flow from client to server and from server to client. |
+   | Status | Example message | Conditions | Action |
+   | --- | --- | --- | --- |
+   | Pending | "Not Configured" | - | The Skupper controller hasn't processed the YAML yet. Wait a few seconds. |
+   | Error | "No matches for selector..." | - | Skupper cannot find your application pods. Check that your deployment's labels match your connector's selector. |
+   | Pending | "No matching listeners" | Configured | Your local setup is correct, but Skupper cannot find a remote listener using that routing key. Check the remote site listener configuration. |
+   | Ready | "OK" | Configured, Matched | Traffic can flow from client to server and from server to client. |
 
    **📌 NOTE**
    By default, the routing key name is set to the name of the connector.
