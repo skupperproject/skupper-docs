@@ -65,6 +65,37 @@ For configuration details, see [Connector resource][connector-resource].
    By default, the routing key name is set to the name of the connector.
    If you want to use a custom routing key, set `spec.routingKey` to your custom value.
 
+<a id="connector-lifecycle-local"></a>
+## Observing connector lifecycle on local system sites
+<!--PROCEDURE-->
+
+Monitor static host connectors on local system sites to understand connection behavior.
+
+On local system sites, connectors specify a `host` and `port` directly rather than a pod selector. There is no dynamic pod discovery. The router maintains a persistent TCP connection to the configured host.
+
+**Procedure**
+
+1. Check the connector configuration:
+
+   ```bash
+   skupper connector status
+   ```
+
+   The connector shows the configured host and port.
+
+2. Monitor connection behavior:
+
+   If the host becomes unreachable, the router retries the connection automatically. There is no CR condition equivalent to `Configured=False` for host-based connectors — availability is determined by whether the router can establish a connection to the host.
+
+3. Check router logs for connection errors:
+
+   ```bash
+   podman logs <username>-skupper-router
+   # or
+   docker logs <username>-skupper-router
+   ```
+
+
 <a id="system-creating-listener-yaml"></a>
 ## Creating a listener using YAML
 <!--PROCEDURE-->
