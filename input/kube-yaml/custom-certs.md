@@ -30,6 +30,13 @@ This document describes two approaches for using custom certificates:
 | Site delete/recreate needed | Yes, to prevent overwrite | No |
 | Skupper overwrites your cert | Yes, unless pre-created | Never |
 
+**Site-specific context**
+
+* `RouterAccess` is a **listening site** concern - it controls how your site accepts incoming link connections
+* `Certificate` CR is a **connecting site** concern - it generates client credentials for outgoing links to remote sites
+
+In both approaches, the listening site provides server certificates and the connecting site uses client certificates to establish the link.
+
 
 <a id="kube-router-access-custom-certs-yaml"></a>
 ## Linking sites using a custom `RouterAccess`, and custom certificates
