@@ -253,6 +253,17 @@ You can now expose services on the application network.
 
 There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
 
+
+## Using custom certificates
+
+For information about linking sites using custom certificates instead of the default Skupper-generated certificates, see [Linking sites using custom certificates][custom-certs-yaml].
+
+**📌 NOTE**  
+For custom certificate workflows YAML provides more control over certificate management and integration with existing PKI infrastructure, although you can still use the Skupper CLI to generate links for those workflows.
+
+[custom-certs-yaml]: ../kube-yaml/custom-certs.md
+
+
 <a id="kube-link-cost-cli"></a>
 ## Specifying link cost
 <!--PROCEDURE-->

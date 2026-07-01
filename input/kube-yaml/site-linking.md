@@ -266,3 +266,9 @@ For per-service failover or weighted traffic distribution, use a
 [multi-key listener][mkl] instead.
 
 [mkl]: ./service-exposure.html#kube-creating-multikeylistener-yaml
+
+## Using custom certificates
+
+For information about linking sites using custom certificates instead of the default Skupper-generated certificates, see [Linking sites using custom certificates][custom-certs-yaml].
+
+[custom-certs-yaml]: ../kube-yaml/custom-certs.md
