@@ -273,7 +273,7 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
 
 3. On the listening site, create client credentials for the connecting site.
 
-   Once your Skupper site is configured to use your custom server certificate, you can create a `Link` resource and an associated client `Secret`. Since Skupper always creates the `skupper-site-ca` signing `Certificate` resource on Kubernetes sites, you can use it to generate client credentials automatically. If you have replaced `skupper-site-ca` with a custom CA that Skupper cannot use for signing, you will need to provide the client `Secret` yourself.
+   Once your Skupper site is configured to use your custom server certificate, you can create a `Link` resource and an associated client `Secret`. If your custom server Secret's `ca.crt` field contains `skupper-site-ca`, you can use the Certificate CR to generate client credentials automatically (Skupper will sign them with `skupper-site-ca`). If your custom server Secret's `ca.crt` contains a different CA, you must provide the client `Secret` yourself, signed by that CA.
 
    To use the automatically created `skupper-site-ca` issuer, create a `Certificate` resource so that Skupper generates a client secret named `skupper-link`:
    ```yaml
