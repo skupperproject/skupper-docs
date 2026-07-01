@@ -37,7 +37,7 @@ This document describes two approaches for using custom certificates:
 
 By default, when you set `spec.linkAccess` on a `Site`, the Skupper controller automatically creates a `RouterAccess` named `skupper-router` with `generateTlsCredentials: true` and `tlsCredentials: skupper-site-server`.
 
-The alternative is to define the `RouterAccess` CR yourself with `generateTlsCredentials: false` and point `tlsCredentials` at a Secret you supply. When `generateTlsCredentials` is false, the `SecuredAccessManager` sets the downstream `SecuredAccess.spec.issuer` to `""`, and `checkCertificate` returns immediately without touching your Secret.
+The alternative is to define the `RouterAccess` CR yourself with `generateTlsCredentials: false` and point `tlsCredentials` at a Secret you supply. When `generateTlsCredentials` is false, the Skupper controller recognizes your custom certificate and will not modify it.
 
 **Prerequisites**
 
@@ -65,6 +65,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    ```yaml
    apiVersion: v1
    kind: Secret
+   type: "kubernetes.io/tls"
    metadata:
      name: my-server-cert
    data:
@@ -122,7 +123,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    spec:
      ca: skupper-site-ca
      client: true
-     subject: skupper.public.host
+     subject: skupper-client
    ```
    Apply it:
    ```shell
@@ -181,6 +182,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    ---
    apiVersion: v1
    kind: Secret
+   type: "kubernetes.io/tls"
    metadata:
      name: skupper-link
    data:
@@ -228,6 +230,7 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
    ```yaml
    apiVersion: v1
    kind: Secret
+   type: "kubernetes.io/tls"
    metadata:
      name: skupper-site-server
    data:
@@ -302,6 +305,7 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
    ```yaml
    apiVersion: v1
    kind: Secret
+   type: "kubernetes.io/tls"
    metadata:
      name: skupper-link
    data:
@@ -378,6 +382,7 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
    ---
    apiVersion: v1
    kind: Secret
+   type: "kubernetes.io/tls"
    metadata:
      name: skupper-link
    data:
