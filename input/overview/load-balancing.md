@@ -11,7 +11,7 @@ For example, if you deploy the same backend code on two sites and expose the bac
 
 ## Preferred approach: Multi-key listeners
 
-A [multi-key listener][mkl] provides per-service control over load balancing and failover by binding a single endpoint to multiple routing keys (connectors).
+A multi-key listener provides per-service control over load balancing and failover by binding a single endpoint to multiple routing keys (connectors).
 This is the **recommended** approach for most use cases because it offers:
 
 * **Per-service configuration** — Each service can have its own distribution strategy, independent of network topology.
@@ -20,7 +20,7 @@ This is the **recommended** approach for most use cases because it offers:
   * **weighted** — Proportional distribution across routing keys. For example, assign weights of `25` and `75` to send a quarter of TCP connections to the first backend and three-quarters to the second.
   * **priority** — Failover with preference order. Traffic uses the first available routing key; if that connector becomes unavailable, traffic automatically shifts to the next routing key in the list.
 
-For configuration details and examples, see [Creating a multi-key listener using YAML][mkl].
+For configuration details and examples, see the multi-key listener documentation.
 
 ## Alternative: Link cost
 
@@ -29,7 +29,7 @@ The routing algorithm favors paths with the lowest total cost from client to tar
 
 **📌 NOTE**
 Link cost applies to **all services** on a link and cannot be set differently for individual services.
-For per-service control, use a [multi-key listener][mkl] instead.
+For per-service control, use a multi-key listener instead.
 
 **Understanding link cost behavior**
 
@@ -54,7 +54,9 @@ If the local server becomes unavailable, traffic fails over to the remote server
 Skupper does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected.
 You must implement that orchestration separately.
 
-For details on configuring link cost, see:
+**Additional resources**
+
+* [Creating a multi-key listener using YAML][mkl]
 * [Specifying link cost using the CLI][link-cost-cli]
 * [Specifying link cost using YAML][link-cost-yaml]
 

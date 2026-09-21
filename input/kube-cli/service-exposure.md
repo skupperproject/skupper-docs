@@ -52,11 +52,10 @@ For more information about connectors, see [Connector concept][connector].
    By default, the routing key name is set to the name of the connector.
    If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
-There are many options to consider when creating connectors using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
+**Additional resources**
 
-**Additional information**
-
-If you need to expose a service from another namespace, you must use YAML as described in [Creating a connector for a different namespace using YAML][attached].
+* [CLI Reference][cli-ref]
+* [Creating a connector for a different namespace using YAML][attached]
 
 <a id="kube-creating-listener-cli"></a>
 ## Creating a listener using the CLI
@@ -105,8 +104,9 @@ For more information about listeners. see [Listener concept][listener].
    By default, the routing key name is the listener name.
    If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
-There are many options to consider when creating connectors using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
+**Additional resources**
 
+* [CLI Reference][cli-ref]
 
 [cli-ref]: https://skupperproject.github.io/refdog/commands/index.html
 [connector]: https://skupperproject.github.io/refdog/concepts/connector.html
