@@ -1,29 +1,29 @@
+---
+skip: true
+---
 <a id="kube-installing-controller"></a>
 # Installing the Skupper controller
 <!--ASSEMBLY-->
 
-If you are using Skupper on local systems (Podman, Docker, Linux), you must install the CLI.
+If you are using Skupper on local systems (Podman, Docker, Linux), you must [install the CLI](#installing-cli).
 
-Before you can create a site on Kubernetes, you must install the Skupper controller.
+Before you can create a site on Kubernetes, you must install the Skupper controller. 
 You can install the controller using the following methods:
 
 * Directly using YAML
 * Helm charts
-* Operator
+* Operator 
 
-After installing the Skupper controller, you can create sites using the CLI or YAML.
+After installing the Skupper controller, you can create sites using the CLI or YAML:
 
-**NOTE**: If you install the controller scoped to cluster, you can create sites in any namespace.
-If you scope the controller to a namespace, you can only create sites in that namespace.
-
-**Additional resources**
-
-* [Installing the Skupper CLI](#installing-cli)
 * [Creating a site using the CLI][cli-site]
 * [Creating a site using YAML][yaml-site]
 
 [cli-site]: ../kube-cli/site-configuration.html
 [yaml-site]: ../kube-yaml/site-configuration.html
+
+**NOTE**: If you install the controller scoped to cluster, you can create sites in any namespace.
+If you scope the controller to a namespace, you can only create sites in that namespace.
 
 
 <a id="kube-installing-controller-yaml"></a>
@@ -38,17 +38,19 @@ Install the Skupper controller on Kubernetes directly from the published YAML ma
 
 **Procedure**
 
-1. Install a cluster-scoped controller:
+Install a cluster-scoped controller using the following commands:
 
-   ```bash
-   kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-cluster-scope.yaml
-   ```
+```bash
+kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-cluster-scope.yaml
+```
 
-   To install a namespace-scoped controller instead:
+Install a namespace-scoped controller using the following commands:
 
-   ```bash
-   kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-namespace-scope.yaml
-   ```
+```bash
+kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{skupper_cli_version}}/skupper-namespace-scope.yaml
+```
+
+
 
 <a id="kube-installing-controller-helm"></a>
 ## Installing the Skupper controller using the Skupper Helm charts
@@ -64,13 +66,12 @@ Install the Skupper controller on Kubernetes by using the published Helm chart.
 
 **Procedure**
 
-1. Install a cluster-scoped controller:
+Run the following command to install a cluster-scoped controller:
 
-   ```
-   helm install skupper oci://quay.io/skupper/helm/skupper --version {{skupper_cli_version}}
-   ```
-
-   To install a namespace-scoped controller, add the `--set scope=namespace` option.
+```
+helm install skupper oci://quay.io/skupper/helm/skupper --version {{skupper_cli_version}}
+```
+To install a namespace-scoped controller, add the `--set scope=namespace` option.
 
 
 <!--
@@ -101,23 +102,24 @@ On local systems, the CLI is all you require to create a site.
 
 **Procedure**
 
-1. Download the latest release:
+To download the latest release:
 
-   ```bash
-   curl https://skupper.io/v2/install.sh | sh
-   ```
+```bash
+curl https://skupper.io/v2/install.sh | sh
+```
 
-   To download a specific version, download from the [Releases](https://github.com/skupperproject/skupper/releases) page.
+To download a specific version, download from [Releases](https://github.com/skupperproject/skupper/releases) page.
 
-2. On local systems, install the controller:
 
-   ```bash
-   skupper system install -p  [podman, docker, linux]
-   ```
+On local systems, you can install the controller using:
+
+```bash
+skupper system install -p  [podman, docker, linux]
+```
 
 <a id="skupper-upgrading-sites"></a>
 ## Upgrading sites
-<!--CONCEPT-->
+<!--PROCEDURE-->
 
 To upgrade a site, you need to upgrade the controller using the same method you used to install Skupper, for example, one of the following:
 
@@ -154,9 +156,7 @@ To update an existing site to the latest images or configuration matching your c
 ### Upgrading the Skupper controller
 <!--PROCEDURE-->
 
-Upgrade the local Skupper controller to a new version without deleting your sites.
-
-Currently, `skupper system uninstall` protects active sites by refusing to run if a site is detected. If you need to force an update to the **controller** itself (to pick up a new controller version) without deleting your sites, follow this manual workaround:
+Currently, `skupper system uninstall` protects active sites by refusing to run if a site is detected. However, if you need to force an update to the **controller** itself (to pick up a new controller version) without deleting your sites, follow this manual workaround:
 
 **Prerequisites** 
 
