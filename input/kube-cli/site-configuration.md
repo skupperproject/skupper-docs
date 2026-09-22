@@ -7,7 +7,7 @@ Using the skupper command-line interface (CLI) allows you to create and manage s
 A typical workflow is to create a site, link sites together, and expose services to the application network.
 
 <a id="kube-checking-cli"></a>
-## Checking the Skupper CLI
+## Check the Skupper CLI
 <!--PROCEDURE-->
 
 Installing the skupper command-line interface (CLI) provides a simple method to get started with Skupper.
@@ -25,7 +25,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    ```
 
 <a id="kube-creating-simple-site-cli"></a>
-## Creating a simple site using the CLI on Kubernetes
+## Create a simple site using the CLI on Kubernetes
 <!--PROCEDURE-->
 
 Use the Skupper CLI to create a site on Kubernetes from the current namespace context.
@@ -80,7 +80,7 @@ There are many options to consider when creating sites using the CLI, see [CLI R
 
 
 <a id="kube-ha-cli"></a>
-## Creating a high availability site using the CLI on Kubernetes
+## Create a high availability site using the CLI on Kubernetes
 <!--PROCEDURE-->
 
 Create a highly available Skupper site on Kubernetes by enabling HA mode in the CLI.
@@ -117,7 +117,7 @@ High availability mode deploys two router pods with anti-affinity rules to ensur
    High availability can also help during a node failure.
 
 <a id="kube-deleting-site-cli"></a>
-## Deleting a site using the CLI on Kubernetes
+## Delete a site using the CLI on Kubernetes
 <!--PROCEDURE-->
 
 Delete a Skupper site on Kubernetes by using the CLI from the namespace where the site was created.

@@ -15,7 +15,7 @@ Service "A" can contact service "B", "B" can contact "C", and so on.
 ![one-cluster](../images/one-cluster.svg)
 
 But if you want to deploy your application across multiple clusters, your options are limited.
-You have to either expose your services to the public internet or set up a VPN.
+You have to either expose your services to the public internet or configure a VPN.
 
 Skupper offers a third way.
 It connects clusters to a secure application network, also known as a virtual application network (VAN).

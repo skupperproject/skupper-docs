@@ -9,9 +9,9 @@ When the Skupper controller detects such a ConfigMap, it copies the ConfigMap's 
 
 You may notice resources that contain labels prefixed with `internal.skupper.io/`.
 
-**📌 NOTE**
-Labels prefixed with `internal.skupper.io/` are generally reserved for system operations and subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels.
-There is one exception to this advice, the `internal.skupper.io/listener` label is explicitly supported for use within label templates to allow you to target specific listener services. 
+> **NOTE:**
+> Labels prefixed with `internal.skupper.io/` are generally reserved for system operations and subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels.
+> There is one exception to this advice, the `internal.skupper.io/listener` label is explicitly supported for use within label templates to allow you to target specific listener services.
 
 
 The controller watches these ConfigMaps dynamically: adding, updating, or deleting a label template takes effect on existing Skupper resources without restarting anything.
@@ -19,7 +19,7 @@ The controller watches these ConfigMaps dynamically: adding, updating, or deleti
 
 
 <a id="kube-creating-label-template"></a>
-## Creating a label template using YAML
+## Create a label template using YAML
 <!--PROCEDURE-->
 
 Use a label template ConfigMap to propagate custom labels and annotations to all Skupper-managed resources.
@@ -65,14 +65,14 @@ Use a label template ConfigMap to propagate custom labels and annotations to all
 
    You should see your custom labels alongside the Skupper-managed labels.
 
-**📌 NOTE**
-The following labels and annotations are always excluded from propagation:
-
-* `skupper.io/label-template`
-* `kubectl.kubernetes.io/last-applied-configuration`
+> **NOTE:**
+> The following labels and annotations are always excluded from propagation:
+>
+> * `skupper.io/label-template`
+> * `kubectl.kubernetes.io/last-applied-configuration`
 
 <a id="kube-label-template-scope"></a>
-## Controlling label template scope
+## Control label template scope
 <!--PROCEDURE-->
 
 Label templates can apply to a single namespace or to all namespaces managed by the Skupper controller.
@@ -87,11 +87,11 @@ Labels and annotations are applied only to resources in that namespace.
 Create the ConfigMap in the Skupper controller's namespace.
 Labels and annotations are applied to Skupper resources in every namespace the controller manages.
 
-**📌 NOTE**
-When both a namespace-scoped and a controller-scoped template define the same key, the controller-scoped value overrides the namespace-scoped one.
+> **NOTE:**
+> When both a namespace-scoped and a controller-scoped template define the same key, the controller-scoped value overrides the namespace-scoped one.
 
 <a id="kube-filtering-label-template"></a>
-## Filtering label templates by resource type
+## Filter label templates by resource type
 <!--PROCEDURE-->
 
 Use optional fields in the ConfigMap's `data` section to apply labels and annotations only to specific resources.
@@ -164,7 +164,7 @@ Use optional fields in the ConfigMap's `data` section to apply labels and annota
    This applies labels only to Service resources that match the label selector.
 
 <a id="kube-excluding-keys"></a>
-## Excluding specific keys from propagation
+## Exclude specific keys from propagation
 <!--PROCEDURE-->
 
 Prevent certain labels or annotations from being propagated by listing them in the `exclude` field.
@@ -199,18 +199,18 @@ Prevent certain labels or annotations from being propagated by listing them in t
    The keys `internal-only` and `internal-secret` are excluded.
 
 <a id="kube-multiple-label-templates"></a>
-## Using multiple label templates
+## Use multiple label templates
 <!--CONCEPT-->
 
 You can create multiple label template ConfigMaps in the same namespace.
 All matching templates are applied.
 
-**📌 NOTE**
-If two templates set the same key to different values, the result is non-deterministic (last-write wins at reconcile time).
-Avoid overlapping keys across templates unless the values are identical.
+> **NOTE:**
+> If two templates set the same key to different values, the result is non-deterministic (last-write wins at reconcile time).
+> Avoid overlapping keys across templates unless the values are identical.
 
 <a id="kube-label-template-lifecycle"></a>
-## Managing label template lifecycle
+## Manage label template lifecycle
 <!--CONCEPT-->
 
 Label templates are dynamic resources that affect Skupper-managed resources in real-time:

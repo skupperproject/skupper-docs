@@ -8,10 +8,10 @@ After creating an application network by linking sites, you can expose services 
 A *routing key* is a string that matches one or more connectors with one or more listeners.
 For example, if you create a connector with the routing key `backend`, you need to create a listener with the routing key `backend` to consume that service.
 
-This section assumes you have created and linked at least two sites.
+Before you begin, create and link at least two sites.
 
 <a id="system-creating-connector-yaml"></a>
-## Creating a connector using YAML
+## Create a connector using YAML
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
@@ -61,12 +61,12 @@ For configuration details, see [Connector resource][connector-resource].
    NAME    STATUS  ROUTING-KEY     SELECTOR        HOST    PORT    HAS MATCHING LISTENER    MESSAGE
    backend Pending backend         app=backend             8080    false   No matching listeners
    ```
-   **📌 NOTE**
-   By default, the routing key name is set to the name of the connector.
-   If you want to use a custom routing key, set `spec.routingKey` to your custom value.
+   > **NOTE:**
+   > By default, the routing key name is set to the name of the connector.
+   > If you want to use a custom routing key, set `spec.routingKey` to your custom value.
 
 <a id="system-creating-listener-yaml"></a>
-## Creating a listener using YAML
+## Create a listener using YAML
 <!--PROCEDURE-->
 
 A listener binds a local connection endpoint to connectors in remote sites. 
@@ -115,11 +115,11 @@ For configuration details, see [Listener resource][listener-resource].
    backend   Ready   backend      0.0.0.0  8080  true                OK
    ```
    
-   **📌 NOTE**
-   There must be a `MATCHING-CONNECTOR` for the service to operate.
+   > **NOTE:**
+   > There must be a `MATCHING-CONNECTOR` for the service to operate.
 
 <a id="system-creating-multikeylistener-yaml"></a>
-## Creating a multi-key listener using YAML
+## Create a multi-key listener using YAML
 <!--PROCEDURE-->
 
 A multi-key listener binds a single local host and port to multiple routing keys in remote sites.
@@ -189,8 +189,8 @@ For configuration details, see [Listener resource][listener-resource].
    where `<filename>` is the name of a YAML file that is saved on your local filesystem.
 
 
-   **📌 NOTE**
-   If you need to change strategy after you created a multi-key listener, you must delete and recreate the resource. This does not affect changing routing keys or weights.
+   > **NOTE:**
+   > If you need to change strategy after you created a multi-key listener, you must delete and recreate the resource. This does not affect changing routing keys or weights.
 
 [connector]: https://skupperproject.github.io/refdog/concepts/connector.html
 [listener]: https://skupperproject.github.io/refdog/concepts/listener.html

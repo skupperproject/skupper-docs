@@ -12,7 +12,7 @@ If you require more than one site, specify a unique namespace when using  `skupp
 
 
 <a id="system-checking-cli"></a>
-## Checking the Skupper CLI and environment
+## Check the Skupper CLI and environment
 <!--PROCEDURE-->
 
 Installing the skupper command-line interface (CLI) provides a simple method to get started with Skupper.
@@ -31,7 +31,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 3. For podman sites:
 
-   Make sure the Podman socket is available. To enable it:
+   Ensure the Podman socket is available. To enable it:
    ```bash
    systemctl --user enable --now podman.socket
    ```
@@ -41,7 +41,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    ```
 
 <a id="system-creating-simple-site-cli"></a>
-## Creating a simple site using the CLI on local systems
+## Create a simple site using the CLI on local systems
 <!--PROCEDURE-->
 
 Use the Skupper CLI to create a site on a local system.
@@ -106,7 +106,7 @@ skupper site create docker-site -p docker -n docker-ns
    ```
 
 <a id="system-deleting-site-cli"></a>
-## Deleting a site using the CLI on local systems
+## Delete a site using the CLI on local systems
 <!--PROCEDURE-->
 
 Delete a Skupper site on a local system by using the CLI.
@@ -129,7 +129,7 @@ Delete a Skupper site on a local system by using the CLI.
    ```
 
 <a id="system-creating-site-bundle"></a>
-## Creating a site bundle using the CLI on local systems
+## Create a site bundle using the CLI on local systems
 <!--PROCEDURE-->
 
 Create a site bundle when you want to prepare a site on one system and install it on a remote host.

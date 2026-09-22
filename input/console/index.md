@@ -10,7 +10,7 @@ The Network console provides data and visualizations of the traffic flow between
 See [API documentation](/api/) for the OpenAPI documentation.
 
 <a id="console-quickstart"></a>
-## Getting started with Skupper network console
+## Get started with Skupper network console
 <!--CONCEPT-->
 
 Install the Network Observer on a Kubernetes cluster.
@@ -318,17 +318,18 @@ Remove the Network Observer and associated resources.
 helm uninstall skupper-network-observer
 ```
 
-**Note:** PVCs are NOT deleted automatically. To remove persistent storage:
+> **NOTE:**
+> PVCs are not deleted automatically. To remove persistent storage:
 
 ```bash
 kubectl delete pvc skupper-network-observer-prometheus
 ```
 
 <a id="console-exploring"></a>
-## Exploring the Network console
+## Explore the Network console
 <!--REFERENCE-->
 
-The Network console provides an overview of the following:
+The Network console provides an overview of:
 
 * Topology
 * Services

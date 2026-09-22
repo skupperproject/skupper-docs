@@ -2,7 +2,7 @@
 # Network Observer Configuration Reference
 <!--ASSEMBLY-->
 
-The following configuration options are for the Skupper Network Observer which enables the network console.
+Configure the Skupper Network Observer, which enables the network console.
 
 
 <a id="observer-external-access"></a>
@@ -482,7 +482,7 @@ The chart creates a second ClusterIP Service named `<release-name>-metrics` that
 | **Service port** | `9000` |
 | **Metrics path** | `/metrics` |
 
-### Scraping Metrics
+### Scrape metrics
 
 Configure your Prometheus instance or monitoring operator to scrape the metrics endpoint.
 

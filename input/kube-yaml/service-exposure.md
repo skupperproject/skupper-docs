@@ -7,11 +7,11 @@ After creating an application network by linking sites, you can expose services 
 A *routing key* is a string that matches one or more connectors with one or more listeners.
 For example, if you create a connector with the routing key `backend`, you need to create a listener with the routing key `backend` to consume that service.
 
-This section assumes you have created and linked at least two sites.
+Before you begin, create and link at least two sites.
 
 <!-- Creating a connector on Kubernetes using YAML -->
 <a id="kube-creating-connector-yaml"></a>
-## Creating a connector using YAML
+## Create a connector using YAML
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
@@ -60,13 +60,13 @@ There are many options to consider when creating connectors using YAML, see [Con
    NAME    STATUS  ROUTING-KEY     SELECTOR        HOST    PORT    HAS MATCHING LISTENER    MESSAGE
    backend Pending backend         app=backend             8080    false   No matching listeners
    ```
-   **📌 NOTE**
-   By default, the routing key name is set to the name of the connector.
-   If you want to use a custom routing key, set `spec.routingKey` to your custom value.
+   > **NOTE:**
+   > By default, the routing key name is set to the name of the connector.
+   > If you want to use a custom routing key, set `spec.routingKey` to your custom value.
 
 <!-- Creating a listener on Kubernetes using YAML -->
 <a id="kube-creating-listener-yaml"></a>
-## Creating a listener using YAML
+## Create a listener using YAML
 <!--PROCEDURE-->
 
 A listener binds a local connection endpoint to connectors in remote sites. 
@@ -116,11 +116,11 @@ For configuration details, see [Listener resource][listener-resource].
    backend   backend       8080   east-backend   Ready    true                     OK   
    ```
    
-   **📌 NOTE**
-   There must be a `MATCHING-CONNECTOR` for the service to operate.
+   > **NOTE:**
+   > There must be a `MATCHING-CONNECTOR` for the service to operate.
 
 <a id="kube-creating-multikeylistener-yaml"></a>
-## Creating a multi-key listener using YAML
+## Create a multi-key listener using YAML
 <!--PROCEDURE-->
 
 A multi-key listener binds a single local host and port to multiple routing keys in remote sites.
@@ -131,8 +131,8 @@ With multi-key listeners, you must choose a strategy which determines how the tr
 * priority - Uses the first routing key in list that is available for traffic. If the connectors for that routing key become unavailable, the listener matches with the next routing key in list.
 * weighted - Uses the routing keys in proportion to the assigned weights. For example, if `backend1` is assigned 25 and `backend2` is assigned 75, then only a quarter of the TCP connections are directed to `backend1`.
 
-**📌 NOTE**
-Multi-key listeners select between routing keys using the configured strategy. Each routing key may have multiple connectors, and link cost determines which connector is used within each routing key. The two mechanisms are independent.
+> **NOTE:**
+> Multi-key listeners select between routing keys using the configured strategy. Each routing key may have multiple connectors, and link cost determines which connector is used within each routing key. The two mechanisms are independent.
 
 For configuration details, see [MultiKeyListener resource][multikeylistener-resource].
 
@@ -191,16 +191,17 @@ For configuration details, see [MultiKeyListener resource][multikeylistener-reso
    kubectl get multikeylistener
    ```
 
-   **📌 NOTE**
-   If you need to change strategy after you created a multi-key listener, you must delete and recreate the resource. This does not affect changing routing keys or weights.
+   > **NOTE:**
+   > If you need to change strategy after you created a multi-key listener, you must delete and recreate the resource. This does not affect changing routing keys or weights.
 
 <a id="kube-creating-attachedconnector-yaml"></a>
-## Creating a connector for a different namespace using YAML
+## Create a connector for a different namespace using YAML
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
 
-If you create a site in one namespace and need to expose a service in a different namespace, use this procedure to create an *attached connector* in the other namespace and an *AttachedConnectorBinding* in the site namespace.
+If you create a site in one namespace and need to expose a service in a different namespace, use an *attached connector*.
+Create the attached connector in the other namespace and an *AttachedConnectorBinding* in the site namespace.
 
 * An attached connector is a connector in a peer namespace, that is, not the site namespace.
 * The AttachedConnectorBinding is a binding to an attached connector in a peer namespace and is created in the site namespace.

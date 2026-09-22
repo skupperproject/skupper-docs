@@ -13,7 +13,7 @@ The CA and server certificate used for this authentication are named `skupper-si
 
 Although this behavior is automatic, you can override it by providing your own custom server certificate or even your own CA.
 
-This document describes two approaches for using custom certificates:
+Two approaches are available for using custom certificates:
 
 * **Using a custom `RouterAccess` and custom certificates** - Manually define the `RouterAccess` CR with your own certificate (`linkAccess` is not enabled)
 
@@ -37,13 +37,14 @@ This document describes two approaches for using custom certificates:
   * On the **listening site** - the Certificate CR can reference a CA secret to sign the server certificate
   * On the **connecting site** - it generates client credentials for outgoing links, but the CA that signs those credentials must also be present in the namespace
   
-**Note:** If a `RouterAccess` references a custom secret signed by an external CA (where no CA secret exists in the namespace), then `Certificate` CRs cannot be used to generate client credentials automatically.
+**Note:** If a `RouterAccess` references a custom secret signed by an external CA, no CA secret exists in the namespace.
+In that case, `Certificate` CRs cannot generate client credentials automatically.
 
 In both approaches, the listening site provides server certificates and the connecting site uses client certificates to establish the link.
 
 
 <a id="kube-router-access-custom-certs-yaml"></a>
-## Linking sites using a custom `RouterAccess`, and custom certificates
+## Link sites using a custom `RouterAccess`, and custom certificates
 <!--PROCEDURE-->
 
 By default, when you set `spec.linkAccess` on a `Site`, the Skupper controller automatically creates a `RouterAccess` named `skupper-router` with `generateTlsCredentials: true` and `tlsCredentials: skupper-site-server`.
@@ -88,7 +89,8 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    ```shell
    kubectl apply -f my-server-cert.yaml
    ```
-   Make sure the certificate in `tls.crt` is valid for the hostname or IP address that will be referenced in your `Link` resource. In this example, consider it valid for `skupper.public.host`.
+   Ensure the certificate in `tls.crt` is valid for the hostname or IP address referenced in your `Link` resource.
+   In this example, consider it valid for `skupper.public.host`.
 
 3. On the listening site, create a `RouterAccess` CR that references your Secret and sets `generateTlsCredentials: false`:
    ```yaml
@@ -208,9 +210,9 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
 
 7. Securely transfer the `Link` resource YAML file to the connecting site.
 
-   **📌 NOTE**
-   Access to this file provides access to the application network.
-   Protect it appropriately.
+   > **NOTE:**
+   > Access to this file provides access to the application network.
+   > Protect it appropriately.
 
 8. On the connecting site, apply the YAML file and check status:
    ```shell
@@ -221,7 +223,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    ```
 
 <a id="kube-link-custom-certs-yaml"></a>
-## Linking sites using `Link` resources and custom certificates
+## Link sites using `Link` resources and custom certificates
 <!--PROCEDURE-->
 
 Link sites using custom TLS certificates instead of the default Skupper-generated certificates.
@@ -239,7 +241,7 @@ You can override this behavior by providing your own custom server certificate.
 
 To link sites using custom certificates, you provide a custom server certificate on the listening site and create a `Link` resource on the connecting site that references matching client credentials.
 
-NOTE: In this procedure you delete and recreate your site to make sure the certificate configuration is applied.
+NOTE: In this procedure you delete and recreate your site to ensure the certificate configuration is applied.
 
 **Procedure**
 
@@ -261,9 +263,10 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
    kubectl apply -f skupper-site-server.yaml
    kubectl apply -f site.yaml # recreate the site
    ```
-   NOTE: If you attempt to apply the secret on an existing site, the Skupper controller overwrites your changes. Make sure to create the secret before creating your site.
+   NOTE: If you attempt to apply the secret on an existing site, the Skupper controller overwrites your changes. Ensure to create the secret before creating your site.
 
-   Make sure the certificate specified in `tls.crt` is valid for the hostname or IP address that will be referenced in your `Link` resource. In this example, consider the server certificate as being valid for the hostname: `skupper.public.host`.
+   Ensure the certificate in `tls.crt` is valid for the hostname or IP address referenced in your `Link` resource.
+   In this example, consider the server certificate valid for the hostname `skupper.public.host`.
 
 2. Determine the hostname or IP address for the listening site.
    
@@ -276,7 +279,7 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
    skupper.public.host
    ```
    
-   **_Note:_** Make sure you specify the appropriate namespace when running the commands from this example.
+   **_Note:_** Ensure you specify the appropriate namespace when running the commands from this example.
    
    Again, if your Site has already been created, Skupper will recognize your custom secret. You can confirm this with the following command:
    ```shell
@@ -292,7 +295,7 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
 
    Once your Skupper site is configured to use your custom server certificate, you can create a `Link` resource and an associated client `Secret`. 
    
-   * If your custom server certificate was signed by the `skupper-site-ca` issuer or by a CA whose secret is on the listening site's namespace, you can use the Certificate CR to generate client credentials automatically. 
+   * If your custom server certificate was signed by `skupper-site-ca` or by a CA whose secret is in the namespace, use the Certificate CR to generate client credentials automatically. 
    * If your custom server certificate was signed by a different CA, you must provide the client `Secret` yourself, signed by that CA.
 
    To use the automatically created `skupper-site-ca` issuer, create a `Certificate` resource so that Skupper generates a client secret named `skupper-link`:
@@ -337,7 +340,9 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
 
 4. On the listening site, create a `Link` resource YAML file.
 
-   Now, regardless of whether Skupper generated your client certificate Secret or if you generated it yourself, to define a Skupper Link, that can be shared with remote sites allowing them to initiate a secure outgoing link to your site, you will need to write a YAML file that contains both documents: a `Link`, and a Client `Secret`.
+   Whether Skupper generated your client certificate Secret or you generated it yourself, the next step is the same.
+   Define a Skupper Link by creating a YAML file that contains both a `Link` and a client `Secret`.
+   Remote sites use this file to initiate a secure outgoing link to your site.
 
    You can generate a Link using `kubectl` or manually (as long as retrieve the list of endpoints). Here are these two methods:
 
@@ -414,9 +419,9 @@ NOTE: In this procedure you delete and recreate your site to make sure the certi
 5. Securely transfer the `Link` resource YAML file to the context of the connecting site.
    If you have both sites available from your terminal session, this step is not required.
 
-   **📌 NOTE**
-   Access to this file provides access to the application network.
-   Protect it appropriately.
+   > **NOTE:**
+   > Access to this file provides access to the application network.
+   > Protect it appropriately.
 
 6. On the connecting site, apply the YAML file and check status:
    ```shell

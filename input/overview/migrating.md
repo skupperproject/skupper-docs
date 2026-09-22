@@ -12,10 +12,10 @@ Terminology changes:
 * **Skupper Custom Resources**: On non-Kubernetes sites, you can now define your network using YAML. The YAML format is similar to Kubernetes YAML.
 
 <a id="migrating-sites"></a>
-## Creating sites
+## Create sites
 <!--REFERENCE-->
 
-Creating sites using CLI:
+Create sites using CLI:
 
 ```v1
 contextA> skupper init
@@ -31,7 +31,7 @@ Use `--enable-link-access` to allow other sites link to the new site.
 On Podman, the site definition is created in `~/.local/share/skupper` and you must enter `skupper system setup` to complete site creation.
 
 <a id="migrating-links"></a>
-## Linking sites
+## Link sites
 <!--REFERENCE-->
 
 These examples show how site-linking commands changed between Skupper v1 and Skupper v2.
@@ -49,7 +49,7 @@ contextA> skupper token redeem ~/token.yaml
 ```
 
 <a id="migrating-services"></a>
-## Exposing services
+## Expose services
 <!--REFERENCE-->
 
 These examples show how service-exposure commands changed between Skupper v1 and Skupper v2.

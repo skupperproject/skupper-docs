@@ -1,16 +1,13 @@
 <a id="troubleshooting"></a>
-# Troubleshooting an application network
+# Troubleshoot an application network
 <!--ASSEMBLY-->
 
-Typically, you can create a network without referencing this troubleshooting guide.
-However, this guide provides some tips for situations when the network does not perform as expected.
-
-See the resolving common problems section if you have encountered a specific issue using the `skupper` CLI.
+Diagnose and resolve issues with your application network by checking site status, verifying links, and collecting diagnostic data.
 
 A typical troubleshooting workflow is to check all the sites and create debug tar files.
 
 <a id="checking-sites"></a>
-## Checking sites
+## Check sites
 <!--PROCEDURE-->
 
 Check site, connector, listener, and link status to confirm that the application network is operating correctly.
@@ -107,23 +104,27 @@ Using the `skupper` command-line interface (CLI) provides a simple method to get
    The output shows:
 
    - There is one connector, named `backend`.
-   - The connector uses the `backend` routing key and port `9090`.
+   - The connector uses the `backend` routing key and port `8080`.
 
-   This result shows that you can create a listener using the `backend` routing key and port `9090` on a different site to access the `backend` service.
+   This result shows that you can create a listener using the `backend` routing key and port `8080` on a different site to access the `backend` service.
+
+**Additional resources**
+
+- [Checking links](#checking-links)
+- [Creating a Skupper debug tar file](#debug-dump)
 
 <a id="checking-links"></a>
-## Checking links
+## Check links
 <!--PROCEDURE-->
 
 Check link status to confirm that sites can exchange traffic across the application network.
 
 You must link sites before you can expose services on the network.
 
-**📌 NOTE**
-By default, tokens expire after 15 minutes and you can only use a token once.
-Generate a new token if the link is not connected.
+> **NOTE:**
+> By default, tokens expire after 15 minutes and you can only use a token once.
+> Generate a new token if the link is not connected.
 
-This section outlines some advanced options for checking links.
 
 **Procedure**
 
@@ -140,8 +141,8 @@ This section outlines some advanced options for checking links.
 
    The status of the link must be `Ready` to allow service traffic.
 
-   **📌 NOTE**
-   You must run `skupper link status` on a linking site.
+   > **NOTE:**
+   > You must run `skupper link status` on a linking site.
 
    If you use this command on a connecting site, there is a message:
 
@@ -151,9 +152,13 @@ This section outlines some advanced options for checking links.
    There are no link resources in the namespace
    ```
 
+**Additional resources**
+
+- [Checking sites](#checking-sites)
+- [Creating a Skupper debug tar file](#debug-dump)
 
 <a id="debug-dump"></a>
-## Creating a Skupper debug tar file
+## Create a Skupper debug tar file
 <!--PROCEDURE-->
 
 Create a debug tar file containing diagnostic information about a Skupper site to troubleshoot issues or share with support.
@@ -206,17 +211,25 @@ This procedure applies to both Kubernetes and local system sites.
 
    You may notice resources that contain labels prefixed with `internal.skupper.io/`.
 
-   **📌 NOTE**
-   Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels.
+   > **NOTE:**
+   > Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels.
 
+**Verification**
+
+- Verify the tar file exists in the current directory by running `ls -l skupper-dump*.tar.gz`.
+- Verify the extracted directory contains the expected subdirectories: `versions/`, `site-namespace/`.
+
+**Additional resources**
+
+- [Checking sites](#checking-sites)
+- [Checking links](#checking-links)
+- [Troubleshooting the Dynamic System Controller](#dynamic-system-controller)
 
 <a id="dynamic-system-controller"></a>
-## Troubleshooting the Dynamic System Controller
+## Troubleshoot the Dynamic System Controller
 <!--PROCEDURE-->
 
-The Dynamic System Controller feature (available on Docker and Podman platforms only) enables automatic processing of YAML resources when `--reload-type=auto` is enabled during installation. 
-
-Use this section to diagnose issues when resources are not being automatically detected or processed.
+Diagnose issues with the Dynamic System Controller on Docker and Podman platforms when YAML (YAML Ain't Markup Language) resources are not being automatically detected or processed.
 
 By default, the reload type is set to `manual`, meaning resources must be processed by using `skupper system start` and `skupper system reload` for subsequent changes.
 
@@ -243,7 +256,7 @@ By default, the reload type is set to `manual`, meaning resources must be proces
    Resource has been created: backend.yaml
    ```
 
-   If you don't see this message after copying a YAML file to the `/input/resources` directory, check:
+   If you do not see this message after copying a YAML file to the `/input/resources` directory, check:
    - The file is in the correct directory for the namespace
    - The file has valid YAML syntax
    - The file has correct permissions
@@ -267,4 +280,9 @@ By default, the reload type is set to `manual`, meaning resources must be proces
    # or
    docker logs <username>-skupper-controller | grep -i error
    ```
+
+**Additional resources**
+
+- [Creating a Skupper debug tar file](#debug-dump)
+- [Checking sites](#checking-sites)
 

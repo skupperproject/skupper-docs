@@ -10,10 +10,11 @@ The link direction is not significant, and is typically determined by ease of co
 Once sites are linked, services can be exposed and consumed across the application network without the need to open ports or manage inter-site connectivity.
 
 The procedures below describe linking an existing site.
-Typically, it is easier to configure a site, links, and services in a set of files and then create a configured site by placing all the YAML files in a directory such as `local` before running `skupper system setup`.
+Typically, it is easier to configure a site, links, and services in a set of files.
+Create a configured site by placing all the YAML files in a directory such as `local` before running `skupper system setup`.
 
 <a id="system-link-yaml"></a>
-## Linking sites using a `link` resource
+## Link sites using a `link` resource
 <!--PROCEDURE-->
 
 Create a `link` resource YAML file and apply it to the local system site to establish a link.
@@ -29,7 +30,7 @@ To link sites, you create a `link` resource YAML file on one site and apply that
 
 **Procedure**
 
-1. On the site where you want to create a link , make sure link access is enabled:
+1. On the site where you want to create a link , ensure link access is enabled:
    ```bash
    skupper site update --enable-link-access
    ```

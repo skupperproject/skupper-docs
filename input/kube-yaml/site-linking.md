@@ -17,7 +17,7 @@ The link direction is not significant, and is typically determined by ease of co
 
 
 <a id="kube-access-yaml"></a>
-## Linking sites using `AccessGrant` and `AccessToken` resources
+## Link sites using `AccessGrant` and `AccessToken` resources
 <!--PROCEDURE-->
 
 Use `AccessGrant` and `AccessToken` resources to create a link between two Kubernetes sites using YAML.
@@ -99,9 +99,9 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    ```
    where `token.yaml` is the name of the YAML file that is saved on your local filesystem.
 
-   **📌 NOTE**
-   Access to this file provides access to the application network. 
-   Protect it appropriately.
+   > **NOTE:**
+   > Access to this file provides access to the application network.
+   > Protect it appropriately.
 
 4. Securely transfer the `token.yaml` file to context of the connecting site.
    If you have both sites available from your terminal session, this step is not required.
@@ -132,11 +132,11 @@ traffic across links between sites.
 The routing algorithm favors paths with the lowest total cost from client to
 target server.
 
-**📌 NOTE**
-For most load-balancing and failover use cases, a [multi-key listener][mkl]
-provides more predictable, per-service control than link cost.
-Link cost applies to **all services** that traverse a link; it is not
-possible to set different costs for distinct services on the same link.
+> **NOTE:**
+> For most load-balancing and failover use cases, a [multi-key listener][mkl]
+> provides more predictable, per-service control than link cost.
+> Link cost applies to **all services** that traverse a link; it is not
+> possible to set different costs for distinct services on the same link.
 
 Understanding link cost behavior:
 
@@ -241,8 +241,8 @@ The `AccessToken` resource also exposes `spec.linkCost`, which is applied to the
    The minimum enforced cost is `1`. If `spec.cost` is set to `0` or omitted, the router treats it as `1`.
    For the failover pattern, set `spec.cost: 99999` on the backup site's `Link` resource.
 
-   **📌 NOTE**
-   Skupper does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected. For per-service failover or weighted traffic distribution, use a multi-key listener instead.
+   > **NOTE:**
+   > Skupper does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected. For per-service failover or weighted traffic distribution, use a multi-key listener instead.
 
 **Additional resources**
 
@@ -251,7 +251,7 @@ The `AccessToken` resource also exposes `spec.linkCost`, which is applied to the
 [mkl]: ./service-exposure.html#kube-creating-multikeylistener-yaml
 
 <a id="kube-yaml-custom-certs-info"></a>
-## Using custom certificates
+## Use custom certificates
 <!--CONCEPT-->
 
 You can link sites using custom TLS certificates instead of the default Skupper-generated certificates.
