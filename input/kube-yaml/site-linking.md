@@ -125,7 +125,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
 
 <a id="kube-link-cost-yaml"></a>
 ## Specifying link cost using YAML
-<!--REFERENCE-->
+<!--PROCEDURE-->
 
 Link cost is a configurable integer value that influences how Skupper routes
 traffic across links between sites.
@@ -161,55 +161,52 @@ The `AccessToken` resource also exposes `spec.linkCost`, which is applied to the
 
 **Procedure**
 
-**Option A — Set cost when redeeming a token**
+1. Choose one of the following options to set link cost:
 
-Add `linkCost` to the `AccessToken` resource before applying it. When the token is redeemed, the resulting `Link` is created with that cost.
+   **Option A — Set cost when redeeming a token:**
 
-```yaml
-apiVersion: skupper.io/v2alpha1
-kind: AccessToken
-metadata:
-  name: my-token
-spec:
-  url: <grant-url>
-  code: <secret-code>
-  ca: <ca-cert>
-  linkCost: 2
-```
+   Add `linkCost` to the `AccessToken` resource before applying it. When the token is redeemed, the resulting `Link` is created with that cost.
 
-Apply it:
+   ```yaml
+   apiVersion: skupper.io/v2alpha1
+   kind: AccessToken
+   metadata:
+     name: my-token
+   spec:
+     url: <grant-url>
+     code: <secret-code>
+     ca: <ca-cert>
+     linkCost: 2
+   ```
 
-```bash
-kubectl apply -f token.yaml
-```
+   Apply it:
 
-**Option B — Update cost on an existing link**
+   ```bash
+   kubectl apply -f token.yaml
+   ```
 
-1. Find the link name:
+   **Option B — Update cost on an existing link:**
+
+   Find the link name:
 
    ```bash
    kubectl get links
    ```
-   Example output:
-   ```
-   NAME          STATUS   REMOTE SITE   MESSAGE
-   west-6bfn6    Ready    west
-   ```
 
-2. Patch the cost on the link:
+   Patch the cost on the link:
 
    ```bash
    kubectl patch link west-6bfn6 --type merge -p '{"spec":{"cost":2}}'
    ```
-   
+
    Or edit the resource directly:
-   
+
    ```bash
    kubectl edit link west-6bfn6
    ```
-   
+
    Set the `cost` field in `spec`:
-   
+
    ```yaml
    apiVersion: skupper.io/v2alpha1
    kind: Link
@@ -227,48 +224,41 @@ kubectl apply -f token.yaml
      tlsCredentials: west-6bfn6
    ```
 
-**Verifying link cost**
+**Verification**
 
-Check the cost of a specific link:
+1. Check the cost of a specific link:
 
-```bash
-kubectl get link west-6bfn6 -o yaml
-```
+   ```bash
+   kubectl get link west-6bfn6 -o yaml
+   ```
 
-Look for `spec.cost` in the output. Alternatively, for a summary:
+   Look for `spec.cost` in the output. Alternatively, for a summary:
 
-```bash
-kubectl get links
-```
+   ```bash
+   kubectl get links
+   ```
 
-**Additional information**
+   The minimum enforced cost is `1`. If `spec.cost` is set to `0` or omitted, the router treats it as `1`.
+   For the failover pattern, set `spec.cost: 99999` on the backup site's `Link` resource.
 
-* The minimum enforced cost is `1`. If `spec.cost` is set to `0` or omitted, the router treats it as `1`.
-* For the failover pattern (primary cost `0`/local, backup cost `99999`), set `spec.cost: 99999` on the backup site's `Link` resource.
+   **📌 NOTE**
+   Skupper does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected. For per-service failover or weighted traffic distribution, use a multi-key listener instead.
 
-A common use case for link cost is automatic failover.
-You can configure a primary site with an effective cost of `0` (local) and a
-backup site with a high link cost, for example `99999`:
+**Additional resources**
 
-- local server — effective cost `0`
-- remote backup server — link cost `99999`
-
-In this configuration, all connections are routed to the local server.
-If the local server becomes unavailable, traffic fails over to the remote
-server regardless of the high cost.
-
-**📌 NOTE**
-Skupper does not provide orchestrated failover for stateful applications that
-require control over the order in which traffic is redirected.
-You must implement that orchestration separately.
-
-For per-service failover or weighted traffic distribution, use a
-[multi-key listener][mkl] instead.
+* [Multi-key listener][mkl]
 
 [mkl]: ./service-exposure.html#kube-creating-multikeylistener-yaml
 
+<a id="kube-yaml-custom-certs-info"></a>
 ## Using custom certificates
+<!--CONCEPT-->
 
-For information about linking sites using custom certificates instead of the default Skupper-generated certificates, see [Linking sites using custom certificates][custom-certs-yaml].
+You can link sites using custom TLS certificates instead of the default Skupper-generated certificates.
+Custom certificates allow integration with your existing PKI infrastructure.
+
+**Additional resources**
+
+* [Linking sites using custom certificates][custom-certs-yaml]
 
 [custom-certs-yaml]: ../kube-yaml/custom-certs.md

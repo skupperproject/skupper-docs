@@ -204,11 +204,10 @@ This procedure applies to both Kubernetes and local system sites.
    - `/site-namespace/resources/Connector-<name>.yaml` - Connector configuration and status
    - `/site-namespace/resources/Listener-<name>.yaml` - Listener configuration and status
 
+   You may notice resources that contain labels prefixed with `internal.skupper.io/`.
 
-You may notice resources that contain labels prefixed with `internal.skupper.io/`.
-
-**📌 NOTE**
-Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels. 
+   **📌 NOTE**
+   Labels prefixed with `internal.skupper.io/` are **internal-only**. They are subject to change without notice in future versions of Skupper. Do not modify, delete, or build automation that depends on the state or existence of these labels.
 
 
 <a id="dynamic-system-controller"></a>

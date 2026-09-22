@@ -1,3 +1,6 @@
+---
+skip: true
+---
 <a id="kube-installing-controller"></a>
 # Installing the Skupper controller
 <!--ASSEMBLY-->

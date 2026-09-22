@@ -6,7 +6,7 @@ render_macros: false
 # Linking sites using custom certificates
 <!--ASSEMBLY-->
 
-By default, the Skupper controller generates internal Certificate Authorities (CAs) and self-signed certificates.  
+By default, the Skupper controller generates internal Certificate Authorities (CAs) and self-signed certificates.
 For example, it creates certificates to authenticate incoming Skupper links from external Skupper sites.
 
 The CA and server certificate used for this authentication are named `skupper-site-ca` (default signing `Certificate` resource for a Skupper Site) and `skupper-site-server`, respectively.
@@ -223,6 +223,8 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
 <a id="kube-link-custom-certs-yaml"></a>
 ## Linking sites using `Link` resources and custom certificates
 <!--PROCEDURE-->
+
+Link sites using custom TLS certificates instead of the default Skupper-generated certificates.
 
 The server certificate (`skupper-site-server`) issued by the self-signed CA `skupper-site-ca` is issued for the public hostname or IP address associated with the `skupper-router` service. This depends on the ingress method used, for example an OpenShift Route or a Kubernetes LoadBalancer Service.
 

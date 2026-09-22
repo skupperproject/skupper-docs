@@ -88,7 +88,9 @@ To link sites, you create a token on one site and redeem that token on the other
    ```
    You can now expose services on the application network.
 
-There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
+**Additional resources**
+
+* [CLI Reference][cli-ref]
 
 <a id="kube-link-cli"></a>
 ## Linking sites using a `link` resource
@@ -150,7 +152,9 @@ To link sites, you create a `link` resource YAML file on one site and apply that
    ```
    You can now expose services on the application network.
 
-There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
+**Additional resources**
+
+* [CLI Reference][cli-ref]
 
 <a id="kube-proxy-cli"></a>
 ## Linking sites through an HTTP proxy
@@ -248,18 +252,22 @@ To link sites through a proxy, you create a Secret containing the proxy configur
    kubectl annotate link <link-name> reconcile=$(date +%s) --overwrite
    ```
 
-All inter-site traffic is protected by mutual TLS and routed through the HTTP CONNECT proxy tunnel.
-You can now expose services on the application network.
+   All inter-site traffic is protected by mutual TLS and routed through the HTTP CONNECT proxy tunnel.
+   You can now expose services on the application network.
 
-There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
+**Additional resources**
 
+* [CLI Reference][cli-ref]
 
+<a id="kube-custom-certs-cli"></a>
 ## Using custom certificates
+<!--CONCEPT-->
 
-For information about linking sites using custom certificates instead of the default Skupper-generated certificates, see [Linking sites using custom certificates][custom-certs-yaml].
+For custom certificate workflows, YAML provides more control over certificate management and integration with existing PKI infrastructure, although you can still use the Skupper CLI to generate links for those workflows.
 
-**📌 NOTE**  
-For custom certificate workflows YAML provides more control over certificate management and integration with existing PKI infrastructure, although you can still use the Skupper CLI to generate links for those workflows.
+**Additional resources**
+
+* [Linking sites using custom certificates][custom-certs-yaml]
 
 [custom-certs-yaml]: ../kube-yaml/custom-certs.md
 
@@ -335,25 +343,17 @@ The following procedure describes how to set link cost in various scenarios:
    Message:  <none>
    ```
 
-**Additional information**
+   A common use case for link cost is automatic failover.
+   You can configure a primary site with an effective cost of `0` (local) and a backup site with a high link cost, for example `99999`.
+   In this configuration, all connections are routed to the local server.
+   If the local server becomes unavailable, traffic fails over to the remote server regardless of the high cost.
 
-A common use case for link cost is automatic failover.
-You can configure a primary site with an effective cost of `0` (local) and a
-backup site with a high link cost, for example `99999`:
+   **📌 NOTE**
+   Skupper does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected. For per-service failover or weighted traffic distribution, use a multi-key listener instead.
 
-- local server — effective cost `0`
-- remote backup server — link cost `99999`
+**Additional resources**
 
-In this configuration, all connections are routed to the local server.
-If the local server becomes unavailable, traffic fails over to the remote
-server regardless of the high cost.
-
-**📌 NOTE**
-Skupper does not provide orchestrated failover for stateful applications that
-require control over the order in which traffic is redirected.
-You must implement that orchestration separately.
-
-For per-service failover or weighted traffic distribution, use a
-[multi-key listener][mkl] instead.
+* [Multi-key listener][mkl]
 
 [mkl]: ../kube-yaml/service-exposure.html#kube-creating-multikeylistener-yaml
+[cli-ref]: https://skupperproject.github.io/refdog/commands/index.html
