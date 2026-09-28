@@ -91,7 +91,7 @@ There are many options to consider when linking sites using the CLI, see [CLI Re
    You can now expose services on the application network.
 
 <a id="system-link-cli"></a>
-## Link sites using a `link` resource
+## Link sites using a `link` resource and the CLI
 <!--PROCEDURE-->
 
 An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.

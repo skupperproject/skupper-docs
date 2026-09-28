@@ -109,7 +109,7 @@ High availability mode deploys two router pods with anti-affinity rules to ensur
    ```
 
 <a id="kube-site-resources-yaml"></a>
-## Set site resources
+## Set site resources using YAML
 <!--PROCEDURE-->
 
 You can configure the Skupper Router and Kube Adaptor components with minimum and maximum CPU and memory resources by defining sizing models using ConfigMaps.

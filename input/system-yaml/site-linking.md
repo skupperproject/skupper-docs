@@ -14,12 +14,12 @@ Typically, it is easier to configure a site, links, and services in a set of fil
 Create a configured site by placing all the YAML files in a directory such as `local` before running `skupper system setup`.
 
 <a id="system-link-yaml"></a>
-## Link sites using a `link` resource
+## Link sites using a `link` resource and YAML
 <!--PROCEDURE-->
 
 Create a `link` resource YAML file and apply it to the local system site to establish a link.
 
-An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.
+An alternative approach to linking sites using tokens is to create a `link` resource YAML file, and to apply that resource to the local system site.
 
 **Prerequisites**
 

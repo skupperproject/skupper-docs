@@ -251,7 +251,7 @@ The `AccessToken` resource also exposes `spec.linkCost`, which is applied to the
 [mkl]: ./service-exposure.html#kube-creating-multikeylistener-yaml
 
 <a id="kube-yaml-custom-certs-info"></a>
-## Use custom certificates
+## Custom certificates and YAML
 <!--CONCEPT-->
 
 You can link sites using custom TLS certificates instead of the default Skupper-generated certificates.

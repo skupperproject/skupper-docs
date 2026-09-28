@@ -263,7 +263,7 @@ Then reference the proxy Secret in the link settings and apply that resource to 
 * [CLI Reference][cli-ref]
 
 <a id="kube-custom-certs-cli"></a>
-## Use custom certificates
+## Custom certificates and the Skupper CLI
 <!--CONCEPT-->
 
 For custom certificate workflows, YAML provides more control over certificate management and PKI integration.
@@ -277,7 +277,7 @@ You can still use the Skupper CLI to generate links for those workflows.
 
 
 <a id="kube-link-cost-cli"></a>
-## Specifying link cost
+## Specifying link cost using the CLI
 <!--PROCEDURE-->
 
 Link cost is a configurable integer value that influences how Skupper routes
