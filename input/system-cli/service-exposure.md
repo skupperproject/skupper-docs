@@ -1,5 +1,5 @@
 <a id="system-exposing-services-cli"></a>
-# Exposing services on the application network using the CLI
+# Exposing services on the application network using the CLI on local systems
 <!--ASSEMBLY-->
 
 Use the CLI on local systems to create connectors and listeners for services on the application network.
@@ -11,7 +11,7 @@ For example, if you create a connector with the routing key `backend`, you need 
 Before you begin, create and link at least two sites.
 
 <a id="system-creating-connector-cli"></a>
-## Create a connector using the CLI
+## Create a local system connector using the CLI
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
@@ -63,7 +63,7 @@ There are many options to consider when creating connectors using the CLI, see [
    ```
 
 <a id="system-creating-listener-cli"></a>
-## Create a listener using the CLI
+## Create a local system listener using the CLI
 <!--PROCEDURE-->
 
 A listener binds a local connection endpoint to connectors in remote sites. 

@@ -10,7 +10,7 @@ While such a solution provides many benefits, it also presents a unique challeng
 Skupper provides a solution to this challenge with an Application Network that simply and securely connects applications running in different network locations.
 
 <a id="application-networks"></a>
-## Application Networks
+## Application networks
 <!--CONCEPT-->
 
 An application network connects services across sites as if they were running together.

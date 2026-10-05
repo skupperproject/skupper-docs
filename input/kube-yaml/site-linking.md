@@ -60,7 +60,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
      expirationWindow: 25m        # default 15m
    ```
    For example, if you created `accessgrant.yaml`, apply and check status:
-   ```shell
+   ```bash
    kubectl apply -f accessgrant.yaml
    
    kubectl get accessgrants
@@ -84,7 +84,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    * CA_RAW is the cert required to establish a HTTPS connection to the GrantServer
 
 3. On the listening site, create a token YAML file:
-   ```shell
+   ```bash
    cat > token.yaml <<EOF
    apiVersion: skupper.io/v2alpha1
    kind: AccessToken
@@ -107,7 +107,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    If you have both sites available from your terminal session, this step is not required.
 
 5. On the connecting site, apply the token and check status:
-   ```shell
+   ```bash
    kubectl apply -f token.yaml
    kubectl get accesstokens 
    NAME            URL                                                                REDEEMED   STATUS   MESSAGE
@@ -117,7 +117,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    The connecting site uses `Link` resource to establish an mTLS connection between routers.
 
 6. On the connecting site, check link status:
-   ```shell
+   ```bash
    kubectl get link
    NAME            STATUS   REMOTE SITE   MESSAGE
    token-to-west   Ready    my-site       OK

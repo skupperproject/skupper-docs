@@ -1,5 +1,5 @@
 <a id="system-yaml-service-exposure"></a>
-# Exposing services on the application network using YAML
+# Exposing services on the application network using YAML on local systems
 <!--ASSEMBLY-->
 
 Use YAML to create connectors and listeners for services on the application network.
@@ -11,7 +11,7 @@ For example, if you create a connector with the routing key `backend`, you need 
 Before you begin, create and link at least two sites.
 
 <a id="system-creating-connector-yaml"></a>
-## Create a connector using YAML
+## Create a local system connector using YAML
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
@@ -66,7 +66,7 @@ For configuration details, see [Connector resource][connector-resource].
    > If you want to use a custom routing key, set `spec.routingKey` to your custom value.
 
 <a id="system-creating-listener-yaml"></a>
-## Create a listener using YAML
+## Create a local system listener using YAML
 <!--PROCEDURE-->
 
 A listener binds a local connection endpoint to connectors in remote sites. 
@@ -119,7 +119,7 @@ For configuration details, see [Listener resource][listener-resource].
    > There must be a `MATCHING-CONNECTOR` for the service to operate.
 
 <a id="system-creating-multikeylistener-yaml"></a>
-## Create a multi-key listener using YAML
+## Create a local system multi-key listener using YAML
 <!--PROCEDURE-->
 
 A multi-key listener binds a single local host and port to multiple routing keys in remote sites.

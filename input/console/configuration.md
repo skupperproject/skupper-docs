@@ -100,7 +100,7 @@ Configure how TLS certificates are provisioned for the Network Observer.
 - **External:** Manual management, Secret type `kubernetes.io/tls`
 
 <a id="observer-router"></a>
-## Router Connection
+## Router connection
 <!--REFERENCE-->
 
 Configure how the Network Observer connects to the Skupper router.
@@ -117,7 +117,7 @@ Configure how the Network Observer connects to the Skupper router.
 - Certificate mounted at `/etc/messaging/`
 
 <a id="observer-tuning"></a>
-## Network Observer Tuning
+## Network Observer tuning
 <!--REFERENCE-->
 
 Configure command-line flags and runtime behavior for the Network Observer container.
@@ -143,7 +143,7 @@ extraArgs:
 ```
 
 <a id="observer-prometheus"></a>
-## Prometheus Configuration
+## Prometheus configuration
 <!--REFERENCE-->
 
 The Prometheus container supports custom configuration and tuning options.
@@ -203,7 +203,7 @@ prometheus:
 ```
 
 <a id="observer-persistence"></a>
-## Data Persistence
+## Data persistence
 <!--PROCEDURE-->
 
 By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-series data, enable a PersistentVolumeClaim.
@@ -258,7 +258,7 @@ By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-
    When persistence is enabled, the Deployment uses a **Recreate** update strategy to ensure the single read-write volume can attach cleanly during pod updates.
 
 <a id="observer-resources"></a>
-## Container Resources
+## Container resources
 <!--REFERENCE-->
 
 Resource requests and limits can be configured for each container in the Pod.
@@ -318,7 +318,7 @@ containerResources:
 ```
 
 <a id="observer-images"></a>
-## Container Images
+## Container images
 <!--REFERENCE-->
 
 Configure container image repositories, tags, and pull policies for each component.
@@ -435,7 +435,7 @@ Available for: `securityContext`, `prometheus.securityContext`, `nginx.securityC
 | `.capabilities.drop` | array | `["ALL"]` | Capabilities to drop |
 
 <a id="observer-advanced"></a>
-## Advanced Options
+## Advanced options
 <!--REFERENCE-->
 
 Configure naming and label behavior for the Network Observer chart.
@@ -454,7 +454,7 @@ Configure naming and label behavior for the Network Observer chart.
 | `skipManagementLabels` | bool | `false` | Skip Skupper management labels |
 
 <a id="observer-metrics"></a>
-## Metrics Endpoint
+## Metrics endpoint
 <!--REFERENCE-->
 
 The Network Observer serves Prometheus metrics on a dedicated HTTP listener, separate from the main API endpoint.
@@ -535,7 +535,7 @@ skupper-network-observer          ClusterIP   10.96.123.45    <none>        443/
 skupper-network-observer-metrics  ClusterIP   10.96.123.46    <none>        9000/TCP   5m
 ```
 
-### Test Metrics Endpoint
+### Test Metrics endpoint
 
 From a pod in the same namespace:
 
@@ -567,7 +567,7 @@ Example output:
 2025/03/15 10:23:45 Starting API server on 127.0.0.1:8080
 ```
 
-### Verify Prometheus Configuration
+### Verify Prometheus configuration
 
 If the embedded Prometheus shows no data, check the ConfigMap:
 

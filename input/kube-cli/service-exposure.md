@@ -1,5 +1,5 @@
 <a id="kube-exposing-services-cli"></a>
-# Exposing services on the application network using the CLI
+# Exposing services on the application network using the CLI on Kubernetes
 <!--ASSEMBLY-->
 
 Create connectors and listeners to expose services across the application network.
@@ -11,7 +11,7 @@ For example, if you create a connector with the routing key `backend`, you need 
 Before you begin, create and link at least two sites.
 
 <a id="kube-creating-connector-cli"></a>
-## Create a connector using the CLI
+## Create a Kubernetes connector using the CLI
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
@@ -58,7 +58,7 @@ For more information about connectors, see [Connector concept][connector].
 * [Creating a connector for a different namespace using YAML][attached]
 
 <a id="kube-creating-listener-cli"></a>
-## Create a listener using the CLI
+## Create a Kubernetes listener using the CLI
 <!--PROCEDURE-->
 
 A listener binds a local connection endpoint to connectors in remote sites. 

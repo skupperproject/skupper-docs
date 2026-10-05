@@ -17,11 +17,11 @@ Terminology changes:
 
 Create sites using CLI:
 
-```v1
+```bash
 contextA> skupper init
 ```
 
-```v2
+```bash
 contextA> skupper site create
 ```
 
@@ -38,12 +38,12 @@ These examples show how site-linking commands changed between Skupper v1 and Sku
 
 
 
-```v1
+```bash
 contextA> skupper token create ~/token.yaml
 contextB> skupper link create ~/token.yaml
 ```
 
-```v2
+```bash
 contextA> skupper token issue ~/token.yaml
 contextA> skupper token redeem ~/token.yaml
 ```
@@ -54,17 +54,17 @@ contextA> skupper token redeem ~/token.yaml
 
 These examples show how service-exposure commands changed between Skupper v1 and Skupper v2.
 
-```v1
+```bash
 contextA> skupper expose deployment/backend --port 8080
 ```
 
-```v2
+```bash
 contextA> skupper connector create backend 8080
 contextB> skupper listener create backend 8080
 ```
 
 The new *routing-key* option gives you more control over how services are defined, for example to expose the service as `backend2` in contextB:
 
-```v2
+```bash
 contextB> skupper listener create backend2 8080 --routing-key backend
 ```

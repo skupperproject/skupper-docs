@@ -141,7 +141,7 @@ prometheus:
     - --storage.tsdb.retention.size=18GB
 ```
 
-**Custom Prometheus Configuration**
+**Custom Prometheus configuration**
 
 ```yaml
 prometheus:
@@ -259,7 +259,7 @@ kubectl get ingress skupper-network-observer
 kubectl get pvc skupper-network-observer-prometheus
 ```
 
-**Test Metrics Endpoint**
+**Test Metrics endpoint**
 
 ```bash
 kubectl run -it --rm curl --image=curlimages/curl --restart=Never -- \

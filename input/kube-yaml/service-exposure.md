@@ -1,5 +1,5 @@
 <a id="kube-exposing-services-yaml"></a>
-# Exposing services on the application network using YAML
+# Exposing services on the application network using YAML on Kubernetes
 <!--ASSEMBLY-->
 
 After creating an application network by linking sites, you can expose services from one site using connectors and consume those services on other sites using listeners.
@@ -11,7 +11,7 @@ Before you begin, create and link at least two sites.
 
 <!-- Creating a connector on Kubernetes using YAML -->
 <a id="kube-creating-connector-yaml"></a>
-## Create a connector using YAML
+## Create a Kubernetes connector using YAML
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
@@ -66,7 +66,7 @@ There are many options to consider when creating connectors using YAML, see [Con
 
 <!-- Creating a listener on Kubernetes using YAML -->
 <a id="kube-creating-listener-yaml"></a>
-## Create a listener using YAML
+## Create a Kubernetes listener using YAML
 <!--PROCEDURE-->
 
 A listener binds a local connection endpoint to connectors in remote sites. 
@@ -120,7 +120,7 @@ For configuration details, see [Listener resource][listener-resource].
    > There must be a `MATCHING-CONNECTOR` for the service to operate.
 
 <a id="kube-creating-multikeylistener-yaml"></a>
-## Create a multi-key listener using YAML
+## Create a Kubernetes multi-key listener using YAML
 <!--PROCEDURE-->
 
 A multi-key listener binds a single local host and port to multiple routing keys in remote sites.

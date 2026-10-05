@@ -68,7 +68,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    spec: {}
    ```
    Apply it:
-   ```shell
+   ```bash
    kubectl apply -f site.yaml
    ```
    Because `spec.linkAccess` is not set, the controller will not auto-create any `RouterAccess`.
@@ -86,7 +86,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
      tls.key: LS0tLS1C...redacted
    ```
    Apply it:
-   ```shell
+   ```bash
    kubectl apply -f my-server-cert.yaml
    ```
    Ensure the certificate in `tls.crt` is valid for the hostname or IP address referenced in your `Link` resource.
@@ -109,7 +109,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
          port: 45671
    ```
    Apply it:
-   ```shell
+   ```bash
    kubectl apply -f my-router-access.yaml
    ```
    Because `generateTlsCredentials: false`, Skupper will use your Secret as-is and will never overwrite it.
@@ -117,7 +117,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
 4. Determine the hostname or IP address for the listening site.
 
    Check the `RouterAccess` status for the resolved endpoints:
-   ```shell
+   ```bash
    kubectl get routeraccess my-router-access -o json | jq -r '.status.endpoints[0].host'
    ```
    You should see something like:
@@ -141,11 +141,11 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
      subject: skupper-client
    ```
    Apply it:
-   ```shell
+   ```bash
    kubectl apply -f skupper-link-certificate.yaml
    ```
    Save the generated Secret for use in the next step:
-   ```shell
+   ```bash
    kubectl get secret skupper-link -o yaml | yq eval -o=yaml 'del(.metadata.namespace, .metadata.creationTimestamp, .metadata.resourceVersion, .metadata.uid, .metadata.managedFields)' - > client-secret.yaml
    ```
 
@@ -156,7 +156,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
 6. From the listening site, create a `Link` resource YAML file.
 
    **Option A:** Using kubectl with jq and yq
-   ```shell
+   ```bash
    kubectl get routeraccess my-router-access -o json | jq '{
      apiVersion: "skupper.io/v2alpha1",
      kind: "Link",
@@ -174,7 +174,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    **Option B:** Manual generation
 
    Retrieve the endpoints:
-   ```shell
+   ```bash
    kubectl get routeraccess my-router-access -o yaml | yq '.status.endpoints'
    ```
    Then compose the file manually:
@@ -215,7 +215,7 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    > Protect it appropriately.
 
 8. On the connecting site, apply the YAML file and check status:
-   ```shell
+   ```bash
    kubectl apply -f skupper-link.yaml
    kubectl get link
    NAME            STATUS   REMOTE SITE   MESSAGE
@@ -258,7 +258,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
      tls.key: LS0tLS1C...redacted
    ```
    Apply the secret while deleting and recreating the site:
-   ```shell
+   ```bash
    kubectl delete site <site-name> # delete the site
    kubectl apply -f skupper-site-server.yaml
    kubectl apply -f site.yaml # recreate the site
@@ -271,7 +271,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
 2. Determine the hostname or IP address for the listening site.
    
    In case your Skupper Site is already created, you can find the appropriate Hostname or IP by looking at the Endpoint element of a Site status:
-   ```shell
+   ```bash
    kubectl get site <site-name> -o json | jq -r '.status.endpoints[0].host'
    ```
    And you will see something like:
@@ -282,7 +282,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    **_Note:_** Ensure you specify the appropriate namespace when running the commands from this example.
    
    Again, if your Site has already been created, Skupper will recognize your custom secret. You can confirm this with the following command:
-   ```shell
+   ```bash
    kubectl get certificate.skupper.io skupper-site-server -o json | jq -r '.status.conditions[].message'
    ```
    You should see a message like:
@@ -310,7 +310,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
      subject: skupper-client
    ```
    Apply the resource:
-   ```shell
+   ```bash
    kubectl apply -f skupper-link-certificate.yaml
    ```
    You should see an output like:
@@ -320,7 +320,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    Then a Secret named `skupper-link` should be created and it can be used to compose your link file.
    
    Save the generated secret to a local file for use in the next step:
-   ```shell
+   ```bash
    kubectl get secret skupper-link -o yaml | yq eval -o=yaml 'del(.metadata.namespace, .metadata.creationTimestamp, .metadata.resourceVersion, .metadata.uid, .metadata.managedFields)' - > client-secret.yaml
    ```
 
@@ -349,7 +349,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    **Option A: Using kubectl with jq and yq**
 
    The following command uses `kubectl`, `jq`, and `yq` to extract and compose the information needed to define a Link, storing the Link document into `skupper-link.yaml`:
-   ```shell
+   ```bash
    kubectl get site <site-name> -o json | jq '{
      apiVersion: "skupper.io/v2alpha1",
      kind: "Link",
@@ -362,7 +362,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    }' | yq -P > skupper-link.yaml
    ```
    Then you need to combine it in a YAML file that contains both the Link above and the client Secret. Suppose your client Secret is stored in a file named `client-secret.yaml`, you could run:
-   ```shell
+   ```bash
    echo "---" >> skupper-link.yaml
    cat client-secret.yaml >> skupper-link.yaml
    ```
@@ -370,7 +370,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    **Option B: Manual generation**
 
    You can retrieve the list of endpoints from the Site definition, using:
-   ```shell
+   ```bash
    kubectl get site <site-name> -o yaml | yq '.status.endpoints'
    ```
    The command above uses both `kubectl` and `yq`. And the output should be something like:
@@ -424,7 +424,7 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    > Protect it appropriately.
 
 6. On the connecting site, apply the YAML file and check status:
-   ```shell
+   ```bash
    kubectl apply -f skupper-link.yaml
    kubectl get link
    NAME            STATUS   REMOTE SITE   MESSAGE
