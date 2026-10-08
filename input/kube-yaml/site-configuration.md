@@ -122,15 +122,15 @@ Only one ConfigMap should be annotated as the default (`skupper.io/default-site-
 **Prerequisites**
 
 * The Skupper V2 controller is running in your cluster.
-* You have determined the router CPU allocation you require.
+* You have determined the router CPU allocation you require, as shown in the following table.
 
-  Consider the following CPU allocation options:
+### Router CPU allocation
 
-  | Router CPU | Description |
-  |------------|-------------|
-  | 1 | Helps avoid issues with BestEffort on low resource clusters |
-  | 2 | Suitable for production environments |
-  | 5 | Maximum performance |
+| Router CPU | Description |
+|------------|-------------|
+| 1 | Helps avoid issues with BestEffort on low resource clusters |
+| 2 | Suitable for production environments |
+| 5 | Maximum performance |
 
 **Procedure**
 

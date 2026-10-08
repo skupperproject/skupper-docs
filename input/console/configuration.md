@@ -52,6 +52,8 @@ Configure external access to the Network Observer console using Ingress or OpenS
 
 Configure the authentication strategy for the Network Observer console.
 
+### Authentication strategy
+
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `auth.strategy` | string | `"basic"` | Authentication strategy: `basic`, `openshift`, `none` |
@@ -86,6 +88,8 @@ Configure the authentication strategy for the Network Observer console.
 
 Configure how TLS certificates are provisioned for the Network Observer.
 
+### TLS certificate options
+
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `tls.skupperIssued` | bool | `true` | Use Skupper controller CA (default) |
@@ -105,6 +109,8 @@ Configure how TLS certificates are provisioned for the Network Observer.
 
 Configure how the Network Observer connects to the Skupper router.
 
+### Router connection settings
+
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `router.endpoint` | string | `"amqps://skupper-router-local"` | AMQP endpoint URL |
@@ -122,11 +128,13 @@ Configure how the Network Observer connects to the Skupper router.
 
 Configure command-line flags and runtime behavior for the Network Observer container.
 
+### Extra arguments
+
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `extraArgs` | array | `[]` | Command-line flags for observer container |
 
-**Available flags:**
+### Available flags
 
 | Flag | Type | Default | Description |
 |------|------|---------|-------------|
@@ -341,8 +349,6 @@ Configure container image repositories, tags, and pull policies for each compone
 
 ### NGINX Proxy Image
 
-Used when `auth.strategy` is `basic` or `none`:
-
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `nginx.repository` | string | `mirror.gcr.io/nginxinc/nginx-unprivileged` | Image repository |
@@ -350,9 +356,9 @@ Used when `auth.strategy` is `basic` or `none`:
 | `nginx.pullPolicy` | string | `IfNotPresent` | Pull policy |
 | `nginx.command` | array | `[]` | Override default command |
 
-### OpenShift OAuth Proxy Image
+Used when `auth.strategy` is `basic` or `none`.
 
-Used when `auth.strategy` is `openshift`:
+### OpenShift OAuth Proxy Image
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
@@ -360,11 +366,15 @@ Used when `auth.strategy` is `openshift`:
 | `openshiftOauthProxy.tag` | string | `4.22.0` | Image tag |
 | `openshiftOauthProxy.pullPolicy` | string | `IfNotPresent` | Pull policy |
 
+Used when `auth.strategy` is `openshift`.
+
 <a id="observer-labels"></a>
 ## Labels and Annotations
 <!--REFERENCE-->
 
 Configure labels and annotations applied to Network Observer resources.
+
+### Labels and annotations
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
@@ -404,6 +414,8 @@ podAnnotations:
 
 Configure the Kubernetes Service that exposes the Network Observer.
 
+### Service settings
+
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `service.type` | string | `ClusterIP` | Service type: `ClusterIP`, `LoadBalancer`, `NodePort` |
@@ -427,12 +439,12 @@ Configure pod and container security contexts for the Network Observer.
 
 ### Container Security Contexts
 
-Available for: `securityContext`, `prometheus.securityContext`, `nginx.securityContext`, `openshiftOauthProxy.securityContext`
-
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `.allowPrivilegeEscalation` | bool | `false` | Allow privilege escalation |
 | `.capabilities.drop` | array | `["ALL"]` | Capabilities to drop |
+
+Available for: `securityContext`, `prometheus.securityContext`, `nginx.securityContext`, `openshiftOauthProxy.securityContext`
 
 <a id="observer-advanced"></a>
 ## Advanced options
@@ -473,14 +485,14 @@ The Network Observer serves Prometheus metrics on a dedicated HTTP listener, sep
 
 ### Metrics Service
 
-The chart creates a second ClusterIP Service named `<release-name>-metrics` that targets the metrics listener on port **9000**.
-
 | Property | Value |
 |----------|-------|
 | **Listener address** | `:9000` |
 | **Service name** | `<release-name>-metrics` |
 | **Service port** | `9000` |
 | **Metrics path** | `/metrics` |
+
+The chart creates a second ClusterIP Service named `<release-name>-metrics` that targets the metrics listener on port **9000**.
 
 ### Scrape metrics
 

@@ -20,7 +20,7 @@ Two approaches are available for using custom certificates:
 * **Using `Link` resources and custom certificates** - Override the default `skupper-site-server` certificate before `linkAccess` is enabled
 
 
-**Key differences between approaches**
+### Key differences between approaches
 
 | | `linkAccess` | `RouterAccess` |
 |---|---|---|

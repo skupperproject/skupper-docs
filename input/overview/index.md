@@ -22,11 +22,11 @@ An application network connects the applications and services in your hybrid clo
 They can communicate with each other as if they were all running in the same site.
 In this diagram, an application network connects three services, each of which is running in a different cloud:
 
-![overview-clouds](../images/overview-clouds.png)
+![Three application sites in different clouds, each with a service and a Layer 7 router, connected by an application network](../images/overview-clouds.png)
 
 In essence, the application network connects the services in a distributed application with a microservice architecture.
 
-![overview-application](../images/overview-application.png)
+![A distributed application composed of three services: Service A, Service B, and Service C](../images/overview-application.png)
 
 Application networks are able to provide connectivity across the hybrid cloud by using Skupper routers.
 
@@ -48,7 +48,7 @@ For example, in this diagram, **Service B** sends a message with an application 
 **Service A** and **Service C** are subscribed to the same service.
 The application router routes copies of the message through the application network until they arrive at each destination.
 
-![overview-routers](../images/overview-routers.png)
+![Service B sending a message through skupper-routers to Service A and Service C via application routing](../images/overview-routers.png)
 
 In the diagram, `skupper-router` is a container or systemd process that acts as a software router for service communication.
 
@@ -65,7 +65,7 @@ By using Skupper, you can create a distributed application consisting of microse
 
 This diagram illustrates a Skupper network that connects three services running in three different sites:
 
-![overview-clusters](../images/overview-clusters.png)
+![Three Kubernetes clusters, each with a namespace containing a service and a Skupper instance, connected by a Skupper network](../images/overview-clusters.png)
 
 In a Skupper network, each namespace contains a Skupper instance.
 When these Skupper instances connect, they continually share information about the services that each instance exposes.
