@@ -261,4 +261,4 @@ Custom certificates allow integration with your existing PKI infrastructure.
 
 * [Linking sites using custom certificates][custom-certs-yaml]
 
-[custom-certs-yaml]: ../kube-yaml/custom-certs.md
+[custom-certs-yaml]: ../kube-yaml/custom-certs.html

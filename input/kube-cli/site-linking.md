@@ -273,7 +273,7 @@ You can still use the Skupper CLI to generate links for those workflows.
 
 * [Linking sites using custom certificates][custom-certs-yaml]
 
-[custom-certs-yaml]: ../kube-yaml/custom-certs.md
+[custom-certs-yaml]: ../kube-yaml/custom-certs.html
 
 
 <a id="kube-link-cost-cli"></a>
