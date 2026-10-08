@@ -10,12 +10,12 @@ The link direction is not significant, and is typically determined by ease of co
 Once sites are linked, services can be exposed and consumed across the application network without the need to open ports or manage inter-site connectivity.
 
 <a id="kube-token-cli"></a>
-## Linking sites using a token
+## Link sites using a token
 <!--PROCEDURE-->
 
 A token provides a secure method to link sites.
 By default, a token can only be used once and must be used within 15 minutes to link sites.
-This procedure describes how to issue a token from one site and redeem that token on another site to create a link.
+Issue a token from one site and redeem that token on another site to create a link.
 
 **Prerequisites**
 
@@ -26,7 +26,7 @@ To link sites, you create a token on one site and redeem that token on the other
 
 **Procedure**
 
-1. On the site where you want to issue the token, make sure link access is enabled:
+1. On the site where you want to issue the token, ensure link access is enabled:
    ```bash
    skupper site update --enable-link-access
    ```
@@ -38,9 +38,10 @@ To link sites, you create a token on one site and redeem that token on the other
 
    This file contains a key and the location of the site that created it.
    
-   **📌 NOTE**
-   Access to this file provides access to the application network. 
-   Protect it appropriately.
+   > **NOTE:**
+   > Access to this file provides access to the application network.
+   > Protect it appropriately.
+
    A token can be restricted by any combination of:
 
    * Time - prevents token reuse after a specified period.
@@ -93,7 +94,7 @@ To link sites, you create a token on one site and redeem that token on the other
 * [CLI Reference][cli-ref]
 
 <a id="kube-link-cli"></a>
-## Linking sites using a `link` resource
+## Link sites using a `link` resource
 <!--PROCEDURE-->
 
 An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.
@@ -107,7 +108,7 @@ To link sites, you create a `link` resource YAML file on one site and apply that
 
 **Procedure**
 
-1. On the site where you want to create a link, make sure link access is enabled:
+1. On the site where you want to create a link, ensure link access is enabled:
    ```bash
    skupper site update --enable-link-access
    ```
@@ -157,7 +158,7 @@ To link sites, you create a `link` resource YAML file on one site and apply that
 * [CLI Reference][cli-ref]
 
 <a id="kube-proxy-cli"></a>
-## Linking sites through an HTTP proxy
+## Link sites through an HTTP proxy
 <!--PROCEDURE-->
 
 If your network requires routing through an HTTP CONNECT proxy to reach remote sites, you can configure Skupper links to use a proxy.
@@ -175,11 +176,12 @@ This feature is only available when using `link` resources, not tokens.
   http_access allow CONNECT skupper_ports
   ```
 
-To link sites through a proxy, you create a Secret containing the proxy configuration, generate a `link` resource YAML file, reference the proxy Secret in the link settings, and apply that resource to create the link.
+To link sites through a proxy, you create a Secret containing the proxy configuration and generate a `link` resource YAML file.
+Then reference the proxy Secret in the link settings and apply that resource to create the link.
 
 **Procedure**
 
-1. On the listening site, make sure link access is enabled:
+1. On the listening site, ensure link access is enabled:
    ```bash
    skupper site update --enable-link-access
    ```
@@ -205,8 +207,8 @@ To link sites through a proxy, you create a Secret containing the proxy configur
      password: mypassword
    ```
   
-   **📌 NOTE**
-   If your proxy does not require authentication, remove the username and password.
+   > **NOTE:**
+   > If your proxy does not require authentication, remove the username and password.
  
 5. On the linking site, edit the `link.yaml` file to add the proxy configuration in the settings section:
    ```yaml
@@ -246,8 +248,9 @@ To link sites through a proxy, you create a Secret containing the proxy configur
    * The proxy is accessible from the router pod
    * Router logs for connection errors: `kubectl logs deployment/skupper-router`
 
-   **📌 NOTE**
-   If you update the proxy Secret, you must trigger a reconciliation to apply the changes:
+   > **NOTE:**
+   > If you update the proxy Secret, you must trigger a reconciliation to apply the changes:
+
    ```bash
    kubectl annotate link <link-name> reconcile=$(date +%s) --overwrite
    ```
@@ -260,20 +263,21 @@ To link sites through a proxy, you create a Secret containing the proxy configur
 * [CLI Reference][cli-ref]
 
 <a id="kube-custom-certs-cli"></a>
-## Using custom certificates
+## Custom certificates and the Skupper CLI
 <!--CONCEPT-->
 
-For custom certificate workflows, YAML provides more control over certificate management and integration with existing PKI infrastructure, although you can still use the Skupper CLI to generate links for those workflows.
+For custom certificate workflows, YAML provides more control over certificate management and PKI integration.
+You can still use the Skupper CLI to generate links for those workflows.
 
 **Additional resources**
 
 * [Linking sites using custom certificates][custom-certs-yaml]
 
-[custom-certs-yaml]: ../kube-yaml/custom-certs.md
+[custom-certs-yaml]: ../kube-yaml/custom-certs.html
 
 
 <a id="kube-link-cost-cli"></a>
-## Specifying link cost
+## Specifying link cost using the CLI
 <!--PROCEDURE-->
 
 Link cost is a configurable integer value that influences how Skupper routes
@@ -281,11 +285,11 @@ traffic across links between sites.
 The routing algorithm favors paths with the lowest total cost from client to
 target server.
 
-**📌 NOTE**
-For most load-balancing and failover use cases, a [multi-key listener][mkl]
-provides per-service control.
-Link cost applies to **all services** that traverse a link; it is not
-possible to set different costs for distinct services on the same link.
+> **NOTE:**
+> For most load-balancing and failover use cases, a [multi-key listener][mkl]
+> provides per-service control.
+> Link cost applies to **all services** that traverse a link; it is not
+> possible to set different costs for distinct services on the same link.
 
 Understanding link cost behavior:
 
@@ -348,8 +352,8 @@ The following procedure describes how to set link cost in various scenarios:
    In this configuration, all connections are routed to the local server.
    If the local server becomes unavailable, traffic fails over to the remote server regardless of the high cost.
 
-   **📌 NOTE**
-   Skupper does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected. For per-service failover or weighted traffic distribution, use a multi-key listener instead.
+   > **NOTE:**
+   > Skupper does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected. For per-service failover or weighted traffic distribution, use a multi-key listener instead.
 
 **Additional resources**
 

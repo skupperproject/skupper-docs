@@ -7,7 +7,7 @@ Using YAML allows you to create and manage sites from the context of the current
 A typical workflow is to create a site, link sites together, and expose services to the application network.
 
 <a id="kube-creating-simple-site-yaml"></a>
-## Creating a simple site on Kubernetes using YAML
+## Create a simple site on Kubernetes using YAML
 <!--PROCEDURE-->
 
 You can use YAML to create and manage Skupper sites.
@@ -71,7 +71,7 @@ There are many options to consider when creating sites using YAML, see the [YAML
 
 
 <a id="kube-ha-yaml"></a>
-## Creating a high availability site using YAML
+## Create a high availability site using YAML
 <!--PROCEDURE-->
 
 Use the `ha` option to create a highly available site on Kubernetes.
@@ -109,7 +109,7 @@ High availability mode deploys two router pods with anti-affinity rules to ensur
    ```
 
 <a id="kube-site-resources-yaml"></a>
-## Setting site resources
+## Set site resources using YAML
 <!--PROCEDURE-->
 
 You can configure the Skupper Router and Kube Adaptor components with minimum and maximum CPU and memory resources by defining sizing models using ConfigMaps.
@@ -122,15 +122,15 @@ Only one ConfigMap should be annotated as the default (`skupper.io/default-site-
 **Prerequisites**
 
 * The Skupper V2 controller is running in your cluster.
-* You have determined the router CPU allocation you require.
+* You have determined the router CPU allocation you require, as shown in the following table.
 
-  Consider the following CPU allocation options:
+### Router CPU allocation
 
-  | Router CPU | Description |
-  |------------|-------------|
-  | 1 | Helps avoid issues with BestEffort on low resource clusters |
-  | 2 | Suitable for production environments |
-  | 5 | Maximum performance |
+| Router CPU | Description |
+|------------|-------------|
+| 1 | Helps avoid issues with BestEffort on low resource clusters |
+| 2 | Suitable for production environments |
+| 5 | Maximum performance |
 
 **Procedure**
 
@@ -168,7 +168,7 @@ Only one ConfigMap should be annotated as the default (`skupper.io/default-site-
    - `adaptor-memory-request`
    - `adaptor-memory-limit`
 
-   **Note:** If only the `limit` field is defined, Kubernetes will also set the `request` with the same value. If this is not what you want, make sure to set the respective `request` field with a smaller value.
+   **Note:** If only the `limit` field is defined, Kubernetes will also set the `request` with the same value. If this is not what you want, ensure you set the respective `request` field with a smaller value.
 
 2. Determine the controller namespace.
    Depending on your installation method, the controller namespace may be `skupper`, `openshift-operators`, or have a different name.

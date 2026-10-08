@@ -2,7 +2,7 @@
 # Skupper resources on Kubernetes
 <!--REFERENCE-->
 
-The following sections describe the various Skupper resources on Kubernetes, for example, service accounts
+Skupper creates and manages several types of Kubernetes resources, including custom resource definitions, service accounts, deployments, ConfigMaps, secrets, and services.
 
 <a id="kube-resources-crds"></a>
 ## Custom resource definitions
@@ -78,7 +78,8 @@ issues certs for remote access.
 
 The tokens used to establish links creates the following secrets with variable names:
 +
-* The site that issues a token generates a secret with a UUID name that contains details of any usage restrictions, for example, the number of times you can use the token to create a link and the amount of time the token is valid for.
+* The site that issues a token generates a secret with a UUID name.
+This secret contains usage restrictions, such as the number of times you can use the token and the token validity period.
 * The site establishing the link will have a secret that contains the token. 
 These secrets are typically called `link-<remote-site-name>`. 
 

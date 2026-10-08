@@ -15,14 +15,14 @@ In this release, the CLI does not support issuing tokens for local systems.
 However, you can redeem tokens on a local system, and you can create and use 'link' resources.
 
 <a id="system-token-cli"></a>
-## Linking to Kubernetes sites using a token
+## Link to Kubernetes sites using a token
 <!--PROCEDURE-->
 
 A token lets a local system site link securely to a Kubernetes site.
 
 A token provides a secure method to link sites.
 By default, a token can only be used once and must be used within 15 minutes to link sites.
-This procedure describes how to issue a token from a Kubernetes site and redeem that token on a local system site to create a link.
+Issue a token from a Kubernetes site and redeem that token on a local system site to create a link.
 
 **Prerequisites**
 
@@ -35,7 +35,7 @@ There are many options to consider when linking sites using the CLI, see [CLI Re
 
 **Procedure**
 
-1. On the Kubernetes site where you want to issue the token, make sure link access is enabled:
+1. On the Kubernetes site where you want to issue the token, ensure link access is enabled:
    ```bash
    skupper site update --enable-link-access
    ```
@@ -47,9 +47,10 @@ There are many options to consider when linking sites using the CLI, see [CLI Re
 
    This file contains a key and the location of the site that created it.
    
-   **📌 NOTE**
-   Access to this file provides access to the application network. 
-   Protect it appropriately.
+   > **NOTE:**
+   > Access to this file provides access to the application network.
+   > Protect it appropriately.
+
    A token can be restricted by any combination of:
 
    * Time - prevents token reuse after a specified period.
@@ -90,7 +91,7 @@ There are many options to consider when linking sites using the CLI, see [CLI Re
    You can now expose services on the application network.
 
 <a id="system-link-cli"></a>
-## Linking sites using a `link` resource
+## Link sites using a `link` resource and the CLI
 <!--PROCEDURE-->
 
 An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.
@@ -106,7 +107,7 @@ There are many options to consider when linking sites using the CLI, see [CLI Re
 
 **Procedure**
 
-1. On the site where you want to create a link , make sure link access is enabled:
+1. On the site where you want to create a link , ensure link access is enabled:
    ```bash
    skupper site update --enable-link-access
    skupper site reload

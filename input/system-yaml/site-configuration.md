@@ -9,7 +9,7 @@ A typical workflow is to create a site, link sites together, and expose services
 If you require more than one site, specify a unique namespace when using  `skupper`, for example `skupper --namespace second-site ...`.
 
 <a id="system-creating-simple-site-yaml"></a>
-## Creating a simple site on local systems using YAML
+## Create a simple site on local systems using YAML
 <!--PROCEDURE-->
 
 You can use YAML to create and manage Skupper sites.

@@ -147,7 +147,7 @@ To update an existing site to the latest images or configuration matching your c
 
 1. Ensure you have the latest version of the Skupper CLI installed.
 2. Run the reload command:
-	```shell
+	```bash
 	skupper system reload
 	```
 	*This command refreshes the site definition and pulls the latest images associated with the CLI version.*

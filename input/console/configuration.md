@@ -2,7 +2,7 @@
 # Network Observer Configuration Reference
 <!--ASSEMBLY-->
 
-The following configuration options are for the Skupper Network Observer which enables the network console.
+Configure the Skupper Network Observer, which enables the network console.
 
 
 <a id="observer-external-access"></a>
@@ -52,6 +52,8 @@ Configure external access to the Network Observer console using Ingress or OpenS
 
 Configure the authentication strategy for the Network Observer console.
 
+### Authentication strategy
+
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `auth.strategy` | string | `"basic"` | Authentication strategy: `basic`, `openshift`, `none` |
@@ -86,6 +88,8 @@ Configure the authentication strategy for the Network Observer console.
 
 Configure how TLS certificates are provisioned for the Network Observer.
 
+### TLS certificate options
+
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `tls.skupperIssued` | bool | `true` | Use Skupper controller CA (default) |
@@ -100,10 +104,12 @@ Configure how TLS certificates are provisioned for the Network Observer.
 - **External:** Manual management, Secret type `kubernetes.io/tls`
 
 <a id="observer-router"></a>
-## Router Connection
+## Router connection
 <!--REFERENCE-->
 
 Configure how the Network Observer connects to the Skupper router.
+
+### Router connection settings
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
@@ -117,16 +123,18 @@ Configure how the Network Observer connects to the Skupper router.
 - Certificate mounted at `/etc/messaging/`
 
 <a id="observer-tuning"></a>
-## Network Observer Tuning
+## Network Observer tuning
 <!--REFERENCE-->
 
 Configure command-line flags and runtime behavior for the Network Observer container.
+
+### Extra arguments
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `extraArgs` | array | `[]` | Command-line flags for observer container |
 
-**Available flags:**
+### Available flags
 
 | Flag | Type | Default | Description |
 |------|------|---------|-------------|
@@ -143,7 +151,7 @@ extraArgs:
 ```
 
 <a id="observer-prometheus"></a>
-## Prometheus Configuration
+## Prometheus configuration
 <!--REFERENCE-->
 
 The Prometheus container supports custom configuration and tuning options.
@@ -203,7 +211,7 @@ prometheus:
 ```
 
 <a id="observer-persistence"></a>
-## Data Persistence
+## Data persistence
 <!--PROCEDURE-->
 
 By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-series data, enable a PersistentVolumeClaim.
@@ -258,7 +266,7 @@ By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-
    When persistence is enabled, the Deployment uses a **Recreate** update strategy to ensure the single read-write volume can attach cleanly during pod updates.
 
 <a id="observer-resources"></a>
-## Container Resources
+## Container resources
 <!--REFERENCE-->
 
 Resource requests and limits can be configured for each container in the Pod.
@@ -318,7 +326,7 @@ containerResources:
 ```
 
 <a id="observer-images"></a>
-## Container Images
+## Container images
 <!--REFERENCE-->
 
 Configure container image repositories, tags, and pull policies for each component.
@@ -341,8 +349,6 @@ Configure container image repositories, tags, and pull policies for each compone
 
 ### NGINX Proxy Image
 
-Used when `auth.strategy` is `basic` or `none`:
-
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `nginx.repository` | string | `mirror.gcr.io/nginxinc/nginx-unprivileged` | Image repository |
@@ -350,9 +356,9 @@ Used when `auth.strategy` is `basic` or `none`:
 | `nginx.pullPolicy` | string | `IfNotPresent` | Pull policy |
 | `nginx.command` | array | `[]` | Override default command |
 
-### OpenShift OAuth Proxy Image
+Used when `auth.strategy` is `basic` or `none`.
 
-Used when `auth.strategy` is `openshift`:
+### OpenShift OAuth Proxy Image
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
@@ -360,11 +366,15 @@ Used when `auth.strategy` is `openshift`:
 | `openshiftOauthProxy.tag` | string | `4.22.0` | Image tag |
 | `openshiftOauthProxy.pullPolicy` | string | `IfNotPresent` | Pull policy |
 
+Used when `auth.strategy` is `openshift`.
+
 <a id="observer-labels"></a>
 ## Labels and Annotations
 <!--REFERENCE-->
 
 Configure labels and annotations applied to Network Observer resources.
+
+### Labels and annotations
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
@@ -404,6 +414,8 @@ podAnnotations:
 
 Configure the Kubernetes Service that exposes the Network Observer.
 
+### Service settings
+
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `service.type` | string | `ClusterIP` | Service type: `ClusterIP`, `LoadBalancer`, `NodePort` |
@@ -427,15 +439,15 @@ Configure pod and container security contexts for the Network Observer.
 
 ### Container Security Contexts
 
-Available for: `securityContext`, `prometheus.securityContext`, `nginx.securityContext`, `openshiftOauthProxy.securityContext`
-
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
 | `.allowPrivilegeEscalation` | bool | `false` | Allow privilege escalation |
 | `.capabilities.drop` | array | `["ALL"]` | Capabilities to drop |
 
+Available for: `securityContext`, `prometheus.securityContext`, `nginx.securityContext`, `openshiftOauthProxy.securityContext`
+
 <a id="observer-advanced"></a>
-## Advanced Options
+## Advanced options
 <!--REFERENCE-->
 
 Configure naming and label behavior for the Network Observer chart.
@@ -454,7 +466,7 @@ Configure naming and label behavior for the Network Observer chart.
 | `skipManagementLabels` | bool | `false` | Skip Skupper management labels |
 
 <a id="observer-metrics"></a>
-## Metrics Endpoint
+## Metrics endpoint
 <!--REFERENCE-->
 
 The Network Observer serves Prometheus metrics on a dedicated HTTP listener, separate from the main API endpoint.
@@ -473,8 +485,6 @@ The Network Observer serves Prometheus metrics on a dedicated HTTP listener, sep
 
 ### Metrics Service
 
-The chart creates a second ClusterIP Service named `<release-name>-metrics` that targets the metrics listener on port **9000**.
-
 | Property | Value |
 |----------|-------|
 | **Listener address** | `:9000` |
@@ -482,7 +492,9 @@ The chart creates a second ClusterIP Service named `<release-name>-metrics` that
 | **Service port** | `9000` |
 | **Metrics path** | `/metrics` |
 
-### Scraping Metrics
+The chart creates a second ClusterIP Service named `<release-name>-metrics` that targets the metrics listener on port **9000**.
+
+### Scrape metrics
 
 Configure your Prometheus instance or monitoring operator to scrape the metrics endpoint.
 
@@ -535,7 +547,7 @@ skupper-network-observer          ClusterIP   10.96.123.45    <none>        443/
 skupper-network-observer-metrics  ClusterIP   10.96.123.46    <none>        9000/TCP   5m
 ```
 
-### Test Metrics Endpoint
+### Test Metrics endpoint
 
 From a pod in the same namespace:
 
@@ -567,7 +579,7 @@ Example output:
 2025/03/15 10:23:45 Starting API server on 127.0.0.1:8080
 ```
 
-### Verify Prometheus Configuration
+### Verify Prometheus configuration
 
 If the embedded Prometheus shows no data, check the ConfigMap:
 

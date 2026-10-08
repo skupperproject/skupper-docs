@@ -1,5 +1,5 @@
 <a id="kube-exposing-services-cli"></a>
-# Exposing services on the application network using the CLI
+# Exposing services on the application network using the CLI on Kubernetes
 <!--ASSEMBLY-->
 
 Create connectors and listeners to expose services across the application network.
@@ -8,10 +8,10 @@ After creating an application network by linking sites, you can expose services 
 A *routing key* is a string that matches one or more connectors with one or more listeners.
 For example, if you create a connector with the routing key `backend`, you need to create a listener with the routing key `backend` to consume that service.
 
-This section assumes you have created and linked at least two sites.
+Before you begin, create and link at least two sites.
 
 <a id="kube-creating-connector-cli"></a>
-## Creating a connector using the CLI
+## Create a Kubernetes connector using the CLI
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
@@ -48,9 +48,9 @@ For more information about connectors, see [Connector concept][connector].
    backend Pending backend         app=backend             8080    false   No matching listeners
    ```
 
-   **📌 NOTE**
-   By default, the routing key name is set to the name of the connector.
-   If you want to use a custom routing key, set the `--routing-key` to your custom name.
+   > **NOTE:**
+   > By default, the routing key name is set to the name of the connector.
+   > If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
 **Additional resources**
 
@@ -58,7 +58,7 @@ For more information about connectors, see [Connector concept][connector].
 * [Creating a connector for a different namespace using YAML][attached]
 
 <a id="kube-creating-listener-cli"></a>
-## Creating a listener using the CLI
+## Create a Kubernetes listener using the CLI
 <!--PROCEDURE-->
 
 A listener binds a local connection endpoint to connectors in remote sites. 
@@ -99,10 +99,10 @@ For more information about listeners. see [Listener concept][listener].
    backend Ready   backend         backend 8080    true                    OK
    ```
 
-   **📌 NOTE**
-   There must be a `MATCHING-CONNECTOR` for the service to operate.
-   By default, the routing key name is the listener name.
-   If you want to use a custom routing key, set the `--routing-key` to your custom name.
+   > **NOTE:**
+   > There must be a `MATCHING-CONNECTOR` for the service to operate.
+   > By default, the routing key name is the listener name.
+   > If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
 **Additional resources**
 

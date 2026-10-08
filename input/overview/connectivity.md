@@ -12,10 +12,10 @@ See how Skupper can give you the flexibility to deploy your services where you n
 Kubernetes **services** provide a virtual network address for each element of your distributed application.
 Service "A" can contact service "B", "B" can contact "C", and so on.
 
-![one-cluster](../images/one-cluster.svg)
+![A single Kubernetes cluster containing six services labeled A through F](../images/one-cluster.svg)
 
 But if you want to deploy your application across multiple clusters, your options are limited.
-You have to either expose your services to the public internet or set up a VPN.
+You have to either expose your services to the public internet or configure a VPN.
 
 Skupper offers a third way.
 It connects clusters to a secure application network, also known as a virtual application network (VAN).
@@ -25,7 +25,7 @@ It uses that network to forward local service traffic to remote clusters.
 
 Deploy your application across public and private clusters.
 
-![two-clusters](../images/two-clusters.svg)
+![A public cluster and a private cluster connected by a Skupper link, with services distributed across both](../images/two-clusters.svg)
 
 You can host your database on a private cluster and retain full connectivity with services running on the public cloud.
 All communication is secured by mutual TLS authentication and encryption.
@@ -34,7 +34,7 @@ All communication is secured by mutual TLS authentication and encryption.
 
 Distribute application services across geographic regions.
 
-![five-clusters](../images/five-clusters.svg)
+![A central cluster connected to four edge clusters via Skupper links in a hub-and-spoke topology](../images/five-clusters.svg)
 
 You can connect multiple retail sites to a central office.
 Once connected, each edge location can contact any other edge.
@@ -44,4 +44,4 @@ You can add and remove sites on demand.
 
 Build large, robust networks of connected clusters.
 
-![many-clusters](../images/many-clusters.svg)
+![A large network of clusters connected by Skupper links in a mesh topology with multiple sites](../images/many-clusters.svg)

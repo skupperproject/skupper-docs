@@ -1,5 +1,5 @@
 <a id="system-exposing-services-cli"></a>
-# Exposing services on the application network using the CLI
+# Exposing services on the application network using the CLI on local systems
 <!--ASSEMBLY-->
 
 Use the CLI on local systems to create connectors and listeners for services on the application network.
@@ -8,10 +8,10 @@ After creating an application network by linking sites, you can expose services 
 A *routing key* is a string that matches one or more connectors with one or more listeners.
 For example, if you create a connector with the routing key `backend`, you need to create a listener with the routing key `backend` to consume that service.
 
-This section assumes you have created and linked at least two sites.
+Before you begin, create and link at least two sites.
 
 <a id="system-creating-connector-cli"></a>
-## Creating a connector using the CLI
+## Create a local system connector using the CLI
 <!--PROCEDURE-->
 
 A connector binds a local workload to listeners in remote sites.
@@ -53,9 +53,9 @@ There are many options to consider when creating connectors using the CLI, see [
    my-server	Ok	my-server	localhost	8081
 
    ```
-   **📌 NOTE**
-   By default, the routing key name is set to the name of the connector.
-   If you want to use a custom routing key, set the `--routing-key` to your custom name.
+   > **NOTE:**
+   > By default, the routing key name is set to the name of the connector.
+   > If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
    Apply the configuration using:
    ```bash
@@ -63,7 +63,7 @@ There are many options to consider when creating connectors using the CLI, see [
    ```
 
 <a id="system-creating-listener-cli"></a>
-## Creating a listener using the CLI
+## Create a local system listener using the CLI
 <!--PROCEDURE-->
 
 A listener binds a local connection endpoint to connectors in remote sites. 
@@ -111,10 +111,10 @@ There are many options to consider when creating listeners using the CLI, see [C
 
    ```
    
-   **📌 NOTE**
-   There must be a matching connector for the service to operate.
-   By default, the routing key name is the listener name.
-   If you want to use a custom routing key, set the `--routing-key` to your custom name.
+   > **NOTE:**
+   > There must be a matching connector for the service to operate.
+   > By default, the routing key name is the listener name.
+   > If you want to use a custom routing key, set the `--routing-key` to your custom name.
 
 [cli-ref]: https://skupperproject.github.io/refdog/commands/index.html
 [connector]: https://skupperproject.github.io/refdog/concepts/connector.html
