@@ -111,7 +111,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    kubectl apply -f token.yaml
    kubectl get accesstokens 
    NAME            URL                                                                REDEEMED   STATUS   MESSAGE
-   token-to-west   https://10.110.160.132:9090/87426fa9-5623-49af-a612-47d33b7a4200   true       Ready    OK
+   token-to-west   https://<host>:<port>/<grant-id>   true       Ready    OK
    ```
    The GrantServer has validated the AccessToken and redeemed it for a `Link` resource.
    The connecting site uses `Link` resource to establish an mTLS connection between routers.

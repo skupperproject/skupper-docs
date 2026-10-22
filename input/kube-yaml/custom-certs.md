@@ -81,9 +81,9 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    metadata:
      name: my-server-cert
    data:
-     ca.crt: LS0tLS1C...redacted
-     tls.crt: LS0tLS1C...redacted
-     tls.key: LS0tLS1C...redacted
+     ca.crt: <base64-encoded-ca-cert>
+     tls.crt: <base64-encoded-tls-cert>
+     tls.key: <base64-encoded-tls-key>
    ```
    Apply it:
    ```bash
@@ -203,9 +203,9 @@ The alternative is to define the `RouterAccess` CR yourself with `generateTlsCre
    metadata:
      name: skupper-link
    data:
-     ca.crt: LS0tLS1C...redacted
-     tls.crt: LS0tLS1C...redacted
-     tls.key: LS0tLS1C...redacted
+     ca.crt: <base64-encoded-ca-cert>
+     tls.crt: <base64-encoded-tls-cert>
+     tls.key: <base64-encoded-tls-key>
    ```
 
 7. Securely transfer the `Link` resource YAML file to the connecting site.
@@ -253,9 +253,9 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    metadata:
      name: skupper-site-server
    data:
-     ca.crt: LS0tLS1C...redacted
-     tls.crt: LS0tLS1C...redacted
-     tls.key: LS0tLS1C...redacted
+     ca.crt: <base64-encoded-ca-cert>
+     tls.crt: <base64-encoded-tls-cert>
+     tls.key: <base64-encoded-tls-key>
    ```
    Apply the secret while deleting and recreating the site:
    ```bash
@@ -332,9 +332,9 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    metadata:
      name: skupper-link
    data:
-     ca.crt: LS0tLS1C...redacted
-     tls.crt: LS0tLS1C...redacted
-     tls.key: LS0tLS1C...redacted
+     ca.crt: <base64-encoded-ca-cert>
+     tls.crt: <base64-encoded-tls-cert>
+     tls.key: <base64-encoded-tls-key>
    ```
    Save this resource locally as `client-secret.yaml` if you want to combine it with a `Link` resource in a single file.
 
@@ -411,9 +411,9 @@ NOTE: In this procedure you delete and recreate your site to ensure the certific
    metadata:
      name: skupper-link
    data:
-     ca.crt: LS0tLS1C...redacted        # The trusted CA certificate
-     tls.crt: LS0tLS1C...redacted       # The client certificate
-     tls.key: LS0tLS1C...redacted       # The corresponding private key
+     ca.crt: <base64-encoded-ca-cert>        # The trusted CA certificate
+     tls.crt: <base64-encoded-tls-cert>       # The client certificate
+     tls.key: <base64-encoded-tls-key>       # The corresponding private key
    ```
 
 5. Securely transfer the `Link` resource YAML file to the context of the connecting site.
