@@ -1,24 +1,24 @@
 <a id="skupper-routing"></a>
-# Skupper routing
+# {{skupper_name}} routing
 <!--CONCEPT-->
 
-Skupper routes application traffic by using routing keys, ports, and site-aware paths.
+{{skupper_name}} routes application traffic by using routing keys, ports, and site-aware paths.
 
-Skupper uses routing keys and ports to connect servers and clients.
+{{skupper_name}} uses routing keys and ports to connect servers and clients.
 See how the power of application-layer addressing can bring new capabilities to your applications.
 
 **Multi-cluster services**
 
 Deploy a single logical service across multiple clusters.
 
-Skupper can route requests to instances of a single service running on multiple clusters.
+{{skupper_name}} can route requests to instances of a single service running on multiple clusters.
 If a provider or data center fails, the service instances running at unaffected sites can scale to meet the need and maintain availability.
 
 **Dynamic load balancing**
 
 Balance requests across clusters according to service capacity.
 
-The Skupper network has cross-cluster visibility.
+The {{skupper_name}} network has cross-cluster visibility.
 It can see which services are already loaded and which have spare capacity, and it directs requests accordingly.
 
 You can assign a cost to each inter-site connection.
@@ -28,4 +28,4 @@ If demand peaks, you can dynamically spill over to public cloud resources.
 
 **Reliable networks**
 
-Skupper uses redundant network paths and smart routing to provide highly available connectivity at scale.
+{{skupper_name}} uses redundant network paths and smart routing to provide highly available connectivity at scale.

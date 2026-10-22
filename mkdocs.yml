@@ -5,15 +5,15 @@ site_dir: output/docs
 
 extra:
   # Static values for MVP - will be dynamic with macros plugin
-  skupper_version: "2.2.1"
-  skupper_cli_version: "2.2.1"
-  skupper_version_v1: "1.9.2"
+  skupper_version: "2.2.3"
+  skupper_cli_version: "2.2.3"
+  skupper_version_v1: "1.9.6"
   # site_prefix controls navigation links in header/footer
   # For production (skupper.io): use empty string (relative paths)
   # For staging/preview: use full URL without trailing slash
   # For local dev: use http://localhost:8000 or your local server
   site_prefix: ""
-
+  skupper_name: "Skupper"
 # Support .html links in markdown (Transom compatibility)
 use_directory_urls: false
 

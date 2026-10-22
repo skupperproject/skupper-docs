@@ -1,11 +1,11 @@
 <a id="overview-load-balancing"></a>
-# Skupper load balancing and failover
+# {{skupper_name}} load balancing and failover
 <!--CONCEPT-->
 
-Skupper balances new TCP connections across sites and reroutes traffic when a site fails.
+{{skupper_name}} balances new TCP connections across sites and reroutes traffic when a site fails.
 
-Skupper enables load balancing and failover across servers located across the application network.
-Specifically, Skupper balances **new TCP connections** across workloads deployed in distinct sites.
+{{skupper_name}} enables load balancing and failover across servers located across the application network.
+Specifically, {{skupper_name}} balances **new TCP connections** across workloads deployed in distinct sites.
 If a workload at one site becomes unavailable, traffic is automatically rerouted to available sites. 
 For example, if you deploy the same backend code on two sites and expose the backend on the application network, both sites process concurrent requests from a third site.
 
@@ -24,7 +24,7 @@ For configuration details and examples, see the multi-key listener documentation
 
 ## Alternative: Link cost
 
-Link cost is a configurable integer value that influences how Skupper routes traffic across **all services** that traverse a link between two sites.
+Link cost is a configurable integer value that influences how {{skupper_name}} routes traffic across **all services** that traverse a link between two sites.
 The routing algorithm favors paths with the lowest total cost from client to target server.
 
 > **NOTE:**
@@ -51,7 +51,7 @@ In this configuration, all connections are routed to the local server.
 If the local server becomes unavailable, traffic fails over to the remote server regardless of the high cost.
 
 > **NOTE:**
-> Skupper does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected.
+> {{skupper_name}} does not provide orchestrated failover for stateful applications that require control over the order in which traffic is redirected.
 > You must implement that orchestration separately.
 
 **Additional resources**

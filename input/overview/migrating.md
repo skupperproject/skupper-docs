@@ -1,15 +1,15 @@
 <a id="migrating"></a>
-# Migrating from Skupper v1
+# Migrating from {{skupper_name}} v1
 <!--REFERENCE-->
 
-Skupper v1 sites are not compatible with Skupper v2 sites.
+{{skupper_name}} v1 sites are not compatible with {{skupper_name}} v2 sites.
 While there are plans to create migration tooling, currently, the only way migrate an application network is to create a new network.
 
 Terminology changes:
 
 * **application network**: Application network or just network
 * **service sync**: Services are not automatically available on other sites. You must create a *connector* on the site with the server process and a *listener* on the site with the client process. Also you must match the connector and listener with a *routing key* to expose a service.
-* **Skupper Custom Resources**: On non-Kubernetes sites, you can now define your network using YAML. The YAML format is similar to Kubernetes YAML.
+* **{{skupper_name}} Custom Resources**: On non-Kubernetes sites, you can now define your network using YAML. The YAML format is similar to Kubernetes YAML.
 
 <a id="migrating-sites"></a>
 ## Create sites
@@ -34,7 +34,7 @@ On Podman, the site definition is created in `~/.local/share/skupper` and you mu
 ## Link sites
 <!--REFERENCE-->
 
-These examples show how site-linking commands changed between Skupper v1 and Skupper v2.
+These examples show how site-linking commands changed between {{skupper_name}} v1 and {{skupper_name}} v2.
 
 
 
@@ -52,7 +52,7 @@ contextA> skupper token redeem ~/token.yaml
 ## Expose services
 <!--REFERENCE-->
 
-These examples show how service-exposure commands changed between Skupper v1 and Skupper v2.
+These examples show how service-exposure commands changed between {{skupper_name}} v1 and {{skupper_name}} v2.
 
 ```bash
 contextA> skupper expose deployment/backend --port 8080

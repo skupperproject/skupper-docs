@@ -1,11 +1,11 @@
 <a id="overview-connectivity"></a>
-# Skupper connectivity
+# {{skupper_name}} connectivity
 <!--CONCEPT-->
 
-Skupper provides secure connectivity for services running across multiple clusters.
+{{skupper_name}} provides secure connectivity for services running across multiple clusters.
 
-Skupper represents a new approach to connecting services across multiple Kubernetes clusters.
-See how Skupper can give you the flexibility to deploy your services where you need them.
+{{skupper_name}} represents a new approach to connecting services across multiple Kubernetes clusters.
+See how {{skupper_name}} can give you the flexibility to deploy your services where you need them.
 
 **One cluster**
 
@@ -17,7 +17,7 @@ Service "A" can contact service "B", "B" can contact "C", and so on.
 But if you want to deploy your application across multiple clusters, your options are limited.
 You have to either expose your services to the public internet or configure a VPN.
 
-Skupper offers a third way.
+{{skupper_name}} offers a third way.
 It connects clusters to a secure application network, also known as a virtual application network (VAN).
 It uses that network to forward local service traffic to remote clusters.
 
@@ -25,7 +25,7 @@ It uses that network to forward local service traffic to remote clusters.
 
 Deploy your application across public and private clusters.
 
-![A public cluster and a private cluster connected by a Skupper link, with services distributed across both](../images/two-clusters.svg)
+![A public cluster and a private cluster connected by a {{skupper_name}} link, with services distributed across both](../images/two-clusters.svg)
 
 You can host your database on a private cluster and retain full connectivity with services running on the public cloud.
 All communication is secured by mutual TLS authentication and encryption.
@@ -34,7 +34,7 @@ All communication is secured by mutual TLS authentication and encryption.
 
 Distribute application services across geographic regions.
 
-![A central cluster connected to four edge clusters via Skupper links in a hub-and-spoke topology](../images/five-clusters.svg)
+![A central cluster connected to four edge clusters via {{skupper_name}} links in a hub-and-spoke topology](../images/five-clusters.svg)
 
 You can connect multiple retail sites to a central office.
 Once connected, each edge location can contact any other edge.
@@ -44,4 +44,4 @@ You can add and remove sites on demand.
 
 Build large, robust networks of connected clusters.
 
-![A large network of clusters connected by Skupper links in a mesh topology with multiple sites](../images/many-clusters.svg)
+![A large network of clusters connected by {{skupper_name}} links in a mesh topology with multiple sites](../images/many-clusters.svg)

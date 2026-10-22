@@ -1,13 +1,13 @@
 <a id="skupper-overview"></a>
-# Skupper overview
+# {{skupper_name}} overview
 <!--ASSEMBLY-->
 
-Skupper connects distributed applications across sites by creating an application network.
+{{skupper_name}} connects distributed applications across sites by creating an application network.
 
 Hybrid clouds enable organizations to combine on-premises, private cloud, and public cloud resources.
 While such a solution provides many benefits, it also presents a unique challenge: enabling these resources to communicate with each other.
 
-Skupper provides a solution to this challenge with an Application Network that simply and securely connects applications running in different network locations.
+{{skupper_name}} provides a solution to this challenge with an Application Network that simply and securely connects applications running in different network locations.
 
 <a id="application-networks"></a>
 ## Application networks
@@ -15,8 +15,8 @@ Skupper provides a solution to this challenge with an Application Network that s
 
 An application network connects services across sites as if they were running together.
 
-Skupper solves multi-cluster communication challenges through something called a Virtual Application Network or just application network.
-To understand the value of Skupper, it is helpful to first understand what an application network is.
+{{skupper_name}} solves multi-cluster communication challenges through something called a Virtual Application Network or just application network.
+To understand the value of {{skupper_name}}, it is helpful to first understand what an application network is.
 
 An application network connects the applications and services in your hybrid cloud into a virtual network.
 They can communicate with each other as if they were all running in the same site.
@@ -28,21 +28,21 @@ In essence, the application network connects the services in a distributed appli
 
 ![A distributed application composed of three services: Service A, Service B, and Service C](../images/overview-application.png)
 
-Application networks are able to provide connectivity across the hybrid cloud by using Skupper routers.
+Application networks are able to provide connectivity across the hybrid cloud by using {{skupper_name}} routers.
 
 <a id="skupper-routers"></a>
-## Skupper routers
+## {{skupper_name}} routers
 <!--CONCEPT-->
 
-Skupper routers carry application traffic between services in different sites.
+{{skupper_name}} routers carry application traffic between services in different sites.
 
-Skupper routers form the backbone of an application network in the same way that conventional network routers form the backbone of a VPN.
-However, instead of routing IP packets between network endpoints, Skupper routers route messages between application endpoints.
+{{skupper_name}} routers form the backbone of an application network in the same way that conventional network routers form the backbone of a VPN.
+However, instead of routing IP packets between network endpoints, {{skupper_name}} routers route messages between application endpoints.
 
 **Application services**
 
 An application service represents an endpoint, or destination in the application network.
-When an application sends a communication to an service, the Skupper routers distribute the communication to any other application in the application network that has the same service.
+When an application sends a communication to an service, the {{skupper_name}} routers distribute the communication to any other application in the application network that has the same service.
 
 For example, in this diagram, **Service B** sends a message with an application service to its local application router.
 **Service A** and **Service C** are subscribed to the same service.
@@ -55,21 +55,21 @@ In the diagram, `skupper-router` is a container or systemd process that acts as 
 Application networks provide multiple routing patterns, so communications can be distributed in anycast (balanced or closest) or multicast patterns.
 
 <a id="skupper"></a>
-## Skupper
+## {{skupper_name}}
 <!--CONCEPT-->
 
-Skupper is the tool that creates and manages application networks across sites.
+{{skupper_name}} is the tool that creates and manages application networks across sites.
 
-Skupper is an open source tool for creating application networks in Kubernetes or Linux.
-By using Skupper, you can create a distributed application consisting of microservices running in different sites.
+{{skupper_name}} is an open source tool for creating application networks in Kubernetes or Linux.
+By using {{skupper_name}}, you can create a distributed application consisting of microservices running in different sites.
 
-This diagram illustrates a Skupper network that connects three services running in three different sites:
+This diagram illustrates a {{skupper_name}} network that connects three services running in three different sites:
 
-![Three Kubernetes clusters, each with a namespace containing a service and a Skupper instance, connected by a Skupper network](../images/overview-clusters.png)
+![Three Kubernetes clusters, each with a namespace containing a service and a {{skupper_name}} instance, connected by a {{skupper_name}} network](../images/overview-clusters.png)
 
-In a Skupper network, each namespace contains a Skupper instance.
-When these Skupper instances connect, they continually share information about the services that each instance exposes.
-This means that each Skupper instance is always aware of every service that has been exposed to the Skupper network, regardless of the namespace in which each service resides.
+In a {{skupper_name}} network, each namespace contains a {{skupper_name}} instance.
+When these {{skupper_name}} instances connect, they continually share information about the services that each instance exposes.
+This means that each {{skupper_name}} instance is always aware of every service that has been exposed to the {{skupper_name}} network, regardless of the namespace in which each service resides.
 
-Once a Skupper network is formed across Kubernetes namespaces, any of the services in those namespaces can be exposed (through annotation) to the Skupper network.
-When a service is exposed, Skupper creates proxy endpoints to make that service available on each namespace in the Skupper network.
+Once a {{skupper_name}} network is formed across Kubernetes namespaces, any of the services in those namespaces can be exposed (through annotation) to the {{skupper_name}} network.
+When a service is exposed, {{skupper_name}} creates proxy endpoints to make that service available on each namespace in the {{skupper_name}} network.
