@@ -1,5 +1,5 @@
 <a id="skupper-routing"></a>
-# {{skupper_name}} routing
+# Routing
 <!--CONCEPT-->
 
 {{skupper_name}} routes application traffic by using routing keys, ports, and site-aware paths.

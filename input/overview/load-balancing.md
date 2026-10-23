@@ -1,5 +1,5 @@
 <a id="overview-load-balancing"></a>
-# {{skupper_name}} load balancing and failover
+# Load balancing and failover
 <!--CONCEPT-->
 
 {{skupper_name}} balances new TCP connections across sites and reroutes traffic when a site fails.
@@ -57,8 +57,8 @@ If the local server becomes unavailable, traffic fails over to the remote server
 **Additional resources**
 
 * [Creating a multi-key listener using YAML][mkl]
-* [Specifying link cost using the CLI][link-cost-cli]
-* [Specifying link cost using YAML][link-cost-yaml]
+* [Specify link cost using the CLI][link-cost-cli]
+* [Specify link cost using YAML][link-cost-yaml]
 
 [link-cost-cli]: ../kube-cli/site-linking.html#kube-link-cost-cli
 [link-cost-yaml]: ../kube-yaml/site-linking.html#kube-link-cost-yaml

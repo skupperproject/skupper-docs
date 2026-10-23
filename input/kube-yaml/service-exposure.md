@@ -1,5 +1,5 @@
 <a id="kube-exposing-services-yaml"></a>
-# Exposing services on the application network using YAML on Kubernetes
+# Expose services on the application network using YAML on Kubernetes
 <!--ASSEMBLY-->
 
 After creating an application network by linking sites, you can expose services from one site using connectors and consume those services on other sites using listeners.

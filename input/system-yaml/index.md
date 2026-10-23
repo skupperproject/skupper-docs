@@ -1,5 +1,5 @@
 <a id="system-yaml"></a>
-# Overview of using YAML on local systems
+# YAML on local systems
 <!--REFERENCE-->
 
 Use YAML on local systems to create sites, link them to other sites, and expose or consume services.

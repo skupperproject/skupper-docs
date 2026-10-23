@@ -1,5 +1,5 @@
 <a id="system-yaml-site-configuration"></a>
-# Creating a site on local systems using YAML
+# Create a site on local systems using YAML
 <!--ASSEMBLY-->
 
 Using YAML allows you to create and manage sites on Docker, Podman and Linux.

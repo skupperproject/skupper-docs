@@ -3,7 +3,7 @@ render_macros: false
 ---
 <!-- Macro rendering is disabled because this page contains literal Go template expressions. -->
 <a id="kube-yaml-custom-certs"></a>
-# Linking sites using custom certificates
+# Secure inter-site communication with custom certificates
 <!--ASSEMBLY-->
 
 By default, the Skupper controller generates internal Certificate Authorities (CAs) and self-signed certificates.

@@ -42,40 +42,40 @@ extra_css:
 nav:
   - Home: index.md
   - Discover:
-    - Skupper overview: overview/index.md
-    - Skupper connectivity: overview/connectivity.md
-    - Skupper security: overview/security.md
-    - Skupper routing: overview/routing.md
-    - Skupper load balancing and failover: overview/load-balancing.md
+    - Product overview: overview/index.md
+    - Connectivity: overview/connectivity.md
+    - Security: overview/security.md
+    - Routing: overview/routing.md
+    - Load balancing and failover: overview/load-balancing.md
   - Install:
-    - Installing the Skupper controller: install/index.md
+    - Install the Skupper controller: install/index.md
   - Deploy:
-    - Overview of Skupper CLI on Kubernetes: kube-cli/index.md
-    - Creating a site on Kubernetes using the Skupper CLI: kube-cli/site-configuration.md
-    - Overview of using YAML on Kubernetes: kube-yaml/index.md
-    - Creating a site on Kubernetes using YAML: kube-yaml/site-configuration.md
-    - Overview of Skupper CLI on local systems: system-cli/index.md
-    - Creating a site on a local system using the Skupper CLI: system-cli/site-configuration.md
-    - Overview of using YAML on local systems: system-yaml/index.md
-    - Creating a site on local systems using YAML: system-yaml/site-configuration.md
+    - Skupper CLI on Kubernetes: kube-cli/index.md
+    - Create a site on Kubernetes using the CLI: kube-cli/site-configuration.md
+    - YAML on Kubernetes: kube-yaml/index.md
+    - Create a site on Kubernetes using YAML: kube-yaml/site-configuration.md
+    - Skupper CLI on local systems: system-cli/index.md
+    - Create a site on a local system using the CLI: system-cli/site-configuration.md
+    - YAML on local systems: system-yaml/index.md
+    - Create a site on local systems using YAML: system-yaml/site-configuration.md
   - Configure:
-    - Linking sites on Kubernetes using the Skupper CLI: kube-cli/site-linking.md
-    - Exposing services on the application network using the CLI on Kubernetes: kube-cli/service-exposure.md
-    - Linking sites on Kubernetes using YAML: kube-yaml/site-linking.md
-    - Exposing services on the application network using YAML on Kubernetes: kube-yaml/service-exposure.md
-    - Linking sites on local systems using the Skupper CLI: system-cli/site-linking.md
-    - Exposing services on the application network using the CLI on local systems: system-cli/service-exposure.md
-    - Linking sites on local systems using YAML: system-yaml/site-linking.md
-    - Exposing services on the application network using YAML on local systems: system-yaml/service-exposure.md
+    - Link sites on Kubernetes using the CLI: kube-cli/site-linking.md
+    - Expose services on the application network using the CLI on Kubernetes: kube-cli/service-exposure.md
+    - Link sites on Kubernetes using YAML: kube-yaml/site-linking.md
+    - Expose services on the application network using YAML on Kubernetes: kube-yaml/service-exposure.md
+    - Link sites on local systems using the CLI: system-cli/site-linking.md
+    - Expose services on the application network using the CLI on local systems: system-cli/service-exposure.md
+    - Link sites on local systems using YAML: system-yaml/site-linking.md
+    - Expose services on the application network using YAML on local systems: system-yaml/service-exposure.md
   - Secure:
-    - Linking sites using custom certificates: kube-yaml/custom-certs.md
+    - Secure inter-site communication with custom certificates: kube-yaml/custom-certs.md
   - Observe:
-    - Using the Skupper network console: console/index.md
+    - Maintain network health and service reachability: console/index.md
     - Network Observer Configuration Reference: console/configuration.md
   - Troubleshoot:
-    - Troubleshoot an application network: troubleshooting/index.md
+    - Troubleshoot link failures and resolve routing issues: troubleshooting/index.md
   - Upgrade:
-    - Migrating from Skupper v1: overview/migrating.md
+    - Migrate from Skupper v1: overview/migrating.md
   - Reference:
     - Skupper resources on Kubernetes: overview/resources.md
   - ...

@@ -1,5 +1,5 @@
 <a id="system-yaml-service-exposure"></a>
-# Exposing services on the application network using YAML on local systems
+# Expose services on the application network using YAML on local systems
 <!--ASSEMBLY-->
 
 Use YAML to create connectors and listeners for services on the application network.

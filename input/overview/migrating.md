@@ -1,5 +1,5 @@
 <a id="migrating"></a>
-# Migrating from {{skupper_name}} v1
+# Migrate from {{skupper_name}} v1
 <!--REFERENCE-->
 
 {{skupper_name}} v1 sites are not compatible with {{skupper_name}} v2 sites.

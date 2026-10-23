@@ -1,5 +1,5 @@
 <a id="system-yaml-site-linking"></a>
-# Linking sites on local systems using YAML
+# Link sites on local systems using YAML
 <!--ASSEMBLY-->
 
 Use a `link` resource YAML file to create links between local system and Kubernetes sites.

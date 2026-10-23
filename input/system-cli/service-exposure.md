@@ -1,5 +1,5 @@
 <a id="system-exposing-services-cli"></a>
-# Exposing services on the application network using the CLI on local systems
+# Expose services on the application network using the CLI on local systems
 <!--ASSEMBLY-->
 
 Use the CLI on local systems to create connectors and listeners for services on the application network.

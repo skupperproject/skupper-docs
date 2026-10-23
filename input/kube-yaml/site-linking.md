@@ -3,7 +3,7 @@ render_macros: false
 ---
 <!-- Macro rendering is disabled because this page contains literal Go template expressions. -->
 <a id="kube-yaml-site-linking"></a>
-# Linking sites on Kubernetes using YAML
+# Link sites on Kubernetes using YAML
 <!--ASSEMBLY-->
 
 Once sites are linked, services can be exposed and consumed across the application network without the need to open ports or manage inter-site connectivity.
@@ -124,7 +124,7 @@ A connecting site redeems this token for a `Link` resource to establish a link t
    ```
 
 <a id="kube-link-cost-yaml"></a>
-## Specifying link cost using YAML
+## Specify link cost using YAML
 <!--PROCEDURE-->
 
 Link cost is a configurable integer value that influences how Skupper routes
@@ -259,6 +259,6 @@ Custom certificates allow integration with your existing PKI infrastructure.
 
 **Additional resources**
 
-* [Linking sites using custom certificates][custom-certs-yaml]
+* [Secure inter-site communication with custom certificates][custom-certs-yaml]
 
 [custom-certs-yaml]: ../kube-yaml/custom-certs.html

@@ -1,5 +1,5 @@
 <a id="system-linking-cli"></a>
-# Linking sites on local systems using the Skupper CLI
+# Link sites on local systems using the CLI
 <!--ASSEMBLY-->
 
 Use the Skupper CLI on local systems to create links between sites.

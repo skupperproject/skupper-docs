@@ -1,5 +1,5 @@
 <a id="skupper-overview"></a>
-# {{skupper_name}} overview
+# What is {{skupper_name}}?
 <!--ASSEMBLY-->
 
 {{skupper_name}} connects distributed applications across sites by creating an application network.

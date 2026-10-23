@@ -2,7 +2,7 @@
 skip: true
 ---
 <a id="console"></a>
-# Using the Skupper network console
+# Maintain network health and service reachability
 <!--ASSEMBLY-->
 
 The Network console provides data and visualizations of the traffic flow between sites using the Network Observer component which also deploys an API endpoint.

@@ -1,5 +1,5 @@
 <a id="kube-exposing-services-cli"></a>
-# Exposing services on the application network using the CLI on Kubernetes
+# Expose services on the application network using the CLI on Kubernetes
 <!--ASSEMBLY-->
 
 Create connectors and listeners to expose services across the application network.

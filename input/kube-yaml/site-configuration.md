@@ -1,5 +1,5 @@
 <a id="kube-creating-site-yaml"></a>
-# Creating a site on Kubernetes using YAML
+# Create a site on Kubernetes using YAML
 <!--ASSEMBLY-->
 
 Using YAML allows you to create and manage sites from the context of the current namespace.

@@ -1,5 +1,5 @@
 <a id="kube-linking-cli"></a>
-# Linking sites on Kubernetes using the Skupper CLI
+# Link sites on Kubernetes using the CLI
 <!--ASSEMBLY-->
 
 Create links between sites on Kubernetes by using the CLI.
@@ -271,13 +271,13 @@ You can still use the Skupper CLI to generate links for those workflows.
 
 **Additional resources**
 
-* [Linking sites using custom certificates][custom-certs-yaml]
+* [Secure inter-site communication with custom certificates][custom-certs-yaml]
 
 [custom-certs-yaml]: ../kube-yaml/custom-certs.html
 
 
 <a id="kube-link-cost-cli"></a>
-## Specifying link cost using the CLI
+## Specify link cost using the CLI
 <!--PROCEDURE-->
 
 Link cost is a configurable integer value that influences how Skupper routes

@@ -1,5 +1,5 @@
 <a id="troubleshooting"></a>
-# Troubleshoot an application network
+# Troubleshoot link failures and resolve routing issues
 <!--ASSEMBLY-->
 
 Diagnose and resolve issues with your application network by checking site status, verifying links, and collecting diagnostic data.

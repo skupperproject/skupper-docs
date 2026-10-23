@@ -1,5 +1,5 @@
 <a id="system-creating-site-cli"></a>
-# Creating a site on a local system using the Skupper CLI
+# Create a site on a local system using the CLI
 <!--ASSEMBLY-->
 
 Using the skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current user.
