@@ -28,7 +28,8 @@ theme:
     - navigation.sections  # Show sections in sidebar
     #- navigation.expand    # Auto-expand sections in sidebar
     - navigation.top       # Back to top button
-    - navigation.indexes   # Section index pages
+    # navigation.indexes disabled — merges index.md into section headers,
+    # which collapses single-page JTBD categories into direct links
     - search.suggest       # Search suggestions
     - search.highlight     # Highlight search terms
     - content.code.copy    # Copy button for code blocks
@@ -40,40 +41,43 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Overview:
-    - Introduction: overview/index.md
-    - Connectivity: overview/connectivity.md
-    - Security: overview/security.md
-    - Routing: overview/routing.md
-    - Load Balancing: overview/load-balancing.md
-    - Resources: overview/resources.md
-    - Migrating: overview/migrating.md
-  - Installation: install/index.md
-  - Kubernetes CLI:
-    - Overview: kube-cli/index.md
-    - Site Configuration: kube-cli/site-configuration.md
-    - Site Linking: kube-cli/site-linking.md
-    - Service Exposure: kube-cli/service-exposure.md
-  - Kubernetes YAML:
-    - Overview: kube-yaml/index.md
-    - Site Configuration: kube-yaml/site-configuration.md
-    - Site Linking: kube-yaml/site-linking.md
-    - Custom Certificates: kube-yaml/custom-certs.md
-    - Service Exposure: kube-yaml/service-exposure.md
-  - System CLI:
-    - Overview: system-cli/index.md
-    - Site Configuration: system-cli/site-configuration.md
-    - Site Linking: system-cli/site-linking.md
-    - Service Exposure: system-cli/service-exposure.md
-  - System YAML:
-    - Overview: system-yaml/index.md
-    - Site Configuration: system-yaml/site-configuration.md
-    - Site Linking: system-yaml/site-linking.md
-    - Service Exposure: system-yaml/service-exposure.md
-  - Console:
-    - Overview: console/index.md
-    - Configuration: console/configuration.md
-  - Troubleshooting: troubleshooting/index.md
+  - Discover:
+    - Skupper overview: overview/index.md
+    - Skupper connectivity: overview/connectivity.md
+    - Skupper security: overview/security.md
+    - Skupper routing: overview/routing.md
+    - Skupper load balancing and failover: overview/load-balancing.md
+  - Install:
+    - Installing the Skupper controller: install/index.md
+  - Deploy:
+    - Overview of Skupper CLI on Kubernetes: kube-cli/index.md
+    - Creating a site on Kubernetes using the Skupper CLI: kube-cli/site-configuration.md
+    - Overview of using YAML on Kubernetes: kube-yaml/index.md
+    - Creating a site on Kubernetes using YAML: kube-yaml/site-configuration.md
+    - Overview of Skupper CLI on local systems: system-cli/index.md
+    - Creating a site on a local system using the Skupper CLI: system-cli/site-configuration.md
+    - Overview of using YAML on local systems: system-yaml/index.md
+    - Creating a site on local systems using YAML: system-yaml/site-configuration.md
+  - Configure:
+    - Linking sites on Kubernetes using the Skupper CLI: kube-cli/site-linking.md
+    - Exposing services on the application network using the CLI on Kubernetes: kube-cli/service-exposure.md
+    - Linking sites on Kubernetes using YAML: kube-yaml/site-linking.md
+    - Exposing services on the application network using YAML on Kubernetes: kube-yaml/service-exposure.md
+    - Linking sites on local systems using the Skupper CLI: system-cli/site-linking.md
+    - Exposing services on the application network using the CLI on local systems: system-cli/service-exposure.md
+    - Linking sites on local systems using YAML: system-yaml/site-linking.md
+    - Exposing services on the application network using YAML on local systems: system-yaml/service-exposure.md
+  - Secure:
+    - Linking sites using custom certificates: kube-yaml/custom-certs.md
+  - Observe:
+    - Using the Skupper network console: console/index.md
+    - Network Observer Configuration Reference: console/configuration.md
+  - Troubleshoot:
+    - Troubleshoot an application network: troubleshooting/index.md
+  - Upgrade:
+    - Migrating from Skupper v1: overview/migrating.md
+  - Reference:
+    - Skupper resources on Kubernetes: overview/resources.md
   - ...
 
 markdown_extensions:
@@ -103,4 +107,3 @@ plugins:
   - awesome-pages
   - macros:
       module_name: config/mkdocs_macros
-

@@ -1,0 +1,70 @@
+site_name: Skupper Documentation
+site_url: https://skupper.io/docs/
+docs_dir: doc-input
+site_dir: output/docs
+
+extra:
+  # Static values for MVP - will be dynamic with macros plugin
+  skupper_version: "2.2.3"
+  skupper_cli_version: "2.2.3"
+  skupper_version_v1: "1.9.6"
+  # site_prefix controls navigation links in header/footer
+  # For production (skupper.io): use empty string (relative paths)
+  # For staging/preview: use full URL without trailing slash
+  # For local dev: use http://localhost:8000 or your local server
+  site_prefix: ""
+  skupper_name: "Skupper"
+# Support .html links in markdown (Transom compatibility)
+use_directory_urls: false
+
+theme:
+  name: material
+  custom_dir: config/mkdocs-overrides
+  palette:
+    primary: blue
+    accent: green
+  features:
+    # - navigation.tabs  # REMOVED: This puts nav in horizontal tabs at top
+    - navigation.sections  # Show sections in sidebar
+    #- navigation.expand    # Auto-expand sections in sidebar
+    - navigation.top       # Back to top button
+    # navigation.indexes disabled — merges index.md into section headers,
+    # which collapses single-page JTBD categories into direct links
+    - search.suggest       # Search suggestions
+    - search.highlight     # Highlight search terms
+    - content.code.copy    # Copy button for code blocks
+    - content.code.annotate # Code annotations
+    - toc.integrate        # Integrate table of contents into sidebar
+
+extra_css:
+  - stylesheets/skupper-overrides.css
+
+# {{NAV}}
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+# Validation settings
+validation:
+  links:
+    not_found: warn  # Warn but don't fail on missing links
+    absolute_links: warn
+    unrecognized_links: warn
+
+plugins:
+  - search
+  - awesome-pages
+  - macros:
+      module_name: config/mkdocs_macros
