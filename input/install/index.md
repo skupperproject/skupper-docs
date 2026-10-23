@@ -2,7 +2,7 @@
 skip: true
 ---
 <a id="kube-installing-controller"></a>
-# Install the Skupper controller
+# Install and upgrade the Skupper controller
 <!--ASSEMBLY-->
 
 If you are using Skupper on local systems (Podman, Docker, Linux), you must [install the CLI](#installing-cli).

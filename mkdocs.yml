@@ -48,7 +48,7 @@ nav:
     - Routing: overview/routing.md
     - Load balancing and failover: overview/load-balancing.md
   - Install:
-    - Install the Skupper controller: install/index.md
+    - Install and upgrade the Skupper controller: install/index.md
   - Deploy:
     - Skupper CLI on Kubernetes: kube-cli/index.md
     - Create a site on Kubernetes using the CLI: kube-cli/site-configuration.md
