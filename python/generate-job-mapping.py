@@ -253,6 +253,28 @@ def build_entries():
 # Markdown (monolithic .md files in input/) support
 # ---------------------------------------------------------------------------
 
+def get_frontmatter(filepath):
+    """Extract YAML frontmatter from a markdown file as a dict."""
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            first = f.readline().strip()
+            if first != "---":
+                return {}
+            fm_lines = []
+            for line in f:
+                if line.strip() == "---":
+                    break
+                fm_lines.append(line)
+    except FileNotFoundError:
+        return {}
+    result = {}
+    for line in fm_lines:
+        m = re.match(r"(\w[\w_-]*):\s*(.+)", line.strip())
+        if m:
+            result[m.group(1)] = m.group(2).strip()
+    return result
+
+
 def get_md_headings(filepath):
     """Extract headings with anchor IDs and content-type markers from a markdown file."""
     headings = []
@@ -318,6 +340,8 @@ def build_entries_md():
         if not filepath.exists():
             continue
 
+        fm = get_frontmatter(filepath)
+        navtitle = fm.get("navtitle", "")
         headings = get_md_headings(filepath)
         file_rel = f"input/{md_rel}"
 
@@ -327,6 +351,7 @@ def build_entries_md():
                     "category": category,
                     "level": 2,
                     "title": h["title"],
+                    "navtitle": navtitle,
                     "path": file_rel,
                     "is_job": is_job(h["title"]),
                 })
@@ -336,6 +361,7 @@ def build_entries_md():
                     "category": category,
                     "level": 3,
                     "title": h["title"],
+                    "navtitle": "",
                     "path": f"{file_rel}{anchor}",
                     "is_job": is_job(h["title"]),
                 })
@@ -362,7 +388,40 @@ def sort_key(entry):
     return (cat_idx, entry["level"])
 
 
+def read_existing_csv(csv_path):
+    """Read existing CSV and return a lookup of (category, path) → {order, navtitle}.
+
+    Preserves manually edited Order and Navtitle values across regeneration.
+    """
+    lookup = {}
+    if not csv_path.exists():
+        return lookup
+    with open(csv_path, encoding="utf-8") as f:
+        reader = csv.reader(f)
+        current_cat = None
+        for row_num, row in enumerate(reader):
+            if row_num < 4 or len(row) < 7:
+                continue
+            cat_col = row[0].strip()
+            l2_col = row[1].strip()
+            path_col = row[6].strip()
+            if cat_col and not l2_col:
+                current_cat = cat_col
+                continue
+            if l2_col and current_cat and path_col:
+                navtitle = row[8].strip() if len(row) > 8 else ""
+                order = row[9].strip() if len(row) > 9 else ""
+                lookup[(current_cat, path_col)] = {
+                    "order": order,
+                    "navtitle": navtitle,
+                }
+    return lookup
+
+
 def write_csv(entries, output_path):
+    # Preserve existing Order and Navtitle values from current CSV
+    existing = read_existing_csv(output_path)
+
     # Group entries: within each category keep original order (doc structure)
     from collections import OrderedDict
     groups = OrderedDict()
@@ -384,21 +443,63 @@ def write_csv(entries, output_path):
         w.writerow([
             "Category (L!)", "Level 2 (Jobs)", "Level 3 (Jobs or Topics)",
             "Level 4 (Jobs or Topics)", "Topic (H2)", "H3",
-            "Full filename path", "Is a job?", "Navtitle",
+            "Full filename path", "Is a job?", "Navtitle", "Order",
         ])
 
         for cat in sorted_cats:
             items = groups[cat]
             # Category header row
-            w.writerow([cat, "", "", "", "", "", "", "FALSE", ""])
+            w.writerow([cat, "", "", "", "", "", "", "FALSE", "", ""])
 
+            # Sort L2 entries by existing order, keeping L3s after their L2
+            ordered_items = []
+            current_l2 = None
+            l2_groups = []
             for item in items:
-                row = [""] * 9
-                lvl = item["level"]
-                row[lvl - 1] = item["title"]  # L2→col1, L3→col2, L4→col3
+                if item["level"] == 2:
+                    if current_l2 is not None:
+                        l2_groups.append(current_l2)
+                    current_l2 = {"l2": item, "children": []}
+                else:
+                    if current_l2 is not None:
+                        current_l2["children"].append(item)
+                    else:
+                        ordered_items.append(item)
+            if current_l2 is not None:
+                l2_groups.append(current_l2)
+
+            def l2_sort_key(g):
+                key = (cat, g["l2"]["path"])
+                prev = existing.get(key, {})
+                try:
+                    return int(prev.get("order", "999999"))
+                except ValueError:
+                    return 999999
+
+            l2_groups.sort(key=l2_sort_key)
+
+            order_counter = 0
+            for g in l2_groups:
+                item = g["l2"]
+                row = [""] * 10
+                row[1] = item["title"]
                 row[6] = item["path"]
                 row[7] = "TRUE" if item["is_job"] else "FALSE"
+                key = (cat, item["path"])
+                prev = existing.get(key, {})
+                row[8] = item.get("navtitle", "") or prev.get("navtitle", "")
+                if prev.get("order"):
+                    row[9] = prev["order"]
+                else:
+                    order_counter += 10
+                    row[9] = str(order_counter)
                 w.writerow(row)
+                for child in g["children"]:
+                    crow = [""] * 10
+                    crow[2] = child["title"]
+                    crow[6] = child["path"]
+                    crow[7] = "TRUE" if child["is_job"] else "FALSE"
+                    w.writerow(crow)
 
 
 if __name__ == "__main__":

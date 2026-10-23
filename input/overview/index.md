@@ -1,3 +1,6 @@
+---
+navtitle: Skupper overview
+---
 <a id="skupper-overview"></a>
 # What is {{skupper_name}}?
 <!--ASSEMBLY-->

@@ -42,7 +42,7 @@ extra_css:
 nav:
   - Home: index.md
   - Discover:
-    - What is Skupper?: overview/index.md
+    - Skupper overview: overview/index.md
     - Connectivity: overview/connectivity.md
     - Security: overview/security.md
     - Routing: overview/routing.md
@@ -50,14 +50,14 @@ nav:
   - Install:
     - Install and upgrade the Skupper controller: install/index.md
   - Deploy:
-    - Skupper CLI on Kubernetes: kube-cli/index.md
-    - Create a site on Kubernetes using the CLI: kube-cli/site-configuration.md
     - YAML on Kubernetes: kube-yaml/index.md
     - Create a site on Kubernetes using YAML: kube-yaml/site-configuration.md
-    - Skupper CLI on local systems: system-cli/index.md
-    - Create a site on a local system using the CLI: system-cli/site-configuration.md
     - YAML on local systems: system-yaml/index.md
     - Create a site on local systems using YAML: system-yaml/site-configuration.md
+    - Skupper CLI on Kubernetes: kube-cli/index.md
+    - Create a site on Kubernetes using the CLI: kube-cli/site-configuration.md
+    - Skupper CLI on local systems: system-cli/index.md
+    - Create a site on a local system using the CLI: system-cli/site-configuration.md
   - Configure:
     - Link sites on Kubernetes using the CLI: kube-cli/site-linking.md
     - Expose services on the application network using the CLI on Kubernetes: kube-cli/service-exposure.md

@@ -26,7 +26,11 @@ HEADER_ROWS = 4
 
 
 def read_csv_nav_entries(csv_path):
-    """Read the job-mapping CSV and return L2 entries grouped by category."""
+    """Read the job-mapping CSV and return L2 entries grouped by category.
+
+    Entries within each category are sorted by the Order column (col 9).
+    Empty or missing Order values sort last.
+    """
     groups = {}
     current_category = None
 
@@ -41,6 +45,7 @@ def read_csv_nav_entries(csv_path):
             cat_col = row[0].strip()
             l2_col = row[1].strip()
             path_col = row[6].strip()
+            order_col = row[9].strip() if len(row) > 9 else ""
 
             if cat_col and not l2_col:
                 current_category = cat_col
@@ -48,12 +53,22 @@ def read_csv_nav_entries(csv_path):
 
             if l2_col and current_category:
                 title = resolve_variables(l2_col)
+                navtitle = row[8].strip() if len(row) > 8 else ""
                 path = strip_input_prefix(path_col)
                 if path:
+                    display_title = resolve_variables(navtitle) if navtitle else title
+                    try:
+                        order = int(order_col)
+                    except (ValueError, TypeError):
+                        order = 999999
                     groups.setdefault(current_category, []).append({
-                        "title": title,
+                        "title": display_title,
                         "path": path,
+                        "order": order,
                     })
+
+    for cat in groups:
+        groups[cat].sort(key=lambda e: e["order"])
 
     return groups
 
