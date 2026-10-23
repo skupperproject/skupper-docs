@@ -42,7 +42,7 @@ extra_css:
 nav:
   - Home: index.md
   - Discover:
-    - Product overview: overview/index.md
+    - What is Skupper?: overview/index.md
     - Connectivity: overview/connectivity.md
     - Security: overview/security.md
     - Routing: overview/routing.md

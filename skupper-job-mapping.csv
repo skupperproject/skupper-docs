@@ -3,7 +3,7 @@
 ,LEFT HAND NAVIGATION,,,RIGHT HAND NAVIGATION,,,,
 Category (L!),Level 2 (Jobs),Level 3 (Jobs or Topics),Level 4 (Jobs or Topics),Topic (H2),H3,Full filename path,Is a job?,Navtitle
 Discover,,,,,,,FALSE,
-,What is {{skupper_name}}?,,,,,input/overview/index.md,FALSE,Product overview
+,What is {{skupper_name}}?,,,,,input/overview/index.md,FALSE,
 ,,Application networks,,,,input/overview/index.md#application-networks,FALSE,
 ,,{{skupper_name}} routers,,,,input/overview/index.md#skupper-routers,FALSE,
 ,,{{skupper_name}},,,,input/overview/index.md#skupper,FALSE,
@@ -72,7 +72,7 @@ Configure,,,,,,,FALSE,
 ,,Create a local system listener using YAML,,,,input/system-yaml/service-exposure.md#system-creating-listener-yaml,TRUE,
 ,,Create a local system multi-key listener using YAML,,,,input/system-yaml/service-exposure.md#system-creating-multikeylistener-yaml,TRUE,
 Secure,,,,,,,FALSE,
-,Secure inter-site communication with custom certificates,,,,,input/kube-yaml/custom-certs.md,TRUE,
+,Secure inter-site communication with custom certificates,,,,,input/kube-yaml/custom-certs.md,FALSE,
 ,,"Link sites using a custom `RouterAccess`, and custom certificates",,,,input/kube-yaml/custom-certs.md#kube-router-access-custom-certs-yaml,TRUE,
 ,,Link sites using `Link` resources and custom certificates,,,,input/kube-yaml/custom-certs.md#kube-link-custom-certs-yaml,TRUE,
 Observe,,,,,,,FALSE,
