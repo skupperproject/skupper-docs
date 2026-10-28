@@ -17,7 +17,6 @@ Install,,,,,,,FALSE,,
 ,Install the Skupper controller,,,,,input/install/index.md,TRUE,,10
 ,,Install the Skupper controller using YAML,,,,input/install/index.md#kube-installing-controller-yaml,TRUE,,
 ,,Install the Skupper controller using Helm charts,,,,input/install/index.md#kube-installing-controller-helm,TRUE,,
-,,Install the Skupper CLI,,,,input/install/index.md#installing-cli,TRUE,,
 ,Upgrade sites,,,,,input/install/upgrade.md,TRUE,,10
 Deploy,,,,,,,FALSE,,
 ,YAML on Kubernetes,,,,,input/kube-yaml/index.md,FALSE,,1

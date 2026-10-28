@@ -11,7 +11,7 @@ Once sites are linked, services can be exposed and consumed across the applicati
 
 The procedures below describe linking an existing site.
 Typically, it is easier to configure a site, links, and services in a set of files.
-Create a configured site by placing all the YAML files in a directory such as `local` before running `skupper system setup`.
+Create a configured site by applying all the YAML files using `skupper system apply`.
 
 <a id="system-link-yaml"></a>
 ## Link sites using a `link` resource and YAML
@@ -42,28 +42,15 @@ To link sites, you create a `link` resource YAML file on one site and apply that
 
 3. Apply the `link` resource YAML file on a local system site to create a link:
    ```bash
-   mv <filename> ~/.local/share/skupper/namespaces/default/input/resources/
-   skupper system setup --force
+   skupper system apply -f <filename>.yaml
+   skupper system reload
    ```
-   where `<filename>` is the name of a YAML file that is saved on your local filesystem.
+   where `<filename>.yaml` is the name of the YAML file saved on your local filesystem.
+   The file must have a `.yaml` or `.json` extension.
 
-   The path shown is specific to the `default` namespace.
-   If you are configuring a different namespace, use that name instead.
-
-   The site is recreated and you see some of the internal resources that are not affected, for example:
-   ```text
-   Sources will be consumed from namespace "default"
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/tls.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/tls.key
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/ca.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/tls.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/tls.key
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/ca.crt
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/tls.crt
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/tls.key
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/ca.crt
-   
-   ```
+   The `apply` command stages the resource into `~/.local/share/skupper/namespaces/<namespace>/input/resources/`.
+   The `reload` command processes the staged resources and establishes the link.
+   The path is specific to the namespace; if you are configuring a different namespace, use that name instead.
 
 4. Check the status of the link:
    ```bash

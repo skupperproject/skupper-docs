@@ -48,6 +48,7 @@ nav:
     - Directing network traffic: overview/routing.md
     - Ensuring high availability and continuity: overview/load-balancing.md
   - Install:
+    - Install the Skupper CLI: install/cli.md
     - Install the Skupper controller: install/index.md
     - Upgrade sites: install/upgrade.md
   - Deploy:

@@ -28,7 +28,8 @@ contextA> skupper site create
 The site does not accept links by default.
 Use `--enable-link-access` to allow other sites link to the new site.
 
-On Podman, the site definition is created in `~/.local/share/skupper` and you must enter `skupper system setup` to complete site creation.
+On Podman, the site definition is created in `~/.local/share/skupper` and you must run `skupper system apply -f <site>.yaml` to stage the site definition, then `skupper system start` to complete site creation.
+Optionally, run `skupper system install` to enable the Dynamic System Controller.
 
 <a id="migrating-links"></a>
 ## Link sites

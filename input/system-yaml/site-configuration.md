@@ -34,10 +34,12 @@ There are many options to consider when creating sites using YAML, see [YAML Ref
 
 2. Create the site:
    ```bash
-   skupper system setup --path ./local
+   skupper system apply -f my-site.yaml
+   skupper system start
    ```
-   Skupper attempts to process any files in the `local` directory.
-   Typically, you create all resources you require for a site before running `skupper system setup`.
+   The `apply` command stages the custom resources from the YAML file into `~/.local/share/skupper/namespaces/<namespace>/input/resources/`.
+   The `start` command processes the staged resources and starts the site.
+   Typically, you apply all resources you require for a site before running `skupper system start`.
 
    **Optional:** Enable the Dynamic System Controller to automatically process YAML resources:
    ```bash
