@@ -7,18 +7,18 @@ Discover,,,,,,,FALSE,,
 ,,Application networks,,,,input/overview/index.md#application-networks,FALSE,,
 ,,{{skupper_name}} routers,,,,input/overview/index.md#skupper-routers,FALSE,,
 ,,{{skupper_name}},,,,input/overview/index.md#skupper,FALSE,,
-,Connectivity,,,,,input/overview/connectivity.md,FALSE,,20
-,Security,,,,,input/overview/security.md,FALSE,,30
-,Routing,,,,,input/overview/routing.md,FALSE,,40
-,Load balancing and failover,,,,,input/overview/load-balancing.md,FALSE,,50
+,Establishing system connectivity,,,,,input/overview/connectivity.md,FALSE,,20
+,Securing systems and data,,,,,input/overview/security.md,FALSE,,30
+,Directing network traffic,,,,,input/overview/routing.md,FALSE,,40
+,Ensuring high availability and continuity,,,,,input/overview/load-balancing.md,FALSE,,50
 ,,Preferred approach: Multi-key listeners,,,,input/overview/load-balancing.md,FALSE,,
 ,,Alternative: Link cost,,,,input/overview/load-balancing.md,TRUE,,
 Install,,,,,,,FALSE,,
-,Install and upgrade the Skupper controller,,,,,input/install/index.md,TRUE,,10
+,Install the Skupper controller,,,,,input/install/index.md,TRUE,,10
 ,,Install the Skupper controller using YAML,,,,input/install/index.md#kube-installing-controller-yaml,TRUE,,
 ,,Install the Skupper controller using Helm charts,,,,input/install/index.md#kube-installing-controller-helm,TRUE,,
 ,,Install the Skupper CLI,,,,input/install/index.md#installing-cli,TRUE,,
-,,Upgrade sites,,,,input/install/index.md#skupper-upgrading-sites,TRUE,,
+,Upgrade sites,,,,,input/install/upgrade.md,TRUE,,10
 Deploy,,,,,,,FALSE,,
 ,YAML on Kubernetes,,,,,input/kube-yaml/index.md,FALSE,,1
 ,Create a site on Kubernetes using YAML,,,,,input/kube-yaml/site-configuration.md,TRUE,,2

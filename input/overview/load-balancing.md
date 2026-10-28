@@ -1,5 +1,5 @@
 <a id="overview-load-balancing"></a>
-# Load balancing and failover
+# Ensuring high availability and continuity
 <!--CONCEPT-->
 
 {{skupper_name}} balances new TCP connections across sites and reroutes traffic when a site fails.

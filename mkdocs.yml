@@ -43,12 +43,13 @@ nav:
   - Home: index.md
   - Discover:
     - Skupper overview: overview/index.md
-    - Connectivity: overview/connectivity.md
-    - Security: overview/security.md
-    - Routing: overview/routing.md
-    - Load balancing and failover: overview/load-balancing.md
+    - Establishing system connectivity: overview/connectivity.md
+    - Securing systems and data: overview/security.md
+    - Directing network traffic: overview/routing.md
+    - Ensuring high availability and continuity: overview/load-balancing.md
   - Install:
-    - Install and upgrade the Skupper controller: install/index.md
+    - Install the Skupper controller: install/index.md
+    - Upgrade sites: install/upgrade.md
   - Deploy:
     - YAML on Kubernetes: kube-yaml/index.md
     - Create a site on Kubernetes using YAML: kube-yaml/site-configuration.md

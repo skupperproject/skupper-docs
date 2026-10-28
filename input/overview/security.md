@@ -1,5 +1,5 @@
 <a id="skupper-security"></a>
-# Security
+# Securing systems and data
 <!--CONCEPT-->
 
 {{skupper_name}} protects service-to-service communication with built-in mutual TLS security.

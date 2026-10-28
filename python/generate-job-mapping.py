@@ -78,6 +78,7 @@ MD_CATEGORY = {
     "overview/resources.md": "Reference",
     "overview/migrating.md": "Upgrade",
     "install/index.md": "Install",
+    "install/upgrade.md": "Install",
     "kube-cli/index.md": "Deploy",
     "kube-cli/site-configuration.md": "Deploy",
     "kube-cli/site-linking.md": "Configure",
@@ -338,6 +339,7 @@ def build_entries_md():
     for md_rel, category in MD_CATEGORY.items():
         filepath = input_dir / md_rel
         if not filepath.exists():
+            print(f"WARNING: {md_rel} in MD_CATEGORY but file not found at {filepath}")
             continue
 
         fm = get_frontmatter(filepath)
