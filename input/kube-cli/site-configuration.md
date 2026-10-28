@@ -14,7 +14,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 **Procedure**
 
-1. Follow the instructions for [Installing Skupper](https://skupper.io/releases/index.html).
+1. Install the Skupper CLI.
 
 2. Verify the installation.
    ```bash

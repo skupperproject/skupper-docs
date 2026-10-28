@@ -332,7 +332,7 @@ Configure container image repositories, tags, and pull policies for each compone
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
-| `image.repository` | string | `quay.io/skupper/network-observer` | Image repository |
+| `image.repository` | string | - | Image repository |
 | `image.tag` | string | chart appVersion | Image tag |
 | `image.pullPolicy` | string | `Always` | Pull policy |
 
@@ -340,7 +340,7 @@ Configure container image repositories, tags, and pull policies for each compone
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
-| `prometheus.repository` | string | `quay.io/prometheus/prometheus` | Image repository |
+| `prometheus.repository` | string | - | Image repository |
 | `prometheus.tag` | string | `v3.11.3` | Image tag |
 | `prometheus.pullPolicy` | string | `IfNotPresent` | Pull policy |
 
@@ -348,7 +348,7 @@ Configure container image repositories, tags, and pull policies for each compone
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
-| `nginx.repository` | string | `mirror.gcr.io/nginxinc/nginx-unprivileged` | Image repository |
+| `nginx.repository` | string | - | Image repository |
 | `nginx.tag` | string | `1.31.0-alpine` | Image tag |
 | `nginx.pullPolicy` | string | `IfNotPresent` | Pull policy |
 | `nginx.command` | array | `[]` | Override default command |
@@ -359,7 +359,7 @@ Used when `auth.strategy` is `basic` or `none`.
 
 | Path | Type | Default | Description |
 |------|------|---------|-------------|
-| `openshiftOauthProxy.repository` | string | `quay.io/openshift/origin-oauth-proxy` | Image repository |
+| `openshiftOauthProxy.repository` | string | - | Image repository |
 | `openshiftOauthProxy.tag` | string | `4.22.0` | Image tag |
 | `openshiftOauthProxy.pullPolicy` | string | `IfNotPresent` | Pull policy |
 
