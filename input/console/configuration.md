@@ -246,10 +246,7 @@ By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-
          - ReadWriteOnce
    ```
 
-2. Install or upgrade the chart with your values:
-   ```bash
-   helm upgrade --install skupper-network-observer oci://quay.io/skupper/helm/network-observer --version {{skupper_cli_version}} -f values.yaml
-   ```
+2. Apply the values to your Network Observer deployment.
 
 3. Verify the PersistentVolumeClaim is bound:
    ```bash

@@ -1,3 +1,6 @@
+---
+skip: true
+---
 <a id="skupper-upgrading-sites"></a>
 # Upgrade sites
 <!--PROCEDURE-->

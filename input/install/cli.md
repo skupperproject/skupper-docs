@@ -1,3 +1,6 @@
+---
+skip: true
+---
 <a id="installing-cli"></a>
 # Install the Skupper CLI
 <!--PROCEDURE-->
