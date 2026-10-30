@@ -1,5 +1,5 @@
 <a id="kube-resources"></a>
-# {{skupper_name}} resources on Kubernetes
+# {{skupper_name}} Kubernetes resources
 <!--REFERENCE-->
 
 {{skupper_name}} creates and manages several types of Kubernetes resources, including custom resource definitions, service accounts, deployments, ConfigMaps, secrets, and services.
