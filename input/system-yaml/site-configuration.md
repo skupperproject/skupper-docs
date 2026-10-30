@@ -1,5 +1,5 @@
 <a id="system-yaml-site-configuration"></a>
-# Creating a site on local systems using YAML
+# Create a site on local systems using YAML
 <!--ASSEMBLY-->
 
 Using YAML allows you to create and manage sites on Docker, Podman and Linux.
@@ -9,7 +9,7 @@ A typical workflow is to create a site, link sites together, and expose services
 If you require more than one site, specify a unique namespace when using  `skupper`, for example `skupper --namespace second-site ...`.
 
 <a id="system-creating-simple-site-yaml"></a>
-## Creating a simple site on local systems using YAML
+## Create a simple site on local systems using YAML
 <!--PROCEDURE-->
 
 You can use YAML to create and manage Skupper sites.
@@ -34,10 +34,12 @@ There are many options to consider when creating sites using YAML, see [YAML Ref
 
 2. Create the site:
    ```bash
-   skupper system setup --path ./local
+   skupper system apply -f my-site.yaml
+   skupper system start
    ```
-   Skupper attempts to process any files in the `local` directory.
-   Typically, you create all resources you require for a site before running `skupper system setup`.
+   The `apply` command stages the custom resources from the YAML file into `~/.local/share/skupper/namespaces/<namespace>/input/resources/`.
+   The `start` command processes the staged resources and starts the site.
+   Typically, you apply all resources you require for a site before running `skupper system start`.
 
    **Optional:** Enable the Dynamic System Controller to automatically process YAML resources:
    ```bash

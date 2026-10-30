@@ -2,10 +2,10 @@
 skip: true
 ---
 <a id="kube-installing-controller"></a>
-# Installing the Skupper controller
+# Install the Skupper controller
 <!--ASSEMBLY-->
 
-If you are using Skupper on local systems (Podman, Docker, Linux), you must [install the CLI](#installing-cli).
+If you are using Skupper on local systems (Podman, Docker, Linux), you must [install the CLI](cli.md).
 
 Before you can create a site on Kubernetes, you must install the Skupper controller. 
 You can install the controller using the following methods:
@@ -16,8 +16,8 @@ You can install the controller using the following methods:
 
 After installing the Skupper controller, you can create sites using the CLI or YAML:
 
-* [Creating a site using the CLI][cli-site]
-* [Creating a site using YAML][yaml-site]
+* [Create a site using the CLI][cli-site]
+* [Create a site using YAML][yaml-site]
 
 [cli-site]: ../kube-cli/site-configuration.html
 [yaml-site]: ../kube-yaml/site-configuration.html
@@ -27,7 +27,7 @@ If you scope the controller to a namespace, you can only create sites in that na
 
 
 <a id="kube-installing-controller-yaml"></a>
-## Installing the Skupper controller using YAML
+## Install the Skupper controller using YAML
 <!--PROCEDURE-->
 
 Install the Skupper controller on Kubernetes directly from the published YAML manifests.
@@ -53,7 +53,7 @@ kubectl apply -f https://github.com/skupperproject/skupper/releases/download/{{s
 
 
 <a id="kube-installing-controller-helm"></a>
-## Installing the Skupper controller using the Skupper Helm charts
+## Install the Skupper controller using Helm charts
 <!--PROCEDURE-->
 
 Install the Skupper controller on Kubernetes by using the published Helm chart.
@@ -91,95 +91,3 @@ Procedure
 5. Click **Install**.
 -->
 
-<a id="installing-cli"></a>
-## Installing the Skupper CLI
-<!--PROCEDURE-->
-
-
-You can use the Skupper CLI with Kubernetes or on local systems (Podman, Docker, Linux). 
-
-On local systems, the CLI is all you require to create a site.
-
-**Procedure**
-
-To download the latest release:
-
-```bash
-curl https://skupper.io/v2/install.sh | sh
-```
-
-To download a specific version, download from [Releases](https://github.com/skupperproject/skupper/releases) page.
-
-
-On local systems, you can install the controller using:
-
-```bash
-skupper system install -p  [podman, docker, linux]
-```
-
-<a id="skupper-upgrading-sites"></a>
-## Upgrading sites
-<!--PROCEDURE-->
-
-To upgrade a site, you need to upgrade the controller using the same method you used to install Skupper, for example, one of the following:
-
-* Applying the latest Helm chart
-* Applying the latest YAML
-
-To update the Skupper CLI:
-
-```bash
-curl https://skupper.io/v2/install.sh | sh
-```
-
-
-<a id="skupper-upgrading-local-sites"></a>
-### Upgrading local sites
-<!--PROCEDURE-->
-
-There are two distinct procedures for updating your Skupper installation: updating the site configuration and manually updating the controller.
-
-**Standard Site Update** 
-
-To update an existing site to the latest images or configuration matching your current CLI version:
-
-**Procedure**
-
-1. Ensure you have the latest version of the Skupper CLI installed.
-2. Run the reload command:
-	```shell
-	skupper system reload
-	```
-	*This command refreshes the site definition and pulls the latest images associated with the CLI version.*
-
-<a id="skupper-upgrading-local-controller"></a>
-### Upgrading the Skupper controller
-<!--PROCEDURE-->
-
-Currently, `skupper system uninstall` protects active sites by refusing to run if a site is detected. However, if you need to force an update to the **controller** itself (to pick up a new controller version) without deleting your sites, follow this manual workaround:
-
-**Prerequisites** 
-
-* Ensure your CLI is updated to the target version.
-
-**Procedure**
-
-1. Stop and remove the controller container. The container is named `<user>-skupper-controller`.
-	
-    **Podman**
-    ```
-	podman rm -f <user>-skupper-controller
-	```
-    **Docker**
-    ```
-	docker rm -f <user>-skupper-controller
-	```
-	*Note: Replace `<user>` with the specific username under which Skupper is running.*
-
-2. Re-install the controller.
-    Run the install command to recreate the controller using the new CLI version.
-	```
-	skupper system install
-	```
-
-3. Verify the controller is recreated with the updated version.

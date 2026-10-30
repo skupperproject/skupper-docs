@@ -1,8 +1,8 @@
 <a id="kube-resources"></a>
-# Skupper resources on Kubernetes
+# Look up Custom Resource specifications and CLI commands
 <!--REFERENCE-->
 
-The following sections describe the various Skupper resources on Kubernetes, for example, service accounts
+{{skupper_name}} creates and manages several types of Kubernetes resources, including custom resource definitions, service accounts, deployments, ConfigMaps, secrets, and services.
 
 <a id="kube-resources-crds"></a>
 ## Custom resource definitions
@@ -21,24 +21,24 @@ See [Resource Reference][yaml-ref] for explanations of all the custom resources.
 ## Service accounts, roles and role bindings
 <!--REFERENCE-->
 
-When you install the Skupper controller, the following resources are created:
+When you install the {{skupper_name}} controller, the following resources are created:
 
 * **skupper-controller**
-A service account, role and role binding with this name are created to manage the Skupper  controller.
+A service account, role and role binding with this name are created to manage the {{skupper_name}}  controller.
 
 
-When you create a Skupper site, the following resources are created:
+When you create a {{skupper_name}} site, the following resources are created:
 
 * **skupper-router**
-A service account, role and role binding with this name are created to manage the Skupper router.
+A service account, role and role binding with this name are created to manage the {{skupper_name}} router.
 
 <a id="kube-resources-deployments"></a>
 ## Deployments
 <!--REFERENCE-->
 
-The Skupper controller deploys the **skupper-controller**, which provides the control plane for the application network.
+The {{skupper_name}} controller deploys the **skupper-controller**, which provides the control plane for the application network.
 
-Each Skupper site on Kubernetes deploys a **skupper-router**, which provides the data plane for the application network.
+Each {{skupper_name}} site on Kubernetes deploys a **skupper-router**, which provides the data plane for the application network.
 
 <a id="kube-resources-cm"></a>
 ## ConfigMaps
@@ -52,7 +52,7 @@ site settings, including:
   * console authentication
   * ingress strategy
 
-  This ConfigMap is the root object for all the skupper resources; deleting it will remove the Skupper deployment from the namespace.
+  This ConfigMap is the root object for all the skupper resources; deleting it will remove the {{skupper_name}} deployment from the namespace.
 * **skupper-services**
 internal representation of the services available on the application network.
 * **skupper-internal**
@@ -78,7 +78,8 @@ issues certs for remote access.
 
 The tokens used to establish links creates the following secrets with variable names:
 +
-* The site that issues a token generates a secret with a UUID name that contains details of any usage restrictions, for example, the number of times you can use the token to create a link and the amount of time the token is valid for.
+* The site that issues a token generates a secret with a UUID name.
+This secret contains usage restrictions, such as the number of times you can use the token and the token validity period.
 * The site establishing the link will have a secret that contains the token. 
 These secrets are typically called `link-<remote-site-name>`. 
 

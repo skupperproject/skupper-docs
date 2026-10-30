@@ -263,7 +263,16 @@ footer > div > div:first-child {
     min-width: 10em;
 }
 
-/* Ensure sidebar navigation matches Skupper styling */
+/* JTBD category headers — muted, uppercase label style */
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link {
+    color: hsl(0, 0%, 45%);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Clickable page links — Skupper brand color */
 .md-nav__link {
     color: hsl(0, 0%, 20%);
 }
@@ -329,6 +338,13 @@ footer > div > div:first-child {
 
 body > header {
     z-index: 1000;
+}
+
+/* Separator lines between top-level nav sections */
+.md-nav--primary > .md-nav__list > .md-nav__item--section + .md-nav__item--section {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 0.6em;
+  padding-top: 0.6em;
 }
 
 /* Made with Bob */

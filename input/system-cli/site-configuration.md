@@ -1,5 +1,5 @@
 <a id="system-creating-site-cli"></a>
-# Creating a site on a local system using the Skupper CLI
+# Create a site on a local system using the CLI
 <!--ASSEMBLY-->
 
 Using the skupper command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current user.
@@ -12,14 +12,14 @@ If you require more than one site, specify a unique namespace when using  `skupp
 
 
 <a id="system-checking-cli"></a>
-## Checking the Skupper CLI and environment
+## Check the Skupper CLI and environment
 <!--PROCEDURE-->
 
 Installing the skupper command-line interface (CLI) provides a simple method to get started with Skupper.
 
 **Procedure**
 
-1. Follow the instructions for [Installing Skupper](https://skupper.io/releases/index.html).
+1. Install the Skupper CLI.
 
 2. Verify the installation.
    ```bash
@@ -31,7 +31,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
 
 3. For podman sites:
 
-   Make sure the Podman socket is available. To enable it:
+   Ensure the Podman socket is available. To enable it:
    ```bash
    systemctl --user enable --now podman.socket
    ```
@@ -41,7 +41,7 @@ Installing the skupper command-line interface (CLI) provides a simple method to 
    ```
 
 <a id="system-creating-simple-site-cli"></a>
-## Creating a simple site using the CLI on local systems
+## Create a simple site using the CLI on local systems
 <!--PROCEDURE-->
 
 Use the Skupper CLI to create a site on a local system.
@@ -106,7 +106,7 @@ skupper site create docker-site -p docker -n docker-ns
    ```
 
 <a id="system-deleting-site-cli"></a>
-## Deleting a site using the CLI on local systems
+## Delete a site using the CLI on local systems
 <!--PROCEDURE-->
 
 Delete a Skupper site on a local system by using the CLI.
@@ -129,13 +129,13 @@ Delete a Skupper site on a local system by using the CLI.
    ```
 
 <a id="system-creating-site-bundle"></a>
-## Creating a site bundle using the CLI on local systems
+## Provision and deploy site bundles
 <!--PROCEDURE-->
 
 Create a site bundle when you want to prepare a site on one system and install it on a remote host.
 
 Sometimes, you might want to create all the configuration for a site and apply it automatically to a remote host.
-To support this, Skupper allows you create a `.tar.gz` file with all the required files and an `install.sh` script to start the remote site.
+To support this, Skupper allows you create a bundle as a `.tar.gz` archive or a shell script to start the remote site.
 
 
 **Prerequisites**
@@ -185,21 +185,35 @@ To support this, Skupper allows you create a `.tar.gz` file with all the require
    ```bash
     skupper system generate-bundle remote-site
    ```
-   The output shows the location of the generated `.tar.gz` file, for example:
+   By default, the bundle is a `.tar.gz` archive.
+   To generate a shell script instead, use `--type shell-script`:
+   ```bash
+    skupper system generate-bundle --type shell-script remote-site
+   ```
+   The output shows the location of the generated bundle, for example:
    ```text
    Site "remote-site" has been created (as a distributable bundle)
    Installation bundle available at: /home/user/.local/share/skupper/bundles/remote-site.tar.gz
    Default namespace: default
    Default platform: podman
    ```
-5. Transfer the bundle file to the remote location and uncompress the file in an appropriate location:
+5. Transfer the bundle to the remote location.
+
+   For a `.tar.gz` bundle, uncompress the file in an appropriate location:
    ```bash
    tar -xzvf remote-site.tar.gz
    ```
 
 6. Start the site:
+
+   For a `.tar.gz` bundle:
    ```bash
    install.sh
+   ```
+
+   For a shell script bundle, run the script directly:
+   ```bash
+   bash remote-site.sh
    ```
    The site is now running, you can verify with `skupper site status` if the CLI is installed at that location.
 

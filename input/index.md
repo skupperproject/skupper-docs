@@ -28,6 +28,29 @@ These guides show how to describe sites, links, and service exposure for Kuberne
 * [Link sites with system YAML](system-yaml/site-linking.html)
 * [Expose services with system YAML](system-yaml/service-exposure.html)
 
+## Kubernetes
+
+* [Kubernetes CLI overview](kube-cli/index.html)
+* [Create sites using the CLI](kube-cli/site-configuration.html)
+* [Link sites using the CLI](kube-cli/site-linking.html)
+* [Expose services using the CLI](kube-cli/service-exposure.html)
+* [Kubernetes YAML overview](kube-yaml/index.html)
+* [Create sites using YAML](kube-yaml/site-configuration.html)
+* [Link sites using YAML](kube-yaml/site-linking.html)
+* [Expose services using YAML](kube-yaml/service-exposure.html)
+* [Custom certificates](kube-yaml/custom-certs.html)
+
+## Local systems
+
+* [Local systems CLI overview](system-cli/index.html)
+* [Create sites using the CLI](system-cli/site-configuration.html)
+* [Link sites using the CLI](system-cli/site-linking.html)
+* [Expose services using the CLI](system-cli/service-exposure.html)
+* [Local systems YAML overview](system-yaml/index.html)
+* [Create sites using YAML](system-yaml/site-configuration.html)
+* [Link sites using YAML](system-yaml/site-linking.html)
+* [Expose services using YAML](system-yaml/service-exposure.html)
+
 ## Explore conceptual deep dives
 
 The Reference section provides a more detailed look at the Skupper model, terminology, and operational topics.

@@ -1,5 +1,5 @@
 <a id="system-cli"></a>
-# Overview of Skupper CLI on local systems
+# Skupper CLI on local systems
 <!--REFERENCE-->
 
 Use the Skupper CLI on local systems to create sites, link them to other sites, and expose or consume services.
