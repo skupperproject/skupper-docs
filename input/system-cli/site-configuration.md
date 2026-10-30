@@ -129,7 +129,7 @@ Delete a Skupper site on a local system by using the CLI.
    ```
 
 <a id="system-creating-site-bundle"></a>
-## Create a site bundle using the CLI on local systems
+## Provision and deploy site bundles
 <!--PROCEDURE-->
 
 Create a site bundle when you want to prepare a site on one system and install it on a remote host.
