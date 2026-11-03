@@ -257,8 +257,3 @@ The `AccessToken` resource also exposes `spec.linkCost`, which is applied to the
 You can link sites using custom TLS certificates instead of the default Skupper-generated certificates.
 Custom certificates allow integration with your existing PKI infrastructure.
 
-**Additional resources**
-
-* [Secure inter-site communication with custom certificates][custom-certs-yaml]
-
-[custom-certs-yaml]: ../kube-yaml/custom-certs.html
