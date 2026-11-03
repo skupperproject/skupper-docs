@@ -1,3 +1,6 @@
+---
+type: module
+---
 <a id="skupper-routing"></a>
 # Directing network traffic
 <!--CONCEPT-->

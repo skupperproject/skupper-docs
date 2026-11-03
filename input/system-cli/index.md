@@ -1,3 +1,6 @@
+---
+type: module
+---
 <a id="system-cli"></a>
 # Skupper CLI on local systems
 <!--REFERENCE-->

@@ -1,5 +1,6 @@
 ---
 skip: true
+type: module
 ---
 <a id="installing-cli"></a>
 # Install the Skupper CLI

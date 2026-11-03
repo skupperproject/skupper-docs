@@ -1,3 +1,6 @@
+---
+type: module
+---
 <a id="kube-resources"></a>
 # Look up Custom Resource specifications and CLI commands
 <!--REFERENCE-->

@@ -1,3 +1,6 @@
+---
+type: module
+---
 <a id="kube-cli"></a>
 # Skupper CLI on Kubernetes
 <!--REFERENCE-->

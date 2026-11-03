@@ -1,3 +1,6 @@
+---
+type: module
+---
 <a id="overview-connectivity"></a>
 # Establish system connectivity
 <!--CONCEPT-->

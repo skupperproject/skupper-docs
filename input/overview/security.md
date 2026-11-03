@@ -1,3 +1,6 @@
+---
+type: module
+---
 <a id="skupper-security"></a>
 # Secure systems and data
 <!--CONCEPT-->

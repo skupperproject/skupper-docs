@@ -1,3 +1,6 @@
+---
+type: module
+---
 <a id="kube-yaml"></a>
 # YAML on Kubernetes
 <!--REFERENCE-->

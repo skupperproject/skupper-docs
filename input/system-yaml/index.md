@@ -1,3 +1,6 @@
+---
+type: module
+---
 <a id="system-yaml"></a>
 # YAML on local systems
 <!--REFERENCE-->
