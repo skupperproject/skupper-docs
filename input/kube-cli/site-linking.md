@@ -218,13 +218,10 @@ Then reference the proxy Secret in the link settings and apply that resource to 
      name: link-to-remote-site
    spec:
      cost: 1
-     endpoints:
-     - host: remote-site.example.com
-       name: inter-router
-       port: "55671"
-     - host: remote-site.example.com
-       name: edge
-       port: "45671"
+     endpoints: [
+       { host: remote-site.example.com, name: inter-router, port: "55671" },
+       { host: remote-site.example.com, name: edge, port: "45671" }
+     ]
      tlsCredentials: link-to-remote-site
      settings:
        proxy-configuration: my-proxy-config
