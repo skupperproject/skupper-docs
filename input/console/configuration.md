@@ -6,7 +6,7 @@ Configure the Skupper Network Observer, which enables the network console.
 
 
 <a id="observer-external-access"></a>
-## Console access
+## Console access parameters
 <!--REFERENCE-->
 
 Configure access to the Network Observer console using Ingress or OpenShift Routes.
@@ -47,7 +47,7 @@ Configure access to the Network Observer console using Ingress or OpenShift Rout
 - OpenShift only
 
 <a id="observer-authentication"></a>
-## Authentication
+## Authentication options
 <!--REFERENCE-->
 
 Configure the authentication strategy for the Network Observer console.
@@ -83,7 +83,7 @@ Configure the authentication strategy for the Network Observer console.
 - RBAC permissions for delegated authentication
 
 <a id="observer-tls"></a>
-## TLS Certificates
+## TLS certificate requirements
 <!--REFERENCE-->
 
 Configure how TLS certificates are provisioned for the Network Observer.
@@ -104,7 +104,7 @@ Configure how TLS certificates are provisioned for the Network Observer.
 - **External:** Manual management, Secret type `kubernetes.io/tls`
 
 <a id="observer-router"></a>
-## Router connection
+## Router connection settings
 <!--REFERENCE-->
 
 Configure how the Network Observer connects to the Skupper router.
@@ -123,7 +123,7 @@ Configure how the Network Observer connects to the Skupper router.
 - Certificate mounted at `/etc/messaging/`
 
 <a id="observer-tuning"></a>
-## Runtime behavior
+## Runtime behavior properties
 <!--REFERENCE-->
 
 Configure command-line flags and runtime behavior for the Network Observer container.
@@ -151,7 +151,7 @@ extraArgs:
 ```
 
 <a id="observer-prometheus"></a>
-## Prometheus
+## Prometheus parameters
 <!--REFERENCE-->
 
 The Prometheus container supports custom configuration and tuning options.
@@ -211,7 +211,7 @@ prometheus:
 ```
 
 <a id="observer-persistence"></a>
-## Persistent storage
+## Configure persistent storage
 <!--PROCEDURE-->
 
 By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-series data, enable a PersistentVolumeClaim.
@@ -263,7 +263,7 @@ By default, Prometheus uses ephemeral storage (`emptyDir`). For persistent time-
    When persistence is enabled, the Deployment uses a **Recreate** update strategy to ensure the single read-write volume can attach cleanly during pod updates.
 
 <a id="observer-resources"></a>
-## Resource requests and limits
+## Resource request and limit values
 <!--REFERENCE-->
 
 Resource requests and limits can be configured for each container in the Pod.
@@ -323,7 +323,7 @@ containerResources:
 ```
 
 <a id="observer-images"></a>
-## Container images
+## Container image settings
 <!--REFERENCE-->
 
 Configure container image repositories, tags, and pull policies for each component.
@@ -366,7 +366,7 @@ Used when `auth.strategy` is `basic` or `none`.
 Used when `auth.strategy` is `openshift`.
 
 <a id="observer-labels"></a>
-## Labels and Annotations
+## Supported labels and annotations
 <!--REFERENCE-->
 
 Configure labels and annotations applied to Network Observer resources.
@@ -406,7 +406,7 @@ podAnnotations:
 ```
 
 <a id="observer-service"></a>
-## Service
+## Service configuration parameters
 <!--REFERENCE-->
 
 Configure the Kubernetes Service that exposes the Network Observer.
@@ -423,7 +423,7 @@ Configure the Kubernetes Service that exposes the Network Observer.
 - Metrics service always `ClusterIP` on port `9000`
 
 <a id="observer-security"></a>
-## Security contexts
+## Security context constraints
 <!--REFERENCE-->
 
 Configure pod and container security contexts for the Network Observer.
@@ -444,7 +444,7 @@ Configure pod and container security contexts for the Network Observer.
 Available for: `securityContext`, `prometheus.securityContext`, `nginx.securityContext`, `openshiftOauthProxy.securityContext`
 
 <a id="observer-advanced"></a>
-## Resource naming and label options
+## Resource naming conventions
 <!--REFERENCE-->
 
 Configure naming and label behavior for the Network Observer.
@@ -463,7 +463,7 @@ Configure naming and label behavior for the Network Observer.
 | `skipManagementLabels` | bool | `false` | Skip Skupper management labels |
 
 <a id="observer-metrics"></a>
-## Metrics
+## Metrics endpoint reference
 <!--REFERENCE-->
 
 The Network Observer serves Prometheus metrics on a dedicated HTTP listener, separate from the main API endpoint.
@@ -523,7 +523,7 @@ scrape_configs:
 **Security note:** The metrics Service is **ClusterIP** by default and does not include the TLS proxy or authentication that protects the main console endpoint. Do not expose this Service publicly without additional access controls if your metrics contain sensitive data.
 
 <a id="observer-validation"></a>
-## Validation and Troubleshooting
+## Troubleshooting reference
 <!--REFERENCE-->
 
 Use the following steps to verify that the Network Observer is running correctly.
