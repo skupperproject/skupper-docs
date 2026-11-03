@@ -444,7 +444,7 @@ Configure pod and container security contexts for the Network Observer.
 Available for: `securityContext`, `prometheus.securityContext`, `nginx.securityContext`, `openshiftOauthProxy.securityContext`
 
 <a id="observer-advanced"></a>
-## Naming overrides
+## Resource naming and label options
 <!--REFERENCE-->
 
 Configure naming and label behavior for the Network Observer.

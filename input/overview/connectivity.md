@@ -1,5 +1,5 @@
 <a id="overview-connectivity"></a>
-# Establishing system connectivity
+# Establish system connectivity
 <!--CONCEPT-->
 
 {{skupper_name}} provides secure connectivity for services running across multiple clusters.

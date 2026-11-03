@@ -5,8 +5,7 @@
 {{skupper_name}} creates and manages several types of Kubernetes resources, including custom resource definitions, service accounts, deployments, ConfigMaps, secrets, and services.
 
 <a id="kube-resources-crds"></a>
-## Custom resource definitions
-<!--REFERENCE-->
+**Custom resources for application networks**
 
 To get start creating application networks, you create the following custom resources:
 
@@ -18,8 +17,7 @@ To get start creating application networks, you create the following custom reso
 See [Resource Reference][yaml-ref] for explanations of all the custom resources.
 
 <a id="kube-resources-sa"></a>
-## Service accounts, roles and role bindings
-<!--REFERENCE-->
+**RBAC resources**
 
 When you install the {{skupper_name}} controller, the following resources are created:
 
@@ -33,16 +31,14 @@ When you create a {{skupper_name}} site, the following resources are created:
 A service account, role and role binding with this name are created to manage the {{skupper_name}} router.
 
 <a id="kube-resources-deployments"></a>
-## Deployments
-<!--REFERENCE-->
+**Control and data plane deployments**
 
 The {{skupper_name}} controller deploys the **skupper-controller**, which provides the control plane for the application network.
 
 Each {{skupper_name}} site on Kubernetes deploys a **skupper-router**, which provides the data plane for the application network.
 
 <a id="kube-resources-cm"></a>
-## ConfigMaps
-<!--REFERENCE-->
+**ConfigMaps**
 
 Do not edit these ConfigMap values directly.
 
@@ -60,8 +56,7 @@ internal router configuration.
 The service controller determines the values in this ConfigMap based on the services available on the application network.
 
 <a id="kube-resources-secrets"></a>
-## Secrets
-<!--REFERENCE-->
+**Certificates and secrets**
 
 Each site has two `kubernetes.io/tls` type secrets, **skupper-local-ca** and **skupper-site-ca**:
 
@@ -84,8 +79,7 @@ This secret contains usage restrictions, such as the number of times you can use
 These secrets are typically called `link-<remote-site-name>`. 
 
 <a id="kube-resources-svc"></a>
-## Services
-<!--REFERENCE-->
+**Kubernetes services**
 
 In addition to the services that are exposed on the application network, the following services are created:
 

@@ -1,5 +1,5 @@
 <a id="kube-custom-labels"></a>
-# Propagating custom labels and annotations using YAML
+# Propagate custom labels and annotations using YAML
 <!--ASSEMBLY-->
 
 Skupper allows you to propagate custom labels and annotations onto the Kubernetes resources it manages by creating a specially-marked ConfigMap called a *label template*.
