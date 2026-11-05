@@ -137,3 +137,122 @@ There are many options to consider when linking sites using the CLI, see [CLI Re
    west                                            Ready   1       OK
    ```
    You can now expose services on the application network.
+
+
+   ## Linking a local site through an HTTP proxy[¶](#linking-a-local-site-through-an-http-proxy "Permanent link")
+
+If your network requires routing through an HTTP CONNECT proxy to reach remote sites, you can configure Skupper links on non-Kubernetes (Linux) sites to use a proxy. This feature uses `link` resources with a proxy Secret, allowing the local Skupper router to tunnel inter-site traffic through an HTTP CONNECT proxy.
+
+**Prerequisites**
+
+- A remote site (typically Kubernetes) with `enable-link-access` enabled.
+- A local (non-Kubernetes) site installed with `skupper system install`.
+- An HTTP CONNECT proxy accessible from the local site.
+- Network connectivity from the proxy to the remote site's router endpoints.
+- The proxy must allow HTTP CONNECT requests to ports 55671 (inter-router) and 45671 (edge). For example, Squid requires:
+    ```
+    acl skupper_ports port 55671 45671
+    http_access allow CONNECT skupper_ports
+    ```
+
+To link a local site through a proxy, you generate a `link` resource YAML from the remote site, create a Secret containing the proxy configuration on the local site, reference the proxy Secret in the link settings, and apply the resources.
+
+**Procedure**
+
+1. On the remote (Kubernetes) site, make sure link access is enabled:
+    ```
+    skupper site update --enable-link-access
+    ```
+2. On the remote site, generate a `link` resource YAML file:
+    ```
+    skupper link generate > link.yaml
+    ```
+3. Copy the generated `link.yaml` file to the local site.
+4. On the local site, create a YAML file for the proxy Secret (for example, `proxy-secret.yaml`):
+    ```yaml
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: my-proxy-config
+    type: kubernetes.io/basic-auth
+    stringData:
+      host: proxy.example.com
+      port: "3128"
+      username: myuser
+      password: mypassword
+    ```
+
+    **📌 NOTE** If your proxy does not require authentication, omit the `username` and `password` fields entirely. The `host` and `port` fields are required.
+
+5. Edit the `link.yaml` file to add the proxy configuration in the `settings` section:
+    ```yaml
+    apiVersion: skupper.io/v2alpha1
+    kind: Link
+    metadata:
+      name: link-to-remote-site
+    spec:
+      cost: 1
+      endpoints:
+      - host: remote-site.example.com
+        name: inter-router
+        port: "55671"
+      - host: remote-site.example.com
+        name: edge
+        port: "45671"
+      tlsCredentials: link-to-remote-site
+      settings:
+        proxy-configuration: my-proxy-config
+    ```
+    where `my-proxy-config` matches the `metadata.name` of the Secret created in step 4.
+
+6. Place both YAML files into the local site's input resources directory:
+    ```
+    cp proxy-secret.yaml link.yaml ~/.local/share/skupper/namespaces/<namespace>/input/resources/
+    ```
+    Replace `<namespace>` with the namespace of your local site (typically `default`). If running as root, use `/var/lib/skupper/namespaces/<namespace>/input/resources/` instead.
+
+7. Reload the site configuration to apply the changes:
+    ```
+    skupper system reload <namespace>
+    ```
+8. Check the status of the link:
+    ```
+    skupper link status
+    ```
+    You might need to issue the command multiple times before the link is ready.
+
+**How it works**
+
+When the system controller processes the link, it:
+
+- Reads the proxy Secret to extract `host`, `port`, and optional `username`/`password`.
+- Writes the password to a secure file under `runtime/proxies/<secret-name>/password.txt` (mode 0600).
+- Configures a `proxyProfile` on the Skupper router connector, which routes the AMQP-over-TLS connection through an HTTP CONNECT tunnel to the remote site.
+
+All inter-site traffic remains protected by mutual TLS inside the proxy tunnel.
+
+**Troubleshooting**
+
+If the link remains in "Pending" or "Not Operational" status, check:
+
+- The proxy Secret exists and contains the correct `host` and `port` values.
+- The proxy is accessible from the local site.
+- If using authentication, both `username` and `password` must be present. A `username` without a `password` is ignored with a warning.
+- The Secret type must be `kubernetes.io/basic-auth`. Other types are ignored with a warning.
+- Router logs for connection errors:
+    ```
+    journalctl -u skupper-<namespace>.service
+    ```
+- Validate resources before applying:
+    ```
+    skupper system validate <namespace>
+    ```
+
+**📌 NOTE** If you update the proxy Secret after the link is established, reload the site configuration to apply the changes:
+
+```
+skupper system reload <namespace>
+```
+
+There are many options to consider when linking sites using the CLI, see [CLI Reference][cli-ref], including *frequently used* options.
+
