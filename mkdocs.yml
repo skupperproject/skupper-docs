@@ -5,15 +5,15 @@ site_dir: output/docs
 
 extra:
   # Static values for MVP - will be dynamic with macros plugin
-  skupper_version: "2.2.1"
-  skupper_cli_version: "2.2.1"
-  skupper_version_v1: "1.9.2"
+  skupper_version: "2.2.3"
+  skupper_cli_version: "2.2.3"
+  skupper_version_v1: "1.9.6"
   # site_prefix controls navigation links in header/footer
   # For production (skupper.io): use empty string (relative paths)
   # For staging/preview: use full URL without trailing slash
   # For local dev: use http://localhost:8000 or your local server
   site_prefix: ""
-
+  skupper_name: "Skupper"
 # Support .html links in markdown (Transom compatibility)
 use_directory_urls: false
 
@@ -28,7 +28,8 @@ theme:
     - navigation.sections  # Show sections in sidebar
     #- navigation.expand    # Auto-expand sections in sidebar
     - navigation.top       # Back to top button
-    - navigation.indexes   # Section index pages
+    # navigation.indexes disabled — merges index.md into section headers,
+    # which collapses single-page JTBD categories into direct links
     - search.suggest       # Search suggestions
     - search.highlight     # Highlight search terms
     - content.code.copy    # Copy button for code blocks
@@ -40,40 +41,45 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Overview:
-    - Introduction: overview/index.md
-    - Connectivity: overview/connectivity.md
-    - Security: overview/security.md
-    - Routing: overview/routing.md
-    - Load Balancing: overview/load-balancing.md
-    - Resources: overview/resources.md
-    - Migrating: overview/migrating.md
-  - Installation: install/index.md
-  - Kubernetes CLI:
-    - Overview: kube-cli/index.md
-    - Site Configuration: kube-cli/site-configuration.md
-    - Site Linking: kube-cli/site-linking.md
-    - Service Exposure: kube-cli/service-exposure.md
-  - Kubernetes YAML:
-    - Overview: kube-yaml/index.md
-    - Site Configuration: kube-yaml/site-configuration.md
-    - Site Linking: kube-yaml/site-linking.md
-    - Custom Certificates: kube-yaml/custom-certs.md
-    - Service Exposure: kube-yaml/service-exposure.md
-  - System CLI:
-    - Overview: system-cli/index.md
-    - Site Configuration: system-cli/site-configuration.md
-    - Site Linking: system-cli/site-linking.md
-    - Service Exposure: system-cli/service-exposure.md
-  - System YAML:
-    - Overview: system-yaml/index.md
-    - Site Configuration: system-yaml/site-configuration.md
-    - Site Linking: system-yaml/site-linking.md
-    - Service Exposure: system-yaml/service-exposure.md
-  - Console:
-    - Overview: console/index.md
-    - Configuration: console/configuration.md
-  - Troubleshooting: troubleshooting/index.md
+  - Discover:
+    - Skupper overview: overview/index.md
+    - Establishing system connectivity: overview/connectivity.md
+    - Securing systems and data: overview/security.md
+    - Directing network traffic: overview/routing.md
+    - Ensuring high availability and continuity: overview/load-balancing.md
+  - Install:
+    - Install the Skupper CLI: install/cli.md
+    - Install the Skupper controller: install/index.md
+    - Upgrade sites: install/upgrade.md
+  - Deploy:
+    - YAML on Kubernetes: kube-yaml/index.md
+    - Create a site on Kubernetes using YAML: kube-yaml/site-configuration.md
+    - YAML on local systems: system-yaml/index.md
+    - Create a site on local systems using YAML: system-yaml/site-configuration.md
+    - Skupper CLI on Kubernetes: kube-cli/index.md
+    - Create a site on Kubernetes using the CLI: kube-cli/site-configuration.md
+    - Skupper CLI on local systems: system-cli/index.md
+    - Create a site on a local system using the CLI: system-cli/site-configuration.md
+  - Configure:
+    - Link sites on Kubernetes using the CLI: kube-cli/site-linking.md
+    - Expose services on the application network using the CLI on Kubernetes: kube-cli/service-exposure.md
+    - Link sites on Kubernetes using YAML: kube-yaml/site-linking.md
+    - Expose services on the application network using YAML on Kubernetes: kube-yaml/service-exposure.md
+    - Link sites on local systems using the CLI: system-cli/site-linking.md
+    - Expose services on the application network using the CLI on local systems: system-cli/service-exposure.md
+    - Link sites on local systems using YAML: system-yaml/site-linking.md
+    - Expose services on the application network using YAML on local systems: system-yaml/service-exposure.md
+  - Secure:
+    - Secure inter-site communication with custom certificates: kube-yaml/custom-certs.md
+  - Observe:
+    - Maintain network health and service reachability: console/index.md
+    - Network Observer Configuration Reference: console/configuration.md
+  - Troubleshoot:
+    - Troubleshoot link failures and resolve routing issues: troubleshooting/index.md
+  - Upgrade:
+    - Migrate from Skupper v1: overview/migrating.md
+  - Reference:
+    - Skupper resources on Kubernetes: overview/resources.md
   - ...
 
 markdown_extensions:
@@ -103,4 +109,3 @@ plugins:
   - awesome-pages
   - macros:
       module_name: config/mkdocs_macros
-

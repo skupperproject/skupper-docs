@@ -1,5 +1,8 @@
+---
+type: module
+---
 <a id="kube-yaml"></a>
-# Overview of using YAML on Kubernetes
+# YAML on Kubernetes
 <!--REFERENCE-->
 
 You can use YAML on Kubernetes after installing the Skupper controller to create sites, link sites, and expose or consume services.

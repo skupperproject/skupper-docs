@@ -1,5 +1,5 @@
 <a id="system-yaml-site-linking"></a>
-# Linking sites on local systems using YAML
+# Link sites on local systems using YAML
 <!--ASSEMBLY-->
 
 Use a `link` resource YAML file to create links between local system and Kubernetes sites.
@@ -10,15 +10,16 @@ The link direction is not significant, and is typically determined by ease of co
 Once sites are linked, services can be exposed and consumed across the application network without the need to open ports or manage inter-site connectivity.
 
 The procedures below describe linking an existing site.
-Typically, it is easier to configure a site, links, and services in a set of files and then create a configured site by placing all the YAML files in a directory such as `local` before running `skupper system setup`.
+Typically, it is easier to configure a site, links, and services in a set of files.
+Create a configured site by applying all the YAML files using `skupper system apply`.
 
 <a id="system-link-yaml"></a>
-## Linking sites using a `link` resource
+## Link sites using a `link` resource and YAML
 <!--PROCEDURE-->
 
 Create a `link` resource YAML file and apply it to the local system site to establish a link.
 
-An alternative approach to linking sites using tokens is to create a `link` resource YAML file using the CLI, and to apply that resource to another site.
+An alternative approach to linking sites using tokens is to create a `link` resource YAML file, and to apply that resource to the local system site.
 
 **Prerequisites**
 
@@ -29,7 +30,7 @@ To link sites, you create a `link` resource YAML file on one site and apply that
 
 **Procedure**
 
-1. On the site where you want to create a link , make sure link access is enabled:
+1. On the site where you want to create a link , ensure link access is enabled:
    ```bash
    skupper site update --enable-link-access
    ```
@@ -41,28 +42,15 @@ To link sites, you create a `link` resource YAML file on one site and apply that
 
 3. Apply the `link` resource YAML file on a local system site to create a link:
    ```bash
-   mv <filename> ~/.local/share/skupper/namespaces/default/input/resources/
-   skupper system setup --force
+   skupper system apply -f <filename>.yaml
+   skupper system reload
    ```
-   where `<filename>` is the name of a YAML file that is saved on your local filesystem.
+   where `<filename>.yaml` is the name of the YAML file saved on your local filesystem.
+   The file must have a `.yaml` or `.json` extension.
 
-   The path shown is specific to the `default` namespace.
-   If you are configuring a different namespace, use that name instead.
-
-   The site is recreated and you see some of the internal resources that are not affected, for example:
-   ```text
-   Sources will be consumed from namespace "default"
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/tls.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/tls.key
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-local-ca/ca.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/tls.crt
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/tls.key
-   2025/03/09 22:43:14 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-site-ca/ca.crt
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/tls.crt
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/tls.key
-   2025/03/09 22:43:15 WARN certificate will not be overwritten path=~/.local/share/skupper/namespaces/default/runtime/issuers/skupper-service-ca/ca.crt
-   
-   ```
+   The `apply` command stages the resource into `~/.local/share/skupper/namespaces/<namespace>/input/resources/`.
+   The `reload` command processes the staged resources and establishes the link.
+   The path is specific to the namespace; if you are configuring a different namespace, use that name instead.
 
 4. Check the status of the link:
    ```bash
