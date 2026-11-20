@@ -3,10 +3,111 @@ description: |
   Display help for debug commands and exit.
 include_options: [global/*]
 subcommands:
-  - name: check
+  - name: cert-inspect
     description: |
-      Run diagnostic checks.
+      Decode and display key fields of X.509 certificates managed by Skupper,
+      including subject, issuer, validity period, SANs, and public key information.
+
+      Without a name, all certificates in the namespace are listed. With a name,
+      detailed information for that certificate is shown.
+    examples: |
+      # List all certificates
+      $ skupper debug cert-inspect
+
+      # Inspect a named certificate
+      $ skupper debug cert-inspect skupper-local-server
+
+      # Inspect a local PEM file
+      $ skupper debug cert-inspect --file /path/to/tls.crt
     include_options: [context/*, global/*]
+    options:
+      - name: name
+        type: string
+        positional: true
+        required: false
+        description: |
+          The name of the certificate to inspect.
+          If omitted, all certificates in the namespace are listed.
+      - name: file
+        type: string
+        description: |
+          Inspect a local PEM-encoded certificate file.
+      - name: output
+        type: string
+        short_option: o
+        choices:
+          - name: json
+          - name: yaml
+        description: |
+          Print resources to the console in the specified format.
+  - name: conn
+    description: |
+      Inspect and manage TCP adaptor connections.
+
+      Queries the router management API for TCP adaptor connections, correlates
+      them with listener/connector resources (routing key, resource name), and lists
+      matching connections (idle time, TCP state, routing key). Connections idle
+      beyond `--idle-threshold` can be force-closed with `--execute`.
+
+      With `--list-ports` it instead reports how many connections each port carries,
+      inbound and outbound, plus the correlated routing key and resource.
+    examples: |
+      # List all connections
+      $ skupper debug conn
+
+      # List ports with connection counts
+      $ skupper debug conn --list-ports
+
+      # Filter by TCP state and routing key
+      $ skupper debug conn --state ESTAB --routing-key echo:8080
+
+      # Close idle connections matching filters
+      $ skupper debug conn --port 1024 --idle-threshold 14400 --execute
+    include_options: [context/*, global/*]
+    options:
+      - name: list-ports
+        type: boolean
+        description: |
+          List each port in use with its inbound and outbound connection counts,
+          instead of sweeping for idle connections.
+      - name: execute
+        type: boolean
+        description: |
+          Close idle connections matching the filters.
+          Without this flag, matching connections are only listed.
+      - name: idle-threshold
+        type: integer
+        default: 14400
+        description: |
+          Seconds with no data received before a connection is flagged as orphaned.
+      - name: port
+        type: integer
+        description: |
+          Only consider connections on this router-side port.
+          Repeat the flag to specify multiple ports.
+      - name: state
+        type: string
+        description: |
+          Only consider connections whose kernel socket is in this TCP state
+          (using ss names: ESTAB, FIN-WAIT-2, etc.). Repeat or comma-separate.
+      - name: routing-key
+        type: string
+        description: |
+          Only consider connections correlated to this routing key.
+          Repeat or comma-separate.
+      - name: kind
+        type: string
+        description: |
+          Only consider connections correlated to this resource kind.
+          Choices: listener, connector, multikeylistener. Repeat or comma-separate.
+      - name: output
+        type: string
+        default: text
+        choices:
+          - name: text
+          - name: json
+        description: |
+          Output format.
   - name: dump
     links: [skupper/debug-dumps]
     description: |

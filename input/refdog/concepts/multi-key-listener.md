@@ -114,4 +114,3 @@ failover control at the routing key level, independent of link costs.
 The **weighted strategy** provides predictable load balancing across
 routing keys, while link cost still affects connector selection
 within each routing key.
-

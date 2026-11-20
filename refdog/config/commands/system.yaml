@@ -103,6 +103,28 @@ subcommands:
             description: A gzipped tar file
           - name: shell-script
             description: A self-extracting shell script
+  - name: network-observer
+    description: |
+      Install the Skupper network observer to collect and expose network metrics.
+      The network observer requires an existing Skupper site and will deploy two containers:
+      the network-observer (which collects metrics from the router) and prometheus
+      (which stores metrics).
+    include_options: [context/namespace, global/*]
+    options:
+      - name: uninstall
+        type: boolean
+        description: |
+          Uninstall the Network Observer.
+  - name: prometheus
+    description: |
+      Install a single Prometheus container shared by all network observers on this host.
+      This must be run before installing any network observer.
+    include_options: [context/namespace, global/*]
+    options:
+      - name: uninstall
+        type: boolean
+        description: |
+          Uninstall Prometheus.
   # - name: status
   #   description: |
   #     Display the status of the system.

@@ -27,4 +27,6 @@ skupper system [subcommand] [options]
 <tr><th><a href="/docs/refdog/commands/system/apply.html">System apply</a></th><td>Create or update resources using files or standard input</td></tr>
 <tr><th><a href="/docs/refdog/commands/system/delete.html">System delete</a></th><td>Delete resources using files or standard input</td></tr>
 <tr><th><a href="/docs/refdog/commands/system/generate-bundle.html">System generate-bundle</a></th><td>Generate a self-contained site bundle for use on another machine</td></tr>
+<tr><th><a href="/docs/refdog/commands/system/network-observer.html">System network-observer</a></th><td>Install the Skupper network observer to collect and expose network metrics</td></tr>
+<tr><th><a href="/docs/refdog/commands/system/prometheus.html">System prometheus</a></th><td>Install a single Prometheus container shared by all network observers on this host</td></tr>
 </table>

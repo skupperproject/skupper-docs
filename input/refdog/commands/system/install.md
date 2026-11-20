@@ -44,10 +44,24 @@ help for install
 </div>
 <div class="attribute-body">
 
-Specify the type of reload to perform. Choices: manual, auto (default "manual") ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
+Specify the type of reload to perform. Choices: manual, auto (default "manual")
 
 <table class="fields"><tr><th>Default</th><td><p><code>&quot;manual&quot;</code></p>
 </td></table>
+
+</div>
+</div>
+
+<div class="attribute">
+<div class="attribute-heading">
+<h3 id="option-upgrade">--upgrade</h3>
+<div class="attribute-type-info">boolean</div>
+</div>
+<div class="attribute-body">
+
+replace the running system controller container with the images specified in the environment variables or the current image by default ``` ``` -n, --namespace string   Set the namespace -p, --platform string    Set the platform type to use [kubernetes, podman, docker, linux] ```
+
+
 
 </div>
 </div>

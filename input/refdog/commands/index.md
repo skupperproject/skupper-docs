@@ -81,13 +81,16 @@ refdog_links:
 <tr><th><a href="/docs/refdog/commands/system/apply.html">System apply</a></th><td>Create or update resources using files or standard input</td></tr>
 <tr><th><a href="/docs/refdog/commands/system/delete.html">System delete</a></th><td>Delete resources using files or standard input</td></tr>
 <tr><th><a href="/docs/refdog/commands/system/generate-bundle.html">System generate-bundle</a></th><td>Generate a self-contained site bundle for use on another machine</td></tr>
+<tr><th><a href="/docs/refdog/commands/system/network-observer.html">System network-observer</a></th><td>Install the Skupper network observer to collect and expose network metrics</td></tr>
+<tr><th><a href="/docs/refdog/commands/system/prometheus.html">System prometheus</a></th><td>Install a single Prometheus container shared by all network observers on this host</td></tr>
 </table>
 
 <h4>Debugging operations</h4>
 
 <table class="objects">
 <tr><th><a href="/docs/refdog/commands/debug/index.html">Debug</a></th><td>Overview of debug commands</td></tr>
-<tr><th><a href="/docs/refdog/commands/debug/check.html">Debug check</a></th><td>Run diagnostic checks</td></tr>
+<tr><th><a href="/docs/refdog/commands/debug/cert-inspect.html">Debug cert-inspect</a></th><td>Decode and display key fields of X.509 certificates managed by Skupper, including subject, issuer, validity period, SANs, and public key information</td></tr>
+<tr><th><a href="/docs/refdog/commands/debug/conn.html">Debug conn</a></th><td>Queries the router management API for TCP adaptor connections, correlates them with listener/connector resources (routing key, resource name), and lists matching connections (idle time, TCP state, routing key)</td></tr>
 <tr><th><a href="/docs/refdog/commands/debug/dump.html">Debug dump</a></th><td>Create a tarball including site resources and status; component versions, config files,  	and logs; and info about the environment where Skupper is running
 </td></tr>
 </table>
