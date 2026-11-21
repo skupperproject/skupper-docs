@@ -13,7 +13,12 @@ See [API documentation](/api/) for the OpenAPI documentation.
 ## Get started with Skupper network console
 <!--CONCEPT-->
 
-Install the Network Observer on a Kubernetes cluster.
+Install the Network Observer on a Kubernetes cluster or a local Docker or Podman system.
+
+**Platform support:** On local systems, the Network Observer is supported on Docker and Podman only. Linux system (systemd) sites are not supported.
+
+<a id="console-quickstart-kube"></a>
+### Install on Kubernetes
 
 * Helm 3.8 or later
 * kubectl access to target Kubernetes cluster
@@ -104,6 +109,49 @@ auth:
 
 tls:
   openshiftIssued: true
+```
+
+<a id="console-quickstart-local"></a>
+### Install on a local system (Docker or Podman)
+<!--PROCEDURE-->
+
+Install the Network Observer on a Docker or Podman site using the Skupper CLI.
+
+**Prerequisites**
+
+* Docker or Podman is installed and running.
+* The `skupper` CLI is installed.
+* The local system controller is installed (`skupper system install`).
+* A Skupper site is running in the target namespace.
+
+**Procedure**
+
+1. Install Prometheus for the Network Observer:
+
+   ```bash
+   skupper system prometheus -n <namespace>
+   ```
+
+   Replace `<namespace>` with the namespace of your Skupper site (default: `default`).
+
+2. Install the Network Observer:
+
+   ```bash
+   skupper system network-observer -n <namespace>
+   ```
+
+3. Access the console at the URL shown in the command output, for example:
+
+   ```
+   http://localhost:8080
+   ```
+
+**Uninstall**
+
+To remove the Network Observer and Prometheus from a local system, uninstall the system controller:
+
+```bash
+skupper system uninstall -n <namespace>
 ```
 
 <a id="console-advanced"></a>
